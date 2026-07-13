@@ -115,9 +115,5 @@ const config = {
             year: "2014 - 2017"
         }
     ],
-    philosophyAndHobbies: {
-        philosophy: "I believe in aggressive automation so humans can focus on creative, complex problem-solving. Code should be clean, highly maintainable, and infrastructure should be treated as code.",
-        hobbies: "Outside of professional engineering, I build out my own personal home server lab, script and optimize Left 4 Dead 2 game servers (VScript/SourcePawn), and analyze advanced baseball sabermetrics."
-    },
     footerText: "© 2026 William Elias. All rights reserved."
 };
