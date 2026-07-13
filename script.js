@@ -1,4 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Render Content from config.js ---
+    if (typeof config !== 'undefined') {
+        const heroTarget = document.getElementById('hero-content-target');
+        if (heroTarget) {
+            heroTarget.innerHTML = `
+                <h1>${config.personal.name}</h1>
+                <h2 class="subtitle">${config.personal.title}</h2>
+                <p class="tagline">${config.personal.tagline}</p>
+                <div class="contact-info">
+                    ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope"></i> ${config.personal.email}</a>` : ''}
+                    ${config.personal.phone ? `<a href="tel:${config.personal.phone.replace(/[^0-9+]/g,'')}" class="contact-pill"><i class="fas fa-phone"></i> ${config.personal.phone}</a>` : ''}
+                    ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" class="contact-pill"><i class="fab fa-linkedin"></i> LinkedIn</a>` : ''}
+                    ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" class="contact-pill"><i class="fab fa-github"></i> GitHub</a>` : ''}
+                    ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" class="contact-pill"><i class="fas fa-file-pdf"></i> Download Resume</a>` : ''}
+                </div>
+            `;
+        }
+
+        const summaryTarget = document.getElementById('summary-target');
+        if (summaryTarget) {
+            summaryTarget.innerHTML = `<p>${config.summary}</p>`;
+        }
+
+        const skillsTarget = document.getElementById('skills-target');
+        if (skillsTarget) {
+            skillsTarget.innerHTML = config.skills.map(skill => `
+                <div class="skill-category card">
+                    <div class="skill-icon"><i class="fas ${skill.icon}"></i></div>
+                    <h4>${skill.category}</h4>
+                    <div class="skill-tags">
+                        ${skill.tags.map(tag => `<span>${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const experienceTarget = document.getElementById('experience-target');
+        if (experienceTarget) {
+            experienceTarget.innerHTML = config.experience.map(job => `
+                <div class="timeline-item card">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">${job.date}</div>
+                    <div class="timeline-content">
+                        <h4>${job.title}</h4>
+                        <h5>${job.company}${job.location ? ` | ${job.location}` : ''}</h5>
+                        <ul>
+                            ${job.achievements.map(ach => `<li>${ach}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const educationTarget = document.getElementById('education-target');
+        if (educationTarget) {
+            educationTarget.innerHTML = config.education.map(edu => `
+                <div class="edu-card card">
+                    <div class="edu-icon"><i class="fas ${edu.icon}"></i></div>
+                    <div class="edu-info">
+                        <h4>${edu.degree}</h4>
+                        <p>${edu.school}${edu.year ? ` (${edu.year})` : ''}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const footerTarget = document.getElementById('footer-target');
+        if (footerTarget) {
+            footerTarget.innerText = config.footerText;
+        }
+        
+        document.title = `${config.personal.name} | ${config.personal.title}`;
+    }
+
     // 1. Intersection Observer for fade-in animations on scroll
     const observerOptions = {
         root: null,
@@ -15,7 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Wait a brief moment before observing so dynamic content renders
+    setTimeout(() => {
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }, 50);
     
     // 2. Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -66,60 +143,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Theme Toggle Handler (Light/Dark)
-    themeToggleBtn.addEventListener('click', () => {
-        // If colorblind mode is active, we just toggle the dark/light variant of colorblind
-        if (document.documentElement.getAttribute('data-theme') === 'colorblind' || 
-            document.documentElement.classList.contains('dark-mode-colorblind')) {
-            document.documentElement.classList.toggle('dark-mode-colorblind');
-            const isDark = document.documentElement.classList.contains('dark-mode-colorblind');
-            updateThemeIcon(isDark ? 'dark' : 'light');
-            
-            // Persist the underlying light/dark choice even in colorblind mode
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            return;
-        }
+    if(themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.getAttribute('data-theme') === 'colorblind' || 
+                document.documentElement.classList.contains('dark-mode-colorblind')) {
+                document.documentElement.classList.toggle('dark-mode-colorblind');
+                const isDark = document.documentElement.classList.contains('dark-mode-colorblind');
+                updateThemeIcon(isDark ? 'dark' : 'light');
+                
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                return;
+            }
 
-        let newTheme = 'light';
-        if (document.documentElement.getAttribute('data-theme') === 'light') {
-            newTheme = 'dark'; // Actually removes the attribute to fallback to root defaults
-        }
-        
-        if (newTheme === 'dark') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        }
-        updateThemeIcon(newTheme);
-    });
+            let newTheme = 'light';
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                newTheme = 'dark'; 
+            }
+            
+            if (newTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+            updateThemeIcon(newTheme);
+        });
+    }
 
     // Colorblind Toggle Handler
-    colorblindToggleBtn.addEventListener('click', () => {
-        const currentlyColorblind = document.documentElement.getAttribute('data-theme') === 'colorblind';
-        
-        if (currentlyColorblind) {
-            // Disable colorblind mode, restore previous theme
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            if (savedTheme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
+    if(colorblindToggleBtn) {
+        colorblindToggleBtn.addEventListener('click', () => {
+            const currentlyColorblind = document.documentElement.getAttribute('data-theme') === 'colorblind';
+            
+            if (currentlyColorblind) {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                if (savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                document.documentElement.classList.remove('dark-mode-colorblind');
+                localStorage.setItem('colorblind', 'false');
+                colorblindToggleBtn.style.color = '';
+                updateThemeIcon(savedTheme);
             } else {
-                document.documentElement.removeAttribute('data-theme');
+                enableColorblindMode();
             }
-            document.documentElement.classList.remove('dark-mode-colorblind');
-            localStorage.setItem('colorblind', 'false');
-            colorblindToggleBtn.style.color = '';
-            updateThemeIcon(savedTheme);
-        } else {
-            // Enable colorblind mode
-            enableColorblindMode();
-        }
-    });
+        });
+    }
 
     function enableColorblindMode() {
         document.documentElement.setAttribute('data-theme', 'colorblind');
         
-        // Preserve dark mode preference within colorblind mode
         const isDark = localStorage.getItem('theme') !== 'light';
         if (isDark) {
             document.documentElement.classList.add('dark-mode-colorblind');
@@ -128,11 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         localStorage.setItem('colorblind', 'true');
-        colorblindToggleBtn.style.color = 'var(--primary)'; // highlight button
+        if(colorblindToggleBtn) colorblindToggleBtn.style.color = 'var(--primary)';
         updateThemeIcon(isDark ? 'dark' : 'light');
     }
 
     function updateThemeIcon(theme) {
+        if(!themeToggleBtn) return;
         const icon = themeToggleBtn.querySelector('i');
         if (theme === 'light') {
             icon.classList.replace('fa-sun', 'fa-moon');
