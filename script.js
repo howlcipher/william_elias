@@ -65,6 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
         }
 
+        const philosophyTarget = document.getElementById('philosophy-target');
+        if (philosophyTarget && config.philosophyAndHobbies) {
+            philosophyTarget.innerHTML = `
+                <div class="card">
+                    <h4 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Core Philosophy</h4>
+                    <p>${config.philosophyAndHobbies.philosophy}</p>
+                    <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.25rem;">Hobbies</h4>
+                    <p>${config.philosophyAndHobbies.hobbies}</p>
+                </div>
+            `;
+        }
+
         const footerTarget = document.getElementById('footer-target');
         if (footerTarget) {
             footerTarget.innerText = config.footerText;
