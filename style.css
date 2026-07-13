@@ -237,10 +237,8 @@ h1, h2, h3, h4, h5, h6, .logo {
 
 /* Hero Section */
 .hero {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    padding-top: 80px;
+    padding-top: 140px;
+    padding-bottom: 2rem;
 }
 
 .hero h1 {
