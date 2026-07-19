@@ -1,68 +1,69 @@
 const config = {
     personal: {
         name: "William Elias",
-        title: "Software Engineer",
-        tagline: "Python • Go • SQL • PowerShell | IT Systems & Automation | Pursuing MS Cybersecurity",
+        title: "Site Reliability & DevSecOps Engineer",
+        tagline: "Python • Go • SQL • PowerShell | Pursuing MS Cyber Defense",
         email: "WylElias.123@gmail.com",
         phone: "586.438.6057",
         linkedin: "https://linkedin.com/in/wylelias",
         github: "https://github.com/howlcipher",
         resumePdf: "William_Elias_Resume.pdf"
     },
-    summary: "Software engineer with over 9 years of experience spanning automation, web development, DevOps, QA, and production support. Specialized in Python and Go development for APIs, backend systems, and infrastructure automation. Proven ability to build secure, scalable solutions that streamline operations across development and production environments. Strong foundation in networking, security (CCNA), and system integration. Highly experienced in orchestrating zero downtime migrations, building automated security auditing tools, and managing CI/CD pipelines. Passionate about writing maintainable code and solving complex technical challenges in security focused environments.",
+    summary: "Automation and systems engineer with over 9 years of experience spanning infrastructure automation, DevOps, and production support. Specialized in Python and Go development for APIs, backend systems, and automated deployment pipelines. Proven ability to build secure and scalable solutions that streamline operations across development and production environments. Strong foundation in enterprise networking, security controls, and system integration. Passionate about writing maintainable code and solving complex technical challenges in security focused environments.",
     skills: [
         {
             category: "Programming & Development",
             icon: "fa-code",
-            tags: ["Python", "Go", "PowerShell", "SQL", "REST APIs", "ETL", "FastAPI"]
+            tags: ["Python", "Go", "PowerShell", "SQL", "REST APIs", "ETL"]
         },
         {
             category: "DevOps & Cloud",
             icon: "fa-cloud",
-            tags: ["Azure DevOps", "Azure Cloud Services", "Docker", "CI/CD", "Git", "Bitbucket", "IIS"]
+            tags: ["Azure DevOps", "CI/CD", "Git", "Bitbucket", "IIS"]
         },
         {
             category: "Systems & Infrastructure",
             icon: "fa-server",
-            tags: ["Windows Server", "Automation Scripting", "Log Monitoring"]
+            tags: ["Windows Server", "Automation Scripting", "Log Monitoring", "Job Scheduling"]
         },
         {
             category: "Networking & Security",
             icon: "fa-shield-alt",
-            tags: ["Cisco/Meraki", "VLANs", "Firewalls", "Packet Capture", "Monitoring"]
+            tags: ["Cisco/Meraki", "VLANs", "Firewalls", "Packet Capture", "Monitoring Tools"]
         },
         {
             category: "Databases",
             icon: "fa-database",
-            tags: ["SQL Server", "SQLite", "Migrations", "Automated PII Masking", "Stored Procedures"]
+            tags: ["SQL Server", "SQLite", "Migrations", "Stored Procedures", "Reporting"]
         }
     ],
     experience: [
         {
             date: "Feb 2023 - Present",
-            title: "Software Engineer (Python/Go, Automation & CI/CD)",
+            title: "Production Support Engineer (Automation & CI/CD)",
             company: "Stellantis Financial Services",
             location: "Auburn Hills, MI",
             achievements: [
-                "Engineered a Python automation script to audit and permanently remove historical password traces and exposed credentials across over 100 Azure DevOps repositories, significantly enhancing organizational security posture.",
-                "Developed a Python database transfer utility featuring automated Personally Identifiable Information (PII) masking to secure sensitive client data during migrations to lower environments.",
-                "Orchestrated a massive disaster recovery cutover to new Windows servers, coordinating across Dev, IT, and DBA teams to migrate applications, firewalls, and load balancers with zero downtime.",
-                "Modernized deployment workflows by creating standardized CI/CD pipeline templates for Python and .Net applications, alongside implementing UV for highly efficient Python dependency management.",
-                "Designed and deployed a FastAPI Query Viewer and automated Python scripts to extract failed MuleSoft payloads, drastically reducing manual log analysis and accelerating incident resolution.",
-                "Built automated file copying and service installation scripts for IIS staging environments to guarantee reliable, controlled testing for rapidly changing application builds."
+                "Developed a Python automation system converting TXT reports to Excel, saving several hours of manual work daily while improving overall system reliability.",
+                "Built custom tools with Go and PowerShell, successfully streamlining deployment processes by 30 percent.",
+                "Implemented database migration strategies between environments with zero data loss.",
+                "Managed IIS applications including configuration, troubleshooting, and performance optimization.",
+                "Led weekly releases and deployments using Git workflows and Bitbucket.",
+                "Built backend scripts for log parsing, anomaly detection, and data validation to support production operations."
             ]
         },
         {
             date: "Jul 2020 - Feb 2023",
-            title: "Software Developer (Python Automation)",
+            title: "DevOps Engineer (Python Automation)",
             company: "HBK Engineering Solutions",
             location: "Southfield, MI",
             achievements: [
-                "Designed and implemented an automated XML to database pipeline in Python, significantly improving data processing speed and accuracy.",
-                "Built reusable Python libraries and internal tools to eliminate repetitive tasks for engineering teams.",
-                "Developed deployment automation with validation logic to ensure secure and reliable software packaging using NSIS.",
+                "Created an XML output automation system with Python and Tkinter, reducing data processing time by 60 percent.",
+                "Automated SQL output processing with Python scripts, saving over 40 hours monthly.",
+                "Developed custom database configuration tools that streamlined customer onboarding workflows.",
+                "Built installer and uninstaller packages using NSIS scripting for seamless application deployment.",
                 "Maintained version control best practices and developer tooling with Git.",
-                "Provided technical support and troubleshooting for internal applications."
+                "Provided direct technical support to customers through live interactive troubleshooting sessions."
             ]
         },
         {
@@ -71,21 +72,41 @@ const config = {
             company: "Intrepid Control Systems",
             location: "Madison Heights, MI",
             achievements: [
-                "Wrote and executed Mocha test cases for internal applications.",
+                "Wrote and executed Mocha test cases for internal software applications.",
                 "Debugged and validated API alongside software and hardware integrations."
             ]
         },
         {
-            date: "2015 - 2020",
-            title: "Network Engineering, Security, Infrastructure",
-            company: "Ford, Project Worldwide, Trendset Communications Group",
+            date: "Jan 2020 - Mar 2020",
+            title: "Network Engineer",
+            company: "Project Worldwide",
             location: "",
             achievements: [
-                "Designed and deployed secure network infrastructure using Cisco/Meraki equipment.",
-                "Automated network configurations and monitoring across enterprise environments.",
-                "Standardized security configurations for routers, switches, and firewalls.",
-                "Conducted security audits, network segmentation, and monitoring tool deployments.",
-                "Provided production support for critical network and IT infrastructure."
+                "Configured Cisco switches and Meraki access points across multiple enterprise company locations.",
+                "Developed comprehensive network documentation standards including specific IP addressing schemes.",
+                "Executed multi state network migration projects with minimal operational downtime."
+            ]
+        },
+        {
+            date: "Sep 2019 - Dec 2019",
+            title: "Network Standards Engineer",
+            company: "Ford Motor Company",
+            location: "",
+            achievements: [
+                "Implemented global network configuration standards across distributed enterprise infrastructure.",
+                "Created documentation templates and IP management databases to scale organizational efficiency.",
+                "Supported large scale network migrations with comprehensive planning and technical execution."
+            ]
+        },
+        {
+            date: "Sep 2015 - Jun 2019",
+            title: "IT Network Engineer",
+            company: "Trendset Communications Group",
+            location: "",
+            achievements: [
+                "Enforced strict network standards and performed comprehensive audits covering ports, IPs, and VLANs.",
+                "Maintained complex configuration files for diverse network equipment environments.",
+                "Provided tier production support for critical network infrastructure and organizational uptime."
             ]
         }
     ],
@@ -106,6 +127,12 @@ const config = {
             icon: "fa-graduation-cap",
             degree: "B.B.A. Business Administration",
             school: "Rochester College",
+            year: ""
+        },
+        {
+            icon: "fa-cloud",
+            degree: "AWS Certified Solutions Architect Associate (In Progress)",
+            school: "Amazon Web Services",
             year: ""
         },
         {
