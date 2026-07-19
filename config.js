@@ -19,7 +19,7 @@ const config = {
         {
             category: "DevOps & Cloud",
             icon: "fa-cloud",
-            tags: ["Azure DevOps", "CI/CD", "Git", "Bitbucket", "IIS"]
+            tags: ["Azure DevOps", "Application Insights", "Key Vault", "Azure Monitor", "CI/CD", "Git", "Bitbucket", "IIS"]
         },
         {
             category: "Systems & Infrastructure",
@@ -127,12 +127,6 @@ const config = {
             icon: "fa-graduation-cap",
             degree: "B.B.A. Business Administration",
             school: "Rochester College",
-            year: ""
-        },
-        {
-            icon: "fa-cloud",
-            degree: "AWS Certified Solutions Architect Associate (In Progress)",
-            school: "Amazon Web Services",
             year: ""
         },
         {
