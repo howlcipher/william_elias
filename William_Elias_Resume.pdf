@@ -13,7 +13,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 5 0 obj
-<< /Length 5822 >>
+<< /Length 6017 >>
 stream
 BT /F2 20 Tf 1 0 0 1 231.00 738.00 Tm (WILLIAM ELIAS) Tj ET
 BT /F1 9.5 Tf 1 0 0 1 114.80 718.00 Tm (586.438.6057 | WylElias.123@gmail.com | linkedin.com/in/wylelias | github.com/howlcipher) Tj ET
@@ -25,79 +25,106 @@ BT /F1 10 Tf 1 0 0 1 54.00 642.00 Tm (Automation and systems engineer with over 
 BT /F1 10 Tf 1 0 0 1 54.00 629.00 Tm (and production support. Specialized in Python and Go development for APIs, backend systems, and automated) Tj ET
 BT /F1 10 Tf 1 0 0 1 54.00 616.00 Tm (deployment pipelines. Proven ability to build secure and scalable solutions that streamline operations across) Tj ET
 BT /F1 10 Tf 1 0 0 1 54.00 603.00 Tm (development and production environments. Strong foundation in enterprise networking, security controls, and) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 590.00 Tm (system integration. Passionate about writing maintainable code and solving complex technical challenges in) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 577.00 Tm (security focused environments.) Tj ET
-BT /F2 12 Tf 1 0 0 1 54.00 552.00 Tm (CORE SKILLS) Tj ET
-0.75 w 54.00 548.00 m 558.00 548.00 l S
-BT /F2 10 Tf 1 0 0 1 54.00 534.00 Tm (Programming & Development:) Tj ET
-BT /F1 10 Tf 1 0 0 1 200.69 534.00 Tm (Python, Go, PowerShell, SQL, REST APIs, ETL) Tj ET
-BT /F2 10 Tf 1 0 0 1 54.00 521.00 Tm (DevOps & Cloud:) Tj ET
-BT /F1 10 Tf 1 0 0 1 139.01 521.00 Tm (Azure DevOps, Application Insights, Key Vault, Azure Monitor, CI/CD, Git, Bitbucket, IIS) Tj ET
-BT /F2 10 Tf 1 0 0 1 54.00 508.00 Tm (Systems & Infrastructure:) Tj ET
-BT /F1 10 Tf 1 0 0 1 179.03 508.00 Tm (Windows Server, Automation Scripting, Log Monitoring, Job Scheduling) Tj ET
-BT /F2 10 Tf 1 0 0 1 54.00 495.00 Tm (Networking & Security:) Tj ET
-BT /F1 10 Tf 1 0 0 1 166.80 495.00 Tm (Cisco/Meraki, VLANs, Firewalls, Packet Capture, Monitoring Tools) Tj ET
-BT /F2 10 Tf 1 0 0 1 54.00 482.00 Tm (Databases:) Tj ET
-BT /F1 10 Tf 1 0 0 1 110.13 482.00 Tm (SQL Server, SQLite, Migrations, Stored Procedures, Reporting) Tj ET
-BT /F2 12 Tf 1 0 0 1 54.00 459.00 Tm (PROFESSIONAL EXPERIENCE) Tj ET
-0.75 w 54.00 455.00 m 558.00 455.00 l S
-BT /F2 10.5 Tf 1 0 0 1 54.00 441.00 Tm (Stellantis Financial Services) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 476.68 441.00 Tm (Feb 2023 - Present) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 428.00 Tm (Production Support Engineer \(Automation & CI/CD\) | Auburn Hills, MI) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 414.00 Tm (- Developed a Python automation system converting TXT reports to Excel, saving several hours of manual work) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 401.50 Tm (  daily while improving overall system reliability.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 389.00 Tm (- Built custom tools with Go and PowerShell, successfully streamlining deployment processes by 30 percent.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 376.50 Tm (- Implemented database migration strategies between environments with zero data loss.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 364.00 Tm (- Managed IIS applications including configuration, troubleshooting, and performance optimization.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 351.50 Tm (- Led weekly releases and deployments using Git workflows and Bitbucket.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 339.00 Tm (- Built backend scripts for log parsing, anomaly detection, and data validation to support production operations.) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 54.00 318.50 Tm (HBK Engineering Solutions) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 473.51 318.50 Tm (Jul 2020 - Feb 2023) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 305.50 Tm (DevOps Engineer \(Python Automation\) | Southfield, MI) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 291.50 Tm (- Created an XML output automation system with Python and Tkinter, reducing data processing time by 60) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 279.00 Tm (  percent.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 266.50 Tm (- Automated SQL output processing with Python scripts, saving over 40 hours monthly.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 254.00 Tm (- Developed custom database configuration tools that streamlined customer onboarding workflows.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 241.50 Tm (- Built installer and uninstaller packages using NSIS scripting for seamless application deployment.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 229.00 Tm (- Maintained version control best practices and developer tooling with Git.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 216.50 Tm (- Provided direct technical support to customers through live interactive troubleshooting sessions.) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 54.00 196.00 Tm (Intrepid Control Systems) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 470.88 196.00 Tm (Mar 2020 - Apr 2020) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 183.00 Tm (QA Developer | Madison Heights, MI) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 169.00 Tm (- Wrote and executed Mocha test cases for internal software applications.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 156.50 Tm (- Debugged and validated API alongside software and hardware integrations.) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 54.00 136.00 Tm (Project Worldwide) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 470.34 136.00 Tm (Jan 2020 - Mar 2020) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 123.00 Tm (Network Engineer) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 109.00 Tm (- Configured Cisco switches and Meraki access points across multiple enterprise company locations.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 96.50 Tm (- Developed comprehensive network documentation standards including specific IP addressing schemes.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 84.00 Tm (- Executed multi state network migration projects with minimal operational downtime.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 590.00 Tm (system integration. Outside of work, directs AI coding agents \(Claude Code, Gemini CLI\) through prompt) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 577.00 Tm (engineering to architect, build, and test personal automation platforms end to end. Passionate about writing) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 564.00 Tm (maintainable code and solving complex technical challenges in security focused environments.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54.00 539.00 Tm (CORE SKILLS) Tj ET
+0.75 w 54.00 535.00 m 558.00 535.00 l S
+BT /F2 10 Tf 1 0 0 1 54.00 521.00 Tm (Programming & Development:) Tj ET
+BT /F1 10 Tf 1 0 0 1 200.69 521.00 Tm (Python, Go, PowerShell, SQL, REST APIs, ETL) Tj ET
+BT /F2 10 Tf 1 0 0 1 54.00 508.00 Tm (DevOps & Cloud:) Tj ET
+BT /F1 10 Tf 1 0 0 1 139.01 508.00 Tm (Azure DevOps, Application Insights, Key Vault, Azure Monitor, CI/CD, Git, Bitbucket, IIS) Tj ET
+BT /F2 10 Tf 1 0 0 1 54.00 495.00 Tm (Systems & Infrastructure:) Tj ET
+BT /F1 10 Tf 1 0 0 1 179.03 495.00 Tm (Windows Server, Automation Scripting, Log Monitoring, Job Scheduling) Tj ET
+BT /F2 10 Tf 1 0 0 1 54.00 482.00 Tm (Networking & Security:) Tj ET
+BT /F1 10 Tf 1 0 0 1 166.80 482.00 Tm (Cisco/Meraki, VLANs, Firewalls, Packet Capture, Monitoring Tools) Tj ET
+BT /F2 10 Tf 1 0 0 1 54.00 469.00 Tm (Databases:) Tj ET
+BT /F1 10 Tf 1 0 0 1 110.13 469.00 Tm (SQL Server, SQLite, Migrations, Stored Procedures, Reporting) Tj ET
+BT /F2 10 Tf 1 0 0 1 54.00 456.00 Tm (AI & Automation:) Tj ET
+BT /F1 10 Tf 1 0 0 1 138.44 456.00 Tm (AI-Augmented Development, Prompt Engineering, Claude Code, Gemini CLI, LLM API) Tj ET
+BT /F1 10 Tf 1 0 0 1 66.00 443.00 Tm (Integration, ChromaDB/RAG) Tj ET
+BT /F2 12 Tf 1 0 0 1 54.00 420.00 Tm (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 54.00 416.00 m 558.00 416.00 l S
+BT /F2 10.5 Tf 1 0 0 1 54.00 402.00 Tm (Stellantis Financial Services) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 476.68 402.00 Tm (Feb 2023 - Present) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 389.00 Tm (Production Support Engineer \(Automation & CI/CD\) | Auburn Hills, MI) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 375.00 Tm (- Developed a Python automation system converting TXT reports to Excel, saving several hours of manual work) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 362.50 Tm (  daily while improving overall system reliability.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 350.00 Tm (- Built custom tools with Go and PowerShell, successfully streamlining deployment processes by 30 percent.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 337.50 Tm (- Implemented database migration strategies between environments with zero data loss.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 325.00 Tm (- Managed IIS applications including configuration, troubleshooting, and performance optimization.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 312.50 Tm (- Led weekly releases and deployments using Git workflows and Bitbucket.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 300.00 Tm (- Built backend scripts for log parsing, anomaly detection, and data validation to support production operations.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 279.50 Tm (HBK Engineering Solutions) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 473.51 279.50 Tm (Jul 2020 - Feb 2023) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 266.50 Tm (DevOps Engineer \(Python Automation\) | Southfield, MI) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 252.50 Tm (- Created an XML output automation system with Python and Tkinter, reducing data processing time by 60) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 240.00 Tm (  percent.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 227.50 Tm (- Automated SQL output processing with Python scripts, saving over 40 hours monthly.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 215.00 Tm (- Developed custom database configuration tools that streamlined customer onboarding workflows.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 202.50 Tm (- Built installer and uninstaller packages using NSIS scripting for seamless application deployment.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 190.00 Tm (- Maintained version control best practices and developer tooling with Git.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 177.50 Tm (- Provided direct technical support to customers through live interactive troubleshooting sessions.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 157.00 Tm (Intrepid Control Systems) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 470.88 157.00 Tm (Mar 2020 - Apr 2020) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 144.00 Tm (QA Developer | Madison Heights, MI) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 130.00 Tm (- Wrote and executed Mocha test cases for internal software applications.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 117.50 Tm (- Debugged and validated API alongside software and hardware integrations.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 97.00 Tm (Project Worldwide) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 470.34 97.00 Tm (Jan 2020 - Mar 2020) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 84.00 Tm (Network Engineer) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 70.00 Tm (- Configured Cisco switches and Meraki access points across multiple enterprise company locations.) Tj ET
 endstream
 endobj
 6 0 obj
 << /Type /Page /Parent 2 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /MediaBox [0 0 612 792] /Contents 5 0 R >>
 endobj
 7 0 obj
-<< /Length 1822 >>
+<< /Length 4645 >>
 stream
-BT /F2 10.5 Tf 1 0 0 1 54.00 738.00 Tm (Ford Motor Company) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 468.23 738.00 Tm (Sep 2019 - Dec 2019) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 725.00 Tm (Network Standards Engineer) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 711.00 Tm (- Implemented global network configuration standards across distributed enterprise infrastructure.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 698.50 Tm (- Created documentation templates and IP management databases to scale organizational efficiency.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 686.00 Tm (- Supported large scale network migrations with comprehensive planning and technical execution.) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 54.00 665.50 Tm (Trendset Communications Group) Tj ET
-BT /F1 9.5 Tf 1 0 0 1 469.80 665.50 Tm (Sep 2015 - Jun 2019) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 652.50 Tm (IT Network Engineer) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 638.50 Tm (- Enforced strict network standards and performed comprehensive audits covering ports, IPs, and VLANs.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 626.00 Tm (- Maintained complex configuration files for diverse network equipment environments.) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 613.50 Tm (- Provided tier production support for critical network infrastructure and organizational uptime.) Tj ET
-BT /F2 12 Tf 1 0 0 1 54.00 589.00 Tm (EDUCATION & CERTIFICATIONS) Tj ET
-0.75 w 54.00 585.00 m 558.00 585.00 l S
-BT /F1 10 Tf 1 0 0 1 54.00 571.00 Tm (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 558.00 Tm (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 545.00 Tm (B.B.A. Business Administration - Rochester College) Tj ET
-BT /F1 10 Tf 1 0 0 1 54.00 532.00 Tm (Cisco Certified Network Associate \(CCNA\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Developed comprehensive network documentation standards including specific IP addressing schemes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 725.50 Tm (- Executed multi state network migration projects with minimal operational downtime.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 705.00 Tm (Ford Motor Company) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 468.23 705.00 Tm (Sep 2019 - Dec 2019) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 692.00 Tm (Network Standards Engineer) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 678.00 Tm (- Implemented global network configuration standards across distributed enterprise infrastructure.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 665.50 Tm (- Created documentation templates and IP management databases to scale organizational efficiency.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 653.00 Tm (- Supported large scale network migrations with comprehensive planning and technical execution.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 632.50 Tm (Trendset Communications Group) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 469.80 632.50 Tm (Sep 2015 - Jun 2019) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 619.50 Tm (IT Network Engineer) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 605.50 Tm (- Enforced strict network standards and performed comprehensive audits covering ports, IPs, and VLANs.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 593.00 Tm (- Maintained complex configuration files for diverse network equipment environments.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 580.50 Tm (- Provided tier production support for critical network infrastructure and organizational uptime.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54.00 556.00 Tm (PROJECTS) Tj ET
+0.75 w 54.00 552.00 m 558.00 552.00 l S
+BT /F2 10.5 Tf 1 0 0 1 54.00 538.00 Tm (AI Knowledge Library) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 525.00 Tm (Multi-agent orchestration platform \(Python, Go\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 511.00 Tm (- Directed AI coding agents \(Claude Code, Gemini CLI\) through prompt engineering to design, implement, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 498.50 Tm (  test a platform that routes engineering work across multiple AI providers \(Claude, Gemini, local Ollama models\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 486.00 Tm (  with shared skills, rules, and project context.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 473.50 Tm (- Built a skill-routing system with keyword and ChromaDB semantic-search fallback to automatically surface) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 461.00 Tm (  relevant domain knowledge into AI agent sessions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 448.50 Tm (- Enforced production-grade quality with a 148-test Python and Go suite, bandit SAST scanning, and pre-push) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 436.00 Tm (  CI gates that block unverified code from shipping.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 423.50 Tm (- Packaged as a Go-built CLI installer with a Helm chart and Docker/GitHub Actions deployment.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 403.00 Tm (Career Agent Core) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 390.00 Tm (AI-powered job search assistant \(Go\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 376.00 Tm (- Directed AI coding agents \(Claude Code, Gemini CLI\) through prompt engineering to architect and build a Go) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 363.50 Tm (  service that aggregates remote job postings and scores them against a structured profile, salary floor, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 351.00 Tm (  remote-work requirements using the Gemini API.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 338.50 Tm (- Built an AI tailoring pipeline that synthesizes job descriptions against a candidate profile to generate) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 326.00 Tm (  customized resumes, cover letters, and interview prep notes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 313.50 Tm (- Hardened the system against untrusted third-party content with a prompt-injection quarantine layer and SSRF) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 301.00 Tm (  protections.) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 288.50 Tm (- Tracked application history in a SQLite-backed dashboard \(WAL mode\) with architecture decisions) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 276.00 Tm (  documented as ADRs.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54.00 251.50 Tm (EDUCATION & CERTIFICATIONS) Tj ET
+0.75 w 54.00 247.50 m 558.00 247.50 l S
+BT /F1 10 Tf 1 0 0 1 54.00 233.50 Tm (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 220.50 Tm (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 207.50 Tm (B.B.A. Business Administration - Rochester College) Tj ET
+BT /F1 10 Tf 1 0 0 1 54.00 194.50 Tm (Cisco Certified Network Associate \(CCNA\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 endstream
 endobj
 8 0 obj
@@ -111,11 +138,11 @@ xref
 0000000127 00000 n 
 0000000224 00000 n 
 0000000326 00000 n 
-0000006200 00000 n 
-0000006336 00000 n 
-0000008210 00000 n 
+0000006395 00000 n 
+0000006531 00000 n 
+0000011228 00000 n 
 trailer
 << /Size 9 /Root 1 0 R >>
 startxref
-8346
+11364
 %%EOF

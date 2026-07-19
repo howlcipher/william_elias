@@ -52,6 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
         }
 
+        const projectsTarget = document.getElementById('projects-target');
+        if (projectsTarget && config.projects) {
+            projectsTarget.innerHTML = config.projects.map(proj => `
+                <div class="project-card card">
+                    <h4>${proj.name}</h4>
+                    <div class="project-subtitle">${proj.subtitle}</div>
+                    <ul>
+                        ${proj.highlights.map(h => `<li>${h}</li>`).join('')}
+                    </ul>
+                    <div class="skill-tags">
+                        ${proj.tags.map(tag => `<span>${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
         const educationTarget = document.getElementById('education-target');
         if (educationTarget) {
             educationTarget.innerHTML = config.education.map(edu => `
