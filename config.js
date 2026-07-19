@@ -1,8 +1,8 @@
 const config = {
     personal: {
         name: "William Elias",
-        title: "Site Reliability & DevSecOps Engineer",
-        tagline: "Python • Go • SQL • PowerShell | Pursuing MS Cyber Defense",
+        title: "DevOps Engineer",
+        tagline: "Python • Go • SQL • PowerShell | Automation & CI/CD | Pursuing MS Cyber Defense",
         email: "WylElias.123@gmail.com",
         phone: "586.438.6057",
         linkedin: "https://linkedin.com/in/wylelias",
