@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="contact-info">
                     ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope"></i> ${config.personal.email}</a>` : ''}
                     ${config.personal.phone ? `<a href="tel:${config.personal.phone.replace(/[^0-9+]/g,'')}" class="contact-pill"><i class="fas fa-phone"></i> ${config.personal.phone}</a>` : ''}
-                    ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" class="contact-pill"><i class="fab fa-linkedin"></i> LinkedIn</a>` : ''}
-                    ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" class="contact-pill"><i class="fab fa-github"></i> GitHub</a>` : ''}
-                    ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" class="contact-pill"><i class="fas fa-file-pdf"></i> Download Resume</a>` : ''}
-                    ${config.personal.sourceRepo ? `<a href="${config.personal.sourceRepo}" target="_blank" class="contact-pill"><i class="fas fa-code-branch"></i> View Source</a>` : ''}
+                    ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-linkedin"></i> LinkedIn</a>` : ''}
+                    ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-github"></i> GitHub</a>` : ''}
+                    ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fas fa-file-pdf"></i> Download Resume</a>` : ''}
+                    ${config.personal.sourceRepo ? `<a href="${config.personal.sourceRepo}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fas fa-code-branch"></i> View Source</a>` : ''}
                 </div>
             `;
         }
@@ -253,7 +253,7 @@ function renderLastSynced(sha, date, url) {
     const target = document.getElementById('last-synced-target');
     if (!target) return;
     const shortSha = sha.slice(0, 7);
-    target.innerHTML = `<i class="fas fa-code-commit" aria-hidden="true"></i> Last synced <a href="${url}" target="_blank">${formatRelativeTime(date)} (${shortSha})</a>`;
+    target.innerHTML = `<i class="fas fa-code-commit" aria-hidden="true"></i> Last synced <a href="${url}" target="_blank" rel="noopener noreferrer">${formatRelativeTime(date)} (${shortSha})</a>`;
 }
 
 function initLastSynced() {
