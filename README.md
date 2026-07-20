@@ -16,7 +16,8 @@ You do not need to understand HTML to update this site. All your information is 
 1. Open `config.js` in any text editor.
 2. Edit the text inside the quotes.
 3. Save the file.
-4. Push your changes to the `main` branch to automatically deploy to GitHub Pages.
+4. Regenerate the PDF: `pip install --user fpdf2 && python3 scripts/generate_resume_pdf.py`. This rewrites `William_Elias_Resume.pdf` from the same `config.js` data, so the site and the PDF can never drift out of sync.
+5. Push your changes to the `main` branch to automatically deploy to GitHub Pages.
 
 ### Adding a New Job
 Find the `experience` array in `config.js` and add a new object to the top of the list:

@@ -14,7 +14,7 @@ const config = {
         {
             category: "Programming & Development",
             icon: "fa-code",
-            tags: ["Python", "Go", "PowerShell", "SQL", "REST APIs", "ETL"]
+            tags: ["Python", "Go", "C#", ".NET Framework", "PowerShell", "SQL", "REST APIs", "ETL"]
         },
         {
             category: "DevOps & Cloud",
@@ -54,7 +54,9 @@ const config = {
                 "Implemented database migration strategies between environments with zero data loss.",
                 "Managed IIS applications including configuration, troubleshooting, and performance optimization.",
                 "Led weekly releases and deployments using Git workflows and Bitbucket.",
-                "Built backend scripts for log parsing, anomaly detection, and data validation to support production operations."
+                "Built backend scripts for log parsing, anomaly detection, and data validation to support production operations.",
+                "Built an internal documentation and issue-discovery platform with Claude Code that polls Jira and SharePoint across the team, flags drift between documentation and production state, and lets new employees ask questions in plain language to speed up onboarding and production troubleshooting.",
+                "Built a production support portal centralizing team links, runbooks, and documentation into a single searchable hub, reducing time spent hunting for operational resources."
             ]
         },
         {
