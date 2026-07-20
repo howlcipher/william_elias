@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             heroTarget.innerHTML = `
                 <h1>${config.personal.name}</h1>
                 <h2 class="subtitle">${config.personal.title}</h2>
-                <p class="tagline">${config.personal.tagline}</p>
+                <p class="tagline terminal-type">${config.personal.tagline}</p>
                 <div class="contact-info">
                     ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope"></i> ${config.personal.email}</a>` : ''}
                     ${config.personal.phone ? `<a href="tel:${config.personal.phone.replace(/[^0-9+]/g,'')}" class="contact-pill"><i class="fas fa-phone"></i> ${config.personal.phone}</a>` : ''}
