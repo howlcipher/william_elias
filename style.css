@@ -10,7 +10,7 @@
     
     --primary: #3b82f6; /* Blue 500 */
     --primary-hover: #2563eb;
-    --accent: #2dd4bf; /* Teal 400 - analogous accent, 9.6:1 on bg-main */
+    --accent: #93c5fd; /* Blue 300 - lighter tonal blue, 9.9:1 on bg-main, clearly lighter than --primary */
     --brand-accent: #cc3433; /* Cubs red - 3.49:1 on bg-main (fine for the bold 24px logo + decorative dot) */
 
     --border-color: #334155; /* Slate 700 */
@@ -29,7 +29,7 @@
     
     --primary: #2563eb; /* Blue 600 */
     --primary-hover: #1d4ed8;
-    --accent: #0f766e; /* Teal 700 - analogous accent, 5.2:1 on bg-main */
+    --accent: #0e3386; /* Cubs blue - same hue as --primary, much darker, 10.93:1 on bg-main */
     --brand-accent: #cc3433; /* Cubs red - 5.11:1 on bg-main */
 
     --border-color: #e2e8f0; /* Slate 200 */
