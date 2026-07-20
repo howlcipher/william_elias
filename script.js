@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" class="contact-pill"><i class="fab fa-linkedin"></i> LinkedIn</a>` : ''}
                     ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" class="contact-pill"><i class="fab fa-github"></i> GitHub</a>` : ''}
                     ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" class="contact-pill"><i class="fas fa-file-pdf"></i> Download Resume</a>` : ''}
+                    ${config.personal.sourceRepo ? `<a href="${config.personal.sourceRepo}" target="_blank" class="contact-pill"><i class="fas fa-code-branch"></i> View Source</a>` : ''}
                 </div>
             `;
         }
