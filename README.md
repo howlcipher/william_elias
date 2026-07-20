@@ -8,6 +8,9 @@ A professional, modern, and highly performant resume website built with HTML, CS
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
 - **Mobile Responsive**: Custom hamburger menu and flexible layout.
 - **Print/PDF Download**: Embedded download link for the PDF version.
+- **View Source**: Hero pill linking straight to this repo.
+- **Terminal-Style Intro**: One-time CSS typewriter reveal on the tagline (respects `prefers-reduced-motion`).
+- **Live "Last Synced" Widget**: Footer pulls the latest commit from the GitHub API and shows it as a relative timestamp + short SHA. Cached in localStorage for 10 minutes to stay polite to GitHub's unauthenticated rate limit; renders nothing if the fetch has never succeeded (no error state shown to visitors).
 
 ## How to Update Your Information
 
