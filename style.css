@@ -11,7 +11,8 @@
     --primary: #3b82f6; /* Blue 500 */
     --primary-hover: #2563eb;
     --accent: #2dd4bf; /* Teal 400 - analogous accent, 9.6:1 on bg-main */
-    
+    --brand-accent: #e2543a; /* Coral - from the LinkedIn banner mark, 4.73:1 on bg-main */
+
     --border-color: #334155; /* Slate 700 */
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -29,7 +30,8 @@
     --primary: #2563eb; /* Blue 600 */
     --primary-hover: #1d4ed8;
     --accent: #0f766e; /* Teal 700 - analogous accent, 5.2:1 on bg-main */
-    
+    --brand-accent: #c23e26; /* Coral, darkened for light bg - 5.24:1 on bg-main */
+
     --border-color: #e2e8f0; /* Slate 200 */
     --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -47,7 +49,8 @@
     --primary: #005ab5; /* High contrast blue */
     --primary-hover: #003f7a;
     --accent: #d55e00; /* High contrast vermillion/orange */
-    
+    --brand-accent: var(--accent); /* Stay within the vetted colorblind-safe pair */
+
     --border-color: #000000; /* Solid borders for clarity */
     --card-shadow: none;
     --hover-shadow: none;
@@ -174,6 +177,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--brand-accent);
 }
 
 .nav-right {
@@ -446,7 +450,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     top: 2rem;
     width: 1rem;
     height: 1rem;
-    background: var(--primary);
+    background: var(--brand-accent);
     border-radius: 50%;
     transform: translateX(-50%);
 }
