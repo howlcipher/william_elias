@@ -540,6 +540,22 @@ footer {
     margin-top: 3rem;
 }
 
+.last-synced {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.last-synced a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border-color);
+}
+
+.last-synced a:hover,
+.last-synced a:focus-visible {
+    color: var(--accent);
+}
+
 /* Animations */
 .fade-in {
     opacity: 0;

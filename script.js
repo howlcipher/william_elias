@@ -87,6 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             footerTarget.innerText = config.footerText;
         }
         
+        initLastSynced();
+        
         document.title = `${config.personal.name} | ${config.personal.title}`;
     }
 
@@ -235,3 +237,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+function formatRelativeTime(dateStr) {
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const diffMin = Math.round(diffMs / 60000);
+    const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+    if (Math.abs(diffMin) < 60) return rtf.format(-diffMin, 'minute');
+    const diffHr = Math.round(diffMin / 60);
+    if (Math.abs(diffHr) < 24) return rtf.format(-diffHr, 'hour');
+    const diffDay = Math.round(diffHr / 24);
+    return rtf.format(-diffDay, 'day');
+}
+
+function renderLastSynced(sha, date, url) {
+    const target = document.getElementById('last-synced-target');
+    if (!target) return;
+    const shortSha = sha.slice(0, 7);
+    target.innerHTML = `<i class="fas fa-code-commit" aria-hidden="true"></i> Last synced <a href="${url}" target="_blank">${formatRelativeTime(date)} (${shortSha})</a>`;
+}
+
+function initLastSynced() {
+    const CACHE_KEY = 'we_last_synced';
+    const CACHE_TTL_MS = 10 * 60 * 1000;
+
+    let cached = null;
+    try {
+        cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+    } catch (e) {
+        cached = null;
+    }
+
+    if (cached && (Date.now() - cached.cachedAt) < CACHE_TTL_MS) {
+        renderLastSynced(cached.sha, cached.date, cached.url);
+        return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    fetch('https://api.github.com/repos/howlcipher/william_elias/commits/main', {
+        headers: { Accept: 'application/vnd.github+json' },
+        signal: controller.signal
+    })
+        .then(res => {
+            clearTimeout(timeoutId);
+            if (!res.ok) throw new Error(`GitHub API returned ${res.status}`);
+            return res.json();
+        })
+        .then(data => {
+            const sha = data.sha;
+            const date = data.commit.author.date;
+            const url = data.html_url;
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ sha, date, url, cachedAt: Date.now() }));
+            renderLastSynced(sha, date, url);
+        })
+        .catch(() => {
+            clearTimeout(timeoutId);
+            if (cached) {
+                renderLastSynced(cached.sha, cached.date, cached.url);
+            }
+        });
+}
