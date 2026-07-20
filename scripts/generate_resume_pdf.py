@@ -43,6 +43,18 @@ class ResumePDF(FPDF):
         self.set_x(self.l_margin + indent)
         self.multi_cell(self.w - self.r_margin - self.l_margin - indent, 13, f"- {text}")
 
+    def bullet_height(self, text, indent=12):
+        self.set_font("Helvetica", "", 9.5)
+        width = self.w - self.r_margin - self.l_margin - indent
+        lines = self.multi_cell(width, 13, f"- {text}", dry_run=True, output="LINES")
+        return len(lines) * 13
+
+    def keep_together(self, height):
+        """Force a page break now if `height` of content wouldn't fit on the
+        current page, so a block's header never gets orphaned from its body."""
+        if self.will_page_break(height):
+            self.add_page()
+
 
 def build(config: dict, out_path: Path):
     p = config["personal"]
@@ -74,6 +86,8 @@ def build(config: dict, out_path: Path):
 
     pdf.section_title("Professional Experience")
     for job in config["experience"]:
+        block_h = 14 + 13 + sum(pdf.bullet_height(a) for a in job["achievements"]) + 2
+        pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(pdf.w - pdf.l_margin - pdf.r_margin - 140, 14, job["company"])
         pdf.set_font("Helvetica", "", 9.5)
@@ -87,6 +101,8 @@ def build(config: dict, out_path: Path):
 
     pdf.section_title("Projects")
     for proj in config["projects"]:
+        block_h = 14 + 13 + sum(pdf.bullet_height(h) for h in proj["highlights"]) + 2
+        pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(0, 14, proj["name"], new_x="LMARGIN", new_y="NEXT")
         pdf.set_font("Helvetica", "I", 9.5)
