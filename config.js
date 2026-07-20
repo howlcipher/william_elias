@@ -10,7 +10,7 @@ const config = {
         resumePdf: "William_Elias_Resume.pdf",
         sourceRepo: "https://github.com/howlcipher/william_elias"
     },
-    summary: "Automation and systems engineer with over 9 years of experience spanning infrastructure automation, DevOps, and production support. Specialized in Python and Go development for APIs, backend systems, and automated deployment pipelines. Proven ability to build secure and scalable solutions that streamline operations across development and production environments. Strong foundation in enterprise networking, security controls, and system integration. Outside of work, directs AI coding agents (Claude Code, Gemini CLI) through prompt engineering to architect, build, and test personal automation platforms end to end. Passionate about writing maintainable code and solving complex technical challenges in security focused environments.",
+    summary: "Automation and systems engineer with over 9 years of experience spanning infrastructure automation, DevOps, and production support. Specialized in Python and Go development for APIs, backend systems, and automated deployment pipelines. Proven ability to build secure and scalable solutions that streamline operations across development and production environments. Strong foundation in enterprise networking, security controls, and system integration. Directs AI coding agents (Claude Code, Gemini CLI) through prompt engineering to architect, build, and test automation platforms both on the job and in personal projects. Passionate about writing maintainable code and solving complex technical challenges in security focused environments.",
     skills: [
         {
             category: "Programming & Development",
