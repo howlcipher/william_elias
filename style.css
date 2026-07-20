@@ -11,7 +11,7 @@
     --primary: #3b82f6; /* Blue 500 */
     --primary-hover: #2563eb;
     --accent: #2dd4bf; /* Teal 400 - analogous accent, 9.6:1 on bg-main */
-    --brand-accent: #e2543a; /* Coral - from the LinkedIn banner mark, 4.73:1 on bg-main */
+    --brand-accent: #cc3433; /* Cubs red - 3.49:1 on bg-main (fine for the bold 24px logo + decorative dot) */
 
     --border-color: #334155; /* Slate 700 */
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -30,7 +30,7 @@
     --primary: #2563eb; /* Blue 600 */
     --primary-hover: #1d4ed8;
     --accent: #0f766e; /* Teal 700 - analogous accent, 5.2:1 on bg-main */
-    --brand-accent: #c23e26; /* Coral, darkened for light bg - 5.24:1 on bg-main */
+    --brand-accent: #cc3433; /* Cubs red - 5.11:1 on bg-main */
 
     --border-color: #e2e8f0; /* Slate 200 */
     --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
