@@ -1,8 +1,8 @@
 const config = {
     personal: {
         name: "William Elias",
-        title: "DevOps Engineer",
-        tagline: "Python • Go • SQL • PowerShell | Automation & CI/CD | Pursuing MS Cyber Defense",
+        title: "Automation & Systems Engineer",
+        tagline: "Python • Go • PowerShell • SQL | DevOps & Infrastructure | AI-Assisted Development",
         email: "WylElias.123@gmail.com",
         phone: "586.438.6057",
         linkedin: "https://linkedin.com/in/wylelias",
@@ -10,7 +10,7 @@ const config = {
         resumePdf: "William_Elias_Resume.pdf",
         sourceRepo: "https://github.com/howlcipher/william_elias"
     },
-    summary: "Automation and systems engineer with over 10 years of experience spanning infrastructure automation, DevOps, and production support. Specialized in Python and Go development for APIs, backend systems, and automated deployment pipelines. Proven ability to build secure and scalable solutions that streamline operations across development and production environments. Strong foundation in enterprise networking, security controls, and system integration. Directs AI coding agents (Claude Code, Gemini CLI) through prompt engineering to architect, build, and test automation platforms both on the job and in personal projects. Passionate about writing maintainable code and solving complex technical challenges in security focused environments.",
+    summary: "Automation and systems engineer with 10+ years of experience across software development, infrastructure, DevOps, networking, and production support. Builds Python, Go, PowerShell, and SQL solutions for backend services, APIs, data processing, deployment pipelines, system integrations, and operational tooling. Delivered automation that reduced processing time by 60%, saved more than 40 hours per month, and improved deployment workflows by 30%. Combines enterprise operations experience with secure engineering practices, troubleshooting, and AI-assisted development.",
     skills: [
         {
             category: "Programming & Development",
@@ -18,29 +18,29 @@ const config = {
             tags: ["Python", "Go", "C#", ".NET Framework", "PowerShell", "SQL", "REST APIs", "ETL"]
         },
         {
-            category: "DevOps & Cloud",
+            category: "DevOps & Delivery",
             icon: "fa-cloud",
-            tags: ["Azure DevOps", "Application Insights", "Key Vault", "Azure Monitor", "CI/CD", "Git", "Bitbucket", "IIS"]
+            tags: ["Azure DevOps", "CI/CD", "Git", "Bitbucket", "GitHub Actions", "Docker", "Helm", "IIS", "NSIS"]
         },
         {
-            category: "Systems & Infrastructure",
+            category: "Cloud, Monitoring & Security",
             icon: "fa-server",
-            tags: ["Windows Server", "Automation Scripting", "Log Monitoring", "Job Scheduling"]
+            tags: ["Application Insights", "Key Vault", "Azure Monitor", "Bandit SAST", "Log Monitoring"]
         },
         {
-            category: "Networking & Security",
-            icon: "fa-shield-alt",
-            tags: ["Cisco/Meraki", "VLANs", "Firewalls", "Packet Capture", "Monitoring Tools"]
+            category: "Data & Systems",
+            icon: "fa-server",
+            tags: ["SQL Server", "SQLite", "Database Migrations", "Stored Procedures", "Windows Server", "Job Scheduling"]
         },
         {
-            category: "Databases",
-            icon: "fa-database",
-            tags: ["SQL Server", "SQLite", "Migrations", "Stored Procedures", "Reporting"]
+            category: "Networking",
+            icon: "fa-network-wired",
+            tags: ["Cisco", "Meraki", "VLANs", "Firewalls", "Packet Capture", "Network Standards"]
         },
         {
-            category: "AI & Automation",
+            category: "AI & Knowledge Systems",
             icon: "fa-robot",
-            tags: ["AI-Augmented Development", "Prompt Engineering", "Claude Code", "Gemini CLI", "LLM API Integration", "ChromaDB / RAG"]
+            tags: ["LLM API Integration", "Multi-Agent Orchestration", "ChromaDB", "RAG", "Prompt Engineering"]
         }
     ],
     experience: [
@@ -51,13 +51,13 @@ const config = {
             location: "Auburn Hills, MI",
             achievements: [
                 "Developed a Python automation system converting TXT reports to Excel, saving several hours of manual work daily while improving overall system reliability.",
-                "Built custom tools with Go and PowerShell, successfully streamlining deployment processes by 30 percent.",
+                "Built Go and PowerShell deployment tools that improved deployment processes by 30 percent.",
                 "Implemented database migration strategies between environments with zero data loss.",
                 "Managed IIS applications including configuration, troubleshooting, and performance optimization.",
                 "Led weekly releases and deployments using Git workflows and Bitbucket.",
-                "Built backend scripts for log parsing, anomaly detection, and data validation to support production operations.",
-                "Built an internal documentation and issue-discovery platform with Claude Code that polls Jira and SharePoint across the team, flags drift between documentation and production state, and lets new employees ask questions in plain language to speed up onboarding and production troubleshooting.",
-                "Built a production support portal centralizing team links, runbooks, and documentation into a single searchable hub, reducing time spent hunting for operational resources."
+                "Developed scripts for log parsing, anomaly detection, and data validation to support production operations.",
+                "Architected an internal Jira and SharePoint knowledge platform that detects documentation drift and supports natural-language questions for onboarding and troubleshooting.",
+                "Built a production support portal that centralizes team links, runbooks, and documentation in a searchable hub."
             ]
         },
         {
@@ -66,12 +66,11 @@ const config = {
             company: "HBK Engineering Solutions",
             location: "Southfield, MI",
             achievements: [
-                "Created an XML output automation system with Python and Tkinter, reducing data processing time by 60 percent.",
-                "Automated SQL output processing with Python scripts, saving over 40 hours monthly.",
-                "Developed custom database configuration tools that streamlined customer onboarding workflows.",
-                "Built installer and uninstaller packages using NSIS scripting for seamless application deployment.",
-                "Maintained version control best practices and developer tooling with Git.",
-                "Provided direct technical support to customers through live interactive troubleshooting sessions."
+                "Created a Python and Tkinter XML-output automation system that reduced data-processing time by 60 percent.",
+                "Automated SQL output processing with Python, saving more than 40 hours per month.",
+                "Developed database configuration tools that streamlined customer onboarding workflows.",
+                "Built installer and uninstaller packages with NSIS for reliable application deployment.",
+                "Maintained Git workflows and developer tooling, and provided live technical troubleshooting for customers."
             ]
         },
         {
@@ -81,7 +80,7 @@ const config = {
             location: "Madison Heights, MI",
             achievements: [
                 "Wrote and executed Mocha test cases for internal software applications.",
-                "Debugged and validated API alongside software and hardware integrations."
+                "Debugged and validated APIs across software and hardware integrations."
             ]
         },
         {
@@ -90,9 +89,9 @@ const config = {
             company: "Project Worldwide",
             location: "",
             achievements: [
-                "Configured Cisco switches and Meraki access points across multiple enterprise company locations.",
-                "Developed comprehensive network documentation standards including specific IP addressing schemes.",
-                "Executed multi state network migration projects with minimal operational downtime."
+                "Configured Cisco switches and Meraki access points across multiple enterprise locations.",
+                "Developed network documentation standards and IP-addressing schemes.",
+                "Executed multi-state network migrations with minimal operational downtime."
             ]
         },
         {
@@ -102,8 +101,8 @@ const config = {
             location: "",
             achievements: [
                 "Implemented global network configuration standards across distributed enterprise infrastructure.",
-                "Created documentation templates and IP management databases to scale organizational efficiency.",
-                "Supported large scale network migrations with comprehensive planning and technical execution."
+                "Created documentation templates and IP-management databases to improve scalability and consistency.",
+                "Supported large-scale network migrations through planning and technical execution."
             ]
         },
         {
@@ -112,9 +111,9 @@ const config = {
             company: "Trendset Communications Group",
             location: "",
             achievements: [
-                "Enforced strict network standards and performed comprehensive audits covering ports, IPs, and VLANs.",
-                "Maintained complex configuration files for diverse network equipment environments.",
-                "Provided tier production support for critical network infrastructure and organizational uptime."
+                "Enforced network standards and performed audits covering ports, IP addresses, and VLANs.",
+                "Maintained configuration files across diverse network equipment environments.",
+                "Provided tiered production support for critical network infrastructure and organizational uptime."
             ]
         }
     ],
@@ -123,9 +122,9 @@ const config = {
             name: "AI Knowledge Library",
             subtitle: "Multi-agent orchestration platform - Python, Go",
             highlights: [
-                "Directed AI coding agents (Claude Code, Gemini CLI) through prompt engineering to design, implement, and test a platform that routes engineering work across multiple AI providers (Claude, Gemini, local Ollama models) with shared skills, rules, and project context.",
-                "Built a skill-routing system with keyword and ChromaDB semantic-search fallback to automatically surface relevant domain knowledge into AI agent sessions.",
-                "Enforced production-grade quality with a 148-test Python and Go suite, bandit SAST scanning, and pre-push CI gates that block unverified code from shipping.",
+                "Architected and built a platform that routes engineering work across Claude, Gemini, and local Ollama models using shared skills, rules, and project context.",
+                "Implemented skill routing with keyword matching and ChromaDB semantic-search fallback to surface relevant domain knowledge.",
+                "Established production-grade quality with a 148-test Python and Go suite, Bandit SAST scanning, and pre-push CI gates.",
                 "Packaged as a Go-built CLI installer with a Helm chart and Docker/GitHub Actions deployment.",
             ],
             tags: ["Python", "Go", "Claude Code", "Gemini CLI", "ChromaDB", "Helm", "Docker", "GitHub Actions"]
@@ -134,10 +133,10 @@ const config = {
             name: "Career Agent Core",
             subtitle: "AI-powered job search assistant - Go",
             highlights: [
-                "Directed AI coding agents (Claude Code, Gemini CLI) through prompt engineering to architect and build a Go service that aggregates remote job postings and scores them against a structured profile, salary floor, and remote-work requirements using the Gemini API.",
-                "Built an AI tailoring pipeline that synthesizes job descriptions against a candidate profile to generate customized resumes, cover letters, and interview prep notes.",
-                "Hardened the system against untrusted third-party content with a prompt-injection quarantine layer and SSRF protections.",
-                "Tracked application history in a SQLite-backed dashboard (WAL mode) with architecture decisions documented as ADRs.",
+                "Architected and built a Go service that aggregates remote job postings and scores them against a structured profile, salary floor, and remote-work requirements using the Gemini API.",
+                "Built an AI tailoring pipeline that generates customized resumes, cover letters, and interview-preparation notes from job descriptions and candidate data.",
+                "Hardened third-party content handling with a prompt-injection quarantine layer and SSRF protections.",
+                "Tracked application history in a SQLite WAL-mode dashboard with architecture decisions documented as ADRs.",
             ],
             tags: ["Go", "Gemini API", "SQLite", "Security Hardening", "ADR Documentation"]
         }
