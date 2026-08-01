@@ -93,25 +93,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 1. Intersection Observer for fade-in animations on scroll
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+    if (typeof IntersectionObserver === 'undefined') {
+        // No IntersectionObserver support: skip the animation and show content immediately.
+        document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    } else {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Only animate once
-            }
-        });
-    }, observerOptions);
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
 
-    // Wait a brief moment before observing so dynamic content renders
-    setTimeout(() => {
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }, 50);
+        // Wait a brief moment before observing so dynamic content renders
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }, 50);
+    }
     
     // 2. Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

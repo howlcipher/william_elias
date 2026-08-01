@@ -10,46 +10,9 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 1. Critical Bugs
 
-*(None currently open. See REL-001 for the closest thing to a critical defect — content that never becomes visible under a real failure condition.)*
+*(None currently open. REL-001 — content that never becomes visible under a real failure condition — was the closest thing to a critical defect; fixed 2026-08-01, see Completed section.)*
 
 ## 2. Reliability
-
-### REL-001 — `.fade-in` sections can stay permanently invisible without `IntersectionObserver`
-
-**Type:** Bug
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `script.js`, `style.css`
-**Status:** Ready
-
-### Problem
-
-`.fade-in` elements (`style.css:564`) start at `opacity: 0` and rely entirely on `script.js:102-114` calling `IntersectionObserver` to add `.visible`. There is no `typeof IntersectionObserver === 'undefined'` guard and no `<noscript>` fallback. On any browser/environment where `IntersectionObserver` is unsupported or blocked (older browsers, some in-app webviews, aggressive privacy tools), every major section of the page — hero, about, skills, experience, projects, education — remains invisible forever with no way for the visitor to know content exists.
-
-### Proposed work
-
-Add a feature-detection fallback: if `IntersectionObserver` is unavailable, immediately add `.visible` to all `.fade-in` elements (or skip the class-toggling animation entirely) instead of leaving them hidden. Keep the fallback minimal — no polyfill needed, just a graceful degrade to "visible, no animation."
-
-### Acceptance criteria
-
-- With `IntersectionObserver` deleted/stubbed out in devtools before page load, all `.fade-in` sections are visible without scrolling interaction.
-- Normal (supported) behavior is unchanged — sections still fade in on scroll.
-- `prefers-reduced-motion` behavior (`style.css:112-134`) continues to work.
-
-### Validation
-
-- Manual: in browser devtools console before navigation, run `delete window.IntersectionObserver` via a pre-load snippet or a local test harness, reload, confirm content is visible.
-- Manual: normal load, confirm fade-in animation still occurs on scroll.
-
-### Notes
-
-Sequencing: do this first — it's the only bug where content can become literally unreachable, and the fix is small and isolated.
-
----
 
 ### REL-002 — Theme/colorblind/last-synced `localStorage` calls are not fault-tolerant
 
@@ -1016,7 +979,42 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 ## 9. Completed
 
-*(No items completed yet — this is the initial backlog for this repository.)*
+### REL-001 — `.fade-in` sections can stay permanently invisible without `IntersectionObserver`
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `script.js`, `style.css`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`.fade-in` elements (`style.css:564`) start at `opacity: 0` and rely entirely on `script.js:102-114` calling `IntersectionObserver` to add `.visible`. There is no `typeof IntersectionObserver === 'undefined'` guard and no `<noscript>` fallback. On any browser/environment where `IntersectionObserver` is unsupported or blocked (older browsers, some in-app webviews, aggressive privacy tools), every major section of the page — hero, about, skills, experience, projects, education — remains invisible forever with no way for the visitor to know content exists.
+
+### Proposed work
+
+Add a feature-detection fallback: if `IntersectionObserver` is unavailable, immediately add `.visible` to all `.fade-in` elements (or skip the class-toggling animation entirely) instead of leaving them hidden. Keep the fallback minimal — no polyfill needed, just a graceful degrade to "visible, no animation."
+
+### Acceptance criteria
+
+- With `IntersectionObserver` deleted/stubbed out in devtools before page load, all `.fade-in` sections are visible without scrolling interaction.
+- Normal (supported) behavior is unchanged — sections still fade in on scroll.
+- `prefers-reduced-motion` behavior (`style.css:112-134`) continues to work.
+
+### Validation
+
+- Manual: in browser devtools console before navigation, run `delete window.IntersectionObserver` via a pre-load snippet or a local test harness, reload, confirm content is visible.
+- Manual: normal load, confirm fade-in animation still occurs on scroll.
+
+### Notes
+
+Sequencing: do this first — it's the only bug where content can become literally unreachable, and the fix is small and isolated.
+
+**Done note (2026-08-01):** Wrapped the observer setup in `typeof IntersectionObserver === 'undefined'` (`script.js:96`); when unsupported, `.fade-in` elements get `.visible` added immediately instead of staying at `opacity: 0`. Verified via a Node harness transcribing the exact branch logic against a mocked DOM (no `IntersectionObserver` global vs. present) — both paths correctly mark all `.fade-in` elements visible. A real browser/devtools check wasn't available in this environment (no Chrome extension connected, no local Chromium/Playwright); a manual devtools spot-check per the item's Validation section is still recommended before/at next deploy.
 
 ---
 
@@ -1024,7 +1022,7 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 Dependency-aware order, following the general sequence in the operating instructions:
 
-1. **REL-001** — IntersectionObserver fallback (prevents invisible content)
+1. ~~**REL-001** — IntersectionObserver fallback (prevents invisible content)~~ — Done (2026-08-01)
 2. **REL-002** — storage fault tolerance
 3. **REL-006** — anchor scroll-margin fix
 4. **A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)
