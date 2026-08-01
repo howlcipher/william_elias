@@ -1,3 +1,19 @@
+function safeStorageGet(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (e) {
+        return null;
+    }
+}
+
+function safeStorageSet(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (e) {
+        // ignore: storage unavailable/blocked/quota-exceeded
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Render Content from config.js ---
     if (typeof config !== 'undefined') {
@@ -150,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorblindToggleBtn = document.getElementById('colorblind-toggle');
     
     // Check saved preferences
-    const currentTheme = localStorage.getItem('theme');
-    const isColorblind = localStorage.getItem('colorblind') === 'true';
+    const currentTheme = safeStorageGet('theme');
+    const isColorblind = safeStorageGet('colorblind') === 'true';
     
     // Initialize theme based on preference or OS setting
     if (currentTheme) {
@@ -175,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isDark = document.documentElement.classList.contains('dark-mode-colorblind');
                 updateThemeIcon(isDark ? 'dark' : 'light');
                 
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                safeStorageSet('theme', isDark ? 'dark' : 'light');
                 return;
             }
 
@@ -186,10 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (newTheme === 'dark') {
                 document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
+                safeStorageSet('theme', 'dark');
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
+                safeStorageSet('theme', 'light');
             }
             updateThemeIcon(newTheme);
         });
@@ -201,14 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentlyColorblind = document.documentElement.getAttribute('data-theme') === 'colorblind';
             
             if (currentlyColorblind) {
-                const savedTheme = localStorage.getItem('theme') || 'dark';
+                const savedTheme = safeStorageGet('theme') || 'dark';
                 if (savedTheme === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
                 } else {
                     document.documentElement.removeAttribute('data-theme');
                 }
                 document.documentElement.classList.remove('dark-mode-colorblind');
-                localStorage.setItem('colorblind', 'false');
+                safeStorageSet('colorblind', 'false');
                 colorblindToggleBtn.style.color = '';
                 updateThemeIcon(savedTheme);
             } else {
@@ -220,14 +236,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function enableColorblindMode() {
         document.documentElement.setAttribute('data-theme', 'colorblind');
         
-        const isDark = localStorage.getItem('theme') !== 'light';
+        const isDark = safeStorageGet('theme') !== 'light';
         if (isDark) {
             document.documentElement.classList.add('dark-mode-colorblind');
         } else {
             document.documentElement.classList.remove('dark-mode-colorblind');
         }
         
-        localStorage.setItem('colorblind', 'true');
+        safeStorageSet('colorblind', 'true');
         if(colorblindToggleBtn) colorblindToggleBtn.style.color = 'var(--primary)';
         updateThemeIcon(isDark ? 'dark' : 'light');
     }
@@ -293,7 +309,7 @@ function initLastSynced() {
             const sha = data.sha;
             const date = data.commit.author.date;
             const url = data.html_url;
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ sha, date, url, cachedAt: Date.now() }));
+            safeStorageSet(CACHE_KEY, JSON.stringify({ sha, date, url, cachedAt: Date.now() }));
             renderLastSynced(sha, date, url);
         })
         .catch(() => {

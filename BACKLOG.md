@@ -14,45 +14,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 2. Reliability
 
-### REL-002 — Theme/colorblind/last-synced `localStorage` calls are not fault-tolerant
-
-**Type:** Bug
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-`script.js` reads `localStorage` safely in one place (`initLastSynced`'s cache read, wrapped in try/catch at lines 264-268) but calls `localStorage.setItem` unguarded in five places: theme toggle (`script.js:173, 184, 187`), colorblind toggle (`script.js:206, 225`), and the last-synced cache write (`script.js:291`). In Safari private browsing (older versions), storage-quota-exceeded scenarios, or environments where storage access is blocked by policy, `setItem` throws. Each throw aborts the rest of that function:
-- In `enableColorblindMode()` (`script.js:215-228`), a throw at line 225 skips the icon update and the `colorblindToggleBtn.style.color` indicator, leaving the UI visually inconsistent with the applied `data-theme`.
-- In `initLastSynced()`'s success path (`script.js:291-292`), a throw at line 291 means `renderLastSynced` is **never called** — a successful API response is silently discarded and the footer widget never renders, even though the fetch succeeded.
-
-### Proposed work
-
-Wrap each `localStorage.setItem` call (and the `getItem` reads at `script.js:148-149`, which can also throw in some storage-disabled environments) in try/catch, or centralize through a small helper (`safeStorage.get(key)` / `safeStorage.set(key, value)`) that swallows exceptions and returns a sentinel. Ensure the surrounding UI update (icon swap, `renderLastSynced` call) still executes even when persistence fails — persistence is a nice-to-have, not a precondition for the DOM update.
-
-### Acceptance criteria
-
-- Stubbing `localStorage.setItem` to throw (e.g., `Storage.prototype.setItem = () => { throw new Error('blocked') }` before load) does not prevent the theme icon, colorblind indicator, or last-synced widget from updating.
-- Stubbing `localStorage.getItem` to throw does not throw an uncaught exception during initial load.
-- No regression to normal (storage-available) behavior.
-
-### Validation
-
-- Manual: override `localStorage.setItem`/`getItem` in devtools console to throw, reload and interact with theme/colorblind toggles, confirm no uncaught errors in console and UI still updates.
-- Automated: see TEST-001.
-
-### Notes
-
-Bundle with REL-001 as the two "fault tolerance" fixes — both are small, high-value, low-risk.
-
----
-
 ### REL-003 — Last-synced repo/branch are hardcoded and duplicate `config.js.sourceRepo`
 
 **Type:** Improvement
@@ -1018,12 +979,49 @@ Sequencing: do this first — it's the only bug where content can become literal
 
 ---
 
+### REL-002 — Theme/colorblind/last-synced `localStorage` calls are not fault-tolerant
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `script.js`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`script.js` reads `localStorage` safely in one place (`initLastSynced`'s cache read, wrapped in try/catch) but calls `localStorage.setItem` unguarded in five places: theme toggle, colorblind toggle, and the last-synced cache write. In Safari private browsing (older versions), storage-quota-exceeded scenarios, or environments where storage access is blocked by policy, `setItem` throws. Each throw aborted the rest of that function — in `enableColorblindMode()`, skipping the icon update; in `initLastSynced()`'s success path, discarding a successful API response and leaving the footer widget unrendered.
+
+### Proposed work
+
+Wrap each `localStorage.setItem`/`getItem` call in try/catch, centralized through a small helper (`safeStorage.get(key)` / `safeStorage.set(key, value)`) that swallows exceptions and returns a sentinel. Ensure the surrounding UI update (icon swap, `renderLastSynced` call) still executes even when persistence fails.
+
+### Acceptance criteria
+
+- Stubbing `localStorage.setItem` to throw does not prevent the theme icon, colorblind indicator, or last-synced widget from updating.
+- Stubbing `localStorage.getItem` to throw does not throw an uncaught exception during initial load.
+- No regression to normal (storage-available) behavior.
+
+### Validation
+
+- Manual: override `localStorage.setItem`/`getItem` in devtools console to throw, reload and interact with theme/colorblind toggles, confirm no uncaught errors in console and UI still updates.
+- Automated: see TEST-001.
+
+### Notes
+
+**Done note (2026-08-01):** Added top-level `safeStorageGet(key)`/`safeStorageSet(key, value)` helpers (`script.js:1-14`) that swallow storage exceptions, and replaced all nine unguarded `localStorage.getItem`/`setItem` call sites (theme toggle, colorblind toggle, `enableColorblindMode`, `initLastSynced`'s cache write) with calls to the helpers. The pre-existing try/catch-wrapped cache read in `initLastSynced` was left as-is. Implementation was delegated to `gpt-oss-120b-medium` via agy; the first pass defined the helpers *inside* the `DOMContentLoaded` closure, which made them invisible to `initLastSynced()` (a top-level function called from inside that closure but not lexically nested in it) — this would have thrown `ReferenceError: safeStorageSet is not defined` on every successful fetch, silently caught by the promise chain's `.catch()`, reintroducing the exact "successful API response discarded" bug this item exists to fix. Caught by reviewing the diff before trusting it (per repo convention) and fixed by moving both helpers to module scope. Verified with a Node `vm`-context harness (mocked `document`/`localStorage`/`fetch`) confirming the last-synced widget still renders when `localStorage.getItem`/`setItem` throw, and that normal (non-throwing) storage behavior is unaffected.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
 
 1. ~~**REL-001** — IntersectionObserver fallback (prevents invisible content)~~ — Done (2026-08-01)
-2. **REL-002** — storage fault tolerance
+2. ~~**REL-002** — storage fault tolerance~~ — Done (2026-08-01)
 3. **REL-006** — anchor scroll-margin fix
 4. **A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)
 5. **A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior
