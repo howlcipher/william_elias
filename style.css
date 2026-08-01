@@ -375,6 +375,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 /* Sections */
 .section {
     padding: 4rem 0;
+    scroll-margin-top: 140px;
 }
 
 .section-title {
@@ -596,6 +597,9 @@ footer {
     }
     .hero {
         padding-top: 100px;
+    }
+    .section {
+        scroll-margin-top: 100px;
     }
     .tagline.terminal-type {
         white-space: normal;

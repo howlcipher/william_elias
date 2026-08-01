@@ -123,41 +123,6 @@ Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) 
 
 ---
 
-### REL-006 — Fixed navbar can hide section headings on anchor navigation
-
-**Type:** Bug
-**Priority:** Medium
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `style.css`
-**Status:** Ready
-
-### Problem
-
-`.navbar` is `position: fixed` (`style.css:156-166`) and `html { scroll-behavior: smooth }` is set (`style.css:76-78`). The hero has `padding-top: 140px` to clear the navbar on initial load, but `.section` (`style.css:376-378`) has no `scroll-margin-top`. Clicking a nav link (`#about`, `#skills`, `#experience`, `#projects`, `#education`) scrolls the target heading to the very top of the viewport, where it's obscured by the fixed, blurred navbar.
-
-### Proposed work
-
-Add `scroll-margin-top` to `.section` (and/or the section headings) sized to clear the navbar's rendered height, so anchor-jumped headings land visibly below the nav bar.
-
-### Acceptance criteria
-
-- Clicking each desktop nav link and each mobile nav link scrolls its target section's heading fully into view, not underneath the navbar.
-- No visual regression to section spacing when reached via normal scrolling (non-anchor navigation).
-
-### Validation
-
-- Manual: click each nav link at desktop and mobile viewport widths, confirm the heading is visible below the navbar with reasonable spacing.
-
-### Notes
-
-Small, isolated CSS fix — good candidate for a first small implementation task alongside REL-001/REL-002.
-
----
-
 ## 3. Accessibility
 
 ### A11Y-001 — Mobile menu button lacks `aria-expanded`/`aria-controls`, no Escape handling, no focus return
@@ -1016,13 +981,50 @@ Wrap each `localStorage.setItem`/`getItem` call in try/catch, centralized throug
 
 ---
 
+### REL-006 — Fixed navbar can hide section headings on anchor navigation
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `style.css`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`.navbar` is `position: fixed` (`style.css:156-166`) and `html { scroll-behavior: smooth }` is set (`style.css:76-78`). The hero has `padding-top: 140px` to clear the navbar on initial load, but `.section` (`style.css:376-378`) has no `scroll-margin-top`. Clicking a nav link (`#about`, `#skills`, `#experience`, `#projects`, `#education`) scrolls the target heading to the very top of the viewport, where it's obscured by the fixed, blurred navbar.
+
+### Proposed work
+
+Add `scroll-margin-top` to `.section` (and/or the section headings) sized to clear the navbar's rendered height, so anchor-jumped headings land visibly below the nav bar.
+
+### Acceptance criteria
+
+- Clicking each desktop nav link and each mobile nav link scrolls its target section's heading fully into view, not underneath the navbar.
+- No visual regression to section spacing when reached via normal scrolling (non-anchor navigation).
+
+### Validation
+
+- Manual: click each nav link at desktop and mobile viewport widths, confirm the heading is visible below the navbar with reasonable spacing.
+
+### Notes
+
+Small, isolated CSS fix — good candidate for a first small implementation task alongside REL-001/REL-002.
+
+**Done note (2026-08-01):** Added `scroll-margin-top: 140px` to `.section` (`style.css:378`) matching the desktop hero's `padding-top`, and `scroll-margin-top: 100px` to a `.section` override inside the existing `@media (max-width: 768px)` block (`style.css:604`) matching the mobile hero's `padding-top`. No other selectors touched; `padding` on `.section` unchanged. Implementation delegated to `gemini-3.5-flash-low` via agy, which hit an account-wide Gemini quota (unrelated to this task, resets in ~66h); re-delegated to `gpt-oss-120b-medium`, which produced the correct minimal diff on the first attempt. Verified via `git diff` against disk (brace-balance and region checks) rather than trusting the delegate's self-reported diff. No local Chromium/Playwright/browser tool was available in this environment to do the manual click-through in the item's Validation section — that spot-check (each desktop/mobile nav link scrolls its heading fully clear of the navbar) is still recommended before/at next deploy, same caveat as REL-001.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
 
 1. ~~**REL-001** — IntersectionObserver fallback (prevents invisible content)~~ — Done (2026-08-01)
 2. ~~**REL-002** — storage fault tolerance~~ — Done (2026-08-01)
-3. **REL-006** — anchor scroll-margin fix
+3. ~~**REL-006** — anchor scroll-margin fix~~ — Done (2026-08-01)
 4. **A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)
 5. **A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior
 6. **A11Y-003** — toggle button state exposure
