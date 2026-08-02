@@ -19,41 +19,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 4. Security
 
-### SEC-003 — Font Awesome stylesheet loaded from CDN without Subresource Integrity
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `index.html`
-**Status:** Ready
-
-### Problem
-
-`index.html:18` loads `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css` with no `integrity` or `crossorigin` attribute. If cdnjs were ever compromised or the specific asset tampered with, the site would load and execute (well, apply as CSS — lower severity than a JS CDN, but still) unverified third-party content. Google Fonts links (`index.html:15-17`) are lower risk (no SRI support for cross-origin CSS at a dynamically-generated URL, which is normal/expected for Google Fonts) and are not in scope here.
-
-### Proposed work
-
-Add an `integrity` (SRI hash) and `crossorigin="anonymous"` attribute to the Font Awesome `<link>` tag, pinned to the specific 6.4.0 version already in use. cdnjs publishes SRI hashes alongside each asset version.
-
-### Acceptance criteria
-
-- Font Awesome stylesheet link includes a correct `integrity` hash matching the pinned 6.4.0 asset and `crossorigin="anonymous"`.
-- Icons continue to render correctly (SRI mismatch would block the stylesheet entirely, so this is self-verifying).
-
-### Validation
-
-- Manual: load the page after the change, confirm icons still render and no console error about SRI mismatch/blocked resource.
-
-### Notes
-
-Cheapest item in the backlog — good candidate to bundle into any other small maintenance pass.
-
----
-
 ### SEC-004 — Config-driven sections still render via unescaped `innerHTML`
 
 **Type:** Improvement
@@ -1111,6 +1076,43 @@ Bundle with SEC-001 since both touch the same rendering call sites.
 
 ---
 
+### SEC-003 — Font Awesome stylesheet loaded from CDN without Subresource Integrity
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `index.html`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`index.html:18` loads `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css` with no `integrity` or `crossorigin` attribute. If cdnjs were ever compromised or the specific asset tampered with, the site would load and execute (well, apply as CSS — lower severity than a JS CDN, but still) unverified third-party content. Google Fonts links (`index.html:15-17`) are lower risk (no SRI support for cross-origin CSS at a dynamically-generated URL, which is normal/expected for Google Fonts) and are not in scope here.
+
+### Proposed work
+
+Add an `integrity` (SRI hash) and `crossorigin="anonymous"` attribute to the Font Awesome `<link>` tag, pinned to the specific 6.4.0 version already in use. cdnjs publishes SRI hashes alongside each asset version.
+
+### Acceptance criteria
+
+- Font Awesome stylesheet link includes a correct `integrity` hash matching the pinned 6.4.0 asset and `crossorigin="anonymous"`.
+- Icons continue to render correctly (SRI mismatch would block the stylesheet entirely, so this is self-verifying).
+
+### Validation
+
+- Manual: load the page after the change, confirm icons still render and no console error about SRI mismatch/blocked resource.
+
+### Notes
+
+Cheapest item in the backlog — good candidate to bundle into any other small maintenance pass.
+
+**Done note (2026-08-01):** Added `integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="` and `crossorigin="anonymous"` to the Font Awesome `<link>` (`index.html:18`). Applied this one directly rather than delegating — it's a single well-defined attribute addition with no logic to get wrong, and getting the hash *right* mattered more than saving a delegation round-trip. Didn't trust a third-party SRI listing site: downloaded the actual `all.min.css` 6.4.0 asset from cdnjs directly, computed its SHA-512 locally with `openssl dgst`, and cross-checked that against cdnjs's own API (`api.cdnjs.com/libraries/font-awesome/6.4.0?fields=sri`) — both independent computations matched byte-for-byte. No local browser was available to do the manual "icons still render, no SRI-mismatch console error" check in the Validation section (this one actually matters more than most of the "no browser available" caveats elsewhere in this file, since a hash typo here would silently block every icon on the site) — strongly recommended before/at next deploy.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1124,7 +1126,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 7. ~~**A11Y-004** — heading hierarchy~~ — Done (2026-08-01)
 8. ~~**REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key~~ — Done (2026-08-01)
 9. ~~**REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together~~ — Done (2026-08-01); config.js-wide portions filed as **SEC-004**/**SEC-005**
-10. **SEC-003** — Font Awesome SRI (cheap, anytime)
+10. ~~**SEC-003** — Font Awesome SRI (cheap, anytime)~~ — Done (2026-08-01)
 10a. **SEC-004** → **SEC-005** — config.js-wide safe rendering and href validation, deferred from item 9 (filed 2026-08-01; lower urgency, data is owner-controlled — good candidate to pair with TEST-001 once it exists)
 11. **MAINT-001** — remove `.directory`, add `.gitignore` (cheap, anytime)
 12. **TEST-002** → **TEST-003** → **TEST-001** — PDF tests, then CI, then browser-behavior tests
