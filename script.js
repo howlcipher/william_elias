@@ -242,7 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 document.documentElement.classList.remove('dark-mode-colorblind');
                 safeStorageSet('colorblind', 'false');
-                colorblindToggleBtn.style.color = '';
+                colorblindToggleBtn.classList.remove('active');
+                colorblindToggleBtn.setAttribute('aria-pressed', 'false');
                 updateThemeIcon(savedTheme);
             } else {
                 enableColorblindMode();
@@ -261,7 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         safeStorageSet('colorblind', 'true');
-        if(colorblindToggleBtn) colorblindToggleBtn.style.color = 'var(--primary)';
+        if(colorblindToggleBtn) {
+            colorblindToggleBtn.classList.add('active');
+            colorblindToggleBtn.setAttribute('aria-pressed', 'true');
+        }
         updateThemeIcon(isDark ? 'dark' : 'light');
     }
 
@@ -273,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             icon.classList.replace('fa-moon', 'fa-sun');
         }
+        themeToggleBtn.setAttribute('aria-pressed', String(theme === 'dark'));
     }
 });
 

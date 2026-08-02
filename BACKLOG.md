@@ -125,42 +125,6 @@ Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) 
 
 ## 3. Accessibility
 
-### A11Y-003 — Theme and colorblind toggle buttons don't expose pressed state programmatically
-
-**Type:** Bug
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `index.html`, `script.js`, `style.css`
-**Status:** Ready
-
-### Problem
-
-`#theme-toggle` and `#colorblind-toggle` (`index.html:37-42`) communicate state only through icon glyph changes (`fa-sun`/`fa-moon`, `script.js:230-238`) and, for colorblind mode, an inline `style.color` set directly in JS (`script.js:207, 226`). Neither button has `aria-pressed`, so screen reader users have no way to know whether dark/light or colorblind mode is currently active. The inline-style-only indicator for colorblind state is also fragile — it bypasses the theme system's CSS custom properties and won't respond to theme changes made another way.
-
-### Proposed work
-
-Add `aria-pressed` (or `aria-checked` if treated as a switch) to both buttons, updated at every state transition. Replace the inline `style.color` colorblind indicator with a CSS class (e.g. `.icon-btn.active`) styled via `style.css` using `var(--primary)`, toggled in `script.js` instead of setting `style.color` directly.
-
-### Acceptance criteria
-
-- `aria-pressed` on both buttons accurately reflects current state after every toggle and after initial load (including when state is restored from `localStorage` or OS preference).
-- Colorblind-active visual indicator is applied via a CSS class, not an inline style.
-- No visual regression to the existing active-state color indicator.
-
-### Validation
-
-- Manual: toggle each control, inspect `aria-pressed` in devtools at each state.
-- Manual: screen reader spot check confirms toggle state is announced.
-
-### Notes
-
-Small, contained change. Independent of A11Y-001/002 (different controls) — can be done in parallel by a different work session if desired, but no hard dependency either way.
-
----
 
 ### A11Y-004 — Heading hierarchy skips from `h1` to `h3`
 
@@ -1025,6 +989,45 @@ Lower priority than A11Y-001 since `visibility: hidden` already provides most of
 
 ---
 
+### A11Y-003 — Theme and colorblind toggle buttons don't expose pressed state programmatically
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `index.html`, `script.js`, `style.css`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`#theme-toggle` and `#colorblind-toggle` (`index.html:37-42`) communicate state only through icon glyph changes (`fa-sun`/`fa-moon`, `script.js:230-238`) and, for colorblind mode, an inline `style.color` set directly in JS (`script.js:207, 226`). Neither button has `aria-pressed`, so screen reader users have no way to know whether dark/light or colorblind mode is currently active. The inline-style-only indicator for colorblind state is also fragile — it bypasses the theme system's CSS custom properties and won't respond to theme changes made another way.
+
+### Proposed work
+
+Add `aria-pressed` (or `aria-checked` if treated as a switch) to both buttons, updated at every state transition. Replace the inline `style.color` colorblind indicator with a CSS class (e.g. `.icon-btn.active`) styled via `style.css` using `var(--primary)`, toggled in `script.js` instead of setting `style.color` directly.
+
+### Acceptance criteria
+
+- `aria-pressed` on both buttons accurately reflects current state after every toggle and after initial load (including when state is restored from `localStorage` or OS preference).
+- Colorblind-active visual indicator is applied via a CSS class, not an inline style.
+- No visual regression to the existing active-state color indicator.
+
+### Validation
+
+- Manual: toggle each control, inspect `aria-pressed` in devtools at each state.
+- Manual: screen reader spot check confirms toggle state is announced.
+
+### Notes
+
+Small, contained change. Independent of A11Y-001/002 (different controls) — can be done in parallel by a different work session if desired, but no hard dependency either way.
+
+**Done note (2026-08-01):** Added `aria-pressed` to both `#theme-toggle` and `#colorblind-toggle` (`index.html:37,40`), defaulting to `true`/`false` respectively to match this site's actual defaults (dark theme, colorblind off) and kept in sync at every transition: `updateThemeIcon()` now sets `theme-toggle`'s `aria-pressed` from the theme argument it already receives (`script.js:280`), and both branches of the colorblind click handler plus `enableColorblindMode()` set `colorblind-toggle`'s `aria-pressed` (`script.js:245-246,264-267`). Replaced the inline `style.color` indicator with an `.icon-btn.active` CSS class (`style.css:232-234`), toggled via `classList` instead of direct style writes. One correction made during re-evaluation: the original Proposed work said to style the active class "using `var(--primary)`", but that predates A11Y-005's fix splitting `--primary` (background-safe) from `--primary-text` (text-safe) — using `var(--primary)` here would have reintroduced the exact dark-colorblind-mode text-contrast failure A11Y-005 just fixed, since this is icon *color* (text-role), not a background. Used `var(--primary-text)` instead, matching the adjacent `.icon-btn:hover` rule. Implementation delegated to `gpt-oss-120b-medium` via agy; verified against the actual file diff on disk (the delegate's own summary this time didn't include the diff text at all, just a description — per repo convention, never trust a delegate's self-report without checking disk). Sanity-checked with `node --check script.js`, brace-balance, and button-tag-balance. No local browser/screen-reader tool was available in this environment to do the manual devtools/AT walkthrough in the Validation section — recommended before/at next deploy, same caveat as prior items.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1034,7 +1037,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 3. ~~**REL-006** — anchor scroll-margin fix~~ — Done (2026-08-01)
 4. ~~**A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)~~ — Done (2026-08-01)
 5. ~~**A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior~~ — Done (2026-08-01)
-6. **A11Y-003** — toggle button state exposure
+6. ~~**A11Y-003** — toggle button state exposure~~ — Done (2026-08-01)
 7. **A11Y-004** — heading hierarchy
 8. **REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key
 9. **REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together
