@@ -300,7 +300,12 @@ function renderLastSynced(sha, date, url) {
 }
 
 function initLastSynced() {
-    const CACHE_KEY = 'we_last_synced';
+    const sourceRepo = (typeof config !== 'undefined' && config.personal && config.personal.sourceRepo) || '';
+    const branch = (typeof config !== 'undefined' && config.personal && config.personal.sourceBranch) || 'main';
+    const ownerRepo = sourceRepo.replace('https://github.com/', '').replace(/\/$/, '');
+    if (!/^[^/]+\/[^/]+$/.test(ownerRepo)) return;
+
+    const CACHE_KEY = `we_last_synced:${ownerRepo}:${branch}`;
     const CACHE_TTL_MS = 10 * 60 * 1000;
 
     let cached = null;
@@ -318,7 +323,7 @@ function initLastSynced() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    fetch('https://api.github.com/repos/howlcipher/william_elias/commits/main', {
+    fetch(`https://api.github.com/repos/${ownerRepo}/commits/${branch}`, {
         headers: { Accept: 'application/vnd.github+json' },
         signal: controller.signal
     })

@@ -14,78 +14,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 2. Reliability
 
-### REL-003 — Last-synced repo/branch are hardcoded and duplicate `config.js.sourceRepo`
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `script.js`, `config.js`
-**Status:** Ready
-
-### Problem
-
-`initLastSynced()` hardcodes `https://api.github.com/repos/howlcipher/william_elias/commits/main` (`script.js:278`), duplicating the repo identity already present in `config.js.personal.sourceRepo` (`config.js:11`) and the branch name implicitly assumed to be `main`. If the repo is ever renamed/forked or the default branch changes, this must be updated in two places (and the README's deploy instructions imply `main` is significant — see MAINT-002).
-
-### Proposed work
-
-Derive the GitHub API URL from `config.personal.sourceRepo` (parse owner/repo out of the GitHub URL) plus a single configurable branch value (add e.g. `config.personal.sourceBranch = "main"` or a small constant near the top of `script.js`). Keep the parsing simple — this doesn't need a general-purpose URL parser, just a `sourceRepo.replace('https://github.com/', '')` style extraction with a sanity check.
-
-### Acceptance criteria
-
-- Repo owner/name is sourced from `config.js`, not duplicated as a literal in `script.js`.
-- Branch is a single named constant/config value, not inlined in the fetch URL string.
-- Widget behavior (rendering, caching, relative time) is unchanged for the current repo/branch.
-
-### Validation
-
-- Manual: load the page, confirm the last-synced widget still renders the correct commit.
-- Manual: temporarily point the derived URL at a different fork/branch to confirm the value is actually being read from config, not hardcoded.
-
-### Notes
-
-Low urgency on its own, but do this before/alongside REL-004 (cache key) since both touch the same function and repo/branch identity feeds the cache key.
-
----
-
-### REL-004 — Last-synced cache key doesn't include repo/branch identity
-
-**Type:** Bug
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** REL-003 (do together or REL-004 first, either order is fine — REL-003 is what makes this matter)
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-`CACHE_KEY = 'we_last_synced'` (`script.js:260`) is a fixed string with no repo/branch component. This is harmless today (one hardcoded repo/branch), but once REL-003 makes the repo/branch configurable, a stale cached value from a previous repo/branch could be served under the same key after a config change, showing the wrong commit until the 10-minute TTL expires.
-
-### Proposed work
-
-Include the derived owner/repo/branch in the cache key (e.g. `` `we_last_synced:${owner}/${repo}:${branch}` ``) so a config change invalidates old cache entries automatically.
-
-### Acceptance criteria
-
-- Changing the configured repo or branch does not surface a stale cached commit from the old identity.
-- Existing cache behavior (10-minute TTL, graceful fallback to cache on fetch failure) is unchanged.
-
-### Validation
-
-- Manual: populate cache for one repo/branch, change the configured value, reload, confirm a fresh fetch occurs rather than serving stale cached data.
-
-### Notes
-
-Trivial fix; sequence right after REL-003 so there's something for the key to disambiguate.
-
----
-
 ### REL-005 — Last-synced API response is cached and rendered without validation
 
 **Type:** Bug
@@ -1029,6 +957,82 @@ Purely structural/markup — no resume content changes required, just tag names 
 
 ---
 
+### REL-003 — Last-synced repo/branch are hardcoded and duplicate `config.js.sourceRepo`
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `script.js`, `config.js`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`initLastSynced()` hardcodes `https://api.github.com/repos/howlcipher/william_elias/commits/main` (`script.js:278`), duplicating the repo identity already present in `config.js.personal.sourceRepo` (`config.js:11`) and the branch name implicitly assumed to be `main`. If the repo is ever renamed/forked or the default branch changes, this must be updated in two places (and the README's deploy instructions imply `main` is significant — see MAINT-002).
+
+### Proposed work
+
+Derive the GitHub API URL from `config.personal.sourceRepo` (parse owner/repo out of the GitHub URL) plus a single configurable branch value (add e.g. `config.personal.sourceBranch = "main"` or a small constant near the top of `script.js`). Keep the parsing simple — this doesn't need a general-purpose URL parser, just a `sourceRepo.replace('https://github.com/', '')` style extraction with a sanity check.
+
+### Acceptance criteria
+
+- Repo owner/name is sourced from `config.js`, not duplicated as a literal in `script.js`.
+- Branch is a single named constant/config value, not inlined in the fetch URL string.
+- Widget behavior (rendering, caching, relative time) is unchanged for the current repo/branch.
+
+### Validation
+
+- Manual: load the page, confirm the last-synced widget still renders the correct commit.
+- Manual: temporarily point the derived URL at a different fork/branch to confirm the value is actually being read from config, not hardcoded.
+
+### Notes
+
+Low urgency on its own, but do this before/alongside REL-004 (cache key) since both touch the same function and repo/branch identity feeds the cache key.
+
+**Done note (2026-08-01):** Implemented together with REL-004 (single function rewrite covers both). Added `config.personal.sourceBranch: "main"` (`config.js:11-12`). `initLastSynced()` (`script.js:302-349`) now derives `ownerRepo` from `config.personal.sourceRepo` via `.replace('https://github.com/', '')` plus a `/^[^/]+\/[^/]+$/` sanity check (bails out silently, same as a fetch failure, if `sourceRepo` is missing or malformed) and reads `branch` from `config.personal.sourceBranch` (falling back to `'main'` if unset), then builds both the fetch URL and the cache key from those. Verified the extraction produces byte-identical values to the old hardcoded ones for the current config (`howlcipher/william_elias`, `main`) via a standalone Node check, so current behavior is unchanged. Implementation delegated to `gpt-oss-120b-medium` via agy; this delegation had a real defect caught only by checking the actual file on disk: the model's diff summary claimed a full function replacement, but it had only *inserted* the new function body without deleting the old one, leaving the new function's closing `}` immediately followed by ~40 lines of the old function's body as dangling top-level statements — a `SyntaxError: Unexpected token '}'` that `node --check script.js` caught immediately. Fixed by deleting the leftover dead code directly (a small, unambiguous removal, not worth a full re-delegation). This is the same class of failure the repo's own delegation protocol warns about (self-reported diffs that don't match reality) — `node --check` is now a standing habit for every JS delegation in this repo, not just a one-off.
+
+---
+
+### REL-004 — Last-synced cache key doesn't include repo/branch identity
+
+**Type:** Bug
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** REL-003 (do together or REL-004 first, either order is fine — REL-003 is what makes this matter)
+**Affected files:** `script.js`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`CACHE_KEY = 'we_last_synced'` (`script.js:260`) is a fixed string with no repo/branch component. This is harmless today (one hardcoded repo/branch), but once REL-003 makes the repo/branch configurable, a stale cached value from a previous repo/branch could be served under the same key after a config change, showing the wrong commit until the 10-minute TTL expires.
+
+### Proposed work
+
+Include the derived owner/repo/branch in the cache key (e.g. `` `we_last_synced:${owner}/${repo}:${branch}` ``) so a config change invalidates old cache entries automatically.
+
+### Acceptance criteria
+
+- Changing the configured repo or branch does not surface a stale cached commit from the old identity.
+- Existing cache behavior (10-minute TTL, graceful fallback to cache on fetch failure) is unchanged.
+
+### Validation
+
+- Manual: populate cache for one repo/branch, change the configured value, reload, confirm a fresh fetch occurs rather than serving stale cached data.
+
+### Notes
+
+Trivial fix; sequence right after REL-003 so there's something for the key to disambiguate.
+
+**Done note (2026-08-01):** See REL-003's Done note — implemented together as one function rewrite. `CACHE_KEY` is now `` `we_last_synced:${ownerRepo}:${branch}` `` (`script.js:308`), so a repo or branch config change no longer risks serving a stale cached commit from the old identity under the same key. Existing TTL (10 min) and cache-fallback-on-fetch-failure behavior are both untouched.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1040,7 +1044,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 5. ~~**A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior~~ — Done (2026-08-01)
 6. ~~**A11Y-003** — toggle button state exposure~~ — Done (2026-08-01)
 7. ~~**A11Y-004** — heading hierarchy~~ — Done (2026-08-01)
-8. **REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key
+8. ~~**REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key~~ — Done (2026-08-01)
 9. **REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together
 10. **SEC-003** — Font Awesome SRI (cheap, anytime)
 11. **MAINT-001** — remove `.directory`, add `.gitignore` (cheap, anytime)

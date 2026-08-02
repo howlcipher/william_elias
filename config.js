@@ -8,7 +8,8 @@ const config = {
         linkedin: "https://linkedin.com/in/wylelias",
         github: "https://github.com/howlcipher",
         resumePdf: "William_Elias_Resume.pdf",
-        sourceRepo: "https://github.com/howlcipher/william_elias"
+        sourceRepo: "https://github.com/howlcipher/william_elias",
+        sourceBranch: "main"
     },
     summary: "Automation and systems engineer with 10+ years of experience across software development, infrastructure, DevOps, networking, and production support. Builds Python, Go, PowerShell, and SQL solutions for backend services, APIs, data processing, deployment pipelines, system integrations, and operational tooling. Delivered automation that reduced processing time by 60%, saved more than 40 hours per month, and improved deployment workflows by 30%. Combines enterprise operations experience with secure engineering practices, troubleshooting, and AI-assisted development.",
     skills: [
