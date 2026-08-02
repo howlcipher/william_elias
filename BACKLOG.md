@@ -14,119 +14,10 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 2. Reliability
 
-### REL-005 — Last-synced API response is cached and rendered without validation
-
-**Type:** Bug
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-`initLastSynced()`'s fetch handler (`script.js:287-293`) takes `data.sha`, `data.commit.author.date`, and `data.html_url` directly from the parsed JSON response and both caches them and passes them to `renderLastSynced`, which interpolates them into `innerHTML` (`script.js:256`, see SEC-001) without checking they exist or are well-formed. If GitHub's API response shape changes, returns an error body with a 200 (unlikely but not impossible), or `res.json()` succeeds on something unexpected, `sha.slice(0,7)` at `script.js:255` can throw on `undefined`, or a malformed `date` can produce `Invalid Date` / `NaN` output from `formatRelativeTime`.
-
-### Proposed work
-
-Validate the shape of the response (string `sha`, parseable `commit.author.date`, string `html_url` matching an expected `https://github.com/...` pattern) before caching or rendering. On validation failure, treat it the same as a fetch failure — fall back to cache if present, otherwise render nothing.
-
-### Acceptance criteria
-
-- A mocked API response missing `sha`/`commit.author.date`/`html_url` does not throw an uncaught exception and does not render broken/`NaN`/`undefined` content.
-- A malformed response is not written to `localStorage` cache.
-- Normal successful responses render exactly as before.
-
-### Validation
-
-- Manual: mock `fetch` to resolve with a response missing expected fields, reload, confirm no console errors and no garbled footer text.
-- Automated: see TEST-001.
-
-### Notes
-
-Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) — consider implementing both together since the safe-rendering rewrite naturally forces validation at the same call site.
-
----
-
 ## 3. Accessibility
 
 
 ## 4. Security
-
-### SEC-001 — Resume and API data rendered via unescaped `innerHTML` throughout
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** M
-**Risk:** Medium
-**Recommended mode:** Coding
-**Recommended model tier:** High reasoning
-**Affected files:** `script.js`
-**Dependencies:** REL-005 (validation work overlaps the same call site)
-**Status:** Ready
-
-### Problem
-
-`script.js` builds DOM content via template-literal `innerHTML` assignment in ~7 places: hero (`script.js:6-18`), summary (`script.js:23`), skills (`script.js:28-36`), experience (`script.js:41-53`), projects (`script.js:58-68`), education (`script.js:74-82`), and the last-synced widget (`script.js:256`). The `config.js` values are static and owner-controlled, so the practical risk there is low (defense-in-depth, not an active exploit path) — but the last-synced widget interpolates `sha`, `date`-derived text, and `url` **sourced from a live network response (GitHub's API)** directly into `innerHTML` with no escaping (`script.js:256`). While GitHub's API is trusted today, this is the one spot where externally-sourced data reaches `innerHTML` unescaped, and it sets a pattern that would be actively dangerous if `config.js` ever became less static (e.g., fetched from a CMS) or if the API response shape assumption in REL-005 is ever violated.
-
-### Proposed work
-
-Replace `innerHTML` template interpolation with `textContent` assignment and explicit DOM construction (`createElement` + `setAttribute`/`textContent`) at least for the last-synced widget, since that's the only genuinely externally-sourced data. Extend the same pattern to the `config.js`-driven renderers where practical, prioritizing anywhere user-facing text is interpolated (achievements, highlights, tags) over purely structural markup. This is a meaningful refactor of `script.js`'s rendering — don't rewrite it in one giant diff; consider splitting by section (hero, skills, experience, projects, education, last-synced) if done incrementally.
-
-### Acceptance criteria
-
-- The last-synced widget no longer interpolates API-sourced strings into `innerHTML`; equivalent output is built via `textContent`/DOM APIs.
-- Config-driven sections render identically to before (no visual regression).
-- No behavior change to links (`href`, `target`, `rel` attributes preserved, see SEC-002).
-
-### Validation
-
-- Manual: visually diff every section before/after against the live site to confirm no rendering regression.
-- Manual: mock the last-synced fetch to return a value containing `<img src=x onerror=alert(1)>` in `html_url` or `sha`, confirm it renders as inert text, not executed markup, both before-fix (to confirm the risk) and after-fix (to confirm the mitigation).
-
-### Notes
-
-This is the largest single refactor in the backlog short of the resume.json architecture work — size it as M and expect it may be worth splitting into per-section sub-items if it proves larger in practice. The `config.js` half of this item is lower urgency than the last-synced half; if scoping down, prioritize the last-synced widget alone and file the `config.js` portion as a separate follow-up.
-
----
-
-### SEC-002 — Dynamic link `href` values aren't protocol-validated
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** SEC-001 (natural to fix together at the same call sites)
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-`config.personal.linkedin`, `.github`, `.resumePdf`, `.sourceRepo` (`script.js:13-16`) and the last-synced `url` (`script.js:256`) are all written directly into `href` attributes with no check that they're `http(s)` URLs. Today all values are owner-controlled or come from GitHub's API, so this is low practical risk, but it's an easy, cheap check to add as defense-in-depth (e.g. against a future config value accidentally containing a `javascript:` URL).
-
-### Proposed work
-
-Add a small helper that validates a URL string starts with `http://` or `https://` (or is a `mailto:`/`tel:` where expected) before using it as an `href`, skipping/omitting the link if it fails validation rather than rendering a dangerous `href`.
-
-### Acceptance criteria
-
-- A config value or API value with a non-http(s) protocol (e.g. `javascript:...`) does not get rendered as a clickable `href`.
-- Normal `https://` links are unaffected.
-
-### Validation
-
-- Manual: temporarily set a config link value to `javascript:alert(1)`, confirm it's not rendered as an active link after the fix.
-
-### Notes
-
-Bundle with SEC-001 since both touch the same rendering call sites.
-
----
 
 ### SEC-003 — Font Awesome stylesheet loaded from CDN without Subresource Integrity
 
@@ -160,6 +51,78 @@ Add an `integrity` (SRI hash) and `crossorigin="anonymous"` attribute to the Fon
 ### Notes
 
 Cheapest item in the backlog — good candidate to bundle into any other small maintenance pass.
+
+---
+
+### SEC-004 — Config-driven sections still render via unescaped `innerHTML`
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** High reasoning
+**Dependencies:** None
+**Affected files:** `script.js`
+**Status:** Ready
+
+### Problem
+
+Filed as the deferred half of SEC-001, which was scoped down to the last-synced widget only (see SEC-001's Done note, 2026-08-01). `script.js` still builds the hero (`script.js:22-34`), summary (`script.js:39`), skills (`script.js:44-53`), experience (`script.js:57-72`), projects (`script.js:74-87`), and education (`script.js:90-98`) sections via template-literal `innerHTML` assignment. All of this data currently comes from the static, owner-controlled `config.js`, so the practical exploit risk is low today (defense-in-depth, not an active vulnerability) — but it sets a pattern that would become actively dangerous if `config.js` were ever replaced by a fetched/CMS-driven source (see ARCH-002), and achievements/highlights/tags are exactly the kind of free-text fields a future content source might not fully control.
+
+### Proposed work
+
+Replace `innerHTML` template interpolation with `textContent` assignment and explicit DOM construction (`createElement`/`appendChild`/`textContent`) across the six sections listed above. This is a genuine refactor of `script.js`'s rendering, not a one-line fix — don't attempt it as a single diff; split it per-section (hero, skills, experience, projects, education, summary) and verify each section's visual output against the live site before moving to the next, since template literals currently also encode structural markup (wrapper `div`s, icon `i` tags, conditional contact-pill links) that has to be reconstructed correctly, not just the text nodes.
+
+### Acceptance criteria
+
+- None of the six sections use `innerHTML` with interpolated `config.js` values; equivalent output is built via `textContent`/DOM APIs.
+- Visual output is pixel-identical to before for the current `config.js` content (this is the main risk: the current template literals encode a fair amount of conditional structure — e.g. the hero's contact pills only render if the corresponding config field is truthy — that must be preserved exactly).
+- No regression to any interactive behavior tied to this markup (fade-in observer targets, `.timeline-dot`, `.skill-tags`, etc. — verify class names and structure are unchanged, not just visible text).
+
+### Validation
+
+- Manual: visually diff every section before/after against the live site.
+- Automated: see TEST-001 — this item is a strong candidate to pair with automated regression tests precisely because "visually identical" is hard to eyeball-verify across six sections reliably by hand.
+
+### Notes
+
+Larger and lower-urgency than the last-synced fix (SEC-001) it was split from — the data source here is static and owner-controlled, so this is genuinely optional hardening, not an active-risk fix. Good candidate to sequence alongside or after TEST-001 exists, so the refactor has an automated safety net rather than relying purely on manual visual diffing across six sections.
+
+---
+
+### SEC-005 — Config-driven link `href` values aren't protocol-validated
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** SEC-004 (natural to fix together at the same call site, though not strictly required — this is a small independent addition)
+**Affected files:** `script.js`
+**Status:** Ready
+
+### Problem
+
+Filed as the deferred half of SEC-002, which was scoped down to the last-synced widget's `url` only (see SEC-002's Done note, 2026-08-01). `config.personal.linkedin`, `.github`, `.resumePdf`, and `.sourceRepo` (`script.js:27-32`, inside the hero template literal) are still written directly into `href` attributes with no protocol check. These are owner-controlled config values today, so practical risk is low — this is cheap defense-in-depth, not an active vulnerability.
+
+### Proposed work
+
+Add a small helper that validates a URL string starts with `http://`/`https://` (for `linkedin`/`github`/`sourceRepo`) or is a same-origin relative path (for `resumePdf`, which is a local file like `William_Elias_Resume.pdf`, not an absolute URL) before using it as an `href`; skip rendering the link entirely if validation fails, matching the pattern already established for the last-synced widget in SEC-002.
+
+### Acceptance criteria
+
+- A config value with a non-http(s)/non-relative protocol (e.g. `javascript:...`) does not get rendered as a clickable `href`.
+- Normal `https://` links and the local `resumePdf` relative path are both unaffected.
+
+### Validation
+
+- Manual: temporarily set a config link value to `javascript:alert(1)`, confirm it's not rendered as an active link after the fix.
+
+### Notes
+
+Small and cheap on its own, but touches the same hero template literal SEC-004 refactors — sequence together if both are being done, otherwise this can be done standalone since it doesn't require the full `innerHTML`→DOM-API rewrite (a href-validation check works the same whether the surrounding markup is built via `innerHTML` or `createElement`).
 
 ---
 
@@ -1033,6 +996,121 @@ Trivial fix; sequence right after REL-003 so there's something for the key to di
 
 ---
 
+### REL-005 — Last-synced API response is cached and rendered without validation
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `script.js`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`initLastSynced()`'s fetch handler (`script.js:287-293`) takes `data.sha`, `data.commit.author.date`, and `data.html_url` directly from the parsed JSON response and both caches them and passes them to `renderLastSynced`, which interpolates them into `innerHTML` (`script.js:256`, see SEC-001) without checking they exist or are well-formed. If GitHub's API response shape changes, returns an error body with a 200 (unlikely but not impossible), or `res.json()` succeeds on something unexpected, `sha.slice(0,7)` at `script.js:255` can throw on `undefined`, or a malformed `date` can produce `Invalid Date` / `NaN` output from `formatRelativeTime`.
+
+### Proposed work
+
+Validate the shape of the response (string `sha`, parseable `commit.author.date`, string `html_url` matching an expected `https://github.com/...` pattern) before caching or rendering. On validation failure, treat it the same as a fetch failure — fall back to cache if present, otherwise render nothing.
+
+### Acceptance criteria
+
+- A mocked API response missing `sha`/`commit.author.date`/`html_url` does not throw an uncaught exception and does not render broken/`NaN`/`undefined` content.
+- A malformed response is not written to `localStorage` cache.
+- Normal successful responses render exactly as before.
+
+### Validation
+
+- Manual: mock `fetch` to resolve with a response missing expected fields, reload, confirm no console errors and no garbled footer text.
+- Automated: see TEST-001.
+
+### Notes
+
+Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) — consider implementing both together since the safe-rendering rewrite naturally forces validation at the same call site.
+
+**Done note (2026-08-01):** Implemented together with SEC-001's last-synced portion and SEC-002's last-synced portion (one combined delegation, since all three touch the same two functions). Added `validateLastSyncedData(data)` (`script.js:295-304`), called from `initLastSynced()`'s fetch success handler: checks `sha` is a non-empty string, `commit.author.date` parses to a valid `Date`, and `html_url` is a string matching `/^https:\/\/github\.com\//`. On failure it returns `null`, which makes the caller `throw`, routing through the *existing* `.catch()` fallback (cache-if-present, else render nothing) instead of adding new branching — same behavior REL-005 asked for. Verified with a Node `vm`-context harness (mocked `document`/`localStorage`/`fetch`, same technique used for REL-002) across four scenarios: a valid response (renders + caches correctly), a response missing `sha` (no throw, empty render, nothing cached), an `<img src=x onerror=alert(1)>`-style payload in `sha` (renders as inert text via `textContent`, confirmed by inspecting the actual diff uses `createElement`/`textContent`, never `innerHTML`), and a `javascript:` URL in `html_url` (rejected by the `https://github.com/` prefix check before it ever reaches render or cache). Implementation delegated to `claude-sonnet-4-6` via agy (escalated above the usual `gpt-oss-120b-medium` tier given this item's own "High reasoning" recommendation and that it's security-sensitive rendering code) — this delegation was clean on the first attempt, unlike the prior REL-003/004 delegation, but was still verified against the actual disk diff and `node --check` rather than trusted from its prose summary, per standing practice in this repo.
+
+---
+
+### SEC-001 — Resume and API data rendered via unescaped `innerHTML` throughout
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** High reasoning
+**Affected files:** `script.js`
+**Dependencies:** REL-005 (validation work overlaps the same call site)
+**Status:** Done (2026-08-01) — scoped to the last-synced widget only; config.js-driven sections filed as SEC-004
+
+### Problem
+
+`script.js` builds DOM content via template-literal `innerHTML` assignment in ~7 places: hero (`script.js:6-18`), summary (`script.js:23`), skills (`script.js:28-36`), experience (`script.js:41-53`), projects (`script.js:58-68`), education (`script.js:74-82`), and the last-synced widget (`script.js:256`). The `config.js` values are static and owner-controlled, so the practical risk there is low (defense-in-depth, not an active exploit path) — but the last-synced widget interpolates `sha`, `date`-derived text, and `url` **sourced from a live network response (GitHub's API)** directly into `innerHTML` with no escaping (`script.js:256`). While GitHub's API is trusted today, this is the one spot where externally-sourced data reaches `innerHTML` unescaped, and it sets a pattern that would be actively dangerous if `config.js` ever became less static (e.g., fetched from a CMS) or if the API response shape assumption in REL-005 is ever violated.
+
+### Proposed work
+
+Replace `innerHTML` template interpolation with `textContent` assignment and explicit DOM construction (`createElement` + `setAttribute`/`textContent`) at least for the last-synced widget, since that's the only genuinely externally-sourced data. Extend the same pattern to the `config.js`-driven renderers where practical, prioritizing anywhere user-facing text is interpolated (achievements, highlights, tags) over purely structural markup. This is a meaningful refactor of `script.js`'s rendering — don't rewrite it in one giant diff; consider splitting by section (hero, skills, experience, projects, education, last-synced) if done incrementally.
+
+### Acceptance criteria
+
+- The last-synced widget no longer interpolates API-sourced strings into `innerHTML`; equivalent output is built via `textContent`/DOM APIs.
+- Config-driven sections render identically to before (no visual regression).
+- No behavior change to links (`href`, `target`, `rel` attributes preserved, see SEC-002).
+
+### Validation
+
+- Manual: visually diff every section before/after against the live site to confirm no rendering regression.
+- Manual: mock the last-synced fetch to return a value containing `<img src=x onerror=alert(1)>` in `html_url` or `sha`, confirm it renders as inert text, not executed markup, both before-fix (to confirm the risk) and after-fix (to confirm the mitigation).
+
+### Notes
+
+This is the largest single refactor in the backlog short of the resume.json architecture work — size it as M and expect it may be worth splitting into per-section sub-items if it proves larger in practice. The `config.js` half of this item is lower urgency than the last-synced half; if scoping down, prioritize the last-synced widget alone and file the `config.js` portion as a separate follow-up.
+
+**Done note (2026-08-01):** Scoped down exactly as this item's own Notes suggested: implemented the last-synced widget portion only (see REL-005's Done note for the full diff — `renderLastSynced()` now builds DOM via `createElement`/`textContent`/`append`, no `innerHTML`). Confirmed via the verification harness that an XSS-style payload in API-sourced `sha` renders as inert text, not executed markup. The `config.js`-driven sections (hero, summary, skills, experience, projects, education — still using `innerHTML` template interpolation, `script.js:22,39,44,57,74,90`) are unchanged; that data remains owner-controlled/static so the practical risk stays low, but the refactor itself is filed as **SEC-004** below rather than done here, per this item's own scoping guidance.
+
+---
+
+### SEC-002 — Dynamic link `href` values aren't protocol-validated
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** SEC-001 (natural to fix together at the same call sites)
+**Affected files:** `script.js`
+**Status:** Done (2026-08-01) — scoped to the last-synced widget's `url` only; config.js-driven links filed as SEC-005
+
+### Problem
+
+`config.personal.linkedin`, `.github`, `.resumePdf`, `.sourceRepo` (`script.js:13-16`) and the last-synced `url` (`script.js:256`) are all written directly into `href` attributes with no check that they're `http(s)` URLs. Today all values are owner-controlled or come from GitHub's API, so this is low practical risk, but it's an easy, cheap check to add as defense-in-depth (e.g. against a future config value accidentally containing a `javascript:` URL).
+
+### Proposed work
+
+Add a small helper that validates a URL string starts with `http://` or `https://` (or is a `mailto:`/`tel:` where expected) before using it as an `href`, skipping/omitting the link if it fails validation rather than rendering a dangerous `href`.
+
+### Acceptance criteria
+
+- A config value or API value with a non-http(s) protocol (e.g. `javascript:...`) does not get rendered as a clickable `href`.
+- Normal `https://` links are unaffected.
+
+### Validation
+
+- Manual: temporarily set a config link value to `javascript:alert(1)`, confirm it's not rendered as an active link after the fix.
+
+### Notes
+
+Bundle with SEC-001 since both touch the same rendering call sites.
+
+**Done note (2026-08-01):** Implemented for the last-synced widget's `url` only, together with REL-005/SEC-001 (see REL-005's Done note for the full diff and verification). `renderLastSynced()` now only sets `href`/`target`/`rel` on the commit link if `url` matches `/^https:\/\//`; a mocked `javascript:alert(1)` value was confirmed rejected before it ever reaches the DOM (caught earlier, at `validateLastSyncedData`'s stricter `https://github.com/` prefix check, but the render-time `/^https:\/\//` guard is a deliberate second layer independent of that — see REL-005's Done note for why both are kept). The `config.js`-driven links (`linkedin`, `github`, `resumePdf`, `sourceRepo` — `script.js:27-32`) are unchanged and filed as **SEC-005** below, per this item's dependency on SEC-001 which was also scoped down.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1045,8 +1123,9 @@ Dependency-aware order, following the general sequence in the operating instruct
 6. ~~**A11Y-003** — toggle button state exposure~~ — Done (2026-08-01)
 7. ~~**A11Y-004** — heading hierarchy~~ — Done (2026-08-01)
 8. ~~**REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key~~ — Done (2026-08-01)
-9. **REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together
+9. ~~**REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together~~ — Done (2026-08-01); config.js-wide portions filed as **SEC-004**/**SEC-005**
 10. **SEC-003** — Font Awesome SRI (cheap, anytime)
+10a. **SEC-004** → **SEC-005** — config.js-wide safe rendering and href validation, deferred from item 9 (filed 2026-08-01; lower urgency, data is owner-controlled — good candidate to pair with TEST-001 once it exists)
 11. **MAINT-001** — remove `.directory`, add `.gitignore` (cheap, anytime)
 12. **TEST-002** → **TEST-003** → **TEST-001** — PDF tests, then CI, then browser-behavior tests
 13. **ARCH-003** — config validation

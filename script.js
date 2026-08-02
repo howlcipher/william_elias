@@ -292,11 +292,37 @@ function formatRelativeTime(dateStr) {
     return rtf.format(-diffDay, 'day');
 }
 
+function validateLastSyncedData(data) {
+    if (!data || typeof data !== 'object') return null;
+    const sha = data.sha;
+    const date = data.commit && data.commit.author && data.commit.author.date;
+    const url = data.html_url;
+    if (typeof sha !== 'string' || sha.length === 0) return null;
+    if (typeof date !== 'string' || isNaN(new Date(date).getTime())) return null;
+    if (typeof url !== 'string' || !/^https:\/\/github\.com\//.test(url)) return null;
+    return { sha, date, url };
+}
+
 function renderLastSynced(sha, date, url) {
     const target = document.getElementById('last-synced-target');
     if (!target) return;
     const shortSha = sha.slice(0, 7);
-    target.innerHTML = `<i class="fas fa-code-commit" aria-hidden="true"></i> Last synced <a href="${url}" target="_blank" rel="noopener noreferrer">${formatRelativeTime(date)} (${shortSha})</a>`;
+
+    target.textContent = '';
+
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-code-commit';
+    icon.setAttribute('aria-hidden', 'true');
+
+    const link = document.createElement('a');
+    link.textContent = `${formatRelativeTime(date)} (${shortSha})`;
+    if (/^https:\/\//.test(url)) {
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
+
+    target.append(icon, document.createTextNode(' Last synced '), link);
 }
 
 function initLastSynced() {
@@ -333,11 +359,10 @@ function initLastSynced() {
             return res.json();
         })
         .then(data => {
-            const sha = data.sha;
-            const date = data.commit.author.date;
-            const url = data.html_url;
-            safeStorageSet(CACHE_KEY, JSON.stringify({ sha, date, url, cachedAt: Date.now() }));
-            renderLastSynced(sha, date, url);
+            const validated = validateLastSyncedData(data);
+            if (!validated) throw new Error('Invalid last-synced API response shape');
+            safeStorageSet(CACHE_KEY, JSON.stringify({ ...validated, cachedAt: Date.now() }));
+            renderLastSynced(validated.sha, validated.date, validated.url);
         })
         .catch(() => {
             clearTimeout(timeoutId);
