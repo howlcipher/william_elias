@@ -126,43 +126,6 @@ Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) 
 ## 3. Accessibility
 
 
-### A11Y-004 — Heading hierarchy skips from `h1` to `h3`
-
-**Type:** Bug
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `index.html`, `script.js`, `style.css`
-**Status:** Ready
-
-### Problem
-
-The hero renders an `h1` (config-driven, `script.js:7`) and an `h2.subtitle` (`script.js:8`), but every section title (`index.html:71,78,85,92,99`) is an `h3.section-title`, and content within sections (skill categories, timeline items, project cards, education cards) uses `h4`/`h5`. There is no `h2` used for the top-level section headings ("Professional Summary," "Core Skills," etc.) — the hierarchy jumps `h1` → (hero `h2`) → `h3` for sections not nested under the hero `h2`, which is itself questionable since the hero `h2` (job title) and the section `h3`s aren't actually in a parent-child relationship.
-
-### Proposed work
-
-Restructure so section titles (`index.html:71,78,85,92,99`) use `h2`, and demote nested headings one level accordingly (skill-category/timeline/project/education headings move from `h4`→ appropriate level, currently-`h5` company/school lines adjust to match). Update `style.css` selectors and any element-specific styling tied to the old tag names.
-
-### Acceptance criteria
-
-- Heading levels increase by exactly one at each nesting step with no skipped levels, verified with a browser accessibility tree inspector or automated heading-outline check.
-- Visual appearance is unchanged (font size/weight styled by class, not by relying on the tag's default UA styling).
-
-### Validation
-
-- Manual: browser devtools Accessibility panel heading outline, or a headings-list browser extension, confirms a clean h1→h2→h3(→h4) outline with no gaps.
-- Visual diff: confirm no unintended styling change from swapping tag names (styles are class-driven, so this should be a non-issue, but verify).
-
-### Notes
-
-Purely structural/markup — no resume content changes required, just tag names and matching CSS selectors.
-
----
-
-
 ## 4. Security
 
 ### SEC-001 — Resume and API data rendered via unescaped `innerHTML` throughout
@@ -1028,6 +991,44 @@ Small, contained change. Independent of A11Y-001/002 (different controls) — ca
 
 ---
 
+### A11Y-004 — Heading hierarchy skips from `h1` to `h3`
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `index.html`, `script.js`, `style.css`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+The hero renders an `h1` (config-driven, `script.js:7`) and an `h2.subtitle` (`script.js:8`), but every section title (`index.html:71,78,85,92,99`) is an `h3.section-title`, and content within sections (skill categories, timeline items, project cards, education cards) uses `h4`/`h5`. There is no `h2` used for the top-level section headings ("Professional Summary," "Core Skills," etc.) — the hierarchy jumps `h1` → (hero `h2`) → `h3` for sections not nested under the hero `h2`, which is itself questionable since the hero `h2` (job title) and the section `h3`s aren't actually in a parent-child relationship.
+
+### Proposed work
+
+Restructure so section titles (`index.html:71,78,85,92,99`) use `h2`, and demote nested headings one level accordingly (skill-category/timeline/project/education headings move from `h4`→ appropriate level, currently-`h5` company/school lines adjust to match). Update `style.css` selectors and any element-specific styling tied to the old tag names.
+
+### Acceptance criteria
+
+- Heading levels increase by exactly one at each nesting step with no skipped levels, verified with a browser accessibility tree inspector or automated heading-outline check.
+- Visual appearance is unchanged (font size/weight styled by class, not by relying on the tag's default UA styling).
+
+### Validation
+
+- Manual: browser devtools Accessibility panel heading outline, or a headings-list browser extension, confirms a clean h1→h2→h3(→h4) outline with no gaps.
+- Visual diff: confirm no unintended styling change from swapping tag names (styles are class-driven, so this should be a non-issue, but verify).
+
+### Notes
+
+Purely structural/markup — no resume content changes required, just tag names and matching CSS selectors.
+
+**Done note (2026-08-01):** Promoted the 5 section titles h3→h2 (`index.html:71,78,85,92,99`, `.section-title` is class-styled so no CSS change needed there). Demoted the nested headings one level in `script.js`'s template literals: `skill.category`, `job.title`, `proj.name`, `edu.degree` all h4→h3, and the single h5 (`job.company`/location line) →h4 (`script.js:47,62-63,76,94`). Updated the matching tag-descendant selectors in `style.css` (`.skill-category h4`→`h3`, `.timeline-content h4`→`h3`, `.timeline-content h5`→`h4`, `.project-card h4`→`h3`). Found one pre-existing gap while doing this: `edu.degree`'s heading had no dedicated CSS rule at all (no `.edu-info h4` existed), so it was rendering at the browser's UA-default h4 size; promoting it to h3 would have silently picked up the larger UA-default h3 size instead, a real visual regression the item's own acceptance criteria calls out. Added `.edu-info h3 { font-size: 1em; }` (`style.css:541-543`) to pin it back to its prior effective size. Final outline: h1 → h2 (hero subtitle, sibling) / h2 (section titles) → h3 (category/job-title/project-name/degree) → h4 (company/location line) — no skipped levels. Implementation delegated to `gpt-oss-120b-medium` via agy in two parts: the first call hit a transient network error mid-run but had already completed the index.html edit correctly before failing (git status showed a partial diff, not a clean revert) — verified that partial diff against disk before re-delegating just the remaining script.js/style.css changes in a follow-up brief that explicitly excluded index.html, rather than re-running the full original brief and risking a double-edit. Verified all three files against disk diffs (not the delegate's prose summaries, which again didn't include actual diff text) plus `node --check script.js`, brace-balance, and a full heading-tag grep across both files to confirm the final outline. No local browser/AT tool was available in this environment for the manual accessibility-tree/visual-diff check in the Validation section — recommended before/at next deploy, same caveat as prior items.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1038,7 +1039,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 4. ~~**A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)~~ — Done (2026-08-01)
 5. ~~**A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior~~ — Done (2026-08-01)
 6. ~~**A11Y-003** — toggle button state exposure~~ — Done (2026-08-01)
-7. **A11Y-004** — heading hierarchy
+7. ~~**A11Y-004** — heading hierarchy~~ — Done (2026-08-01)
 8. **REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key
 9. **REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together
 10. **SEC-003** — Font Awesome SRI (cheap, anytime)

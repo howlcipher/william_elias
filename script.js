@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             skillsTarget.innerHTML = config.skills.map(skill => `
                 <div class="skill-category card">
                     <div class="skill-icon"><i class="fas ${skill.icon}"></i></div>
-                    <h4>${skill.category}</h4>
+                    <h3>${skill.category}</h3>
                     <div class="skill-tags">
                         ${skill.tags.map(tag => `<span>${tag}</span>`).join('')}
                     </div>
@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">${job.date}</div>
                     <div class="timeline-content">
-                        <h4>${job.title}</h4>
-                        <h5>${job.company}${job.location ? ` | ${job.location}` : ''}</h5>
+                        <h3>${job.title}</h3>
+                        <h4>${job.company}${job.location ? ` | ${job.location}` : ''}</h4>
                         <ul>
                             ${job.achievements.map(ach => `<li>${ach}</li>`).join('')}
                         </ul>
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectsTarget && config.projects) {
             projectsTarget.innerHTML = config.projects.map(proj => `
                 <div class="project-card card">
-                    <h4>${proj.name}</h4>
+                    <h3>${proj.name}</h3>
                     <div class="project-subtitle">${proj.subtitle}</div>
                     <ul>
                         ${proj.highlights.map(h => `<li>${h}</li>`).join('')}
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="edu-card card">
                     <div class="edu-icon"><i class="fas ${edu.icon}"></i></div>
                     <div class="edu-info">
-                        <h4>${edu.degree}</h4>
+                        <h3>${edu.degree}</h3>
                         <p>${edu.school}${edu.year ? ` (${edu.year})` : ''}</p>
                     </div>
                 </div>

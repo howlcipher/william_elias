@@ -410,7 +410,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     margin-bottom: 1rem;
 }
 
-.skill-category h4 {
+.skill-category h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
@@ -474,12 +474,12 @@ h1, h2, h3, h4, h5, h6, .logo {
     margin-bottom: 0.5rem;
 }
 
-.timeline-content h4 {
+.timeline-content h3 {
     font-size: 1.25rem;
     margin-bottom: 0.25rem;
 }
 
-.timeline-content h5 {
+.timeline-content h4 {
     font-size: 1rem;
     color: var(--text-muted);
     font-weight: 500;
@@ -502,7 +502,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     gap: 1.5rem;
 }
 
-.project-card h4 {
+.project-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.25rem;
 }
@@ -536,6 +536,10 @@ h1, h2, h3, h4, h5, h6, .logo {
     align-items: flex-start;
     gap: 1rem;
     padding: 1.5rem;
+}
+
+.edu-info h3 {
+    font-size: 1em;
 }
 
 .edu-icon {
