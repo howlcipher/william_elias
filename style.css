@@ -10,6 +10,7 @@
     
     --primary: #3b82f6; /* Blue 500 */
     --primary-hover: #2563eb;
+    --primary-text: var(--primary); /* Text/outline color; may be overridden separately from --primary (button backgrounds) per theme */
     --accent: #93c5fd; /* Blue 300 - lighter tonal blue, 9.9:1 on bg-main, clearly lighter than --primary */
     --brand-accent: #cc3433; /* Cubs red - 3.49:1 on bg-main (fine for the bold 24px logo + decorative dot) */
 
@@ -60,10 +61,12 @@
     --bg-main: #121212;
     --bg-card: #1e1e1e;
     --bg-nav: rgba(18, 18, 18, 0.98);
-    
+
     --text-main: #ffffff;
     --text-muted: #e0e0e0;
-    
+
+    --primary-text: #1c8dff; /* Lightened from --primary #005ab5 for WCAG AA text contrast (5.62:1 on bg-main, 5.00:1 on bg-card); --primary itself stays dark for white-text button contrast */
+    --accent: #e96700; /* Lightened from #d55e00 for WCAG AA text contrast (5.73:1 on bg-main, 5.10:1 on bg-card) */
     --border-color: #ffffff;
 }
 
@@ -100,7 +103,7 @@ html {
 /* Visible, high-contrast focus states for all interactive elements */
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--primary-text);
     outline-offset: 3px;
     border-radius: 4px;
 }
@@ -201,7 +204,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .theme-controls {
@@ -223,7 +226,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 }
 
 .icon-btn:hover {
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .mobile-menu-btn {
@@ -306,7 +309,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1rem;
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .subtitle {
@@ -381,7 +384,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 .section-title {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     margin-bottom: 2.5rem;
-    color: var(--primary);
+    color: var(--primary-text);
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.5rem;
 }

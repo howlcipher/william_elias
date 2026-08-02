@@ -274,46 +274,6 @@ Purely structural/markup — no resume content changes required, just tag names 
 
 ---
 
-### A11Y-005 — Primary blue fails contrast (2.79:1) against dark colorblind-mode background
-
-**Type:** Bug
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `style.css`
-**Status:** Ready
-
-### Problem
-
-Measured directly: `--primary: #005ab5` against `[data-theme="colorblind"].dark-mode-colorblind`'s `--bg-main: #121212` yields **2.79:1** contrast, and against `--bg-card: #1e1e1e` yields **2.48:1**. Both fail WCAG AA even at the most lenient applicable threshold (3:1 for large text / UI components), let alone the 4.5:1 normal-text threshold. `--primary` is used for `.section-title` (large text — still fails at 2.79:1), link/icon hover states, and the `:focus-visible` outline color (non-text UI contrast, 3:1 required — fails). This is exactly the mode meant to serve low-vision and colorblind users, so the failure is highest-impact where it's least acceptable.
-
-Separately, `--accent: #d55e00` on the same dark colorblind background measures 4.84:1 (passes normal text) but only 4.31:1 against the card background (still passes 4.5:1? — 4.31 fails 4.5:1 marginally for normal-size text; passes for large text at 3:1). `.timeline-date` and `.project-subtitle` use `--accent` at 0.9rem, which is normal-size text requiring 4.5:1 — this is a smaller, secondary finding worth including in the same fix pass.
-
-Light colorblind mode was also checked and passes: primary 6.71:1, accent 3.87:1 on `#ffffff` (accent is used only for large/secondary text there, so 3.87:1 is acceptable for that usage but worth a final check once the dark-mode value changes).
-
-### Proposed work
-
-Darken/adjust `--primary` (and re-check `--accent`) specifically within `[data-theme="colorblind"].dark-mode-colorblind` so both meet at least 4.5:1 against `--bg-main` and `--bg-card` for any normal-text usage, and at least 3:1 for large-text/UI-component usage (focus outlines, icon hover). Keep the light colorblind-mode values as-is since they already pass. Re-verify with computed contrast ratios, not visual inspection alone.
-
-### Acceptance criteria
-
-- `--primary` and `--accent` (as used for text, focus outlines, and UI-component color in dark colorblind mode) meet WCAG AA contrast thresholds for their actual usage (4.5:1 normal text, 3:1 large text/UI components) against both `--bg-main` and `--bg-card` in `[data-theme="colorblind"].dark-mode-colorblind`.
-- Light colorblind mode is unaffected (already passes).
-- The colorblind-safe blue/orange hue pairing is preserved (don't reintroduce a red/green pair).
-
-### Validation
-
-- Automated: recompute WCAG contrast ratios for the new hex values against both backgrounds (same method used to find this issue) and confirm all pass their applicable threshold.
-- Manual: visually confirm the dark colorblind theme still reads as high-contrast and the blue/orange distinction remains clear.
-
-### Notes
-
-This is a measured, confirmed failure (not a hypothesis) — contrast ratios computed directly from the CSS custom property values in `style.css:11-19,40-68`. Sequence this early; it's a real accessibility defect in a mode specifically built for accessibility.
-
----
 
 ## 4. Security
 
@@ -1018,6 +978,49 @@ Small, isolated CSS fix — good candidate for a first small implementation task
 
 ---
 
+### A11Y-005 — Primary blue fails contrast (2.79:1) against dark colorblind-mode background
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `style.css`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+Measured directly: `--primary: #005ab5` against `[data-theme="colorblind"].dark-mode-colorblind`'s `--bg-main: #121212` yields **2.79:1** contrast, and against `--bg-card: #1e1e1e` yields **2.48:1**. Both fail WCAG AA even at the most lenient applicable threshold (3:1 for large text / UI components), let alone the 4.5:1 normal-text threshold. `--primary` is used for `.section-title` (large text — still fails at 2.79:1), link/icon hover states, and the `:focus-visible` outline color (non-text UI contrast, 3:1 required — fails). This is exactly the mode meant to serve low-vision and colorblind users, so the failure is highest-impact where it's least acceptable.
+
+Separately, `--accent: #d55e00` on the same dark colorblind background measures 4.84:1 (passes normal text) but only 4.31:1 against the card background (still passes 4.5:1? — 4.31 fails 4.5:1 marginally for normal-size text; passes for large text at 3:1). `.timeline-date` and `.project-subtitle` use `--accent` at 0.9rem, which is normal-size text requiring 4.5:1 — this is a smaller, secondary finding worth including in the same fix pass.
+
+Light colorblind mode was also checked and passes: primary 6.71:1, accent 3.87:1 on `#ffffff` (accent is used only for large/secondary text there, so 3.87:1 is acceptable for that usage but worth a final check once the dark-mode value changes).
+
+### Proposed work
+
+Darken/adjust `--primary` (and re-check `--accent`) specifically within `[data-theme="colorblind"].dark-mode-colorblind` so both meet at least 4.5:1 against `--bg-main` and `--bg-card` for any normal-text usage, and at least 3:1 for large-text/UI-component usage (focus outlines, icon hover). Keep the light colorblind-mode values as-is since they already pass. Re-verify with computed contrast ratios, not visual inspection alone.
+
+### Acceptance criteria
+
+- `--primary` and `--accent` (as used for text, focus outlines, and UI-component color in dark colorblind mode) meet WCAG AA contrast thresholds for their actual usage (4.5:1 normal text, 3:1 large text/UI components) against both `--bg-main` and `--bg-card` in `[data-theme="colorblind"].dark-mode-colorblind`.
+- Light colorblind mode is unaffected (already passes).
+- The colorblind-safe blue/orange hue pairing is preserved (don't reintroduce a red/green pair).
+
+### Validation
+
+- Automated: recompute WCAG contrast ratios for the new hex values against both backgrounds (same method used to find this issue) and confirm all pass their applicable threshold.
+- Manual: visually confirm the dark colorblind theme still reads as high-contrast and the blue/orange distinction remains clear.
+
+### Notes
+
+This is a measured, confirmed failure (not a hypothesis) — contrast ratios computed directly from the CSS custom property values in `style.css:11-19,40-68`. Sequence this early; it's a real accessibility defect in a mode specifically built for accessibility.
+
+**Done note (2026-08-01):** Re-evaluation before implementing surfaced a conflict the original Proposed work didn't account for: `--primary` is used both as *text/outline color* (needs to be light against the dark backgrounds) and as a *background under white text* at two sites (`.skip-link`, `.contact-pill:hover`, both `background: var(--primary); color: #ffffff;`) — lightening `--primary` directly would have fixed the reported failure while silently breaking those white-on-button pairs (dropping them from 6.71:1 to as low as ~3.2:1, itself a new AA failure). Resolved by introducing a `--primary-text` custom property (`style.css:13`, defined once at `:root` as `var(--primary)` so every theme's behavior is unchanged by default) used only at the 5 text/outline call sites (`style.css:106` focus-visible outline, `:204` nav-link hover, `:227` icon-btn hover, `:312` hero heading, `:387` section-title), while the 2 background call sites keep `var(--primary)` untouched. Only `[data-theme="colorblind"].dark-mode-colorblind` overrides `--primary-text` (to `#1c8dff`, 5.62:1/5.00:1 against bg-main/bg-card) and `--accent` (to `#e96700`, 5.71:1/5.08:1) — `--accent` had no equivalent background-usage conflict (grepped every `var(--accent)` site: all `color`/`border-color`, no background+white-text pairing) so it was overridden directly rather than split. Light colorblind mode and all non-colorblind themes are untouched (they don't define `--primary-text` or override `--accent` in dark mode, so they keep exactly their prior computed values). Contrast ratios computed with a WCAG relative-luminance/contrast-ratio Python script (standard sRGB-linearization formula), not visual inspection, and re-verified after the delegate's edit against the actual file on disk. Implementation delegated to `gpt-oss-120b-medium` via agy with the exact hex values, line-level context, and an explicit instruction not to blind-replace `var(--primary)` (to avoid catching the 2 background sites); the delegate's diff matched the spec exactly on the first attempt, confirmed via `git diff` against disk. No local Chromium/Playwright/browser tool was available to do the manual "still reads as high-contrast, blue/orange distinction clear" visual check in this environment — recommended before/at next deploy, same caveat as REL-001/REL-006.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1025,7 +1028,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 1. ~~**REL-001** — IntersectionObserver fallback (prevents invisible content)~~ — Done (2026-08-01)
 2. ~~**REL-002** — storage fault tolerance~~ — Done (2026-08-01)
 3. ~~**REL-006** — anchor scroll-margin fix~~ — Done (2026-08-01)
-4. **A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)
+4. ~~**A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)~~ — Done (2026-08-01)
 5. **A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior
 6. **A11Y-003** — toggle button state exposure
 7. **A11Y-004** — heading hierarchy
