@@ -139,25 +139,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
+    const closeMobileMenu = () => {
+        mobileNav.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+    };
+
     if (mobileMenuBtn && mobileNav) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
-            if (mobileNav.classList.contains('active')) {
+            const isOpen = mobileNav.classList.contains('active');
+            if (isOpen) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
+            mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+            mobileNav.setAttribute('aria-hidden', String(!isOpen));
         });
 
         // Close menu when a link is clicked
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                closeMobileMenu();
             });
+        });
+
+        // Close menu on Escape and return focus to the toggle button
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMobileMenu();
+                mobileMenuBtn.focus();
+            }
         });
     }
 

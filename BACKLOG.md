@@ -125,82 +125,6 @@ Ties directly into SEC-001 (unsafe `innerHTML` interpolation of this same data) 
 
 ## 3. Accessibility
 
-### A11Y-001 — Mobile menu button lacks `aria-expanded`/`aria-controls`, no Escape handling, no focus return
-
-**Type:** Bug
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** `index.html`, `script.js`
-**Status:** Ready
-
-### Problem
-
-`.mobile-menu-btn` (`index.html:45-47`) has only `aria-label`; it has no `aria-expanded` or `aria-controls`, so screen reader users get no indication the button is a disclosure toggle or what state it's in. `script.js:121-141` toggles the `.active` class and swaps the icon but never sets `aria-expanded`. There is also no `keydown` handler for Escape to close the menu, and no focus management — closing the menu (by link click) doesn't return focus to the toggle button, and there's no way to close via keyboard without tabbing through every link.
-
-### Proposed work
-
-- Add `aria-expanded="false"` (toggled true/false) and `aria-controls="<mobile-nav-id>"` to `.mobile-menu-btn`; give `.mobile-nav` a matching `id`.
-- Add an Escape `keydown` handler that closes the menu when open and returns focus to `.mobile-menu-btn`.
-- On link-click close (existing behavior at `script.js:135-140`), keep it, but ensure `aria-expanded` is set to `false` at the same time.
-
-### Acceptance criteria
-
-- `aria-expanded` on `.mobile-menu-btn` accurately reflects open/closed state at every transition (button click, link click, Escape).
-- `aria-controls` references the mobile nav's `id`.
-- Pressing Escape while the mobile menu is open closes it and moves focus back to `.mobile-menu-btn`.
-- No regression to existing click-to-open/close and icon-swap behavior.
-
-### Validation
-
-- Manual: keyboard-only walkthrough — Tab to menu button, Enter to open, verify `aria-expanded="true"` in devtools, Escape to close, verify focus returns to the button.
-- Manual: screen reader spot check (VoiceOver or NVDA) confirms the button announces as a toggle with current state.
-
-### Notes
-
-Combine with A11Y-002 (semantic exposure while closed) since both touch the same markup and script.
-
----
-
-### A11Y-002 — Verify closed mobile-menu content is fully inert (not just visually hidden)
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** A11Y-001
-**Affected files:** `style.css`, `index.html`
-**Status:** Ready
-
-### Problem
-
-`.mobile-nav` is hidden when closed via `visibility: hidden` plus `transform`/`opacity` (`style.css:239-257`), which in modern browsers does remove it from the tab order and, generally, the accessibility tree. This is better than `display` toggling alone would suggest, but it hasn't been verified against the project's actual assistive-technology/browser support matrix, and relying on `visibility: hidden` alone (without a redundant `aria-hidden` or the `inert` attribute) is a known source of inconsistent AT behavior across older browser/AT combinations.
-
-### Proposed work
-
-Add `aria-hidden="true"` (toggled alongside `.active`/`aria-expanded` in the same script.js code path from A11Y-001) or the `inert` attribute to `.mobile-nav` while closed, as defense-in-depth on top of the existing `visibility: hidden`.
-
-### Acceptance criteria
-
-- With the menu closed, mobile nav links are confirmed unreachable via Tab and not announced by a screen reader.
-- With the menu open, links are reachable and announced normally.
-
-### Validation
-
-- Manual: keyboard Tab-through with menu closed confirms mobile links are skipped.
-- Manual: screen reader spot check with menu closed confirms links are not announced.
-
-### Notes
-
-Lower priority than A11Y-001 since `visibility: hidden` already provides most of the needed behavior in current browsers — this is a verification + defense-in-depth item, not a confirmed active bug.
-
----
-
 ### A11Y-003 — Theme and colorblind toggle buttons don't expose pressed state programmatically
 
 **Type:** Bug
@@ -1021,6 +945,86 @@ This is a measured, confirmed failure (not a hypothesis) — contrast ratios com
 
 ---
 
+### A11Y-001 — Mobile menu button lacks `aria-expanded`/`aria-controls`, no Escape handling, no focus return
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `index.html`, `script.js`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`.mobile-menu-btn` (`index.html:45-47`) has only `aria-label`; it has no `aria-expanded` or `aria-controls`, so screen reader users get no indication the button is a disclosure toggle or what state it's in. `script.js:121-141` toggles the `.active` class and swaps the icon but never sets `aria-expanded`. There is also no `keydown` handler for Escape to close the menu, and no focus management — closing the menu (by link click) doesn't return focus to the toggle button, and there's no way to close via keyboard without tabbing through every link.
+
+### Proposed work
+
+- Add `aria-expanded="false"` (toggled true/false) and `aria-controls="<mobile-nav-id>"` to `.mobile-menu-btn`; give `.mobile-nav` a matching `id`.
+- Add an Escape `keydown` handler that closes the menu when open and returns focus to `.mobile-menu-btn`.
+- On link-click close (existing behavior at `script.js:135-140`), keep it, but ensure `aria-expanded` is set to `false` at the same time.
+
+### Acceptance criteria
+
+- `aria-expanded` on `.mobile-menu-btn` accurately reflects open/closed state at every transition (button click, link click, Escape).
+- `aria-controls` references the mobile nav's `id`.
+- Pressing Escape while the mobile menu is open closes it and moves focus back to `.mobile-menu-btn`.
+- No regression to existing click-to-open/close and icon-swap behavior.
+
+### Validation
+
+- Manual: keyboard-only walkthrough — Tab to menu button, Enter to open, verify `aria-expanded="true"` in devtools, Escape to close, verify focus returns to the button.
+- Manual: screen reader spot check (VoiceOver or NVDA) confirms the button announces as a toggle with current state.
+
+### Notes
+
+Combine with A11Y-002 (semantic exposure while closed) since both touch the same markup and script.
+
+**Done note (2026-08-01):** Added `aria-expanded="false"` and `aria-controls="mobile-nav"` to `.mobile-menu-btn` (`index.html:45`) and `id="mobile-nav"` to `.mobile-nav` (`index.html:53`, also covers A11Y-002 below). In `script.js`, extracted a `closeMobileMenu()` helper (`script.js:142-147`) used by both the existing link-click-close path and a new `keydown` listener for Escape that closes the menu and calls `mobileMenuBtn.focus()` to return focus (`script.js:176-181`). The click-toggle handler now sets `aria-expanded`/`aria-hidden` to match the new open/closed state on every transition. Implementation delegated to `gpt-oss-120b-medium` via agy in a single combined brief covering both A11Y-001 and A11Y-002; verified against the actual file diff on disk (not the delegate's truncated self-summary), plus `node --check script.js` and an HTML tag-balance sanity check. No local browser/screen-reader tool was available in this environment to do the manual keyboard/AT walkthrough in the Validation section — recommended before/at next deploy, same caveat as prior items.
+
+---
+
+### A11Y-002 — Verify closed mobile-menu content is fully inert (not just visually hidden)
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** A11Y-001
+**Affected files:** `style.css`, `index.html`
+**Status:** Done (2026-08-01)
+
+### Problem
+
+`.mobile-nav` is hidden when closed via `visibility: hidden` plus `transform`/`opacity` (`style.css:239-257`), which in modern browsers does remove it from the tab order and, generally, the accessibility tree. This is better than `display` toggling alone would suggest, but it hasn't been verified against the project's actual assistive-technology/browser support matrix, and relying on `visibility: hidden` alone (without a redundant `aria-hidden` or the `inert` attribute) is a known source of inconsistent AT behavior across older browser/AT combinations.
+
+### Proposed work
+
+Add `aria-hidden="true"` (toggled alongside `.active`/`aria-expanded` in the same script.js code path from A11Y-001) or the `inert` attribute to `.mobile-nav` while closed, as defense-in-depth on top of the existing `visibility: hidden`.
+
+### Acceptance criteria
+
+- With the menu closed, mobile nav links are confirmed unreachable via Tab and not announced by a screen reader.
+- With the menu open, links are reachable and announced normally.
+
+### Validation
+
+- Manual: keyboard Tab-through with menu closed confirms mobile links are skipped.
+- Manual: screen reader spot check with menu closed confirms links are not announced.
+
+### Notes
+
+Lower priority than A11Y-001 since `visibility: hidden` already provides most of the needed behavior in current browsers — this is a verification + defense-in-depth item, not a confirmed active bug.
+
+**Done note (2026-08-01):** Implemented together with A11Y-001 (see that item's Done note for the full diff) since both touch the same markup/script code path as anticipated. `aria-hidden="true"`/`"false"` on `.mobile-nav` is now toggled in `script.js` alongside `aria-expanded`, in addition to the pre-existing `visibility: hidden` CSS. Actual affected files ended up being `index.html` and `script.js` only — `style.css` (listed above) wasn't touched since the existing `visibility`/`transform`/`opacity` hiding was left as-is; `aria-hidden` is a defense-in-depth attribute toggle, not a CSS change.
+
+---
+
 ## Recommended Sequencing
 
 Dependency-aware order, following the general sequence in the operating instructions:
@@ -1029,7 +1033,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 2. ~~**REL-002** — storage fault tolerance~~ — Done (2026-08-01)
 3. ~~**REL-006** — anchor scroll-margin fix~~ — Done (2026-08-01)
 4. ~~**A11Y-005** — dark colorblind contrast fix (measured, confirmed failure)~~ — Done (2026-08-01)
-5. **A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior
+5. ~~**A11Y-001** + **A11Y-002** — mobile menu keyboard/ARIA behavior~~ — Done (2026-08-01)
 6. **A11Y-003** — toggle button state exposure
 7. **A11Y-004** — heading hierarchy
 8. **REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key

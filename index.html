@@ -42,7 +42,7 @@
                     </button>
                 </div>
                 
-                <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <button class="mobile-menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-nav">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -50,7 +50,7 @@
     </nav>
 
     <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav">
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
         <ul class="mobile-nav-links">
             <li><a href="#about" class="mobile-link">About</a></li>
             <li><a href="#skills" class="mobile-link">Skills</a></li>
