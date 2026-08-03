@@ -20,17 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const heroTarget = document.getElementById('hero-content-target');
         if (heroTarget) {
             heroTarget.innerHTML = `
-                <h1>${config.personal.name}</h1>
-                <h2 class="subtitle">${config.personal.title}</h2>
-                <p class="tagline terminal-type">${config.personal.tagline}</p>
-                <div class="contact-info">
-                    ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope"></i> ${config.personal.email}</a>` : ''}
-                    ${config.personal.phone ? `<a href="tel:${config.personal.phone.replace(/[^0-9+]/g,'')}" class="contact-pill"><i class="fas fa-phone"></i> ${config.personal.phone}</a>` : ''}
-                    ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-linkedin"></i> LinkedIn</a>` : ''}
-                    ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-github"></i> GitHub</a>` : ''}
-                    ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fas fa-file-pdf"></i> Download Resume</a>` : ''}
-                    ${config.personal.sourceRepo ? `<a href="${config.personal.sourceRepo}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fas fa-code-branch"></i> View Source</a>` : ''}
+                <div class="hero-copy">
+                    <p class="eyebrow">${config.personal.location} // AVAILABLE FOR REMOTE</p>
+                    <h1>${config.personal.name}</h1>
+                    <h2 class="subtitle">${config.personal.title}</h2>
+                    <p class="tagline terminal-type">${config.personal.tagline}</p>
+                    <div class="contact-info">
+                        ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>` : ''}
+                        ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>` : ''}
+                        ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>` : ''}
+                        ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" rel="noopener noreferrer" class="contact-pill primary-action"><i class="fas fa-file-pdf" aria-hidden="true"></i> Resume PDF</a>` : ''}
+                    </div>
                 </div>
+                ${config.personal.photo ? `<img class="profile-photo" src="${config.personal.photo}" alt="Professional headshot of ${config.personal.name}">` : ''}
             `;
         }
 
@@ -48,6 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="skill-tags">
                         ${skill.tags.map(tag => `<span>${tag}</span>`).join('')}
                     </div>
+                </div>
+            `).join('');
+        }
+
+        const statsTarget = document.getElementById('stats-target');
+        if (statsTarget && config.stats) {
+            statsTarget.innerHTML = config.stats.map(stat => `
+                <div class="stat-card">
+                    <strong>${stat.value}</strong>
+                    <span>${stat.label}</span>
                 </div>
             `).join('');
         }
@@ -82,6 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${proj.tags.map(tag => `<span>${tag}</span>`).join('')}
                     </div>
                 </div>
+            `).join('');
+        }
+
+        const additionalExperienceTarget = document.getElementById('additional-experience-target');
+        if (additionalExperienceTarget && config.additionalExperience) {
+            additionalExperienceTarget.innerHTML = config.additionalExperience.map(job => `
+                <article class="additional-item">
+                    <div><h3>${job.company}</h3><p>${job.title}</p></div>
+                    <p class="additional-date">${job.date}</p>
+                    <p class="additional-summary">${job.summary}</p>
+                </article>
             `).join('');
         }
 
