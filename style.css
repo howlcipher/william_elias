@@ -1,13 +1,13 @@
 :root {
     --ink: #e9edf5;
     --muted: #a9b3c5;
-    --paper: #0e3386;
-    --panel: #103b92;
-    --panel-solid: #15479e;
-    --nav: rgba(14, 51, 134, 0.94);
-    --line: #6eaed8;
+    --paper: #111e35;
+    --panel: #172946;
+    --panel-solid: #1d3457;
+    --nav: rgba(17, 30, 53, 0.94);
+    --line: #6daedf;
     --blue: #9fd3f4;
-    --blue-deep: #5da9dd;
+    --blue-deep: #67aedd;
     --red: #ef4444;
     --red-deep: #991b1b;
     --shadow: 8px 8px 0 rgba(4, 8, 15, 0.48);
