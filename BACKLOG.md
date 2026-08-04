@@ -18,79 +18,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 
 ## 4. Security
-
-### SEC-004 — Config-driven sections still render via unescaped `innerHTML`
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** M
-**Risk:** Medium
-**Recommended mode:** Coding
-**Recommended model tier:** High reasoning
-**Dependencies:** None
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-Filed as the deferred half of SEC-001, which was scoped down to the last-synced widget only (see SEC-001's Done note, 2026-08-01). `script.js` still builds the hero (`script.js:22-34`), summary (`script.js:39`), skills (`script.js:44-53`), experience (`script.js:57-72`), projects (`script.js:74-87`), and education (`script.js:90-98`) sections via template-literal `innerHTML` assignment. All of this data currently comes from the static, owner-controlled `config.js`, so the practical exploit risk is low today (defense-in-depth, not an active vulnerability) — but it sets a pattern that would become actively dangerous if `config.js` were ever replaced by a fetched/CMS-driven source (see ARCH-002), and achievements/highlights/tags are exactly the kind of free-text fields a future content source might not fully control.
-
-### Proposed work
-
-Replace `innerHTML` template interpolation with `textContent` assignment and explicit DOM construction (`createElement`/`appendChild`/`textContent`) across the six sections listed above. This is a genuine refactor of `script.js`'s rendering, not a one-line fix — don't attempt it as a single diff; split it per-section (hero, skills, experience, projects, education, summary) and verify each section's visual output against the live site before moving to the next, since template literals currently also encode structural markup (wrapper `div`s, icon `i` tags, conditional contact-pill links) that has to be reconstructed correctly, not just the text nodes.
-
-### Acceptance criteria
-
-- None of the six sections use `innerHTML` with interpolated `config.js` values; equivalent output is built via `textContent`/DOM APIs.
-- Visual output is pixel-identical to before for the current `config.js` content (this is the main risk: the current template literals encode a fair amount of conditional structure — e.g. the hero's contact pills only render if the corresponding config field is truthy — that must be preserved exactly).
-- No regression to any interactive behavior tied to this markup (fade-in observer targets, `.timeline-dot`, `.skill-tags`, etc. — verify class names and structure are unchanged, not just visible text).
-
-### Validation
-
-- Manual: visually diff every section before/after against the live site.
-- Automated: see TEST-001 — this item is a strong candidate to pair with automated regression tests precisely because "visually identical" is hard to eyeball-verify across six sections reliably by hand.
-
-### Notes
-
-Larger and lower-urgency than the last-synced fix (SEC-001) it was split from — the data source here is static and owner-controlled, so this is genuinely optional hardening, not an active-risk fix. Good candidate to sequence alongside or after TEST-001 exists, so the refactor has an automated safety net rather than relying purely on manual visual diffing across six sections.
-
----
-
-### SEC-005 — Config-driven link `href` values aren't protocol-validated
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** SEC-004 (natural to fix together at the same call site, though not strictly required — this is a small independent addition)
-**Affected files:** `script.js`
-**Status:** Ready
-
-### Problem
-
-Filed as the deferred half of SEC-002, which was scoped down to the last-synced widget's `url` only (see SEC-002's Done note, 2026-08-01). `config.personal.linkedin`, `.github`, `.resumePdf`, and `.sourceRepo` (`script.js:27-32`, inside the hero template literal) are still written directly into `href` attributes with no protocol check. These are owner-controlled config values today, so practical risk is low — this is cheap defense-in-depth, not an active vulnerability.
-
-### Proposed work
-
-Add a small helper that validates a URL string starts with `http://`/`https://` (for `linkedin`/`github`/`sourceRepo`) or is a same-origin relative path (for `resumePdf`, which is a local file like `William_Elias_Resume.pdf`, not an absolute URL) before using it as an `href`; skip rendering the link entirely if validation fails, matching the pattern already established for the last-synced widget in SEC-002.
-
-### Acceptance criteria
-
-- A config value with a non-http(s)/non-relative protocol (e.g. `javascript:...`) does not get rendered as a clickable `href`.
-- Normal `https://` links and the local `resumePdf` relative path are both unaffected.
-
-### Validation
-
-- Manual: temporarily set a config link value to `javascript:alert(1)`, confirm it's not rendered as an active link after the fix.
-
-### Notes
-
-Small and cheap on its own, but touches the same hero template literal SEC-004 refactors — sequence together if both are being done, otherwise this can be done standalone since it doesn't require the full `innerHTML`→DOM-API rewrite (a href-validation check works the same whether the surrounding markup is built via `innerHTML` or `createElement`).
-
----
-
 ## 5. Data and Build Architecture
 
 ### ARCH-001 — PDF generator parses `config.js` with regex instead of a real data source
@@ -572,6 +499,81 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 ## 9. Completed
 
+### SEC-004 — Config-driven sections still render via unescaped `innerHTML`
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** High reasoning
+**Dependencies:** None
+**Affected files:** `script.js`
+**Status:** Done (2026-08-04)
+
+### Problem
+
+Filed as the deferred half of SEC-001, which was scoped down to the last-synced widget only (see SEC-001's Done note, 2026-08-01). `script.js` still builds the hero (`script.js:22-34`), summary (`script.js:39`), skills (`script.js:44-53`), experience (`script.js:57-72`), projects (`script.js:74-87`), and education (`script.js:90-98`) sections via template-literal `innerHTML` assignment. All of this data currently comes from the static, owner-controlled `config.js`, so the practical exploit risk is low today (defense-in-depth, not an active vulnerability) — but it sets a pattern that would become actively dangerous if `config.js` were ever replaced by a fetched/CMS-driven source (see ARCH-002), and achievements/highlights/tags are exactly the kind of free-text fields a future content source might not fully control.
+
+### Proposed work
+
+Replace `innerHTML` template interpolation with `textContent` assignment and explicit DOM construction (`createElement`/`appendChild`/`textContent`) across the six sections listed above. This is a genuine refactor of `script.js`'s rendering, not a one-line fix — don't attempt it as a single diff; split it per-section (hero, skills, experience, projects, education, summary) and verify each section's visual output against the live site before moving to the next, since template literals currently also encode structural markup (wrapper `div`s, icon `i` tags, conditional contact-pill links) that has to be reconstructed correctly, not just the text nodes.
+
+### Acceptance criteria
+
+- None of the six sections use `innerHTML` with interpolated `config.js` values; equivalent output is built via `textContent`/DOM APIs.
+- Visual output is pixel-identical to before for the current `config.js` content (this is the main risk: the current template literals encode a fair amount of conditional structure — e.g. the hero's contact pills only render if the corresponding config field is truthy — that must be preserved exactly).
+- No regression to any interactive behavior tied to this markup (fade-in observer targets, `.timeline-dot`, `.skill-tags`, etc. — verify class names and structure are unchanged, not just visible text).
+
+### Validation
+
+- Manual: visually diff every section before/after against the live site.
+- Automated: see TEST-001 — this item is a strong candidate to pair with automated regression tests precisely because "visually identical" is hard to eyeball-verify across six sections reliably by hand.
+
+### Notes
+
+Larger and lower-urgency than the last-synced fix (SEC-001) it was split from — the data source here is static and owner-controlled, so this is genuinely optional hardening, not an active-risk fix. Good candidate to sequence alongside or after TEST-001 exists, so the refactor has an automated safety net rather than relying purely on manual visual diffing across six sections.
+
+**Done note (2026-08-04):** Refactored config-driven rendering in `script.js` to construct DOM nodes explicitly using `document.createElement`, `textContent`, and `appendChild`.
+
+---
+
+### SEC-005 — Config-driven link `href` values aren't protocol-validated
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** SEC-004 (natural to fix together at the same call site, though not strictly required — this is a small independent addition)
+**Affected files:** `script.js`
+**Status:** Done (2026-08-04)
+
+### Problem
+
+Filed as the deferred half of SEC-002, which was scoped down to the last-synced widget's `url` only (see SEC-002's Done note, 2026-08-01). `config.personal.linkedin`, `.github`, `.resumePdf`, and `.sourceRepo` (`script.js:27-32`, inside the hero template literal) are still written directly into `href` attributes with no protocol check. These are owner-controlled config values today, so practical risk is low — this is cheap defense-in-depth, not an active vulnerability.
+
+### Proposed work
+
+Add a small helper that validates a URL string starts with `http://`/`https://` (for `linkedin`/`github`/`sourceRepo`) or is a same-origin relative path (for `resumePdf`, which is a local file like `William_Elias_Resume.pdf`, not an absolute URL) before using it as an `href`; skip rendering the link entirely if validation fails, matching the pattern already established for the last-synced widget in SEC-002.
+
+### Acceptance criteria
+
+- A config value with a non-http(s)/non-relative protocol (e.g. `javascript:...`) does not get rendered as a clickable `href`.
+- Normal `https://` links and the local `resumePdf` relative path are both unaffected.
+
+### Validation
+
+- Manual: temporarily set a config link value to `javascript:alert(1)`, confirm it's not rendered as an active link after the fix.
+
+### Notes
+
+Small and cheap on its own, but touches the same hero template literal SEC-004 refactors — sequence together if both are being done, otherwise this can be done standalone since it doesn't require the full `innerHTML`→DOM-API rewrite (a href-validation check works the same whether the surrounding markup is built via `innerHTML` or `createElement`).
+
+**Done note (2026-08-04):** Added `getValidUrl` helper function in `script.js` and wrapped url variables with it before assigning them to href or src.
+
+---
 ### REL-001 — `.fade-in` sections can stay permanently invisible without `IntersectionObserver`
 
 **Type:** Bug

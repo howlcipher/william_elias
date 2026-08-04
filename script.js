@@ -14,111 +14,308 @@ function safeStorageSet(key, value) {
     }
 }
 
+function getValidUrl(url, allowRelative = false) {
+    if (typeof url !== 'string' || !url) return null;
+    if (allowRelative && !url.includes(':')) return url;
+    return /^https?:\/\//i.test(url) ? url : null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Render Content from config.js ---
     if (typeof config !== 'undefined') {
         const heroTarget = document.getElementById('hero-content-target');
         if (heroTarget) {
-            heroTarget.innerHTML = `
-                <div class="hero-copy">
-                    <p class="eyebrow">${config.personal.location} // AVAILABLE FOR REMOTE</p>
-                    <h1>${config.personal.name}</h1>
-                    <h2 class="subtitle">${config.personal.title}</h2>
-                    <p class="tagline terminal-type">${config.personal.tagline}</p>
-                    <div class="contact-info">
-                        ${config.personal.email ? `<a href="mailto:${config.personal.email}" class="contact-pill"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>` : ''}
-                        ${config.personal.linkedin ? `<a href="${config.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>` : ''}
-                        ${config.personal.github ? `<a href="${config.personal.github}" target="_blank" rel="noopener noreferrer" class="contact-pill"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>` : ''}
-                        ${config.personal.resumePdf ? `<a href="${config.personal.resumePdf}" target="_blank" rel="noopener noreferrer" class="contact-pill primary-action"><i class="fas fa-file-pdf" aria-hidden="true"></i> Resume PDF</a>` : ''}
-                    </div>
-                </div>
-                ${config.personal.photo ? `<img class="profile-photo" src="${config.personal.photo}" alt="Professional headshot of ${config.personal.name}">` : ''}
-            `;
+            heroTarget.textContent = '';
+            const heroCopy = document.createElement('div');
+            heroCopy.className = 'hero-copy';
+            
+            const eyebrow = document.createElement('p');
+            eyebrow.className = 'eyebrow';
+            eyebrow.textContent = `${config.personal.location || ''} // AVAILABLE FOR REMOTE`;
+            
+            const h1 = document.createElement('h1');
+            h1.textContent = config.personal.name || '';
+            
+            const h2 = document.createElement('h2');
+            h2.className = 'subtitle';
+            h2.textContent = config.personal.title || '';
+            
+            const tagline = document.createElement('p');
+            tagline.className = 'tagline terminal-type';
+            tagline.textContent = config.personal.tagline || '';
+            
+            const contactInfo = document.createElement('div');
+            contactInfo.className = 'contact-info';
+            
+            if (config.personal.email) {
+                const emailL = document.createElement('a');
+                emailL.href = `mailto:${config.personal.email}`;
+                emailL.className = 'contact-pill';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-envelope';
+                icon.setAttribute('aria-hidden', 'true');
+                emailL.appendChild(icon);
+                emailL.appendChild(document.createTextNode(' Email'));
+                contactInfo.appendChild(emailL);
+            }
+            
+            const linkedInUrl = getValidUrl(config.personal.linkedin);
+            if (linkedInUrl) {
+                const link = document.createElement('a');
+                link.href = linkedInUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'contact-pill';
+                const icon = document.createElement('i');
+                icon.className = 'fab fa-linkedin';
+                icon.setAttribute('aria-hidden', 'true');
+                link.appendChild(icon);
+                link.appendChild(document.createTextNode(' LinkedIn'));
+                contactInfo.appendChild(link);
+            }
+            
+            const githubUrl = getValidUrl(config.personal.github);
+            if (githubUrl) {
+                const link = document.createElement('a');
+                link.href = githubUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'contact-pill';
+                const icon = document.createElement('i');
+                icon.className = 'fab fa-github';
+                icon.setAttribute('aria-hidden', 'true');
+                link.appendChild(icon);
+                link.appendChild(document.createTextNode(' GitHub'));
+                contactInfo.appendChild(link);
+            }
+            
+            const resumeUrl = getValidUrl(config.personal.resumePdf, true);
+            if (resumeUrl) {
+                const link = document.createElement('a');
+                link.href = resumeUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'contact-pill primary-action';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-file-pdf';
+                icon.setAttribute('aria-hidden', 'true');
+                link.appendChild(icon);
+                link.appendChild(document.createTextNode(' Resume PDF'));
+                contactInfo.appendChild(link);
+            }
+            
+            heroCopy.appendChild(eyebrow);
+            heroCopy.appendChild(h1);
+            heroCopy.appendChild(h2);
+            heroCopy.appendChild(tagline);
+            heroCopy.appendChild(contactInfo);
+            heroTarget.appendChild(heroCopy);
+            
+            const photoUrl = getValidUrl(config.personal.photo, true);
+            if (photoUrl) {
+                const img = document.createElement('img');
+                img.className = 'profile-photo';
+                img.src = photoUrl;
+                img.alt = `Professional headshot of ${config.personal.name || ''}`;
+                heroTarget.appendChild(img);
+            }
         }
 
         const summaryTarget = document.getElementById('summary-target');
         if (summaryTarget) {
-            summaryTarget.innerHTML = `<p>${config.summary}</p>`;
+            summaryTarget.textContent = '';
+            const p = document.createElement('p');
+            p.textContent = config.summary;
+            summaryTarget.appendChild(p);
         }
 
         const skillsTarget = document.getElementById('skills-target');
-        if (skillsTarget) {
-            skillsTarget.innerHTML = config.skills.map(skill => `
-                <div class="skill-category card">
-                    <div class="skill-icon"><i class="fas ${skill.icon}"></i></div>
-                    <h3>${skill.category}</h3>
-                    <div class="skill-tags">
-                        ${skill.tags.map(tag => `<span>${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
+        if (skillsTarget && config.skills) {
+            skillsTarget.textContent = '';
+            config.skills.forEach(skill => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'skill-category card';
+                
+                const skillIcon = document.createElement('div');
+                skillIcon.className = 'skill-icon';
+                const icon = document.createElement('i');
+                icon.className = `fas ${skill.icon || ''}`;
+                skillIcon.appendChild(icon);
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = skill.category || '';
+                
+                const tagsDiv = document.createElement('div');
+                tagsDiv.className = 'skill-tags';
+                (skill.tags || []).forEach(tag => {
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    tagsDiv.appendChild(span);
+                });
+                
+                categoryCard.appendChild(skillIcon);
+                categoryCard.appendChild(h3);
+                categoryCard.appendChild(tagsDiv);
+                skillsTarget.appendChild(categoryCard);
+            });
         }
 
         const statsTarget = document.getElementById('stats-target');
         if (statsTarget && config.stats) {
-            statsTarget.innerHTML = config.stats.map(stat => `
-                <div class="stat-card">
-                    <strong>${stat.value}</strong>
-                    <span>${stat.label}</span>
-                </div>
-            `).join('');
+            statsTarget.textContent = '';
+            config.stats.forEach(stat => {
+                const card = document.createElement('div');
+                card.className = 'stat-card';
+                
+                const strong = document.createElement('strong');
+                strong.textContent = stat.value || '';
+                
+                const span = document.createElement('span');
+                span.textContent = stat.label || '';
+                
+                card.appendChild(strong);
+                card.appendChild(span);
+                statsTarget.appendChild(card);
+            });
         }
 
         const experienceTarget = document.getElementById('experience-target');
-        if (experienceTarget) {
-            experienceTarget.innerHTML = config.experience.map(job => `
-                <div class="timeline-item card">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">${job.date}</div>
-                    <div class="timeline-content">
-                        <h3>${job.title}</h3>
-                        <h4>${job.company}${job.location ? ` | ${job.location}` : ''}</h4>
-                        <ul>
-                            ${job.achievements.map(ach => `<li>${ach}</li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `).join('');
+        if (experienceTarget && config.experience) {
+            experienceTarget.textContent = '';
+            config.experience.forEach(job => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item card';
+                
+                const dot = document.createElement('div');
+                dot.className = 'timeline-dot';
+                
+                const date = document.createElement('div');
+                date.className = 'timeline-date';
+                date.textContent = job.date || '';
+                
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = job.title || '';
+                
+                const h4 = document.createElement('h4');
+                h4.textContent = job.company + (job.location ? ` | ${job.location}` : '');
+                
+                const ul = document.createElement('ul');
+                (job.achievements || []).forEach(ach => {
+                    const li = document.createElement('li');
+                    li.textContent = ach;
+                    ul.appendChild(li);
+                });
+                
+                content.appendChild(h3);
+                content.appendChild(h4);
+                content.appendChild(ul);
+                
+                item.appendChild(dot);
+                item.appendChild(date);
+                item.appendChild(content);
+                experienceTarget.appendChild(item);
+            });
         }
 
         const projectsTarget = document.getElementById('projects-target');
         if (projectsTarget && config.projects) {
-            projectsTarget.innerHTML = config.projects.map(proj => `
-                <div class="project-card card">
-                    <h3>${proj.name}</h3>
-                    <div class="project-subtitle">${proj.subtitle}</div>
-                    <ul>
-                        ${proj.highlights.map(h => `<li>${h}</li>`).join('')}
-                    </ul>
-                    <div class="skill-tags">
-                        ${proj.tags.map(tag => `<span>${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
+            projectsTarget.textContent = '';
+            config.projects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'project-card card';
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = proj.name || '';
+                
+                const sub = document.createElement('div');
+                sub.className = 'project-subtitle';
+                sub.textContent = proj.subtitle || '';
+                
+                const ul = document.createElement('ul');
+                (proj.highlights || []).forEach(h => {
+                    const li = document.createElement('li');
+                    li.textContent = h;
+                    ul.appendChild(li);
+                });
+                
+                const tagsDiv = document.createElement('div');
+                tagsDiv.className = 'skill-tags';
+                (proj.tags || []).forEach(tag => {
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    tagsDiv.appendChild(span);
+                });
+                
+                card.appendChild(h3);
+                card.appendChild(sub);
+                card.appendChild(ul);
+                card.appendChild(tagsDiv);
+                projectsTarget.appendChild(card);
+            });
         }
 
         const additionalExperienceTarget = document.getElementById('additional-experience-target');
         if (additionalExperienceTarget && config.additionalExperience) {
-            additionalExperienceTarget.innerHTML = config.additionalExperience.map(job => `
-                <article class="additional-item">
-                    <div><h3>${job.company}</h3><p>${job.title}</p></div>
-                    <p class="additional-date">${job.date}</p>
-                    <p class="additional-summary">${job.summary}</p>
-                </article>
-            `).join('');
+            additionalExperienceTarget.textContent = '';
+            config.additionalExperience.forEach(job => {
+                const article = document.createElement('article');
+                article.className = 'additional-item';
+                
+                const div = document.createElement('div');
+                const h3 = document.createElement('h3');
+                h3.textContent = job.company || '';
+                const pTitle = document.createElement('p');
+                pTitle.textContent = job.title || '';
+                div.appendChild(h3);
+                div.appendChild(pTitle);
+                
+                const pDate = document.createElement('p');
+                pDate.className = 'additional-date';
+                pDate.textContent = job.date || '';
+                
+                const pSum = document.createElement('p');
+                pSum.className = 'additional-summary';
+                pSum.textContent = job.summary || '';
+                
+                article.appendChild(div);
+                article.appendChild(pDate);
+                article.appendChild(pSum);
+                additionalExperienceTarget.appendChild(article);
+            });
         }
 
         const educationTarget = document.getElementById('education-target');
-        if (educationTarget) {
-            educationTarget.innerHTML = config.education.map(edu => `
-                <div class="edu-card card">
-                    <div class="edu-icon"><i class="fas ${edu.icon}"></i></div>
-                    <div class="edu-info">
-                        <h3>${edu.degree}</h3>
-                        <p>${edu.school}${edu.year ? ` (${edu.year})` : ''}</p>
-                    </div>
-                </div>
-            `).join('');
+        if (educationTarget && config.education) {
+            educationTarget.textContent = '';
+            config.education.forEach(edu => {
+                const card = document.createElement('div');
+                card.className = 'edu-card card';
+                
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'edu-icon';
+                const i = document.createElement('i');
+                i.className = `fas ${edu.icon || ''}`;
+                iconDiv.appendChild(i);
+                
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'edu-info';
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = edu.degree || '';
+                
+                const p = document.createElement('p');
+                p.textContent = edu.school + (edu.year ? ` (${edu.year})` : '');
+                
+                infoDiv.appendChild(h3);
+                infoDiv.appendChild(p);
+                
+                card.appendChild(iconDiv);
+                card.appendChild(infoDiv);
+                educationTarget.appendChild(card);
+            });
         }
 
         const footerTarget = document.getElementById('footer-target');
