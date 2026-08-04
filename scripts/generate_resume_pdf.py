@@ -6,6 +6,7 @@ Usage: python3 scripts/generate_resume_pdf.py
 import json
 import re
 import sys
+import datetime
 from pathlib import Path
 
 from fpdf import FPDF
@@ -87,6 +88,8 @@ def build(config: dict, out_path: Path):
     pdf.set_title(f'{p["name"]} - Resume')
     pdf.set_author(p["name"])
     pdf.set_creator("generate_resume_pdf.py")
+    # Make generation deterministic for CI byte-for-byte checks
+    pdf.set_creation_date(datetime.datetime(2024, 1, 1))
     pdf.add_page()
 
     pdf.set_font("Helvetica", "B", 18)

@@ -20,17 +20,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 5. Data and Build Architecture
 
 
-### ARCH-005 — PDF generation is not verified deterministic/current in CI
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** TEST-003 (this is effectively a specific check within that CI job)
-**Affected files:** CI config (new), `scripts/generate_resume_pdf.py`
-**Status:** Ready
 
 ### Problem
 
@@ -135,17 +124,6 @@ Reasonable to do a first lightweight pass now (fixing the overstated claim) and 
 
 ## 8. Portfolio Enhancements
 
-### ENH-003 — Add `requirements-dev.txt` for development dependencies
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `requirements-dev.txt`, `.github/workflows/ci.yml`
-**Status:** Ready
 
 ### Problem
 
@@ -240,6 +218,40 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### ENH-003 — Add `requirements-dev.txt` for development dependencies
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `requirements-dev.txt`, `.github/workflows/ci.yml`
+**Status:** Done (2026-08-04)
+
+### Done note
+Created `requirements-dev.txt` listing `pytest`, `playwright`, `fpdf2`, and `pypdf`. Updated `.github/workflows/ci.yml` to install dependencies from this file instead of a hardcoded list.
+
+---
+
+### ARCH-005 — PDF generation is not verified deterministic/current in CI
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** TEST-003 (this is effectively a specific check within that CI job)
+**Affected files:** CI config (new), `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-04)
+
+### Done note
+Updated `scripts/generate_resume_pdf.py` to use a fixed `creation_date` making the PDF byte-for-byte deterministic. Added a step to `.github/workflows/ci.yml` that generates the PDF and checks for uncommitted changes using `git diff --exit-code`.
+
+---
 
 ### ARCH-006 — Introduce `resume.json` and generate `config.js`
 
@@ -1246,7 +1258,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 14. **ARCH-002** — canonical resume-data decision (planning), spawning its own follow-up items if pursued
 15. **ARCH-001** — PDF parser hardening (only if ARCH-002 is deferred; otherwise resolved by ARCH-002's follow-ups)
 16. **ARCH-004** — PDF metadata (anytime, cheap)
-17. **ARCH-005** — PDF freshness check in CI (after TEST-003)
+17. ~~**ARCH-005** — PDF freshness check in CI~~ — Done (2026-08-04)
 18. **TEST-004** — document validation command (after the above testing items land)
 19. **MAINT-002** — README accuracy pass (do a lightweight pass early for the overstated claim; full pass after ARCH-005/TEST-004)
 20. **ENH-001**, **ENH-002** — portfolio enhancements, whenever owner input/priority allows

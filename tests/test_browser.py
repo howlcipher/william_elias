@@ -15,6 +15,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         pass # silence HTTP logs
 
+socketserver.TCPServer.allow_reuse_address = True
 httpd = socketserver.TCPServer(("", PORT), Handler)
 
 def start_server():
