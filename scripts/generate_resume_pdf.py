@@ -14,8 +14,10 @@ SITE_DIR = Path(__file__).resolve().parent.parent
 MARGIN = 0.75 * 72  # 54pt, matches the source PDF's visual margins
 
 
-def load_config() -> dict:
-    raw = (SITE_DIR / "config.js").read_text()
+def load_config(config_path: Path | str | None = None) -> dict:
+    if config_path is None:
+        config_path = SITE_DIR / "config.js"
+    raw = Path(config_path).read_text(encoding="utf-8")
     body = raw.split("=", 1)[1].strip()
     body = body[:-1] if body.endswith(";") else body
     body = re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', body)

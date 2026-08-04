@@ -208,39 +208,6 @@ Correctly sequenced after TEST-003 since it needs a CI pipeline to run in.
 
 ## 6. Testing and CI
 
-### TEST-002 — No automated tests for the PDF generator
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None
-**Affected files:** New test file (e.g. `scripts/test_generate_resume_pdf.py`), `scripts/generate_resume_pdf.py`
-**Status:** Ready
-
-### Problem
-
-`scripts/generate_resume_pdf.py` has no tests. `load_config()`'s regex-based parsing (ARCH-001) and the `keep_together`/`bullet_height` orphan-prevention logic are exactly the kind of fragile-but-important logic that benefits from unit coverage, since failures would otherwise only surface as visually broken PDF output discovered by manual inspection.
-
-### Proposed work
-
-Add `pytest`-based unit tests (Python preferred per project conventions) for `load_config()` against representative `config.js`-shaped input, and for `bullet_height`/`keep_together` page-break behavior. Full visual PDF diffing is out of scope — focus on the parsing and layout-calculation logic that's most likely to silently break.
-
-### Acceptance criteria
-
-- Tests exist and pass for `load_config()` parsing at least one realistic sample.
-- Tests exist for orphan-prevention logic (`bullet_height` returns expected line counts for known input).
-- Tests runnable via a single documented command.
-
-### Validation
-
-- Run `pytest scripts/` (or equivalent), confirm all pass.
-
-### Notes
-
-Smaller and more contained than TEST-001 — good candidate to do first if sequencing tests before browser-behavior tests is preferred.
 
 ---
 
@@ -425,6 +392,45 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### TEST-002 — No automated tests for the PDF generator
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** New test file (e.g. `scripts/test_generate_resume_pdf.py`), `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-04)
+
+### Done note
+Implemented pytest-based unit tests for load_config() and layout calculations. Tests pass and integrate with CI.
+
+### Problem
+
+`scripts/generate_resume_pdf.py` has no tests. `load_config()`'s regex-based parsing (ARCH-001) and the `keep_together`/`bullet_height` orphan-prevention logic are exactly the kind of fragile-but-important logic that benefits from unit coverage, since failures would otherwise only surface as visually broken PDF output discovered by manual inspection.
+
+### Proposed work
+
+Add `pytest`-based unit tests (Python preferred per project conventions) for `load_config()` against representative `config.js`-shaped input, and for `bullet_height`/`keep_together` page-break behavior. Full visual PDF diffing is out of scope — focus on the parsing and layout-calculation logic that's most likely to silently break.
+
+### Acceptance criteria
+
+- Tests exist and pass for `load_config()` parsing at least one realistic sample.
+- Tests exist for orphan-prevention logic (`bullet_height` returns expected line counts for known input).
+- Tests runnable via a single documented command.
+
+### Validation
+
+- Run `pytest scripts/` (or equivalent), confirm all pass.
+
+### Notes
+
+Smaller and more contained than TEST-001 — good candidate to do first if sequencing tests before browser-behavior tests is preferred.
+
+---
 
 ### TEST-003 — No CI pipeline
 
