@@ -1,45 +1,70 @@
 # William Elias - Resume Website
 
-A professional, modern, and highly performant resume website built with HTML, CSS, and Vanilla JavaScript. Deployed via GitHub Pages.
+A professional, modern, and highly performant resume website built with HTML, CSS, and Vanilla JavaScript.
+
+## Deployment & Architecture
+- **Data Source**: A single `resume.json` acts as the canonical source of truth for all content.
+- **Generated Assets**: The static `config.js` used by the browser, the SEO meta tags in `index.html`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts.
+- **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
+- **CI/CD**: GitHub Actions verify tests and ensure that the generated PDF is fresh, but CI does not mutate the repository or push commits. 
 
 ## Features
-- **Config-Driven**: Easily update your experience, skills, and contact info via a single `config.js` file. No need to touch HTML!
+- **Config-Driven**: Easily update your experience, skills, and contact info via a single `resume.json` file. No need to touch HTML!
 - **Dark/Light Mode**: User preference is stored in LocalStorage.
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
 - **Mobile Responsive**: Custom hamburger menu and flexible layout.
 - **Print/PDF Download**: Embedded download link for the PDF version.
 - **View Source**: Hero pill linking straight to this repo.
 - **Terminal-Style Intro**: One-time CSS typewriter reveal on the tagline (respects `prefers-reduced-motion`).
-- **Live "Last Synced" Widget**: Footer pulls the latest commit from the GitHub API and shows it as a relative timestamp + short SHA. Cached in localStorage for 10 minutes to stay polite to GitHub's unauthenticated rate limit; renders nothing if the fetch has never succeeded (no error state shown to visitors).
+- **Live "Last Synced" Widget**: Footer pulls the latest commit from the GitHub API and shows it as a relative timestamp + short SHA. Cached in localStorage for 10 minutes to stay polite to GitHub's unauthenticated rate limit.
 
 ## How to Update Your Information
 
-You do not need to understand HTML to update this site. All your information is stored in the `config.js` file.
+All your information is stored in the canonical `resume.json` file. Do not manually edit `config.js` or the SEO meta tags in `index.html`.
 
-1. Open `config.js` in any text editor.
-2. Edit the text inside the quotes.
-3. Save the file.
-4. Regenerate the PDF: `pip install --user fpdf2 && python3 scripts/generate_resume_pdf.py`. This rewrites `William_Elias_Resume.pdf` from the same `config.js` data, so the site and the PDF can never drift out of sync.
-5. Push your changes to the `main` branch to automatically deploy to GitHub Pages.
+1. Open `resume.json` in any text editor and update your information.
+2. Regenerate the derived files by running the build sequence:
+   ```bash
+   python scripts/build_config.py
+   python scripts/build_html.py
+   python scripts/generate_resume_pdf.py
+   ```
+   *(Note: This requires development dependencies, see below)*
+3. Verify your changes and run the automated tests.
+4. Commit all changes (including the updated `resume.json`, `config.js`, `index.html`, and `William_Elias_Resume.pdf`) and push to `main`. CI will verify that the generated PDF is up to date before changes are fully integrated.
 
 ### Adding a New Job
-Find the `experience` array in `config.js` and add a new object to the top of the list:
+Find the `experience` array in `resume.json` and add a new object to the top of the list:
 
-```javascript
+```json
 {
-    date: "March 2026 - Present",
-    title: "Senior Security Engineer",
-    company: "New Company Inc.",
-    location: "Remote",
-    achievements: [
+    "date": "March 2026 - Present",
+    "title": "Senior Security Engineer",
+    "company": "New Company Inc.",
+    "location": "Remote",
+    "achievements": [
         "First bullet point goes here.",
         "Second bullet point goes here."
     ]
 }
 ```
 
-## Local Development
-Since this is a static site, you can simply double-click `index.html` to view it locally in your browser. 
+## Local Development & Validation
 
-## Deployment
-Changes pushed to the `main` branch are automatically deployed via GitHub Pages.
+Since this is a static site, you can view it locally by simply double-clicking `index.html` in your browser. 
+
+Before committing your changes, you should validate them end-to-end to ensure config validity, fresh generated files, and passing tests. Run the following sequence in your terminal from the project root:
+
+```bash
+# 1. Install development dependencies (only needed once)
+pip install -r requirements-dev.txt
+playwright install chromium --with-deps
+
+# 2. Rebuild all derived files
+python scripts/build_config.py && python scripts/build_html.py && python scripts/generate_resume_pdf.py
+
+# 3. Run the test suite
+PYTHONPATH=. pytest tests/
+```
+
+If the tests pass, your changes are ready to commit and push.

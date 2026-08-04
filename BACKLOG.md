@@ -19,134 +19,42 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 4. Security
 ## 5. Data and Build Architecture
 
+### ARCH-009 — CI does not verify freshness of config.js and index.html
 
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** ARCH-006, ARCH-007
+**Affected files:** `.github/workflows/ci.yml`
+**Status:** Ready
 
 ### Problem
 
-README.md:22 claims regenerating the PDF means "the site and the PDF can never drift out of sync" — but this is only true if the regeneration script is actually run before every commit that touches `config.js`, and nothing currently enforces that. `William_Elias_Resume.pdf` is a tracked binary that can silently go stale relative to `config.js`.
+While CI verifies the freshness of the generated PDF (`William_Elias_Resume.pdf`), it currently does not verify that `config.js` and `index.html` have been properly rebuilt from `resume.json` before commit. It is possible for a contributor to edit `resume.json`, regenerate the PDF, but forget to run `build_config.py` and `build_html.py`, leading to drift between the source of truth and the deployed site.
 
 ### Proposed work
 
-Once basic CI exists (TEST-003), add a check that regenerates the PDF from `config.js` in a clean environment and diffs it against the tracked file (or a normalized representation of it, since PDF binaries can have non-deterministic byte-level output even from identical input — e.g. embedded timestamps). Fail the CI job if they differ, prompting the contributor to regenerate and commit the PDF.
+Update the GitHub Actions workflow to run `python scripts/build_config.py` and `python scripts/build_html.py`, and check for uncommitted changes using `git diff --exit-code`, just like it already does for the PDF.
 
 ### Acceptance criteria
 
-- CI fails if `config.js` changes without a corresponding PDF regeneration.
-- CI does not fail on incidental non-deterministic PDF metadata (e.g. generation timestamp) if `fpdf2` embeds one — compare content, not raw bytes, if needed.
-- CI does not commit or push generated files itself (per repository constraints — CI must not mutate the repo).
+- CI fails if `config.js` or `index.html` are out of sync with `resume.json`.
+- Contributors are forced to commit the properly generated files.
 
 ### Validation
 
-- Manual: modify `config.js` without regenerating the PDF, confirm the new CI check fails; regenerate, confirm it passes.
-
-### Notes
-
-Correctly sequenced after TEST-003 since it needs a CI pipeline to run in.
+- Make a manual change to `resume.json` without rebuilding, push to a branch, and confirm CI fails. Rebuild and commit, and confirm CI passes.
 
 ---
 
 ## 6. Testing and CI
 
----
-
-### TEST-004 — No single documented local validation command
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** TEST-001, TEST-002, ARCH-003
-**Affected files:** `README.md`
-**Status:** Blocked — depends on TEST-001/TEST-002/ARCH-003 (nothing to document yet)
-
-### Problem
-
-The README documents how to regenerate the PDF but has no single documented command (or short sequence) a contributor can run locally to validate their changes before pushing — no mention of tests, linting, or config validation, because none currently exist.
-
-### Proposed work
-
-Once TEST-001/TEST-002/ARCH-003 exist, document a single local validation command (or a short, copy-pasteable sequence) in the README covering: config validation, PDF regeneration, and running tests.
-
-### Acceptance criteria
-
-- README contains one clearly-labeled command or short sequence a contributor can run locally to validate a change end-to-end.
-- The documented command(s) actually work when run fresh.
-
-### Validation
-
-- Follow the documented steps in a clean checkout, confirm they succeed.
-
-### Notes
-
-Deliberately last in the testing/CI chain — documenting a validation workflow before the pieces it references exist would be documentation debt on day one.
-
----
-
 ## 7. Repository Maintenance
 
-### MAINT-002 — README overstates drift-proofing and omits the real workflow
-
-**Type:** Maintenance
-**Priority:** Low
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** Loosely follows ARCH-002/ARCH-005/TEST-004 (README should describe the actual final workflow, not get rewritten repeatedly as those land)
-**Affected files:** `README.md`
-**Status:** Ready
-
-### Problem
-
-`README.md:22` states regenerating the PDF means "the site and the PDF can never drift out of sync" — this is true only if a human remembers to run the regen script before every relevant commit; nothing currently enforces it (see ARCH-005). The README also doesn't document that GitHub Pages deployment here is classic branch-based (serving `main` directly), doesn't mention any validation/test step (because none exist yet), and doesn't describe the actual generated-file relationship between `config.js`, the PDF, and the static SEO meta tags in `index.html`.
-
-### Proposed work
-
-Soften the "can never drift" claim to reflect reality (e.g., "regenerate the PDF after editing config.js — CI verifies this if ARCH-005 lands, otherwise it's a manual step"), and add a brief section describing: what's generated vs. hand-maintained, how GitHub Pages deployment actually works for this repo, and (once they exist) how to run tests/validation.
-
-### Acceptance criteria
-
-- No claim in the README implies automatic drift-proofing that isn't actually enforced.
-- README accurately describes the deployment mechanism (classic Pages vs. Actions).
-- README changes contain no resume content changes.
-
-### Validation
-
-- Manual read-through comparing README claims against actual repository behavior/tooling.
-
-### Notes
-
-Reasonable to do a first lightweight pass now (fixing the overstated claim) and a follow-up pass once ARCH-005/TEST-004 land and there's more to document — don't block the initial fix on those.
-
----
-
 ## 8. Portfolio Enhancements
-
-
-### Problem
-
-Currently, `pytest` and `playwright` are installed via hardcoded `pip install` commands in the CI workflow (`.github/workflows/ci.yml`) and there is no documented way for local developers to install test dependencies.
-
-### Proposed work
-
-Create a `requirements-dev.txt` file listing `pytest` and `playwright`. Update the CI workflow to run `pip install -r requirements-dev.txt` instead of hardcoding the dependencies. Document it in the README later.
-
-### Acceptance criteria
-
-- `requirements-dev.txt` exists.
-- `.github/workflows/ci.yml` installs from the requirements file.
-
-### Validation
-
-- CI continues to pass.
-
-### Notes
-
-A quick follow-up to TEST-003.
-
----
 
 ### ENH-001 — Support optional per-project links without inventing URLs
 
@@ -218,6 +126,40 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### MAINT-002 — README overstates drift-proofing and omits the real workflow
+
+**Type:** Maintenance
+**Priority:** Low
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** Loosely follows ARCH-002/ARCH-005/TEST-004 (README should describe the actual final workflow, not get rewritten repeatedly as those land)
+**Affected files:** `README.md`
+**Status:** Done (2026-08-04)
+
+### Done note
+Rewrote README.md to reflect the new architecture with `resume.json` as the single source of truth, explain the build steps, remove the overstated claim about drift-proofing, and provide a single end-to-end validation command.
+
+---
+
+### TEST-004 — No single documented local validation command
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** TEST-001, TEST-002, ARCH-003
+**Affected files:** `README.md`
+**Status:** Done (2026-08-04)
+
+### Done note
+Added an end-to-end local validation command sequence to `README.md` under "Local Development & Validation".
+
+---
 
 ### ENH-003 — Add `requirements-dev.txt` for development dependencies
 
