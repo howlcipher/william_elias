@@ -180,7 +180,7 @@ Small, isolated, good "quick win" item.
 **Recommended model tier:** Standard
 **Dependencies:** TEST-003 (this is effectively a specific check within that CI job)
 **Affected files:** CI config (new), `scripts/generate_resume_pdf.py`
-**Status:** Blocked — depends on TEST-003 (no CI exists yet to add this check to)
+**Status:** Ready
 
 ### Problem
 
@@ -244,41 +244,6 @@ Smaller and more contained than TEST-001 — good candidate to do first if seque
 
 ---
 
-### TEST-003 — No CI pipeline
-
-**Type:** Improvement
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** TEST-001 and/or TEST-002 (needs something to run — can start with whichever test suite lands first)
-**Affected files:** New `.github/workflows/*.yml`
-**Status:** Blocked — depends on TEST-001/TEST-002 (no tests exist yet to run)
-
-### Problem
-
-There is no `.github/workflows` directory and no CI configuration at all. Nothing runs automatically on push or PR — no linting, no tests (none exist yet), no generated-file freshness check. GitHub Pages deployment for this repo appears to be classic branch-based Pages (serving directly from `main`, not an Actions-based deploy — no workflow file exists to do otherwise), so CI here is purely a verification gate, not a deployment mechanism.
-
-### Proposed work
-
-Add a GitHub Actions workflow that runs on push/PR: the test suite(s) from TEST-001/TEST-002 once they exist, and (once available) the PDF-freshness check from ARCH-005. Explicitly scope the workflow to verification only — it must not deploy, push commits, or otherwise mutate the repository, per repository constraints.
-
-### Acceptance criteria
-
-- A workflow file exists and runs on push/PR to `main`.
-- The workflow fails when tests fail and passes when they succeed (verify with an intentionally broken test).
-- The workflow performs no writes back to the repository (no auto-commits, no deploy step).
-
-### Validation
-
-- Push a branch with an intentionally failing test (or open a draft PR), confirm the workflow fails; fix it, confirm it passes.
-
-### Notes
-
-Marked Blocked until at least one of TEST-001/TEST-002 exists to give the pipeline something to run — implementing CI with nothing to check would be low-value. Recommended order: TEST-002 (smaller) → TEST-003 (CI running that) → TEST-001 (expand coverage) → ARCH-005 (add PDF-freshness check to the now-existing pipeline).
-
----
 
 ### TEST-004 — No single documented local validation command
 
@@ -355,6 +320,41 @@ Reasonable to do a first lightweight pass now (fixing the overstated claim) and 
 
 ## 8. Portfolio Enhancements
 
+### ENH-003 — Add `requirements-dev.txt` for development dependencies
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `requirements-dev.txt`, `.github/workflows/ci.yml`
+**Status:** Ready
+
+### Problem
+
+Currently, `pytest` and `playwright` are installed via hardcoded `pip install` commands in the CI workflow (`.github/workflows/ci.yml`) and there is no documented way for local developers to install test dependencies.
+
+### Proposed work
+
+Create a `requirements-dev.txt` file listing `pytest` and `playwright`. Update the CI workflow to run `pip install -r requirements-dev.txt` instead of hardcoding the dependencies. Document it in the README later.
+
+### Acceptance criteria
+
+- `requirements-dev.txt` exists.
+- `.github/workflows/ci.yml` installs from the requirements file.
+
+### Validation
+
+- CI continues to pass.
+
+### Notes
+
+A quick follow-up to TEST-003.
+
+---
+
 ### ENH-001 — Support optional per-project links without inventing URLs
 
 **Type:** Enhancement
@@ -426,6 +426,43 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 ## 9. Completed
 
+### TEST-003 — No CI pipeline
+
+**Type:** Improvement
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** TEST-001 and/or TEST-002 (needs something to run — can start with whichever test suite lands first)
+**Affected files:** New `.github/workflows/*.yml`
+**Status:** Done (2026-08-04)
+
+### Problem
+
+There is no `.github/workflows` directory and no CI configuration at all. Nothing runs automatically on push or PR — no linting, no tests (none exist yet), no generated-file freshness check. GitHub Pages deployment for this repo appears to be classic branch-based Pages (serving directly from `main`, not an Actions-based deploy — no workflow file exists to do otherwise), so CI here is purely a verification gate, not a deployment mechanism.
+
+### Proposed work
+
+Add a GitHub Actions workflow that runs on push/PR: the test suite(s) from TEST-001/TEST-002 once they exist, and (once available) the PDF-freshness check from ARCH-005. Explicitly scope the workflow to verification only — it must not deploy, push commits, or otherwise mutate the repository, per repository constraints.
+
+### Acceptance criteria
+
+- A workflow file exists and runs on push/PR to `main`.
+- The workflow fails when tests fail and passes when they succeed (verify with an intentionally broken test).
+- The workflow performs no writes back to the repository (no auto-commits, no deploy step).
+
+### Validation
+
+- Push a branch with an intentionally failing test (or open a draft PR), confirm the workflow fails; fix it, confirm it passes.
+
+### Notes
+
+Marked Blocked until at least one of TEST-001/TEST-002 exists to give the pipeline something to run — implementing CI with nothing to check would be low-value. Recommended order: TEST-002 (smaller) → TEST-003 (CI running that) → TEST-001 (expand coverage) → ARCH-005 (add PDF-freshness check to the now-existing pipeline).
+
+**Done note (2026-08-04):** Implemented GitHub Actions CI workflow in `.github/workflows/ci.yml` that runs the headless browser tests using pytest and playwright on push/PR to `main`.
+
+---
 ### MAINT-001 — Tracked `.directory` desktop metadata file, no `.gitignore`
 
 **Type:** Maintenance
