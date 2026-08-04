@@ -19,36 +19,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 4. Security
 ## 5. Data and Build Architecture
 
-### ARCH-009 — CI does not verify freshness of config.js and index.html
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** ARCH-006, ARCH-007
-**Affected files:** `.github/workflows/ci.yml`
-**Status:** Ready
-
-### Problem
-
-While CI verifies the freshness of the generated PDF (`William_Elias_Resume.pdf`), it currently does not verify that `config.js` and `index.html` have been properly rebuilt from `resume.json` before commit. It is possible for a contributor to edit `resume.json`, regenerate the PDF, but forget to run `build_config.py` and `build_html.py`, leading to drift between the source of truth and the deployed site.
-
-### Proposed work
-
-Update the GitHub Actions workflow to run `python scripts/build_config.py` and `python scripts/build_html.py`, and check for uncommitted changes using `git diff --exit-code`, just like it already does for the PDF.
-
-### Acceptance criteria
-
-- CI fails if `config.js` or `index.html` are out of sync with `resume.json`.
-- Contributors are forced to commit the properly generated files.
-
-### Validation
-
-- Make a manual change to `resume.json` without rebuilding, push to a branch, and confirm CI fails. Rebuild and commit, and confirm CI passes.
-
----
 
 ## 6. Testing and CI
 
@@ -126,6 +96,23 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### ARCH-009 — CI does not verify freshness of config.js and index.html
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** ARCH-006, ARCH-007
+**Affected files:** `.github/workflows/ci.yml`
+**Status:** Done (2026-08-04)
+
+### Done note
+Updated `.github/workflows/ci.yml` to run `python scripts/build_config.py` and `python scripts/build_html.py` before checking for uncommitted changes with `git diff --exit-code config.js index.html William_Elias_Resume.pdf`.
+
+---
 
 ### MAINT-002 — README overstates drift-proofing and omits the real workflow
 
