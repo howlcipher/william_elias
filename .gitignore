@@ -1,0 +1,12 @@
+# OS metadata
+.DS_Store
+.directory
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Editor
+*.swp
+*~

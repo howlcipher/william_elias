@@ -317,42 +317,6 @@ Deliberately last in the testing/CI chain — documenting a validation workflow 
 
 ## 7. Repository Maintenance
 
-### MAINT-001 — Tracked `.directory` desktop metadata file, no `.gitignore`
-
-**Type:** Maintenance
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `.directory` (remove), new `.gitignore`
-**Status:** Ready
-
-### Problem
-
-`.directory` (`[Desktop Entry]\nIcon=folder-important`) is tracked in the repository — this is KDE/Dolphin desktop-environment metadata, not project content, and shouldn't be version-controlled. There is also no `.gitignore` at all, so any future local editor/OS artifacts (`.DS_Store`, `__pycache__/`, editor swap files, etc.) risk being accidentally committed.
-
-### Proposed work
-
-`git rm .directory` and add a `.gitignore` covering common OS metadata (`.directory`, `.DS_Store`), Python artifacts (`__pycache__/`, `*.pyc`), and common editor swap files.
-
-### Acceptance criteria
-
-- `.directory` is removed from the repository.
-- A `.gitignore` exists covering the categories above.
-- No project-relevant tracked files are accidentally ignored (verify `git status` shows nothing unexpected after adding `.gitignore`).
-
-### Validation
-
-- `git status` after the change shows `.directory` removed and no unintended untracked/ignored files.
-
-### Notes
-
-Trivial, zero-risk — good first/quick item.
-
----
-
 ### MAINT-002 — README overstates drift-proofing and omits the real workflow
 
 **Type:** Maintenance
@@ -461,6 +425,44 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### MAINT-001 — Tracked `.directory` desktop metadata file, no `.gitignore`
+
+**Type:** Maintenance
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `.directory` (remove), new `.gitignore`
+**Status:** Done (2026-08-04)
+
+### Problem
+
+`.directory` (`[Desktop Entry]\nIcon=folder-important`) is tracked in the repository — this is KDE/Dolphin desktop-environment metadata, not project content, and shouldn't be version-controlled. There is also no `.gitignore` at all, so any future local editor/OS artifacts (`.DS_Store`, `__pycache__/`, editor swap files, etc.) risk being accidentally committed.
+
+### Proposed work
+
+`git rm .directory` and add a `.gitignore` covering common OS metadata (`.directory`, `.DS_Store`), Python artifacts (`__pycache__/`, `*.pyc`), and common editor swap files.
+
+### Acceptance criteria
+
+- `.directory` is removed from the repository.
+- A `.gitignore` exists covering the categories above.
+- No project-relevant tracked files are accidentally ignored (verify `git status` shows nothing unexpected after adding `.gitignore`).
+
+### Validation
+
+- `git status` after the change shows `.directory` removed and no unintended untracked/ignored files.
+
+### Notes
+
+Trivial, zero-risk — good first/quick item.
+
+**Done note (2026-08-04):** Created `.gitignore` ignoring common files and `__pycache__`. Untracked `tests/__pycache__` and removed tracked `.directory`.
+
+---
 
 ### TEST-001 — No automated regression tests for browser behavior
 
