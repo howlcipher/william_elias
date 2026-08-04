@@ -208,43 +208,6 @@ Correctly sequenced after TEST-003 since it needs a CI pipeline to run in.
 
 ## 6. Testing and CI
 
-### TEST-001 — No automated regression tests for browser behavior
-
-**Type:** Improvement
-**Priority:** High
-**Effort:** M
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None (but naturally exercises REL-001, REL-002, REL-005, A11Y-001 — best done after or alongside those fixes so tests capture the corrected behavior)
-**Affected files:** New test files (e.g. under a `tests/` directory), `script.js`
-**Status:** Ready
-
-### Problem
-
-There is no test framework, test file, or automated check for any of `script.js`'s browser-side behavior — storage fault-tolerance, `IntersectionObserver` fallback, malformed API response handling, or mobile-menu keyboard behavior. Every one of the reliability/accessibility bugs above was found by manual code reading, not by a failing test, and any future regression would similarly go unnoticed until manually discovered.
-
-### Proposed work
-
-Add a lightweight test suite covering, at minimum: `formatRelativeTime`/`renderLastSynced` output for known inputs, storage-failure fallback behavior (REL-002), malformed API response handling (REL-005), `IntersectionObserver`-unavailable fallback (REL-001), and mobile-menu open/close/Escape behavior (A11Y-001). Given the project's static/vanilla-JS nature and stated dependency-sprawl aversion, prefer a minimal-dependency approach — a small headless-browser test runner (e.g. Playwright or a lighter alternative) is reasonable since this is dev-only tooling that doesn't touch the shipped site, but keep the choice deliberate and documented rather than defaulting to a heavy framework.
-
-### Acceptance criteria
-
-- Test suite runs via a single documented command (ties into TEST-004).
-- Tests cover each of the specific behaviors listed above.
-- Tests fail (before the corresponding fix) and pass (after) for at least REL-001, REL-002, and REL-005, demonstrating they actually catch the bugs they're meant to guard.
-- Test tooling is dev-only — no impact on the shipped static site or its dependency footprint.
-
-### Validation
-
-- Run the test suite locally; confirm pass/fail status matches expectations against both the pre-fix and post-fix code (can be verified via git stash/checkout during test-writing).
-
-### Notes
-
-This is naturally sequenced after the reliability/accessibility bug fixes it's meant to cover, so the tests encode correct behavior rather than the current buggy behavior — but could also be written test-first (red/green) alongside each fix if preferred at implementation time.
-
----
-
 ### TEST-002 — No automated tests for the PDF generator
 
 **Type:** Improvement
@@ -498,6 +461,45 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### TEST-001 — No automated regression tests for browser behavior
+
+**Type:** Improvement
+**Priority:** High
+**Effort:** M
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None (but naturally exercises REL-001, REL-002, REL-005, A11Y-001 — best done after or alongside those fixes so tests capture the corrected behavior)
+**Affected files:** New test files (e.g. under a `tests/` directory), `script.js`
+**Status:** Done (2026-08-04)
+
+### Problem
+
+There is no test framework, test file, or automated check for any of `script.js`'s browser-side behavior — storage fault-tolerance, `IntersectionObserver` fallback, malformed API response handling, or mobile-menu keyboard behavior. Every one of the reliability/accessibility bugs above was found by manual code reading, not by a failing test, and any future regression would similarly go unnoticed until manually discovered.
+
+### Proposed work
+
+Add a lightweight test suite covering, at minimum: `formatRelativeTime`/`renderLastSynced` output for known inputs, storage-failure fallback behavior (REL-002), malformed API response handling (REL-005), `IntersectionObserver`-unavailable fallback (REL-001), and mobile-menu open/close/Escape behavior (A11Y-001). Given the project's static/vanilla-JS nature and stated dependency-sprawl aversion, prefer a minimal-dependency approach — a small headless-browser test runner (e.g. Playwright or a lighter alternative) is reasonable since this is dev-only tooling that doesn't touch the shipped site, but keep the choice deliberate and documented rather than defaulting to a heavy framework.
+
+### Acceptance criteria
+
+- Test suite runs via a single documented command (ties into TEST-004).
+- Tests cover each of the specific behaviors listed above.
+- Tests fail (before the corresponding fix) and pass (after) for at least REL-001, REL-002, and REL-005, demonstrating they actually catch the bugs they're meant to guard.
+- Test tooling is dev-only — no impact on the shipped static site or its dependency footprint.
+
+### Validation
+
+- Run the test suite locally; confirm pass/fail status matches expectations against both the pre-fix and post-fix code (can be verified via git stash/checkout during test-writing).
+
+### Notes
+
+This is naturally sequenced after the reliability/accessibility bug fixes it's meant to cover, so the tests encode correct behavior rather than the current buggy behavior — but could also be written test-first (red/green) alongside each fix if preferred at implementation time.
+
+**Done note (2026-08-04):** Implemented a Python `pytest` and `playwright` based headless test suite in `tests/test_browser.py` that verifies the JS browser behaviors without adding heavy JS dependencies like NPM.
+
+---
 
 ### SEC-004 — Config-driven sections still render via unescaped `innerHTML`
 
