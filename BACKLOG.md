@@ -16,7 +16,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 3. Accessibility
 
-
 ## 4. Security
 ## 5. Data and Build Architecture
 
@@ -63,18 +62,6 @@ Per the operating instructions for this backlog, do not create one large "refact
 
 ---
 
-### ARCH-003 — No schema validation for resume config data
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None (independent of ARCH-002 — useful whether or not a canonical source is introduced)
-**Affected files:** `scripts/generate_resume_pdf.py`, possibly a new small validation script
-**Status:** Ready
-
 ### Problem
 
 Neither the browser (`script.js`) nor the PDF generator (`scripts/generate_resume_pdf.py`) validates `config.js`/parsed-config data before using it. Missing fields, malformed arrays, or invalid URL values would currently fail unpredictably — a missing `achievements` array throws inside `.map()`, a malformed `linkedin` URL renders as a broken link with no warning, etc. There's no single point that catches these before they reach either output.
@@ -98,18 +85,6 @@ Add a lightweight validation pass (Python, run as part of or before PDF generati
 Worth doing regardless of the ARCH-002 canonical-source decision — the validation logic is cheap and useful either way, just potentially validates a different file shape depending on that outcome.
 
 ---
-
-### ARCH-004 — PDF output has no document metadata
-
-**Type:** Improvement
-**Priority:** Low
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `scripts/generate_resume_pdf.py`
-**Status:** Ready
 
 ### Problem
 
@@ -172,9 +147,7 @@ Correctly sequenced after TEST-003 since it needs a CI pipeline to run in.
 
 ## 6. Testing and CI
 
-
 ---
-
 
 ### TEST-004 — No single documented local validation command
 
@@ -356,6 +329,40 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### ARCH-004 — PDF output has no document metadata
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-04)
+
+### Done note
+Added pdf.set_title, pdf.set_author, and pdf.set_creator to the FPDF initialization in scripts/generate_resume_pdf.py.
+
+---
+
+### ARCH-003 — No schema validation for resume config data
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None (independent of ARCH-002 — useful whether or not a canonical source is introduced)
+**Affected files:** `scripts/generate_resume_pdf.py`, possibly a new small validation script
+**Status:** Done (2026-08-04)
+
+### Done note
+Implemented validate_config in scripts/generate_resume_pdf.py which checks that all required top-level fields are present, expected lists are arrays, and personal URLs have valid protocol schemas. Added corresponding tests.
+
+---
 
 ### ARCH-001 — PDF generator parses `config.js` with regex instead of a real data source
 

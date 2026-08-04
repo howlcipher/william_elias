@@ -31,6 +31,30 @@ def load_config(config_path: Path | str | None = None) -> dict:
             f"Underlying error: {e}"
         ) from e
 
+def validate_config(config: dict):
+    required_top = ["personal", "summary", "skills", "experience", "projects", "education"]
+    for k in required_top:
+        if k not in config:
+            raise ValueError(f"Validation failed: Missing required top-level field '{k}'")
+    
+    for k in ["skills", "experience", "projects", "education"]:
+        if not isinstance(config.get(k), list):
+            raise ValueError(f"Validation failed: '{k}' must be an array")
+            
+    p = config.get("personal", {})
+    for url_field in ["linkedin", "github"]:
+        val = p.get(url_field, "")
+        if not (val.startswith("http://") or val.startswith("https://")):
+            raise ValueError(f"Validation failed: 'personal.{url_field}' must be a valid URL starting with http:// or https://")
+
+    for i, job in enumerate(config.get("experience", [])):
+        if not isinstance(job.get("achievements"), list):
+            raise ValueError(f"Validation failed: 'experience[{i}].achievements' must be an array")
+            
+    for i, proj in enumerate(config.get("projects", [])):
+        if not isinstance(proj.get("highlights"), list):
+            raise ValueError(f"Validation failed: 'projects[{i}].highlights' must be an array")
+
 
 class ResumePDF(FPDF):
     def __init__(self):
@@ -68,6 +92,9 @@ class ResumePDF(FPDF):
 def build(config: dict, out_path: Path):
     p = config["personal"]
     pdf = ResumePDF()
+    pdf.set_title(f'{p["name"]} - Resume')
+    pdf.set_author(p["name"])
+    pdf.set_creator("generate_resume_pdf.py")
     pdf.add_page()
 
     pdf.set_font("Helvetica", "B", 18)
@@ -131,6 +158,7 @@ def build(config: dict, out_path: Path):
 
 if __name__ == "__main__":
     cfg = load_config()
+    validate_config(cfg)
     out = SITE_DIR / "William_Elias_Resume.pdf"
     build(cfg, out)
     print(f"Wrote {out}")

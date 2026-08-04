@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import pytest
 
-from scripts.generate_resume_pdf import ResumePDF, build, load_config, SITE_DIR
+from scripts.generate_resume_pdf import ResumePDF, build, load_config, validate_config, SITE_DIR
 
 
 class TestLoadConfig:
@@ -124,3 +124,27 @@ class TestPDFBuilder:
         with open(out_pdf, "rb") as f:
             header = f.read(5)
             assert header == b"%PDF-"
+
+
+class TestValidateConfig:
+    def test_validate_config_success(self):
+        cfg = load_config()
+        validate_config(cfg)
+        
+    def test_validate_config_missing_field(self):
+        cfg = load_config()
+        del cfg["skills"]
+        with pytest.raises(ValueError, match="Validation failed: Missing required top-level field 'skills'"):
+            validate_config(cfg)
+            
+    def test_validate_config_bad_url(self):
+        cfg = load_config()
+        cfg["personal"]["linkedin"] = "ftp://linkedin.com"
+        with pytest.raises(ValueError, match="must be a valid URL"):
+            validate_config(cfg)
+
+    def test_validate_config_not_array(self):
+        cfg = load_config()
+        cfg["experience"] = "Not an array"
+        with pytest.raises(ValueError, match="must be an array"):
+            validate_config(cfg)
