@@ -16,20 +16,12 @@ MARGIN = 0.75 * 72  # 54pt, matches the source PDF's visual margins
 
 def load_config(config_path: Path | str | None = None) -> dict:
     if config_path is None:
-        config_path = SITE_DIR / "config.js"
+        config_path = SITE_DIR / "resume.json"
     raw = Path(config_path).read_text(encoding="utf-8")
     try:
-        body = raw.split("=", 1)[1].strip()
-        body = body[:-1] if body.endswith(";") else body
-        body = re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', body)
-        body = re.sub(r",\s*([}\]])", r"\1", body)
-        return json.loads(body)
+        return json.loads(raw)
     except Exception as e:
-        raise ValueError(
-            "Failed to parse config.js. The PDF generator uses regex to parse the JS config into JSON. "
-            "Ensure config.js avoids complex JS-only syntax like template literals or trailing commas. "
-            f"Underlying error: {e}"
-        ) from e
+        raise ValueError(f"Failed to parse resume.json. Underlying error: {e}") from e
 
 def validate_config(config: dict):
     required_top = ["personal", "summary", "skills", "experience", "projects", "education"]

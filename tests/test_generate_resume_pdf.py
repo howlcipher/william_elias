@@ -18,49 +18,7 @@ class TestLoadConfig:
         assert "education" in cfg
         assert cfg["personal"]["name"] == "William Elias"
 
-    def test_load_config_custom_js(self, tmp_path: Path):
-        """Verify load_config handles unquoted keys, trailing commas, and semicolons."""
-        sample_js = """
-        const config = {
-            personal: {
-                name: "Test User",
-                email: "test@example.com",
-            },
-            summary: "A test summary with commas and text.",
-            skills: [
-                { category: "Test Category", tags: ["Python", "Pytest",] },
-            ],
-            experience: [],
-            projects: [],
-            education: [],
-        };
-        """
-        js_file = tmp_path / "config.js"
-        js_file.write_text(sample_js, encoding="utf-8")
 
-        cfg = load_config(js_file)
-        assert cfg["personal"]["name"] == "Test User"
-        assert cfg["personal"]["email"] == "test@example.com"
-        assert cfg["summary"] == "A test summary with commas and text."
-        assert cfg["skills"][0]["tags"] == ["Python", "Pytest"]
-
-    def test_load_config_no_semicolon(self, tmp_path: Path):
-        """Verify load_config parses JS objects without a trailing semicolon."""
-        sample_js = """
-        const config = {
-            personal: { name: "No Semi" },
-            summary: "Test",
-            skills: [],
-            experience: [],
-            projects: [],
-            education: []
-        }
-        """
-        js_file = tmp_path / "config.js"
-        js_file.write_text(sample_js, encoding="utf-8")
-
-        cfg = load_config(js_file)
-        assert cfg["personal"]["name"] == "No Semi"
 
 
 class TestOrphanPreventionLogic:

@@ -19,95 +19,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 4. Security
 ## 5. Data and Build Architecture
 
-### ARCH-002 — Evaluate a canonical structured resume data source (`resume.json`)
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** L
-**Risk:** Medium
-**Recommended mode:** Planning
-**Recommended model tier:** High reasoning
-**Dependencies:** None
-**Affected files:** New `resume.json` (or similar), `config.js`, `scripts/generate_resume_pdf.py`, potentially `index.html` (SEO meta tags), build tooling
-**Status:** Ready
-
-### Problem
-
-Resume content currently exists redundantly across four places that can drift independently: `config.js` (the site's source of truth), `index.html`'s hardcoded Open Graph/SEO meta tags (`index.html:6-13`, duplicating name/title/description), `preview.jpg` (a static screenshot that needs manual regeneration whenever the visual resume changes), and `William_Elias_Resume.pdf` (generated from `config.js` via a fragile regex parser — ARCH-001). There is no single canonical data source that all four derive from mechanically.
-
-### Proposed work
-
-This is a planning/design item, not an implementation item — evaluate whether introducing a canonical `resume.json` (or equivalent) is worth the added build-step complexity for a static site that currently has none. If yes, scope it as a **sequence of small, independently shippable items** rather than one large refactor, e.g.:
-- Introduce canonical resume schema (`resume.json` + a documented shape)
-- Generate `config.js` from canonical data (or eliminate `config.js` in favor of the browser loading `resume.json` directly)
-- Generate static SEO/OG meta tags from canonical data
-- Point PDF generator at canonical data directly (resolves ARCH-001)
-- Document the generated-file workflow (ties into MAINT-002)
-
-Each sub-item should be filed as its own `ARCH-###` entry once this evaluation is complete and the approach is decided, with this item's outcome being "decision made + follow-up items filed," not a full implementation.
-
-### Acceptance criteria
-
-- A documented decision (in this backlog item's Notes, or a short ADR if the project's conventions call for one) on whether to pursue the canonical-source architecture, with pros/cons considered (build-step complexity added to a currently zero-build static site vs. drift risk eliminated).
-- If pursued: follow-up items filed for each independently shippable step, each leaving the repo in a working, deployable state.
-- If deferred: rationale recorded so this doesn't get silently re-litigated.
-
-### Validation
-
-- N/A (planning item) — validation is peer/owner review of the decision and resulting item breakdown.
-
-### Notes
-
-Per the operating instructions for this backlog, do not create one large "refactor everything" item — this item exists specifically to produce that breakdown, not to do the refactor itself. Static GitHub Pages compatibility must be preserved regardless of outcome — any generation step must run at commit/CI time, not require a server at request time.
-
----
-
-### Problem
-
-Neither the browser (`script.js`) nor the PDF generator (`scripts/generate_resume_pdf.py`) validates `config.js`/parsed-config data before using it. Missing fields, malformed arrays, or invalid URL values would currently fail unpredictably — a missing `achievements` array throws inside `.map()`, a malformed `linkedin` URL renders as a broken link with no warning, etc. There's no single point that catches these before they reach either output.
-
-### Proposed work
-
-Add a lightweight validation pass (Python, run as part of or before PDF generation) that checks required fields are present, arrays are actually arrays, and URL-shaped fields look like URLs, failing with a clear, specific error message before generation proceeds. This does not need a full schema library — plain Python assertions/checks are sufficient for this project's size and language preferences (Python preferred per project conventions).
-
-### Acceptance criteria
-
-- Running the validation against the current `config.js` passes cleanly.
-- Running it against a deliberately broken copy (missing required field, non-array `achievements`, malformed URL) fails with a specific, actionable error message rather than an unrelated traceback.
-- Validation is easy to invoke as a single documented command (ties into TEST-004).
-
-### Validation
-
-- Manual: run against current config (pass) and against 2-3 deliberately broken variants (each fails with a clear message).
-
-### Notes
-
-Worth doing regardless of the ARCH-002 canonical-source decision — the validation logic is cheap and useful either way, just potentially validates a different file shape depending on that outcome.
-
----
-
-### Problem
-
-`ResumePDF.__init__` (`scripts/generate_resume_pdf.py:26-30`) never calls `set_title`/`set_author`/`set_subject`/`set_creator`. The generated PDF's document properties are whatever `fpdf2` defaults to (typically blank), so the file shows no title/author metadata in PDF viewers, browser tabs (when opened directly), or OS file previews.
-
-### Proposed work
-
-Call `pdf.set_title(...)`, `pdf.set_author(config["personal"]["name"])`, and similar metadata setters in `build()`, sourcing values from the already-loaded config.
-
-### Acceptance criteria
-
-- Generated PDF's document properties (visible via `pdf metadata`, most PDF viewers' "Document Properties," or `pdfinfo`) show a meaningful title and author.
-- No change to visible PDF page content.
-
-### Validation
-
-- Run `python3 scripts/generate_resume_pdf.py` and inspect metadata with `pdfinfo William_Elias_Resume.pdf` or equivalent.
-
-### Notes
-
-Small, isolated, good "quick win" item.
-
----
 
 ### ARCH-005 — PDF generation is not verified deterministic/current in CI
 
@@ -330,6 +241,105 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 ## 9. Completed
 
+### ARCH-006 — Introduce `resume.json` and generate `config.js`
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `resume.json`, `scripts/build_config.py`, `config.js`
+**Status:** Done (2026-08-04)
+
+### Done note
+Created `resume.json` from `config.js`, created `scripts/build_config.py`, regenerated `config.js`, and updated tests.
+
+---
+
+### ARCH-007 — Generate static SEO meta tags from `resume.json`
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** ARCH-006
+**Affected files:** `scripts/build_html.py`, `index.html`
+**Status:** Done (2026-08-04)
+
+### Done note
+Created `scripts/build_html.py` to inject SEO meta tags into `index.html` from `resume.json`.
+
+---
+
+### ARCH-008 — Point PDF generator at `resume.json`
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** ARCH-006
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-04)
+
+### Done note
+Updated `generate_resume_pdf.py` to read `resume.json` via json.loads, removed the dirty JS regex parsing, and cleaned up tests.
+
+---
+
+### ARCH-002 — Evaluate a canonical structured resume data source (`resume.json`)
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** L
+**Risk:** Medium
+**Recommended mode:** Planning
+**Recommended model tier:** High reasoning
+**Dependencies:** None
+**Affected files:** New `resume.json` (or similar), `config.js`, `scripts/generate_resume_pdf.py`, potentially `index.html` (SEO meta tags), build tooling
+**Status:** Done (2026-08-04)
+
+### Done note
+Evaluated canonical source approach. Decided to pursue it. Added ARCH-006, ARCH-007, and ARCH-008 to the backlog for implementation.
+
+### Problem
+
+Resume content currently exists redundantly across four places that can drift independently: `config.js` (the site's source of truth), `index.html`'s hardcoded Open Graph/SEO meta tags (`index.html:6-13`, duplicating name/title/description), `preview.jpg` (a static screenshot that needs manual regeneration whenever the visual resume changes), and `William_Elias_Resume.pdf` (generated from `config.js` via a fragile regex parser — ARCH-001). There is no single canonical data source that all four derive from mechanically.
+
+### Proposed work
+
+This is a planning/design item, not an implementation item — evaluate whether introducing a canonical `resume.json` (or equivalent) is worth the added build-step complexity for a static site that currently has none. If yes, scope it as a **sequence of small, independently shippable items** rather than one large refactor, e.g.:
+- Introduce canonical resume schema (`resume.json` + a documented shape)
+- Generate `config.js` from canonical data (or eliminate `config.js` in favor of the browser loading `resume.json` directly)
+- Generate static SEO/OG meta tags from canonical data
+- Point PDF generator at canonical data directly (resolves ARCH-001)
+- Document the generated-file workflow (ties into MAINT-002)
+
+Each sub-item should be filed as its own `ARCH-###` entry once this evaluation is complete and the approach is decided, with this item's outcome being "decision made + follow-up items filed," not a full implementation.
+
+### Acceptance criteria
+
+- A documented decision (in this backlog item's Notes, or a short ADR if the project's conventions call for one) on whether to pursue the canonical-source architecture, with pros/cons considered (build-step complexity added to a currently zero-build static site vs. drift risk eliminated).
+- If pursued: follow-up items filed for each independently shippable step, each leaving the repo in a working, deployable state.
+- If deferred: rationale recorded so this doesn't get silently re-litigated.
+
+### Validation
+
+- N/A (planning item) — validation is peer/owner review of the decision and resulting item breakdown.
+
+### Notes
+
+Per the operating instructions for this backlog, do not create one large "refactor everything" item — this item exists specifically to produce that breakdown, not to do the refactor itself. Static GitHub Pages compatibility must be preserved regardless of outcome — any generation step must run at commit/CI time, not require a server at request time.
+
+---
+
+---
+
 ### ARCH-004 — PDF output has no document metadata
 
 **Type:** Improvement
@@ -344,6 +354,27 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 
 ### Done note
 Added pdf.set_title, pdf.set_author, and pdf.set_creator to the FPDF initialization in scripts/generate_resume_pdf.py.
+
+### Problem
+
+`ResumePDF.__init__` (`scripts/generate_resume_pdf.py:26-30`) never calls `set_title`/`set_author`/`set_subject`/`set_creator`. The generated PDF's document properties are whatever `fpdf2` defaults to (typically blank), so the file shows no title/author metadata in PDF viewers, browser tabs (when opened directly), or OS file previews.
+
+### Proposed work
+
+Call `pdf.set_title(...)`, `pdf.set_author(config["personal"]["name"])`, and similar metadata setters in `build()`, sourcing values from the already-loaded config.
+
+### Acceptance criteria
+
+- Generated PDF's document properties (visible via `pdf metadata`, most PDF viewers' "Document Properties," or `pdfinfo`) show a meaningful title and author.
+- No change to visible PDF page content.
+
+### Validation
+
+- Run `python3 scripts/generate_resume_pdf.py` and inspect metadata with `pdfinfo William_Elias_Resume.pdf` or equivalent.
+
+### Notes
+
+Small, isolated, good "quick win" item.
 
 ---
 
@@ -361,6 +392,28 @@ Added pdf.set_title, pdf.set_author, and pdf.set_creator to the FPDF initializat
 
 ### Done note
 Implemented validate_config in scripts/generate_resume_pdf.py which checks that all required top-level fields are present, expected lists are arrays, and personal URLs have valid protocol schemas. Added corresponding tests.
+
+### Problem
+
+Neither the browser (`script.js`) nor the PDF generator (`scripts/generate_resume_pdf.py`) validates `config.js`/parsed-config data before using it. Missing fields, malformed arrays, or invalid URL values would currently fail unpredictably — a missing `achievements` array throws inside `.map()`, a malformed `linkedin` URL renders as a broken link with no warning, etc. There's no single point that catches these before they reach either output.
+
+### Proposed work
+
+Add a lightweight validation pass (Python, run as part of or before PDF generation) that checks required fields are present, arrays are actually arrays, and URL-shaped fields look like URLs, failing with a clear, specific error message before generation proceeds. This does not need a full schema library — plain Python assertions/checks are sufficient for this project's size and language preferences (Python preferred per project conventions).
+
+### Acceptance criteria
+
+- Running the validation against the current `config.js` passes cleanly.
+- Running it against a deliberately broken copy (missing required field, non-array `achievements`, malformed URL) fails with a specific, actionable error message rather than an unrelated traceback.
+- Validation is easy to invoke as a single documented command (ties into TEST-004).
+
+### Validation
+
+- Manual: run against current config (pass) and against 2-3 deliberately broken variants (each fails with a clear message).
+
+### Notes
+
+Worth doing regardless of the ARCH-002 canonical-source decision — the validation logic is cheap and useful either way, just potentially validates a different file shape depending on that outcome.
 
 ---
 
