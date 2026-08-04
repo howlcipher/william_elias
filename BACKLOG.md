@@ -20,42 +20,6 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 4. Security
 ## 5. Data and Build Architecture
 
-### ARCH-001 — PDF generator parses `config.js` with regex instead of a real data source
-
-**Type:** Improvement
-**Priority:** Medium
-**Effort:** M
-**Risk:** Medium
-**Recommended mode:** Coding
-**Recommended model tier:** High reasoning
-**Dependencies:** None (but see ARCH-002, which would obsolete this approach)
-**Affected files:** `scripts/generate_resume_pdf.py`
-**Status:** Ready
-
-### Problem
-
-`load_config()` (`scripts/generate_resume_pdf.py:17-23`) parses the JS module by string-splitting on `=`, stripping a trailing `;`, and using two regexes to coerce unquoted object keys and trailing commas into valid JSON before `json.loads`. This works today because `config.js`'s object literal happens to stay close to JSON syntax, but it's fragile: any future use of JS-only syntax in `config.js` (template literals, comments, single-quoted strings, computed properties, trailing function calls) will silently break or misparse the PDF generator with no clear error message pointing at the cause.
-
-### Proposed work
-
-This is directly superseded by introducing a canonical structured data source (ARCH-002/ARCH-003) — if that work proceeds, this item's proper resolution is "PDF generator reads `resume.json` directly," which is trivial once that source exists. If the canonical-source work is deferred, harden the current regex parser with clearer error handling (fail loudly with a specific message when `json.loads` fails, rather than an opaque `JSONDecodeError`) as a stopgap.
-
-### Acceptance criteria
-
-- Either: PDF generator reads from a canonical JSON/structured source with no regex-based JS parsing (preferred, depends on ARCH-002/003), or: parse failures produce a clear, actionable error message identifying the likely cause.
-- Existing PDF output is unchanged for the current `config.js` content.
-
-### Validation
-
-- Manual: run `python3 scripts/generate_resume_pdf.py`, confirm output PDF matches current tracked `William_Elias_Resume.pdf` content.
-- Manual: intentionally introduce a JS-only construct (e.g. a template literal) into a scratch copy of `config.js` and confirm the parser either handles it or fails with a clear message rather than a cryptic traceback.
-
-### Notes
-
-Don't implement this independently of the ARCH-002/003 decision — check whether the canonical-source work is planned before investing effort in hardening the regex approach, since it may be thrown away.
-
----
-
 ### ARCH-002 — Evaluate a canonical structured resume data source (`resume.json`)
 
 **Type:** Improvement
@@ -392,6 +356,45 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### ARCH-001 — PDF generator parses `config.js` with regex instead of a real data source
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** High reasoning
+**Dependencies:** None (but see ARCH-002, which would obsolete this approach)
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-04)
+
+### Done note
+Implemented the stopgap fix: wrapped `json.loads` in a `try...except` block in `load_config()` to fail loudly with a clear, specific error message explaining the regex parsing failure and its likely cause (complex JS-only syntax).
+
+### Problem
+
+`load_config()` (`scripts/generate_resume_pdf.py:17-23`) parses the JS module by string-splitting on `=`, stripping a trailing `;`, and using two regexes to coerce unquoted object keys and trailing commas into valid JSON before `json.loads`. This works today because `config.js`'s object literal happens to stay close to JSON syntax, but it's fragile: any future use of JS-only syntax in `config.js` (template literals, comments, single-quoted strings, computed properties, trailing function calls) will silently break or misparse the PDF generator with no clear error message pointing at the cause.
+
+### Proposed work
+
+This is directly superseded by introducing a canonical structured data source (ARCH-002/ARCH-003) — if that work proceeds, this item's proper resolution is "PDF generator reads `resume.json` directly," which is trivial once that source exists. If the canonical-source work is deferred, harden the current regex parser with clearer error handling (fail loudly with a specific message when `json.loads` fails, rather than an opaque `JSONDecodeError`) as a stopgap.
+
+### Acceptance criteria
+
+- Either: PDF generator reads from a canonical JSON/structured source with no regex-based JS parsing (preferred, depends on ARCH-002/003), or: parse failures produce a clear, actionable error message identifying the likely cause.
+- Existing PDF output is unchanged for the current `config.js` content.
+
+### Validation
+
+- Manual: run `python3 scripts/generate_resume_pdf.py`, confirm output PDF matches current tracked `William_Elias_Resume.pdf` content.
+- Manual: intentionally introduce a JS-only construct (e.g. a template literal) into a scratch copy of `config.js` and confirm the parser either handles it or fails with a clear message rather than a cryptic traceback.
+
+### Notes
+
+Don't implement this independently of the ARCH-002/003 decision — check whether the canonical-source work is planned before investing effort in hardening the regex approach, since it may be thrown away.
+
+---
 
 ### TEST-002 — No automated tests for the PDF generator
 

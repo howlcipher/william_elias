@@ -18,11 +18,18 @@ def load_config(config_path: Path | str | None = None) -> dict:
     if config_path is None:
         config_path = SITE_DIR / "config.js"
     raw = Path(config_path).read_text(encoding="utf-8")
-    body = raw.split("=", 1)[1].strip()
-    body = body[:-1] if body.endswith(";") else body
-    body = re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', body)
-    body = re.sub(r",\s*([}\]])", r"\1", body)
-    return json.loads(body)
+    try:
+        body = raw.split("=", 1)[1].strip()
+        body = body[:-1] if body.endswith(";") else body
+        body = re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', body)
+        body = re.sub(r",\s*([}\]])", r"\1", body)
+        return json.loads(body)
+    except Exception as e:
+        raise ValueError(
+            "Failed to parse config.js. The PDF generator uses regex to parse the JS config into JSON. "
+            "Ensure config.js avoids complex JS-only syntax like template literals or trailing commas. "
+            f"Underlying error: {e}"
+        ) from e
 
 
 class ResumePDF(FPDF):
