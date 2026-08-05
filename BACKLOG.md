@@ -35,31 +35,39 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 **Recommended mode:** Coding
 **Recommended model tier:** Standard
 **Dependencies:** None
-**Affected files:** `config.js`, `script.js`, `style.css`
-**Status:** Blocked — needs owner-supplied URLs before the feature has any visible effect
+**Affected files:** `config.js`, `script.js`, `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-05)
 
-### Problem
-
-`config.projects` (`config.js:120-142`) has no field for a project link (repo/demo URL), and `script.js`'s project-card renderer (`script.js:56-70`) has nowhere to put one even if the data existed. Per repository constraints, no URLs should be invented — this is purely a capability to add, not something to populate without owner-supplied links.
-
-### Proposed work
-
-Add an optional `link` (or `repoUrl`/`demoUrl`) field to the project schema in `config.js`/rendering in `script.js`, rendered only when present (mirroring the existing pattern for optional hero contact links, `script.js:11-16`). Leave both current projects' `link` field absent/unset until the owner supplies real URLs.
-
-### Acceptance criteria
-
-- Project cards render an optional link when `link` is present in config, and render identically to today when absent.
-- No invented or placeholder URL is added to `config.js` as part of this change.
-
-### Validation
-
-- Manual: add a test `link` value locally, confirm it renders correctly; confirm removing it reverts to current appearance exactly.
-
-### Notes
-
-Blocked in the sense that it's low-value until real project URLs exist to populate it — but the code capability itself can ship anytime. Consider filing as Ready if the intent is to ship the capability now and populate later.
+### Done note
+Added optional `link` rendering to project cards in `script.js` (rendered using `getValidUrl` as a `.contact-pill`), and added schema validation for `proj.link` (if present) in `scripts/generate_resume_pdf.py`. No invented URLs were added; the fields are omitted when not supplied.
 
 ---
+
+### ENH-004 — SEO meta tag generation lacks proper HTML attribute escaping
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/build_html.py`
+**Status:** Done (2026-08-05)
+
+### Done note
+Replaced ad-hoc string formatting in `build_html.py` with `html.escape(..., quote=True)` to properly escape double quotes and angle brackets in SEO meta tag `content` attributes.
+`build_html.py` replaces `<meta>` tag contents by directly inserting values like `page_title` and `tagline` into `content="..."` attributes using f-strings. It replaces `&` with `&amp;` for `page_title`, but doesn't properly escape double quotes (`"`) or angle brackets (`<`, `>`). If the owner's `name`, `title`, or `tagline` in `resume.json` ever contains double quotes, it will prematurely terminate the `content` attribute and break the HTML structure.
+
+### Proposed work
+Use a standard HTML escaping function (like `html.escape(..., quote=True)` from Python's standard library) when interpolating strings into `index.html` attributes in `build_html.py`, replacing the ad-hoc `.replace('&', '&amp;')`.
+
+### Acceptance criteria
+- Generated meta tag content attributes are properly HTML-escaped.
+- Double quotes in `resume.json` strings do not break `index.html` syntax.
+
+### Validation
+- Manual: Add a double quote to `tagline` in `resume.json`, run `python scripts/build_html.py`, and inspect `index.html` to ensure it is escaped as `&quot;`.
 
 ### ENH-002 — Consider stronger project evidence (screenshots, demos, case studies)
 

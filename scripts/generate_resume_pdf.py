@@ -47,7 +47,10 @@ def validate_config(config: dict):
     for i, proj in enumerate(config.get("projects", [])):
         if not isinstance(proj.get("highlights"), list):
             raise ValueError(f"Validation failed: 'projects[{i}].highlights' must be an array")
-
+        if "link" in proj:
+            val = proj["link"]
+            if not (val.startswith("http://") or val.startswith("https://")):
+                raise ValueError(f"Validation failed: 'projects[{i}].link' must be a valid URL starting with http:// or https://")
 
 class ResumePDF(FPDF):
     def __init__(self):

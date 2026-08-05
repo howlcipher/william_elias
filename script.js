@@ -253,6 +253,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(sub);
                 card.appendChild(ul);
                 card.appendChild(tagsDiv);
+
+                const projLink = getValidUrl(proj.link);
+                if (projLink) {
+                    const linkWrapper = document.createElement('div');
+                    linkWrapper.style.marginTop = '1rem';
+                    const linkEl = document.createElement('a');
+                    linkEl.href = projLink;
+                    linkEl.target = '_blank';
+                    linkEl.rel = 'noopener noreferrer';
+                    linkEl.className = 'contact-pill project-link';
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-external-link-alt';
+                    icon.setAttribute('aria-hidden', 'true');
+                    linkEl.appendChild(icon);
+                    linkEl.appendChild(document.createTextNode(' View Project'));
+                    linkWrapper.appendChild(linkEl);
+                    card.appendChild(linkWrapper);
+                }
+
                 projectsTarget.appendChild(card);
             });
         }
