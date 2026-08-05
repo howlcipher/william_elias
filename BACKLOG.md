@@ -26,6 +26,36 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 8. Portfolio Enhancements
 
+### ENH-005 — Render project links in PDF generator
+
+**Type:** Enhancement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-05)
+
+### Done note
+Updated `scripts/generate_resume_pdf.py` to check for `link` on projects and render it in blue with an underline if present, increasing the block height calculation accordingly.
+
+### Problem
+ENH-001 added schema validation for `proj.link` to `generate_resume_pdf.py` and rendered it in HTML, but omitted rendering the actual link into the generated PDF. As a result, the PDF output for projects with links lacks URLs that might be useful for recruiters reviewing the PDF version of the resume.
+
+### Proposed work
+Update `scripts/generate_resume_pdf.py` to optionally append the `link` URL to the project subtitle or render it as a clickable link in the PDF if `link` is present in the project data.
+
+### Acceptance criteria
+- Projects with a `link` in `resume.json` display the link in the generated PDF.
+- The link is clickable (if FPDF supports it) or at least visible.
+- Projects without a `link` remain unchanged.
+
+### Validation
+- Run `python scripts/generate_resume_pdf.py` and manually verify `William_Elias_Resume.pdf` project entries.
+
+
 ### ENH-001 — Support optional per-project links without inventing URLs
 
 **Type:** Enhancement

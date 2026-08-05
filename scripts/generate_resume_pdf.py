@@ -140,11 +140,20 @@ def build(config: dict, out_path: Path):
     pdf.section_title("Projects")
     for proj in config["projects"]:
         block_h = 14 + 13 + sum(pdf.bullet_height(h) for h in proj["highlights"]) + 2
+        if proj.get("link"):
+            block_h += 13
         pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(0, 14, proj["name"], new_x="LMARGIN", new_y="NEXT")
         pdf.set_font("Helvetica", "I", 9.5)
         pdf.cell(0, 13, proj["subtitle"], new_x="LMARGIN", new_y="NEXT")
+        if proj.get("link"):
+            pdf.set_font("Helvetica", "U", 9.5)
+            pdf.set_text_color(0, 0, 255)
+            # Render the link as clickable (if FPDF supports it directly, else just text)
+            # FPDF2 supports link attribute in cell
+            pdf.cell(0, 13, proj["link"], new_x="LMARGIN", new_y="NEXT", link=proj["link"])
+            pdf.set_text_color(0, 0, 0)
         for h in proj["highlights"]:
             pdf.bullet(h)
         pdf.ln(2)
