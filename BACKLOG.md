@@ -128,6 +128,8 @@ Use a standard HTML escaping function (like `html.escape(..., quote=True)` from 
 ### Validation
 - Manual: Add a double quote to `tagline` in `resume.json`, run `python scripts/build_html.py`, and inspect `index.html` to ensure it is escaped as `&quot;`.
 
+## 9. Completed
+
 ### ENH-002 — Consider stronger project evidence (screenshots, demos, case studies)
 
 **Type:** Enhancement
@@ -138,31 +140,27 @@ Use a standard HTML escaping function (like `html.escape(..., quote=True)` from 
 **Recommended model tier:** Standard
 **Dependencies:** ENH-001 (if links are part of the evidence)
 **Affected files:** `config.js`, `index.html`, `style.css`, new asset files
-**Status:** Blocked — needs owner input on what evidence exists/should be created (screenshots, demo recordings, written case studies)
+**Status:** Closed (2026-08-05)
+
+### Closed note
+Owner decided to hold off; prefers to keep the site as a simple resume without deep-dive case studies or extra evidence material.
 
 ### Problem
-
 The Projects section (`config.js:120-142`) currently shows only text highlights and tags — no visual evidence (screenshots, architecture diagrams) or deeper case-study content for either project.
 
 ### Proposed work
-
 This is a planning/scoping item pending owner direction on what supporting material exists or should be created. Once scoped, break into independently shippable sub-items (e.g., "add screenshot to AI Knowledge Library card," "add architecture diagram," "add expandable case-study detail") rather than one large content overhaul.
 
 ### Acceptance criteria
-
 - N/A until scoped — this item's completion criterion is "owner direction gathered and follow-up items filed," matching the same pattern as ARCH-002.
 
 ### Validation
-
 - N/A (planning item).
 
 ### Notes
-
 Explicitly kept separate from bug fixes per operating instructions. Do not invent screenshots, metrics, or claims — this depends entirely on real material the owner provides.
 
 ---
-
-## 9. Completed
 
 ### REL-007 — Colorblind toggle reads theme from `localStorage` instead of live DOM state
 
