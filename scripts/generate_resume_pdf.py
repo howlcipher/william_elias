@@ -49,7 +49,7 @@ def validate_config(config: dict):
             raise ValueError(f"Validation failed: 'projects[{i}].highlights' must be an array")
         if "link" in proj:
             val = proj["link"]
-            if not (val.startswith("http://") or val.startswith("https://")):
+            if val and not (val.startswith("http://") or val.startswith("https://")):
                 raise ValueError(f"Validation failed: 'projects[{i}].link' must be a valid URL starting with http:// or https://")
 
 class ResumePDF(FPDF):

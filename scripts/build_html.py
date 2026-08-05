@@ -25,28 +25,28 @@ def build_html():
     # Update <title>
     html_content = re.sub(
         r'<title>.*?</title>',
-        f'<title>{page_title}</title>',
+        lambda m: f'<title>{page_title}</title>',
         html_content
     )
     
     # Update <meta name="description">
     html_content = re.sub(
-        r'<meta name="description" content="[^"]*">',
-        f'<meta name="description" content="{escaped_desc}">',
+        r'<meta name="description" content=".*?">',
+        lambda m: f'<meta name="description" content="{escaped_desc}">',
         html_content
     )
     
     # Update <meta property="og:title">
     html_content = re.sub(
-        r'<meta property="og:title" content="[^"]*">',
-        f'<meta property="og:title" content="{page_title}">',
+        r'<meta property="og:title" content=".*?">',
+        lambda m: f'<meta property="og:title" content="{page_title}">',
         html_content
     )
     
     # Update <meta property="og:description">
     html_content = re.sub(
-        r'<meta property="og:description" content="[^"]*">',
-        f'<meta property="og:description" content="{escaped_og_desc}">',
+        r'<meta property="og:description" content=".*?">',
+        lambda m: f'<meta property="og:description" content="{escaped_og_desc}">',
         html_content
     )
 
