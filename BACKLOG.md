@@ -26,6 +26,35 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 8. Portfolio Enhancements
 
+### ENH-006 — Pre-render static HTML body content for SEO
+
+**Type:** Enhancement
+**Priority:** Medium
+**Effort:** M
+**Risk:** Medium
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `scripts/build_html.py`, `script.js`, `index.html`
+**Status:** Pending
+
+### Problem
+Currently, `index.html` contains empty placeholder tags for its main content (e.g. `<div id="experience-target"></div>`) and relies entirely on `script.js` to render the content client-side from `config.js`. This harms search engine optimization (SEO) because crawlers that don't execute JavaScript will see an empty body, leaving them without context about the portfolio.
+
+### Proposed work
+Update `scripts/build_html.py` to pre-render the content sections by parsing `resume.json` and injecting the generated HTML directly into `index.html` during the build process, mimicking what `script.js` currently does. `script.js` will then only need to handle interactivity, theme toggling, and hydration, instead of generating the DOM from scratch.
+
+### Acceptance criteria
+- `index.html` contains the full portfolio content in plain HTML upon generation.
+- Search crawlers reading `index.html` without JS execution can see the resume data.
+- Interactive elements (like theme toggles) still function correctly on the client side.
+
+### Validation
+- Run `python scripts/build_html.py` and inspect `index.html` to confirm elements are populated.
+- Turn off JavaScript in the browser and verify the portfolio content is still visible.
+
+---
+
 ### ENH-005 — Render project links in PDF generator
 
 **Type:** Enhancement
