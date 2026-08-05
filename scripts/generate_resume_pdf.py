@@ -91,8 +91,12 @@ def build(config: dict, out_path: Path):
     pdf.set_title(f'{p["name"]} - Resume')
     pdf.set_author(p["name"])
     pdf.set_creator("generate_resume_pdf.py")
-    # Make generation deterministic for CI byte-for-byte checks
+    # Make generation deterministic for CI byte-for-byte checks.
+    # Stream compression is also disabled: fpdf2 compresses via zlib, and different
+    # zlib builds (e.g. zlib-ng vs stock zlib) produce different compressed bytes for
+    # identical content, which broke byte-for-byte comparison across environments.
     pdf.set_creation_date(datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc))
+    pdf.compress = False
     pdf.add_page()
 
     pdf.set_font("Helvetica", "B", 18)
