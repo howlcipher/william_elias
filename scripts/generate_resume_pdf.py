@@ -92,7 +92,7 @@ def build(config: dict, out_path: Path):
     pdf.set_author(p["name"])
     pdf.set_creator("generate_resume_pdf.py")
     # Make generation deterministic for CI byte-for-byte checks
-    pdf.set_creation_date(datetime.datetime(2024, 1, 1))
+    pdf.set_creation_date(datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc))
     pdf.add_page()
 
     pdf.set_font("Helvetica", "B", 18)
