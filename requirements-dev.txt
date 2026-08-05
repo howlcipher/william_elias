@@ -1,5 +1,5 @@
 pytest
 playwright
 pytest-playwright
-fpdf2
-pypdf
+fpdf2==2.8.7
+pypdf==6.14.2
