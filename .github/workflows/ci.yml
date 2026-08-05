@@ -32,4 +32,13 @@ jobs:
         python scripts/build_config.py
         python scripts/build_html.py
         python scripts/generate_resume_pdf.py
-        git diff --exit-code config.js index.html William_Elias_Resume.pdf
+        git diff > diff.patch
+        if [ -s diff.patch ]; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b ci-diff-${GITHUB_SHA}
+          git add diff.patch
+          git commit -m "CI diff"
+          git push origin ci-diff-${GITHUB_SHA}
+          exit 1
+        fi
