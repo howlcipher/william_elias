@@ -473,17 +473,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentlyColorblind = document.documentElement.getAttribute('data-theme') === 'colorblind';
             
             if (currentlyColorblind) {
-                const savedTheme = safeStorageGet('theme') || 'dark';
-                if (savedTheme === 'light') {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                } else {
+                // Derive light/dark from the live DOM state set when colorblind mode was
+                // entered, not localStorage: the 'theme' key is only written on an explicit
+                // theme-toggle click, so it's absent for an OS-auto-detected preference.
+                const wasDark = document.documentElement.classList.contains('dark-mode-colorblind');
+                if (wasDark) {
                     document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
                 }
                 document.documentElement.classList.remove('dark-mode-colorblind');
                 safeStorageSet('colorblind', 'false');
                 colorblindToggleBtn.classList.remove('active');
                 colorblindToggleBtn.setAttribute('aria-pressed', 'false');
-                updateThemeIcon(savedTheme);
+                updateThemeIcon(wasDark ? 'dark' : 'light');
             } else {
                 enableColorblindMode();
             }
@@ -491,9 +494,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enableColorblindMode() {
+        // Read the current theme before overwriting data-theme to 'colorblind', and from the
+        // live attribute (not localStorage) so an OS-auto-detected preference that was never
+        // explicitly saved is still respected.
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
         document.documentElement.setAttribute('data-theme', 'colorblind');
-        
-        const isDark = safeStorageGet('theme') !== 'light';
+
         if (isDark) {
             document.documentElement.classList.add('dark-mode-colorblind');
         } else {

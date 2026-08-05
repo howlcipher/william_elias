@@ -10,6 +10,12 @@
     --blue-deep: #67aedd;
     --red: #ef4444;
     --red-deep: #991b1b;
+    /* Fixed, theme-independent solid-button backgrounds for white text (skip-link,
+       icon-btn/contact-pill hover, logo, primary-action). --blue/--red are tuned to
+       read as text/border color against each theme's own background, not as a
+       background under white text, so they can't double as both (see A11Y-006). */
+    --blue-solid: #0b5c9e;
+    --red-solid: #a13000;
     --shadow: 8px 8px 0 rgba(4, 8, 15, 0.48);
 }
 
@@ -72,13 +78,13 @@ body {
 h1, h2, h3, h4, .logo { font-family: "Space Grotesk", sans-serif; color: var(--ink); line-height: 1.08; }
 a { color: inherit; }
 
-.skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 200; padding: .6rem 1rem; background: var(--blue); color: #fff; font-weight: 700; text-decoration: none; }
+.skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 200; padding: .6rem 1rem; background: var(--blue-solid); color: #fff; font-weight: 700; text-decoration: none; }
 .skip-link:focus { top: 0; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 
 .navbar { position: fixed; top: 0; width: 100%; z-index: 100; background: var(--nav); border-bottom: 2px solid var(--line); backdrop-filter: blur(10px); }
 .nav-content { max-width: 1200px; min-height: 72px; padding: .75rem 2rem; margin: auto; display: flex; align-items: center; justify-content: space-between; }
-.logo { display: flex; align-items: center; width: 42px; height: 42px; color: #fff; background: var(--red); border: 3px solid var(--blue); box-shadow: 3px 3px 0 var(--blue-deep); justify-content: center; font-size: .93rem; font-weight: 700; letter-spacing: -.08em; }
+.logo { display: flex; align-items: center; width: 42px; height: 42px; color: #fff; background: var(--red-solid); border: 3px solid var(--blue); box-shadow: 3px 3px 0 var(--blue-deep); justify-content: center; font-size: .93rem; font-weight: 700; letter-spacing: -.08em; }
 .nav-right, .theme-controls, .nav-links { display: flex; align-items: center; }
 .nav-right { gap: 1.25rem; }
 .nav-links { gap: 1rem; list-style: none; }
@@ -86,7 +92,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
 .nav-links a:hover { color: var(--blue); }
 .theme-controls { gap: .25rem; }
 .icon-btn, .mobile-menu-btn { display: grid; place-items: center; width: 34px; height: 34px; color: var(--ink); background: transparent; border: 1px solid var(--line); cursor: pointer; }
-.icon-btn:hover, .icon-btn.active { color: #fff; background: var(--blue-deep); border-color: var(--blue); }
+.icon-btn:hover, .icon-btn.active { color: #fff; background: var(--blue-solid); border-color: var(--blue); }
 .mobile-menu-btn { display: none; font-size: 1.1rem; }
 .mobile-nav { position: fixed; top: 72px; left: 0; right: 0; z-index: 99; display: none; background: var(--panel); border-bottom: 2px solid var(--line); }
 .mobile-nav.active { display: block; }
@@ -107,8 +113,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
 @keyframes terminal-caret { 50% { border-color: transparent; } }
 .contact-info { display: flex; flex-wrap: wrap; gap: .65rem; }
 .contact-pill { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .75rem; color: var(--ink); border: 1px solid var(--line); background: var(--paper); font-size: .75rem; font-weight: 600; text-decoration: none; transition: transform .15s ease, background .15s ease; }
-.contact-pill:hover { color: #fff; background: var(--blue-deep); border-color: var(--blue); transform: translate(-2px, -2px); }
-.primary-action { color: #fff; background: var(--red-deep); border-color: var(--red); }
+.contact-pill:hover { color: #fff; background: var(--blue-solid); border-color: var(--blue); transform: translate(-2px, -2px); }
+.primary-action { color: #fff; background: var(--red-solid); border-color: var(--red); }
 .profile-photo { width: 175px; aspect-ratio: 1; object-fit: cover; border: 5px solid var(--blue); outline: 5px solid var(--red); outline-offset: -12px; image-rendering: auto; }
 
 .section { padding: 4.25rem 0 0; scroll-margin-top: 90px; }

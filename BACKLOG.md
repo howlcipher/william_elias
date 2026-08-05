@@ -14,89 +14,7 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 2. Reliability
 
-### REL-007 — Colorblind toggle reads theme from `localStorage` instead of live DOM state
-
-**Type:** Bug
-**Priority:** Medium
-**Effort:** XS
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Lightweight
-**Dependencies:** None
-**Affected files:** `script.js`
-**Status:** Open (filed 2026-08-05)
-
-### Problem
-
-`enableColorblindMode()` and the colorblind-off branch of the toggle handler (`script.js:476,496`) both derive light/dark state from `safeStorageGet('theme')`, but that `localStorage` key is only ever written when a user *manually* clicks the theme toggle (`script.js:461-464`). On first load, if the OS reports a light preference, `data-theme="light"` is set directly on `<html>` via `matchMedia` (`script.js:432-434`) without ever writing to `localStorage`. A first-time visitor with an OS light preference who has never touched the theme toggle will therefore have `safeStorageGet('theme')` return `null`, and `null !== 'light'` evaluates to `true` — so clicking the colorblind toggle sends them into **dark** colorblind mode (`enableColorblindMode`, `script.js:493-509`), contradicting the light theme currently on screen. The same stale-read pattern affects turning colorblind mode back off (`script.js:476`, defaults to `'dark'` if nothing was ever explicitly stored).
-
-### Proposed work
-
-Read the *live* theme state instead of `localStorage` at both call sites — e.g. check `document.documentElement.getAttribute('data-theme') === 'light'` (or track an in-memory "effective theme" variable kept in sync at every transition) rather than `safeStorageGet('theme')`, since the DOM attribute is always correct at the point these functions run (set either from a stored preference or the OS `matchMedia` check during init).
-
-### Acceptance criteria
-
-- A fresh visitor (no `localStorage` entries) whose OS reports `prefers-color-scheme: light`, who has never clicked the theme toggle, entering colorblind mode lands in **light** colorblind mode, not dark.
-- Turning colorblind mode back off in that same scenario returns to **light**, not dark.
-- No regression to the existing (already-correct) behavior when a theme preference *has* been explicitly stored.
-
-### Validation
-
-- Manual: stub `window.matchMedia` to report `prefers-color-scheme: light`, clear `localStorage`, load the page, click the colorblind toggle, confirm `data-theme="colorblind"` is set **without** the `dark-mode-colorblind` class.
-- Automated: candidate for `tests/test_browser.py` alongside the existing storage/theme coverage.
-
-### Notes
-
-Found during a general review following the 2026-08-05 CI fixes, not part of a full backlog audit — other sections weren't re-swept.
-
----
-
 ## 3. Accessibility
-
-### A11Y-006 — White text on `--blue`/`--red` backgrounds fails WCAG AA in the default theme and dark colorblind mode
-
-**Type:** Bug
-**Priority:** High
-**Effort:** S
-**Risk:** Low
-**Recommended mode:** Coding
-**Recommended model tier:** Standard
-**Dependencies:** None (regression of the issue A11Y-005 previously fixed)
-**Affected files:** `style.css`
-**Status:** Open (filed 2026-08-05)
-
-### Problem
-
-`--blue`/`--red`/`--blue-deep`/`--red-deep` are each used for two conflicting roles: as light, high-contrast **text/border** colors against the dark backgrounds, and as **backgrounds under white text** at `.skip-link`, `.icon-btn:hover`, `.contact-pill:hover` (`--blue`/`--blue-deep`), `.logo` (`--red`), and `.primary-action` (`--red-deep`). This is exactly the conflict **A11Y-005** (2026-08-01) fixed by splitting `--primary` into a background-safe and a text-safe variant — that split no longer exists in the current `style.css` (no `--primary`/`--primary-text`/`--accent` variables remain at all), so the failure is back. Measured directly (WCAG relative-luminance contrast, not visual inspection):
-
-- **Default (dark) theme** — the theme most visitors see:
-  - `.skip-link` (white on `--blue`): **1.60:1** (needs 4.5:1). This is the keyboard-only "skip to content" link, visible exactly when a keyboard/screen-reader user tabs onto the page — the highest-stakes place for this to fail.
-  - `.icon-btn:hover` / `.contact-pill:hover` (white on `--blue-deep`): **2.42:1**
-  - `.logo` badge (white on `--red`): **3.76:1** (fails the 4.5:1 normal-text threshold; the badge text is ~14.9px bold, just under the 18.66px-bold "large text" cutoff that would allow 3:1)
-- **Dark colorblind mode** (`[data-theme="colorblind"].dark-mode-colorblind`) — the mode specifically built for low-vision/colorblind users:
-  - Same four pairs: **2.43:1**, **3.33:1**, **1.83:1** (`.logo`), and `.primary-action` (white on `--red-deep`): **2.61:1**
-- Light theme and light colorblind mode are unaffected (all pairs pass, 6.47:1–13.73:1).
-
-### Proposed work
-
-Reintroduce a role split like A11Y-005's, scoped to whichever themes actually fail: keep `--blue`/`--red` for their background-under-white-text usage sites, and either darken those specific theme overrides for the default and dark-colorblind themes, or add dedicated background-safe variables and repoint the 5 failing selectors, verifying every other `var(--blue)`/`var(--red)` call site isn't also a background-under-white-text pairing before changing shared values (A11Y-005's Done note describes exactly this class of mistake to avoid).
-
-### Acceptance criteria
-
-- `.skip-link`, `.icon-btn:hover`, `.contact-pill:hover`, `.logo`, and `.primary-action` meet 4.5:1 (normal text) or 3:1 (confirmed large text) against their actual background in both the default dark theme and dark colorblind mode.
-- Light theme and light colorblind mode are unchanged (already passing).
-- Contrast re-verified with computed ratios, not visual inspection alone.
-
-### Validation
-
-- Automated: recompute WCAG contrast ratios for the new values against the backgrounds above and confirm all pass their applicable threshold (same method used to find this issue).
-- Manual: keyboard-Tab to reveal `.skip-link` in both the default and dark-colorblind themes, confirm the text is legible.
-
-### Notes
-
-Found during a general review following the 2026-08-05 CI fixes, not part of a full backlog audit — other sections weren't re-swept. Worth checking, at implementation time, whether a later theme rewrite (variables renamed from `--primary`/`--accent` to `--blue`/`--red`) is what dropped A11Y-005's fix, so the same regression doesn't recur a third time.
-
----
 
 ## 4. Security
 ## 5. Data and Build Architecture
@@ -186,6 +104,94 @@ Explicitly kept separate from bug fixes per operating instructions. Do not inven
 ---
 
 ## 9. Completed
+
+### REL-007 — Colorblind toggle reads theme from `localStorage` instead of live DOM state
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `script.js`
+**Status:** Done (2026-08-05)
+
+### Done note
+Fixed both call sites to read live DOM state instead of `localStorage`. `enableColorblindMode()` (`script.js:496-501`) now captures `isDark` from `document.documentElement.getAttribute('data-theme') !== 'light'` *before* overwriting `data-theme` to `'colorblind'`. The toggle-off branch (`script.js:475-489`) now derives `wasDark` from `classList.contains('dark-mode-colorblind')` instead of `safeStorageGet('theme') || 'dark'`. Verified with a real headless-browser run (Playwright, `color_scheme: "light"`, cleared `localStorage`): clicking the colorblind toggle from an OS-auto-detected light theme now correctly enters light colorblind mode (`dark-mode-colorblind` absent), and toggling off returns to `data-theme="light"` — both previously landed on dark. Full existing suite (16 tests) still passes.
+
+### Problem
+
+`enableColorblindMode()` and the colorblind-off branch of the toggle handler (`script.js:476,496`) both derive light/dark state from `safeStorageGet('theme')`, but that `localStorage` key is only ever written when a user *manually* clicks the theme toggle (`script.js:461-464`). On first load, if the OS reports a light preference, `data-theme="light"` is set directly on `<html>` via `matchMedia` (`script.js:432-434`) without ever writing to `localStorage`. A first-time visitor with an OS light preference who has never touched the theme toggle will therefore have `safeStorageGet('theme')` return `null`, and `null !== 'light'` evaluates to `true` — so clicking the colorblind toggle sends them into **dark** colorblind mode (`enableColorblindMode`, `script.js:493-509`), contradicting the light theme currently on screen. The same stale-read pattern affects turning colorblind mode back off (`script.js:476`, defaults to `'dark'` if nothing was ever explicitly stored).
+
+### Proposed work
+
+Read the *live* theme state instead of `localStorage` at both call sites — e.g. check `document.documentElement.getAttribute('data-theme') === 'light'` (or track an in-memory "effective theme" variable kept in sync at every transition) rather than `safeStorageGet('theme')`, since the DOM attribute is always correct at the point these functions run (set either from a stored preference or the OS `matchMedia` check during init).
+
+### Acceptance criteria
+
+- A fresh visitor (no `localStorage` entries) whose OS reports `prefers-color-scheme: light`, who has never clicked the theme toggle, entering colorblind mode lands in **light** colorblind mode, not dark.
+- Turning colorblind mode back off in that same scenario returns to **light**, not dark.
+- No regression to the existing (already-correct) behavior when a theme preference *has* been explicitly stored.
+
+### Validation
+
+- Manual: stub `window.matchMedia` to report `prefers-color-scheme: light`, clear `localStorage`, load the page, click the colorblind toggle, confirm `data-theme="colorblind"` is set **without** the `dark-mode-colorblind` class.
+- Automated: candidate for `tests/test_browser.py` alongside the existing storage/theme coverage.
+
+### Notes
+
+Found during a general review following the 2026-08-05 CI fixes, not part of a full backlog audit — other sections weren't re-swept.
+
+---
+
+### A11Y-006 — White text on `--blue`/`--red` backgrounds fails WCAG AA in the default theme and dark colorblind mode
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None (regression of the issue A11Y-005 previously fixed)
+**Affected files:** `style.css`
+**Status:** Done (2026-08-05)
+
+### Done note
+Unlike A11Y-005's fix (a text-role split, since that conflict was one variable serving both a text color and a background role, and the *surrounding page background* mattered), this conflict is a **solid button background** under white text — contrast there depends only on the button's own background color, not the surrounding theme, so a single fixed pair works across every theme with no per-theme override needed. Added `--blue-solid: #0b5c9e` and `--red-solid: #a13000` at `:root` (`style.css:9-14`) and repointed exactly the 5 conflicting `background` declarations to them — `.skip-link`, `.icon-btn:hover`/`.icon-btn.active`, `.contact-pill:hover` → `--blue-solid`; `.logo`, `.primary-action` → `--red-solid` — leaving their `border-color`/`box-shadow` properties and every other `var(--blue)`/`var(--red)` text/border/decorative usage (inventoried in full via grep before editing, 20 call sites) untouched. Verified with computed WCAG contrast (6.91:1 and 7.15:1 respectively, both comfortably above the 4.5:1 requirement) and confirmed in a real headless browser via `getComputedStyle` on the live page (not just the CSS source) for `.skip-link`, `.logo`, and `#colorblind-toggle:hover`, matching the offline calculation exactly. Full existing suite (16 tests) still passes.
+
+### Problem
+
+`--blue`/`--red`/`--blue-deep`/`--red-deep` are each used for two conflicting roles: as light, high-contrast **text/border** colors against the dark backgrounds, and as **backgrounds under white text** at `.skip-link`, `.icon-btn:hover`, `.contact-pill:hover` (`--blue`/`--blue-deep`), `.logo` (`--red`), and `.primary-action` (`--red-deep`). This is exactly the conflict **A11Y-005** (2026-08-01) fixed by splitting `--primary` into a background-safe and a text-safe variant — that split no longer exists in the current `style.css` (no `--primary`/`--primary-text`/`--accent` variables remain at all), so the failure is back. Measured directly (WCAG relative-luminance contrast, not visual inspection):
+
+- **Default (dark) theme** — the theme most visitors see:
+  - `.skip-link` (white on `--blue`): **1.60:1** (needs 4.5:1). This is the keyboard-only "skip to content" link, visible exactly when a keyboard/screen-reader user tabs onto the page — the highest-stakes place for this to fail.
+  - `.icon-btn:hover` / `.contact-pill:hover` (white on `--blue-deep`): **2.42:1**
+  - `.logo` badge (white on `--red`): **3.76:1** (fails the 4.5:1 normal-text threshold; the badge text is ~14.9px bold, just under the 18.66px-bold "large text" cutoff that would allow 3:1)
+- **Dark colorblind mode** (`[data-theme="colorblind"].dark-mode-colorblind`) — the mode specifically built for low-vision/colorblind users:
+  - Same four pairs: **2.43:1**, **3.33:1**, **1.83:1** (`.logo`), and `.primary-action` (white on `--red-deep`): **2.61:1**
+- Light theme and light colorblind mode are unaffected (all pairs pass, 6.47:1–13.73:1).
+
+### Proposed work
+
+Reintroduce a role split like A11Y-005's, scoped to whichever themes actually fail: keep `--blue`/`--red` for their background-under-white-text usage sites, and either darken those specific theme overrides for the default and dark-colorblind themes, or add dedicated background-safe variables and repoint the 5 failing selectors, verifying every other `var(--blue)`/`var(--red)` call site isn't also a background-under-white-text pairing before changing shared values (A11Y-005's Done note describes exactly this class of mistake to avoid).
+
+### Acceptance criteria
+
+- `.skip-link`, `.icon-btn:hover`, `.contact-pill:hover`, `.logo`, and `.primary-action` meet 4.5:1 (normal text) or 3:1 (confirmed large text) against their actual background in both the default dark theme and dark colorblind mode.
+- Light theme and light colorblind mode are unchanged (already passing).
+- Contrast re-verified with computed ratios, not visual inspection alone.
+
+### Validation
+
+- Automated: recompute WCAG contrast ratios for the new values against the backgrounds above and confirm all pass their applicable threshold (same method used to find this issue).
+- Manual: keyboard-Tab to reveal `.skip-link` in both the default and dark-colorblind themes, confirm the text is legible.
+
+### Notes
+
+Found during a general review following the 2026-08-05 CI fixes, not part of a full backlog audit — other sections weren't re-swept. Worth checking, at implementation time, whether a later theme rewrite (variables renamed from `--primary`/`--accent` to `--blue`/`--red`) is what dropped A11Y-005's fix, so the same regression doesn't recur a third time.
+
+---
 
 ### ARCH-009 — CI does not verify freshness of config.js and index.html
 
@@ -1281,7 +1287,7 @@ Dependency-aware order, following the general sequence in the operating instruct
 18. **TEST-004** — document validation command (after the above testing items land)
 19. **MAINT-002** — README accuracy pass (do a lightweight pass early for the overstated claim; full pass after ARCH-005/TEST-004)
 20. **ENH-001**, **ENH-002** — portfolio enhancements, whenever owner input/priority allows
-21. **A11Y-006** — default-theme and dark-colorblind contrast regression (measured, confirmed failure; recommend doing before ENH-002 despite list position, since it affects the theme most visitors see)
-22. **REL-007** — colorblind toggle theme-detection fix (cheap, anytime)
+21. ~~**A11Y-006** — default-theme and dark-colorblind contrast regression~~ — Done (2026-08-05)
+22. ~~**REL-007** — colorblind toggle theme-detection fix~~ — Done (2026-08-05)
 
 SEC-001's `config.js`-wide portion is the largest true refactor in this list; treat it as the one item most likely to warrant further sub-splitting at implementation time.
