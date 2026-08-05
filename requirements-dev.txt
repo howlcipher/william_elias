@@ -1,4 +1,5 @@
 pytest
 playwright
+pytest-playwright
 fpdf2
 pypdf
