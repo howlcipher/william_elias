@@ -87,6 +87,12 @@ class ResumePDF(FPDF):
         if self.will_page_break(height):
             self.add_page()
 
+    def wrapped_text_height(self, text, size=9.5):
+        self.set_font("Helvetica", "", size)
+        width = self.w - self.r_margin - self.l_margin
+        lines = self.multi_cell(width, 13, text, dry_run=True, output="LINES")
+        return len(lines) * 13
+
 
 def build(config: dict, out_path: Path):
     p = config["personal"]
@@ -163,6 +169,20 @@ def build(config: dict, out_path: Path):
         for h in proj["highlights"]:
             pdf.bullet(h)
         pdf.ln(2)
+
+    additional_experience = config.get("additionalExperience") or []
+    if additional_experience:
+        pdf.section_title("Earlier Technical Experience")
+        for job in additional_experience:
+            summary = job.get("summary", "")
+            block_h = 14 + pdf.wrapped_text_height(summary) + 2
+            pdf.keep_together(block_h)
+            pdf.set_font("Helvetica", "B", 9.5)
+            header = f'{job.get("company", "")} - {job.get("title", "")} | {job.get("date", "")}'
+            pdf.cell(0, 14, header, new_x="LMARGIN", new_y="NEXT")
+            pdf.set_font("Helvetica", "", 9.5)
+            pdf.multi_cell(0, 13, summary)
+            pdf.ln(2)
 
     pdf.section_title("Education & Certifications")
     pdf.set_font("Helvetica", "", 9.5)

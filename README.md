@@ -4,7 +4,7 @@ A professional, modern, and highly performant resume website built with HTML, CS
 
 ## Deployment & Architecture
 - **Data Source**: A single `resume.json` acts as the canonical source of truth for all content.
-- **Generated Assets**: The static `config.js` used by the browser, the SEO meta tags in `index.html`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts.
+- **Generated Assets**: The static `config.js` used by the browser, the SEO meta tags in `index.html`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF renders `resume.json`'s `additionalExperience` array as a compact "Earlier Technical Experience" section.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
 - **CI/CD**: GitHub Actions verify tests and ensure that the generated PDF is fresh, but CI does not mutate the repository or push commits. 
 
