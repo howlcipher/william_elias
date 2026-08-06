@@ -35,6 +35,9 @@ def validate_config(config: dict):
             raise ValueError(f"Validation failed: '{k}' must be an array")
             
     p = config.get("personal", {})
+    if not p.get("title"):
+        raise ValueError("Validation failed: 'personal.title' is required and must be non-empty")
+
     for url_field in ["linkedin", "github"]:
         val = p.get(url_field, "")
         if not (val.startswith("http://") or val.startswith("https://")):
@@ -101,6 +104,9 @@ def build(config: dict, out_path: Path):
 
     pdf.set_font("Helvetica", "B", 18)
     pdf.cell(0, 22, p["name"].upper(), align="C", new_x="LMARGIN", new_y="NEXT")
+
+    pdf.set_font("Helvetica", "B", 11)
+    pdf.cell(0, 15, p["title"].replace("//", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "", 9.5)
     contact = f'{p["phone"]} | {p["email"]} | {p["linkedin"].replace("https://", "")} | {p["github"].replace("https://", "")}'
