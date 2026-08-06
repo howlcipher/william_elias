@@ -1,8 +1,8 @@
 const config = {
     "personal": {
         "name": "William Elias",
-        "title": "DevOps Engineer // AI-Native Automation",
-        "tagline": "Platform Engineering // CI/CD // Python + Go // Agentic Systems",
+        "title": "Senior DevOps & Platform Engineer // AI Automation Specialist",
+        "tagline": "CI/CD // Python + Go // Agentic Systems & AI Security",
         "location": "Michigan",
         "photo": "1778619951750.jpg",
         "email": "WylElias.123@gmail.com",
@@ -13,15 +13,15 @@ const config = {
         "sourceRepo": "https://github.com/howlcipher/william_elias",
         "sourceBranch": "main"
     },
-    "summary": "Remote-ready DevOps and platform engineer with 10+ years across software delivery, infrastructure, and production support, who treats AI systems as production infrastructure rather than a side experiment. Currently architecting a reusable Azure DevOps pipeline framework to scale CI/CD from one pipeline to 70+ .NET applications on IIS, plus the AI knowledge platform that automates its rollout: a zero-dependency Python system that self-synchronizes Jira, Confluence, and SharePoint behind ten automated quality, drift, PII, and credential gates. Ships agentic tooling engineers actually run, from incident triage and automated root cause analysis to deployment and release, under GLBA, SOX, and SOC 2 controls.",
+    "summary": "DevOps and platform engineer with 10+ years across software delivery, infrastructure, and production support, now specializing in applied AI automation and agentic tooling. Currently architecting a reusable Azure DevOps pipeline framework to scale CI/CD from one pipeline to 70+ .NET applications on IIS, and built an internal AI knowledge platform that self-synchronizes Jira, Confluence, and SharePoint behind ten automated quality, drift, PII, and credential gates, operating inside a GLBA/SOX/SOC 2-regulated environment. Builds agentic tooling for incident triage, automated root-cause analysis, and release workflows that the engineering team runs day to day.",
     "stats": [
         {
             "value": "70+",
-            "label": ".NET applications in CI/CD rollout"
+            "label": ".NET applications in CI/CD rollout scope"
         },
         {
-            "value": "21",
-            "label": "AI skills in production engineering use"
+            "value": "4",
+            "label": "live CI/CD pipelines shipped"
         },
         {
             "value": "40+ hrs",
@@ -58,6 +58,7 @@ const config = {
                 "LLM API Integration",
                 "Prompt Engineering",
                 "AI Guardrails",
+                "AI Security",
                 "RAG",
                 "ChromaDB",
                 "Jira",
@@ -95,7 +96,7 @@ const config = {
                 "Database Migrations",
                 "Bandit SAST",
                 "Credential & PII Scanning",
-                "GLBA / SOX / SOC 2"
+                "Regulated Environment Controls (GLBA/SOX/SOC 2)"
             ]
         },
         {
@@ -114,15 +115,15 @@ const config = {
     "experience": [
         {
             "date": "Feb 2023 - Present",
-            "title": "Production Support Engineer - DevOps, Automation & AI Enablement",
+            "title": "Production Support Engineer - DevOps & Automation",
             "company": "Stellantis Financial Services",
             "location": "Auburn Hills, MI",
             "achievements": [
                 "Independently architected a reusable Azure DevOps CI/CD framework designed to scale delivery from one pipeline to 70+ .NET applications hosted on IIS, using YAML templates, Python, PowerShell, artifact creation, environment-scoped deployments, and approval gates.",
                 "Launched three new application pipelines, taking live CI/CD coverage from one to four, then encoded the onboarding path into AI skills that generate and roll out pipeline definitions per repository, replacing error-prone copy-and-paste setup.",
                 "Built an employer-owned AI knowledge platform that self-synchronizes Jira, Confluence, and SharePoint into a two-layer retrieval architecture, giving 14 engineers grounded production context on demand instead of tribal knowledge.",
-                "Engineered its daily Azure DevOps sync pipeline with ten automated gates covering credential scanning, PII/NPI detection, documentation drift, schema, provenance, and changelog consistency, plus secret-expiry alerting, keeping the system audit-clean under GLBA, SOX, and SOC 2 in zero-dependency Python.",
-                "Shipped 21 production AI skills for incident triage, deployment, release notes, and post-mortem review, plus a root-cause-analysis engine that redacts credentials from raw logs, resolves stack frames to source, and emits a Jira payload and runbook, dry-run by default.",
+                "Engineered its daily Azure DevOps sync pipeline with ten automated gates covering credential scanning, PII/NPI detection, documentation drift, schema, provenance, and changelog consistency, plus secret-expiry alerting, built in zero-dependency Python for a GLBA/SOX/SOC 2-regulated environment.",
+                "Built a library of AI skills for incident triage, deployment, release notes, and post-mortem review, plus a root-cause-analysis engine that redacts credentials from raw logs, resolves stack frames to source, and emits a Jira payload and runbook, dry-run by default.",
                 "Created an environment-readiness dashboard comparing code and runtime versions and IIS objects across servers before promotion, an operations portal centralizing team links and DBA-approval SQL payloads, and Go migration utilities with dry-run modes; led weekly releases and zero-data-loss database migrations."
             ]
         },
@@ -161,7 +162,7 @@ const config = {
             "subtitle": "Agentic operations tooling on Jira, SharePoint & MCP",
             "highlights": [
                 "Designed a two-layer retrieval architecture that routes an agent from lightweight index maps to a single deep-dive source file, keeping context lean and answers grounded in real system state rather than model recall.",
-                "Delivered 21 skills for triage, deployment, release notes, and post-mortem review, plus a log-to-RCA engine that turns a raw stack trace into a Jira payload and runbook, all self-maintained by a daily ten-gate quality pipeline."
+                "Built a library of skills for triage, deployment, release notes, and post-mortem review, plus a log-to-RCA engine that turns a raw stack trace into a Jira payload and runbook, all governed by a daily ten-gate quality pipeline."
             ],
             "tags": [
                 "Claude Code",
