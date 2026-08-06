@@ -36,7 +36,10 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 **Recommended model tier:** Standard
 **Dependencies:** None
 **Affected files:** `scripts/build_html.py`, `script.js`, `index.html`
-**Status:** Pending
+**Status:** Done (2026-08-05)
+
+### Done note
+Added marker-comment pairs (e.g. `<!-- BUILD:HERO:START -->...<!-- BUILD:HERO:END -->`) around each content target in `index.html`, and a set of `render_*` functions in `scripts/build_html.py` that read `resume.json` and inject the equivalent static HTML between those markers (hero, summary, stats, skills, experience, projects, additional experience, education, footer), including the same URL-protocol validation `getValidUrl` previously did client-side. Marker-based replacement (rather than tag-depth matching) keeps the build idempotent across repeated runs — verified with a byte-for-byte diff after running the build script twice in a row. Removed the now-redundant DOM-construction blocks and `getValidUrl` helper from `script.js`, which now only handles interactivity, theme/colorblind toggling, the last-synced widget, and the fade-in observer. Verified with a raw-HTML grep (no JS execution) that all sections render (name, employer, project names, degrees, footer text), and confirmed the full existing suite (`tests/test_browser.py` + `tests/test_generate_resume_pdf.py`, 16 tests) still passes with a real headless Chromium run.
 
 ### Problem
 Currently, `index.html` contains empty placeholder tags for its main content (e.g. `<div id="experience-target"></div>`) and relies entirely on `script.js` to render the content client-side from `config.js`. This harms search engine optimization (SEO) because crawlers that don't execute JavaScript will see an empty body, leaving them without context about the portfolio.
