@@ -1,8 +1,8 @@
 {
   "personal": {
     "name": "William Elias",
-    "title": "Senior DevOps & Platform Engineer // AI Automation Specialist",
-    "tagline": "CI/CD // Python + Go // Agentic Systems & AI Security",
+    "title": "Senior DevOps & Platform Engineer // Production Support & AI Automation",
+    "tagline": "Azure DevOps // Application Operations // Python + Go // Networking",
     "location": "Michigan",
     "photo": "1778619951750.jpg",
     "email": "WylElias.123@gmail.com",
@@ -13,19 +13,19 @@
     "sourceRepo": "https://github.com/howlcipher/william_elias",
     "sourceBranch": "main"
   },
-  "summary": "DevOps and platform engineer with 10+ years across software delivery, infrastructure, and production support, now specializing in applied AI automation and agentic tooling. Currently architecting a reusable Azure DevOps pipeline framework to scale CI/CD from one pipeline to 70+ .NET applications on IIS, and built an internal AI knowledge platform that self-synchronizes Jira, Confluence, and SharePoint behind ten automated quality, drift, PII, and credential gates, operating inside a GLBA/SOX/SOC 2-regulated environment. Builds agentic tooling for incident triage, automated root-cause analysis, and release workflows that the engineering team runs day to day.",
+  "summary": "Senior DevOps and platform engineer with 10+ years across application operations, software delivery, networking, databases, infrastructure, and automation. Created 100+ Azure DevOps pipelines supporting .NET build, deployment, and release workflows. Supports Azure-connected and IIS-hosted applications using Azure Monitor, Application Insights, KQL, application logs, connection strings, and environment configuration. Handles SLA-driven Freshservice support, Jira workflows, OAuth-based identity and access, release coordination, SQL changes, and network-connectivity troubleshooting. Builds applied AI and agentic tooling for incident response, engineering enablement, knowledge retrieval, and delivery automation in regulated environments.",
   "stats": [
     {
-      "value": "70+",
-      "label": ".NET applications in CI/CD rollout scope"
-    },
-    {
-      "value": "4",
-      "label": "live CI/CD pipelines shipped"
+      "value": "100+",
+      "label": "Azure DevOps pipelines created"
     },
     {
       "value": "40+ hrs",
       "label": "saved per month through automation"
+    },
+    {
+      "value": "60%",
+      "label": "reduction in processing time"
     }
   ],
   "skills": [
@@ -48,7 +48,25 @@
       ]
     },
     {
-      "category": "AI Engineering & Agentic Systems",
+      "category": "Application Operations & Production Support",
+      "icon": "fa-headset",
+      "tags": [
+        "Freshservice",
+        "SLA-Based Support",
+        "Incident Triage",
+        "Application Administration",
+        "Production Troubleshooting",
+        "Log Analysis",
+        "Release Support",
+        "Environment Readiness",
+        "Runbooks and Documentation",
+        "Jira",
+        "Application Configuration",
+        "Connection Strings"
+      ]
+    },
+    {
+      "category": "Applied AI & Agentic Systems",
       "icon": "fa-robot",
       "tags": [
         "Claude Code Skills",
@@ -61,7 +79,6 @@
         "AI Security",
         "RAG",
         "ChromaDB",
-        "Jira",
         "Confluence",
         "SharePoint"
       ]
@@ -91,12 +108,15 @@
         "KQL",
         "Key Vault",
         "Secret Rotation",
+        "OAuth 2.0",
+        "Identity and Access Management",
+        "Authentication and Authorization",
         "SQL Server",
         "SQLite",
         "Database Migrations",
         "Bandit SAST",
         "Credential & PII Scanning",
-        "Regulated Environment Controls (GLBA/SOX/SOC 2)"
+        "Regulated Environment Controls"
       ]
     },
     {
@@ -108,7 +128,8 @@
         "VLANs",
         "Firewalls",
         "Packet Capture",
-        "Network Standards"
+        "Network Standards",
+        "Network Connectivity Troubleshooting"
       ]
     }
   ],
@@ -119,12 +140,12 @@
       "company": "Stellantis Financial Services",
       "location": "Auburn Hills, MI",
       "achievements": [
-        "Independently architected a reusable Azure DevOps CI/CD framework designed to scale delivery from one pipeline to 70+ .NET applications hosted on IIS, using YAML templates, Python, PowerShell, artifact creation, environment-scoped deployments, and approval gates.",
-        "Launched three new application pipelines, taking live CI/CD coverage from one to four, then encoded the onboarding path into AI skills that generate and roll out pipeline definitions per repository, replacing error-prone copy-and-paste setup.",
-        "Built an employer-owned AI knowledge platform that self-synchronizes Jira, Confluence, and SharePoint into a two-layer retrieval architecture, giving 14 engineers grounded production context on demand instead of tribal knowledge.",
-        "Engineered its daily Azure DevOps sync pipeline with ten automated gates covering credential scanning, PII/NPI detection, documentation drift, schema, provenance, and changelog consistency, plus secret-expiry alerting, built in zero-dependency Python for a GLBA/SOX/SOC 2-regulated environment.",
-        "Built a library of AI skills for incident triage, deployment, release notes, and post-mortem review, plus a root-cause-analysis engine that redacts credentials from raw logs, resolves stack frames to source, and emits a Jira payload and runbook, dry-run by default.",
-        "Created an environment-readiness dashboard comparing code and runtime versions and IIS objects across servers before promotion, an operations portal centralizing team links and DBA-approval SQL payloads, and Go migration utilities with dry-run modes; led weekly releases and zero-data-loss database migrations."
+        "Monitor and troubleshoot Azure-connected and IIS-hosted .NET applications using Azure Monitor, Application Insights, KQL, and application logs; manage connection strings and environment-specific application configuration.",
+        "Manage production incidents and service requests through Freshservice against SLA targets, coordinate technical work and documentation in Jira, and troubleshoot OAuth-based identity/access and network-connectivity issues across application environments.",
+        "Created 100+ Azure DevOps pipelines supporting .NET application build, deployment, and release workflows using reusable YAML templates, Python, PowerShell, artifact management, IIS deployment, environment controls, and approval gates.",
+        "Architected the underlying reusable pipeline framework behind the 70+ application rollout scope, then encoded onboarding into AI-assisted skills that generate and roll out pipeline definitions per repository.",
+        "Led weekly release coordination and zero-data-loss database migrations, and built an environment-readiness dashboard comparing code, runtime versions, and IIS objects across servers before promotion, plus an operations portal centralizing team links and DBA-approval SQL payloads.",
+        "Built an internal AI knowledge platform synchronizing Jira, Confluence, and SharePoint for grounded production context, governed by credential, PII, and documentation-drift gates, plus AI-assisted incident-triage and RCA tooling reviewed by engineers."
       ]
     },
     {
@@ -142,45 +163,12 @@
   ],
   "projects": [
     {
-      "name": "Azure DevOps Pipeline Factory",
-      "subtitle": "YAML, Python, PowerShell, IIS, AI-driven rollout",
-      "highlights": [
-        "Reverse-engineered the organization's single existing pipeline into reusable templates for .NET applications, with parameterized artifact creation, IIS deployment, and approval controls.",
-        "Turned the rollout itself into automation: AI skills generate a repository's pipeline definition, wire it to its IIS targets, and sweep the remaining 70+ application portfolio one app at a time."
-      ],
-      "tags": [
-        "Azure DevOps",
-        "YAML",
-        "Python",
-        "PowerShell",
-        "IIS",
-        "Pipeline as Code"
-      ]
-    },
-    {
-      "name": "AI Knowledge Platform",
-      "subtitle": "Agentic operations tooling on Jira, SharePoint & MCP",
-      "highlights": [
-        "Designed a two-layer retrieval architecture that routes an agent from lightweight index maps to a single deep-dive source file, keeping context lean and answers grounded in real system state rather than model recall.",
-        "Built a library of skills for triage, deployment, release notes, and post-mortem review, plus a log-to-RCA engine that turns a raw stack trace into a Jira payload and runbook, all governed by a daily ten-gate quality pipeline."
-      ],
-      "tags": [
-        "Claude Code",
-        "MCP",
-        "Python",
-        "Go",
-        "Jira",
-        "SharePoint",
-        "Azure DevOps"
-      ]
-    },
-    {
       "name": "Multi-Agent Engineering Library",
       "subtitle": "Open-source AI context system for terminal agents",
       "link": "https://github.com/howlcipher/ai_knowledge_library",
       "highlights": [
         "Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal assistant.",
-        "Ships 40 domain skills on a tiered priority model with hallucination guardrails, MCP integrations, and ChromaDB vector-store context pruning, packaged with Docker, Helm, and a cross-platform installer, and guarded by eight GitHub Actions workflows running CodeQL and Bandit SAST, linting, and cross-platform tests."
+        "Ships 40 domain skills with hallucination guardrails, MCP integrations, and ChromaDB context pruning, packaged with Docker, Helm, and a cross-platform installer, guarded by GitHub Actions running CodeQL, Bandit SAST, and cross-platform tests."
       ],
       "tags": [
         "Python",

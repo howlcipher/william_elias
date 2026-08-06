@@ -27,7 +27,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 5571
+/Length 6045
 >>
 stream
 2 J
@@ -35,76 +35,83 @@ stream
 BT /F1 18.00 Tf ET
 BT 238.50 721.60 Td (WILLIAM ELIAS) Tj ET
 BT /F1 11.00 Tf ET
-BT 142.78 705.20 Td (Senior DevOps & Platform Engineer | AI Automation Specialist) Tj ET
+BT 111.32 705.20 Td (Senior DevOps & Platform Engineer | Production Support & AI Automation) Tj ET
 BT /F2 9.50 Tf ET
 BT 114.80 691.15 Td (586.438.6057 | WylElias.123@gmail.com | linkedin.com/in/wylelias | github.com/howlcipher) Tj ET
-BT 191.82 677.15 Td (CI/CD // Python + Go // Agentic Systems & AI Security) Tj ET
+BT 161.19 677.15 Td (Azure DevOps // Application Operations // Python + Go // Networking) Tj ET
 BT /F1 11.00 Tf ET
 BT 56.83 652.70 Td (PROFESSIONAL SUMMARY) Tj ET
 54.00 649.00 m 558.00 649.00 l S
 BT /F2 9.50 Tf ET
-q BT 56.83 635.65 Td 1.030 Tw (DevOps and platform engineer with 10+ years across software delivery, infrastructure, and production support, now) Tj ET Q
-q BT 56.83 622.65 Td 1.463 Tw (specializing in applied AI automation and agentic tooling. Currently architecting a reusable Azure DevOps pipeline) Tj ET Q
-q BT 56.83 609.65 Td 1.827 Tw (framework to scale CI/CD from one pipeline to 70+ .NET applications on IIS, and built an internal AI knowledge) Tj ET Q
-q BT 56.83 596.65 Td 3.361 Tw (platform that self-synchronizes Jira, Confluence, and SharePoint behind ten automated quality, drift, PII, and) Tj ET Q
-q BT 56.83 583.65 Td 2.278 Tw (credential gates, operating inside a GLBA/SOX/SOC 2-regulated environment. Builds agentic tooling for incident) Tj ET Q
-BT 56.83 570.65 Td (triage, automated root-cause analysis, and release workflows that the engineering team runs day to day.) Tj ET
+q BT 56.83 635.65 Td 1.434 Tw (Senior DevOps and platform engineer with 10+ years across application operations, software delivery, networking,) Tj ET Q
+q BT 56.83 622.65 Td 0.363 Tw (databases, infrastructure, and automation. Created 100+ Azure DevOps pipelines supporting .NET build, deployment,) Tj ET Q
+q BT 56.83 609.65 Td 2.774 Tw (and release workflows. Supports Azure-connected and IIS-hosted applications using Azure Monitor, Application) Tj ET Q
+q BT 56.83 596.65 Td 0.807 Tw (Insights, KQL, application logs, connection strings, and environment configuration. Handles SLA-driven Freshservice) Tj ET Q
+q BT 56.83 583.65 Td 7.477 Tw (support, Jira workflows, OAuth-based identity and access, release coordination, SQL changes, and) Tj ET Q
+q BT 56.83 570.65 Td 3.684 Tw (network-connectivity troubleshooting. Builds applied AI and agentic tooling for incident response, engineering) Tj ET Q
+BT 56.83 557.65 Td (enablement, knowledge retrieval, and delivery automation in regulated environments.) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 546.70 Td (CORE SKILLS) Tj ET
-54.00 543.00 m 558.00 543.00 l S
+BT 56.83 533.70 Td (CORE SKILLS) Tj ET
+54.00 530.00 m 558.00 530.00 l S
 BT /F1 9.50 Tf ET
-BT 56.83 529.65 Td (DevOps & Platform: ) Tj ET
+BT 56.83 516.65 Td (DevOps & Platform: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 149.21 529.65 Td (Azure DevOps, CI/CD, YAML Templates, Pipeline as Code, GitHub Actions, Git, Bitbucket, IIS,) Tj ET
-BT 56.83 516.65 Td (Windows Server, Docker, Helm, Release Management) Tj ET
+BT 149.21 516.65 Td (Azure DevOps, CI/CD, YAML Templates, Pipeline as Code, GitHub Actions, Git, Bitbucket, IIS,) Tj ET
+BT 56.83 503.65 Td (Windows Server, Docker, Helm, Release Management) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 502.65 Td (AI Engineering & Agentic Systems: ) Tj ET
+BT 56.83 489.65 Td (Application Operations & Production Support: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 218.37 502.65 Td (Claude Code Skills, Model Context Protocol \(MCP\), Multi-Agent Orchestration,) Tj ET
-BT 56.83 489.65 Td (Context Engineering, LLM API Integration, Prompt Engineering, AI Guardrails, AI Security, RAG, ChromaDB, Jira,) Tj ET
-BT 56.83 476.65 Td (Confluence, SharePoint) Tj ET
+BT 268.49 489.65 Td (Freshservice, SLA-Based Support, Incident Triage, Application) Tj ET
+BT 56.83 476.65 Td (Administration, Production Troubleshooting, Log Analysis, Release Support, Environment Readiness, Runbooks and) Tj ET
+BT 56.83 463.65 Td (Documentation, Jira, Application Configuration, Connection Strings) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 462.65 Td (Languages & Automation: ) Tj ET
+BT 56.83 449.65 Td (Applied AI & Agentic Systems: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 177.70 462.65 Td (Python, Go, C#, .NET Framework, PowerShell, Bash, SQL, REST APIs, ETL, XML) Tj ET
-BT 56.83 449.65 Td (Processing) Tj ET
+BT 198.31 449.65 Td (Claude Code Skills, Model Context Protocol \(MCP\), Multi-Agent Orchestration,) Tj ET
+BT 56.83 436.65 Td (Context Engineering, LLM API Integration, Prompt Engineering, AI Guardrails, AI Security, RAG, ChromaDB,) Tj ET
+BT 56.83 423.65 Td (Confluence, SharePoint) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 435.65 Td (Cloud, Data & Security: ) Tj ET
+BT 56.83 409.65 Td (Languages & Automation: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 165.05 435.65 Td (Azure Monitor, Application Insights, KQL, Key Vault, Secret Rotation, SQL Server, SQLite,) Tj ET
-BT 56.83 422.65 Td (Database Migrations, Bandit SAST, Credential & PII Scanning, Regulated Environment Controls \(GLBA/SOX/SOC 2\)) Tj ET
+BT 177.70 409.65 Td (Python, Go, C#, .NET Framework, PowerShell, Bash, SQL, REST APIs, ETL, XML) Tj ET
+BT 56.83 396.65 Td (Processing) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 408.65 Td (Infrastructure & Networking: ) Tj ET
+BT 56.83 382.65 Td (Cloud, Data & Security: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 188.27 408.65 Td (Cisco, Meraki, VLANs, Firewalls, Packet Capture, Network Standards) Tj ET
+BT 165.05 382.65 Td (Azure Monitor, Application Insights, KQL, Key Vault, Secret Rotation, OAuth 2.0, Identity and) Tj ET
+BT 56.83 369.65 Td (Access Management, Authentication and Authorization, SQL Server, SQLite, Database Migrations, Bandit SAST,) Tj ET
+BT 56.83 356.65 Td (Credential & PII Scanning, Regulated Environment Controls) Tj ET
+BT /F1 9.50 Tf ET
+BT 56.83 342.65 Td (Infrastructure & Networking: ) Tj ET
+BT /F2 9.50 Tf ET
+BT 188.27 342.65 Td (Cisco, Meraki, VLANs, Firewalls, Packet Capture, Network Standards, Network) Tj ET
+BT 56.83 329.65 Td (Connectivity Troubleshooting) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 383.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
-54.00 380.00 m 558.00 380.00 l S
+BT 56.83 304.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
+54.00 301.00 m 558.00 301.00 l S
 BT /F1 10.00 Tf ET
-BT 56.83 366.00 Td (Stellantis Financial Services) Tj ET
+BT 56.83 287.00 Td (Stellantis Financial Services) Tj ET
 BT /F2 9.50 Tf ET
-BT 473.85 366.15 Td (Feb 2023 - Present) Tj ET
+BT 473.85 287.15 Td (Feb 2023 - Present) Tj ET
 BT /F3 9.50 Tf ET
-BT 56.83 352.65 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI) Tj ET
+BT 56.83 273.65 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI) Tj ET
 BT /F2 9.50 Tf ET
-q BT 68.83 339.65 Td 2.342 Tw (- Independently architected a reusable Azure DevOps CI/CD framework designed to scale delivery from one) Tj ET Q
-q BT 68.83 326.65 Td 1.943 Tw (pipeline to 70+ .NET applications hosted on IIS, using YAML templates, Python, PowerShell, artifact creation,) Tj ET Q
-BT 68.83 313.65 Td (environment-scoped deployments, and approval gates.) Tj ET
-q BT 68.83 300.65 Td 2.508 Tw (- Launched three new application pipelines, taking live CI/CD coverage from one to four, then encoded the) Tj ET Q
-q BT 68.83 287.65 Td 1.410 Tw (onboarding path into AI skills that generate and roll out pipeline definitions per repository, replacing error-prone) Tj ET Q
-BT 68.83 274.65 Td (copy-and-paste setup.) Tj ET
-q BT 68.83 261.65 Td 1.210 Tw (- Built an employer-owned AI knowledge platform that self-synchronizes Jira, Confluence, and SharePoint into a) Tj ET Q
-q BT 68.83 248.65 Td 2.398 Tw (two-layer retrieval architecture, giving 14 engineers grounded production context on demand instead of tribal) Tj ET Q
-BT 68.83 235.65 Td (knowledge.) Tj ET
-q BT 68.83 222.65 Td 0.565 Tw (- Engineered its daily Azure DevOps sync pipeline with ten automated gates covering credential scanning, PII/NPI) Tj ET Q
-q BT 68.83 209.65 Td 0.178 Tw (detection, documentation drift, schema, provenance, and changelog consistency, plus secret-expiry alerting, built in) Tj ET Q
-BT 68.83 196.65 Td (zero-dependency Python for a GLBA/SOX/SOC 2-regulated environment.) Tj ET
-q BT 68.83 183.65 Td 2.954 Tw (- Built a library of AI skills for incident triage, deployment, release notes, and post-mortem review, plus a) Tj ET Q
-q BT 68.83 170.65 Td 0.070 Tw (root-cause-analysis engine that redacts credentials from raw logs, resolves stack frames to source, and emits a Jira) Tj ET Q
-BT 68.83 157.65 Td (payload and runbook, dry-run by default.) Tj ET
-q BT 68.83 144.65 Td 2.278 Tw (- Created an environment-readiness dashboard comparing code and runtime versions and IIS objects across) Tj ET Q
-q BT 68.83 131.65 Td 1.172 Tw (servers before promotion, an operations portal centralizing team links and DBA-approval SQL payloads, and Go) Tj ET Q
-BT 68.83 118.65 Td (migration utilities with dry-run modes; led weekly releases and zero-data-loss database migrations.) Tj ET
+q BT 68.83 260.65 Td 1.718 Tw (- Monitor and troubleshoot Azure-connected and IIS-hosted .NET applications using Azure Monitor, Application) Tj ET Q
+BT 68.83 247.65 Td (Insights, KQL, and application logs; manage connection strings and environment-specific application configuration.) Tj ET
+q BT 68.83 234.65 Td 0.124 Tw (- Manage production incidents and service requests through Freshservice against SLA targets, coordinate technical) Tj ET Q
+q BT 68.83 221.65 Td 1.683 Tw (work and documentation in Jira, and troubleshoot OAuth-based identity/access and network-connectivity issues) Tj ET Q
+BT 68.83 208.65 Td (across application environments.) Tj ET
+q BT 68.83 195.65 Td 1.730 Tw (- Created 100+ Azure DevOps pipelines supporting .NET application build, deployment, and release workflows) Tj ET Q
+q BT 68.83 182.65 Td 0.675 Tw (using reusable YAML templates, Python, PowerShell, artifact management, IIS deployment, environment controls,) Tj ET Q
+BT 68.83 169.65 Td (and approval gates.) Tj ET
+q BT 68.83 156.65 Td 1.151 Tw (- Architected the underlying reusable pipeline framework behind the 70+ application rollout scope, then encoded) Tj ET Q
+BT 68.83 143.65 Td (onboarding into AI-assisted skills that generate and roll out pipeline definitions per repository.) Tj ET
+q BT 68.83 130.65 Td 1.807 Tw (- Led weekly release coordination and zero-data-loss database migrations, and built an environment-readiness) Tj ET Q
+q BT 68.83 117.65 Td 0.455 Tw (dashboard comparing code, runtime versions, and IIS objects across servers before promotion, plus an operations) Tj ET Q
+BT 68.83 104.65 Td (portal centralizing team links and DBA-approval SQL payloads.) Tj ET
+q BT 68.83 91.65 Td 0.869 Tw (- Built an internal AI knowledge platform synchronizing Jira, Confluence, and SharePoint for grounded production) Tj ET Q
+q BT 68.83 78.65 Td 0.001 Tw (context, governed by credential, PII, and documentation-drift gates, plus AI-assisted incident-triage and RCA tooling) Tj ET Q
+BT 68.83 65.65 Td (reviewed by engineers.) Tj ET
 
 endstream
 endobj
@@ -113,7 +120,7 @@ endobj
 /Annots [<</A <</S /URI /URI (https://github.com/howlcipher/ai_knowledge_library)>>
 /Border [0 0 0]
 /F 4
-/Rect [56.83 402.75 271.72 412.25]
+/Rect [56.83 564.75 271.72 574.25]
 /Subtype /Link
 /Type /Annot>>]
 /Contents 6 0 R
@@ -124,7 +131,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 4073
+/Length 3650
 >>
 stream
 2 J
@@ -146,43 +153,44 @@ BT /F1 11.00 Tf ET
 BT 56.83 610.70 Td (PROJECTS) Tj ET
 54.00 607.00 m 558.00 607.00 l S
 BT /F1 10.00 Tf ET
-BT 56.83 593.00 Td (Azure DevOps Pipeline Factory) Tj ET
+BT 56.83 593.00 Td (Multi-Agent Engineering Library) Tj ET
 BT /F3 9.50 Tf ET
-BT 56.83 579.65 Td (YAML, Python, PowerShell, IIS, AI-driven rollout) Tj ET
+BT 56.83 579.65 Td (Open-source AI context system for terminal agents) Tj ET
 BT /F2 9.50 Tf ET
-q BT 68.83 566.65 Td 0.473 Tw (- Reverse-engineered the organization's single existing pipeline into reusable templates for .NET applications, with) Tj ET Q
-BT 68.83 553.65 Td (parameterized artifact creation, IIS deployment, and approval controls.) Tj ET
-q BT 68.83 540.65 Td 0.129 Tw (- Turned the rollout itself into automation: AI skills generate a repository's pipeline definition, wire it to its IIS targets,) Tj ET Q
-BT 68.83 527.65 Td (and sweep the remaining 70+ application portfolio one app at a time.) Tj ET
-BT /F1 10.00 Tf ET
-BT 56.83 512.00 Td (AI Knowledge Platform) Tj ET
-BT /F3 9.50 Tf ET
-BT 56.83 498.65 Td (Agentic operations tooling on Jira, SharePoint & MCP) Tj ET
-BT /F2 9.50 Tf ET
-q BT 68.83 485.65 Td 0.282 Tw (- Designed a two-layer retrieval architecture that routes an agent from lightweight index maps to a single deep-dive) Tj ET Q
-BT 68.83 472.65 Td (source file, keeping context lean and answers grounded in real system state rather than model recall.) Tj ET
-q BT 68.83 459.65 Td 0.967 Tw (- Built a library of skills for triage, deployment, release notes, and post-mortem review, plus a log-to-RCA engine) Tj ET Q
-BT 68.83 446.65 Td (that turns a raw stack trace into a Jira payload and runbook, all governed by a daily ten-gate quality pipeline.) Tj ET
-BT /F1 10.00 Tf ET
-BT 56.83 431.00 Td (Multi-Agent Engineering Library) Tj ET
-BT /F3 9.50 Tf ET
-BT 56.83 417.65 Td (Open-source AI context system for terminal agents) Tj ET
-BT /F2 9.50 Tf ET
-q BT 56.83 404.65 Td 0 0 1 rg (https://github.com/howlcipher/ai_knowledge_library) Tj ET 56.83 403.70 214.89 -0.48 re f Q
-q BT 68.83 391.65 Td 1.983 Tw (- Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile) Tj ET Q
-q BT 68.83 378.65 Td 0.597 Tw (context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal) Tj ET Q
-BT 68.83 365.65 Td (assistant.) Tj ET
-q BT 68.83 352.65 Td 0.698 Tw (- Ships 40 domain skills on a tiered priority model with hallucination guardrails, MCP integrations, and ChromaDB) Tj ET Q
-q BT 68.83 339.65 Td 1.474 Tw (vector-store context pruning, packaged with Docker, Helm, and a cross-platform installer, and guarded by eight) Tj ET Q
-BT 68.83 326.65 Td (GitHub Actions workflows running CodeQL and Bandit SAST, linting, and cross-platform tests.) Tj ET
+q BT 56.83 566.65 Td 0 0 1 rg (https://github.com/howlcipher/ai_knowledge_library) Tj ET 56.83 565.70 214.89 -0.48 re f Q
+q BT 68.83 553.65 Td 1.983 Tw (- Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile) Tj ET Q
+q BT 68.83 540.65 Td 0.597 Tw (context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal) Tj ET Q
+BT 68.83 527.65 Td (assistant.) Tj ET
+q BT 68.83 514.65 Td 0.306 Tw (- Ships 40 domain skills with hallucination guardrails, MCP integrations, and ChromaDB context pruning, packaged) Tj ET Q
+q BT 68.83 501.65 Td 0.672 Tw (with Docker, Helm, and a cross-platform installer, guarded by GitHub Actions running CodeQL, Bandit SAST, and) Tj ET Q
+BT 68.83 488.65 Td (cross-platform tests.) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 300.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
-54.00 297.00 m 558.00 297.00 l S
+BT 56.83 462.70 Td (EARLIER TECHNICAL EXPERIENCE) Tj ET
+54.00 459.00 m 558.00 459.00 l S
+BT /F1 9.50 Tf ET
+BT 56.83 445.15 Td (Intrepid Control Systems - QA Developer | Mar 2020 - Apr 2020) Tj ET
 BT /F2 9.50 Tf ET
-BT 56.83 283.15 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
-BT 56.83 269.15 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT 56.83 255.15 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 56.83 241.15 Td (Cisco Certified Network Associate \(CCNA\) - Previously held - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 56.83 431.65 Td (Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
+BT /F1 9.50 Tf ET
+BT 56.83 416.15 Td (Project Worldwide - Network Engineer | Jan 2020 - Mar 2020) Tj ET
+BT /F2 9.50 Tf ET
+BT 56.83 402.65 Td (Configured Cisco and Meraki infrastructure and executed multi-state migrations with minimal downtime.) Tj ET
+BT /F1 9.50 Tf ET
+BT 56.83 387.15 Td (Ford Motor Company - Network Standards Engineer | Sep 2019 - Dec 2019) Tj ET
+BT /F2 9.50 Tf ET
+BT 56.83 373.65 Td (Implemented global network standards and created scalable documentation and IP-management systems.) Tj ET
+BT /F1 9.50 Tf ET
+BT 56.83 358.15 Td (Trendset Communications Group - IT Network Engineer | Sep 2015 - Jun 2019) Tj ET
+BT /F2 9.50 Tf ET
+BT 56.83 344.65 Td (Enforced network standards, maintained configuration files, and supported critical production infrastructure.) Tj ET
+BT /F1 11.00 Tf ET
+BT 56.83 318.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
+54.00 315.00 m 558.00 315.00 l S
+BT /F2 9.50 Tf ET
+BT 56.83 301.15 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
+BT 56.83 287.15 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT 56.83 273.15 Td (B.B.A. Business Administration - Rochester College) Tj ET
+BT 56.83 259.15 Td (Cisco Certified Network Associate \(CCNA\) - Previously held - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -241,21 +249,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000292 00000 n 
-0000005915 00000 n 
-0000006167 00000 n 
-0000010292 00000 n 
-0000010394 00000 n 
-0000010491 00000 n 
-0000010596 00000 n 
-0000010704 00000 n 
-0000010812 00000 n 
+0000006389 00000 n 
+0000006641 00000 n 
+0000010343 00000 n 
+0000010445 00000 n 
+0000010542 00000 n 
+0000010647 00000 n 
+0000010755 00000 n 
+0000010863 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<F6619BB9F179708ED4DD37125DD37A46><F6619BB9F179708ED4DD37125DD37A46>]
+/ID [<847D1361294F088117A4F02E35E9B847><847D1361294F088117A4F02E35E9B847>]
 >>
 startxref
-10958
+11009
 %%EOF
