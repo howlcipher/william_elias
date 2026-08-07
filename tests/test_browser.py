@@ -133,6 +133,23 @@ def test_mobile_menu_behavior(page: Page, test_url: str):
     focused_class = page.evaluate("() => document.activeElement.className")
     assert 'mobile-menu-btn' in focused_class, "Focus should return to mobile menu button after closing"
 
+def test_terminal_caret_is_inline_pseudo_element_not_border(page: Page, test_url: str):
+    page.goto(test_url)
+    tagline = page.locator('.tagline.terminal-type')
+
+    border_right_width = tagline.evaluate("el => getComputedStyle(el).borderRightWidth")
+    assert border_right_width == "0px", (
+        f"Caret should not be implemented as a border-right on the tagline box, got {border_right_width}"
+    )
+
+    after_style = tagline.evaluate("""el => {
+        const cs = getComputedStyle(el, '::after');
+        return {display: cs.display, width: cs.width, animationName: cs.animationName};
+    }""")
+    assert after_style["display"] == "inline-block"
+    assert after_style["width"] not in ("0px", "auto", "")
+    assert after_style["animationName"] == "terminal-caret"
+
 def test_six_project_cards_render_with_correct_links(page: Page, test_url: str):
     page.goto(test_url)
 

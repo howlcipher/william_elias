@@ -109,8 +109,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
 .subtitle { margin-bottom: 1rem; color: var(--red); font-size: clamp(1.15rem, 2vw, 1.7rem); font-weight: 600; }
 .tagline { max-width: 780px; margin-bottom: 1.75rem; color: var(--muted); font-size: .9rem; }
 .tagline::before { content: "> "; color: var(--red); }
-.tagline.terminal-type { border-right: 2px solid var(--red); white-space: nowrap; overflow: hidden; animation: terminal-caret .85s step-end infinite; }
-@keyframes terminal-caret { 50% { border-color: transparent; } }
+.tagline.terminal-type { white-space: nowrap; overflow: visible; }
+.tagline.terminal-type::after { content: ""; display: inline-block; width: 2px; height: 1em; margin-left: .15em; background: var(--red); vertical-align: -0.15em; animation: terminal-caret .85s step-end infinite; }
+@keyframes terminal-caret { 50% { opacity: 0; } }
 .contact-info { display: flex; flex-wrap: wrap; gap: .65rem; }
 .contact-pill { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .75rem; color: var(--ink); border: 1px solid var(--line); background: var(--paper); font-size: .75rem; font-weight: 600; text-decoration: none; transition: transform .15s ease, background .15s ease; }
 .contact-pill:hover { color: #fff; background: var(--blue-solid); border-color: var(--blue); transform: translate(-2px, -2px); }
@@ -196,7 +197,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .hero-content { padding: 1.5rem; }
     .hero-content::before { display: none; }
     .hero h1 { font-size: clamp(2.7rem, 16vw, 4.3rem); }
-    .tagline.terminal-type { white-space: normal; border-right: 0; animation: none; }
+    .tagline.terminal-type { white-space: normal; }
     .stats-grid, .skills-grid, .education-grid, .programs-grid { grid-template-columns: 1fr; }
     .additional-item { grid-template-columns: 1fr; gap: .35rem; }
     .additional-summary { margin-top: .35rem; }
@@ -206,4 +207,5 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     .fade-in { opacity: 1; transform: none; }
+    .tagline.terminal-type::after { animation: none; }
 }
