@@ -441,11 +441,17 @@ def build_html():
     html_content = inject(html_content, 'SUMMARY', render_summary(data.get('summary', '')))
     html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
-    html_content = inject(html_content, 'EXPERIENCE', render_experience(data.get('experience')))
+    exp_combined = data.get('experience', [])[:]
+    for job in data.get('additionalExperience', []):
+        job_copy = dict(job)
+        if 'summary' in job_copy:
+            job_copy['achievements'] = [job_copy['summary']]
+        exp_combined.append(job_copy)
+    html_content = inject(html_content, 'EXPERIENCE', render_experience(exp_combined))
     html_content = inject(html_content, 'PROGRAMS', render_programs(data.get('selectedEngineeringPrograms')))
     html_content = inject(html_content, 'AI_CAPABILITIES', render_ai_capabilities(data.get('aiEngineeringCapabilities')))
     html_content = inject(html_content, 'PROJECTS', render_projects(data.get('projects')))
-    html_content = inject(html_content, 'ADDITIONAL', render_additional_experience(data.get('additionalExperience')))
+
     html_content = inject(html_content, 'EDUCATION', render_education(data.get('education')))
     html_content = inject(html_content, 'FOOTER', esc(data.get('footerText', '')))
     html_content = inject(html_content, 'NAV_RESUME', render_nav_resume(personal))

@@ -167,7 +167,7 @@ def build(config: dict, out_path: Path):
         pdf.set_font("Helvetica", "", 9.5)
         # Cap the tag list rendered in the PDF (the website shows the full list from
         # resume.json) so six categories of curated skills stay on page 1.
-        pdf.write(13, ", ".join(s["tags"][:9]))
+        pdf.write(13, ", ".join(s["tags"][:7]))
         pdf.ln(14)
 
     print("Before Prof Exp:", pdf.get_y()); pdf.section_title("Professional Experience")

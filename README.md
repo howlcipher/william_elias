@@ -1,7 +1,7 @@
 # William Elias
 
 **Senior DevOps / Platform Engineer**
-CI/CD & Release Automation | Production Reliability
+CI/CD Automation | Production Reliability | AI-Enabled Engineering
 Open to U.S. Remote Roles
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)

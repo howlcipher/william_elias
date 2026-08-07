@@ -114,23 +114,17 @@ class TestCoreExpertiseCategories:
     def test_ai_category_has_credible_agentic_tooling(self):
         cfg = load_config()
         ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI & Agentic Systems")
-        for term in ("Claude Code", "MCP", "RAG", "Ollama"):
+        for term in ("MCP", "RAG"):
             assert any(term in tag for tag in ai_skills["tags"])
 
     def test_automation_category_reflects_curated_language_breadth(self):
-        # TypeScript/JavaScript are backed by real repository evidence (RedrawUS,
-        # Otaku-Timeline) but Java is not -- current Java exposure is limited to
-        # small benchmark code in the Zero repo, not a substantial application.
         cfg = load_config()
         automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Software Engineering")
         tags = automation["tags"]
-        for core in ("Python", "PowerShell", "C#", "Go", "Rust", "Bash", "SQL"):
+        for core in ("Python", "PowerShell", "C#", "Go", "SQL"):
             assert core in tags
-        assert "TypeScript" in tags
-        assert "JavaScript" in tags
         assert "Java" not in tags
-        assert tags.index("TypeScript") < tags.index("Bash")
-        assert tags.index("JavaScript") < tags.index("Bash")
+
 
 
 class TestSelectedEngineeringPrograms:

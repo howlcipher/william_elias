@@ -2,7 +2,7 @@ const config = {
     "personal": {
         "name": "William Elias",
         "title": "Senior DevOps / Platform Engineer",
-        "tagline": "CI/CD & Release Automation | Production Reliability",
+        "tagline": "CI/CD Automation | Production Reliability | AI-Enabled Engineering",
         "location": "Michigan",
         "remote": "Open to U.S. Remote Roles",
         "photo": "1778619951750.jpg",
@@ -54,21 +54,17 @@ const config = {
             "category": "DevOps & Release Engineering",
             "icon": "fa-cloud",
             "tags": [
+                "Azure DevOps",
                 "Azure DevOps YAML",
-                "Azure DevOps Classic Release",
-                "Deployment Groups",
-                "Azure DevOps REST APIs",
+                "Classic Release",
                 "CI/CD",
-                "Reusable Pipeline Templates",
                 "Pipeline as Code",
-                "Release Gates",
+                "Reusable Templates",
+                "Deployment Groups",
                 "GitHub Actions",
                 "Git",
                 "Bitbucket",
-                "IIS",
-                "MSBuild",
-                ".NET Framework",
-                ".NET 8"
+                "Release Gates"
             ]
         },
         {
@@ -79,20 +75,11 @@ const config = {
                 "PowerShell",
                 "C#",
                 "Go",
-                "Rust",
-                "TypeScript",
-                "JavaScript",
-                "Bash",
                 "SQL",
+                ".NET",
                 "ASP.NET Core",
-                "Razor Pages",
-                "FastAPI",
-                "Axum",
                 "REST APIs",
-                "SQLite",
-                "SQL Server",
-                "Playwright",
-                "XML Processing"
+                "FastAPI"
             ]
         },
         {
@@ -103,16 +90,10 @@ const config = {
                 "Managed Identity",
                 "OAuth 2.0",
                 "IAM",
-                "Credential Discovery",
-                "Credential Classification",
-                "Git History Rewriting",
                 "Credential Remediation",
-                "Credential Scanning",
-                "PII Scanning",
-                "Integrity-Verified Rollback",
+                "PII controls",
                 "CodeQL",
-                "Bandit SAST",
-                "Prompt-Injection Defenses"
+                "Bandit"
             ]
         },
         {
@@ -124,52 +105,38 @@ const config = {
                 "KQL",
                 "Serilog",
                 "Structured Logging",
-                "Log Analysis",
                 "Incident Triage",
                 "RCA",
-                "SLA-Driven Support",
-                "Release Coordination",
-                "Environment Readiness",
-                "Runbooks"
+                "SLA Support"
             ]
         },
         {
             "category": "Infrastructure & Networking",
             "icon": "fa-network-wired",
             "tags": [
-                "Windows Server",
                 "IIS",
+                "Windows Server",
                 "Active Directory",
                 "SQL Server",
                 "Load Balancers",
                 "Firewalls",
-                "Cisco",
-                "Meraki",
                 "Docker",
                 "Docker Compose",
                 "Helm",
-                "WSL2",
-                "Rancher Desktop",
-                "IIS ARR"
+                "Rancher Desktop"
             ]
         },
         {
             "category": "AI & Agentic Systems",
             "icon": "fa-robot",
             "tags": [
-                "Claude Code",
-                "OpenAI Codex CLI",
-                "Gemini CLI / Antigravity",
-                "Ollama / Local LLMs",
-                "Model Context Protocol (MCP)",
+                "MCP",
                 "RAG",
                 "ChromaDB",
-                "Vector Search & Embeddings",
-                "Multi-Agent Orchestration",
+                "Vector Search",
+                "Embeddings",
                 "Multi-Agent Routing",
-                "Provider Fallback",
-                "LLM API Integration",
-                "Context Engineering",
+                "LLM APIs",
                 "AI Guardrails",
                 "Prompt-Injection Defenses",
                 "Human-in-the-Loop Workflows"
@@ -208,7 +175,8 @@ const config = {
             "pdfBullet": "Designed the standard .NET CI/CD and release pattern for a ~60-application, five-server estate with no prior consistent path; 28 of 60 wired and build-verified, 27 green.",
             "bullets": [
                 "Designed the standard .NET build/release pattern for an estate of approximately 60 internal web applications across five servers that previously had no consistent deployment path.",
-                "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions; 28 of 60 applications are wired and build-verified, with 27 currently green.",
+                "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions.",
+                "28 of approximately 60 applications are wired and build-verified, with 27 currently green.",
                 "Deployment-path dry-run validation caught a mapping defect in the generator that would have mirrored the wrong application into six production folders.",
                 "Also built reusable Python/.NET pipeline templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
             ],
@@ -216,7 +184,7 @@ const config = {
                 "Azure DevOps YAML",
                 "Azure DevOps Classic Release",
                 "Deployment Groups",
-                "Azure DevOps REST",
+                "Azure DevOps REST APIs",
                 "PowerShell",
                 "Python",
                 "IIS",
@@ -232,10 +200,11 @@ const config = {
             "name": "Credential Hygiene & Secrets Remediation",
             "pdfBullet": "Removed exposed credentials from 100+ repositories via Git-history remediation, then built a .NET 8 discovery/Key Vault migration utility backed by 62 automated tests.",
             "bullets": [
-                "Built an audit script and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
-                "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests.",
-                "A measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
-                "Self-review during development caught and corrected a real integrity flaw in the migration path before rollout, direct evidence of testing discipline rather than just tooling."
+                "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
+                "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback.",
+                "Backed by 62 automated tests.",
+                "Measured server run: 2,832 files scanned, 67 distinct secrets identified, 25 seconds.",
+                "Self-review identified and corrected a migration-path integrity flaw before rollout."
             ],
             "technology": [
                 ".NET 8",
@@ -246,15 +215,16 @@ const config = {
                 "Managed Identity",
                 "Python",
                 "PowerShell",
-                "Git History Rewriting"
+                "Git history rewriting"
             ]
         },
         {
             "name": "Server Migration & DR Cutover",
             "pdfBullet": "Co-led build-out of four new production/test servers and coordinated a zero-downtime cutover from legacy infrastructure.",
             "bullets": [
-                "Co-led build-out of four new production/test servers: OS configuration, IIS, Active Directory, firewall coordination, application migration, database coordination, and load-balancer coordination.",
-                "Helped coordinate a zero-downtime cutover from legacy infrastructure to the new environment."
+                "Co-led build-out of four new production/test servers.",
+                "Coordinated across OS configuration, Windows Server, IIS, Active Directory, firewall, application migration, databases, and load balancers.",
+                "Helped coordinate a zero-downtime cutover from legacy infrastructure."
             ],
             "technology": [
                 "Windows Server",
@@ -269,8 +239,9 @@ const config = {
             "name": "Internal Web Apps & Support Portal",
             "pdfBullet": "Expanded a query extractor into a modular internal support portal with per-module access policies, a permanently retained SOX audit trail, and 156 automated tests.",
             "bullets": [
-                "Expanded a single-purpose query extractor into a modular internal support portal with a module framework, per-module access policies, and a permanently retained SOX audit trail.",
-                "Added a query extractor, DBA approve-only deployment scripts, a live-object diff tool, a pre-CAB dashboard, and a request tracker that feeds the existing service desk rather than replacing it.",
+                "Expanded a single-purpose query extractor into a modular ASP.NET Core internal support platform.",
+                "Included a modular framework, per-module access policies, a permanently retained SOX audit trail, and DBA approve-only deployment scripts.",
+                "Added a live-object diff, pre-CAB dashboard, and request tracking integrated with the existing service-desk process.",
                 "Covered by 156 automated tests."
             ],
             "technology": [
@@ -291,9 +262,11 @@ const config = {
             "name": "Observability & Telemetry",
             "pdfBullet": "Helped establish Application Insights as the team standard, added structured logging estate-wide, authored the KQL library, and built a usage-based sunset list.",
             "bullets": [
-                "Contributed to the Application Insights proof of concept that became the team standard, and drove adoption across the legacy application estate.",
-                "Added structured logging to applications that previously lacked it, and authored the team's KQL query library.",
-                "Used the resulting usage telemetry to build an evidence-based application sunset list."
+                "Contributed to the Application Insights proof of concept that became the team standard.",
+                "Drove adoption across the legacy application estate.",
+                "Added structured logging to applications that previously lacked it.",
+                "Authored the team's KQL query library.",
+                "Used resulting usage telemetry to build an evidence-based application sunset list."
             ],
             "technology": [
                 "Application Insights",
@@ -307,9 +280,11 @@ const config = {
             "name": "Python Ops Automation & Estate Reduction",
             "pdfBullet": "Built Python automation for database copying, payload triage, and report generation, then scripted the retirement of 300+ legacy applications.",
             "bullets": [
-                "Built tooling for PII-masked production-to-lower-environment database copying, failed-payload triage, event-driven query-to-email workflows, XML log parsing, and vendor report-to-Excel conversion.",
-                "Installed and supported Python applications on IIS, and built a multi-string source search tool to support decommission planning.",
-                "Scripted the retirement of 300+ unused legacy applications, and standardized the team on uv."
+                "Built PII-masked production-to-lower-environment database copying and failed-payload triage.",
+                "Developed event-driven query-to-email workflows, XML/log parsing, and vendor report-to-Excel conversion.",
+                "Hosted and supported Python applications on IIS.",
+                "Created multi-string source search for decommission planning.",
+                "Scripted the retirement of 300+ unused legacy applications and standardized team Python tooling around uv."
             ],
             "technology": [
                 "Python",
