@@ -125,6 +125,25 @@ class TestNavigationCtas:
         assert 'href="#resume"' not in nav_section
 
 
+class TestLogoHomeLink:
+    def test_logo_is_accessible_home_anchor(self):
+        html_content = _index_html()
+        assert '<body id="top">' in html_content
+        assert '<a href="#top" class="logo" aria-label="Home — return to top">WE.</a>' in html_content
+
+    def test_no_duplicate_home_nav_item(self):
+        html_content = _index_html()
+        nav_section = html_content.split('<div class="nav-right">')[1].split("</nav>")[0]
+        mobile_nav_section = html_content.split('<div class="mobile-nav"')[1].split("</div>")[0]
+        assert ">Home<" not in nav_section
+        assert ">Home<" not in mobile_nav_section
+
+    def test_logo_not_marked_as_scroll_section(self):
+        html_content = _index_html()
+        assert html_content.count('class="logo"') == 1
+        assert 'href="#top" class="logo"' in html_content
+
+
 class TestBottomRecruiterCta:
     def test_recruiter_cta_section_exists(self):
         html_content = _index_html()
