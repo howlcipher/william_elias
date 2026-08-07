@@ -148,6 +148,19 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
 .timeline-content li, .project-card li { margin-bottom: .6rem; }
 .timeline-content li::marker, .project-card li::marker { color: var(--red); }
 
+.programs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.program-card { padding: 1.5rem; }
+.program-card h3 { margin-bottom: .8rem; font-size: 1.15rem; }
+.program-card ul { padding-left: 1.15rem; margin-bottom: 1rem; color: var(--muted); font-size: .85rem; }
+.program-card li { margin-bottom: .5rem; }
+.program-card li::marker { color: var(--red); }
+
+.capability-stack { display: flex; flex-direction: column; align-items: center; gap: .6rem; max-width: 620px; margin: 0 auto; }
+.capability-tier { width: 100%; padding: 1.1rem 1.5rem; background: var(--panel); border: 2px solid var(--line); box-shadow: var(--shadow); text-align: center; }
+.capability-tier h3 { margin-bottom: .6rem; color: var(--blue); font-size: .95rem; letter-spacing: .06em; text-transform: uppercase; }
+.capability-tier .skill-tags { justify-content: center; }
+.capability-arrow { color: var(--red); font-size: 1rem; }
+
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .project-card { padding: 1.5rem; }
 .project-card h3 { margin-bottom: .5rem; font-size: 1.2rem; }
@@ -174,7 +187,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .mobile-menu-btn { display: grid; }
     .hero-content { grid-template-columns: 1fr; gap: 1.75rem; }
     .profile-photo { width: 140px; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid, .programs-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 620px) {
     .container, .nav-content { padding-left: 1rem; padding-right: 1rem; }
@@ -184,7 +197,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .hero-content::before { display: none; }
     .hero h1 { font-size: clamp(2.7rem, 16vw, 4.3rem); }
     .tagline.terminal-type { white-space: normal; border-right: 0; animation: none; }
-    .stats-grid, .skills-grid, .education-grid { grid-template-columns: 1fr; }
+    .stats-grid, .skills-grid, .education-grid, .programs-grid { grid-template-columns: 1fr; }
     .additional-item { grid-template-columns: 1fr; gap: .35rem; }
     .additional-summary { margin-top: .35rem; }
     .section { padding-top: 3.25rem; }

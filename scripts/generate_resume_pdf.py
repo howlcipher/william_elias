@@ -25,12 +25,12 @@ def load_config(config_path: Path | str | None = None) -> dict:
         raise ValueError(f"Failed to parse resume.json. Underlying error: {e}") from e
 
 def validate_config(config: dict):
-    required_top = ["personal", "summary", "skills", "experience", "projects", "education"]
+    required_top = ["personal", "summary", "skills", "experience", "projects", "education", "selectedEngineeringPrograms"]
     for k in required_top:
         if k not in config:
             raise ValueError(f"Validation failed: Missing required top-level field '{k}'")
-    
-    for k in ["skills", "experience", "projects", "education"]:
+
+    for k in ["skills", "experience", "projects", "education", "selectedEngineeringPrograms"]:
         if not isinstance(config.get(k), list):
             raise ValueError(f"Validation failed: '{k}' must be an array")
             
@@ -72,6 +72,10 @@ def validate_config(config: dict):
             if not edu.get(field):
                 raise ValueError(f"Validation failed: 'education[{i}].{field}' is required and must be non-empty")
 
+    for i, prog in enumerate(config.get("selectedEngineeringPrograms", [])):
+        if not prog.get("name"):
+            raise ValueError(f"Validation failed: 'selectedEngineeringPrograms[{i}].name' is required and must be non-empty")
+
 class ResumePDF(FPDF):
     def __init__(self):
         super().__init__(format="Letter", unit="pt")
@@ -110,6 +114,19 @@ class ResumePDF(FPDF):
         lines = self.multi_cell(width, 13, text, dry_run=True, output="LINES")
         return len(lines) * 13
 
+    def indented_text_height(self, text, indent=12, size=8.5, line_h=11):
+        self.set_font("Helvetica", "I", size)
+        width = self.w - self.r_margin - self.l_margin - indent
+        lines = self.multi_cell(width, line_h, text, dry_run=True, output="LINES")
+        return len(lines) * line_h
+
+    def indented_text(self, text, indent=12, size=8.5, line_h=11):
+        self.set_font("Helvetica", "I", size)
+        self.set_x(self.l_margin + indent)
+        self.set_text_color(90, 90, 90)
+        self.multi_cell(self.w - self.r_margin - self.l_margin - indent, line_h, text)
+        self.set_text_color(0, 0, 0)
+
 
 def build(config: dict, out_path: Path):
     p = config["personal"]
@@ -143,12 +160,14 @@ def build(config: dict, out_path: Path):
     pdf.set_font("Helvetica", "", 9.5)
     pdf.multi_cell(0, 13, config["summary"])
 
-    pdf.section_title("Core Skills")
+    pdf.section_title("Core Expertise")
     for s in config["skills"]:
         pdf.set_font("Helvetica", "B", 9.5)
         pdf.write(13, f'{s["category"]}: ')
         pdf.set_font("Helvetica", "", 9.5)
-        pdf.write(13, ", ".join(s["tags"]))
+        # Cap the tag list rendered in the PDF (the website shows the full list from
+        # resume.json) so six categories of curated skills stay on page 1.
+        pdf.write(13, ", ".join(s["tags"][:9]))
         pdf.ln(14)
 
     pdf.section_title("Professional Experience")
@@ -166,25 +185,29 @@ def build(config: dict, out_path: Path):
             pdf.bullet(a)
         pdf.ln(2)
 
-    pdf.section_title("Projects")
-    for proj in config["projects"]:
-        block_h = 14 + 13 + sum(pdf.bullet_height(h) for h in proj["highlights"]) + 2
-        if proj.get("link"):
-            block_h += 13
+    # Deliberate page break: Selected Engineering Programs always starts a fresh
+    # page, even when page 1 has unused whitespace, so the section reads as one
+    # coherent block rather than splitting mid-program.
+    pdf.add_page()
+
+    pdf.section_title("Selected Engineering Programs")
+    for prog in config.get("selectedEngineeringPrograms") or []:
+        pdf_bullet = prog.get("pdfBullet") or ""
+        tech = prog.get("technology") or []
+        tech_line = ("Technology: " + ", ".join(tech)) if tech else ""
+        block_h = 14
+        if pdf_bullet:
+            block_h += pdf.bullet_height(pdf_bullet)
+        if tech_line:
+            block_h += pdf.indented_text_height(tech_line)
+        block_h += 2
         pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
-        pdf.cell(0, 14, proj["name"], new_x="LMARGIN", new_y="NEXT")
-        pdf.set_font("Helvetica", "I", 9.5)
-        pdf.cell(0, 13, proj["subtitle"], new_x="LMARGIN", new_y="NEXT")
-        if proj.get("link"):
-            pdf.set_font("Helvetica", "U", 9.5)
-            pdf.set_text_color(0, 0, 255)
-            # Render the link as clickable (if FPDF supports it directly, else just text)
-            # FPDF2 supports link attribute in cell
-            pdf.cell(0, 13, proj["link"], new_x="LMARGIN", new_y="NEXT", link=proj["link"])
-            pdf.set_text_color(0, 0, 0)
-        for h in proj["highlights"]:
-            pdf.bullet(h)
+        pdf.cell(0, 14, prog.get("name", ""), new_x="LMARGIN", new_y="NEXT")
+        if pdf_bullet:
+            pdf.bullet(pdf_bullet)
+        if tech_line:
+            pdf.indented_text(tech_line)
         pdf.ln(2)
 
     additional_experience = config.get("additionalExperience") or []

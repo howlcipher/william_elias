@@ -1,9 +1,10 @@
 {
   "personal": {
     "name": "William Elias",
-    "title": "Senior DevOps & Platform Engineer // Production Support & AI Automation",
-    "tagline": "Azure DevOps // Application Operations // Python + Go // Networking",
+    "title": "Senior DevOps / Platform Engineer",
+    "tagline": "CI/CD & Release Automation | Production Reliability",
     "location": "Michigan",
+    "remote": "Open to U.S. Remote Roles",
     "photo": "1778619951750.jpg",
     "email": "WylElias.123@gmail.com",
     "phone": "586.438.6057",
@@ -13,123 +14,143 @@
     "sourceRepo": "https://github.com/howlcipher/william_elias",
     "sourceBranch": "main"
   },
-  "summary": "Senior DevOps and platform engineer with 10+ years across application operations, software delivery, networking, databases, infrastructure, and automation. Created 100+ Azure DevOps pipelines supporting .NET build, deployment, and release workflows. Supports Azure-connected and IIS-hosted applications using Azure Monitor, Application Insights, KQL, application logs, connection strings, and environment configuration. Handles SLA-driven Freshservice support, Jira workflows, OAuth-based identity and access, release coordination, SQL changes, and network-connectivity troubleshooting. Builds applied AI and agentic tooling for incident response, engineering enablement, knowledge retrieval, and delivery automation in regulated environments.",
+  "summary": "Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations, infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an estate of approximately 60 internal web applications, led enterprise credential remediation across 100+ repositories, and co-led production server migration and DR cutover work. Builds secure, heavily tested internal tooling in C#/.NET, Python, PowerShell, and SQL Server, and drove observability standardization with Azure Monitor, Application Insights, and KQL that fed a large-scale application-estate reduction. Works daily in Azure DevOps, GitHub Actions, and Azure Key Vault, and layers applied AI and agentic engineering on top of this platform and automation foundation.",
   "stats": [
     {
+      "value": "~60",
+      "label": "Applications in CI/CD delivery-standardization scope"
+    },
+    {
       "value": "100+",
-      "label": "Azure DevOps pipelines created"
+      "label": "Repositories credential-remediated"
     },
     {
-      "value": "40+ hrs",
-      "label": "saved per month through automation"
-    },
-    {
-      "value": "60%",
-      "label": "reduction in processing time"
+      "value": "300+",
+      "label": "Legacy applications retired"
     }
   ],
   "skills": [
     {
-      "category": "DevOps & Platform",
+      "category": "DevOps & Release Engineering",
       "icon": "fa-cloud",
       "tags": [
-        "Azure DevOps",
+        "Azure DevOps YAML",
+        "Azure DevOps Classic Release",
+        "Deployment Groups",
+        "Azure DevOps REST APIs",
         "CI/CD",
-        "YAML Templates",
+        "Reusable Pipeline Templates",
         "Pipeline as Code",
+        "Release Gates",
         "GitHub Actions",
         "Git",
         "Bitbucket",
         "IIS",
-        "Windows Server",
-        "Docker",
-        "Helm",
-        "Release Management"
+        "MSBuild",
+        ".NET Framework",
+        ".NET 8"
       ]
     },
     {
-      "category": "Application Operations & Production Support",
-      "icon": "fa-headset",
-      "tags": [
-        "Freshservice",
-        "SLA-Based Support",
-        "Incident Triage",
-        "Application Administration",
-        "Production Troubleshooting",
-        "Log Analysis",
-        "Release Support",
-        "Environment Readiness",
-        "Runbooks and Documentation",
-        "Jira",
-        "Application Configuration",
-        "Connection Strings"
-      ]
-    },
-    {
-      "category": "Applied AI & Agentic Systems",
-      "icon": "fa-robot",
-      "tags": [
-        "Claude Code Skills",
-        "Model Context Protocol (MCP)",
-        "Multi-Agent Orchestration",
-        "Context Engineering",
-        "LLM API Integration",
-        "Prompt Engineering",
-        "AI Guardrails",
-        "AI Security",
-        "RAG",
-        "ChromaDB",
-        "Confluence",
-        "SharePoint"
-      ]
-    },
-    {
-      "category": "Languages & Automation",
+      "category": "Automation & Software Engineering",
       "icon": "fa-code",
       "tags": [
         "Python",
-        "Go",
-        "C#",
-        ".NET Framework",
         "PowerShell",
+        "C#",
+        "Go",
+        "Rust",
+        "Axum",
         "Bash",
         "SQL",
+        "ASP.NET Core",
+        "Razor Pages",
+        "FastAPI",
         "REST APIs",
-        "ETL",
+        "SQLite",
+        "SQL Server",
+        "Playwright",
         "XML Processing"
       ]
     },
     {
-      "category": "Cloud, Data & Security",
-      "icon": "fa-server",
+      "category": "Security & Identity",
+      "icon": "fa-shield-halved",
       "tags": [
-        "Azure Monitor",
-        "Application Insights",
-        "KQL",
-        "Key Vault",
-        "Secret Rotation",
+        "Azure Key Vault",
+        "Managed Identity",
         "OAuth 2.0",
-        "Identity and Access Management",
-        "Authentication and Authorization",
-        "SQL Server",
-        "SQLite",
-        "Database Migrations",
+        "IAM",
+        "Credential Discovery",
+        "Credential Classification",
+        "Git History Rewriting",
+        "Credential Remediation",
+        "Credential Scanning",
+        "PII Scanning",
+        "Integrity-Verified Rollback",
+        "CodeQL",
         "Bandit SAST",
-        "Credential & PII Scanning",
-        "Regulated Environment Controls"
+        "Prompt-Injection Defenses"
+      ]
+    },
+    {
+      "category": "Observability & Reliability",
+      "icon": "fa-chart-line",
+      "tags": [
+        "Application Insights",
+        "Azure Monitor",
+        "KQL",
+        "Serilog",
+        "Structured Logging",
+        "Log Analysis",
+        "Incident Triage",
+        "RCA",
+        "SLA-Driven Support",
+        "Release Coordination",
+        "Environment Readiness",
+        "Runbooks"
       ]
     },
     {
       "category": "Infrastructure & Networking",
       "icon": "fa-network-wired",
       "tags": [
+        "Windows Server",
+        "IIS",
+        "Active Directory",
+        "SQL Server",
+        "Load Balancers",
+        "Firewalls",
         "Cisco",
         "Meraki",
-        "VLANs",
-        "Firewalls",
-        "Packet Capture",
-        "Network Standards",
-        "Network Connectivity Troubleshooting"
+        "Docker",
+        "Docker Compose",
+        "Helm",
+        "WSL2",
+        "Rancher Desktop",
+        "IIS ARR"
+      ]
+    },
+    {
+      "category": "AI & Agentic Systems",
+      "icon": "fa-robot",
+      "tags": [
+        "Claude Code",
+        "OpenAI Codex CLI",
+        "Gemini CLI / Antigravity",
+        "Ollama / Local LLMs",
+        "Model Context Protocol (MCP)",
+        "RAG",
+        "ChromaDB",
+        "Vector Search & Embeddings",
+        "Multi-Agent Orchestration",
+        "Multi-Agent Routing",
+        "Provider Fallback",
+        "LLM API Integration",
+        "Context Engineering",
+        "AI Guardrails",
+        "Prompt-Injection Defenses",
+        "Human-in-the-Loop Workflows"
       ]
     }
   ],
@@ -140,12 +161,10 @@
       "company": "Stellantis Financial Services",
       "location": "Auburn Hills, MI",
       "achievements": [
-        "Monitor and troubleshoot Azure-connected and IIS-hosted .NET applications using Azure Monitor, Application Insights, KQL, and application logs; manage connection strings and environment-specific application configuration.",
-        "Manage production incidents and service requests through Freshservice against SLA targets, coordinate technical work and documentation in Jira, and troubleshoot OAuth-based identity/access and network-connectivity issues across application environments.",
-        "Created 100+ Azure DevOps pipelines supporting .NET application build, deployment, and release workflows using reusable YAML templates, Python, PowerShell, artifact management, IIS deployment, environment controls, and approval gates.",
-        "Architected the underlying reusable pipeline framework behind the 70+ application rollout scope, then encoded onboarding into AI-assisted skills that generate and roll out pipeline definitions per repository.",
-        "Led weekly release coordination and zero-data-loss database migrations, and built an environment-readiness dashboard comparing code, runtime versions, and IIS objects across servers before promotion, plus an operations portal centralizing team links and DBA-approval SQL payloads.",
-        "Built an internal AI knowledge platform synchronizing Jira, Confluence, and SharePoint for grounded production context, governed by credential, PII, and documentation-drift gates, plus AI-assisted incident-triage and RCA tooling reviewed by engineers."
+        "Engineering work spans CI/CD standardization, production releases, secrets remediation, internal application development, observability, server migration, and application-estate reduction in a regulated financial-services environment.",
+        "Designed the deployment automation and release guardrails behind an approximately 60-application .NET estate across five servers, replacing inconsistent, ad hoc deployment paths with a standard build/release pattern.",
+        "Build secure, heavily tested operational tooling, including credential-remediation utilities and an internal operations portal, using C#/.NET, Python, PowerShell, SQL Server, and Azure services.",
+        "Handle production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and load-balancer teams to keep environments stable and release-ready."
       ]
     },
     {
@@ -161,6 +180,69 @@
       ]
     }
   ],
+  "selectedEngineeringPrograms": [
+    {
+      "name": "CI/CD & Release Engineering",
+      "pdfBullet": "Designed the standard .NET CI/CD and release pattern for a ~60-application, five-server estate with no prior consistent path; 28 of 60 wired and build-verified, 27 green.",
+      "bullets": [
+        "Designed the standard .NET build/release pattern for an estate of approximately 60 internal web applications across five servers that previously had no consistent deployment path.",
+        "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions; 28 of 60 applications are wired and build-verified, with 27 currently green.",
+        "Deployment-path dry-run validation caught a mapping defect in the generator that would have mirrored the wrong application into six production folders.",
+        "Also built reusable Python/.NET pipeline templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
+      ],
+      "technology": ["Azure DevOps YAML", "Azure DevOps Classic Release", "Deployment Groups", "Azure DevOps REST", "PowerShell", "Python", "IIS", "MSBuild", ".NET Framework", ".NET 8", "WSL2", "Rancher Desktop", "IIS ARR"]
+    },
+    {
+      "name": "Credential Hygiene & Secrets Remediation",
+      "pdfBullet": "Removed exposed credentials from 100+ repositories via Git-history remediation, then built a .NET 8 discovery/Key Vault migration utility backed by 62 automated tests.",
+      "bullets": [
+        "Built an audit script and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
+        "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests.",
+        "A measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
+        "Self-review during development caught and corrected a real integrity flaw in the migration path before rollout, direct evidence of testing discipline rather than just tooling."
+      ],
+      "technology": [".NET 8", "C#", "Spectre.Console", "xUnit", "Azure Key Vault", "Managed Identity", "Python", "PowerShell", "Git History Rewriting"]
+    },
+    {
+      "name": "Server Migration & DR Cutover",
+      "pdfBullet": "Co-led build-out of four new production/test servers and coordinated a zero-downtime cutover from legacy infrastructure.",
+      "bullets": [
+        "Co-led build-out of four new production/test servers: OS configuration, IIS, Active Directory, firewall coordination, application migration, database coordination, and load-balancer coordination.",
+        "Helped coordinate a zero-downtime cutover from legacy infrastructure to the new environment."
+      ],
+      "technology": ["Windows Server", "IIS", "Active Directory", "PowerShell", "SQL Server", "Load Balancers"]
+    },
+    {
+      "name": "Internal Web Apps & Support Portal",
+      "pdfBullet": "Expanded a query extractor into a modular internal support portal with per-module access policies, a permanently retained SOX audit trail, and 156 automated tests.",
+      "bullets": [
+        "Expanded a single-purpose query extractor into a modular internal support portal with a module framework, per-module access policies, and a permanently retained SOX audit trail.",
+        "Added a query extractor, DBA approve-only deployment scripts, a live-object diff tool, a pre-CAB dashboard, and a request tracker that feeds the existing service desk rather than replacing it.",
+        "Covered by 156 automated tests."
+      ],
+      "technology": ["ASP.NET Core 8", "Razor Pages", "C#", "xUnit", "SQLite", "SQL Server", "Serilog", "Application Insights", "Windows Authentication", "DiffPlex", "FastAPI"]
+    },
+    {
+      "name": "Observability & Telemetry",
+      "pdfBullet": "Helped establish Application Insights as the team standard, added structured logging estate-wide, authored the KQL library, and built a usage-based sunset list.",
+      "bullets": [
+        "Contributed to the Application Insights proof of concept that became the team standard, and drove adoption across the legacy application estate.",
+        "Added structured logging to applications that previously lacked it, and authored the team's KQL query library.",
+        "Used the resulting usage telemetry to build an evidence-based application sunset list."
+      ],
+      "technology": ["Application Insights", "Azure Monitor", "KQL", "Serilog", ".NET"]
+    },
+    {
+      "name": "Python Ops Automation & Estate Reduction",
+      "pdfBullet": "Built Python automation for database copying, payload triage, and report generation, then scripted the retirement of 300+ legacy applications.",
+      "bullets": [
+        "Built tooling for PII-masked production-to-lower-environment database copying, failed-payload triage, event-driven query-to-email workflows, XML log parsing, and vendor report-to-Excel conversion.",
+        "Installed and supported Python applications on IIS, and built a multi-string source search tool to support decommission planning.",
+        "Scripted the retirement of 300+ unused legacy applications, and standardized the team on uv."
+      ],
+      "technology": ["Python", "uv", "FastAPI", "SQL Server", "PowerShell", "IIS", "Go"]
+    }
+  ],
   "projects": [
     {
       "name": "Multi-Agent Engineering Library",
@@ -170,15 +252,59 @@
         "Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal assistant.",
         "Ships 40 domain skills with hallucination guardrails, MCP integrations, and ChromaDB context pruning, packaged with Docker, Helm, and a cross-platform installer, guarded by GitHub Actions running CodeQL, Bandit SAST, and cross-platform tests."
       ],
-      "tags": [
-        "Python",
-        "Go",
-        "Docker",
-        "Helm",
-        "GitHub Actions",
-        "MCP",
-        "ChromaDB"
-      ]
+      "tags": ["Python", "Go", "Docker", "Helm", "GitHub Actions", "MCP", "ChromaDB"]
+    },
+    {
+      "name": "AI Router",
+      "subtitle": "Local multi-provider coding-agent orchestrator",
+      "link": "https://github.com/howlcipher/ai_router",
+      "highlights": [
+        "Built a local orchestrator that routes coding-agent tasks across Claude Code, Codex CLI, and Antigravity using task classification, provider health checks, fallback logic, circuit breakers, and cooldown handling.",
+        "Tracks run history in SQLite with structured JSONL run artifacts and captured Git diffs, and enforces safe, Git-aware edit-mode guardrails so agent-driven changes stay reviewable."
+      ],
+      "tags": ["Python", "Claude Code", "Codex CLI", "Antigravity", "SQLite", "Circuit Breakers"]
+    },
+    {
+      "name": "Zero",
+      "subtitle": "Experimental AI-first language and toolchain, written in Go",
+      "link": "https://github.com/howlcipher/zero",
+      "highlights": [
+        "Built a Lisp-like language and compiler toolchain in Go, including a lexer, parser, typed AST/IR, and bytecode VM, with a WebAssembly compilation target and a capability-based security model.",
+        "Explores constrained AI code generation against the language's typed IR, with local Ollama integration for offline generation."
+      ],
+      "tags": ["Go", "Compilers", "WebAssembly", "Bytecode VM", "Ollama"]
+    },
+    {
+      "name": "Baseball Optimizer",
+      "subtitle": "Rust backend for lineup and roster optimization",
+      "link": "https://github.com/howlcipher/baseball_optimizer",
+      "highlights": [
+        "Migrated a performance-sensitive optimization backend to Rust and Axum with a SQLite-backed REST API, containerized with Docker and Docker Compose.",
+        "Built automated end-to-end tests with pytest covering the API and model-evaluation paths, wired into CI."
+      ],
+      "tags": ["Rust", "Axum", "SQLite", "Docker", "pytest"]
+    }
+  ],
+  "aiEngineeringCapabilities": [
+    {
+      "tier": "Coding Agents",
+      "items": ["Claude Code", "Codex CLI", "Gemini CLI / Antigravity"]
+    },
+    {
+      "tier": "Orchestration",
+      "items": ["Multi-Agent Routing", "Provider Fallback", "Task Classification", "Circuit Breakers"]
+    },
+    {
+      "tier": "Context & Retrieval",
+      "items": ["MCP", "RAG", "ChromaDB", "Vector Search", "Embeddings"]
+    },
+    {
+      "tier": "Local AI",
+      "items": ["Ollama", "Local LLMs", "Provider-Agnostic Workflows"]
+    },
+    {
+      "tier": "Safety & Reliability",
+      "items": ["Prompt-Injection Defenses", "Human-in-the-Loop", "Agent Guardrails", "Structured Audit/Run Artifacts"]
     }
   ],
   "additionalExperience": [

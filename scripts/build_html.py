@@ -21,7 +21,8 @@ def esc(value):
 
 def render_hero(personal):
     parts = ['<div class="hero-copy">']
-    parts.append(f'<p class="eyebrow">{esc(personal.get("location", ""))} // AVAILABLE FOR REMOTE</p>')
+    eyebrow_bits = [b for b in (personal.get("location", ""), personal.get("remote", "")) if b]
+    parts.append(f'<p class="eyebrow">{esc(" | ".join(eyebrow_bits))}</p>')
     parts.append(f'<h1>{esc(personal.get("name", ""))}</h1>')
     parts.append(f'<h2 class="subtitle">{esc(personal.get("title", ""))}</h2>')
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
@@ -118,6 +119,34 @@ def render_experience(experience):
     return ''.join(parts)
 
 
+def render_programs(programs):
+    parts = []
+    for prog in programs or []:
+        bullets = ''.join(f'<li>{esc(b)}</li>' for b in (prog.get('bullets') or []))
+        tech = ''.join(f'<span>{esc(t)}</span>' for t in (prog.get('technology') or []))
+        parts.append(
+            '<div class="program-card card">'
+            f'<h3>{esc(prog.get("name", ""))}</h3>'
+            f'<ul>{bullets}</ul>'
+            f'<div class="skill-tags">{tech}</div>'
+            '</div>'
+        )
+    return ''.join(parts)
+
+
+def render_ai_capabilities(tiers):
+    parts = []
+    for tier in tiers or []:
+        items = ''.join(f'<span>{esc(i)}</span>' for i in (tier.get('items') or []))
+        parts.append(
+            '<div class="capability-tier">'
+            f'<h3>{esc(tier.get("tier", ""))}</h3>'
+            f'<div class="skill-tags">{items}</div>'
+            '</div>'
+        )
+    return '<div class="capability-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>'.join(parts)
+
+
 def render_projects(projects):
     parts = []
     for proj in projects or []:
@@ -192,8 +221,9 @@ def build_html():
     tagline = personal.get('tagline', '').replace(" // ", ", ")
 
     page_title = html.escape(f"{name} | {title}", quote=True)
-    escaped_desc = html.escape(f"Resume of {name}, a {title}. {tagline}.", quote=True)
-    escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}.", quote=True)
+    seo_suffix = "Azure DevOps, Python, .NET, and applied AI engineering."
+    escaped_desc = html.escape(f"Resume of {name}, a {title}. {tagline}. {seo_suffix}", quote=True)
+    escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}. {seo_suffix}", quote=True)
 
     with open(SITE_DIR / 'index.html', 'r') as f:
         html_content = f.read()
@@ -232,6 +262,8 @@ def build_html():
     html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
     html_content = inject(html_content, 'EXPERIENCE', render_experience(data.get('experience')))
+    html_content = inject(html_content, 'PROGRAMS', render_programs(data.get('selectedEngineeringPrograms')))
+    html_content = inject(html_content, 'AI_CAPABILITIES', render_ai_capabilities(data.get('aiEngineeringCapabilities')))
     html_content = inject(html_content, 'PROJECTS', render_projects(data.get('projects')))
     html_content = inject(html_content, 'ADDITIONAL', render_additional_experience(data.get('additionalExperience')))
     html_content = inject(html_content, 'EDUCATION', render_education(data.get('education')))
