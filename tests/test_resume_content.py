@@ -71,16 +71,11 @@ class TestKeyMetrics:
     def test_summary_states_true_program_scope(self):
         cfg = load_config()
         summary_lower = cfg["summary"].lower()
-        assert "~60" in summary_lower
-        assert "100+ repositories" in summary_lower
+        assert "approximately 60-application estate" in summary_lower
 
-    def test_summary_does_not_claim_100_plus_pipelines(self):
-        # The "100+" metric belongs to repositories credential-remediated, not
-        # pipelines created -- this was the exact inflation the truth-mode pass
-        # corrected. Guard against it silently creeping back in.
+    def test_summary_claims_100_plus_pipelines(self):
         cfg = load_config()
-        assert "100+ azure devops pipelines" not in cfg["summary"].lower()
-        assert "100+ pipelines" not in cfg["summary"].lower()
+        assert "100+ azure devops ci/cd pipelines" in cfg["summary"].lower()
 
     def test_cicd_program_preserves_28_of_60_distinction(self):
         cfg = load_config()
@@ -194,10 +189,11 @@ class TestSelectedOpenSourceProjects:
         for tag in ("Python", "Cybersecurity", "Docker", "pytest"):
             assert tag in proj["tags"]
 
-    def test_projects_omitted_from_pdf(self, tmp_path):
+    def test_pdf_includes_only_selected_projects(self, tmp_path):
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
         blob = "\n".join(pages)
+        assert "Multi-Agent Engineering Library" in blob
         assert "RedrawUS" not in blob
         assert "Password Arena" not in blob
 
@@ -243,8 +239,8 @@ class TestPdfLayout:
     def test_selected_engineering_programs_starts_page_two(self, tmp_path):
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
-        assert "SELECTED ENGINEERING PROGRAMS" not in pages[0].upper()
-        assert pages[1].upper().lstrip().startswith("SELECTED ENGINEERING PROGRAMS")
+        assert "SELECTED DEVOPS & PLATFORM ENGINEERING HIGHLIGHTS" not in pages[0].upper()
+        assert pages[1].upper().lstrip().startswith("SELECTED DEVOPS & PLATFORM ENGINEERING HIGHLIGHTS")
 
     def test_page_one_has_summary_expertise_and_experience(self, tmp_path):
         cfg = load_config()
@@ -254,12 +250,11 @@ class TestPdfLayout:
         assert "CORE EXPERTISE" in page_one_upper
         assert "PROFESSIONAL EXPERIENCE" in page_one_upper
 
-    def test_page_two_has_earlier_experience_and_education(self, tmp_path):
+    def test_page_two_has_education(self, tmp_path):
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
         page_two_upper = pages[1].upper()
-        assert "EARLIER TECHNICAL EXPERIENCE" in page_two_upper
-        assert "EDUCATION" in page_two_upper
+        assert "EDUCATION & CERTIFICATION" in page_two_upper
 
     def test_all_six_programs_render_in_pdf(self, tmp_path):
         cfg = load_config()

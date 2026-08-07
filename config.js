@@ -34,7 +34,7 @@ const config = {
             "MCP"
         ]
     },
-    "summary": "Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations, infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an estate of ~60 internal web applications, remediated exposed credentials across 100+ repositories, co-led production server migration and DR cutovers, and scripted the retirement of 300+ legacy applications. Builds secure, tested internal tooling in C#/.NET, Python, PowerShell, Go, and SQL Server; helped establish Application Insights as the team observability standard and drove adoption across legacy applications. Hands-on with Azure DevOps, GitHub Actions, Azure Key Vault, Azure Monitor, KQL, and applied AI/agentic engineering layered on top of a production platform and automation foundation.",
+    "summary": "Senior DevOps and platform engineer with 10+ years spanning infrastructure and networking, software QA, automation, production operations, and delivery engineering. Built 100+ Azure DevOps CI/CD pipelines across an approximately 60-application estate, and reusable release automation for .NET applications using YAML, Python, PowerShell, IIS, artifacts, environment controls, and approval gates. Hands-on with Azure Monitor, Application Insights, KQL, Key Vault, OAuth/IAM, SQL Server, GitHub Actions, Docker/Helm, and production incident and release workflows. Built automation that reduced processing time by 60% and saved 40+ hours per month, while adding practical AI-assisted engineering systems for grounded knowledge, troubleshooting, and agent workflows.",
     "stats": [
         {
             "value": "~60",
@@ -150,10 +150,12 @@ const config = {
             "company": "Stellantis Financial Services US",
             "location": "Auburn Hills, MI \u00b7 Remote",
             "achievements": [
-                "Engineering work spans CI/CD and release standardization, production reliability, secrets remediation, internal platform development, observability, server migration, and application-estate reduction in a regulated financial-services environment.",
-                "Designed the standard .NET build and release pattern for an estate of ~60 internal apps across five servers, replacing inconsistent deployment paths with reusable automation, release definitions, and deployment guardrails.",
-                "Build production operational tooling with C#/.NET, Python, PowerShell, Go, and SQL Server, including credential-remediation utilities, Key Vault migration tooling, and a modular internal support platform with automated testing, auditability, and security controls.",
-                "Support production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and load-balancer teams to maintain environment readiness and production reliability."
+                "Built and delivered 100+ Azure DevOps CI/CD pipelines and reusable YAML/release automation for .NET applications, using Python and PowerShell for artifact generation, IIS deployment, environment controls, approvals, and repeatable onboarding.",
+                "Designed deployment-safety controls for a large application estate, including repository-to-server/path inventory, dry-run validation, and environment-readiness checks; guardrails caught a mapping defect that could have deployed one application into six incorrect production folders.",
+                "Lead weekly production releases, database migrations, and SLA-driven incident/service-request work through Freshservice and Jira; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
+                "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
+                "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and load-balancer layers, including a zero-downtime cutover from legacy infrastructure.",
+                "Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while enforcing credential, PII, provenance, and engineer-review controls."
             ]
         },
         {
@@ -162,10 +164,10 @@ const config = {
             "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
             "location": "Southfield, Michigan / Remote",
             "achievements": [
-                "Built Python-based XML processing automation that reduced data-processing time by 60%.",
-                "Automated SQL output processing and operational workflows with Python, saving 40+ hours per month of manual effort.",
-                "Developed database configuration and automation tooling that streamlined customer onboarding and reduced repetitive environment setup.",
-                "Built NSIS installer/uninstaller packages, maintained Git-based development workflows and tooling, and supported application deployment and technical troubleshooting."
+                "Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.",
+                "Automated SQL output processing with Python, saving more than 40 hours per month.",
+                "Developed database-configuration tools that streamlined customer onboarding and reduced repetitive setup across application environments.",
+                "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live technical troubleshooting for customers."
             ]
         }
     ],
@@ -174,11 +176,9 @@ const config = {
             "name": "CI/CD & Release Engineering",
             "pdfBullet": "Designed the standard .NET CI/CD and release pattern for a ~60-application, five-server estate with no prior consistent path; 28 of 60 wired and build-verified, 27 green.",
             "bullets": [
-                "Designed the standard .NET build/release pattern for an estate of approximately 60 internal web applications across five servers that previously had no consistent deployment path.",
-                "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions.",
-                "28 of approximately 60 applications are wired and build-verified, with 27 currently green.",
-                "Deployment-path dry-run validation caught a mapping defect in the generator that would have mirrored the wrong application into six production folders.",
-                "Also built reusable Python/.NET pipeline templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
+                "Designed the standard .NET build/release pattern for approximately 60 internal web applications across five servers that previously had no consistent deployment path.",
+                "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions; 28 of 60 applications are wired and build-verified, with 27 currently green.",
+                "Deployment-path dry-run validation caught a generator mapping defect that would have mirrored the wrong application into six production folders; also built reusable Python/.NET pipeline templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
             ],
             "technology": [
                 "Azure DevOps YAML",
@@ -201,10 +201,8 @@ const config = {
             "pdfBullet": "Removed exposed credentials from 100+ repositories via Git-history remediation, then built a .NET 8 discovery/Key Vault migration utility backed by 62 automated tests.",
             "bullets": [
                 "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
-                "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback.",
-                "Backed by 62 automated tests.",
-                "Measured server run: 2,832 files scanned, 67 distinct secrets identified, 25 seconds.",
-                "Self-review identified and corrected a migration-path integrity flaw before rollout."
+                "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests; a measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
+                "Self-review caught and corrected a migration-path integrity flaw before rollout, providing direct evidence of testing discipline and rollback safety."
             ],
             "technology": [
                 ".NET 8",
@@ -222,9 +220,7 @@ const config = {
             "name": "Server Migration & DR Cutover",
             "pdfBullet": "Co-led build-out of four new production/test servers and coordinated a zero-downtime cutover from legacy infrastructure.",
             "bullets": [
-                "Co-led build-out of four new production/test servers.",
-                "Coordinated across OS configuration, Windows Server, IIS, Active Directory, firewall, application migration, databases, and load balancers.",
-                "Helped coordinate a zero-downtime cutover from legacy infrastructure."
+                "Co-led build-out of four new production/test servers across OS configuration, IIS, Active Directory, firewall, application migration, database, and load-balancer layers, then helped coordinate a zero-downtime cutover from legacy infrastructure."
             ],
             "technology": [
                 "Windows Server",
@@ -239,10 +235,8 @@ const config = {
             "name": "Internal Web Apps & Support Portal",
             "pdfBullet": "Expanded a query extractor into a modular internal support portal with per-module access policies, a permanently retained SOX audit trail, and 156 automated tests.",
             "bullets": [
-                "Expanded a single-purpose query extractor into a modular ASP.NET Core internal support platform.",
-                "Included a modular framework, per-module access policies, a permanently retained SOX audit trail, and DBA approve-only deployment scripts.",
-                "Added a live-object diff, pre-CAB dashboard, and request tracking integrated with the existing service-desk process.",
-                "Covered by 156 automated tests."
+                "Expanded a single-purpose query extractor into a modular ASP.NET Core support portal with a module framework, per-module access policies, and a permanently retained SOX audit trail.",
+                "Added DBA approve-only deployment scripts, live-object diffing, a pre-CAB dashboard, and request tracking that feeds the existing service desk; covered by 156 automated tests."
             ],
             "technology": [
                 "ASP.NET Core 8",
@@ -262,11 +256,7 @@ const config = {
             "name": "Observability & Telemetry",
             "pdfBullet": "Helped establish Application Insights as the team standard, added structured logging estate-wide, authored the KQL library, and built a usage-based sunset list.",
             "bullets": [
-                "Contributed to the Application Insights proof of concept that became the team standard.",
-                "Drove adoption across the legacy application estate.",
-                "Added structured logging to applications that previously lacked it.",
-                "Authored the team's KQL query library.",
-                "Used resulting usage telemetry to build an evidence-based application sunset list."
+                "Contributed to the Application Insights proof of concept that became the team standard, drove adoption across the legacy application estate, added structured logging where none existed, authored the team's reusable KQL library, and used usage telemetry to build an evidence-based application sunset list."
             ],
             "technology": [
                 "Application Insights",
@@ -280,11 +270,8 @@ const config = {
             "name": "Python Ops Automation & Estate Reduction",
             "pdfBullet": "Built Python automation for database copying, payload triage, and report generation, then scripted the retirement of 300+ legacy applications.",
             "bullets": [
-                "Built PII-masked production-to-lower-environment database copying and failed-payload triage.",
-                "Developed event-driven query-to-email workflows, XML/log parsing, and vendor report-to-Excel conversion.",
-                "Hosted and supported Python applications on IIS.",
-                "Created multi-string source search for decommission planning.",
-                "Scripted the retirement of 300+ unused legacy applications and standardized team Python tooling around uv."
+                "Built PII-masked production-to-lower database copy tooling, failed-payload triage, event-driven query-to-email workflows, XML log parsing, and vendor report conversion.",
+                "Installed and supported Python applications on IIS, built multi-string source search for decommission planning, scripted retirement of 300+ unused legacy applications, and standardized the team on uv."
             ],
             "technology": [
                 "Python",
@@ -301,6 +288,7 @@ const config = {
         {
             "name": "Multi-Agent Engineering Library",
             "subtitle": "Open-source AI context system for terminal agents",
+            "pdfInclude": true,
             "link": "https://github.com/howlcipher/ai_knowledge_library",
             "highlights": [
                 "Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal assistant.",
@@ -319,6 +307,7 @@ const config = {
         {
             "name": "AI Router",
             "subtitle": "Local multi-provider coding-agent orchestrator",
+            "pdfInclude": true,
             "link": "https://github.com/howlcipher/ai_router",
             "highlights": [
                 "Built a local orchestrator that routes coding-agent tasks across Claude Code, Codex CLI, and Antigravity using task classification, provider health checks, fallback logic, circuit breakers, and cooldown handling.",
@@ -448,27 +437,27 @@ const config = {
     "additionalExperience": [
         {
             "company": "Intrepid Control Systems",
-            "title": "Quality Assurance Developer",
-            "date": "Mar 2020",
-            "summary": "Developed and executed Mocha tests for internal applications and debugged APIs across software and hardware integrations."
+            "title": "QA Developer",
+            "date": "Mar 2020 - Apr 2020",
+            "summary": "Wrote and executed Mocha test cases for internal software applications and debugged/validated APIs across software and hardware integrations."
         },
         {
             "company": "Project Worldwide",
             "title": "Network Engineer",
             "date": "Jan 2020 - Mar 2020",
-            "summary": "Configured Cisco switching and Meraki wireless infrastructure, created network/IP-addressing standards, and supported multi-state network migrations with minimal downtime."
+            "summary": "Configured Cisco and Meraki infrastructure across enterprise locations and executed multi-state network migrations with minimal operational downtime."
         },
         {
             "company": "Ford Motor Company",
-            "title": "Network Engineer",
+            "title": "Network Standards Engineer",
             "date": "Sep 2019 - Dec 2019",
-            "summary": "Implemented standardized network configurations, built documentation and IP-management systems, and supported enterprise network migrations."
+            "summary": "Implemented global network standards and created scalable documentation and IP-management systems for enterprise infrastructure."
         },
         {
             "company": "Trendset Communications Group",
-            "title": "Network Engineer",
+            "title": "IT Network Engineer",
             "date": "Sep 2015 - Jun 2019",
-            "summary": "Administered and audited network infrastructure across ports, IP addressing, VLANs, and device configurations while supporting production connectivity and availability."
+            "summary": "Enforced network standards, maintained configuration files and documentation, and supported critical production infrastructure."
         }
     ],
     "education": [

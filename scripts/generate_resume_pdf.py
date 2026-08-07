@@ -12,7 +12,7 @@ from pathlib import Path
 from fpdf import FPDF
 
 SITE_DIR = Path(__file__).resolve().parent.parent
-MARGIN = 0.75 * 72  # 54pt, matches the source PDF's visual margins
+MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
 
 
 def load_config(config_path: Path | str | None = None) -> dict:
@@ -91,16 +91,16 @@ class ResumePDF(FPDF):
         self.ln(4)
 
     def bullet(self, text):
-        self.set_font("Helvetica", "", 9.5)
+        self.set_font("Helvetica", "", 9)
         indent = 12
         self.set_x(self.l_margin + indent)
-        self.multi_cell(self.w - self.r_margin - self.l_margin - indent, 13, f"- {text}")
+        self.multi_cell(self.w - self.r_margin - self.l_margin - indent, 11.5, f"- {text}")
 
     def bullet_height(self, text, indent=12):
-        self.set_font("Helvetica", "", 9.5)
+        self.set_font("Helvetica", "", 9)
         width = self.w - self.r_margin - self.l_margin - indent
-        lines = self.multi_cell(width, 13, f"- {text}", dry_run=True, output="LINES")
-        return len(lines) * 13
+        lines = self.multi_cell(width, 11.5, f"- {text}", dry_run=True, output="LINES")
+        return len(lines) * 11.5
 
     def keep_together(self, height):
         """Force a page break now if `height` of content wouldn't fit on the
@@ -108,11 +108,11 @@ class ResumePDF(FPDF):
         if self.will_page_break(height):
             self.add_page()
 
-    def wrapped_text_height(self, text, size=9.5):
+    def wrapped_text_height(self, text, size=9):
         self.set_font("Helvetica", "", size)
         width = self.w - self.r_margin - self.l_margin
-        lines = self.multi_cell(width, 13, text, dry_run=True, output="LINES")
-        return len(lines) * 13
+        lines = self.multi_cell(width, 11.5, text, dry_run=True, output="LINES")
+        return len(lines) * 11.5
 
     def indented_text_height(self, text, indent=12, size=8.5, line_h=11):
         self.set_font("Helvetica", "I", size)
@@ -146,89 +146,96 @@ def build(config: dict, out_path: Path):
     pdf.cell(0, 22, p["name"].upper(), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "B", 11)
-    pdf.cell(0, 15, p["title"].replace("//", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
+    tagline = p["tagline"].replace("•", "|")
+    combined_title = f'{p["title"].replace("//", "|")} | {tagline}'
+    pdf.cell(0, 15, combined_title, align="C", new_x="LMARGIN", new_y="NEXT")
 
-    pdf.set_font("Helvetica", "", 9.5)
-    contact = f'{p["phone"]} | {p["email"]} | {p["linkedin"].replace("https://", "")} | {p["github"].replace("https://", "")}'
+    pdf.set_font("Helvetica", "", 9)
+    location_contact = f'{p["location"]} | {p["remote"]} | {p["phone"]} | {p["email"]}'
+    pdf.cell(0, 14, location_contact, align="C", new_x="LMARGIN", new_y="NEXT")
+
+    contact = f'{p["linkedin"].replace("https://", "")} | {p["github"].replace("https://", "")}'
     pdf.cell(0, 14, contact, align="C", new_x="LMARGIN", new_y="NEXT")
 
-    pdf.set_font("Helvetica", "", 9.5)
-    tagline = p["tagline"].replace("•", "|")
-    pdf.cell(0, 14, tagline, align="C", new_x="LMARGIN", new_y="NEXT")
-
     pdf.section_title("Professional Summary")
-    pdf.set_font("Helvetica", "", 9.5)
-    pdf.multi_cell(0, 13, config["summary"])
+    pdf.set_font("Helvetica", "", 9)
+    pdf.multi_cell(0, 11.5, config["summary"])
 
     pdf.section_title("Core Expertise")
     for s in config["skills"]:
-        pdf.set_font("Helvetica", "B", 9.5)
-        pdf.write(13, f'{s["category"]}: ')
-        pdf.set_font("Helvetica", "", 9.5)
+        pdf.set_font("Helvetica", "B", 9)
+        pdf.write(11.5, f'{s["category"]}: ')
+        pdf.set_font("Helvetica", "", 9)
         # Cap the tag list rendered in the PDF (the website shows the full list from
         # resume.json) so six categories of curated skills stay on page 1.
-        pdf.write(13, ", ".join(s["tags"][:7]))
-        pdf.ln(14)
+        pdf.write(11.5, ", ".join(s["tags"][:7]))
+        pdf.ln(11.5)
 
     print("Before Prof Exp:", pdf.get_y()); pdf.section_title("Professional Experience")
-    for job in config["experience"]:
-        block_h = 14 + 13 + sum(pdf.bullet_height(a) for a in job["achievements"]) + 2
-        print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
-        pdf.set_font("Helvetica", "B", 10)
-        pdf.cell(pdf.w - pdf.l_margin - pdf.r_margin - 140, 14, job["company"])
-        pdf.set_font("Helvetica", "", 9.5)
-        pdf.cell(140, 14, job["date"], align="R", new_x="LMARGIN", new_y="NEXT")
+    all_jobs = config.get("experience", []) + config.get("additionalExperience", [])
+    for job in all_jobs:
+        achievements = job.get("achievements", [])
+        if "summary" in job:
+            achievements = [job["summary"]]
+            
+        block_h = 11.5 + 11.5 + sum(pdf.bullet_height(a) for a in achievements) + 2
+        if pdf.will_page_break(block_h):
+            pdf.add_page()
+            pdf.section_title("Professional Experience (Continued)")
+            
+        pdf.keep_together(block_h)
+        pdf.set_font("Helvetica", "B", 9.5)
+        pdf.cell(pdf.w - pdf.l_margin - pdf.r_margin - 140, 11.5, job["company"])
+        pdf.set_font("Helvetica", "", 9)
+        pdf.cell(140, 11.5, job["date"], align="R", new_x="LMARGIN", new_y="NEXT")
         pdf.set_font("Helvetica", "I", 9.5)
         title_line = job["title"] + (f' | {job["location"]}' if job.get("location") else "")
-        pdf.cell(0, 13, title_line, new_x="LMARGIN", new_y="NEXT")
-        for a in job["achievements"]:
+        pdf.cell(0, 11.5, title_line, new_x="LMARGIN", new_y="NEXT")
+        for a in achievements:
             pdf.bullet(a)
         pdf.ln(2)
 
-    # Deliberate page break: Selected Engineering Programs always starts a fresh
-    # page, even when page 1 has unused whitespace, so the section reads as one
-    # coherent block rather than splitting mid-program.
-    pdf.add_page()
-
-    pdf.section_title("Selected Engineering Programs")
+    pdf.section_title("Selected DevOps & Platform Engineering Highlights")
     for prog in config.get("selectedEngineeringPrograms") or []:
-        pdf_bullet = prog.get("pdfBullet") or ""
+        bullets = prog.get("bullets") or []
         tech = prog.get("technology") or []
-        tech_line = ("Technology: " + ", ".join(tech)) if tech else ""
-        block_h = 14
-        if pdf_bullet:
-            block_h += pdf.bullet_height(pdf_bullet)
+        tech_line = ("Tech: " + ", ".join(tech)) if tech else ""
+        block_h = 11.5 + sum(pdf.bullet_height(b) for b in bullets)
         if tech_line:
             block_h += pdf.indented_text_height(tech_line)
         block_h += 2
-        print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
-        pdf.set_font("Helvetica", "B", 10)
-        pdf.cell(0, 14, prog.get("name", ""), new_x="LMARGIN", new_y="NEXT")
-        if pdf_bullet:
-            pdf.bullet(pdf_bullet)
+        if pdf.will_page_break(block_h):
+            pdf.add_page()
+            pdf.section_title("Selected DevOps & Platform Engineering Highlights (Continued)")
+        pdf.keep_together(block_h)
+        pdf.set_font("Helvetica", "B", 9.5)
+        pdf.cell(0, 11.5, prog.get("name", ""), new_x="LMARGIN", new_y="NEXT")
+        for b in bullets:
+            pdf.bullet(b)
         if tech_line:
             pdf.indented_text(tech_line)
         pdf.ln(2)
 
-    additional_experience = config.get("additionalExperience") or []
-    if additional_experience:
-        pdf.section_title("Earlier Technical Experience")
-        for job in additional_experience:
-            summary = job.get("summary", "")
-            block_h = 14 + pdf.wrapped_text_height(summary) + 2
-            print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
+    pdf_projects = [p for p in config.get("projects", []) if p.get("pdfInclude")]
+    if pdf_projects:
+        pdf.section_title("Selected Open-Source Engineering")
+        for proj in pdf_projects:
+            block_h = 11.5 + 11.5 + sum(pdf.bullet_height(h) for h in proj["highlights"]) + 2
+            pdf.keep_together(block_h)
             pdf.set_font("Helvetica", "B", 9.5)
-            header = f'{job.get("company", "")} - {job.get("title", "")} | {job.get("date", "")}'
-            pdf.cell(0, 14, header, new_x="LMARGIN", new_y="NEXT")
-            pdf.set_font("Helvetica", "", 9.5)
-            pdf.multi_cell(0, 13, summary)
+            pdf.cell(0, 11.5, proj["name"], new_x="LMARGIN", new_y="NEXT")
+            pdf.set_font("Helvetica", "", 9)
+            link_clean = proj["link"].replace("https://", "")
+            pdf.cell(0, 11.5, link_clean, new_x="LMARGIN", new_y="NEXT")
+            for h in proj["highlights"]:
+                pdf.bullet(h)
             pdf.ln(2)
 
-    pdf.section_title("Education & Certifications")
-    pdf.set_font("Helvetica", "", 9.5)
+    pdf.section_title("Education & Certification")
+    pdf.set_font("Helvetica", "", 9)
     for e in config["education"]:
         year = f' ({e["year"]})' if e.get("year") else ""
-        pdf.cell(0, 14, f'{e["degree"]} - {e["school"]}{year}', new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(0, 11.5, f'{e["degree"]} - {e["school"]}{year}', new_x="LMARGIN", new_y="NEXT")
 
     pdf.output(str(out_path))
 

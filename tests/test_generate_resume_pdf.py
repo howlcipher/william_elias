@@ -32,7 +32,7 @@ class TestOrphanPreventionLogic:
         """Verify bullet_height returns height for a single-line bullet (13pt per line)."""
         text = "Short achievement line."
         height = pdf.bullet_height(text)
-        assert height == 13
+        assert height == 11.5
 
     def test_bullet_height_multi_line(self, pdf: ResumePDF):
         """Verify bullet_height calculates wrapping line height for long text."""
@@ -44,8 +44,8 @@ class TestOrphanPreventionLogic:
         )
         height = pdf.bullet_height(long_text)
         # Should wrap into multiple lines (e.g. 3 lines = 39pt)
-        assert height > 13
-        assert height % 13 == 0
+        assert height > 11.5
+        assert height % 11.5 == 0
 
     def test_bullet_height_custom_indent(self, pdf: ResumePDF):
         """Verify modifying indent adjusts available width and resulting height."""

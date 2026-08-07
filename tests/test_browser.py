@@ -191,17 +191,19 @@ def test_logo_returns_to_top_and_clears_active_section(page: Page, test_url: str
     page.set_viewport_size({"width": 1440, "height": 900})
     page.goto(test_url)
 
-    page.evaluate("() => document.getElementById('skills').scrollIntoView({block: 'start'})")
+    exp = page.locator("#experience")
+    exp.scroll_into_view_if_needed()
+    page.evaluate("window.scrollBy(0, 100)")
     page.wait_for_timeout(300)
-    skills_link = page.locator('.nav-links a[href="#skills"]')
-    assert skills_link.get_attribute("aria-current") == "page"
+    exp_link = page.locator('.nav-links a[href="#experience"]')
+    assert exp_link.get_attribute("aria-current") == "page"
 
     page.locator("a.logo").click()
     # Smooth-scroll (html { scroll-behavior: smooth }) animates the long
     # skills -> top jump, so poll for settling instead of a fixed sleep.
     page.wait_for_function("() => window.scrollY === 0", timeout=3000)
 
-    assert skills_link.get_attribute("aria-current") is None
+    assert exp_link.get_attribute("aria-current") is None
     hero_box = page.locator("header.hero").bounding_box()
     assert hero_box["y"] >= 0
 
