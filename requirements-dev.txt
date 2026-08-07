@@ -1,5 +1,5 @@
-pytest
-playwright
-pytest-playwright
+pytest==9.0.3
+playwright==1.60.0
+pytest-playwright==0.8.0
 fpdf2==2.8.7
 pypdf==6.14.2

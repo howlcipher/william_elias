@@ -106,3 +106,38 @@ class TestValidateConfig:
         cfg["experience"] = "Not an array"
         with pytest.raises(ValueError, match="must be an array"):
             validate_config(cfg)
+
+    @pytest.mark.parametrize("field", ["name", "phone", "email", "tagline"])
+    def test_validate_config_missing_personal_field(self, field):
+        cfg = load_config()
+        del cfg["personal"][field]
+        with pytest.raises(ValueError, match=f"Validation failed: 'personal.{field}' is required"):
+            validate_config(cfg)
+
+    @pytest.mark.parametrize("field", ["company", "date", "title"])
+    def test_validate_config_missing_experience_field(self, field):
+        cfg = load_config()
+        del cfg["experience"][0][field]
+        with pytest.raises(ValueError, match=f"Validation failed: 'experience\\[0\\].{field}' is required"):
+            validate_config(cfg)
+
+    @pytest.mark.parametrize("field", ["category", "tags"])
+    def test_validate_config_missing_skills_field(self, field):
+        cfg = load_config()
+        del cfg["skills"][0][field]
+        with pytest.raises(ValueError, match=f"Validation failed: 'skills\\[0\\].{field}' is required"):
+            validate_config(cfg)
+
+    @pytest.mark.parametrize("field", ["name", "subtitle"])
+    def test_validate_config_missing_projects_field(self, field):
+        cfg = load_config()
+        del cfg["projects"][0][field]
+        with pytest.raises(ValueError, match=f"Validation failed: 'projects\\[0\\].{field}' is required"):
+            validate_config(cfg)
+
+    @pytest.mark.parametrize("field", ["degree", "school"])
+    def test_validate_config_missing_education_field(self, field):
+        cfg = load_config()
+        del cfg["education"][0][field]
+        with pytest.raises(ValueError, match=f"Validation failed: 'education\\[0\\].{field}' is required"):
+            validate_config(cfg)

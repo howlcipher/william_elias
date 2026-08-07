@@ -132,3 +132,20 @@ def test_mobile_menu_behavior(page: Page, test_url: str):
     
     focused_class = page.evaluate("() => document.activeElement.className")
     assert 'mobile-menu-btn' in focused_class, "Focus should return to mobile menu button after closing"
+
+def test_no_js_content(browser, test_url: str):
+    context = browser.new_context(java_script_enabled=False)
+    page = context.new_page()
+    page.goto(test_url)
+    
+    # Assert core resume content is visible
+    name = page.locator("h1").inner_text()
+    assert "William Elias" in name
+    
+    experience = page.locator(".timeline-content h3").first.inner_text()
+    assert experience
+    
+    skill = page.locator(".skill-category h3").first.inner_text()
+    assert skill
+    
+    context.close()

@@ -176,7 +176,10 @@ def inject(html_content, marker, content):
     end = f'<!-- BUILD:{marker}:END -->'
     pattern = re.escape(start) + r'.*?' + re.escape(end)
     replacement = start + content + end
-    return re.sub(pattern, lambda m: replacement, html_content, flags=re.DOTALL)
+    new_html, count = re.subn(pattern, lambda m: replacement, html_content, flags=re.DOTALL)
+    if count == 0:
+        raise ValueError(f"Marker pair for {marker} not found in HTML content")
+    return new_html
 
 
 def build_html():
@@ -190,7 +193,7 @@ def build_html():
 
     page_title = html.escape(f"{name} | {title}", quote=True)
     escaped_desc = html.escape(f"Resume of {name}, a {title}. {tagline}.", quote=True)
-    escaped_og_desc = html.escape(f"{tagline.capitalize()}.", quote=True)
+    escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}.", quote=True)
 
     with open(SITE_DIR / 'index.html', 'r') as f:
         html_content = f.read()

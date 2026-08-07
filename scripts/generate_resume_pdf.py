@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render William_Elias_Resume.pdf from config.js so the site and PDF share one source of truth.
+"""Render William_Elias_Resume.pdf from resume.json so the site and PDF share one source of truth.
 
 Usage: python3 scripts/generate_resume_pdf.py
 """
@@ -35,25 +35,42 @@ def validate_config(config: dict):
             raise ValueError(f"Validation failed: '{k}' must be an array")
             
     p = config.get("personal", {})
-    if not p.get("title"):
-        raise ValueError("Validation failed: 'personal.title' is required and must be non-empty")
+    for field in ["name", "title", "phone", "email", "tagline"]:
+        if not p.get(field):
+            raise ValueError(f"Validation failed: 'personal.{field}' is required and must be non-empty")
 
     for url_field in ["linkedin", "github"]:
         val = p.get(url_field, "")
         if not (val.startswith("http://") or val.startswith("https://")):
             raise ValueError(f"Validation failed: 'personal.{url_field}' must be a valid URL starting with http:// or https://")
 
+    for i, skill in enumerate(config.get("skills", [])):
+        for field in ["category", "tags"]:
+            if field not in skill or not skill[field]:
+                raise ValueError(f"Validation failed: 'skills[{i}].{field}' is required and must be non-empty")
+
     for i, job in enumerate(config.get("experience", [])):
+        for field in ["company", "date", "title"]:
+            if not job.get(field):
+                raise ValueError(f"Validation failed: 'experience[{i}].{field}' is required and must be non-empty")
         if not isinstance(job.get("achievements"), list):
             raise ValueError(f"Validation failed: 'experience[{i}].achievements' must be an array")
             
     for i, proj in enumerate(config.get("projects", [])):
+        for field in ["name", "subtitle"]:
+            if not proj.get(field):
+                raise ValueError(f"Validation failed: 'projects[{i}].{field}' is required and must be non-empty")
         if not isinstance(proj.get("highlights"), list):
             raise ValueError(f"Validation failed: 'projects[{i}].highlights' must be an array")
         if "link" in proj:
             val = proj["link"]
             if val and not (val.startswith("http://") or val.startswith("https://")):
                 raise ValueError(f"Validation failed: 'projects[{i}].link' must be a valid URL starting with http:// or https://")
+
+    for i, edu in enumerate(config.get("education", [])):
+        for field in ["degree", "school"]:
+            if not edu.get(field):
+                raise ValueError(f"Validation failed: 'education[{i}].{field}' is required and must be non-empty")
 
 class ResumePDF(FPDF):
     def __init__(self):
