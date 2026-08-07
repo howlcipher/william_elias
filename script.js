@@ -168,6 +168,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 4. Scroll-aware navigation: highlight the nav link for the section currently in view.
+    const sectionIds = ['about', 'skills', 'experience', 'programs', 'projects', 'education'];
+    const navLinksById = new Map();
+    document.querySelectorAll('.nav-links a[href^="#"], .mobile-nav-links a[href^="#"]').forEach(link => {
+        const id = link.getAttribute('href').slice(1);
+        if (!navLinksById.has(id)) navLinksById.set(id, []);
+        navLinksById.get(id).push(link);
+    });
+
+    if (typeof IntersectionObserver !== 'undefined' && navLinksById.size) {
+        let activeId = null;
+        const setActiveSection = (id) => {
+            if (id === activeId) return;
+            activeId = id;
+            navLinksById.forEach((links, linkId) => {
+                links.forEach(link => {
+                    if (linkId === id) {
+                        link.classList.add('active');
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.classList.remove('active');
+                        link.removeAttribute('aria-current');
+                    }
+                });
+            });
+        };
+
+        const visibleSections = new Set();
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    visibleSections.add(entry.target.id);
+                } else {
+                    visibleSections.delete(entry.target.id);
+                }
+            });
+            // sectionIds is already in document order, so the first match is the
+            // topmost section currently inside the focus band.
+            setActiveSection(sectionIds.find(id => visibleSections.has(id)) || null);
+        }, {
+            root: null,
+            // Treat a thin horizontal band near the top of the viewport (below the
+            // fixed navbar) as the "in view" zone, rather than the whole viewport.
+            rootMargin: '-15% 0px -70% 0px',
+            threshold: 0
+        });
+
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) sectionObserver.observe(el);
+        });
+    }
+
     function enableColorblindMode() {
         // Read the current theme before overwriting data-theme to 'colorblind', and from the
         // live attribute (not localStorage) so an OS-auto-detected preference that was never

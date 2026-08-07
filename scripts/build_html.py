@@ -20,12 +20,26 @@ def esc(value):
 
 
 def render_hero(personal):
-    parts = ['<div class="hero-copy">']
+    # Flat (unwrapped) children in reading order -- eyebrow, heading, subtitle,
+    # tagline, photo, then contact actions -- so this same DOM order reads
+    # sensibly with CSS off, and the mobile single-column grid (which mirrors
+    # this order in style.css) needs no `order` overrides to place the photo
+    # between the tagline and the CTA row. Desktop uses named grid areas on
+    # `.hero-content` to move the photo into a right-hand column instead.
+    parts = []
     eyebrow_bits = [b for b in (personal.get("location", ""), personal.get("remote", "")) if b]
     parts.append(f'<p class="eyebrow">{esc(" | ".join(eyebrow_bits))}</p>')
     parts.append(f'<h1>{esc(personal.get("name", ""))}</h1>')
     parts.append(f'<h2 class="subtitle">{esc(personal.get("title", ""))}</h2>')
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
+
+    photo = get_valid_url(personal.get('photo'), allow_relative=True)
+    if photo:
+        parts.append(
+            f'<img class="profile-photo" src="{esc(photo)}" '
+            f'alt="Professional headshot of {esc(personal.get("name", ""))}">'
+        )
+
     parts.append('<div class="contact-info">')
 
     if personal.get('email'):
@@ -56,14 +70,6 @@ def render_hero(personal):
         )
 
     parts.append('</div>')
-    parts.append('</div>')
-
-    photo = get_valid_url(personal.get('photo'), allow_relative=True)
-    if photo:
-        parts.append(
-            f'<img class="profile-photo" src="{esc(photo)}" '
-            f'alt="Professional headshot of {esc(personal.get("name", ""))}">'
-        )
 
     return ''.join(parts)
 
@@ -162,14 +168,141 @@ def render_projects(projects):
         link = get_valid_url(proj.get('link'))
         if link:
             card.append(
-                '<div style="margin-top: 1rem;">'
+                '<div class="project-card-footer">'
                 f'<a href="{esc(link)}" target="_blank" rel="noopener noreferrer" class="contact-pill project-link">'
-                '<i class="fas fa-external-link-alt" aria-hidden="true"></i> View Project</a>'
+                '<i class="fas fa-code-branch" aria-hidden="true"></i> View Repository '
+                '<span aria-hidden="true">&rarr;</span></a>'
                 '</div>'
             )
         card.append('</div>')
         parts.append(''.join(card))
     return ''.join(parts)
+
+
+def render_nav_resume(personal):
+    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
+    if not resume_pdf:
+        return ''
+    return (
+        f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="nav-resume-btn">'
+        '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume</a>'
+    )
+
+
+def render_mobile_nav_resume(personal):
+    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
+    if not resume_pdf:
+        return ''
+    return (
+        '<li>'
+        f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="mobile-link mobile-resume-link">'
+        '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume</a>'
+        '</li>'
+    )
+
+
+def render_cta_copy(personal):
+    title = personal.get('title', '')
+    return (
+        f'<p class="cta-copy">{esc(title)} focused on CI/CD automation, production reliability, '
+        'developer tooling, and AI-enabled engineering systems.</p>'
+    )
+
+
+def render_cta_actions(personal):
+    parts = []
+
+    if personal.get('email'):
+        parts.append(
+            f'<a href="mailto:{esc(personal["email"])}" class="contact-pill">'
+            '<i class="fas fa-envelope" aria-hidden="true"></i> Email Me</a>'
+        )
+
+    linkedin = get_valid_url(personal.get('linkedin'))
+    if linkedin:
+        parts.append(
+            f'<a href="{esc(linkedin)}" target="_blank" rel="noopener noreferrer" class="contact-pill">'
+            '<i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>'
+        )
+
+    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
+    if resume_pdf:
+        parts.append(
+            f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="contact-pill primary-action">'
+            '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume PDF</a>'
+        )
+
+    github = get_valid_url(personal.get('github'))
+    if github:
+        parts.append(
+            f'<a href="{esc(github)}" target="_blank" rel="noopener noreferrer" class="contact-pill">'
+            '<i class="fab fa-github" aria-hidden="true"></i> GitHub</a>'
+        )
+
+    return ''.join(parts)
+
+
+def render_json_ld(data):
+    personal = data.get('personal', {})
+    seo = data.get('seo', {})
+    canonical_url = get_valid_url(seo.get('canonicalUrl')) or ''
+
+    photo = get_valid_url(personal.get('photo'), allow_relative=True)
+    image_url = None
+    if photo and canonical_url:
+        image_url = canonical_url.rstrip('/') + '/' + photo.lstrip('/')
+
+    same_as = [u for u in (get_valid_url(personal.get('linkedin')), get_valid_url(personal.get('github'))) if u]
+
+    person = {
+        '@type': 'Person',
+        'name': personal.get('name', ''),
+        'jobTitle': personal.get('title', ''),
+        'description': personal.get('tagline', ''),
+    }
+    if canonical_url:
+        person['url'] = canonical_url
+    if image_url:
+        person['image'] = image_url
+    if same_as:
+        person['sameAs'] = same_as
+    if seo.get('knowsAbout'):
+        person['knowsAbout'] = seo['knowsAbout']
+
+    profile_page = {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        'name': seo.get('siteName') or f"{personal.get('name', '')} | {personal.get('title', '')}",
+        'mainEntity': person,
+    }
+    if canonical_url:
+        profile_page['url'] = canonical_url
+
+    return json.dumps(profile_page, indent=2)
+
+
+def build_robots(canonical_url):
+    canonical_url = canonical_url.rstrip('/') + '/' if canonical_url else ''
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "\n"
+        f"Sitemap: {canonical_url}sitemap.xml\n"
+    )
+    (SITE_DIR / 'robots.txt').write_text(content)
+
+
+def build_sitemap(canonical_url):
+    canonical_url = canonical_url.rstrip('/') + '/' if canonical_url else ''
+    content = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '  <url>\n'
+        f'    <loc>{esc(canonical_url)}</loc>\n'
+        '  </url>\n'
+        '</urlset>\n'
+    )
+    (SITE_DIR / 'sitemap.xml').write_text(content)
 
 
 def render_additional_experience(items):
@@ -220,10 +353,15 @@ def build_html():
     title = personal.get('title', '')
     tagline = personal.get('tagline', '').replace(" // ", ", ")
 
+    seo = data.get('seo', {})
+    canonical_url = get_valid_url(seo.get('canonicalUrl')) or ''
+    site_name = seo.get('siteName') or f"{name} | {title}"
+
     page_title = html.escape(f"{name} | {title}", quote=True)
     seo_suffix = "Azure DevOps, Python, .NET, and applied AI engineering."
     escaped_desc = html.escape(f"Resume of {name}, a {title}. {tagline}. {seo_suffix}", quote=True)
     escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}. {seo_suffix}", quote=True)
+    escaped_site_name = html.escape(site_name, quote=True)
 
     with open(SITE_DIR / 'index.html', 'r') as f:
         html_content = f.read()
@@ -256,6 +394,48 @@ def build_html():
         html_content
     )
 
+    # Update <meta property="og:url">
+    html_content = re.sub(
+        r'<meta property="og:url" content=".*?">',
+        lambda m: f'<meta property="og:url" content="{esc(canonical_url)}">',
+        html_content
+    )
+
+    # Update <meta property="og:type">
+    html_content = re.sub(
+        r'<meta property="og:type" content=".*?">',
+        lambda m: '<meta property="og:type" content="website">',
+        html_content
+    )
+
+    # Update <meta property="og:site_name">
+    html_content = re.sub(
+        r'<meta property="og:site_name" content=".*?">',
+        lambda m: f'<meta property="og:site_name" content="{escaped_site_name}">',
+        html_content
+    )
+
+    # Update <meta name="twitter:title">
+    html_content = re.sub(
+        r'<meta name="twitter:title" content=".*?">',
+        lambda m: f'<meta name="twitter:title" content="{page_title}">',
+        html_content
+    )
+
+    # Update <meta name="twitter:description">
+    html_content = re.sub(
+        r'<meta name="twitter:description" content=".*?">',
+        lambda m: f'<meta name="twitter:description" content="{escaped_og_desc}">',
+        html_content
+    )
+
+    # Update <link rel="canonical">
+    html_content = re.sub(
+        r'<link rel="canonical" href=".*?">',
+        lambda m: f'<link rel="canonical" href="{esc(canonical_url)}">',
+        html_content
+    )
+
     # Pre-render body content sections for SEO/no-JS visibility
     html_content = inject(html_content, 'HERO', render_hero(personal))
     html_content = inject(html_content, 'SUMMARY', render_summary(data.get('summary', '')))
@@ -268,9 +448,17 @@ def build_html():
     html_content = inject(html_content, 'ADDITIONAL', render_additional_experience(data.get('additionalExperience')))
     html_content = inject(html_content, 'EDUCATION', render_education(data.get('education')))
     html_content = inject(html_content, 'FOOTER', esc(data.get('footerText', '')))
+    html_content = inject(html_content, 'NAV_RESUME', render_nav_resume(personal))
+    html_content = inject(html_content, 'MOBILE_NAV_RESUME', render_mobile_nav_resume(personal))
+    html_content = inject(html_content, 'CTA_COPY', render_cta_copy(personal))
+    html_content = inject(html_content, 'CTA_ACTIONS', render_cta_actions(personal))
+    html_content = inject(html_content, 'JSONLD', render_json_ld(data))
 
     with open(SITE_DIR / 'index.html', 'w') as f:
         f.write(html_content)
+
+    build_robots(canonical_url)
+    build_sitemap(canonical_url)
 
 
 if __name__ == "__main__":

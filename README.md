@@ -19,8 +19,8 @@ Open to U.S. Remote Roles
 This is the source for the resume website above: a professional, modern, and highly performant resume site built with HTML, CSS, and vanilla JavaScript.
 
 ## Deployment & Architecture
-- **Data Source**: A single `resume.json` acts as the canonical source of truth for all content.
-- **Generated Assets**: The static `config.js` used by the browser, the SEO meta tags and pre-rendered body content in `index.html`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF renders `resume.json`'s `additionalExperience` array as a compact "Earlier Technical Experience" section, and forces a page break so "Selected Engineering Programs" always starts on page 2.
+- **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
+- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF renders `resume.json`'s `additionalExperience` array as a compact "Earlier Technical Experience" section, and forces a page break so "Selected Engineering Programs" always starts on page 2.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
 - **CI/CD**: GitHub Actions verify tests and ensure that the generated assets are fresh, but CI does not mutate the repository or push commits.
 
@@ -28,8 +28,12 @@ This is the source for the resume website above: a professional, modern, and hig
 - **Config-Driven**: Easily update your experience, skills, and contact info via a single `resume.json` file. No need to touch HTML!
 - **Dark/Light Mode**: User preference is stored in LocalStorage.
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
-- **Mobile Responsive**: Custom hamburger menu and flexible layout.
+- **Mobile Responsive**: Custom hamburger menu and flexible layout, including a hero photo that reflows between the tagline and contact actions on narrow viewports instead of trailing the whole hero.
 - **Print/PDF Download**: Embedded download link for the PDF version.
+- **Persistent Resume CTA**: A distinct "Resume" action lives in both the desktop navbar and the mobile menu, so it's reachable after scrolling past the hero.
+- **Recruiter Contact CTA**: A focused "Open to U.S. Remote Opportunities" section before the footer surfaces Email/LinkedIn/Resume/GitHub actions, generated from `resume.json`.
+- **Scroll-Aware Navigation**: An `IntersectionObserver`-based active state highlights the nav link for the section currently in view (`aria-current="page"` plus a non-color underline indicator).
+- **SEO / Structured Data**: Canonical link, complete OG/Twitter metadata, and a generated JSON-LD `ProfilePage`/`Person` block, plus a generated `robots.txt` and `sitemap.xml`.
 - **View Source**: Hero pill linking straight to this repo.
 - **Terminal-Style Intro**: One-time CSS typewriter reveal on the tagline (respects `prefers-reduced-motion`).
 - **Live "Last Synced" Widget**: Footer pulls the latest commit from the GitHub API and shows it as a relative timestamp + short SHA. Cached in localStorage for 10 minutes to stay polite to GitHub's unauthenticated rate limit.
@@ -47,7 +51,7 @@ All your information is stored in the canonical `resume.json` file. Do not manua
    ```
    *(Note: This requires development dependencies, see below)*
 3. Verify your changes and run the automated tests.
-4. Commit all changes (including the updated `resume.json`, `config.js`, `index.html`, and `William_Elias_Resume.pdf`) and push to `main`. CI will verify that the generated files are up to date before changes are fully integrated.
+4. Commit all changes (including the updated `resume.json`, `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, and `William_Elias_Resume.pdf`) and push to `main`. CI will verify that the generated files are up to date before changes are fully integrated.
 
 ### Adding a New Job
 Find the `experience` array in `resume.json` and add a new object to the top of the list:

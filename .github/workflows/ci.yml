@@ -32,4 +32,4 @@ jobs:
         python scripts/build_config.py
         python scripts/build_html.py
         python scripts/generate_resume_pdf.py
-        git diff --exit-code config.js index.html William_Elias_Resume.pdf
+        git diff --exit-code config.js index.html robots.txt sitemap.xml William_Elias_Resume.pdf

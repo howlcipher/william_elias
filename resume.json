@@ -14,6 +14,26 @@
     "sourceRepo": "https://github.com/howlcipher/william_elias",
     "sourceBranch": "main"
   },
+  "seo": {
+    "canonicalUrl": "https://howlcipher.github.io/william_elias/",
+    "siteName": "William Elias | Senior DevOps / Platform Engineer",
+    "knowsAbout": [
+      "DevOps",
+      "Platform Engineering",
+      "Azure DevOps",
+      "CI/CD",
+      "Release Automation",
+      "Production Reliability",
+      "Python",
+      "Go",
+      "C# / .NET",
+      "PowerShell",
+      "Observability",
+      "Agentic AI",
+      "RAG",
+      "MCP"
+    ]
+  },
   "summary": "Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations, infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an estate of approximately 60 internal web applications, led enterprise credential remediation across 100+ repositories, and co-led production server migration and DR cutover work. Builds secure, heavily tested internal tooling in C#/.NET, Python, PowerShell, and SQL Server, and drove observability standardization with Azure Monitor, Application Insights, and KQL that fed a large-scale application-estate reduction. Works daily in Azure DevOps, GitHub Actions, and Azure Key Vault, and layers applied AI and agentic engineering on top of this platform and automation foundation.",
   "stats": [
     {

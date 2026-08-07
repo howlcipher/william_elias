@@ -166,6 +166,64 @@ def test_six_project_cards_render_with_correct_links(page: Page, test_url: str):
     password_arena_link = page.locator("#projects-target .project-card", has=page.locator("h3", has_text="Password Arena")).locator("a.project-link")
     assert password_arena_link.get_attribute("href") == "https://github.com/howlcipher/password_arena"
 
+def test_scroll_spy_activates_correct_nav_link(page: Page, test_url: str):
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(test_url)
+
+    about_link = page.locator('.nav-links a[href="#about"]')
+    skills_link = page.locator('.nav-links a[href="#skills"]')
+
+    # Force a scroll (scroll_into_view_if_needed is a no-op when the section is
+    # already on screen at this viewport size) to exercise the observer band.
+    page.evaluate("() => document.getElementById('about').scrollIntoView({block: 'start'})")
+    page.wait_for_timeout(300)
+    assert about_link.get_attribute("aria-current") == "page"
+
+    page.evaluate("() => document.getElementById('skills').scrollIntoView({block: 'start'})")
+    page.wait_for_timeout(300)
+    assert skills_link.get_attribute("aria-current") == "page"
+    assert about_link.get_attribute("aria-current") is None
+    # Active state is not conveyed by color alone: a non-color affordance must change too.
+    border_color = skills_link.evaluate("el => getComputedStyle(el).borderBottomColor")
+    assert border_color != "rgba(0, 0, 0, 0)"
+
+def test_resume_action_never_marked_as_active_section(page: Page, test_url: str):
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(test_url)
+    page.evaluate("() => document.getElementById('education').scrollIntoView({block: 'start'})")
+    page.wait_for_timeout(300)
+
+    resume_btn = page.locator(".nav-resume-btn")
+    assert resume_btn.count() == 1
+    assert resume_btn.get_attribute("aria-current") is None
+
+def test_desktop_nav_resume_cta_visible_and_safe_external_link(page: Page, test_url: str):
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(test_url)
+
+    resume_btn = page.locator(".nav-resume-btn")
+    assert resume_btn.is_visible()
+    assert resume_btn.get_attribute("href") == "William_Elias_Resume.pdf"
+    assert resume_btn.get_attribute("rel") == "noopener noreferrer"
+
+def test_mobile_nav_resume_cta_present_in_menu(page: Page, test_url: str):
+    page.set_viewport_size({"width": 375, "height": 667})
+    page.goto(test_url)
+
+    page.locator(".mobile-menu-btn").click()
+    resume_link = page.locator(".mobile-resume-link")
+    assert resume_link.is_visible()
+    assert resume_link.get_attribute("href") == "William_Elias_Resume.pdf"
+
+def test_bottom_recruiter_cta_renders_with_actions(page: Page, test_url: str):
+    page.goto(test_url)
+    cta = page.locator("#contact-cta")
+    cta.scroll_into_view_if_needed()
+
+    assert cta.locator("h2.cta-title").inner_text() == "Open to U.S. Remote Opportunities"
+    actions = cta.locator(".cta-actions a")
+    assert actions.count() >= 3
+
 def test_no_js_content(browser, test_url: str):
     context = browser.new_context(java_script_enabled=False)
     page = context.new_page()
