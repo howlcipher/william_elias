@@ -367,6 +367,39 @@ const config = {
                 "Docker",
                 "pytest"
             ]
+        },
+        {
+            "name": "RedrawUS",
+            "subtitle": "Geospatial data-analysis and visualization platform",
+            "link": "https://github.com/howlcipher/redistricting-map",
+            "highlights": [
+                "Built a multi-state geospatial analysis pipeline combining Python and R simulation tooling with an interactive JavaScript mapping frontend, persistent browser caching, Web Workers, and multi-tier automated testing.",
+                "Uses GeoPandas, Shapely, GerryChain, R redistricting tooling, Leaflet, IndexedDB, Playwright, Vitest, and pytest to process, visualize, and validate large geographic datasets."
+            ],
+            "tags": [
+                "Python",
+                "R",
+                "Geospatial",
+                "JavaScript",
+                "Playwright",
+                "Data Engineering"
+            ]
+        },
+        {
+            "name": "Password Arena",
+            "subtitle": "Adversarial security-learning sandbox",
+            "link": "https://github.com/howlcipher/password_arena",
+            "highlights": [
+                "Built a local attacker-versus-defender simulation for evaluating synthetic password strength and adaptive strategies under bounded attack budgets, with reproducible experiments, security guardrails, metrics, and audit-style reporting.",
+                "Designed explicit safety boundaries around synthetic credentials, bounded guessing, CSPRNG generation, reproducible test modes, and automated quality checks with pytest, mypy, and Ruff."
+            ],
+            "tags": [
+                "Python",
+                "Cybersecurity",
+                "Docker",
+                "pytest",
+                "Simulation"
+            ]
         }
     ],
     "aiEngineeringCapabilities": [

@@ -133,6 +133,22 @@ def test_mobile_menu_behavior(page: Page, test_url: str):
     focused_class = page.evaluate("() => document.activeElement.className")
     assert 'mobile-menu-btn' in focused_class, "Focus should return to mobile menu button after closing"
 
+def test_six_project_cards_render_with_correct_links(page: Page, test_url: str):
+    page.goto(test_url)
+
+    cards = page.locator("#projects-target .project-card")
+    assert cards.count() == 6
+
+    titles = cards.locator("h3").all_inner_texts()
+    assert "RedrawUS" in titles
+    assert "Password Arena" in titles
+
+    redrawus_link = page.locator("#projects-target .project-card", has=page.locator("h3", has_text="RedrawUS")).locator("a.project-link")
+    assert redrawus_link.get_attribute("href") == "https://github.com/howlcipher/redistricting-map"
+
+    password_arena_link = page.locator("#projects-target .project-card", has=page.locator("h3", has_text="Password Arena")).locator("a.project-link")
+    assert password_arena_link.get_attribute("href") == "https://github.com/howlcipher/password_arena"
+
 def test_no_js_content(browser, test_url: str):
     context = browser.new_context(java_script_enabled=False)
     page = context.new_page()

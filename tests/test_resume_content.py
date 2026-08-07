@@ -141,6 +141,58 @@ class TestSelectedEngineeringPrograms:
             assert prog.get("technology"), f"{prog['name']} missing technology"
 
 
+class TestSelectedOpenSourceProjects:
+    EXPECTED_PROJECTS = {
+        "Multi-Agent Engineering Library",
+        "AI Router",
+        "Zero",
+        "Baseball Optimizer",
+        "RedrawUS",
+        "Password Arena",
+    }
+
+    def test_exactly_six_projects_present(self):
+        cfg = load_config()
+        assert len(cfg["projects"]) == 6
+        names = {p["name"] for p in cfg["projects"]}
+        assert names == self.EXPECTED_PROJECTS
+
+    def test_every_project_has_link_highlights_and_tags(self):
+        cfg = load_config()
+        for proj in cfg["projects"]:
+            assert proj.get("link", "").startswith("https://github.com/"), f"{proj['name']} missing a GitHub link"
+            assert proj.get("highlights"), f"{proj['name']} missing highlights"
+            assert proj.get("tags"), f"{proj['name']} missing tags"
+
+    def test_redrawus_links_to_correct_repo_and_avoids_partisan_framing(self):
+        cfg = load_config()
+        proj = next(p for p in cfg["projects"] if p["name"] == "RedrawUS")
+        assert proj["link"] == "https://github.com/howlcipher/redistricting-map"
+        blob = " ".join(proj["highlights"] + [proj["subtitle"]]).lower()
+        for term in ("democrat", "republican", "gerrymander", "partisan"):
+            assert term not in blob, f"RedrawUS card should not lead with '{term}'"
+        for tag in ("Python", "R", "Geospatial", "JavaScript", "Playwright"):
+            assert tag in proj["tags"]
+
+    def test_password_arena_links_to_correct_repo_and_avoids_ai_overclaims(self):
+        cfg = load_config()
+        proj = next(p for p in cfg["projects"] if p["name"] == "Password Arena")
+        assert proj["link"] == "https://github.com/howlcipher/password_arena"
+        blob = " ".join(proj["highlights"] + [proj["subtitle"]]).lower()
+        for term in ("reinforcement learning", "trained ai agent", "autonomous password cracking", "neural network", "llm"):
+            assert term not in blob, f"Password Arena card should not claim '{term}'"
+        assert "agent systems" not in [t.lower() for t in proj["tags"]]
+        for tag in ("Python", "Cybersecurity", "Docker", "pytest"):
+            assert tag in proj["tags"]
+
+    def test_projects_omitted_from_pdf(self, tmp_path):
+        cfg = load_config()
+        pages = _extract_pdf_pages(cfg, tmp_path)
+        blob = "\n".join(pages)
+        assert "RedrawUS" not in blob
+        assert "Password Arena" not in blob
+
+
 class TestNoUnsupportedClaims:
     def test_no_unsupported_cloud_infra_claims(self):
         cfg = load_config()
