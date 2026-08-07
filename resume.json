@@ -34,19 +34,19 @@
       "MCP"
     ]
   },
-  "summary": "Senior DevOps and platform engineer with 10+ years spanning infrastructure and networking, software QA, automation, production operations, and delivery engineering. Built 100+ Azure DevOps CI/CD pipelines across an approximately 60-application estate, and reusable release automation for .NET applications using YAML, Python, PowerShell, IIS, artifacts, environment controls, and approval gates. Hands-on with Azure Monitor, Application Insights, KQL, Key Vault, OAuth/IAM, SQL Server, GitHub Actions, Docker/Helm, and production incident and release workflows. Built automation that reduced processing time by 60% and saved 40+ hours per month, while adding practical AI-assisted engineering systems for grounded knowledge, troubleshooting, and agent workflows.",
+  "summary": "Senior DevOps and platform engineer with 10+ years spanning infrastructure and networking, software QA, automation, production operations, and delivery engineering. Designed the standardized .NET CI/CD and release model for an approximately 60-application estate and created 56 Azure DevOps build/release definitions across 28 applications, with 27 builds verified green and deployment plans dry-run validated before release. Hands-on with Azure DevOps, Python, PowerShell, .NET, IIS, Azure Monitor, Application Insights, KQL, Key Vault, OAuth/IAM, SQL Server, GitHub Actions, Docker/Helm, and production incident and release workflows, plus practical AI-enabled engineering for grounded knowledge, troubleshooting, and agent workflows.",
   "stats": [
     {
       "value": "~60",
-      "label": "Applications in CI/CD delivery-standardization scope"
+      "label": "Applications in CI/CD standardization scope"
+    },
+    {
+      "value": "56",
+      "label": "Build/release definitions created across 28 applications"
     },
     {
       "value": "100+",
       "label": "Repositories credential-remediated"
-    },
-    {
-      "value": "300+",
-      "label": "Legacy applications retired"
     }
   ],
   "skills": [
@@ -150,8 +150,8 @@
       "company": "Stellantis Financial Services US",
       "location": "Auburn Hills, MI \u00b7 Remote",
       "achievements": [
-        "Built and delivered 100+ Azure DevOps CI/CD pipelines and reusable YAML/release automation for .NET applications, using Python and PowerShell for artifact generation, IIS deployment, environment controls, approvals, and repeatable onboarding.",
-        "Designed deployment-safety controls for a large application estate, including repository-to-server/path inventory, dry-run validation, and environment-readiness checks; guardrails caught a mapping defect that could have deployed one application into six incorrect production folders.",
+        "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment plans dry-run validated on the deployment agent.",
+        "Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent delivery defects, including application-pool identity convergence risk, before any application was deployed.",
         "Lead weekly production releases, database migrations, and SLA-driven incident/service-request work through Freshservice and Jira; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
         "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
         "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and load-balancer layers, including a zero-downtime cutover from legacy infrastructure.",
@@ -174,11 +174,12 @@
   "selectedEngineeringPrograms": [
     {
       "name": "CI/CD & Release Engineering",
-      "pdfBullet": "Designed the standard .NET CI/CD and release pattern for a ~60-application, five-server estate with no prior consistent path; 28 of 60 wired and build-verified, 27 green.",
+      "pdfBullet": "Created 56 Azure DevOps build/release definitions across 28 of ~60 applications; 27 builds verified green, 25 deployment plans dry-run verified, zero deployments performed pending go/no-go approval.",
       "bullets": [
-        "Designed the standard .NET build/release pattern for approximately 60 internal web applications across five servers that previously had no consistent deployment path.",
-        "Built a repository-to-server-to-deployment-path inventory, a generator that emits build pipelines, and multi-tier Azure DevOps Classic Release definitions; 28 of 60 applications are wired and build-verified, with 27 currently green.",
-        "Deployment-path dry-run validation caught a generator mapping defect that would have mirrored the wrong application into six production folders; also built reusable Python/.NET pipeline templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
+        "Designed the standard .NET build/release model for ~60 internal web applications across five servers with no prior consistent deployment path; created 56 Azure DevOps build/release definitions (28 build + 28 Classic Release) across 28 applications.",
+        "Executed all 28 builds (27 verified green) with artifacts validated against each release definition; dry-run deployment-path validation passed for 25 of 28 applications on the live deployment agent. Zero applications are deployed through the new framework: builds are manual-triggered and releases require approval above DEV, pending go/no-go on the first real deployment.",
+        "Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence risk, missing-artifact assumptions against a destructive robocopy /MIR step, and false 'done' states from unverified builds.",
+        "Organized 157 Azure DevOps definitions into a new folder convention (95 legacy inventoried/classified); built the repository-to-server-to-deployment-path inventory, the definition generator, reusable Python/.NET templates, and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
       ],
       "technology": [
         "Azure DevOps YAML",

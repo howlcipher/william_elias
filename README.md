@@ -8,9 +8,9 @@ Open to U.S. Remote Roles
 
 | | |
 |---|---|
-| **~60** | Applications in CI/CD delivery-standardization scope |
+| **~60** | Applications in CI/CD standardization scope |
+| **56** | Build/release definitions created across 28 applications |
 | **100+** | Repositories credential-remediated |
-| **300+** | Legacy applications retired |
 
 ---
 
@@ -20,7 +20,7 @@ This is the source for the resume website above: a professional, modern, and hig
 
 ## Deployment & Architecture
 - **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
-- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF renders `resume.json`'s `additionalExperience` array as a compact "Earlier Technical Experience" section, and forces a page break so "Selected Engineering Programs" always starts on page 2.
+- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF combines `experience` and `additionalExperience` into one continuous "Professional Experience" section, renders `selectedEngineeringPrograms` as "Selected DevOps & Platform Engineering Highlights", and includes any `projects` entries with `pdfInclude: true` under "Selected Open-Source Engineering". The generator paginates dynamically (measuring each block's height before placing it) and is tuned to keep the resume to two pages.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
 - **CI/CD**: GitHub Actions verify tests and ensure that the generated assets are fresh, but CI does not mutate the repository or push commits.
 
@@ -68,7 +68,7 @@ Find the `experience` array in `resume.json` and add a new object to the top of 
 }
 ```
 
-Professional depth beyond the four-bullet `experience` entries lives in `selectedEngineeringPrograms` (rendered on the website and, via each entry's compact `pdfBullet`, in the PDF's page-2 "Selected Engineering Programs" section). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; omitted from the PDF to preserve the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
+Professional depth beyond the four-bullet `experience` entries lives in `selectedEngineeringPrograms` (rendered on the website and in the PDF as "Selected DevOps & Platform Engineering Highlights", using each entry's `bullets` array). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
 
 ## Local Development & Validation
 

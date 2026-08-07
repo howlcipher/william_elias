@@ -57,8 +57,8 @@ class TestKeyMetrics:
         cfg = load_config()
         values = {s["value"] for s in cfg["stats"]}
         assert "~60" in values
+        assert "56" in values
         assert "100+" in values
-        assert "300+" in values
         assert len(cfg["stats"]) == 3
 
     def test_estate_scope_not_overstated_as_migrated_or_deployed(self):
@@ -73,16 +73,93 @@ class TestKeyMetrics:
         summary_lower = cfg["summary"].lower()
         assert "approximately 60-application estate" in summary_lower
 
-    def test_summary_claims_100_plus_pipelines(self):
+    def test_summary_does_not_claim_100_plus_pipelines(self):
         cfg = load_config()
-        assert "100+ azure devops ci/cd pipelines" in cfg["summary"].lower()
+        assert "100+ azure devops ci/cd pipelines" not in cfg["summary"].lower()
+        assert "100+ azure devops" not in cfg["summary"].lower()
 
-    def test_cicd_program_preserves_28_of_60_distinction(self):
+    def test_no_100_plus_pipeline_claim_anywhere(self, tmp_path):
+        cfg = load_config()
+        banned = (
+            "100+ azure devops ci/cd pipelines",
+            "100+ azure devops pipelines",
+            "built 100+ azure devops",
+            "100 azure devops ci/cd pipelines",
+        )
+        blob = json.dumps(cfg).lower()
+        for phrase in banned:
+            assert phrase not in blob, f"resume.json still contains '{phrase}'"
+
+        config_js = (SITE_DIR / "config.js").read_text(encoding="utf-8").lower()
+        index_html = (SITE_DIR / "index.html").read_text(encoding="utf-8").lower()
+        for phrase in banned:
+            assert phrase not in config_js, f"config.js still contains '{phrase}'"
+            assert phrase not in index_html, f"index.html still contains '{phrase}'"
+
+        pages = _extract_pdf_pages(cfg, tmp_path)
+        pdf_blob = "\n".join(pages).lower()
+        for phrase in banned:
+            assert phrase not in pdf_blob, f"PDF still contains '{phrase}'"
+
+    def test_verified_cicd_rollout_numbers_present(self, tmp_path):
+        cfg = load_config()
+        blob = json.dumps(cfg)
+        assert "56 Azure DevOps build/release definitions" in blob
+        assert "28 applications" in blob
+        assert "27" in blob
+        assert "25 deployment plans" in blob or "25 of 28" in blob
+
+        pages = _extract_pdf_pages(cfg, tmp_path)
+        pdf_blob = "\n".join(pages)
+        assert "56 Azure DevOps" in pdf_blob
+        assert "28 applications" in pdf_blob
+        assert "27" in pdf_blob
+
+    def test_no_deployment_completion_implied(self):
+        cfg = load_config()
+        blob = json.dumps(cfg).lower()
+        banned_phrases = (
+            "deployed 28 applications",
+            "rolled out 28 applications",
+            "migrated 28 applications to production",
+            "production deployments completed",
+            "28 applications deployed",
+            "28 applications to production",
+        )
+        for phrase in banned_phrases:
+            assert phrase not in blob, f"resume.json implies deployment via '{phrase}'"
+        assert "zero applications" in blob or "zero deployments" in blob
+
+    def test_estate_organization_numbers_kept_separate_from_created_definitions(self):
         cfg = load_config()
         cicd = next(p for p in cfg["selectedEngineeringPrograms"] if "CI/CD" in p["name"])
         blob = json.dumps(cicd)
-        assert "28 of 60" in blob
+        assert "157" in blob
+        assert "95" in blob
+        # 157/95 describe organization/inventory, not creation -- guard against
+        # phrasing that would fold them into the "56 created" claim.
+        assert "157 azure devops build/release definitions created" not in blob.lower()
+        assert "built 157" not in blob.lower()
+
+    def test_credential_remediation_metric_intact(self):
+        cfg = load_config()
+        values = {s["value"] for s in cfg["stats"]}
+        assert "100+" in values
+        stats_blob = json.dumps(cfg["stats"])
+        assert "credential" in stats_blob.lower() or "repositories" in stats_blob.lower()
+        summary_and_experience = cfg["summary"] + json.dumps(cfg["experience"])
+        assert "100+ repositories" in summary_and_experience
+
+    def test_cicd_program_preserves_verified_metrics(self):
+        cfg = load_config()
+        cicd = next(p for p in cfg["selectedEngineeringPrograms"] if "CI/CD" in p["name"])
+        blob = json.dumps(cicd)
+        assert "56" in blob
+        assert "28" in blob
         assert "27" in blob
+        assert "25" in blob
+        assert "six" in blob.lower()
+        assert "zero" in blob.lower()
 
 
 class TestCoreExpertiseCategories:
@@ -211,6 +288,43 @@ class TestNoUnsupportedClaims:
         assert re.search(r"\bAWS\b", blob) is None
         assert re.search(r"\bGCP\b", blob) is None
 
+    def test_no_kubernetes_family_terms_anywhere(self, tmp_path):
+        # Kubernetes/K8s/AKS/EKS/GKE must not appear as a general skill, in the
+        # summary, skills categories, or SEO keywords -- the defensible container
+        # experience is Docker/Docker Compose/Helm/Rancher Desktop/IIS ARR only.
+        cfg = load_config()
+        blob = json.dumps(cfg)
+        for term in ("Kubernetes", "AKS", "EKS", "GKE"):
+            assert term not in blob, f"'{term}' should not appear anywhere in resume.json"
+        assert re.search(r"\bK8s\b", blob, re.IGNORECASE) is None
+
+        config_js = (SITE_DIR / "config.js").read_text(encoding="utf-8")
+        index_html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+        for term in ("Kubernetes", "AKS", "EKS", "GKE"):
+            assert term not in config_js
+            assert term not in index_html
+
+        pages = _extract_pdf_pages(cfg, tmp_path)
+        pdf_blob = "\n".join(pages)
+        for term in ("Kubernetes", "AKS", "EKS", "GKE"):
+            assert term not in pdf_blob
+
+    def test_seo_knows_about_excludes_kubernetes(self):
+        cfg = load_config()
+        knows_about = cfg.get("seo", {}).get("knowsAbout", [])
+        for term in knows_about:
+            assert "kubernetes" not in term.lower()
+
+    def test_helm_and_docker_retained_as_infrastructure_tags(self):
+        # Helm/Docker/Docker Compose/Rancher Desktop are real, scoped experience
+        # (packaging + a WSL2 container-host POC) and should remain.
+        cfg = load_config()
+        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Networking")
+        assert "Docker" in infra["tags"]
+        assert "Docker Compose" in infra["tags"]
+        assert "Helm" in infra["tags"]
+        assert "Rancher Desktop" in infra["tags"]
+
     def test_no_automated_identity_lifecycle_claim(self):
         cfg = load_config()
         blob = json.dumps(cfg).lower()
@@ -270,6 +384,17 @@ class TestPdfLayout:
         for job in cfg["additionalExperience"]:
             assert job["company"] in blob
             assert job["title"] in blob
+
+    def test_all_six_employers_present_in_pdf(self, tmp_path):
+        cfg = load_config()
+        pages = _extract_pdf_pages(cfg, tmp_path)
+        blob = "\n".join(pages)
+        expected_employers = [job["company"] for job in cfg["experience"]] + [
+            job["company"] for job in cfg["additionalExperience"]
+        ]
+        assert len(expected_employers) == 6
+        for company in expected_employers:
+            assert company in blob, f"'{company}' missing from generated PDF"
 
 
 class TestReadmeRecruiterFacing:
