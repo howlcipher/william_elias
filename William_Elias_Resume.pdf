@@ -27,7 +27,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 5716
+/Length 6046
 >>
 stream
 2 J
@@ -45,75 +45,78 @@ BT 56.83 652.70 Td (PROFESSIONAL SUMMARY) Tj ET
 BT /F2 9.50 Tf ET
 q BT 56.83 635.65 Td 5.029 Tw (Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations,) Tj ET Q
 q BT 56.83 622.65 Td 0.481 Tw (infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an) Tj ET Q
-q BT 56.83 609.65 Td 0.946 Tw (estate of approximately 60 internal web applications, led enterprise credential remediation across 100+ repositories,) Tj ET Q
-q BT 56.83 596.65 Td 0.193 Tw (and co-led production server migration and DR cutover work. Builds secure, heavily tested internal tooling in C#/.NET,) Tj ET Q
-q BT 56.83 583.65 Td 0.073 Tw (Python, PowerShell, and SQL Server, and drove observability standardization with Azure Monitor, Application Insights,) Tj ET Q
-q BT 56.83 570.65 Td 0.290 Tw (and KQL that fed a large-scale application-estate reduction. Works daily in Azure DevOps, GitHub Actions, and Azure) Tj ET Q
-BT 56.83 557.65 Td (Key Vault, and layers applied AI and agentic engineering on top of this platform and automation foundation.) Tj ET
+q BT 56.83 609.65 Td 0.924 Tw (estate of ~60 internal web applications, remediated exposed credentials across 100+ repositories, co-led production) Tj ET Q
+q BT 56.83 596.65 Td 1.841 Tw (server migration and DR cutovers, and scripted the retirement of 300+ legacy applications. Builds secure, tested) Tj ET Q
+q BT 56.83 583.65 Td 1.400 Tw (internal tooling in C#/.NET, Python, PowerShell, Go, and SQL Server; helped establish Application Insights as the) Tj ET Q
+q BT 56.83 570.65 Td 1.495 Tw (team observability standard and drove adoption across legacy applications. Hands-on with Azure DevOps, GitHub) Tj ET Q
+q BT 56.83 557.65 Td 1.575 Tw (Actions, Azure Key Vault, Azure Monitor, KQL, and applied AI/agentic engineering layered on top of a production) Tj ET Q
+BT 56.83 544.65 Td (platform and automation foundation.) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 533.70 Td (CORE EXPERTISE) Tj ET
-54.00 530.00 m 558.00 530.00 l S
+BT 56.83 520.70 Td (CORE EXPERTISE) Tj ET
+54.00 517.00 m 558.00 517.00 l S
 BT /F1 9.50 Tf ET
-BT 56.83 516.65 Td (DevOps & Release Engineering: ) Tj ET
+BT 56.83 503.65 Td (DevOps & Release Engineering: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 204.13 516.65 Td (Azure DevOps YAML, Azure DevOps Classic Release, Deployment Groups, Azure) Tj ET
-BT 56.83 503.65 Td (DevOps REST APIs, CI/CD, Reusable Pipeline Templates, Pipeline as Code, Release Gates, GitHub Actions) Tj ET
+BT 204.13 503.65 Td (Azure DevOps YAML, Azure DevOps Classic Release, Deployment Groups, Azure) Tj ET
+BT 56.83 490.65 Td (DevOps REST APIs, CI/CD, Reusable Pipeline Templates, Pipeline as Code, Release Gates, GitHub Actions) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 489.65 Td (Automation & Software Engineering: ) Tj ET
+BT 56.83 476.65 Td (Automation & Software Engineering: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 225.21 489.65 Td (Python, PowerShell, C#, Go, Rust, Axum, Bash, SQL, ASP.NET Core) Tj ET
+BT 225.21 476.65 Td (Python, PowerShell, C#, Go, Rust, TypeScript, JavaScript, Bash, SQL) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 475.65 Td (Security & Identity: ) Tj ET
+BT 56.83 462.65 Td (Security & Identity: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 146.05 475.65 Td (Azure Key Vault, Managed Identity, OAuth 2.0, IAM, Credential Discovery, Credential) Tj ET
-BT 56.83 462.65 Td (Classification, Git History Rewriting, Credential Remediation, Credential Scanning) Tj ET
+BT 146.05 462.65 Td (Azure Key Vault, Managed Identity, OAuth 2.0, IAM, Credential Discovery, Credential) Tj ET
+BT 56.83 449.65 Td (Classification, Git History Rewriting, Credential Remediation, Credential Scanning) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 448.65 Td (Observability & Reliability: ) Tj ET
+BT 56.83 435.65 Td (Observability & Reliability: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 179.85 448.65 Td (Application Insights, Azure Monitor, KQL, Serilog, Structured Logging, Log Analysis,) Tj ET
-BT 56.83 435.65 Td (Incident Triage, RCA, SLA-Driven Support) Tj ET
+BT 179.85 435.65 Td (Application Insights, Azure Monitor, KQL, Serilog, Structured Logging, Log Analysis,) Tj ET
+BT 56.83 422.65 Td (Incident Triage, RCA, SLA-Driven Support) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 421.65 Td (Infrastructure & Networking: ) Tj ET
+BT 56.83 408.65 Td (Infrastructure & Networking: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 188.27 421.65 Td (Windows Server, IIS, Active Directory, SQL Server, Load Balancers, Firewalls, Cisco,) Tj ET
-BT 56.83 408.65 Td (Meraki, Docker) Tj ET
+BT 188.27 408.65 Td (Windows Server, IIS, Active Directory, SQL Server, Load Balancers, Firewalls, Cisco,) Tj ET
+BT 56.83 395.65 Td (Meraki, Docker) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 394.65 Td (AI & Agentic Systems: ) Tj ET
+BT 56.83 381.65 Td (AI & Agentic Systems: ) Tj ET
 BT /F2 9.50 Tf ET
-BT 160.83 394.65 Td (Claude Code, OpenAI Codex CLI, Gemini CLI / Antigravity, Ollama / Local LLMs, Model) Tj ET
-BT 56.83 381.65 Td (Context Protocol \(MCP\), RAG, ChromaDB, Vector Search & Embeddings, Multi-Agent Orchestration) Tj ET
+BT 160.83 381.65 Td (Claude Code, OpenAI Codex CLI, Gemini CLI / Antigravity, Ollama / Local LLMs, Model) Tj ET
+BT 56.83 368.65 Td (Context Protocol \(MCP\), RAG, ChromaDB, Vector Search & Embeddings, Multi-Agent Orchestration) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 356.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
-54.00 353.00 m 558.00 353.00 l S
+BT 56.83 343.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
+54.00 340.00 m 558.00 340.00 l S
 BT /F1 10.00 Tf ET
-BT 56.83 339.00 Td (Stellantis Financial Services) Tj ET
+BT 56.83 326.00 Td (Stellantis Financial Services US) Tj ET
 BT /F2 9.50 Tf ET
-BT 473.85 339.15 Td (Feb 2023 - Present) Tj ET
+BT 473.85 326.15 Td (Feb 2023 - Present) Tj ET
 BT /F3 9.50 Tf ET
-BT 56.83 325.65 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI) Tj ET
+BT 56.83 312.65 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI · Remote) Tj ET
 BT /F2 9.50 Tf ET
-q BT 68.83 312.65 Td 2.069 Tw (- Engineering work spans CI/CD standardization, production releases, secrets remediation, internal application) Tj ET Q
-q BT 68.83 299.65 Td 2.487 Tw (development, observability, server migration, and application-estate reduction in a regulated financial-services) Tj ET Q
-BT 68.83 286.65 Td (environment.) Tj ET
-q BT 68.83 273.65 Td 0.448 Tw (- Designed the deployment automation and release guardrails behind an approximately 60-application .NET estate) Tj ET Q
-BT 68.83 260.65 Td (across five servers, replacing inconsistent, ad hoc deployment paths with a standard build/release pattern.) Tj ET
-q BT 68.83 247.65 Td 0.084 Tw (- Build secure, heavily tested operational tooling, including credential-remediation utilities and an internal operations) Tj ET Q
-BT 68.83 234.65 Td (portal, using C#/.NET, Python, PowerShell, SQL Server, and Azure services.) Tj ET
-q BT 68.83 221.65 Td 4.067 Tw (- Handle production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and) Tj ET Q
-BT 68.83 208.65 Td (load-balancer teams to keep environments stable and release-ready.) Tj ET
+q BT 68.83 299.65 Td 1.457 Tw (- Engineering work spans CI/CD and release standardization, production reliability, secrets remediation, internal) Tj ET Q
+q BT 68.83 286.65 Td 6.340 Tw (platform development, observability, server migration, and application-estate reduction in a regulated) Tj ET Q
+BT 68.83 273.65 Td (financial-services environment.) Tj ET
+q BT 68.83 260.65 Td 1.511 Tw (- Designed the standard .NET build and release pattern for an estate of ~60 internal apps across five servers,) Tj ET Q
+BT 68.83 247.65 Td (replacing inconsistent deployment paths with reusable automation, release definitions, and deployment guardrails.) Tj ET
+q BT 68.83 234.65 Td 3.942 Tw (- Build production operational tooling with C#/.NET, Python, PowerShell, Go, and SQL Server, including) Tj ET Q
+q BT 68.83 221.65 Td 0.329 Tw (credential-remediation utilities, Key Vault migration tooling, and a modular internal support platform with automated) Tj ET Q
+BT 68.83 208.65 Td (testing, auditability, and security controls.) Tj ET
+q BT 68.83 195.65 Td 3.822 Tw (- Support production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and) Tj ET Q
+BT 68.83 182.65 Td (load-balancer teams to maintain environment readiness and production reliability.) Tj ET
 BT /F1 10.00 Tf ET
-BT 56.83 193.00 Td (HBK Engineering Solutions) Tj ET
+BT 56.83 167.00 Td (HBK - Hottinger Brüel & Kjær) Tj ET
 BT /F2 9.50 Tf ET
-BT 470.67 193.15 Td (Jul 2020 - Feb 2023) Tj ET
+BT 470.67 167.15 Td (Jul 2020 - Feb 2023) Tj ET
 BT /F3 9.50 Tf ET
-BT 56.83 179.65 Td (DevOps Engineer - Python Automation | Southfield, MI) Tj ET
+BT 56.83 153.65 Td (DevOps Engineer - Python Automation | Southfield, Michigan / Remote) Tj ET
 BT /F2 9.50 Tf ET
-BT 68.83 166.65 Td (- Created a Python and Tkinter XML-output automation system that reduced data-processing time by 60%.) Tj ET
-BT 68.83 153.65 Td (- Automated SQL output processing with Python, saving more than 40 hours per month.) Tj ET
-q BT 68.83 140.65 Td 0.882 Tw (- Developed database configuration tools that streamlined customer onboarding workflows and reduced repetitive) Tj ET Q
-BT 68.83 127.65 Td (setup.) Tj ET
-q BT 68.83 114.65 Td 0.848 Tw (- Built NSIS installer and uninstaller packages, maintained Git workflows and developer tooling, and provided live) Tj ET Q
-BT 68.83 101.65 Td (technical troubleshooting for customers.) Tj ET
+BT 68.83 140.65 Td (- Built Python-based XML processing automation that reduced data-processing time by 60%.) Tj ET
+q BT 68.83 127.65 Td 0.215 Tw (- Automated SQL output processing and operational workflows with Python, saving 40+ hours per month of manual) Tj ET Q
+BT 68.83 114.65 Td (effort.) Tj ET
+q BT 68.83 101.65 Td 1.672 Tw (- Developed database configuration and automation tooling that streamlined customer onboarding and reduced) Tj ET Q
+BT 68.83 88.65 Td (repetitive environment setup.) Tj ET
+q BT 68.83 75.65 Td 0.047 Tw (- Built NSIS installer/uninstaller packages, maintained Git-based development workflows and tooling, and supported) Tj ET Q
+BT 68.83 62.65 Td (application deployment and technical troubleshooting.) Tj ET
 
 endstream
 endobj
@@ -127,7 +130,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 4935
+/Length 5259
 >>
 stream
 2 J
@@ -183,29 +186,33 @@ BT /F1 11.00 Tf ET
 BT 56.83 349.70 Td (EARLIER TECHNICAL EXPERIENCE) Tj ET
 54.00 346.00 m 558.00 346.00 l S
 BT /F1 9.50 Tf ET
-BT 56.83 332.15 Td (Intrepid Control Systems - QA Developer | Mar 2020 - Apr 2020) Tj ET
+BT 56.83 332.15 Td (Intrepid Control Systems - Quality Assurance Developer | Mar 2020) Tj ET
 BT /F2 9.50 Tf ET
-BT 56.83 318.65 Td (Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
+q BT 56.83 318.65 Td 1.650 Tw (Developed and executed Mocha tests for internal applications and debugged APIs across software and hardware) Tj ET Q
+BT 56.83 305.65 Td (integrations.) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 303.15 Td (Project Worldwide - Network Engineer | Jan 2020 - Mar 2020) Tj ET
+BT 56.83 290.15 Td (Project Worldwide - Network Engineer | Jan 2020 - Mar 2020) Tj ET
 BT /F2 9.50 Tf ET
-BT 56.83 289.65 Td (Configured Cisco and Meraki infrastructure and executed multi-state migrations with minimal downtime.) Tj ET
+q BT 56.83 276.65 Td 3.953 Tw (Configured Cisco switching and Meraki wireless infrastructure, created network/IP-addressing standards, and) Tj ET Q
+BT 56.83 263.65 Td (supported multi-state network migrations with minimal downtime.) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 274.15 Td (Ford Motor Company - Network Standards Engineer | Sep 2019 - Dec 2019) Tj ET
+BT 56.83 248.15 Td (Ford Motor Company - Network Engineer | Sep 2019 - Dec 2019) Tj ET
 BT /F2 9.50 Tf ET
-BT 56.83 260.65 Td (Implemented global network standards and created scalable documentation and IP-management systems.) Tj ET
+q BT 56.83 234.65 Td 0.885 Tw (Implemented standardized network configurations, built documentation and IP-management systems, and supported) Tj ET Q
+BT 56.83 221.65 Td (enterprise network migrations.) Tj ET
 BT /F1 9.50 Tf ET
-BT 56.83 245.15 Td (Trendset Communications Group - IT Network Engineer | Sep 2015 - Jun 2019) Tj ET
+BT 56.83 206.15 Td (Trendset Communications Group - Network Engineer | Sep 2015 - Jun 2019) Tj ET
 BT /F2 9.50 Tf ET
-BT 56.83 231.65 Td (Enforced network standards, maintained configuration files, and supported critical production infrastructure.) Tj ET
+q BT 56.83 192.65 Td 0.520 Tw (Administered and audited network infrastructure across ports, IP addressing, VLANs, and device configurations while) Tj ET Q
+BT 56.83 179.65 Td (supporting production connectivity and availability.) Tj ET
 BT /F1 11.00 Tf ET
-BT 56.83 205.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
-54.00 202.00 m 558.00 202.00 l S
+BT 56.83 153.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
+54.00 150.00 m 558.00 150.00 l S
 BT /F2 9.50 Tf ET
-BT 56.83 188.15 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
-BT 56.83 174.15 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT 56.83 160.15 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 56.83 146.15 Td (Cisco Certified Network Associate \(CCNA\) - Previously held - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 56.83 136.15 Td (M.S. Cyber Defense - In Progress - Dakota State University) Tj ET
+BT 56.83 122.15 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT 56.83 108.15 Td (B.B.A. Business Administration - Rochester College) Tj ET
+BT 56.83 94.15 Td (CCNA - previously held - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -264,21 +271,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000292 00000 n 
-0000006060 00000 n 
-0000006141 00000 n 
-0000011128 00000 n 
-0000011230 00000 n 
-0000011327 00000 n 
-0000011432 00000 n 
-0000011540 00000 n 
-0000011648 00000 n 
+0000006390 00000 n 
+0000006471 00000 n 
+0000011782 00000 n 
+0000011884 00000 n 
+0000011981 00000 n 
+0000012086 00000 n 
+0000012194 00000 n 
+0000012302 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<E0CEB711B9C9D2987A0694C72FA71E49><E0CEB711B9C9D2987A0694C72FA71E49>]
+/ID [<DEB19C4791D7059DDC54D1A410C78E31><DEB19C4791D7059DDC54D1A410C78E31>]
 >>
 startxref
-11794
+12448
 %%EOF

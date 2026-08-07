@@ -170,10 +170,10 @@ def build(config: dict, out_path: Path):
         pdf.write(13, ", ".join(s["tags"][:9]))
         pdf.ln(14)
 
-    pdf.section_title("Professional Experience")
+    print("Before Prof Exp:", pdf.get_y()); pdf.section_title("Professional Experience")
     for job in config["experience"]:
         block_h = 14 + 13 + sum(pdf.bullet_height(a) for a in job["achievements"]) + 2
-        pdf.keep_together(block_h)
+        print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(pdf.w - pdf.l_margin - pdf.r_margin - 140, 14, job["company"])
         pdf.set_font("Helvetica", "", 9.5)
@@ -201,7 +201,7 @@ def build(config: dict, out_path: Path):
         if tech_line:
             block_h += pdf.indented_text_height(tech_line)
         block_h += 2
-        pdf.keep_together(block_h)
+        print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(0, 14, prog.get("name", ""), new_x="LMARGIN", new_y="NEXT")
         if pdf_bullet:
@@ -216,7 +216,7 @@ def build(config: dict, out_path: Path):
         for job in additional_experience:
             summary = job.get("summary", "")
             block_h = 14 + pdf.wrapped_text_height(summary) + 2
-            pdf.keep_together(block_h)
+            print("Block h:", block_h, "will page break:", pdf.will_page_break(block_h)); pdf.keep_together(block_h)
             pdf.set_font("Helvetica", "B", 9.5)
             header = f'{job.get("company", "")} - {job.get("title", "")} | {job.get("date", "")}'
             pdf.cell(0, 14, header, new_x="LMARGIN", new_y="NEXT")

@@ -34,7 +34,7 @@ const config = {
             "MCP"
         ]
     },
-    "summary": "Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations, infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an estate of approximately 60 internal web applications, led enterprise credential remediation across 100+ repositories, and co-led production server migration and DR cutover work. Builds secure, heavily tested internal tooling in C#/.NET, Python, PowerShell, and SQL Server, and drove observability standardization with Azure Monitor, Application Insights, and KQL that fed a large-scale application-estate reduction. Works daily in Azure DevOps, GitHub Actions, and Azure Key Vault, and layers applied AI and agentic engineering on top of this platform and automation foundation.",
+    "summary": "Senior DevOps and platform engineer with 10+ years spanning software delivery, production operations, infrastructure, networking, databases, and automation. Designed the standard .NET CI/CD and release pattern for an estate of ~60 internal web applications, remediated exposed credentials across 100+ repositories, co-led production server migration and DR cutovers, and scripted the retirement of 300+ legacy applications. Builds secure, tested internal tooling in C#/.NET, Python, PowerShell, Go, and SQL Server; helped establish Application Insights as the team observability standard and drove adoption across legacy applications. Hands-on with Azure DevOps, GitHub Actions, Azure Key Vault, Azure Monitor, KQL, and applied AI/agentic engineering layered on top of a production platform and automation foundation.",
     "stats": [
         {
             "value": "~60",
@@ -80,12 +80,14 @@ const config = {
                 "C#",
                 "Go",
                 "Rust",
-                "Axum",
+                "TypeScript",
+                "JavaScript",
                 "Bash",
                 "SQL",
                 "ASP.NET Core",
                 "Razor Pages",
                 "FastAPI",
+                "Axum",
                 "REST APIs",
                 "SQLite",
                 "SQL Server",
@@ -178,25 +180,25 @@ const config = {
         {
             "date": "Feb 2023 - Present",
             "title": "Production Support Engineer - DevOps & Automation",
-            "company": "Stellantis Financial Services",
-            "location": "Auburn Hills, MI",
+            "company": "Stellantis Financial Services US",
+            "location": "Auburn Hills, MI \u00b7 Remote",
             "achievements": [
-                "Engineering work spans CI/CD standardization, production releases, secrets remediation, internal application development, observability, server migration, and application-estate reduction in a regulated financial-services environment.",
-                "Designed the deployment automation and release guardrails behind an approximately 60-application .NET estate across five servers, replacing inconsistent, ad hoc deployment paths with a standard build/release pattern.",
-                "Build secure, heavily tested operational tooling, including credential-remediation utilities and an internal operations portal, using C#/.NET, Python, PowerShell, SQL Server, and Azure services.",
-                "Handle production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and load-balancer teams to keep environments stable and release-ready."
+                "Engineering work spans CI/CD and release standardization, production reliability, secrets remediation, internal platform development, observability, server migration, and application-estate reduction in a regulated financial-services environment.",
+                "Designed the standard .NET build and release pattern for an estate of ~60 internal apps across five servers, replacing inconsistent deployment paths with reusable automation, release definitions, and deployment guardrails.",
+                "Build production operational tooling with C#/.NET, Python, PowerShell, Go, and SQL Server, including credential-remediation utilities, Key Vault migration tooling, and a modular internal support platform with automated testing, auditability, and security controls.",
+                "Support production incidents and releases while coordinating across Windows, DBA, IAM, firewall, and load-balancer teams to maintain environment readiness and production reliability."
             ]
         },
         {
             "date": "Jul 2020 - Feb 2023",
             "title": "DevOps Engineer - Python Automation",
-            "company": "HBK Engineering Solutions",
-            "location": "Southfield, MI",
+            "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
+            "location": "Southfield, Michigan / Remote",
             "achievements": [
-                "Created a Python and Tkinter XML-output automation system that reduced data-processing time by 60%.",
-                "Automated SQL output processing with Python, saving more than 40 hours per month.",
-                "Developed database configuration tools that streamlined customer onboarding workflows and reduced repetitive setup.",
-                "Built NSIS installer and uninstaller packages, maintained Git workflows and developer tooling, and provided live technical troubleshooting for customers."
+                "Built Python-based XML processing automation that reduced data-processing time by 60%.",
+                "Automated SQL output processing and operational workflows with Python, saving 40+ hours per month of manual effort.",
+                "Developed database configuration and automation tooling that streamlined customer onboarding and reduced repetitive environment setup.",
+                "Built NSIS installer/uninstaller packages, maintained Git-based development workflows and tooling, and supported application deployment and technical troubleshooting."
             ]
         }
     ],
@@ -471,33 +473,33 @@ const config = {
     "additionalExperience": [
         {
             "company": "Intrepid Control Systems",
-            "title": "QA Developer",
-            "date": "Mar 2020 - Apr 2020",
-            "summary": "Wrote Mocha tests and debugged APIs across software and hardware integrations."
+            "title": "Quality Assurance Developer",
+            "date": "Mar 2020",
+            "summary": "Developed and executed Mocha tests for internal applications and debugged APIs across software and hardware integrations."
         },
         {
             "company": "Project Worldwide",
             "title": "Network Engineer",
             "date": "Jan 2020 - Mar 2020",
-            "summary": "Configured Cisco and Meraki infrastructure and executed multi-state migrations with minimal downtime."
+            "summary": "Configured Cisco switching and Meraki wireless infrastructure, created network/IP-addressing standards, and supported multi-state network migrations with minimal downtime."
         },
         {
             "company": "Ford Motor Company",
-            "title": "Network Standards Engineer",
+            "title": "Network Engineer",
             "date": "Sep 2019 - Dec 2019",
-            "summary": "Implemented global network standards and created scalable documentation and IP-management systems."
+            "summary": "Implemented standardized network configurations, built documentation and IP-management systems, and supported enterprise network migrations."
         },
         {
             "company": "Trendset Communications Group",
-            "title": "IT Network Engineer",
+            "title": "Network Engineer",
             "date": "Sep 2015 - Jun 2019",
-            "summary": "Enforced network standards, maintained configuration files, and supported critical production infrastructure."
+            "summary": "Administered and audited network infrastructure across ports, IP addressing, VLANs, and device configurations while supporting production connectivity and availability."
         }
     ],
     "education": [
         {
             "icon": "fa-user-graduate",
-            "degree": "M.S. Cyber Defense (In Progress)",
+            "degree": "M.S. Cyber Defense - In Progress",
             "school": "Dakota State University",
             "year": ""
         },
@@ -515,7 +517,7 @@ const config = {
         },
         {
             "icon": "fa-certificate",
-            "degree": "Cisco Certified Network Associate (CCNA) - Previously held",
+            "degree": "CCNA - previously held",
             "school": "Cisco Networking Academy",
             "year": "2014 - 2017"
         }

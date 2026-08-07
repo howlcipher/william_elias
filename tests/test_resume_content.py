@@ -43,7 +43,7 @@ class TestHeadlineAndPositioning:
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
-        stellantis = next(j for j in cfg["experience"] if j["company"] == "Stellantis Financial Services")
+        stellantis = next(j for j in cfg["experience"] if "Stellantis Financial Services" in j["company"])
         assert stellantis["title"] == "Production Support Engineer - DevOps & Automation"
 
     def test_remote_availability_present(self):
@@ -71,7 +71,7 @@ class TestKeyMetrics:
     def test_summary_states_true_program_scope(self):
         cfg = load_config()
         summary_lower = cfg["summary"].lower()
-        assert "approximately 60" in summary_lower
+        assert "~60" in summary_lower
         assert "100+ repositories" in summary_lower
 
     def test_summary_does_not_claim_100_plus_pipelines(self):
@@ -116,6 +116,21 @@ class TestCoreExpertiseCategories:
         ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI & Agentic Systems")
         for term in ("Claude Code", "MCP", "RAG", "Ollama"):
             assert any(term in tag for tag in ai_skills["tags"])
+
+    def test_automation_category_reflects_curated_language_breadth(self):
+        # TypeScript/JavaScript are backed by real repository evidence (RedrawUS,
+        # Otaku-Timeline) but Java is not -- current Java exposure is limited to
+        # small benchmark code in the Zero repo, not a substantial application.
+        cfg = load_config()
+        automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Software Engineering")
+        tags = automation["tags"]
+        for core in ("Python", "PowerShell", "C#", "Go", "Rust", "Bash", "SQL"):
+            assert core in tags
+        assert "TypeScript" in tags
+        assert "JavaScript" in tags
+        assert "Java" not in tags
+        assert tags.index("TypeScript") < tags.index("Bash")
+        assert tags.index("JavaScript") < tags.index("Bash")
 
 
 class TestSelectedEngineeringPrograms:
