@@ -1,10 +1,10 @@
 # Engineering Backlog — william_elias
 
-Static, config-driven resume site (HTML/CSS/vanilla JS + a Python PDF generator). Deployed via GitHub Pages from `main`. No build step, no test suite, no CI as of this writing.
+Static, config-driven resume site (HTML/CSS/vanilla JS + a Python PDF generator), deployed via classic GitHub Pages from `main`. `resume.json` is the single canonical data source; `scripts/build_config.py`, `scripts/build_html.py`, and `scripts/generate_resume_pdf.py` generate `config.js`, `index.html`'s pre-rendered body/SEO content, and `William_Elias_Resume.pdf` from it respectively. A 16-test `pytest`+Playwright suite and a GitHub Actions CI workflow (`.github/workflows/ci.yml`) run tests and a generated-file freshness check (regenerate + `git diff --exit-code`) on every push/PR to `main`; CI is a read-only verification gate and does not deploy or write back to the repo.
 
 This file is maintained by the BACKLOG operation. IDs are stable and never renumbered. Completed items keep their ID and move to the Completed section with history preserved.
 
-**Last full audit:** 2026-07-31
+**Last full audit:** 2026-08-06
 
 ---
 
@@ -19,12 +19,206 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 ## 4. Security
 ## 5. Data and Build Architecture
 
+### ARCH-011 — `validate_config()` doesn't cover every field `build()` dereferences
+
+**Type:** Bug
+**Priority:** Medium
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Open
+
+### Problem
+`validate_config()` (`scripts/generate_resume_pdf.py:27-56`) checks only 6 top-level keys, array types, `personal.title`, and 2 URL fields. `build()` (lines 91-173) directly subscripts `p["name"]`, `p["phone"]`, `p["email"]`, `p["tagline"]`, plus per-item `company`/`date`/`title`, `s["category"]`/`s["tags"]`, `proj["name"]`/`proj["subtitle"]`, `e["degree"]`/`e["school"]` — none of which `validate_config()` checks. A `resume.json` missing e.g. `personal.phone` passes validation cleanly, then crashes `build()` with a raw `KeyError`, contradicting ARCH-003's original acceptance criterion of a "clear, actionable error message."
+
+### Proposed work
+Extend `validate_config()` to check presence of every field `build()` dereferences (or refactor `build()` to use `.get()` with a single enumerated validation pass).
+
+### Acceptance criteria
+- Deleting any field `build()` uses from a test `resume.json` produces a `ValueError` from `validate_config()`, not a `KeyError` from `build()`.
+
+### Validation
+- Extend `TestValidateConfig` in `tests/test_generate_resume_pdf.py` with cases for each newly-covered field.
+
+### Notes
+Found during the 2026-08-06 post-merge audit, as a gap in ARCH-003's original scope rather than a regression of it.
+
+---
+
+### ARCH-012 — `inject()` silently no-ops if a BUILD marker pair goes missing, undetectable by the CI freshness check
+
+**Type:** Improvement
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/build_html.py`
+**Status:** Open
+
+### Problem
+`inject()` (`scripts/build_html.py:174-179`) uses `re.sub(pattern, ..., html_content)` with no check that a match occurred. If a `<!-- BUILD:<NAME>:START/END -->` pair is ever accidentally edited/removed from `index.html`, `re.sub` returns the input unchanged with no error. Because CI's freshness gate is `git diff --exit-code` against the *regenerated* file, a silently-broken injection that happens to match the already-committed (now-stale) content produces no diff, so CI would not catch it.
+
+### Proposed work
+Use `re.subn()` and raise an exception in `inject()` if the match count is 0.
+
+### Acceptance criteria
+- Deliberately removing a marker pair from `index.html` and re-running `build_html.py` fails loudly instead of silently no-op'ing.
+
+### Validation
+- Manual: delete a marker pair, run `python scripts/build_html.py`, confirm it raises.
+
+### Notes
+Found during the 2026-08-06 post-merge audit while reviewing ENH-006's idempotency claim.
+
+---
+
+### ARCH-013 — OG description mangles acronym casing via `str.capitalize()`
+
+**Type:** Bug
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/build_html.py`
+**Status:** Open
+
+### Problem
+`scripts/build_html.py:189,193` builds `og:description` via `tagline.replace(" // ", ", ").capitalize()`. Python's `.capitalize()` lowercases every character except the first, so "Platform Engineering // CI/CD // Python + Go // Agentic Systems" renders as `"Platform engineering, ci/cd, python + go, agentic systems."` (confirmed live at `index.html:10`) — "CI/CD" becomes "ci/cd".
+
+### Proposed work
+Only uppercase the first character of the whole string (e.g. `s[:1].upper() + s[1:]`) instead of `.capitalize()`, which lowercases the rest.
+
+### Acceptance criteria
+- Generated `og:description` preserves "CI/CD" casing (and any other embedded acronyms) verbatim from `resume.json`.
+
+### Validation
+- Regenerate and inspect `index.html`'s `og:description` meta tag.
+
+### Notes
+Found during the 2026-08-06 post-merge audit. This is an objective formatting defect (acronym mangled by a generic string method), not a subjective redesign preference.
 
 ## 6. Testing and CI
 
+### TEST-005 — No test coverage for `build_html.py`/`build_config.py`; no automated no-JS check
+
+**Type:** Improvement
+**Priority:** Medium
+**Effort:** M
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `tests/` (new test file(s)), optionally `tests/test_browser.py`
+**Status:** Open
+
+### Problem
+`tests/` contains no test exercising `esc()`, `get_valid_url()`, `inject()`, or any `render_*` function in `scripts/build_html.py`, and none for `scripts/build_config.py` — despite `build_html.py` owning the escaping/URL-validation/marker-injection logic, the most injection-sensitive code in the pipeline. Separately, ENH-006's "no-JS" acceptance criterion was validated manually via raw-HTML grep (per its own Done note), not via an automated Playwright page context with `javascript_enabled=False`, even though `pytest-playwright` already supports this directly. **Partially narrowed since filing:** `tests/test_resume_content.py` (added 2026-08-06, PR #2) now covers resume.json↔config.js/index.html/PDF content-drift, including a dedicated `TestPdfIncludesEarlierExperience` check that closed ARCH-010 — so the "no drift protection" half of this item's motivation is now addressed for content. The remaining gap is narrower: no unit tests for `build_html.py`'s own escaping/URL-validation/marker-injection *functions* (`esc()`, `get_valid_url()`, `inject()`), nothing for `build_config.py`, and still no automated no-JS check.
+
+### Proposed work
+Add unit tests for `esc()`/`get_valid_url()`/`inject()` (including the "marker missing → no-op/raise" edge case from ARCH-012) and at least one `render_*` function; add one Playwright test that loads the page with JS disabled and asserts core resume content (name, a job title, a skill) is visible in the DOM.
+
+### Acceptance criteria
+- New tests fail on the current code's untested edge cases and pass once `build_html.py` behaves correctly.
+- No-JS test passes against current `index.html`.
+
+### Validation
+- `PYTHONPATH=. pytest tests/`
+
+### Notes
+Found during the 2026-08-06 post-merge audit. This does not reopen ENH-006 (its acceptance criteria were met as written) — it closes a coverage gap the item's own Done note already flagged as manually-verified-only. Re-scoped 2026-08-06 after `tests/test_resume_content.py` landed upstream and covered part of the original motivation (see Problem).
+
 ## 7. Repository Maintenance
 
+### MAINT-003 — Stale docstring in `generate_resume_pdf.py` says PDF is rendered "from config.js"
+
+**Type:** Maintenance
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Open
+
+### Problem
+`scripts/generate_resume_pdf.py:2` — `"""Render William_Elias_Resume.pdf from config.js so the site and PDF share one source of truth.` — but `load_config()` (line 20) reads `resume.json` directly. Harmless today only because the two are currently identical; misleading for future maintainers, and a leftover from the pre-ARCH-008 architecture.
+
+### Proposed work
+Update the docstring to say `resume.json`.
+
+### Acceptance criteria
+- Docstring matches the actual data source.
+
+### Validation
+- Read diff.
+
+### Notes
+Found during the 2026-08-06 post-merge audit.
+
+---
+
+### MAINT-004 — `pytest`/`playwright`/`pytest-playwright` unpinned in `requirements-dev.txt`
+
+**Type:** Maintenance
+**Priority:** Low
+**Effort:** XS
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Lightweight
+**Dependencies:** None
+**Affected files:** `requirements-dev.txt`
+**Status:** Open
+
+### Problem
+`requirements-dev.txt` pins `fpdf2==2.8.7` and `pypdf==6.14.2` exactly, but `pytest`, `playwright`, `pytest-playwright` have no version constraint at all — an inconsistent pinning strategy within the same file, meaning CI runs are not fully reproducible (an upstream release of any of the three could change test/CI behavior with no repo change).
+
+### Proposed work
+Pin exact versions for all three, matching the existing style.
+
+### Acceptance criteria
+- All entries in `requirements-dev.txt` are exact-pinned.
+
+### Validation
+- `pip install -r requirements-dev.txt` succeeds; CI passes unchanged.
+
+### Notes
+Found during the 2026-08-06 post-merge audit.
+
 ## 8. Portfolio Enhancements
+
+## 9. Completed
+
+### ARCH-010 — PDF generator omits the `additionalExperience` section entirely
+
+**Type:** Bug
+**Priority:** High
+**Effort:** S
+**Risk:** Low
+**Recommended mode:** Coding
+**Recommended model tier:** Standard
+**Dependencies:** None
+**Affected files:** `scripts/generate_resume_pdf.py`
+**Status:** Done (2026-08-06)
+
+### Done note
+Filed during this audit against `main` at `b2b661a` (PDF's PROJECTS section flowed directly into EDUCATION & CERTIFICATIONS, skipping `additionalExperience` entirely — confirmed via `pdftotext` extraction). Independently fixed by the owner in a same-day follow-up (PR #2, commit `8fbe384`, "update resume for 100+ pipelines"), before this finding could be pushed: `build()` now renders an "Earlier Technical Experience" section (`scripts/generate_resume_pdf.py`, new `wrapped_text_height()` helper + a block reading `config.get("additionalExperience")`, using `.get()` defaults consistent with the rest of the file) between Projects and Education, matching `resume.json`/`index.html`. Re-verified via `pdftotext -layout` on the regenerated PDF: all 4 entries (Intrepid Control Systems, Project Worldwide, Ford Motor Company, Trendset Communications Group) now present with correct company/title/date/summary. The same PR added `tests/test_resume_content.py::TestPdfIncludesEarlierExperience`, which regression-tests this specific gap going forward.
+
+### Problem
+`build()` (`scripts/generate_resume_pdf.py:91-173`) rendered `personal`/`summary`/`skills`/`experience`/`projects`/`education` only — no reference to `config["additionalExperience"]` anywhere in the file. Meanwhile `resume.json`'s `additionalExperience` array **was** rendered into `index.html` via `render_additional_experience()`. The website showed 10+ years of experience; the PDF a recruiter downloaded showed only ~3 (HBK 2020 onward).
+
+### Validation
+- `python scripts/generate_resume_pdf.py && pdftotext -layout William_Elias_Resume.pdf -` shows "EARLIER TECHNICAL EXPERIENCE" with all 4 entries.
+- `PYTHONPATH=. pytest tests/` — `TestPdfIncludesEarlierExperience` passes.
+
+---
 
 ### ENH-006 — Pre-render static HTML body content for SEO
 
@@ -87,6 +281,7 @@ Update `scripts/generate_resume_pdf.py` to optionally append the `link` URL to t
 ### Validation
 - Run `python scripts/generate_resume_pdf.py` and manually verify `William_Elias_Resume.pdf` project entries.
 
+---
 
 ### ENH-001 — Support optional per-project links without inventing URLs
 
@@ -131,7 +326,7 @@ Use a standard HTML escaping function (like `html.escape(..., quote=True)` from 
 ### Validation
 - Manual: Add a double quote to `tagline` in `resume.json`, run `python scripts/build_html.py`, and inspect `index.html` to ensure it is escaped as `&quot;`.
 
-## 9. Completed
+---
 
 ### ENH-002 — Consider stronger project evidence (screenshots, demos, case studies)
 
@@ -1336,18 +1531,22 @@ Dependency-aware order, following the general sequence in the operating instruct
 8. ~~**REL-003** → **REL-004** — last-synced repo/branch config-driven, then cache key~~ — Done (2026-08-01)
 9. ~~**REL-005** + **SEC-001** (last-synced portion) + **SEC-002** — safe rendering and validation for the last-synced widget together~~ — Done (2026-08-01); config.js-wide portions filed as **SEC-004**/**SEC-005**
 10. ~~**SEC-003** — Font Awesome SRI (cheap, anytime)~~ — Done (2026-08-01)
-10a. **SEC-004** → **SEC-005** — config.js-wide safe rendering and href validation, deferred from item 9 (filed 2026-08-01; lower urgency, data is owner-controlled — good candidate to pair with TEST-001 once it exists)
-11. **MAINT-001** — remove `.directory`, add `.gitignore` (cheap, anytime)
-12. **TEST-002** → **TEST-003** → **TEST-001** — PDF tests, then CI, then browser-behavior tests
-13. **ARCH-003** — config validation
-14. **ARCH-002** — canonical resume-data decision (planning), spawning its own follow-up items if pursued
-15. **ARCH-001** — PDF parser hardening (only if ARCH-002 is deferred; otherwise resolved by ARCH-002's follow-ups)
-16. **ARCH-004** — PDF metadata (anytime, cheap)
+10a. ~~**SEC-004** → **SEC-005** — config.js-wide safe rendering and href validation, deferred from item 9~~ — Done (2026-08-04)
+11. ~~**MAINT-001** — remove `.directory`, add `.gitignore` (cheap, anytime)~~ — Done (2026-08-04)
+12. ~~**TEST-002** → **TEST-003** → **TEST-001** — PDF tests, then CI, then browser-behavior tests~~ — Done (2026-08-04)
+13. ~~**ARCH-003** — config validation~~ — Done (2026-08-04)
+14. ~~**ARCH-002** — canonical resume-data decision (planning), spawning its own follow-up items if pursued~~ — Done (2026-08-04)
+15. ~~**ARCH-001** — PDF parser hardening (only if ARCH-002 is deferred; otherwise resolved by ARCH-002's follow-ups)~~ — Done (2026-08-04)
+16. ~~**ARCH-004** — PDF metadata (anytime, cheap)~~ — Done (2026-08-04)
 17. ~~**ARCH-005** — PDF freshness check in CI~~ — Done (2026-08-04)
-18. **TEST-004** — document validation command (after the above testing items land)
-19. **MAINT-002** — README accuracy pass (do a lightweight pass early for the overstated claim; full pass after ARCH-005/TEST-004)
-20. **ENH-001**, **ENH-002** — portfolio enhancements, whenever owner input/priority allows
+18. ~~**TEST-004** — document validation command (after the above testing items land)~~ — Done (2026-08-04)
+19. ~~**MAINT-002** — README accuracy pass (do a lightweight pass early for the overstated claim; full pass after ARCH-005/TEST-004)~~ — Done (2026-08-04)
+20. ~~**ENH-001**, **ENH-002** — portfolio enhancements, whenever owner input/priority allows~~ — Done (2026-08-05); ENH-002 Closed (owner declined) rather than implemented
 21. ~~**A11Y-006** — default-theme and dark-colorblind contrast regression~~ — Done (2026-08-05)
 22. ~~**REL-007** — colorblind toggle theme-detection fix~~ — Done (2026-08-05)
+23. ~~**ARCH-010** — PDF generator omits `additionalExperience` section~~ — Done (2026-08-06), fixed independently by the owner before this backlog pass was pushed
+24. **ARCH-011** — `validate_config()` doesn't cover every field `build()` uses (recommended next implementation item — only remaining Medium+ priority open item)
+25. **TEST-005** — build_html.py/build_config.py unit tests + no-JS check (content-drift half now covered by `tests/test_resume_content.py`)
+26. **ARCH-012**, **ARCH-013**, **MAINT-003**, **MAINT-004** — low-priority hardening/hygiene items, anytime
 
 SEC-001's `config.js`-wide portion is the largest true refactor in this list; treat it as the one item most likely to warrant further sub-splitting at implementation time.
