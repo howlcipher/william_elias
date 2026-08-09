@@ -324,9 +324,9 @@
       ]
     },
     {
-      "name": "Zero",
+      "name": "HowlFrame",
       "subtitle": "Experimental AI-first language and toolchain, written in Go",
-      "link": "https://github.com/howlcipher/zero",
+      "link": "https://github.com/howlcipher/howlframe",
       "highlights": [
         "Built a Lisp-like language and compiler toolchain in Go, including a lexer, parser, typed AST/IR, and bytecode VM, with a WebAssembly compilation target and a capability-based security model.",
         "Explores constrained AI code generation against the language's typed IR, with local Ollama integration for offline generation."
