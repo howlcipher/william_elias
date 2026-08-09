@@ -226,7 +226,7 @@ class TestSelectedOpenSourceProjects:
     EXPECTED_PROJECTS = {
         "Multi-Agent Engineering Library",
         "AI Router",
-        "Zero",
+        "HowlFrame",
         "Baseball Optimizer",
         "RedrawUS",
         "Password Arena",
