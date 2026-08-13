@@ -6,7 +6,6 @@ import threading
 import http.server
 import socketserver
 
-PORT = 8081
 DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -16,7 +15,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         pass # silence HTTP logs
 
 socketserver.TCPServer.allow_reuse_address = True
-httpd = socketserver.TCPServer(("", PORT), Handler)
+# Port 0 lets the OS hand out a free port. A fixed port fails collection outright
+# when anything else on the machine already holds it.
+httpd = socketserver.TCPServer(("", 0), Handler)
+PORT = httpd.server_address[1]
 
 def start_server():
     httpd.serve_forever()

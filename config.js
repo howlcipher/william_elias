@@ -142,7 +142,7 @@ const config = {
             "company": "Stellantis Financial Services US",
             "location": "Auburn Hills, MI \u00b7 Remote",
             "achievements": [
-                "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment plans dry-run validated on the deployment agent.",
+                "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the deployment agent.",
                 "Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent delivery defects, including application-pool identity convergence risk, before any application was deployed.",
                 "Lead weekly production releases, database migrations, and SLA-driven incident/service-request work through Freshservice and Jira; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
                 "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
@@ -154,7 +154,7 @@ const config = {
             "date": "Jul 2020 - Feb 2023",
             "title": "DevOps Engineer - Python Automation",
             "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
-            "location": "Southfield, Michigan / Remote",
+            "location": "Southfield, MI \u00b7 Remote",
             "achievements": [
                 "Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.",
                 "Automated SQL output processing with Python, saving more than 40 hours per month.",
@@ -508,7 +508,7 @@ const config = {
     "education": [
         {
             "icon": "fa-user-graduate",
-            "degree": "M.S. Cyber Defense - In Progress",
+            "degree": "M.S. Cyber Defense (In Progress)",
             "school": "Dakota State University",
             "year": ""
         },
@@ -526,7 +526,7 @@ const config = {
         },
         {
             "icon": "fa-certificate",
-            "degree": "CCNA - previously held",
+            "degree": "CCNA (Previously Held)",
             "school": "Cisco Networking Academy",
             "year": "2014 - 2017"
         }

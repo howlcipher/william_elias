@@ -283,6 +283,81 @@ class TestPdfEngineeringHighlights:
                     )
 
 
+class TestEducationHonesty:
+    """The master's degree is in progress and the CCNA is lapsed.
+
+    Both qualifiers are load-bearing: dropping either would turn an accurate
+    entry into a false credential claim, so they are asserted through to the
+    rendered PDF rather than only in resume.json.
+    """
+
+    def _entry(self, cfg, prefix):
+        return next(e for e in cfg["education"] if e["degree"].startswith(prefix))
+
+    def test_masters_marked_in_progress_and_not_claimed_complete(self):
+        cfg = load_config()
+        masters = self._entry(cfg, "M.S.")
+        assert "In Progress" in masters["degree"]
+        assert masters["school"] == "Dakota State University"
+        # A bare degree line with no qualifier would read as conferred.
+        assert masters["degree"] != "M.S. Cyber Defense"
+        blob = json.dumps(cfg).lower()
+        for phrase in ("m.s. cyber defense, completed", "master of science completed"):
+            assert phrase not in blob
+
+    def test_ccna_marked_previously_held(self):
+        cfg = load_config()
+        ccna = self._entry(cfg, "CCNA")
+        assert "previously held" in ccna["degree"].lower()
+
+    def test_qualifiers_survive_into_the_pdf(self, tmp_path):
+        cfg = load_config()
+        blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
+        assert "In Progress" in blob
+        assert "Previously Held" in blob
+
+    def test_masters_stays_out_of_the_headline(self):
+        # Education supports the story; it is not the positioning.
+        cfg = load_config()
+        for field in (cfg["personal"]["title"], cfg["personal"]["tagline"]):
+            assert "Cyber Defense" not in field
+            assert "M.S." not in field
+
+
+class TestPdfContactLinks:
+    def test_pdf_header_exposes_portfolio_linkedin_and_github(self, tmp_path):
+        # The PDF is the selective document; the portfolio is the proof layer
+        # behind it, so the header has to point at all three.
+        cfg = load_config()
+        page_one = _extract_pdf_pages(cfg, tmp_path)[0]
+        assert "linkedin.com/in/wylelias" in page_one
+        assert "github.com/howlcipher" in page_one
+        portfolio = re.sub(r"^https?://", "", cfg["seo"]["canonicalUrl"]).rstrip("/")
+        assert portfolio in page_one
+
+    def test_pdf_links_are_annotations_not_replacements_for_text(self, tmp_path):
+        # Clickable URLs must not cost ATS-readable text: every link annotation
+        # target also has to appear as extractable characters.
+        import pypdf
+
+        cfg = load_config()
+        out_pdf = tmp_path / "link_check.pdf"
+        build(cfg, out_pdf)
+        reader = pypdf.PdfReader(out_pdf)
+        blob = "\n".join(page.extract_text() for page in reader.pages)
+
+        targets = set()
+        for page in reader.pages:
+            for annot in page.get("/Annots") or []:
+                uri = annot.get_object().get("/A", {}).get("/URI")
+                if uri:
+                    targets.add(str(uri))
+
+        assert targets, "expected clickable link annotations in the PDF"
+        for uri in targets:
+            assert re.sub(r"^https?://", "", uri).rstrip("/") in blob
+
+
 class TestSelectedOpenSourceProjects:
     EXPECTED_PROJECTS = {
         "Multi-Agent Engineering Library",

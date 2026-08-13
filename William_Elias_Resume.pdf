@@ -19,6 +19,24 @@ endobj
 endobj
 3 0 obj
 <<
+/Annots [<</A <</S /URI /URI (https://linkedin.com/in/wylelias)>>
+/Border [0 0 0]
+/F 4
+/Rect [140.86 693.50 234.38 702.50]
+/Subtype /Link
+/Type /Annot>>
+<</A <</S /URI /URI (https://github.com/howlcipher)>>
+/Border [0 0 0]
+/F 4
+/Rect [241.73 693.50 331.26 702.50]
+/Subtype /Link
+/Type /Annot>>
+<</A <</S /URI /URI (https://howlcipher.github.io/william_elias/)>>
+/Border [0 0 0]
+/F 4
+/Rect [338.60 693.50 471.14 702.50]
+/Subtype /Link
+/Type /Annot>>]
 /Contents 4 0 R
 /Parent 1 0 R
 /Resources 10 0 R
@@ -27,7 +45,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 7152
+/Length 7299
 >>
 stream
 2 J
@@ -40,7 +58,11 @@ BT /F2 9.50 Tf ET
 BT 168.72 722.65 Td (Building Automation, Reliable Platforms & AI-Enabled Operations) Tj ET
 BT /F3 9.00 Tf ET
 BT 142.61 709.30 Td (Michigan | Open to U.S. Remote Roles | 586.438.6057 | WylElias.123@gmail.com) Tj ET
-BT 210.80 695.30 Td (linkedin.com/in/wylelias | github.com/howlcipher) Tj ET
+BT 140.86 695.30 Td (linkedin.com/in/wylelias) Tj ET
+BT 234.38 695.30 Td ( | ) Tj ET
+BT 241.73 695.30 Td (github.com/howlcipher) Tj ET
+BT 331.26 695.30 Td ( | ) Tj ET
+BT 338.60 695.30 Td (howlcipher.github.io/william_elias) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
@@ -86,7 +108,7 @@ BT /F2 9.50 Tf ET
 BT 26.83 448.90 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI · Remote) Tj ET
 BT /F3 9.00 Tf ET
 q BT 38.83 437.55 Td 1.712 Tw (- Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps) Tj ET Q
-q BT 38.83 426.05 Td 1.136 Tw (build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment plans dry-run validated on the) Tj ET Q
+q BT 38.83 426.05 Td 1.109 Tw (build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the) Tj ET Q
 BT 38.83 414.55 Td (deployment agent.) Tj ET
 q BT 38.83 403.05 Td 0.969 Tw (- Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent) Tj ET Q
 BT 38.83 391.55 Td (delivery defects, including application-pool identity convergence risk, before any application was deployed.) Tj ET
@@ -103,7 +125,7 @@ BT 26.83 285.90 Td (HBK - Hottinger Brüel & Kjær) Tj ET
 BT /F3 9.00 Tf ET
 BT 505.12 286.05 Td (Jul 2020 - Feb 2023) Tj ET
 BT /F2 9.50 Tf ET
-BT 26.83 274.40 Td (DevOps Engineer - Python Automation | Southfield, Michigan / Remote) Tj ET
+BT 26.83 274.40 Td (DevOps Engineer - Python Automation | Southfield, MI · Remote) Tj ET
 BT /F3 9.00 Tf ET
 BT 38.83 263.05 Td (- Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.) Tj ET
 BT 38.83 251.55 Td (- Automated SQL output processing with Python, saving more than 40 hours per month.) Tj ET
@@ -131,6 +153,18 @@ endstream
 endobj
 5 0 obj
 <<
+/Annots [<</A <</S /URI /URI (https://github.com/howlcipher/ai_knowledge_library)>>
+/Border [0 0 0]
+/F 4
+/Rect [26.83 537.75 203.40 546.75]
+/Subtype /Link
+/Type /Annot>>
+<</A <</S /URI /URI (https://github.com/howlcipher/ai_router)>>
+/Border [0 0 0]
+/F 4
+/Rect [26.83 466.75 154.38 475.75]
+/Subtype /Link
+/Type /Annot>>]
 /Contents 6 0 R
 /Parent 1 0 R
 /Resources 11 0 R
@@ -139,7 +173,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 5539
+/Length 5544
 >>
 stream
 2 J
@@ -211,13 +245,13 @@ BT /F3 9.00 Tf ET
 BT 501.61 283.05 Td (Sep 2015 - Jun 2019) Tj ET
 BT 38.83 271.55 Td (- Enforced network standards, maintained configuration files and documentation, and supported critical production infrastructure.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 246.20 Td (EDUCATION & CERTIFICATION) Tj ET
+BT 26.83 246.20 Td (EDUCATION & CERTIFICATIONS) Tj ET
 24.00 242.50 m 588.00 242.50 l S
 BT /F3 9.00 Tf ET
-BT 26.83 230.05 Td (M.S. Cyber Defense - In Progress - Dakota State University) Tj ET
+BT 26.83 230.05 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
 BT 26.83 218.55 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
 BT 26.83 207.05 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 26.83 195.55 Td (CCNA - previously held - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 26.83 195.55 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -275,22 +309,22 @@ xref
 0000000015 00000 n 
 0000000108 00000 n 
 0000000211 00000 n 
-0000000292 00000 n 
-0000007496 00000 n 
-0000007577 00000 n 
-0000013168 00000 n 
-0000013270 00000 n 
-0000013375 00000 n 
-0000013472 00000 n 
-0000013580 00000 n 
-0000013688 00000 n 
+0000000742 00000 n 
+0000008093 00000 n 
+0000008495 00000 n 
+0000014091 00000 n 
+0000014193 00000 n 
+0000014298 00000 n 
+0000014395 00000 n 
+0000014503 00000 n 
+0000014611 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<E5C902795D6EE46E1ABC4A7343D5B256><E5C902795D6EE46E1ABC4A7343D5B256>]
+/ID [<B57490B75925090662A65A7B3C9C11A9><B57490B75925090662A65A7B3C9C11A9>]
 >>
 startxref
-13834
+14757
 %%EOF

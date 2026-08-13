@@ -30,6 +30,19 @@ class TestCanonicalAndOgMeta:
         assert site_name_match
         assert site_name_match.group(1)
 
+    def test_meta_description_fits_search_snippet(self):
+        # Search results truncate around 160 characters; the description has to
+        # land the name, the target title, and the core keywords before the cut.
+        cfg = load_config()
+        html_content = _index_html()
+        match = re.search(r'<meta name="description" content="(.*?)">', html_content)
+        assert match
+        desc = match.group(1)
+        assert len(desc) <= 160, f"meta description is {len(desc)} chars and will be truncated"
+        assert cfg["personal"]["name"] in desc
+        assert "DevOps" in desc
+        assert "Platform" in desc
+
     def test_twitter_title_and_description_present(self):
         html_content = _index_html()
         assert re.search(r'<meta name="twitter:title" content=".+?">', html_content)
@@ -173,13 +186,13 @@ class TestBottomRecruiterCta:
 class TestProjectCardActions:
     def test_project_cards_expose_explicit_repository_action(self):
         html_content = _index_html()
-        projects_section = html_content.split('id="projects-target"')[1].split('id="additional-experience-target"')[0]
+        projects_section = html_content.split('id="projects-target"')[1].split('<!-- BUILD:PROJECTS:END -->')[0]
         assert projects_section.count("project-link") == 6
         assert "View Repository" in projects_section
 
     def test_project_links_use_safe_external_attributes(self):
         html_content = _index_html()
-        projects_section = html_content.split('id="projects-target"')[1].split('id="additional-experience-target"')[0]
+        projects_section = html_content.split('id="projects-target"')[1].split('<!-- BUILD:PROJECTS:END -->')[0]
         for link_html in re.findall(r'<a [^>]*class="contact-pill project-link"[^>]*>', projects_section):
             assert 'target="_blank"' in link_html
             assert 'rel="noopener noreferrer"' in link_html

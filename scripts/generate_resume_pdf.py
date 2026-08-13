@@ -137,6 +137,32 @@ class ResumePDF(FPDF):
         self.multi_cell(self.w - self.r_margin - self.l_margin - indent, line_h, text)
         self.set_text_color(0, 0, 0)
 
+    def centered_link_row(self, entries, height=14, separator=" | "):
+        """Render `entries` of (visible_text, url) centered on one line, each
+        segment individually clickable.
+
+        A cell carries at most one link, so the row is laid out segment by
+        segment instead of as a single centered cell. The visible text is
+        byte-identical to the plain-text version, which keeps ATS extraction
+        unchanged; only the link annotations are new."""
+        # Cells normally pad their text by c_margin; zeroing it here makes each
+        # segment exactly as wide as its glyphs, so the row centers precisely and
+        # each link's clickable rectangle hugs its own text.
+        previous_margin = self.c_margin
+        self.c_margin = 0
+        try:
+            sep_width = self.get_string_width(separator)
+            widths = [self.get_string_width(text) for text, _ in entries]
+            total = sum(widths) + sep_width * (len(entries) - 1)
+            self.set_x((self.w - total) / 2)
+            for i, ((text, url), width) in enumerate(zip(entries, widths)):
+                if i:
+                    self.cell(sep_width, height, separator)
+                self.cell(width, height, text, link=url or "")
+        finally:
+            self.c_margin = previous_margin
+        self.ln(height)
+
 
 def build(config: dict, out_path: Path):
     p = config["personal"]
@@ -167,8 +193,17 @@ def build(config: dict, out_path: Path):
     location_contact = f'{p["location"]} | {p["remote"]} | {p["phone"]} | {p["email"]}'
     pdf.cell(0, 14, location_contact, align="C", new_x="LMARGIN", new_y="NEXT")
 
-    contact = f'{p["linkedin"].replace("https://", "")} | {p["github"].replace("https://", "")}'
-    pdf.cell(0, 14, contact, align="C", new_x="LMARGIN", new_y="NEXT")
+    # LinkedIn, GitHub, and the portfolio site, each clickable. The portfolio is
+    # the broader proof layer behind this selective document, so the PDF has to
+    # point at it; it comes from the same seo.canonicalUrl the site is built from.
+    links = [
+        (p["linkedin"].replace("https://", "").rstrip("/"), p["linkedin"]),
+        (p["github"].replace("https://", "").rstrip("/"), p["github"]),
+    ]
+    portfolio = (config.get("seo") or {}).get("canonicalUrl") or ""
+    if portfolio:
+        links.append((re.sub(r"^https?://", "", portfolio).rstrip("/"), portfolio))
+    pdf.centered_link_row(links)
 
     pdf.section_title("Professional Summary")
     pdf.set_font("Helvetica", "", 9)
@@ -238,7 +273,10 @@ def build(config: dict, out_path: Path):
             pdf.cell(0, 11.5, proj["name"], new_x="LMARGIN", new_y="NEXT")
             pdf.set_font("Helvetica", "", 9)
             link_clean = proj["link"].replace("https://", "")
-            pdf.cell(0, 11.5, link_clean, new_x="LMARGIN", new_y="NEXT")
+            # Sized to the text, not the full line, so the clickable region
+            # matches what is actually underlined-looking to the reader.
+            pdf.cell(pdf.get_string_width(link_clean), 11.5, link_clean,
+                     link=proj["link"], new_x="LMARGIN", new_y="NEXT")
             for h in proj["highlights"]:
                 pdf.bullet(h)
             pdf.ln(2)
@@ -261,7 +299,7 @@ def build(config: dict, out_path: Path):
                 pdf.bullet(summary)
             pdf.ln(2)
 
-    pdf.section_title("Education & Certification")
+    pdf.section_title("Education & Certifications")
     pdf.set_font("Helvetica", "", 9)
     for e in config["education"]:
         year = f' ({e["year"]})' if e.get("year") else ""

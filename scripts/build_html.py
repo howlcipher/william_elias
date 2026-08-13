@@ -358,8 +358,15 @@ def build_html():
     site_name = seo.get('siteName') or f"{name} | {title}"
 
     page_title = html.escape(f"{name} | {title}", quote=True)
-    seo_suffix = "Azure DevOps, Python, .NET, and applied AI engineering."
-    escaped_desc = html.escape(f"Resume of {name}, a {title}. {tagline}. {seo_suffix}", quote=True)
+    seo_suffix = "Azure DevOps, CI/CD, Python, Go, and .NET tooling."
+    # Search snippets cut off around 160 characters, so the meta description
+    # carries name, title, and the core keywords and stops there. OG/Twitter
+    # stay tagline-led, where the longer line still renders in full.
+    description = (
+        f"{name}, {title}: CI/CD and release automation, production reliability, "
+        "Python, Go, and .NET tooling, AI-enabled operations."
+    )
+    escaped_desc = html.escape(description, quote=True)
     escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}. {seo_suffix}", quote=True)
     escaped_site_name = html.escape(site_name, quote=True)
 
