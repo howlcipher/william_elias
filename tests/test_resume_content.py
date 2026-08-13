@@ -35,11 +35,18 @@ class TestHeadlineAndPositioning:
         cfg = load_config()
         assert "Production Support" not in cfg["personal"]["title"]
 
-    def test_tagline_states_cicd_and_reliability_positioning(self):
+    def test_tagline_states_automation_reliability_and_ai_positioning(self):
+        # The tagline carries the positioning story: automation -> reliable
+        # platforms -> AI-enabled operations, in that order.
         cfg = load_config()
         tagline = cfg["personal"]["tagline"]
-        assert "CI/CD" in tagline or "Release" in tagline
-        assert "Reliability" in tagline
+        assert "Automation" in tagline
+        assert "Reliable" in tagline or "Reliability" in tagline
+        assert "AI-Enabled" in tagline
+
+    def test_summary_leads_with_devops_platform_positioning(self):
+        cfg = load_config()
+        assert cfg["summary"].startswith("Senior DevOps and Platform Engineer")
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
@@ -71,7 +78,9 @@ class TestKeyMetrics:
     def test_summary_states_true_program_scope(self):
         cfg = load_config()
         summary_lower = cfg["summary"].lower()
-        assert "approximately 60-application estate" in summary_lower
+        # "estate" framing keeps the ~60 figure as scope, never as applications
+        # migrated or deployed.
+        assert "60-application estate" in summary_lower
 
     def test_summary_does_not_claim_100_plus_pipelines(self):
         cfg = load_config()
@@ -164,15 +173,14 @@ class TestKeyMetrics:
 
 class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
-        "DevOps & Release Engineering",
-        "Automation & Software Engineering",
-        "Security & Identity",
-        "Observability & Reliability",
-        "Infrastructure & Networking",
-        "AI & Agentic Systems",
+        "DevOps & Delivery",
+        "Automation & Development",
+        "Reliability & Observability",
+        "Infrastructure & Security",
+        "AI-Enabled Engineering",
     }
 
-    def test_six_curated_categories_present(self):
+    def test_five_curated_categories_present(self):
         cfg = load_config()
         categories = {s["category"] for s in cfg["skills"]}
         assert categories == self.EXPECTED_CATEGORIES
@@ -185,13 +193,13 @@ class TestCoreExpertiseCategories:
 
     def test_ai_category_has_credible_agentic_tooling(self):
         cfg = load_config()
-        ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI & Agentic Systems")
+        ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI-Enabled Engineering")
         for term in ("MCP", "RAG"):
             assert any(term in tag for tag in ai_skills["tags"])
 
     def test_automation_category_reflects_curated_language_breadth(self):
         cfg = load_config()
-        automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Software Engineering")
+        automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Development")
         tags = automation["tags"]
         for core in ("Python", "PowerShell", "C#", "Go", "SQL"):
             assert core in tags
@@ -214,12 +222,65 @@ class TestSelectedEngineeringPrograms:
         names = {p["name"] for p in cfg["selectedEngineeringPrograms"]}
         assert names == self.EXPECTED_PROGRAMS
 
-    def test_every_program_has_pdf_bullet_and_technology(self):
+    def test_every_program_has_bullets_and_technology(self):
         cfg = load_config()
         for prog in cfg["selectedEngineeringPrograms"]:
-            assert prog.get("pdfBullet"), f"{prog['name']} missing pdfBullet"
             assert prog.get("bullets"), f"{prog['name']} missing bullets"
             assert prog.get("technology"), f"{prog['name']} missing technology"
+
+
+class TestPdfEngineeringHighlights:
+    """The PDF carries a curated condensation of the website's six programs.
+
+    `selectedEngineeringPrograms` is website-only and shows breadth;
+    `pdfEngineeringHighlights` is PDF-only and shows the strongest evidence.
+    """
+
+    EXPECTED_HIGHLIGHTS = {
+        "CI/CD & Release Engineering",
+        "Security & Secrets Remediation",
+        "Platform Reliability & Developer Enablement",
+    }
+
+    def test_three_curated_highlights_present(self):
+        cfg = load_config()
+        names = {h["name"] for h in cfg["pdfEngineeringHighlights"]}
+        assert names == self.EXPECTED_HIGHLIGHTS
+
+    def test_every_highlight_has_bullets_and_technology(self):
+        cfg = load_config()
+        for hl in cfg["pdfEngineeringHighlights"]:
+            assert hl.get("bullets"), f"{hl['name']} missing bullets"
+            assert hl.get("technology"), f"{hl['name']} missing technology"
+
+    def test_pdf_renders_only_the_curated_highlights(self, tmp_path):
+        cfg = load_config()
+        blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
+        for name in self.EXPECTED_HIGHLIGHTS:
+            assert name in blob, f"'{name}' missing from generated PDF"
+        # Website-only programs must stay off the PDF so page 2 stays scannable.
+        for name in ("Server Migration & DR Cutover", "Internal Web Apps & Support Portal"):
+            assert name not in blob, f"'{name}' should be website-only, not in the PDF"
+
+    def test_website_retains_all_six_programs(self):
+        # Breadth belongs on the portfolio even though the PDF is selective.
+        index_html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+        for prog in load_config()["selectedEngineeringPrograms"]:
+            assert html.escape(prog["name"], quote=True) in index_html
+
+    def test_highlight_metrics_are_supported_by_website_programs(self):
+        # Every number the PDF claims must trace back to the fuller program
+        # descriptions, so condensing can never introduce an unsupported metric.
+        cfg = load_config()
+        supporting = json.dumps(cfg["selectedEngineeringPrograms"])
+        supporting_numbers = set(re.findall(r"\d[\d,]*", supporting))
+        for hl in cfg["pdfEngineeringHighlights"]:
+            for bullet in hl["bullets"]:
+                for number in re.findall(r"\d[\d,]*", bullet):
+                    assert number in supporting_numbers, (
+                        f"'{number}' in PDF highlight '{hl['name']}' has no support "
+                        "in selectedEngineeringPrograms"
+                    )
 
 
 class TestSelectedOpenSourceProjects:
@@ -319,7 +380,7 @@ class TestNoUnsupportedClaims:
         # Helm/Docker/Docker Compose/Rancher Desktop are real, scoped experience
         # (packaging + a WSL2 container-host POC) and should remain.
         cfg = load_config()
-        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Networking")
+        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Security")
         assert "Docker" in infra["tags"]
         assert "Docker Compose" in infra["tags"]
         assert "Helm" in infra["tags"]
@@ -350,11 +411,14 @@ class TestPdfLayout:
         pages = _extract_pdf_pages(cfg, tmp_path)
         assert len(pages) == 2
 
-    def test_selected_engineering_programs_starts_page_two(self, tmp_path):
+    def test_engineering_highlights_carry_into_page_two(self, tmp_path):
+        # The strongest highlight (CI/CD) lands on page 1 under the experience
+        # block; the rest continue on page 2 under a "(Continued)" heading, so no
+        # highlight header is ever orphaned from its bullets.
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
-        assert "SELECTED DEVOPS & PLATFORM ENGINEERING HIGHLIGHTS" not in pages[0].upper()
-        assert pages[1].upper().lstrip().startswith("SELECTED DEVOPS & PLATFORM ENGINEERING HIGHLIGHTS")
+        assert "SELECTED ENGINEERING HIGHLIGHTS" in pages[0].upper()
+        assert pages[1].upper().lstrip().startswith("SELECTED ENGINEERING HIGHLIGHTS (CONTINUED)")
 
     def test_page_one_has_summary_expertise_and_experience(self, tmp_path):
         cfg = load_config()
@@ -370,17 +434,13 @@ class TestPdfLayout:
         page_two_upper = pages[1].upper()
         assert "EDUCATION & CERTIFICATION" in page_two_upper
 
-    def test_all_six_programs_render_in_pdf(self, tmp_path):
+    def test_additional_experience_rendered_as_its_own_section(self, tmp_path):
+        # Earlier roles are split out of Professional Experience into a compressed
+        # section so they establish the progression without eating resume space.
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
         blob = "\n".join(pages)
-        for prog in cfg["selectedEngineeringPrograms"]:
-            assert prog["name"] in blob
-
-    def test_additional_experience_present_in_pdf(self, tmp_path):
-        cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
-        blob = "\n".join(pages)
+        assert "EARLIER EXPERIENCE" in blob.upper()
         for job in cfg["additionalExperience"]:
             assert job["company"] in blob
             assert job["title"] in blob

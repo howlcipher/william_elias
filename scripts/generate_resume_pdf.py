@@ -13,6 +13,10 @@ from fpdf import FPDF
 
 SITE_DIR = Path(__file__).resolve().parent.parent
 MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
+# Cap the tag list rendered per Core Expertise category. The website shows every
+# tag from resume.json; the PDF shows the curated leading slice, so tag order in
+# resume.json determines what a recruiter sees on page 1.
+PDF_SKILL_TAG_LIMIT = 9
 
 
 def load_config(config_path: Path | str | None = None) -> dict:
@@ -25,12 +29,12 @@ def load_config(config_path: Path | str | None = None) -> dict:
         raise ValueError(f"Failed to parse resume.json. Underlying error: {e}") from e
 
 def validate_config(config: dict):
-    required_top = ["personal", "summary", "skills", "experience", "projects", "education", "selectedEngineeringPrograms"]
+    required_top = ["personal", "summary", "skills", "experience", "projects", "education", "selectedEngineeringPrograms", "pdfEngineeringHighlights"]
     for k in required_top:
         if k not in config:
             raise ValueError(f"Validation failed: Missing required top-level field '{k}'")
 
-    for k in ["skills", "experience", "projects", "education", "selectedEngineeringPrograms"]:
+    for k in ["skills", "experience", "projects", "education", "selectedEngineeringPrograms", "pdfEngineeringHighlights"]:
         if not isinstance(config.get(k), list):
             raise ValueError(f"Validation failed: '{k}' must be an array")
             
@@ -75,6 +79,12 @@ def validate_config(config: dict):
     for i, prog in enumerate(config.get("selectedEngineeringPrograms", [])):
         if not prog.get("name"):
             raise ValueError(f"Validation failed: 'selectedEngineeringPrograms[{i}].name' is required and must be non-empty")
+
+    for i, hl in enumerate(config.get("pdfEngineeringHighlights", [])):
+        if not hl.get("name"):
+            raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].name' is required and must be non-empty")
+        if not hl.get("bullets") or not isinstance(hl.get("bullets"), list):
+            raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].bullets' must be a non-empty array")
 
 class ResumePDF(FPDF):
     def __init__(self):
@@ -145,10 +155,13 @@ def build(config: dict, out_path: Path):
     pdf.set_font("Helvetica", "B", 18)
     pdf.cell(0, 22, p["name"].upper(), align="C", new_x="LMARGIN", new_y="NEXT")
 
+    # Title and tagline get their own lines: the target role should read as the
+    # headline, not as the first half of a long combined string.
     pdf.set_font("Helvetica", "B", 11)
-    tagline = p["tagline"].replace("•", "|")
-    combined_title = f'{p["title"].replace("//", "|")} | {tagline}'
-    pdf.cell(0, 15, combined_title, align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 14, p["title"].replace("//", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
+
+    pdf.set_font("Helvetica", "I", 9.5)
+    pdf.cell(0, 13, p["tagline"].replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "", 9)
     location_contact = f'{p["location"]} | {p["remote"]} | {p["phone"]} | {p["email"]}'
@@ -166,18 +179,14 @@ def build(config: dict, out_path: Path):
         pdf.set_font("Helvetica", "B", 9)
         pdf.write(11.5, f'{s["category"]}: ')
         pdf.set_font("Helvetica", "", 9)
-        # Cap the tag list rendered in the PDF (the website shows the full list from
-        # resume.json) so six categories of curated skills stay on page 1.
-        pdf.write(11.5, ", ".join(s["tags"][:7]))
+        pdf.write(11.5, ", ".join(s["tags"][:PDF_SKILL_TAG_LIMIT]))
         pdf.ln(11.5)
 
-    print("Before Prof Exp:", pdf.get_y()); pdf.section_title("Professional Experience")
-    all_jobs = config.get("experience", []) + config.get("additionalExperience", [])
-    for job in all_jobs:
+    # Only the two current-era roles carry bullets here; earlier roles get their
+    # own compressed section further down so they cost minimal page space.
+    pdf.section_title("Professional Experience")
+    for job in config.get("experience", []):
         achievements = job.get("achievements", [])
-        if "summary" in job:
-            achievements = [job["summary"]]
-            
         block_h = 11.5 + 11.5 + sum(pdf.bullet_height(a) for a in achievements) + 2
         if pdf.will_page_break(block_h):
             pdf.add_page()
@@ -195,8 +204,11 @@ def build(config: dict, out_path: Path):
             pdf.bullet(a)
         pdf.ln(2)
 
-    pdf.section_title("Selected DevOps & Platform Engineering Highlights")
-    for prog in config.get("selectedEngineeringPrograms") or []:
+    # Sourced from pdfEngineeringHighlights, a curated 3-entry condensation of the
+    # website's selectedEngineeringPrograms. The site keeps all six programs; the
+    # PDF carries only the strongest evidence so page 2 stays scannable.
+    pdf.section_title("Selected Engineering Highlights")
+    for prog in config.get("pdfEngineeringHighlights") or []:
         bullets = prog.get("bullets") or []
         tech = prog.get("technology") or []
         tech_line = ("Tech: " + ", ".join(tech)) if tech else ""
@@ -206,7 +218,7 @@ def build(config: dict, out_path: Path):
         block_h += 2
         if pdf.will_page_break(block_h):
             pdf.add_page()
-            pdf.section_title("Selected DevOps & Platform Engineering Highlights (Continued)")
+            pdf.section_title("Selected Engineering Highlights (Continued)")
         pdf.keep_together(block_h)
         pdf.set_font("Helvetica", "B", 9.5)
         pdf.cell(0, 11.5, prog.get("name", ""), new_x="LMARGIN", new_y="NEXT")
@@ -229,6 +241,24 @@ def build(config: dict, out_path: Path):
             pdf.cell(0, 11.5, link_clean, new_x="LMARGIN", new_y="NEXT")
             for h in proj["highlights"]:
                 pdf.bullet(h)
+            pdf.ln(2)
+
+    earlier_jobs = config.get("additionalExperience") or []
+    if earlier_jobs:
+        # Compressed to two lines per role: these establish the infrastructure and
+        # networking progression into DevOps without consuming resume space.
+        pdf.section_title("Earlier Experience")
+        for job in earlier_jobs:
+            summary = job.get("summary", "")
+            block_h = 11.5 + (pdf.bullet_height(summary) if summary else 0) + 2
+            pdf.keep_together(block_h)
+            pdf.set_font("Helvetica", "B", 9.5)
+            title_line = f'{job["title"]}, {job["company"]}'
+            pdf.cell(pdf.w - pdf.l_margin - pdf.r_margin - 140, 11.5, title_line)
+            pdf.set_font("Helvetica", "", 9)
+            pdf.cell(140, 11.5, job["date"], align="R", new_x="LMARGIN", new_y="NEXT")
+            if summary:
+                pdf.bullet(summary)
             pdf.ln(2)
 
     pdf.section_title("Education & Certification")

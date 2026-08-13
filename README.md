@@ -1,7 +1,7 @@
 # William Elias
 
 **Senior DevOps / Platform Engineer**
-CI/CD Automation | Production Reliability | AI-Enabled Engineering
+Building Automation, Reliable Platforms & AI-Enabled Operations
 Open to U.S. Remote Roles
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
@@ -20,7 +20,8 @@ This is the source for the resume website above: a professional, modern, and hig
 
 ## Deployment & Architecture
 - **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
-- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The PDF combines `experience` and `additionalExperience` into one continuous "Professional Experience" section, renders `selectedEngineeringPrograms` as "Selected DevOps & Platform Engineering Highlights", and includes any `projects` entries with `pdfInclude: true` under "Selected Open-Source Engineering". The generator paginates dynamically (measuring each block's height before placing it) and is tuned to keep the resume to two pages.
+- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The generator paginates dynamically (measuring each block's height before placing it) and is tuned to keep the resume to two pages.
+- **Website vs. PDF**: The two artifacts are deliberately different. The website shows breadth; the PDF is selective. `experience` renders as "Professional Experience" while `additionalExperience` gets its own compressed "Earlier Experience" section further down the PDF. `selectedEngineeringPrograms` (six entries) is **website-only**; the PDF instead renders `pdfEngineeringHighlights`, a curated three-entry condensation, under "Selected Engineering Highlights". All `projects` appear on the website, but only those with `pdfInclude: true` reach the PDF's "Selected Open-Source Engineering" section. Core Expertise shows every tag on the website and the leading `PDF_SKILL_TAG_LIMIT` tags per category in the PDF, so tag order in `resume.json` matters.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
 - **CI/CD**: GitHub Actions verify tests and ensure that the generated assets are fresh, but CI does not mutate the repository or push commits.
 
@@ -68,7 +69,7 @@ Find the `experience` array in `resume.json` and add a new object to the top of 
 }
 ```
 
-Professional depth beyond the four-bullet `experience` entries lives in `selectedEngineeringPrograms` (rendered on the website and in the PDF as "Selected DevOps & Platform Engineering Highlights", using each entry's `bullets` array). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
+Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered on the website as "Selected DevOps & Platform Engineering" using each entry's `bullets` array. That array is website-only: to change what the PDF shows, edit `pdfEngineeringHighlights` instead, keeping every claim traceable to a program in `selectedEngineeringPrograms` (a test enforces that any number in a PDF highlight also appears there). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
 
 ## Local Development & Validation
 

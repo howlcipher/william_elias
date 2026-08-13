@@ -155,6 +155,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
 .stat-card span { display: block; margin-top: .65rem; color: var(--muted); font-size: .72rem; line-height: 1.45; text-transform: uppercase; }
 
 .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+/* With an odd number of categories the final card would sit alone in a half-width
+   cell; span it across both columns so the grid still reads as deliberate. */
+.skills-grid > .skill-category:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .skill-category { padding: 1.4rem; }
 .skill-icon { margin-bottom: .75rem; color: var(--red); font-size: 1.35rem; }
 .skill-category h3 { margin-bottom: .9rem; font-size: 1.05rem; }

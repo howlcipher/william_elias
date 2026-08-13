@@ -2,7 +2,7 @@ const config = {
     "personal": {
         "name": "William Elias",
         "title": "Senior DevOps / Platform Engineer",
-        "tagline": "CI/CD Automation | Production Reliability | AI-Enabled Engineering",
+        "tagline": "Building Automation, Reliable Platforms & AI-Enabled Operations",
         "location": "Michigan",
         "remote": "Open to U.S. Remote Roles",
         "photo": "1778619951750.jpg",
@@ -34,7 +34,7 @@ const config = {
             "MCP"
         ]
     },
-    "summary": "Senior DevOps and platform engineer with 10+ years spanning infrastructure and networking, software QA, automation, production operations, and delivery engineering. Designed the standardized .NET CI/CD and release model for an approximately 60-application estate and created 56 Azure DevOps build/release definitions across 28 applications, with 27 builds verified green and deployment plans dry-run validated before release. Hands-on with Azure DevOps, Python, PowerShell, .NET, IIS, Azure Monitor, Application Insights, KQL, Key Vault, OAuth/IAM, SQL Server, GitHub Actions, Docker/Helm, and production incident and release workflows, plus practical AI-enabled engineering for grounded knowledge, troubleshooting, and agent workflows.",
+    "summary": "Senior DevOps and Platform Engineer with 10+ years across infrastructure, networking, software QA, automation, production operations, and delivery engineering. Designs automation and platform capabilities that reduce repetitive operational work, standardize software delivery, and improve production reliability. Recent work includes standardizing CI/CD across a ~60-application estate, automating release and support workflows, strengthening observability and secrets management, and building AI-enabled operational tooling.",
     "stats": [
         {
             "value": "~60",
@@ -51,95 +51,87 @@ const config = {
     ],
     "skills": [
         {
-            "category": "DevOps & Release Engineering",
+            "category": "DevOps & Delivery",
             "icon": "fa-cloud",
             "tags": [
                 "Azure DevOps",
-                "Azure DevOps YAML",
-                "Classic Release",
                 "CI/CD",
-                "Pipeline as Code",
-                "Reusable Templates",
-                "Deployment Groups",
+                "YAML Pipelines",
+                "Classic Release",
                 "GitHub Actions",
+                "Release Automation",
                 "Git",
-                "Bitbucket",
-                "Release Gates"
+                "Deployment Groups",
+                "Reusable Templates",
+                "Bitbucket"
             ]
         },
         {
-            "category": "Automation & Software Engineering",
+            "category": "Automation & Development",
             "icon": "fa-code",
             "tags": [
                 "Python",
                 "PowerShell",
                 "C#",
-                "Go",
-                "SQL",
                 ".NET",
-                "ASP.NET Core",
+                "Go",
                 "REST APIs",
-                "FastAPI"
+                "FastAPI",
+                "SQL",
+                "ASP.NET Core"
             ]
         },
         {
-            "category": "Security & Identity",
-            "icon": "fa-shield-halved",
-            "tags": [
-                "Azure Key Vault",
-                "Managed Identity",
-                "OAuth 2.0",
-                "IAM",
-                "Credential Remediation",
-                "PII controls",
-                "CodeQL",
-                "Bandit"
-            ]
-        },
-        {
-            "category": "Observability & Reliability",
+            "category": "Reliability & Observability",
             "icon": "fa-chart-line",
             "tags": [
-                "Application Insights",
                 "Azure Monitor",
+                "Application Insights",
                 "KQL",
-                "Serilog",
                 "Structured Logging",
                 "Incident Triage",
                 "RCA",
+                "Serilog",
                 "SLA Support"
             ]
         },
         {
-            "category": "Infrastructure & Networking",
-            "icon": "fa-network-wired",
+            "category": "Infrastructure & Security",
+            "icon": "fa-shield-halved",
             "tags": [
                 "IIS",
                 "Windows Server",
                 "Active Directory",
                 "SQL Server",
-                "Load Balancers",
-                "Firewalls",
                 "Docker",
-                "Docker Compose",
                 "Helm",
-                "Rancher Desktop"
+                "Azure Key Vault",
+                "Managed Identity",
+                "OAuth/IAM",
+                "Credential Remediation",
+                "PII controls",
+                "CodeQL",
+                "Bandit",
+                "Docker Compose",
+                "Rancher Desktop",
+                "Load Balancers",
+                "Firewalls"
             ]
         },
         {
-            "category": "AI & Agentic Systems",
+            "category": "AI-Enabled Engineering",
             "icon": "fa-robot",
             "tags": [
                 "MCP",
                 "RAG",
                 "ChromaDB",
                 "Vector Search",
-                "Embeddings",
                 "Multi-Agent Routing",
                 "LLM APIs",
+                "Human-in-the-Loop Workflows",
+                "Embeddings",
                 "AI Guardrails",
-                "Prompt-Injection Defenses",
-                "Human-in-the-Loop Workflows"
+                "Prompt-Injection Defenses"
             ]
         }
     ],
@@ -174,7 +166,6 @@ const config = {
     "selectedEngineeringPrograms": [
         {
             "name": "CI/CD & Release Engineering",
-            "pdfBullet": "Created 56 Azure DevOps build/release definitions across 28 of ~60 applications; 27 builds verified green, 25 deployment plans dry-run verified, zero deployments performed pending go/no-go approval.",
             "bullets": [
                 "Designed the standard .NET build/release model for ~60 internal web applications across five servers with no prior consistent deployment path; created 56 Azure DevOps build/release definitions (28 build + 28 Classic Release) across 28 applications.",
                 "Executed all 28 builds (27 verified green) with artifacts validated against each release definition; dry-run deployment-path validation passed for 25 of 28 applications on the live deployment agent. Zero applications are deployed through the new framework: builds are manual-triggered and releases require approval above DEV, pending go/no-go on the first real deployment.",
@@ -199,7 +190,6 @@ const config = {
         },
         {
             "name": "Credential Hygiene & Secrets Remediation",
-            "pdfBullet": "Removed exposed credentials from 100+ repositories via Git-history remediation, then built a .NET 8 discovery/Key Vault migration utility backed by 62 automated tests.",
             "bullets": [
                 "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
                 "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests; a measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
@@ -219,7 +209,6 @@ const config = {
         },
         {
             "name": "Server Migration & DR Cutover",
-            "pdfBullet": "Co-led build-out of four new production/test servers and coordinated a zero-downtime cutover from legacy infrastructure.",
             "bullets": [
                 "Co-led build-out of four new production/test servers across OS configuration, IIS, Active Directory, firewall, application migration, database, and load-balancer layers, then helped coordinate a zero-downtime cutover from legacy infrastructure."
             ],
@@ -234,7 +223,6 @@ const config = {
         },
         {
             "name": "Internal Web Apps & Support Portal",
-            "pdfBullet": "Expanded a query extractor into a modular internal support portal with per-module access policies, a permanently retained SOX audit trail, and 156 automated tests.",
             "bullets": [
                 "Expanded a single-purpose query extractor into a modular ASP.NET Core support portal with a module framework, per-module access policies, and a permanently retained SOX audit trail.",
                 "Added DBA approve-only deployment scripts, live-object diffing, a pre-CAB dashboard, and request tracking that feeds the existing service desk; covered by 156 automated tests."
@@ -255,7 +243,6 @@ const config = {
         },
         {
             "name": "Observability & Telemetry",
-            "pdfBullet": "Helped establish Application Insights as the team standard, added structured logging estate-wide, authored the KQL library, and built a usage-based sunset list.",
             "bullets": [
                 "Contributed to the Application Insights proof of concept that became the team standard, drove adoption across the legacy application estate, added structured logging where none existed, authored the team's reusable KQL library, and used usage telemetry to build an evidence-based application sunset list."
             ],
@@ -269,7 +256,6 @@ const config = {
         },
         {
             "name": "Python Ops Automation & Estate Reduction",
-            "pdfBullet": "Built Python automation for database copying, payload triage, and report generation, then scripted the retirement of 300+ legacy applications.",
             "bullets": [
                 "Built PII-masked production-to-lower database copy tooling, failed-payload triage, event-driven query-to-email workflows, XML log parsing, and vendor report conversion.",
                 "Installed and supported Python applications on IIS, built multi-string source search for decommission planning, scripted retirement of 300+ unused legacy applications, and standardized the team on uv."
@@ -282,6 +268,64 @@ const config = {
                 "PowerShell",
                 "IIS",
                 "Go"
+            ]
+        }
+    ],
+    "pdfEngineeringHighlights": [
+        {
+            "name": "CI/CD & Release Engineering",
+            "bullets": [
+                "Standardized delivery for an estate of internal .NET web applications spread across five servers with no prior consistent deployment path, building the repository-to-server-to-deployment-path inventory, a definition generator, reusable Python/.NET templates, and a new folder convention over 157 existing definitions.",
+                "Executed all 28 builds with 27 verified green and validated deployment paths for 25 of 28 applications by dry run on the live deployment agent; zero applications are deployed through the framework yet, pending go/no-go on the first real deployment.",
+                "Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence risk and missing-artifact assumptions against a destructive robocopy /MIR step."
+            ],
+            "technology": [
+                "Azure DevOps YAML",
+                "Classic Release",
+                "Deployment Groups",
+                "Azure DevOps REST APIs",
+                "PowerShell",
+                "Python",
+                "IIS",
+                "MSBuild",
+                ".NET"
+            ]
+        },
+        {
+            "name": "Security & Secrets Remediation",
+            "bullets": [
+                "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
+                "Built a .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests; a measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds."
+            ],
+            "technology": [
+                ".NET 8",
+                "C#",
+                "Azure Key Vault",
+                "Managed Identity",
+                "xUnit",
+                "PowerShell",
+                "Python",
+                "Git history rewriting"
+            ]
+        },
+        {
+            "name": "Platform Reliability & Developer Enablement",
+            "bullets": [
+                "Contributed to the Application Insights proof of concept that became the team standard, drove adoption across the legacy application estate, added structured logging where none existed, and authored the team's reusable KQL library.",
+                "Expanded a single-purpose query extractor into a modular ASP.NET Core support portal with per-module access policies, a permanently retained SOX audit trail, DBA approve-only deployment scripts, and 156 automated tests.",
+                "Built Python operations automation for PII-masked database copies, failed-payload triage, and query-to-email workflows, and used usage telemetry to script the retirement of 300+ unused legacy applications."
+            ],
+            "technology": [
+                "Application Insights",
+                "Azure Monitor",
+                "KQL",
+                "Serilog",
+                "ASP.NET Core 8",
+                "C#",
+                "Python",
+                "FastAPI",
+                "SQL Server",
+                "IIS"
             ]
         }
     ],

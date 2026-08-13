@@ -89,10 +89,17 @@ class TestValidateConfig:
         cfg = load_config()
         validate_config(cfg)
         
-    def test_validate_config_missing_field(self):
+    @pytest.mark.parametrize("key", ["skills", "selectedEngineeringPrograms", "pdfEngineeringHighlights"])
+    def test_validate_config_missing_field(self, key):
         cfg = load_config()
-        del cfg["skills"]
-        with pytest.raises(ValueError, match="Validation failed: Missing required top-level field 'skills'"):
+        del cfg[key]
+        with pytest.raises(ValueError, match=f"Validation failed: Missing required top-level field '{key}'"):
+            validate_config(cfg)
+
+    def test_validate_config_rejects_highlight_without_bullets(self):
+        cfg = load_config()
+        cfg["pdfEngineeringHighlights"][0]["bullets"] = []
+        with pytest.raises(ValueError, match=r"'pdfEngineeringHighlights\[0\].bullets' must be a non-empty array"):
             validate_config(cfg)
             
     def test_validate_config_bad_url(self):
