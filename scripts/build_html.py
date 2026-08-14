@@ -34,10 +34,15 @@ def render_hero(personal):
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
 
     photo = get_valid_url(personal.get('photo'), allow_relative=True)
-    if photo:
+    photo_dark = get_valid_url(personal.get('photoDark'), allow_relative=True)
+    photo_light = get_valid_url(personal.get('photoLight'), allow_relative=True)
+    if photo and photo_dark and photo_light:
         parts.append(
-            f'<img class="profile-photo" src="{esc(photo)}" '
-            f'alt="Professional headshot of {esc(personal.get("name", ""))}">'
+            f'<img class="profile-photo" src="{esc(photo_dark)}" '
+            f'data-photo-dark="{esc(photo_dark)}" '
+            f'data-photo-light="{esc(photo_light)}" '
+            'width="512" height="512" decoding="async" fetchpriority="high" '
+            'alt="Portrait of William Elias">'
         )
 
     parts.append('<div class="contact-info">')

@@ -108,6 +108,47 @@ def test_storage_failure_fallback(page: Page, test_url: str):
         new_theme = page.evaluate("() => document.documentElement.getAttribute('data-theme')")
         assert initial_theme != new_theme, "Theme should toggle even if localStorage fails"
 
+
+def test_profile_photo_tracks_theme_and_colorblind_mode(page: Page, test_url: str):
+    page.add_init_script("localStorage.clear()")
+    page.emulate_media(color_scheme="dark")
+    page.goto(test_url)
+
+    photo = page.locator('.profile-photo')
+    theme_toggle = page.locator('#theme-toggle')
+    colorblind_toggle = page.locator('#colorblind-toggle')
+    dark_photo = 'assets/images/william-elias-profile-hoodie-dark.webp'
+    light_photo = 'assets/images/william-elias-profile-hoodie-light.webp'
+
+    def assert_photo_loaded(expected_source):
+        page.wait_for_function(
+            """expectedSource => {
+                const image = document.querySelector('.profile-photo');
+                return image.getAttribute('src') === expectedSource && image.complete && image.naturalWidth > 0;
+            }""",
+            arg=expected_source,
+        )
+
+    # Default/dark starts on the dark portrait.
+    assert_photo_loaded(dark_photo)
+    assert photo.get_attribute('alt') == 'Portrait of William Elias'
+    assert photo.get_attribute('width') == '512'
+    assert photo.get_attribute('height') == '512'
+
+    # Light, including light colorblind mode, uses the light portrait.
+    theme_toggle.click()
+    assert_photo_loaded(light_photo)
+    colorblind_toggle.click()
+    assert_photo_loaded(light_photo)
+
+    # Dark colorblind mode uses the dark portrait, and repeated switches stay in sync.
+    theme_toggle.click()
+    assert_photo_loaded(dark_photo)
+    theme_toggle.click()
+    assert_photo_loaded(light_photo)
+    theme_toggle.click()
+    assert_photo_loaded(dark_photo)
+
 def test_mobile_menu_behavior(page: Page, test_url: str):
     page.set_viewport_size({"width": 375, "height": 667})
     page.goto(test_url)
