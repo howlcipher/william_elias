@@ -14,6 +14,20 @@ function safeStorageSet(key, value) {
     }
 }
 
+function syncProfilePhoto() {
+    const photo = document.querySelector('.profile-photo');
+    if (!photo) return;
+
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light' ||
+        (document.documentElement.getAttribute('data-theme') === 'colorblind' &&
+            !document.documentElement.classList.contains('dark-mode-colorblind'));
+    const source = isLight ? photo.dataset.photoLight : photo.dataset.photoDark;
+
+    if (source && photo.getAttribute('src') !== source) {
+        photo.setAttribute('src', source);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Portfolio content (hero, summary, skills, experience, projects,
     // additional experience, education, footer) is pre-rendered into
@@ -112,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isColorblind) {
         enableColorblindMode();
     }
+    syncProfilePhoto();
 
     // Theme Toggle Handler (Light/Dark)
     if(themeToggleBtn) {
@@ -123,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateThemeIcon(isDark ? 'dark' : 'light');
                 
                 safeStorageSet('theme', isDark ? 'dark' : 'light');
+                syncProfilePhoto();
                 return;
             }
 
@@ -139,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 safeStorageSet('theme', 'light');
             }
             updateThemeIcon(newTheme);
+            syncProfilePhoto();
         });
     }
 
@@ -165,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 enableColorblindMode();
             }
+            syncProfilePhoto();
         });
     }
 

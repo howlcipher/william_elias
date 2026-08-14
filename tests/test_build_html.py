@@ -1,5 +1,5 @@
 import pytest
-from scripts.build_html import esc, get_valid_url, inject, render_summary
+from scripts.build_html import esc, get_valid_url, inject, render_hero, render_summary
 
 def test_esc():
     assert esc("hello") == "hello"
@@ -27,3 +27,21 @@ def test_inject_missing_marker():
 def test_render_summary():
     res = render_summary("A summary with <br> tag")
     assert res == "<p>A summary with &lt;br&gt; tag</p>"
+
+
+def test_render_hero_uses_theme_aware_portrait_with_intrinsic_dimensions():
+    personal = {
+        "name": "William Elias",
+        "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
+        "photoDark": "assets/images/william-elias-profile-hoodie-dark.webp",
+        "photoLight": "assets/images/william-elias-profile-hoodie-light.webp",
+    }
+
+    hero = render_hero(personal)
+
+    assert 'class="profile-photo"' in hero
+    assert 'src="assets/images/william-elias-profile-hoodie-dark.webp"' in hero
+    assert 'data-photo-dark="assets/images/william-elias-profile-hoodie-dark.webp"' in hero
+    assert 'data-photo-light="assets/images/william-elias-profile-hoodie-light.webp"' in hero
+    assert 'width="512" height="512"' in hero
+    assert 'alt="Portrait of William Elias"' in hero
