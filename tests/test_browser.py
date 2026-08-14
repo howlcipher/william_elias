@@ -135,6 +135,12 @@ def test_profile_photo_tracks_theme_and_colorblind_mode(page: Page, test_url: st
     assert photo.get_attribute('width') == '512'
     assert photo.get_attribute('height') == '512'
 
+    module = page.locator('.profile-module')
+    desktop_box = module.bounding_box()
+    assert abs(desktop_box['width'] - desktop_box['height']) <= 1
+    assert desktop_box['width'] <= 260
+    assert page.locator('.hero-content').evaluate("el => getComputedStyle(el).overflow") == 'visible'
+
     # Light, including light colorblind mode, uses the light portrait.
     theme_toggle.click()
     assert_photo_loaded(light_photo)
@@ -148,6 +154,19 @@ def test_profile_photo_tracks_theme_and_colorblind_mode(page: Page, test_url: st
     assert_photo_loaded(light_photo)
     theme_toggle.click()
     assert_photo_loaded(dark_photo)
+
+
+def test_profile_module_is_square_and_fits_mobile(page: Page, test_url: str):
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(test_url)
+
+    module = page.locator('.profile-module')
+    box = module.bounding_box()
+    assert abs(box['width'] - box['height']) <= 1
+    assert 150 <= box['width'] <= 180
+    assert module.evaluate("el => getComputedStyle(el).gridArea") == 'photo'
+    assert page.evaluate("() => document.documentElement.scrollWidth <= 390")
+    assert page.locator('.profile-photo').get_attribute('alt') == 'Portrait of William Elias'
 
 def test_mobile_menu_behavior(page: Page, test_url: str):
     page.set_viewport_size({"width": 375, "height": 667})

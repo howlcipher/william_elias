@@ -20,12 +20,10 @@ def esc(value):
 
 
 def render_hero(personal):
-    # Flat (unwrapped) children in reading order -- eyebrow, heading, subtitle,
-    # tagline, photo, then contact actions -- so this same DOM order reads
-    # sensibly with CSS off, and the mobile single-column grid (which mirrors
-    # this order in style.css) needs no `order` overrides to place the photo
-    # between the tagline and the CTA row. Desktop uses named grid areas on
-    # `.hero-content` to move the photo into a right-hand column instead.
+    # Keep the content in reading order -- eyebrow, heading, subtitle, tagline,
+    # portrait, then contact actions -- so the mobile single-column grid needs
+    # no order overrides. Desktop uses named grid areas on `.hero-content` to
+    # move the complete profile module into a right-hand column.
     parts = []
     eyebrow_bits = [b for b in (personal.get("location", ""), personal.get("remote", "")) if b]
     parts.append(f'<p class="eyebrow">{esc(" | ".join(eyebrow_bits))}</p>')
@@ -38,11 +36,15 @@ def render_hero(personal):
     photo_light = get_valid_url(personal.get('photoLight'), allow_relative=True)
     if photo and photo_dark and photo_light:
         parts.append(
+            '<div class="profile-module">'
+            '<div class="profile-frame">'
             f'<img class="profile-photo" src="{esc(photo_dark)}" '
             f'data-photo-dark="{esc(photo_dark)}" '
             f'data-photo-light="{esc(photo_light)}" '
             'width="512" height="512" decoding="async" fetchpriority="high" '
             'alt="Portrait of William Elias">'
+            '</div>'
+            '</div>'
         )
 
     parts.append('<div class="contact-info">')

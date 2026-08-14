@@ -39,6 +39,7 @@ def test_render_hero_uses_theme_aware_portrait_with_intrinsic_dimensions():
 
     hero = render_hero(personal)
 
+    assert 'class="profile-module"><div class="profile-frame">' in hero
     assert 'class="profile-photo"' in hero
     assert 'src="assets/images/william-elias-profile-hoodie-dark.webp"' in hero
     assert 'data-photo-dark="assets/images/william-elias-profile-hoodie-dark.webp"' in hero
