@@ -124,7 +124,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
     overflow: visible;
 }
 .hero-content::before { content: "SYSTEMS // DELIVERY // AUTOMATION"; position: absolute; top: .65rem; right: .85rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; }
-.hero-content::after { content: ""; position: absolute; left: 0; bottom: 0; width: 42%; height: 7px; background: var(--red); box-shadow: 42vw 0 0 var(--blue); }
+.hero-content::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 7px; background: linear-gradient(to right, var(--red) 0 42%, var(--blue) 42% 100%); }
 .eyebrow, .timeline-date, .project-subtitle { color: var(--blue); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .hero-content .eyebrow { grid-area: eyebrow; }
 .hero h1 { grid-area: heading; max-width: 800px; margin: .65rem 0; color: var(--ink); font-size: clamp(3rem, 8vw, 6.8rem); font-weight: 700; letter-spacing: -.075em; }
