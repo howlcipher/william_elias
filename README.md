@@ -1,7 +1,7 @@
 # William Elias
 
-**Senior DevOps / Platform Engineer**
-Building Automation, Reliable Platforms & AI-Enabled Operations
+**DevOps Engineer | CI/CD & Release Automation | Production Reliability**
+Automating Software Delivery, Production Observability & AI-Enabled Tooling
 Open to U.S. Remote Roles
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
@@ -69,7 +69,7 @@ Find the `experience` array in `resume.json` and add a new object to the top of 
 }
 ```
 
-Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered on the website as "Selected DevOps & Platform Engineering" using each entry's `bullets` array. That array is website-only: to change what the PDF shows, edit `pdfEngineeringHighlights` instead, keeping every claim traceable to a program in `selectedEngineeringPrograms` (a test enforces that any number in a PDF highlight also appears there). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
+Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered on the website as "Selected DevOps & Production Engineering" using each entry's `bullets` array. That array is website-only: to change what the PDF shows, edit `pdfEngineeringHighlights` instead, keeping every claim traceable to a program in `selectedEngineeringPrograms` (a test enforces that any number in a PDF highlight also appears there). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
 
 ## Local Development & Validation
 

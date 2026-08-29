@@ -41,7 +41,8 @@ class TestCanonicalAndOgMeta:
         assert len(desc) <= 160, f"meta description is {len(desc)} chars and will be truncated"
         assert cfg["personal"]["name"] in desc
         assert "DevOps" in desc
-        assert "Platform" in desc
+        assert "CI/CD" in desc
+        assert "Senior DevOps" not in desc
 
     def test_twitter_title_and_description_present(self):
         html_content = _index_html()

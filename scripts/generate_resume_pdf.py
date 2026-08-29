@@ -16,7 +16,7 @@ MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
 # Cap the tag list rendered per Core Expertise category. The website shows every
 # tag from resume.json; the PDF shows the curated leading slice, so tag order in
 # resume.json determines what a recruiter sees on page 1.
-PDF_SKILL_TAG_LIMIT = 9
+PDF_SKILL_TAG_LIMIT = 6
 
 
 def load_config(config_path: Path | str | None = None) -> dict:
@@ -184,7 +184,7 @@ def build(config: dict, out_path: Path):
     # Title and tagline get their own lines: the target role should read as the
     # headline, not as the first half of a long combined string.
     pdf.set_font("Helvetica", "B", 11)
-    pdf.cell(0, 14, p["title"].replace("//", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 14, p["title"].replace("//", "|").upper(), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "I", 9.5)
     pdf.cell(0, 13, p["tagline"].replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
@@ -242,6 +242,17 @@ def build(config: dict, out_path: Path):
     # Sourced from pdfEngineeringHighlights, a curated 3-entry condensation of the
     # website's selectedEngineeringPrograms. The site keeps all six programs; the
     # PDF carries only the strongest evidence so page 2 stays scannable.
+    first_hl = (config.get("pdfEngineeringHighlights") or [{}])[0]
+    first_bullets = first_hl.get("bullets") or []
+    first_tech = first_hl.get("technology") or []
+    first_tech_line = ("Tech: " + ", ".join(first_tech)) if first_tech else ""
+    first_block_h = 28 + 11.5 + sum(pdf.bullet_height(b) for b in first_bullets)
+    if first_tech_line:
+        first_block_h += pdf.indented_text_height(first_tech_line)
+    first_block_h += 2
+    if pdf.will_page_break(first_block_h):
+        pdf.add_page()
+
     pdf.section_title("Selected Engineering Highlights")
     for prog in config.get("pdfEngineeringHighlights") or []:
         bullets = prog.get("bullets") or []

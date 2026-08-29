@@ -22,31 +22,33 @@ class TestResumeJsonValidity:
 
 
 class TestHeadlineAndPositioning:
-    def test_public_headline_is_devops_platform(self):
+    def test_public_headline_positioning(self):
         cfg = load_config()
         title = cfg["personal"]["title"]
-        assert "DevOps" in title
-        assert "Platform" in title
+        assert "DevOps Engineer" in title
+        assert "CI/CD & Release Automation" in title
+        assert "Production Reliability" in title
+        assert "Platform Engineer" not in title
 
     def test_public_headline_does_not_lead_with_production_support(self):
-        # The public-facing headline should read as Senior DevOps/Platform Engineer,
+        # The public-facing headline should read as DevOps Engineer | CI/CD & Release Automation | Production Reliability,
         # not Production Support -- that title is preserved only as the official
         # Stellantis job title inside the experience entry.
         cfg = load_config()
         assert "Production Support" not in cfg["personal"]["title"]
 
     def test_tagline_states_automation_reliability_and_ai_positioning(self):
-        # The tagline carries the positioning story: automation -> reliable
-        # platforms -> AI-enabled operations, in that order.
         cfg = load_config()
         tagline = cfg["personal"]["tagline"]
-        assert "Automation" in tagline
-        assert "Reliable" in tagline or "Reliability" in tagline
+        assert "Automating" in tagline or "Automation" in tagline
+        assert "Observability" in tagline or "Reliability" in tagline
         assert "AI-Enabled" in tagline
 
-    def test_summary_leads_with_devops_platform_positioning(self):
+    def test_summary_leads_with_devops_positioning(self):
         cfg = load_config()
-        assert cfg["summary"].startswith("Senior DevOps and Platform Engineer")
+        assert cfg["summary"].startswith("DevOps engineer with 10+ years")
+        assert "Senior DevOps" not in cfg["summary"]
+        assert "Platform Engineer" not in cfg["summary"]
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
@@ -175,12 +177,14 @@ class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
         "DevOps & Delivery",
         "Automation & Development",
-        "Reliability & Observability",
-        "Infrastructure & Security",
+        "Production Reliability & Observability",
+        "Infrastructure & Application Operations",
+        "Security & Identity",
         "AI-Enabled Engineering",
+        "Additional Hands-On / Project Technologies",
     }
 
-    def test_five_curated_categories_present(self):
+    def test_curated_categories_present(self):
         cfg = load_config()
         categories = {s["category"] for s in cfg["skills"]}
         assert categories == self.EXPECTED_CATEGORIES
@@ -451,15 +455,18 @@ class TestNoUnsupportedClaims:
         for term in knows_about:
             assert "kubernetes" not in term.lower()
 
-    def test_helm_and_docker_retained_as_infrastructure_tags(self):
-        # Helm/Docker/Docker Compose/Rancher Desktop are real, scoped experience
-        # (packaging + a WSL2 container-host POC) and should remain.
+    def test_helm_and_docker_framed_as_hands_on_project_technologies(self):
+        # Helm/Docker/Docker Compose/Rancher Desktop are framed as hands-on / project technologies.
         cfg = load_config()
-        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Security")
-        assert "Docker" in infra["tags"]
-        assert "Docker Compose" in infra["tags"]
-        assert "Helm" in infra["tags"]
-        assert "Rancher Desktop" in infra["tags"]
+        hands_on = next(s for s in cfg["skills"] if "Project" in s["category"] or "Hands-On" in s["category"])
+        assert "Docker" in hands_on["tags"]
+        assert "Docker Compose" in hands_on["tags"]
+        assert "Helm" in hands_on["tags"]
+        assert "Rancher Desktop" in hands_on["tags"]
+        # Ensure Docker and Helm are not placed beside core infrastructure experience
+        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Application Operations")
+        assert "Docker" not in infra["tags"]
+        assert "Helm" not in infra["tags"]
 
     def test_no_automated_identity_lifecycle_claim(self):
         cfg = load_config()
@@ -581,10 +588,11 @@ class TestGeneratedAssetsSynchronized:
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         assert cfg["personal"]["remote"] in html_content
 
-    def test_seo_meta_description_mentions_devops_and_platform(self):
+    def test_seo_meta_description_mentions_devops_and_reliability(self):
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content)
         assert desc_match
         desc = desc_match.group(1)
         assert "DevOps" in desc
-        assert "Platform" in desc
+        assert "Production Reliability" in desc or "CI/CD" in desc
+        assert "Senior DevOps" not in desc
