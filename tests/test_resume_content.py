@@ -173,12 +173,14 @@ class TestKeyMetrics:
 class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
         "Software & Backend",
+        "Web Development",
         "DevOps & Delivery",
         "Automation",
         "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
         "AI-Enabled Engineering",
+        "Additional Programming Foundations",
         "Additional Hands-On Technologies",
     }
 
@@ -207,6 +209,29 @@ class TestCoreExpertiseCategories:
         for core in ("Python", "FastAPI", "PowerShell", "C#", "Go", "SQL Server"):
             assert core in combined
         assert "Java" not in combined
+
+    def test_web_development_category_has_frontend_basics(self):
+        cfg = load_config()
+        web = next(s for s in cfg["skills"] if s["category"] == "Web Development")
+        for tag in ("JavaScript", "HTML", "CSS"):
+            assert tag in web["tags"]
+
+    def test_additional_programming_foundations_represents_java_as_coursework(self):
+        cfg = load_config()
+        foundations = next(
+            s for s in cfg["skills"] if s["category"] == "Additional Programming Foundations"
+        )
+        assert "Java" in foundations["tags"]
+        # The non-professional framing has to live in the visible category name itself --
+        # render_skills() has no subtitle field to attach a caveat to.
+        assert "Foundations" in foundations["category"]
+        assert "Professional" not in foundations["category"]
+
+    def test_new_website_only_categories_excluded_from_pdf(self, tmp_path):
+        cfg = load_config()
+        blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
+        assert "Web Development" not in blob
+        assert "Additional Programming Foundations" not in blob
 
 
 
