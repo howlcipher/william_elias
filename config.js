@@ -1,10 +1,12 @@
 const config = {
     "personal": {
         "name": "William Elias",
-        "title": "DevOps Engineer | CI/CD & Release Automation | Production Reliability",
-        "tagline": "Automating Software Delivery, Production Observability & AI-Enabled Tooling",
+        "title": "Software, DevOps & Automation Engineer",
+        "tagline": "Building Software, Automating Work & Delivering Reliable Systems",
+        "supporting": "Python & FastAPI | CI/CD | Azure DevOps | AI-Enabled Engineering",
+        "pdfSupporting": "Python & FastAPI | CI/CD & Release Automation | Production Reliability",
         "location": "Michigan",
-        "remote": "Open to U.S. Remote Roles",
+        "remote": "Open to U.S. Remote Opportunities",
         "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
         "photoDark": "assets/images/william-elias-profile-hoodie-dark.webp",
         "photoLight": "assets/images/william-elias-profile-hoodie-light.webp",
@@ -18,19 +20,24 @@ const config = {
     },
     "seo": {
         "canonicalUrl": "https://howlcipher.github.io/william_elias/",
-        "siteName": "William Elias | DevOps Engineer | CI/CD & Release Automation | Production Reliability",
+        "siteName": "William Elias | Software, DevOps & Automation Engineer",
         "knowsAbout": [
+            "Software Engineering",
+            "Python",
+            "FastAPI",
             "DevOps",
             "CI/CD",
             "Release Automation",
             "Production Reliability",
             "Production Engineering",
             "Azure DevOps",
-            "Python",
+            "Automation",
+            "Internal Tools",
+            "Backend Development",
+            "REST APIs",
             "PowerShell",
             "C# / .NET",
-            "Go",
-            "SQL",
+            "SQL Server",
             "Azure Monitor",
             "Application Insights",
             "KQL",
@@ -39,11 +46,12 @@ const config = {
             "Git",
             "GitHub Actions",
             "Agentic AI",
-            "RAG",
-            "MCP"
+            "MCP",
+            "Cybersecurity"
         ]
     },
-    "summary": "DevOps engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and automation. Designs CI/CD, release automation, operational tooling, and production guardrails that make software delivery safer and more repeatable. Recent work includes standardizing .NET delivery across an approximately 60-application estate, building Azure DevOps automation, leading production release and migration work, improving observability with Azure Monitor, Application Insights, and KQL, and remediating exposed credentials across 100+ repositories. Builds secure internal tooling with Python, PowerShell, C#/.NET, and SQL, with current work extending that foundation into AI-enabled engineering and cybersecurity.",
+    "about": "I'm a software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. I tend to work where development and operations overlap: building software and internal tools, automating repetitive work, improving CI/CD and releases, troubleshooting production systems, and finding better ways for engineers to get work done.\n\nIn my current role, I designed the standardized .NET CI/CD and release model for an approximately 60-application estate, built Azure DevOps automation and deployment guardrails, support production releases and database migrations, and troubleshoot application, API, database, identity, configuration, and network issues. I also build Python automation and FastAPI dashboards for operational workflows, engineering visibility, and internal tooling.\n\nMy hands-on stack includes Python, FastAPI, PowerShell, C#/.NET, SQL Server, REST APIs, Azure DevOps, GitHub Actions, IIS, Azure Monitor, Application Insights, KQL, and Azure Key Vault. I've also built security-focused tooling for credential discovery and remediation across 100+ repositories, Key Vault migration and rollback, PII safeguards, and audit-focused workflows.\n\nI'm pursuing an M.S. in Cyber Defense at Dakota State University and spend a lot of my own engineering time experimenting with AI-enabled development and automation, including agent workflows, engineering knowledge systems, incident triage, and human-reviewed AI execution.\n\nI'm open to remote roles across software engineering, Python/backend development, DevOps, automation, production engineering, internal tooling, developer productivity, and AI-enabled engineering. The common thread for me is simple: I like building useful things, automating work that shouldn't be manual, and making systems easier to operate.",
+    "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. Builds software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET, and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that foundation into AI-enabled engineering and cybersecurity.",
     "stats": [
         {
             "value": "~60",
@@ -60,6 +68,20 @@ const config = {
     ],
     "skills": [
         {
+            "category": "Software & Backend",
+            "icon": "fa-code",
+            "tags": [
+                "Python",
+                "FastAPI",
+                "C#",
+                ".NET",
+                "SQL Server",
+                "REST APIs",
+                "ASP.NET Core",
+                "SQLite"
+            ]
+        },
+        {
             "category": "DevOps & Delivery",
             "icon": "fa-cloud",
             "tags": [
@@ -69,28 +91,28 @@ const config = {
                 "Classic Release",
                 "Reusable Templates",
                 "Deployment Groups",
+                "GitHub Actions",
+                "Git",
                 "Artifact Management",
                 "Release Gates",
-                "GitHub Actions",
-                "Git"
+                "Release Automation"
             ]
         },
         {
-            "category": "Automation & Development",
-            "icon": "fa-code",
+            "category": "Automation",
+            "icon": "fa-bolt",
             "tags": [
                 "Python",
                 "PowerShell",
-                "C#",
-                ".NET",
                 "Go",
-                "SQL",
                 "REST APIs",
-                "FastAPI"
+                "Workflow Automation",
+                "Repo Automation",
+                "Operational Tooling"
             ]
         },
         {
-            "category": "Production Reliability & Observability",
+            "category": "Production & Reliability",
             "icon": "fa-chart-line",
             "tags": [
                 "Azure Monitor",
@@ -100,7 +122,9 @@ const config = {
                 "Incident Triage",
                 "RCA",
                 "SLA Support",
-                "Environment Readiness"
+                "Environment Readiness",
+                "Production Releases",
+                "Production Troubleshooting"
             ]
         },
         {
@@ -113,7 +137,8 @@ const config = {
                 "SQL Server",
                 "Load Balancers",
                 "Firewalls",
-                "Network Troubleshooting"
+                "Networking",
+                "Cisco / Meraki"
             ]
         },
         {
@@ -122,27 +147,30 @@ const config = {
             "tags": [
                 "Azure Key Vault",
                 "Managed Identity",
-                "OAuth/IAM",
+                "OAuth",
+                "IAM",
                 "Secrets Remediation",
-                "Credential/PII Scanning",
-                "Git-History Remediation"
+                "Credential / PII Scanning",
+                "Git-History Remediation",
+                "Audit / Compliance Controls"
             ]
         },
         {
             "category": "AI-Enabled Engineering",
             "icon": "fa-robot",
             "tags": [
+                "LLM APIs",
                 "MCP",
                 "RAG",
-                "LLM APIs",
                 "Agent Workflows",
                 "Context Engineering",
-                "Guardrails",
-                "Human-in-the-Loop Automation"
+                "AI Guardrails",
+                "Human-in-the-Loop Automation",
+                "Engineering Knowledge Systems"
             ]
         },
         {
-            "category": "Additional Hands-On / Project Technologies",
+            "category": "Additional Hands-On Technologies",
             "icon": "fa-cubes",
             "tags": [
                 "Docker",
@@ -162,7 +190,7 @@ const config = {
             "achievements": [
                 "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the deployment agent.",
                 "Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent delivery defects, including application-pool identity convergence risk, before any application was deployed.",
-                "Lead weekly production releases, database migrations, and SLA-driven incident/service-request work through Freshservice and Jira; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
+                "Build Python automation and FastAPI dashboards for operational workflows and engineering visibility; lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
                 "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
                 "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and load-balancer layers, including a zero-downtime cutover from legacy infrastructure.",
                 "Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while enforcing credential, PII, provenance, and engineer-review controls."

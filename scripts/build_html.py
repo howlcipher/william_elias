@@ -21,7 +21,7 @@ def esc(value):
 
 def render_hero(personal):
     # Keep the content in reading order -- eyebrow, heading, subtitle, tagline,
-    # portrait, then contact actions -- so the mobile single-column grid needs
+    # supporting line, portrait, then contact actions -- so the mobile single-column grid needs
     # no order overrides. Desktop uses named grid areas on `.hero-content` to
     # move the complete profile module into a right-hand column.
     parts = []
@@ -30,6 +30,8 @@ def render_hero(personal):
     parts.append(f'<h1>{esc(personal.get("name", ""))}</h1>')
     parts.append(f'<h2 class="subtitle">{esc(personal.get("title", ""))}</h2>')
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
+    if personal.get('supporting'):
+        parts.append(f'<p class="hero-supporting">{esc(personal.get("supporting"))}</p>')
 
     photo = get_valid_url(personal.get('photo'), allow_relative=True)
     photo_dark = get_valid_url(personal.get('photoDark'), allow_relative=True)
@@ -81,8 +83,9 @@ def render_hero(personal):
     return ''.join(parts)
 
 
-def render_summary(summary):
-    return f'<p>{esc(summary)}</p>'
+def render_summary(about_or_summary):
+    paragraphs = [p.strip() for p in str(about_or_summary or '').split('\n\n') if p.strip()]
+    return ''.join(f'<p>{esc(p)}</p>' for p in paragraphs)
 
 
 def render_stats(stats):
@@ -210,8 +213,8 @@ def render_mobile_nav_resume(personal):
 
 def render_cta_copy(personal):
     return (
-        '<p class="cta-copy">DevOps engineer focused on CI/CD and release automation, production reliability, '
-        'observability, and AI-enabled engineering tooling.</p>'
+        '<p class="cta-copy">Software, DevOps, and automation engineer focused on building software, '
+        'automating workflows, CI/CD delivery, production reliability, and AI-enabled tooling.</p>'
     )
 
 
@@ -364,12 +367,13 @@ def build_html():
     site_name = seo.get('siteName') or f"{name} | {title}"
 
     page_title = html.escape(f"{name} | {title}", quote=True)
-    seo_suffix = "Azure DevOps, CI/CD, Python, PowerShell, and .NET tooling."
+    seo_suffix = "Python & FastAPI, CI/CD, Azure DevOps, and AI-enabled engineering."
     # Search snippets cut off around 160 characters, so the meta description
     # carries name, title, and the core keywords and stops there. OG/Twitter
     # stay tagline-led, where the longer line still renders in full.
     description = (
-        f"{name} — {title}. Azure DevOps, CI/CD, Python, PowerShell, and observability."
+        "Software, DevOps, and automation engineer: Python, FastAPI, CI/CD, "
+        "Azure DevOps, production reliability, internal tools, and AI-enabled engineering."
     )
     escaped_desc = html.escape(description, quote=True)
     escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}. {seo_suffix}", quote=True)
@@ -450,7 +454,7 @@ def build_html():
 
     # Pre-render body content sections for SEO/no-JS visibility
     html_content = inject(html_content, 'HERO', render_hero(personal))
-    html_content = inject(html_content, 'SUMMARY', render_summary(data.get('summary', '')))
+    html_content = inject(html_content, 'SUMMARY', render_summary(data.get('about') or data.get('summary', '')))
     html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
     exp_combined = data.get('experience', [])[:]

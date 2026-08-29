@@ -1,8 +1,8 @@
 # William Elias
 
-**DevOps Engineer | CI/CD & Release Automation | Production Reliability**
-Automating Software Delivery, Production Observability & AI-Enabled Tooling
-Open to U.S. Remote Roles
+**Software, DevOps & Automation Engineer**
+Building Software, Automating Work & Delivering Reliable Systems
+Open to U.S. Remote Opportunities
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
 

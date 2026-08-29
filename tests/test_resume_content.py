@@ -25,28 +25,25 @@ class TestHeadlineAndPositioning:
     def test_public_headline_positioning(self):
         cfg = load_config()
         title = cfg["personal"]["title"]
-        assert "DevOps Engineer" in title
-        assert "CI/CD & Release Automation" in title
-        assert "Production Reliability" in title
+        assert "Software" in title
+        assert "DevOps" in title
+        assert "Automation Engineer" in title
         assert "Platform Engineer" not in title
 
     def test_public_headline_does_not_lead_with_production_support(self):
-        # The public-facing headline should read as DevOps Engineer | CI/CD & Release Automation | Production Reliability,
-        # not Production Support -- that title is preserved only as the official
-        # Stellantis job title inside the experience entry.
         cfg = load_config()
         assert "Production Support" not in cfg["personal"]["title"]
 
-    def test_tagline_states_automation_reliability_and_ai_positioning(self):
+    def test_tagline_states_software_automation_and_reliability_positioning(self):
         cfg = load_config()
         tagline = cfg["personal"]["tagline"]
+        assert "Software" in tagline or "Building" in tagline
         assert "Automating" in tagline or "Automation" in tagline
-        assert "Observability" in tagline or "Reliability" in tagline
-        assert "AI-Enabled" in tagline
+        assert "Reliable" in tagline or "Reliability" in tagline
 
-    def test_summary_leads_with_devops_positioning(self):
+    def test_summary_leads_with_software_devops_automation_positioning(self):
         cfg = load_config()
-        assert cfg["summary"].startswith("DevOps engineer with 10+ years")
+        assert cfg["summary"].startswith("Software, DevOps, and automation engineer with 10+ years")
         assert "Senior DevOps" not in cfg["summary"]
         assert "Platform Engineer" not in cfg["summary"]
 
@@ -175,13 +172,14 @@ class TestKeyMetrics:
 
 class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
+        "Software & Backend",
         "DevOps & Delivery",
-        "Automation & Development",
-        "Production Reliability & Observability",
+        "Automation",
+        "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
         "AI-Enabled Engineering",
-        "Additional Hands-On / Project Technologies",
+        "Additional Hands-On Technologies",
     }
 
     def test_curated_categories_present(self):
@@ -201,13 +199,14 @@ class TestCoreExpertiseCategories:
         for term in ("MCP", "RAG"):
             assert any(term in tag for tag in ai_skills["tags"])
 
-    def test_automation_category_reflects_curated_language_breadth(self):
+    def test_languages_and_tools_reflected_in_software_and_automation(self):
         cfg = load_config()
-        automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Development")
-        tags = automation["tags"]
-        for core in ("Python", "PowerShell", "C#", "Go", "SQL"):
-            assert core in tags
-        assert "Java" not in tags
+        software = next(s for s in cfg["skills"] if s["category"] == "Software & Backend")
+        automation = next(s for s in cfg["skills"] if s["category"] == "Automation")
+        combined = software["tags"] + automation["tags"]
+        for core in ("Python", "FastAPI", "PowerShell", "C#", "Go", "SQL Server"):
+            assert core in combined
+        assert "Java" not in combined
 
 
 
@@ -458,7 +457,7 @@ class TestNoUnsupportedClaims:
     def test_helm_and_docker_framed_as_hands_on_project_technologies(self):
         # Helm/Docker/Docker Compose/Rancher Desktop are framed as hands-on / project technologies.
         cfg = load_config()
-        hands_on = next(s for s in cfg["skills"] if "Project" in s["category"] or "Hands-On" in s["category"])
+        hands_on = next(s for s in cfg["skills"] if "Hands-On" in s["category"])
         assert "Docker" in hands_on["tags"]
         assert "Docker Compose" in hands_on["tags"]
         assert "Helm" in hands_on["tags"]
@@ -588,11 +587,12 @@ class TestGeneratedAssetsSynchronized:
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         assert cfg["personal"]["remote"] in html_content
 
-    def test_seo_meta_description_mentions_devops_and_reliability(self):
+    def test_seo_meta_description_mentions_software_devops_automation(self):
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content)
         assert desc_match
         desc = desc_match.group(1)
+        assert "Software" in desc
         assert "DevOps" in desc
-        assert "Production Reliability" in desc or "CI/CD" in desc
+        assert "automation" in desc.lower()
         assert "Senior DevOps" not in desc
