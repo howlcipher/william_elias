@@ -111,11 +111,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-        "eyebrow  photo"
-        "heading  photo"
-        "subtitle photo"
-        "tagline  photo"
-        "contact  photo";
+        "eyebrow    photo"
+        "heading    photo"
+        "subtitle   photo"
+        "tagline    photo"
+        "supporting photo"
+        "contact    photo";
     column-gap: 2.5rem;
     padding: 2.25rem;
     background: var(--panel);
@@ -123,17 +124,18 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-o
     box-shadow: var(--shadow);
     overflow: visible;
 }
-.hero-content::before { content: "SYSTEMS // DELIVERY // AUTOMATION"; position: absolute; top: .65rem; right: .85rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; }
+.hero-content::before { content: "SOFTWARE // DEVOPS // AUTOMATION"; position: absolute; top: .65rem; right: .85rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; }
 .hero-content::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 7px; background: linear-gradient(to right, var(--red) 0 42%, var(--blue) 42% 100%); }
 .eyebrow, .timeline-date, .project-subtitle { color: var(--blue); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .hero-content .eyebrow { grid-area: eyebrow; }
 .hero h1 { grid-area: heading; max-width: 800px; margin: .65rem 0; color: var(--ink); font-size: clamp(3rem, 8vw, 6.8rem); font-weight: 700; letter-spacing: -.075em; }
 .subtitle { grid-area: subtitle; margin-bottom: 1rem; color: var(--red); font-size: clamp(1.15rem, 2vw, 1.7rem); font-weight: 600; }
-.tagline { grid-area: tagline; max-width: 780px; margin-bottom: 1.75rem; color: var(--muted); font-size: .9rem; }
+.tagline { grid-area: tagline; max-width: 780px; margin-bottom: .85rem; color: var(--muted); font-size: .9rem; }
 .tagline::before { content: "> "; color: var(--red); }
 .tagline.terminal-type { white-space: nowrap; overflow: visible; }
 .tagline.terminal-type::after { content: ""; display: inline-block; width: 2px; height: 1em; margin-left: .15em; background: var(--red); vertical-align: -0.15em; animation: terminal-caret .85s step-end infinite; }
 @keyframes terminal-caret { 50% { opacity: 0; } }
+.hero-supporting { grid-area: supporting; margin-bottom: 1.5rem; color: var(--blue); font-family: "IBM Plex Mono", monospace; font-size: .85rem; font-weight: 500; letter-spacing: .02em; }
 .contact-info { grid-area: contact; display: flex; flex-wrap: wrap; gap: .65rem; align-self: start; }
 .contact-pill { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .75rem; color: var(--ink); border: 1px solid var(--line); background: var(--paper); font-size: .75rem; font-weight: 600; text-decoration: none; transition: transform .15s ease, background .15s ease; }
 .contact-pill:hover { color: #fff; background: var(--blue-solid); border-color: var(--blue); transform: translate(-2px, -2px); }
@@ -278,10 +280,12 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
             "heading"
             "subtitle"
             "tagline"
+            "supporting"
             "photo"
             "contact";
         row-gap: 1.25rem;
     }
+    .tagline.terminal-type { white-space: normal; }
     .profile-module {
         justify-self: start;
         align-self: auto;

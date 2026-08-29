@@ -32,14 +32,13 @@ class TestCanonicalAndOgMeta:
 
     def test_meta_description_fits_search_snippet(self):
         # Search results truncate around 160 characters; the description has to
-        # land the name, the target title, and the core keywords before the cut.
-        cfg = load_config()
+        # land the target title and the core keywords before the cut.
         html_content = _index_html()
         match = re.search(r'<meta name="description" content="(.*?)">', html_content)
         assert match
         desc = match.group(1)
         assert len(desc) <= 160, f"meta description is {len(desc)} chars and will be truncated"
-        assert cfg["personal"]["name"] in desc
+        assert "Software" in desc
         assert "DevOps" in desc
         assert "CI/CD" in desc
         assert "Senior DevOps" not in desc

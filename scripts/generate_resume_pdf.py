@@ -187,7 +187,8 @@ def build(config: dict, out_path: Path):
     pdf.cell(0, 14, p["title"].replace("//", "|").upper(), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "I", 9.5)
-    pdf.cell(0, 13, p["tagline"].replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf_tagline = p.get("pdfSupporting") or p.get("supporting") or p["tagline"]
+    pdf.cell(0, 13, pdf_tagline.replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "", 9)
     location_contact = f'{p["location"]} | {p["remote"]} | {p["phone"]} | {p["email"]}'
@@ -207,7 +208,7 @@ def build(config: dict, out_path: Path):
 
     pdf.section_title("Professional Summary")
     pdf.set_font("Helvetica", "", 9)
-    pdf.multi_cell(0, 11.5, config["summary"])
+    pdf.multi_cell(0, 11.5, config.get("resumeSummary") or config["summary"])
 
     pdf.section_title("Core Expertise")
     for s in config["skills"]:
