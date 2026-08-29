@@ -45,7 +45,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 7830
+/Length 8035
 >>
 stream
 2 J
@@ -55,7 +55,7 @@ BT 238.50 751.60 Td (WILLIAM ELIAS) Tj ET
 BT /F1 11.00 Tf ET
 BT 173.99 735.70 Td (SOFTWARE, DEVOPS & AUTOMATION ENGINEER) Tj ET
 BT /F2 9.50 Tf ET
-BT 154.90 722.65 Td (Python & FastAPI | CI/CD & Release Automation | Production Reliability) Tj ET
+BT 173.65 722.65 Td (Python, FastAPI, Go & C#/.NET | CI/CD | Production Reliability) Tj ET
 BT /F3 9.00 Tf ET
 BT 127.35 709.30 Td (Michigan | Open to U.S. Remote Opportunities | 586.438.6057 | WylElias.123@gmail.com) Tj ET
 BT 140.86 695.30 Td (linkedin.com/in/wylelias) Tj ET
@@ -67,18 +67,21 @@ BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 9.00 Tf ET
-q BT 26.83 654.55 Td 1.489 Tw (Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking,) Tj ET Q
-q BT 26.83 643.05 Td 0.222 Tw (databases, and engineering automation. Builds software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET, and SQL) Tj ET Q
-q BT 26.83 631.55 Td 3.383 Tw (Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves) Tj ET Q
-q BT 26.83 620.05 Td 2.190 Tw (observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that) Tj ET Q
-BT 26.83 608.55 Td (foundation into AI-enabled engineering and cybersecurity.) Tj ET
+q BT 26.83 654.55 Td 0.155 Tw (Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, and engineering) Tj ET Q
+q BT 26.83 643.05 Td 2.005 Tw (automation. Builds backend services, APIs, internal tools, and dashboards in Python, FastAPI, Go, C#/.NET, and SQL Server, while) Tj ET Q
+q BT 26.83 631.55 Td 0.323 Tw (standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure) Tj ET Q
+BT 26.83 620.05 Td (Monitor and Application Insights, and remediates credentials across 100+ repositories.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 585.20 Td (CORE EXPERTISE) Tj ET
-24.00 581.50 m 588.00 581.50 l S
+BT 26.83 596.70 Td (CORE EXPERTISE) Tj ET
+24.00 593.00 m 588.00 593.00 l S
 BT /F1 9.00 Tf ET
-BT 26.83 569.05 Td (Software & Backend: ) Tj ET
+BT 26.83 580.55 Td (Software & Backend: ) Tj ET
 BT /F3 9.00 Tf ET
-BT 119.35 569.05 Td (Python, FastAPI, C#, .NET, SQL Server, REST APIs) Tj ET
+BT 119.35 580.55 Td (Python, FastAPI, Go, C#, .NET, SQL Server) Tj ET
+BT /F1 9.00 Tf ET
+BT 26.83 569.05 Td (Web Development: ) Tj ET
+BT /F3 9.00 Tf ET
+BT 110.35 569.05 Td (JavaScript, HTML, CSS, Razor Pages) Tj ET
 BT /F1 9.00 Tf ET
 BT 26.83 557.55 Td (DevOps & Delivery: ) Tj ET
 BT /F3 9.00 Tf ET
@@ -104,61 +107,65 @@ BT 26.83 500.05 Td (AI-Enabled Engineering: ) Tj ET
 BT /F3 9.00 Tf ET
 BT 133.85 500.05 Td (LLM APIs, MCP, RAG, Agent Workflows, Context Engineering, AI Guardrails) Tj ET
 BT /F1 9.00 Tf ET
-BT 26.83 488.55 Td (Additional Hands-On Technologies: ) Tj ET
+BT 26.83 488.55 Td (Additional Programming \(Academic\): ) Tj ET
 BT /F3 9.00 Tf ET
-BT 182.35 488.55 Td (Docker, Helm, Docker Compose, Rancher Desktop, WSL2) Tj ET
+BT 188.36 488.55 Td (Java) Tj ET
+BT /F1 9.00 Tf ET
+BT 26.83 477.05 Td (Additional Hands-On Technologies: ) Tj ET
+BT /F3 9.00 Tf ET
+BT 182.35 477.05 Td (Docker, Helm, Docker Compose, Rancher Desktop, WSL2) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 465.20 Td (PROFESSIONAL EXPERIENCE) Tj ET
-24.00 461.50 m 588.00 461.50 l S
+BT 26.83 453.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
+24.00 450.00 m 588.00 450.00 l S
 BT /F1 9.50 Tf ET
-BT 26.83 448.90 Td (Stellantis Financial Services US) Tj ET
+BT 26.83 437.40 Td (Stellantis Financial Services US) Tj ET
 BT /F3 9.00 Tf ET
-BT 508.13 449.05 Td (Feb 2023 - Present) Tj ET
+BT 508.13 437.55 Td (Feb 2023 - Present) Tj ET
 BT /F2 9.50 Tf ET
-BT 26.83 437.40 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI · Remote) Tj ET
+BT 26.83 425.90 Td (Production Support Engineer - DevOps & Automation | Auburn Hills, MI · Remote) Tj ET
 BT /F3 9.00 Tf ET
-q BT 38.83 426.05 Td 1.712 Tw (- Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps) Tj ET Q
-q BT 38.83 414.55 Td 1.109 Tw (build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the) Tj ET Q
-BT 38.83 403.05 Td (deployment agent.) Tj ET
-q BT 38.83 391.55 Td 0.969 Tw (- Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent) Tj ET Q
-BT 38.83 380.05 Td (delivery defects, including application-pool identity convergence risk, before any application was deployed.) Tj ET
-q BT 38.83 368.55 Td 0.225 Tw (- Build Python automation and FastAPI dashboards for operational workflows and engineering visibility; lead weekly production releases,) Tj ET Q
-q BT 38.83 357.05 Td 0.576 Tw (database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API,) Tj ET Q
-BT 38.83 345.55 Td (configuration, and network-connectivity issues.) Tj ET
-q BT 38.83 334.05 Td 2.559 Tw (- Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery,) Tj ET Q
-BT 38.83 322.55 Td (classification, integrity validation, and credential/PII safeguards.) Tj ET
-q BT 38.83 311.05 Td 0.421 Tw (- Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and) Tj ET Q
-BT 38.83 299.55 Td (load-balancer layers, including a zero-downtime cutover from legacy infrastructure.) Tj ET
-q BT 38.83 288.05 Td 2.173 Tw (- Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while) Tj ET Q
-BT 38.83 276.55 Td (enforcing credential, PII, provenance, and engineer-review controls.) Tj ET
+q BT 38.83 414.55 Td 1.712 Tw (- Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps) Tj ET Q
+q BT 38.83 403.05 Td 1.109 Tw (build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the) Tj ET Q
+BT 38.83 391.55 Td (deployment agent.) Tj ET
+q BT 38.83 380.05 Td 0.969 Tw (- Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent) Tj ET Q
+BT 38.83 368.55 Td (delivery defects, including application-pool identity convergence risk, before any application was deployed.) Tj ET
+q BT 38.83 357.05 Td 1.505 Tw (- Build Python automation, FastAPI dashboards, and Go-based API tooling for operational workflows and engineering visibility; lead) Tj ET Q
+q BT 38.83 345.55 Td 0.039 Tw (weekly production releases, database migrations, and SLA-driven incident triage; support, troubleshoot, and fix C#/.NET applications and) Tj ET Q
+BT 38.83 334.05 Td (investigate Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.) Tj ET
+q BT 38.83 322.55 Td 2.559 Tw (- Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery,) Tj ET Q
+BT 38.83 311.05 Td (classification, integrity validation, and credential/PII safeguards.) Tj ET
+q BT 38.83 299.55 Td 0.421 Tw (- Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and) Tj ET Q
+BT 38.83 288.05 Td (load-balancer layers, including a zero-downtime cutover from legacy infrastructure.) Tj ET
+q BT 38.83 276.55 Td 2.173 Tw (- Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while) Tj ET Q
+BT 38.83 265.05 Td (enforcing credential, PII, provenance, and engineer-review controls.) Tj ET
 BT /F1 9.50 Tf ET
-BT 26.83 262.90 Td (HBK - Hottinger Brüel & Kjær) Tj ET
+BT 26.83 251.40 Td (HBK - Hottinger Brüel & Kjær) Tj ET
 BT /F3 9.00 Tf ET
-BT 505.12 263.05 Td (Jul 2020 - Feb 2023) Tj ET
+BT 505.12 251.55 Td (Jul 2020 - Feb 2023) Tj ET
 BT /F2 9.50 Tf ET
-BT 26.83 251.40 Td (DevOps Engineer - Python Automation | Southfield, MI · Remote) Tj ET
+BT 26.83 239.90 Td (DevOps Engineer - Python Automation | Southfield, MI · Remote) Tj ET
 BT /F3 9.00 Tf ET
-BT 38.83 240.05 Td (- Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.) Tj ET
-BT 38.83 228.55 Td (- Automated SQL output processing with Python, saving more than 40 hours per month.) Tj ET
-q BT 38.83 217.05 Td 2.930 Tw (- Developed database-configuration tools that streamlined customer onboarding and reduced repetitive setup across application) Tj ET Q
-BT 38.83 205.55 Td (environments.) Tj ET
-q BT 38.83 194.05 Td 0.006 Tw (- Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live technical troubleshooting for) Tj ET Q
-BT 38.83 182.55 Td (customers.) Tj ET
+BT 38.83 228.55 Td (- Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.) Tj ET
+BT 38.83 217.05 Td (- Automated SQL output processing with Python, saving more than 40 hours per month.) Tj ET
+q BT 38.83 205.55 Td 2.930 Tw (- Developed database-configuration tools that streamlined customer onboarding and reduced repetitive setup across application) Tj ET Q
+BT 38.83 194.05 Td (environments.) Tj ET
+q BT 38.83 182.55 Td 0.006 Tw (- Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live technical troubleshooting for) Tj ET Q
+BT 38.83 171.05 Td (customers.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 157.20 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
-24.00 153.50 m 588.00 153.50 l S
+BT 26.83 145.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
+24.00 142.00 m 588.00 142.00 l S
 BT /F1 9.50 Tf ET
-BT 26.83 140.90 Td (CI/CD & Release Engineering) Tj ET
+BT 26.83 129.40 Td (CI/CD & Release Engineering) Tj ET
 BT /F3 9.00 Tf ET
-q BT 38.83 129.55 Td 0.875 Tw (- Standardized delivery for an estate of internal .NET web applications spread across five servers with no prior consistent deployment) Tj ET Q
-q BT 38.83 118.05 Td 0.545 Tw (path, building the repository-to-server-to-deployment-path inventory, a definition generator, reusable Python/.NET templates, and a new) Tj ET Q
-BT 38.83 106.55 Td (folder convention over 157 existing definitions.) Tj ET
-q BT 38.83 95.05 Td 0.107 Tw (- Executed all 28 builds with 27 verified green and validated deployment paths for 25 of 28 applications by dry run on the live deployment) Tj ET Q
-BT 38.83 83.55 Td (agent; zero applications are deployed through the framework yet, pending go/no-go on the first real deployment.) Tj ET
-q BT 38.83 72.05 Td 0.399 Tw (- Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence) Tj ET Q
-BT 38.83 60.55 Td (risk and missing-artifact assumptions against a destructive robocopy /MIR step.) Tj ET
+q BT 38.83 118.05 Td 0.875 Tw (- Standardized delivery for an estate of internal .NET web applications spread across five servers with no prior consistent deployment) Tj ET Q
+q BT 38.83 106.55 Td 0.545 Tw (path, building the repository-to-server-to-deployment-path inventory, a definition generator, reusable Python/.NET templates, and a new) Tj ET Q
+BT 38.83 95.05 Td (folder convention over 157 existing definitions.) Tj ET
+q BT 38.83 83.55 Td 0.107 Tw (- Executed all 28 builds with 27 verified green and validated deployment paths for 25 of 28 applications by dry run on the live deployment) Tj ET Q
+BT 38.83 72.05 Td (agent; zero applications are deployed through the framework yet, pending go/no-go on the first real deployment.) Tj ET
+q BT 38.83 60.55 Td 0.399 Tw (- Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence) Tj ET Q
+BT 38.83 49.05 Td (risk and missing-artifact assumptions against a destructive robocopy /MIR step.) Tj ET
 BT /F2 8.50 Tf ET
-q BT 38.83 49.45 Td 0.3529 0.3529 0.3529 rg (Tech: Azure DevOps YAML, Classic Release, Deployment Groups, Azure DevOps REST APIs, PowerShell, Python, IIS, MSBuild, .NET) Tj ET Q
+q BT 38.83 37.95 Td 0.3529 0.3529 0.3529 rg (Tech: Azure DevOps YAML, Classic Release, Deployment Groups, Azure DevOps REST APIs, PowerShell, Python, IIS, MSBuild, .NET) Tj ET Q
 
 endstream
 endobj
@@ -321,21 +328,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000742 00000 n 
-0000008624 00000 n 
-0000009026 00000 n 
-0000014622 00000 n 
-0000014724 00000 n 
-0000014829 00000 n 
-0000014926 00000 n 
+0000008829 00000 n 
+0000009231 00000 n 
+0000014827 00000 n 
+0000014929 00000 n 
 0000015034 00000 n 
-0000015142 00000 n 
+0000015131 00000 n 
+0000015239 00000 n 
+0000015347 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<6060E65AB718B92FCF7A9ED6F8120097><6060E65AB718B92FCF7A9ED6F8120097>]
+/ID [<F9BF2B26742D9083E3182A0E64523295><F9BF2B26742D9083E3182A0E64523295>]
 >>
 startxref
-15288
+15493
 %%EOF

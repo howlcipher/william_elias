@@ -242,7 +242,10 @@ def test_scroll_spy_activates_correct_nav_link(page: Page, test_url: str):
     assert about_link.get_attribute("aria-current") == "page"
 
     page.evaluate("() => document.getElementById('skills').scrollIntoView({block: 'start'})")
-    page.wait_for_timeout(300)
+    # A longer About section increases the smooth-scroll distance/duration from
+    # #about to #skills, so this settle wait needs more headroom than the first
+    # scroll (hero -> #about) above.
+    page.wait_for_timeout(600)
     assert skills_link.get_attribute("aria-current") == "page"
     assert about_link.get_attribute("aria-current") is None
     # Active state is not conveyed by color alone: a non-color affordance must change too.

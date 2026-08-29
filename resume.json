@@ -3,8 +3,8 @@
     "name": "William Elias",
     "title": "Software, DevOps & Automation Engineer",
     "tagline": "Building Software, Automating Work & Delivering Reliable Systems",
-    "supporting": "Python & FastAPI | CI/CD | Azure DevOps | AI-Enabled Engineering",
-    "pdfSupporting": "Python & FastAPI | CI/CD & Release Automation | Production Reliability",
+    "supporting": "Python, FastAPI, Go & C#/.NET | CI/CD | Azure DevOps | AI-Enabled Engineering",
+    "pdfSupporting": "Python, FastAPI, Go & C#/.NET | CI/CD | Production Reliability",
     "location": "Michigan",
     "remote": "Open to U.S. Remote Opportunities",
     "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
@@ -23,35 +23,39 @@
     "siteName": "William Elias | Software, DevOps & Automation Engineer",
     "knowsAbout": [
       "Software Engineering",
+      "Backend Development",
       "Python",
       "FastAPI",
-      "DevOps",
-      "CI/CD",
-      "Release Automation",
-      "Production Reliability",
-      "Production Engineering",
-      "Azure DevOps",
-      "Automation",
-      "Internal Tools",
-      "Backend Development",
-      "REST APIs",
-      "PowerShell",
+      "Go",
       "C# / .NET",
+      "ASP.NET Core",
+      "JavaScript",
+      "REST APIs",
+      "API Development",
       "SQL Server",
+      "Internal Tools",
+      "Developer Productivity",
+      "Automation",
+      "Automation Engineering",
+      "DevOps",
+      "Platform Engineering",
+      "Production Engineering",
+      "Production Reliability",
+      "Azure DevOps",
+      "CI/CD",
+      "PowerShell",
       "Azure Monitor",
       "Application Insights",
       "KQL",
-      "Azure Key Vault",
-      "Observability",
-      "Git",
       "GitHub Actions",
-      "Agentic AI",
+      "AI-Enabled Engineering",
       "MCP",
       "Cybersecurity"
     ]
   },
-  "about": "I'm a software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. I tend to work where development and operations overlap: building software and internal tools, automating repetitive work, improving CI/CD and releases, troubleshooting production systems, and finding better ways for engineers to get work done.\n\nIn my current role, I designed the standardized .NET CI/CD and release model for an approximately 60-application estate, built Azure DevOps automation and deployment guardrails, support production releases and database migrations, and troubleshoot application, API, database, identity, configuration, and network issues. I also build Python automation and FastAPI dashboards for operational workflows, engineering visibility, and internal tooling.\n\nMy hands-on stack includes Python, FastAPI, PowerShell, C#/.NET, SQL Server, REST APIs, Azure DevOps, GitHub Actions, IIS, Azure Monitor, Application Insights, KQL, and Azure Key Vault. I've also built security-focused tooling for credential discovery and remediation across 100+ repositories, Key Vault migration and rollback, PII safeguards, and audit-focused workflows.\n\nI'm pursuing an M.S. in Cyber Defense at Dakota State University and spend a lot of my own engineering time experimenting with AI-enabled development and automation, including agent workflows, engineering knowledge systems, incident triage, and human-reviewed AI execution.\n\nI'm open to remote roles across software engineering, Python/backend development, DevOps, automation, production engineering, internal tooling, developer productivity, and AI-enabled engineering. The common thread for me is simple: I like building useful things, automating work that shouldn't be manual, and making systems easier to operate.",
-  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. Builds software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET, and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that foundation into AI-enabled engineering and cybersecurity.",
+  "about": "I'm a software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. I've never really been a narrow tech person. I tend to work wherever the problem leads: building software and internal tools, working with APIs and databases, automating repetitive work, improving CI/CD and releases, troubleshooting production systems, and figuring out how to make things easier for the next person who has to work with them.\n\nIn my current role, I designed the standardized .NET CI/CD and release model for an approximately 60-application estate, built Azure DevOps automation and deployment guardrails, support and troubleshoot C#/.NET applications, handle production releases and database migrations, and investigate issues across applications, APIs, databases, identity, configuration, infrastructure, and networking. I also build Python automation and FastAPI dashboards for operational workflows and engineering visibility, and work with Go for API development.\n\nMy hands-on stack includes Python, FastAPI, Go, C#/.NET, JavaScript, HTML/CSS, PowerShell, SQL Server, REST APIs, Azure DevOps, GitHub Actions, IIS, Azure Monitor, Application Insights, KQL, and Azure Key Vault. I've also built security-focused tooling for credential discovery and remediation across 100+ repositories, Key Vault migration and rollback, PII safeguards, audit-focused workflows, and internal applications that sit somewhere between software engineering, DevOps, and production tooling.\n\nI'm pursuing an M.S. in Cyber Defense at Dakota State University, which has been a good way to add more security depth to the development and operations work I already do. I also spend a lot of my own engineering time experimenting with AI-enabled development and automation, including agent workflows, engineering knowledge systems, incident triage, APIs, and human-reviewed AI execution.\n\nI'm open to remote roles across software engineering, backend development, DevOps, platform engineering, automation, production engineering, internal tooling, developer productivity, and AI-enabled engineering. The common thread is pretty simple: I like building useful things, automating work that shouldn't be manual, figuring out why something broke, and making systems easier to build, ship, and operate.",
+  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. Builds backend services, APIs, internal tools, and dashboards using Python, FastAPI, Go, C#/.NET, JavaScript, and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that foundation into AI-enabled engineering and cybersecurity.",
+  "resumeSummary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, and engineering automation. Builds backend services, APIs, internal tools, and dashboards in Python, FastAPI, Go, C#/.NET, and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure Monitor and Application Insights, and remediates credentials across 100+ repositories.",
   "stats": [
     {
       "value": "~60",
@@ -73,12 +77,23 @@
       "tags": [
         "Python",
         "FastAPI",
+        "Go",
         "C#",
         ".NET",
         "SQL Server",
         "REST APIs",
         "ASP.NET Core",
         "SQLite"
+      ]
+    },
+    {
+      "category": "Web Development",
+      "icon": "fa-globe",
+      "tags": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Razor Pages"
       ]
     },
     {
@@ -170,6 +185,13 @@
       ]
     },
     {
+      "category": "Additional Programming (Academic)",
+      "icon": "fa-book",
+      "tags": [
+        "Java"
+      ]
+    },
+    {
       "category": "Additional Hands-On Technologies",
       "icon": "fa-cubes",
       "tags": [
@@ -190,7 +212,7 @@
       "achievements": [
         "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the deployment agent.",
         "Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent delivery defects, including application-pool identity convergence risk, before any application was deployed.",
-        "Build Python automation and FastAPI dashboards for operational workflows and engineering visibility; lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
+        "Build Python automation, FastAPI dashboards, and Go-based API tooling for operational workflows and engineering visibility; lead weekly production releases, database migrations, and SLA-driven incident triage; support, troubleshoot, and fix C#/.NET applications and investigate Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
         "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
         "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and load-balancer layers, including a zero-downtime cutover from legacy infrastructure.",
         "Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while enforcing credential, PII, provenance, and engineer-review controls."

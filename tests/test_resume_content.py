@@ -173,12 +173,14 @@ class TestKeyMetrics:
 class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
         "Software & Backend",
+        "Web Development",
         "DevOps & Delivery",
         "Automation",
         "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
         "AI-Enabled Engineering",
+        "Additional Programming (Academic)",
         "Additional Hands-On Technologies",
     }
 
