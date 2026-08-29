@@ -1,8 +1,8 @@
 {
   "personal": {
     "name": "William Elias",
-    "title": "Senior DevOps / Platform Engineer",
-    "tagline": "Building Automation, Reliable Platforms & AI-Enabled Operations",
+    "title": "DevOps Engineer | CI/CD & Release Automation | Production Reliability",
+    "tagline": "Automating Software Delivery, Production Observability & AI-Enabled Tooling",
     "location": "Michigan",
     "remote": "Open to U.S. Remote Roles",
     "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
@@ -18,25 +18,32 @@
   },
   "seo": {
     "canonicalUrl": "https://howlcipher.github.io/william_elias/",
-    "siteName": "William Elias | Senior DevOps / Platform Engineer",
+    "siteName": "William Elias | DevOps Engineer | CI/CD & Release Automation | Production Reliability",
     "knowsAbout": [
       "DevOps",
-      "Platform Engineering",
-      "Azure DevOps",
       "CI/CD",
       "Release Automation",
       "Production Reliability",
+      "Production Engineering",
+      "Azure DevOps",
       "Python",
-      "Go",
-      "C# / .NET",
       "PowerShell",
+      "C# / .NET",
+      "Go",
+      "SQL",
+      "Azure Monitor",
+      "Application Insights",
+      "KQL",
+      "Azure Key Vault",
       "Observability",
+      "Git",
+      "GitHub Actions",
       "Agentic AI",
       "RAG",
       "MCP"
     ]
   },
-  "summary": "Senior DevOps and Platform Engineer with 10+ years across infrastructure, networking, software QA, automation, production operations, and delivery engineering. Designs automation and platform capabilities that reduce repetitive operational work, standardize software delivery, and improve production reliability. Recent work includes standardizing CI/CD across a ~60-application estate, automating release and support workflows, strengthening observability and secrets management, and building AI-enabled operational tooling.",
+  "summary": "DevOps engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and automation. Designs CI/CD, release automation, operational tooling, and production guardrails that make software delivery safer and more repeatable. Recent work includes standardizing .NET delivery across an approximately 60-application estate, building Azure DevOps automation, leading production release and migration work, improving observability with Azure Monitor, Application Insights, and KQL, and remediating exposed credentials across 100+ repositories. Builds secure internal tooling with Python, PowerShell, C#/.NET, and SQL, with current work extending that foundation into AI-enabled engineering and cybersecurity.",
   "stats": [
     {
       "value": "~60",
@@ -60,12 +67,12 @@
         "CI/CD",
         "YAML Pipelines",
         "Classic Release",
-        "GitHub Actions",
-        "Release Automation",
-        "Git",
-        "Deployment Groups",
         "Reusable Templates",
-        "Bitbucket"
+        "Deployment Groups",
+        "Artifact Management",
+        "Release Gates",
+        "GitHub Actions",
+        "Git"
       ]
     },
     {
@@ -77,14 +84,13 @@
         "C#",
         ".NET",
         "Go",
-        "REST APIs",
-        "FastAPI",
         "SQL",
-        "ASP.NET Core"
+        "REST APIs",
+        "FastAPI"
       ]
     },
     {
-      "category": "Reliability & Observability",
+      "category": "Production Reliability & Observability",
       "icon": "fa-chart-line",
       "tags": [
         "Azure Monitor",
@@ -93,31 +99,33 @@
         "Structured Logging",
         "Incident Triage",
         "RCA",
-        "Serilog",
-        "SLA Support"
+        "SLA Support",
+        "Environment Readiness"
       ]
     },
     {
-      "category": "Infrastructure & Security",
-      "icon": "fa-shield-halved",
+      "category": "Infrastructure & Application Operations",
+      "icon": "fa-server",
       "tags": [
-        "IIS",
         "Windows Server",
+        "IIS",
         "Active Directory",
         "SQL Server",
-        "Docker",
-        "Helm",
+        "Load Balancers",
+        "Firewalls",
+        "Network Troubleshooting"
+      ]
+    },
+    {
+      "category": "Security & Identity",
+      "icon": "fa-shield-halved",
+      "tags": [
         "Azure Key Vault",
         "Managed Identity",
         "OAuth/IAM",
-        "Credential Remediation",
-        "PII controls",
-        "CodeQL",
-        "Bandit",
-        "Docker Compose",
-        "Rancher Desktop",
-        "Load Balancers",
-        "Firewalls"
+        "Secrets Remediation",
+        "Credential/PII Scanning",
+        "Git-History Remediation"
       ]
     },
     {
@@ -126,14 +134,22 @@
       "tags": [
         "MCP",
         "RAG",
-        "ChromaDB",
-        "Vector Search",
-        "Multi-Agent Routing",
         "LLM APIs",
-        "Human-in-the-Loop Workflows",
-        "Embeddings",
-        "AI Guardrails",
-        "Prompt-Injection Defenses"
+        "Agent Workflows",
+        "Context Engineering",
+        "Guardrails",
+        "Human-in-the-Loop Automation"
+      ]
+    },
+    {
+      "category": "Additional Hands-On / Project Technologies",
+      "icon": "fa-cubes",
+      "tags": [
+        "Docker",
+        "Helm",
+        "Docker Compose",
+        "Rancher Desktop",
+        "WSL2"
       ]
     }
   ],
