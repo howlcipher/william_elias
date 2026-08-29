@@ -15,7 +15,9 @@ SITE_DIR = Path(__file__).resolve().parent.parent
 MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
 # Cap the tag list rendered per Core Expertise category. The website shows every
 # tag from resume.json; the PDF shows the curated leading slice, so tag order in
-# resume.json determines what a recruiter sees on page 1.
+# resume.json determines what a recruiter sees on page 1. A skill category can also
+# carry "pdfInclude": false to stay website-only entirely (same idiom as
+# projects[].pdfInclude), keeping breadth-only categories off the PDF's page budget.
 PDF_SKILL_TAG_LIMIT = 6
 
 
@@ -212,6 +214,8 @@ def build(config: dict, out_path: Path):
 
     pdf.section_title("Core Expertise")
     for s in config["skills"]:
+        if s.get("pdfInclude") is False:
+            continue
         pdf.set_font("Helvetica", "B", 9)
         pdf.write(11.5, f'{s["category"]}: ')
         pdf.set_font("Helvetica", "", 9)

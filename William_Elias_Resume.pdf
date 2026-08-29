@@ -45,7 +45,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 7830
+/Length 7877
 >>
 stream
 2 J
@@ -68,8 +68,8 @@ BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 9.00 Tf ET
 q BT 26.83 654.55 Td 1.489 Tw (Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking,) Tj ET Q
-q BT 26.83 643.05 Td 0.222 Tw (databases, and engineering automation. Builds software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET, and SQL) Tj ET Q
-q BT 26.83 631.55 Td 3.383 Tw (Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves) Tj ET Q
+q BT 26.83 643.05 Td 0.337 Tw (databases, and engineering automation. Builds backend software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET,) Tj ET Q
+q BT 26.83 631.55 Td 0.584 Tw (and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves) Tj ET Q
 q BT 26.83 620.05 Td 2.190 Tw (observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that) Tj ET Q
 BT 26.83 608.55 Td (foundation into AI-enabled engineering and cybersecurity.) Tj ET
 BT /F1 11.00 Tf ET
@@ -78,7 +78,7 @@ BT 26.83 585.20 Td (CORE EXPERTISE) Tj ET
 BT /F1 9.00 Tf ET
 BT 26.83 569.05 Td (Software & Backend: ) Tj ET
 BT /F3 9.00 Tf ET
-BT 119.35 569.05 Td (Python, FastAPI, C#, .NET, SQL Server, REST APIs) Tj ET
+BT 119.35 569.05 Td (Python, FastAPI, C#, .NET, ASP.NET Core, SQL Server) Tj ET
 BT /F1 9.00 Tf ET
 BT 26.83 557.55 Td (DevOps & Delivery: ) Tj ET
 BT /F3 9.00 Tf ET
@@ -122,9 +122,9 @@ q BT 38.83 414.55 Td 1.109 Tw (build/release definitions across 28 applications,
 BT 38.83 403.05 Td (deployment agent.) Tj ET
 q BT 38.83 391.55 Td 0.969 Tw (- Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent) Tj ET Q
 BT 38.83 380.05 Td (delivery defects, including application-pool identity convergence risk, before any application was deployed.) Tj ET
-q BT 38.83 368.55 Td 0.225 Tw (- Build Python automation and FastAPI dashboards for operational workflows and engineering visibility; lead weekly production releases,) Tj ET Q
-q BT 38.83 357.05 Td 0.576 Tw (database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API,) Tj ET Q
-BT 38.83 345.55 Td (configuration, and network-connectivity issues.) Tj ET
+q BT 38.83 368.55 Td 2.099 Tw (- Build Python automation, FastAPI dashboards, and a C#/.NET internal support portal for operational workflows and engineering) Tj ET Q
+q BT 38.83 357.05 Td 0.615 Tw (visibility; lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application) Tj ET Q
+BT 38.83 345.55 Td (Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.) Tj ET
 q BT 38.83 334.05 Td 2.559 Tw (- Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery,) Tj ET Q
 BT 38.83 322.55 Td (classification, integrity validation, and credential/PII safeguards.) Tj ET
 q BT 38.83 311.05 Td 0.421 Tw (- Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and) Tj ET Q
@@ -321,21 +321,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000742 00000 n 
-0000008624 00000 n 
-0000009026 00000 n 
-0000014622 00000 n 
-0000014724 00000 n 
-0000014829 00000 n 
-0000014926 00000 n 
-0000015034 00000 n 
-0000015142 00000 n 
+0000008671 00000 n 
+0000009073 00000 n 
+0000014669 00000 n 
+0000014771 00000 n 
+0000014876 00000 n 
+0000014973 00000 n 
+0000015081 00000 n 
+0000015189 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<6060E65AB718B92FCF7A9ED6F8120097><6060E65AB718B92FCF7A9ED6F8120097>]
+/ID [<C43926FF8D64682D4274C142FE8FAFC4><C43926FF8D64682D4274C142FE8FAFC4>]
 >>
 startxref
-15288
+15335
 %%EOF
