@@ -3,15 +3,15 @@
     "name": "William Elias",
     "title": "Software, DevOps & Automation Engineer",
     "tagline": "Building Software, Automating Work & Delivering Reliable Systems",
-    "supporting": "Python & FastAPI | CI/CD | Azure DevOps | AI-Enabled Engineering",
-    "pdfSupporting": "Python & FastAPI | CI/CD & Release Automation | Production Reliability",
+    "supporting": "Software • Automation • Delivery • Production Reliability",
+    "pdfSupporting": "Backend Software | Python Automation | Delivery & Production Reliability",
+    "contactCopy": "Open to remote software, backend, DevOps, platform, and production engineering roles. Let's talk about the software and operational problems your team needs to solve.",
     "location": "Michigan",
     "remote": "Open to U.S. Remote Opportunities",
     "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
     "photoDark": "assets/images/william-elias-profile-hoodie-dark.webp",
     "photoLight": "assets/images/william-elias-profile-hoodie-light.webp",
     "email": "WylElias.123@gmail.com",
-    "phone": "586.438.6057",
     "linkedin": "https://linkedin.com/in/wylelias",
     "github": "https://github.com/howlcipher",
     "resumePdf": "William_Elias_Resume.pdf",
@@ -21,6 +21,8 @@
   "seo": {
     "canonicalUrl": "https://howlcipher.github.io/william_elias/",
     "siteName": "William Elias | Software, DevOps & Automation Engineer",
+    "description": "William Elias: Software, DevOps and Automation Engineer building Python/FastAPI tools, .NET software and CI/CD automation for production reliability.",
+    "socialDescription": "Backend software, Python automation, delivery engineering and production reliability. Explore William Elias's professional work and open-source projects.",
     "knowsAbout": [
       "Software Engineering",
       "Python",
@@ -45,7 +47,7 @@
       "Observability",
       "Git",
       "GitHub Actions",
-      "Agentic AI",
+      "AI-Enabled Engineering",
       "MCP",
       "Cybersecurity",
       "Go",
@@ -53,155 +55,89 @@
       "Platform Engineering"
     ]
   },
-  "about": "I'm a software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. I tend to work where development and operations overlap: building backend applications, APIs, and internal tools, automating repetitive work, improving CI/CD and releases, troubleshooting production systems, and finding better ways for engineers to get work done.\n\nIn my current role, I designed the standardized .NET CI/CD and release model for an approximately 60-application estate, built Azure DevOps automation and deployment guardrails, support production releases and database migrations, and troubleshoot application, API, database, identity, configuration, and network issues. I also build Python automation and FastAPI dashboards for operational workflows and engineering visibility, and expanded a single-purpose internal tool into a modular ASP.NET Core support portal with per-module access policies, database-backed workflows, and an automated test suite.\n\nMy hands-on stack includes Python, FastAPI, C#/.NET and ASP.NET Core, SQL Server, SQLite, REST APIs, PowerShell, Go, and front-end basics in JavaScript, HTML, and CSS, alongside Azure DevOps, GitHub Actions, IIS, Azure Monitor, Application Insights, KQL, and Azure Key Vault. I've also built security-focused tooling for credential discovery and remediation across 100+ repositories, Key Vault migration and rollback, PII safeguards, and audit-focused workflows.\n\nI'm pursuing an M.S. in Cyber Defense at Dakota State University and spend a lot of my own engineering time experimenting with AI-enabled development and automation, including agent workflows, engineering knowledge systems, incident triage, and human-reviewed AI execution.\n\nI'm open to remote roles across software engineering, Python/backend development, DevOps, automation, platform engineering, production engineering, internal tooling, developer productivity, and AI-enabled engineering. The common thread for me is simple: I like building useful things, automating work that shouldn't be manual, and making systems easier to operate.",
-  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, networking, databases, and engineering automation. Builds backend software, internal tools, and FastAPI dashboards in Python, PowerShell, C#/.NET, and SQL Server, while standardizing CI/CD and release automation across a ~60-application estate. Leads production releases, improves observability with Azure Monitor, Application Insights, and KQL, and remediates credentials across 100+ repositories, extending that foundation into AI-enabled engineering and cybersecurity.",
+  "about": "I work where software and operations overlap. Across 10+ years in software delivery, production operations, infrastructure, and networking, I've built tools and automation that make day-to-day engineering work easier and systems safer to operate.\n\nThat work includes Python/FastAPI dashboards, an ASP.NET Core support portal, reusable delivery automation, and production releases and database migrations. I've added Application Insights telemetry and KQL diagnostics, remediated repository credentials, built Key Vault migration and rollback tooling, and developed internal AI-assisted knowledge and incident-triage tools with engineer-review controls.\n\nI'm looking for U.S. remote roles in software/backend engineering, DevOps, automation, platform and developer productivity, or production reliability, including AI-enabled engineering. The common thread: build useful software, automate work that shouldn't be manual, and make production systems easier to operate.",
+  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python/FastAPI tools and C#/.NET applications, automates delivery and operational workflows, and supports production releases and database migrations. Brings hands-on troubleshooting, observability, security remediation, and internal developer tooling, including AI-assisted engineering with human review.",
   "stats": [
     {
       "value": "~60",
-      "label": "Applications in CI/CD standardization scope"
-    },
-    {
-      "value": "56",
-      "label": "Build/release definitions created across 28 applications"
+      "label": "Applications in delivery standardization scope",
+      "sourceProgram": "CI/CD & Release Engineering"
     },
     {
       "value": "100+",
-      "label": "Repositories credential-remediated"
+      "label": "Repositories credential-remediated",
+      "sourceProgram": "Security & Secrets Remediation"
+    },
+    {
+      "value": "300+",
+      "label": "Unused legacy applications retired",
+      "sourceProgram": "Python Automation & Estate Reduction"
     }
   ],
   "skills": [
     {
       "category": "Software & Backend",
       "icon": "fa-code",
-      "tags": [
-        "Python",
-        "FastAPI",
-        "C#",
-        ".NET",
-        "ASP.NET Core",
-        "SQL Server",
-        "REST APIs",
-        "SQLite",
-        "Go"
-      ]
-    },
-    {
-      "category": "Web Development",
-      "icon": "fa-globe",
-      "pdfInclude": false,
-      "tags": [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "Razor Pages"
-      ]
+      "context": "Professional Python and .NET application development",
+      "tags": ["Python", "FastAPI", "C#", ".NET", "ASP.NET Core", "SQL Server", "REST APIs", "SQLite"]
     },
     {
       "category": "DevOps & Delivery",
       "icon": "fa-cloud",
-      "tags": [
-        "Azure DevOps",
-        "CI/CD",
-        "YAML Pipelines",
-        "Classic Release",
-        "Reusable Templates",
-        "Deployment Groups",
-        "GitHub Actions",
-        "Git",
-        "Artifact Management",
-        "Release Gates",
-        "Release Automation"
-      ]
+      "context": "Azure DevOps professionally; GitHub Actions in projects",
+      "tags": ["Azure DevOps", "CI/CD", "Release Automation", "YAML Pipelines", "Git", "GitHub Actions (projects)"]
     },
     {
       "category": "Automation",
       "icon": "fa-bolt",
-      "tags": [
-        "Python",
-        "PowerShell",
-        "Go",
-        "REST APIs",
-        "Workflow Automation",
-        "Repo Automation",
-        "Operational Tooling"
-      ]
+      "context": "Python and PowerShell professionally; Go in projects",
+      "tags": ["Python", "PowerShell", "REST APIs", "Workflow Automation", "Operational Tooling", "Repo Automation", "Go"]
     },
     {
       "category": "Production & Reliability",
       "icon": "fa-chart-line",
-      "tags": [
-        "Azure Monitor",
-        "Application Insights",
-        "KQL",
-        "Structured Logging",
-        "Incident Triage",
-        "RCA",
-        "SLA Support",
-        "Environment Readiness",
-        "Production Releases",
-        "Production Troubleshooting"
-      ]
+      "context": "Professional production operations and diagnostics",
+      "tags": ["Azure Monitor", "Application Insights", "KQL", "Structured Logging", "Incident Triage", "RCA"]
     },
     {
       "category": "Infrastructure & Application Operations",
       "icon": "fa-server",
-      "tags": [
-        "Windows Server",
-        "IIS",
-        "Active Directory",
-        "SQL Server",
-        "Load Balancers",
-        "Firewalls",
-        "Networking",
-        "Cisco / Meraki"
-      ]
+      "context": "Professional application hosting and infrastructure",
+      "tags": ["Windows Server", "IIS", "Active Directory", "SQL Server", "Load Balancers", "Firewalls", "Cisco / Meraki"]
     },
     {
       "category": "Security & Identity",
       "icon": "fa-shield-halved",
-      "tags": [
-        "Azure Key Vault",
-        "Managed Identity",
-        "OAuth",
-        "IAM",
-        "Secrets Remediation",
-        "Credential / PII Scanning",
-        "Git-History Remediation",
-        "Audit / Compliance Controls"
-      ]
+      "context": "Professional remediation, identity troubleshooting and safeguards",
+      "tags": ["Azure Key Vault", "Managed Identity", "OAuth / IAM", "Secrets Remediation", "PII Safeguards", "Audit Controls"]
     },
     {
       "category": "AI-Enabled Engineering",
       "icon": "fa-robot",
-      "tags": [
-        "LLM APIs",
-        "MCP",
-        "RAG",
-        "Agent Workflows",
-        "Context Engineering",
-        "AI Guardrails",
-        "Human-in-the-Loop Automation",
-        "Engineering Knowledge Systems"
-      ]
+      "context": "Internal engineering tools and independent projects",
+      "pdfContext": "Internal tools & projects",
+      "tags": ["LLM APIs", "MCP", "RAG", "Agent Workflows", "Human Review", "Engineering Knowledge Systems"]
     },
     {
-      "category": "Additional Programming Foundations",
-      "icon": "fa-graduation-cap",
+      "category": "Web Development",
+      "icon": "fa-globe",
+      "context": "Internal Razor Pages tooling; frontend project experience",
       "pdfInclude": false,
-      "tags": [
-        "Java"
-      ]
+      "tags": ["JavaScript", "HTML", "CSS", "Razor Pages"]
     },
     {
       "category": "Additional Hands-On Technologies",
       "icon": "fa-cubes",
-      "tags": [
-        "Docker",
-        "Helm",
-        "Docker Compose",
-        "Rancher Desktop",
-        "WSL2"
-      ]
+      "context": "Project packaging and container-host proof of concept, not production orchestration",
+      "pdfContext": "Projects & container-host proof of concept",
+      "tags": ["Docker", "Docker Compose", "Helm", "Rancher Desktop", "WSL2"]
+    },
+    {
+      "category": "Additional Programming Foundations",
+      "icon": "fa-graduation-cap",
+      "context": "Coursework, not professional production experience",
+      "pdfInclude": false,
+      "tags": ["Java"]
     }
   ],
   "experience": [
@@ -209,26 +145,25 @@
       "date": "Feb 2023 - Present",
       "title": "Production Support Engineer - DevOps & Automation",
       "company": "Stellantis Financial Services US",
-      "location": "Auburn Hills, MI \u00b7 Remote",
+      "location": "Auburn Hills, MI · Remote",
       "achievements": [
-        "Designed the standardized .NET CI/CD and release model for an approximately 60-application estate; created 56 Azure DevOps build/release definitions across 28 applications, with 27 of 28 builds verified green and 25 deployment paths dry-run validated on the deployment agent.",
-        "Built repository-to-server/deployment-path inventory, artifact validation, and environment-readiness guardrails that identified six latent delivery defects, including application-pool identity convergence risk, before any application was deployed.",
-        "Build Python automation, FastAPI dashboards, and a C#/.NET internal support portal for operational workflows and engineering visibility; lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot Azure Monitor, Application Insights, KQL, OAuth/IAM, database, API, configuration, and network-connectivity issues.",
-        "Remediated exposed credentials across 100+ repositories and built secure Key Vault migration/rollback tooling with discovery, classification, integrity validation, and credential/PII safeguards.",
-        "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, application, and load-balancer layers, including a zero-downtime cutover from legacy infrastructure.",
-        "Built internal AI-enabled knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context while enforcing credential, PII, provenance, and engineer-review controls."
+        "Built Python automation, FastAPI dashboards, and an ASP.NET Core support portal for operational workflows and engineering visibility; scripted retirement of 300+ unused legacy applications.",
+        "Designed delivery standardization for a ~60-application .NET estate: created 56 Azure DevOps build/release definitions across 28 applications and reusable automation. Verified 27/28 builds, dry-run validated 25/28 deployment paths, and identified six latent delivery defects before rollout; first deployment pending approval.",
+        "Lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot application, API, SQL Server, OAuth/IAM, configuration, and network issues.",
+        "Remediated exposed credentials across 100+ repositories, including Git history, and built Key Vault migration/rollback tooling with integrity validation and credential/PII safeguards.",
+        "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, and load-balancer layers; helped coordinate a zero-downtime cutover.",
+        "Built AI-assisted knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context with credential, PII, provenance, and engineer-review controls."
       ]
     },
     {
       "date": "Jul 2020 - Feb 2023",
       "title": "DevOps Engineer - Python Automation",
-      "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
-      "location": "Southfield, MI \u00b7 Remote",
+      "company": "HBK - Hottinger Brüel & Kjær",
+      "location": "Southfield, MI · Remote",
       "achievements": [
-        "Created a Python/Tkinter XML-output automation system that reduced data-processing time by 60%.",
-        "Automated SQL output processing with Python, saving more than 40 hours per month.",
-        "Developed database-configuration tools that streamlined customer onboarding and reduced repetitive setup across application environments.",
-        "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live technical troubleshooting for customers."
+        "Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month.",
+        "Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.",
+        "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting."
       ]
     }
   ],
@@ -236,369 +171,203 @@
     {
       "name": "CI/CD & Release Engineering",
       "bullets": [
-        "Designed the standard .NET build/release model for ~60 internal web applications across five servers with no prior consistent deployment path; created 56 Azure DevOps build/release definitions (28 build + 28 Classic Release) across 28 applications.",
-        "Executed all 28 builds (27 verified green) with artifacts validated against each release definition; dry-run deployment-path validation passed for 25 of 28 applications on the live deployment agent. Zero applications are deployed through the new framework: builds are manual-triggered and releases require approval above DEV, pending go/no-go on the first real deployment.",
-        "Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence risk, missing-artifact assumptions against a destructive robocopy /MIR step, and false 'done' states from unverified builds.",
-        "Organized 157 Azure DevOps definitions into a new folder convention (95 legacy inventoried/classified); built the repository-to-server-to-deployment-path inventory, the definition generator, reusable Python/.NET templates, and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
+        "Built a reusable .NET delivery model for a ~60-application estate across five servers: repository-to-server inventory, a definition generator, templates, artifact checks, and environment-readiness guardrails.",
+        "Validated builds and deployment paths and found six latent delivery defects before rollout. First deployment remains pending approval."
       ],
-      "technology": [
-        "Azure DevOps YAML",
-        "Azure DevOps Classic Release",
-        "Deployment Groups",
-        "Azure DevOps REST APIs",
-        "PowerShell",
-        "Python",
-        "IIS",
-        "MSBuild",
-        ".NET Framework",
-        ".NET 8",
-        "WSL2",
-        "Rancher Desktop",
-        "IIS ARR"
-      ]
+      "details": [
+        "Created 56 Azure DevOps build/release definitions (28 build + 28 Classic Release) across 28 applications. Executed all 28 builds: 27 verified green; dry-run deployment-path validation passed for 25 of 28 on the live deployment agent.",
+        "Zero applications are deployed through the new framework. Builds are manually triggered; releases above DEV require approval, pending go/no-go on the first real deployment.",
+        "Validation exposed application-pool identity convergence risk, missing-artifact assumptions before a destructive robocopy /MIR step, and false completion states from unverified builds.",
+        "Organized 157 Azure DevOps definitions into a new folder convention, with 95 legacy definitions inventoried/classified. Built reusable Python/.NET templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
+      ],
+      "technology": ["Azure DevOps", "Python", "PowerShell", ".NET", "IIS"]
     },
     {
-      "name": "Credential Hygiene & Secrets Remediation",
+      "name": "Internal Tools & Developer Enablement",
       "bullets": [
-        "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
-        "Built a purpose-built .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests; a measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
-        "Self-review caught and corrected a migration-path integrity flaw before rollout, providing direct evidence of testing discipline and rollback safety."
+        "Expanded a query extractor into a modular ASP.NET Core support portal with per-module access policies, database-backed workflows, and a permanently retained SOX audit trail.",
+        "Added DBA approve-only deployment scripts, live-object diffing, a pre-CAB dashboard, and service-desk request tracking; covered by 156 automated tests."
       ],
-      "technology": [
-        ".NET 8",
-        "C#",
-        "Spectre.Console",
-        "xUnit",
-        "Azure Key Vault",
-        "Managed Identity",
-        "Python",
-        "PowerShell",
-        "Git history rewriting"
-      ]
-    },
-    {
-      "name": "Server Migration & DR Cutover",
-      "bullets": [
-        "Co-led build-out of four new production/test servers across OS configuration, IIS, Active Directory, firewall, application migration, database, and load-balancer layers, then helped coordinate a zero-downtime cutover from legacy infrastructure."
+      "details": [
+        "Built Python automation and FastAPI dashboards for operational workflows and engineering visibility.",
+        "Built internal AI-assisted knowledge and incident-triage tooling integrating Jira, Confluence, and SharePoint, with credential, PII, provenance, and engineer-review controls."
       ],
-      "technology": [
-        "Windows Server",
-        "IIS",
-        "Active Directory",
-        "PowerShell",
-        "SQL Server",
-        "Load Balancers"
-      ]
-    },
-    {
-      "name": "Internal Web Apps & Support Portal",
-      "bullets": [
-        "Expanded a single-purpose query extractor into a modular ASP.NET Core support portal with a module framework, per-module access policies, and a permanently retained SOX audit trail.",
-        "Added DBA approve-only deployment scripts, live-object diffing, a pre-CAB dashboard, and request tracking that feeds the existing service desk; covered by 156 automated tests."
-      ],
-      "technology": [
-        "ASP.NET Core 8",
-        "Razor Pages",
-        "C#",
-        "xUnit",
-        "SQLite",
-        "SQL Server",
-        "Serilog",
-        "Application Insights",
-        "Windows Authentication",
-        "DiffPlex",
-        "FastAPI"
-      ]
-    },
-    {
-      "name": "Observability & Telemetry",
-      "bullets": [
-        "Contributed to the Application Insights proof of concept that became the team standard, drove adoption across the legacy application estate, added structured logging where none existed, authored the team's reusable KQL library, and used usage telemetry to build an evidence-based application sunset list."
-      ],
-      "technology": [
-        "Application Insights",
-        "Azure Monitor",
-        "KQL",
-        "Serilog",
-        ".NET"
-      ]
-    },
-    {
-      "name": "Python Ops Automation & Estate Reduction",
-      "bullets": [
-        "Built PII-masked production-to-lower database copy tooling, failed-payload triage, event-driven query-to-email workflows, XML log parsing, and vendor report conversion.",
-        "Installed and supported Python applications on IIS, built multi-string source search for decommission planning, scripted retirement of 300+ unused legacy applications, and standardized the team on uv."
-      ],
-      "technology": [
-        "Python",
-        "uv",
-        "FastAPI",
-        "SQL Server",
-        "PowerShell",
-        "IIS",
-        "Go"
-      ]
-    }
-  ],
-  "pdfEngineeringHighlights": [
-    {
-      "name": "CI/CD & Release Engineering",
-      "bullets": [
-        "Standardized delivery for an estate of internal .NET web applications spread across five servers with no prior consistent deployment path, building the repository-to-server-to-deployment-path inventory, a definition generator, reusable Python/.NET templates, and a new folder convention over 157 existing definitions.",
-        "Executed all 28 builds with 27 verified green and validated deployment paths for 25 of 28 applications by dry run on the live deployment agent; zero applications are deployed through the framework yet, pending go/no-go on the first real deployment.",
-        "Pre-deployment validation identified six latent delivery defects before anything shipped, including application-pool identity convergence risk and missing-artifact assumptions against a destructive robocopy /MIR step."
-      ],
-      "technology": [
-        "Azure DevOps YAML",
-        "Classic Release",
-        "Deployment Groups",
-        "Azure DevOps REST APIs",
-        "PowerShell",
-        "Python",
-        "IIS",
-        "MSBuild",
-        ".NET"
-      ]
+      "technology": ["ASP.NET Core 8", "Razor Pages", "C#", "SQL Server", "SQLite", "xUnit", "FastAPI"]
     },
     {
       "name": "Security & Secrets Remediation",
       "bullets": [
         "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
-        "Built a .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests; a measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds."
+        "Built a .NET 8 Key Vault migration utility with hash-only discovery, classification, integrity-verified rollback, and 62 automated tests."
       ],
-      "technology": [
-        ".NET 8",
-        "C#",
-        "Azure Key Vault",
-        "Managed Identity",
-        "xUnit",
-        "PowerShell",
-        "Python",
-        "Git history rewriting"
-      ]
+      "details": [
+        "A measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
+        "Self-review caught and corrected a migration-path integrity flaw before rollout."
+      ],
+      "technology": ["C#", "Azure Key Vault", "Managed Identity", "xUnit", "Python", "PowerShell"]
     },
     {
-      "name": "Platform Reliability & Developer Enablement",
+      "name": "Production Reliability & Observability",
       "bullets": [
-        "Contributed to the Application Insights proof of concept that became the team standard, drove adoption across the legacy application estate, added structured logging where none existed, and authored the team's reusable KQL library.",
-        "Expanded a single-purpose query extractor into a modular ASP.NET Core support portal with per-module access policies, a permanently retained SOX audit trail, DBA approve-only deployment scripts, and 156 automated tests.",
-        "Built Python operations automation for PII-masked database copies, failed-payload triage, and query-to-email workflows, and used usage telemetry to script the retirement of 300+ unused legacy applications."
+        "Contributed to the Application Insights proof of concept that became the team standard, then drove adoption across the legacy application estate.",
+        "Added structured logging, authored the team's reusable KQL library, and used usage telemetry to build an evidence-based application sunset list."
       ],
-      "technology": [
-        "Application Insights",
-        "Azure Monitor",
-        "KQL",
-        "Serilog",
-        "ASP.NET Core 8",
-        "C#",
-        "Python",
-        "FastAPI",
-        "SQL Server",
-        "IIS"
-      ]
+      "details": [
+        "Support production releases, database migrations, and SLA-driven incident triage using Azure Monitor, Application Insights, and KQL alongside application, API, identity, database, and network diagnostics."
+      ],
+      "technology": ["Application Insights", "Azure Monitor", "KQL", "Serilog", ".NET"]
+    },
+    {
+      "name": "Infrastructure & Disaster Recovery",
+      "bullets": [
+        "Co-led build-out of four production/test servers and helped coordinate a zero-downtime cutover from legacy infrastructure."
+      ],
+      "details": [
+        "Worked across OS configuration, IIS, Active Directory, firewall rules, application migration, databases, and load balancers as part of the server migration and DR work."
+      ],
+      "technology": ["Windows Server", "IIS", "Active Directory", "PowerShell", "SQL Server", "Load Balancers"]
+    },
+    {
+      "name": "Python Automation & Estate Reduction",
+      "bullets": [
+        "Scripted retirement of 300+ unused legacy applications and built source-search tooling for decommission planning.",
+        "Automated PII-masked database copies, failed-payload triage, query-to-email workflows, XML log parsing, and vendor report conversion."
+      ],
+      "details": [
+        "Installed and supported Python applications on IIS and standardized the team on uv."
+      ],
+      "technology": ["Python", "FastAPI", "SQL Server", "PowerShell", "IIS", "uv"]
+    }
+  ],
+  "pdfEngineeringHighlights": [
+    {
+      "name": "Internal Tools & Developer Enablement",
+      "sourceProgram": "Internal Tools & Developer Enablement",
+      "bullets": [
+        "Expanded an internal query extractor into a modular ASP.NET Core portal with per-module access policies and a retained SOX audit trail; added DBA approve-only scripts, live-object diffing, and service-desk request tracking, covered by 156 automated tests."
+      ],
+      "technology": ["C#", "Razor Pages", "SQL Server", "SQLite", "xUnit"]
+    },
+    {
+      "name": "Security & Rollback Safety",
+      "sourceProgram": "Security & Secrets Remediation",
+      "bullets": [
+        "Built a .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests. Caught and corrected a migration-path integrity flaw before rollout."
+      ],
+      "technology": ["C#", "Azure Key Vault", "Managed Identity", "xUnit"]
+    },
+    {
+      "name": "Production Reliability & Observability",
+      "sourceProgram": "Production Reliability & Observability",
+      "bullets": [
+        "Contributed to the Application Insights proof of concept that became the team standard, drove adoption, added structured logging, and authored the team's reusable KQL library and telemetry-based application sunset list."
+      ],
+      "technology": ["Azure Monitor", "Application Insights", "KQL", "Serilog"]
     }
   ],
   "projects": [
     {
-      "name": "Multi-Agent Engineering Library",
-      "subtitle": "Open-source AI context system for terminal agents",
+      "name": "HowlPlane",
+      "subtitle": "AI engineering control plane; formerly Multi-Agent Engineering Library",
       "pdfInclude": true,
-      "link": "https://github.com/howlcipher/ai_knowledge_library",
+      "link": "https://github.com/howlcipher/howlplane",
       "highlights": [
-        "Built a filesystem-based knowledge and rules library that loads one canonical rulebook, skill set, and profile context into Claude Code, Codex, and Gemini CLI alike, so agent behavior stays consistent across every terminal assistant.",
-        "Ships 40 domain skills with hallucination guardrails, MCP integrations, and ChromaDB context pruning, packaged with Docker, Helm, and a cross-platform installer, guarded by GitHub Actions running CodeQL, Bandit SAST, and cross-platform tests."
+        "Evolved a shared agent knowledge library into a Python/Go engineering control plane with task routing, review reconciliation, and deterministic verification.",
+        "Built structured evidence recording and human-approval boundaries for consequential actions, alongside shared agent context and GitHub Actions security checks."
       ],
-      "tags": [
-        "Python",
-        "Go",
-        "Docker",
-        "Helm",
-        "GitHub Actions",
-        "MCP",
-        "ChromaDB"
-      ]
-    },
-    {
-      "name": "AI Router",
-      "subtitle": "Local multi-provider coding-agent orchestrator",
-      "pdfInclude": true,
-      "link": "https://github.com/howlcipher/ai_router",
-      "highlights": [
-        "Built a local orchestrator that routes coding-agent tasks across Claude Code, Codex CLI, and Antigravity using task classification, provider health checks, fallback logic, circuit breakers, and cooldown handling.",
-        "Tracks run history in SQLite with structured JSONL run artifacts and captured Git diffs, and enforces safe, Git-aware edit-mode guardrails so agent-driven changes stay reviewable."
-      ],
-      "tags": [
-        "Python",
-        "Claude Code",
-        "Codex CLI",
-        "Antigravity",
-        "SQLite",
-        "Circuit Breakers"
-      ]
-    },
-    {
-      "name": "HowlFrame",
-      "subtitle": "Experimental AI-first language and toolchain, written in Go",
-      "link": "https://github.com/howlcipher/howlframe",
-      "highlights": [
-        "Built a Lisp-like language and compiler toolchain in Go, including a lexer, parser, typed AST/IR, and bytecode VM, with a WebAssembly compilation target and a capability-based security model.",
-        "Explores constrained AI code generation against the language's typed IR, with local Ollama integration for offline generation."
-      ],
-      "tags": [
-        "Go",
-        "Compilers",
-        "WebAssembly",
-        "Bytecode VM",
-        "Ollama"
-      ]
+      "tags": ["Python", "Go", "GitHub Actions", "MCP", "Developer Tooling"]
     },
     {
       "name": "Baseball Optimizer",
       "subtitle": "Rust backend for lineup and roster optimization",
+      "pdfInclude": true,
       "link": "https://github.com/howlcipher/baseball_optimizer",
       "highlights": [
-        "Migrated a performance-sensitive optimization backend to Rust and Axum with a SQLite-backed REST API, containerized with Docker and Docker Compose.",
-        "Built automated end-to-end tests with pytest covering the API and model-evaluation paths, wired into CI."
+        "Migrated an optimization backend from Python to Rust/Axum with a SQLite-backed REST API, packaged with Docker and Docker Compose.",
+        "Built pytest end-to-end coverage for API and model-evaluation paths and wired it into CI."
       ],
-      "tags": [
-        "Rust",
-        "Axum",
-        "SQLite",
-        "Docker",
-        "pytest"
-      ]
+      "tags": ["Rust", "Axum", "SQLite", "Docker", "pytest"]
+    },
+    {
+      "name": "AI Router",
+      "subtitle": "Local multi-provider coding-agent orchestrator",
+      "pdfInclude": false,
+      "link": "https://github.com/howlcipher/ai_router",
+      "highlights": [
+        "Built a local coding-agent orchestrator with task classification, provider health checks, fallback logic, circuit breakers, and cooldown handling.",
+        "Records SQLite run history, JSONL artifacts, and Git diffs; applies Git-aware edit guardrails so changes stay reviewable."
+      ],
+      "tags": ["Python", "SQLite", "Circuit Breakers", "Agent Workflows"]
+    },
+    {
+      "name": "HowlFrame",
+      "subtitle": "Experimental language and toolchain, written in Go",
+      "link": "https://github.com/howlcipher/howlframe",
+      "highlights": [
+        "Built a language and compiler toolchain in Go with a lexer, parser, typed AST/IR, bytecode VM, WebAssembly target, and capability-based security model.",
+        "Explores constrained AI code generation against typed IR, with local Ollama integration."
+      ],
+      "tags": ["Go", "Compilers", "WebAssembly", "Bytecode VM", "Ollama"]
     },
     {
       "name": "RedrawUS",
-      "subtitle": "Geospatial data-analysis and visualization platform",
+      "subtitle": "Geospatial analysis and visualization platform",
       "link": "https://github.com/howlcipher/redistricting-map",
       "highlights": [
-        "Built a multi-state geospatial analysis pipeline combining Python and R simulation tooling with an interactive JavaScript mapping frontend, persistent browser caching, Web Workers, and multi-tier automated testing.",
-        "Uses GeoPandas, Shapely, GerryChain, R redistricting tooling, Leaflet, IndexedDB, Playwright, Vitest, and pytest to process, visualize, and validate large geographic datasets."
+        "Built a multi-state geospatial pipeline with Python/R simulation tooling and an interactive JavaScript map using browser caching and Web Workers.",
+        "Processes and validates geographic datasets with GeoPandas, Shapely, GerryChain, R tooling, and Playwright/Vitest/pytest tests."
       ],
-      "tags": [
-        "Python",
-        "R",
-        "Geospatial",
-        "JavaScript",
-        "Playwright",
-        "Data Engineering"
-      ]
+      "tags": ["Python", "R", "Geospatial", "JavaScript", "Playwright", "Data Engineering"]
     },
     {
       "name": "Password Arena",
-      "subtitle": "Adversarial security-learning sandbox",
+      "subtitle": "Synthetic password-strength learning sandbox",
       "link": "https://github.com/howlcipher/password_arena",
       "highlights": [
-        "Built a local attacker-versus-defender simulation for evaluating synthetic password strength and adaptive strategies under bounded attack budgets, with reproducible experiments, security guardrails, metrics, and audit-style reporting.",
-        "Designed explicit safety boundaries around synthetic credentials, bounded guessing, CSPRNG generation, reproducible test modes, and automated quality checks with pytest, mypy, and Ruff."
+        "Built a local attacker/defender simulation for synthetic password-strength experiments with bounded budgets, reproducible test modes, metrics, and audit reports.",
+        "Added synthetic-only safety boundaries, CSPRNG generation, and pytest, mypy, and Ruff quality checks."
       ],
-      "tags": [
-        "Python",
-        "Cybersecurity",
-        "Docker",
-        "pytest",
-        "Simulation"
-      ]
+      "tags": ["Python", "Cybersecurity", "Docker", "pytest", "Simulation"]
     }
   ],
   "aiEngineeringCapabilities": [
-    {
-      "tier": "Coding Agents",
-      "items": [
-        "Claude Code",
-        "Codex CLI",
-        "Gemini CLI / Antigravity"
-      ]
-    },
-    {
-      "tier": "Orchestration",
-      "items": [
-        "Multi-Agent Routing",
-        "Provider Fallback",
-        "Task Classification",
-        "Circuit Breakers"
-      ]
-    },
-    {
-      "tier": "Context & Retrieval",
-      "items": [
-        "MCP",
-        "RAG",
-        "ChromaDB",
-        "Vector Search",
-        "Embeddings"
-      ]
-    },
-    {
-      "tier": "Local AI",
-      "items": [
-        "Ollama",
-        "Local LLMs",
-        "Provider-Agnostic Workflows"
-      ]
-    },
-    {
-      "tier": "Safety & Reliability",
-      "items": [
-        "Prompt-Injection Defenses",
-        "Human-in-the-Loop",
-        "Agent Guardrails",
-        "Structured Audit/Run Artifacts"
-      ]
-    }
+    {"tier": "Coding Agents", "items": ["Claude Code", "Codex CLI", "Gemini CLI / Antigravity"]},
+    {"tier": "Orchestration", "items": ["Task Classification", "Provider Fallback", "Circuit Breakers"]},
+    {"tier": "Context & Retrieval", "items": ["MCP", "RAG", "ChromaDB", "Vector Search", "Embeddings"]},
+    {"tier": "Local AI", "items": ["Ollama", "Local LLMs", "Provider-Agnostic Workflows"]},
+    {"tier": "Safety & Reliability", "items": ["Prompt-Injection Defenses", "Human-in-the-Loop", "Agent Guardrails", "Structured Audit/Run Artifacts"]}
   ],
   "additionalExperience": [
     {
       "company": "Intrepid Control Systems",
       "title": "QA Developer",
       "date": "Mar 2020 - Apr 2020",
-      "summary": "Wrote and executed Mocha test cases for internal software applications and debugged/validated APIs across software and hardware integrations."
+      "summary": "Wrote Mocha tests and debugged APIs across software and hardware integrations."
     },
     {
       "company": "Project Worldwide",
       "title": "Network Engineer",
       "date": "Jan 2020 - Mar 2020",
-      "summary": "Configured Cisco and Meraki infrastructure across enterprise locations and executed multi-state network migrations with minimal operational downtime."
+      "summary": "Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime."
     },
     {
       "company": "Ford Motor Company",
       "title": "Network Standards Engineer",
       "date": "Sep 2019 - Dec 2019",
-      "summary": "Implemented global network standards and created scalable documentation and IP-management systems for enterprise infrastructure."
+      "summary": "Implemented global network standards, documentation, and IP-management systems."
     },
     {
       "company": "Trendset Communications Group",
       "title": "IT Network Engineer",
       "date": "Sep 2015 - Jun 2019",
-      "summary": "Enforced network standards, maintained configuration files and documentation, and supported critical production infrastructure."
+      "summary": "Maintained network standards, configurations, and documentation; supported critical production infrastructure."
     }
   ],
   "education": [
-    {
-      "icon": "fa-user-graduate",
-      "degree": "M.S. Cyber Defense (In Progress)",
-      "school": "Dakota State University",
-      "year": ""
-    },
-    {
-      "icon": "fa-university",
-      "degree": "B.S. Information Technology",
-      "school": "Colorado State University Global Campus",
-      "year": ""
-    },
-    {
-      "icon": "fa-graduation-cap",
-      "degree": "B.B.A. Business Administration",
-      "school": "Rochester College",
-      "year": ""
-    },
-    {
-      "icon": "fa-certificate",
-      "degree": "CCNA (Previously Held)",
-      "school": "Cisco Networking Academy",
-      "year": "2014 - 2017"
-    }
+    {"icon": "fa-user-graduate", "degree": "M.S. Cyber Defense (In Progress)", "school": "Dakota State University", "year": ""},
+    {"icon": "fa-university", "degree": "B.S. Information Technology", "school": "Colorado State University Global Campus", "year": ""},
+    {"icon": "fa-graduation-cap", "degree": "B.B.A. Business Administration", "school": "Rochester College", "year": ""},
+    {"icon": "fa-certificate", "degree": "CCNA (Previously Held)", "school": "Cisco Networking Academy", "year": "2014 - 2017"}
   ],
-  "footerText": "\u00a9 2026 William Elias. All rights reserved."
+  "footerText": "© 2026 William Elias. All rights reserved."
 }

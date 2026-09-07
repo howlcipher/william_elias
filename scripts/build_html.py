@@ -4,6 +4,8 @@ import re
 import html
 from pathlib import Path
 
+from PIL import Image, ImageDraw, ImageFont
+
 SITE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -108,6 +110,7 @@ def render_skills(skills):
             '<div class="skill-category card">'
             f'<div class="skill-icon"><i class="fas {esc(skill.get("icon", ""))}"></i></div>'
             f'<h3>{esc(skill.get("category", ""))}</h3>'
+            f'<p class="skill-context">{esc(skill.get("context", ""))}</p>'
             f'<div class="skill-tags">{tags}</div>'
             '</div>'
         )
@@ -139,13 +142,18 @@ def render_programs(programs):
     parts = []
     for prog in programs or []:
         bullets = ''.join(f'<li>{esc(b)}</li>' for b in (prog.get('bullets') or []))
+        details = ''.join(f'<li>{esc(b)}</li>' for b in (prog.get('details') or []))
         tech = ''.join(f'<span>{esc(t)}</span>' for t in (prog.get('technology') or []))
+        evidence = (
+            '<details class="program-details"><summary>Implementation &amp; validation</summary>'
+            f'<ul>{details}</ul></details>'
+        ) if details else ''
         parts.append(
-            '<div class="program-card card">'
+            '<article class="program-card card">'
             f'<h3>{esc(prog.get("name", ""))}</h3>'
             f'<ul>{bullets}</ul>'
             f'<div class="skill-tags">{tech}</div>'
-            '</div>'
+            f'{evidence}</article>'
         )
     return ''.join(parts)
 
@@ -212,10 +220,7 @@ def render_mobile_nav_resume(personal):
 
 
 def render_cta_copy(personal):
-    return (
-        '<p class="cta-copy">Software, DevOps, and automation engineer focused on building software, '
-        'automating workflows, CI/CD delivery, production reliability, and AI-enabled tooling.</p>'
-    )
+    return f'<p class="cta-copy">{esc(personal.get("contactCopy", ""))}</p>'
 
 
 def render_cta_actions(personal):
@@ -286,8 +291,58 @@ def render_json_ld(data):
     }
     if canonical_url:
         profile_page['url'] = canonical_url
+        person['@id'] = canonical_url + '#person'
+        profile_page['isPartOf'] = {
+            '@type': 'WebSite',
+            '@id': canonical_url + '#website',
+            'url': canonical_url,
+            'name': personal.get('name', ''),
+            'about': {'@id': person['@id']},
+        }
 
-    return json.dumps(profile_page, indent=2)
+    return json.dumps(profile_page, indent=2).replace('<', '\\u003c')
+
+
+def build_social_preview(data):
+    personal = data['personal']
+    image = Image.new('RGB', (1200, 630), '#111e35')
+    draw = ImageDraw.Draw(image)
+    for x in range(0, 1200, 30):
+        draw.line((x, 0, x, 630), fill='#192e49')
+    for y in range(0, 630, 30):
+        draw.line((0, y, 1200, y), fill='#192e49')
+    draw.rectangle((24, 24, 1175, 605), fill='#172946', outline='#6daedf', width=3)
+    draw.rectangle((24, 596, 506, 605), fill='#ef4444')
+    draw.rectangle((507, 596, 1175, 605), fill='#9fd3f4')
+
+    def line(text, xy, size, color):
+        draw.text(xy, text, font=ImageFont.load_default(size=size), fill=color)
+
+    def wrapped(text, y, size, color, width=720):
+        font = ImageFont.load_default(size=size)
+        row = ''
+        for word in text.split():
+            candidate = f'{row} {word}'.strip()
+            if row and draw.textlength(candidate, font=font) > width:
+                line(row, (65, y), size, color)
+                y += size + 12
+                row = word
+            else:
+                row = candidate
+        line(row, (65, y), size, color)
+        return y + size + 12
+
+    line(personal['name'], (65, 120), 76, '#e9edf5')
+    y = wrapped(personal['title'], 224, 34, '#9fd3f4')
+    wrapped(personal['tagline'], y + 24, 28, '#e9edf5')
+    wrapped(personal['supporting'].replace('•', '|'), 447, 22, '#a9b3c5')
+    line(personal['remote'], (65, 530), 22, '#9fd3f4')
+    with Image.open(SITE_DIR / personal['photoDark']) as portrait:
+        portrait = portrait.convert('RGB').resize((270, 270), Image.Resampling.LANCZOS)
+        image.paste(portrait, (845, 175))
+    draw.rectangle((840, 170, 1119, 449), outline='#6daedf', width=4)
+    line('WE.', (1050, 65), 38, '#e9edf5')
+    image.save(SITE_DIR / 'preview.jpg', quality=90, subsampling=0)
 
 
 def build_robots(canonical_url):
@@ -366,21 +421,24 @@ def build_html():
     canonical_url = get_valid_url(seo.get('canonicalUrl')) or ''
     site_name = seo.get('siteName') or f"{name} | {title}"
 
-    page_title = html.escape(f"{name} | {title}", quote=True)
-    seo_suffix = "Python & FastAPI, C#/.NET, CI/CD, Azure DevOps, and AI-enabled engineering."
+    page_title = html.escape(site_name, quote=True)
     # Search snippets cut off around 160 characters, so the meta description
     # carries name, title, and the core keywords and stops there. OG/Twitter
-    # stay tagline-led, where the longer line still renders in full.
-    description = (
-        "Software, DevOps, and automation engineer: Python, FastAPI, C#/.NET, "
-        "CI/CD, Azure DevOps, production reliability, and AI-enabled engineering."
-    )
-    escaped_desc = html.escape(description, quote=True)
-    escaped_og_desc = html.escape(f"{tagline[:1].upper() + tagline[1:] if tagline else ''}. {seo_suffix}", quote=True)
+    # use their own canonical supporting copy for social sharing.
+    escaped_desc = esc(seo.get('description', ''))
+    escaped_og_desc = esc(seo.get('socialDescription') or tagline)
     escaped_site_name = html.escape(site_name, quote=True)
 
-    with open(SITE_DIR / 'index.html', 'r') as f:
+    with open(SITE_DIR / 'scripts' / 'site_template.html', 'r') as f:
         html_content = f.read()
+
+    image_url = canonical_url.rstrip('/') + '/preview.jpg'
+    for attribute in ('property="og:image"', 'name="twitter:image"'):
+        html_content = re.sub(
+            rf'<meta {attribute} content=".*?">',
+            lambda m: f'<meta {attribute} content="{esc(image_url)}">',
+            html_content,
+        )
 
     # Update <title>
     html_content = re.sub(
@@ -457,13 +515,14 @@ def build_html():
     html_content = inject(html_content, 'SUMMARY', render_summary(data.get('about') or data.get('summary', '')))
     html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
-    exp_combined = data.get('experience', [])[:]
-    for job in data.get('additionalExperience', []):
-        job_copy = dict(job)
-        if 'summary' in job_copy:
-            job_copy['achievements'] = [job_copy['summary']]
-        exp_combined.append(job_copy)
-    html_content = inject(html_content, 'EXPERIENCE', render_experience(exp_combined))
+    experience = '<div class="timeline">' + render_experience(data.get('experience')) + '</div>'
+    if data.get('additionalExperience'):
+        experience += (
+            '<div class="earlier-experience"><h3>Earlier Experience</h3>'
+            '<div class="additional-experience">'
+            + render_additional_experience(data['additionalExperience']) + '</div></div>'
+        )
+    html_content = inject(html_content, 'EXPERIENCE', experience)
     html_content = inject(html_content, 'PROGRAMS', render_programs(data.get('selectedEngineeringPrograms')))
     html_content = inject(html_content, 'AI_CAPABILITIES', render_ai_capabilities(data.get('aiEngineeringCapabilities')))
     html_content = inject(html_content, 'PROJECTS', render_projects(data.get('projects')))
@@ -474,13 +533,14 @@ def build_html():
     html_content = inject(html_content, 'MOBILE_NAV_RESUME', render_mobile_nav_resume(personal))
     html_content = inject(html_content, 'CTA_COPY', render_cta_copy(personal))
     html_content = inject(html_content, 'CTA_ACTIONS', render_cta_actions(personal))
-    html_content = inject(html_content, 'JSONLD', render_json_ld(data))
+    html_content = inject(html_content, 'JSONLD', '<script type="application/ld+json">' + render_json_ld(data) + '</script>')
 
     with open(SITE_DIR / 'index.html', 'w') as f:
         f.write(html_content)
 
     build_robots(canonical_url)
     build_sitemap(canonical_url)
+    build_social_preview(data)
 
 
 if __name__ == "__main__":

@@ -53,7 +53,7 @@ class TestJsonLd:
     def _extract_json_ld(self):
         html_content = _index_html()
         match = re.search(
-            r'<!-- BUILD:JSONLD:START -->(.*?)<!-- BUILD:JSONLD:END -->', html_content, re.DOTALL
+            r'<script type="application/ld\+json">(.*?)</script>', html_content, re.DOTALL
         )
         assert match, "JSON-LD script block not found"
         return json.loads(match.group(1))
@@ -88,7 +88,8 @@ class TestJsonLd:
         cfg = load_config()
         data = self._extract_json_ld()
         blob = json.dumps(data)
-        assert cfg["personal"]["phone"] not in blob
+        assert "telephone" not in blob
+        assert "phone" not in cfg["personal"]
         assert "address" not in blob.lower()
         assert "streetAddress" not in blob
 

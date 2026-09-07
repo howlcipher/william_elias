@@ -187,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Scroll-aware navigation: highlight the nav link for the section currently in view.
-    const sectionIds = ['about', 'skills', 'experience', 'programs', 'projects', 'education'];
+    const sectionIds = Array.from(document.querySelectorAll('main > section[id]'))
+        .map(section => section.id);
     const navLinksById = new Map();
     document.querySelectorAll('.nav-links a[href^="#"], .mobile-nav-links a[href^="#"]').forEach(link => {
         const id = link.getAttribute('href').slice(1);

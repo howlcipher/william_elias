@@ -1,0 +1,1064 @@
+{
+  "date": "2026-09-07",
+  "base_commit": "07ac83e",
+  "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/2026-09-07",
+  "generated_artifacts": {
+    "config.js": {
+      "sha256": "9d8c8f9d0f5ef7cdf0c092354b6a5a4ed4bcf5ff68e109ae8877a05b4673ceee",
+      "bytes": 26645
+    },
+    "index.html": {
+      "sha256": "5b3f47aab20e1041698d7b2d37847a09c9c3f8d5433d01cd91bc9b49c093aedb",
+      "bytes": 33877
+    },
+    "robots.txt": {
+      "sha256": "7140470d13d5081b0b4376b13f54d485fe373e8a060053ba22e548752e2b922a",
+      "bytes": 88
+    },
+    "sitemap.xml": {
+      "sha256": "91f2e89decd69f9db82c4135ba85c1164f2451611dc4a04904542b4dbda5cd15",
+      "bytes": 186
+    },
+    "preview.jpg": {
+      "sha256": "636e8091e57a8ad5388bb9839ac7fae1b6b251cc1945042ac39e8f0903576c4e",
+      "bytes": 125410
+    },
+    "William_Elias_Resume.pdf": {
+      "sha256": "b90efd0a4f5eaa1ecd726a260ca9866b89357850440e75498f8f5841528e57c5",
+      "bytes": 13385
+    }
+  },
+  "screenshots": {
+    "about-dark-1440.png": {
+      "sha256": "42472ae42450aee00f655267d3f65d455f98e1b23a66ca3586da65a12b6ea4ff",
+      "bytes": 59048
+    },
+    "about-dark-390.png": {
+      "sha256": "bbd5d757eaf800eb0ba5e872a386b709c07428112dd5835e69aadf86d7e24de0",
+      "bytes": 49754
+    },
+    "contact-cta-dark-1440.png": {
+      "sha256": "0d54813c191fe087370439ba7c82832fc6495a3231bc9ef4453e74b25e902233",
+      "bytes": 22928
+    },
+    "contact-cta-dark-390.png": {
+      "sha256": "f8530a395f4219a6133522547bd435c8fc1a61d53ac5998f59f476527392072e",
+      "bytes": 18841
+    },
+    "contrast-dark-1024.jpg": {
+      "sha256": "a13348a5fb30a1c0705a76e52f20c00d02d049ca6bf6c353a3094816e7f8ed6a",
+      "bytes": 1171801
+    },
+    "contrast-dark-1440.jpg": {
+      "sha256": "41ba5fd773a6f4061cd96ea82526c0618dbf1ee6c365fcda662b1010f368821a",
+      "bytes": 1314733
+    },
+    "contrast-dark-320.jpg": {
+      "sha256": "a003949cf055fe572b69dd0a732340bf32434a6539335358d8be29faf6ffbf79",
+      "bytes": 1059729
+    },
+    "contrast-dark-390.jpg": {
+      "sha256": "b83d47a992e6ab7b507e3f66408681a137319fd87730a5c9f66da133d184c550",
+      "bytes": 1079136
+    },
+    "contrast-dark-810.jpg": {
+      "sha256": "a93bf1c66e22808a74c99f8c33173153f75b58ba72f9614b8ddf4b08d83495cd",
+      "bytes": 1149240
+    },
+    "contrast-light-1024.jpg": {
+      "sha256": "60d4b5fe92ffcdf3926312d4f86462d3a474090e1474f41c851aa00ffe3fd432",
+      "bytes": 1191207
+    },
+    "contrast-light-1440.jpg": {
+      "sha256": "de1a26edff1b54da151e48a71216b0b13c93932c0a2acaa61634888fcbf205bf",
+      "bytes": 1329823
+    },
+    "contrast-light-320.jpg": {
+      "sha256": "a231f6a865902a5aff456c8a7b4d8d477005a2ecc6d4cc40f510c0b21dedbdf5",
+      "bytes": 1081929
+    },
+    "contrast-light-390.jpg": {
+      "sha256": "3648913e2a03322c7c021e41fe77999945838ceecbdfd1bbe1800e18225b656f",
+      "bytes": 1100663
+    },
+    "contrast-light-810.jpg": {
+      "sha256": "bb61d30f4f5b12a3e0d3d961387d3e3722689f596aa8874ec740428b1c7529b9",
+      "bytes": 1167575
+    },
+    "dark-1024.jpg": {
+      "sha256": "3fe517da2d726e892d54161dfbf8e0b4180f8b267f935f2ba35e3d05fc45439a",
+      "bytes": 1099881
+    },
+    "dark-1440.jpg": {
+      "sha256": "c7805bb7a0552f90151f1709a5cc3de6e046faaaa1f6d8985ce21a486bd1c90f",
+      "bytes": 1244645
+    },
+    "dark-320.jpg": {
+      "sha256": "50aad7a050b50031de7697fea757c14599d794aed54b7477d0a1dcf371010297",
+      "bytes": 987295
+    },
+    "dark-390.jpg": {
+      "sha256": "b560ade4426a9c0d344f36ce5cf4716b3835b99d12eb4ef2bfd57907dd395c42",
+      "bytes": 1009152
+    },
+    "dark-810.jpg": {
+      "sha256": "44d8924f9bd7f7594b346c8dd12b8a58bcf1b8993547290880037a026fa1b440",
+      "bytes": 1086564
+    },
+    "education-dark-1440.png": {
+      "sha256": "eab261137a6beac3d43267596451030c35a5474afa21ae553a381db563ca42bd",
+      "bytes": 32389
+    },
+    "education-dark-390.png": {
+      "sha256": "f4f0530f0ec44be8b54222c5b6bd63a186e27d21643b6cdd2a64c34d56ff705f",
+      "bytes": 31867
+    },
+    "evidence-focus-contrast-dark-1440.png": {
+      "sha256": "62ddedc17274b7321e2d43cc6fdccc03cfd1ffc3f64fcb8831635906a2e14eba",
+      "bytes": 78400
+    },
+    "evidence-focus-contrast-dark-390.png": {
+      "sha256": "c490643cfa7a7514fefbe6d5046a75d1d5dbca2b87836596858b26abf06b81d7",
+      "bytes": 68612
+    },
+    "evidence-focus-contrast-light-1440.png": {
+      "sha256": "0c2b109e2ea9be6254a49a00344562fbb054b070a257ffe06daa32491f3996b8",
+      "bytes": 74866
+    },
+    "evidence-focus-contrast-light-390.png": {
+      "sha256": "969e68302de64844093bc2461e7f2e9b9c0b0099eeb8c48e2b7b458845b810a6",
+      "bytes": 66387
+    },
+    "evidence-focus-dark-1440.png": {
+      "sha256": "8ab7d370f30d73f4da3c187e2c582abf2f288c759ba14cb4670672a5523fda84",
+      "bytes": 85947
+    },
+    "evidence-focus-dark-390.png": {
+      "sha256": "2b9c0585c441b0548ce121d7195bcb3705d3d4ab673d992c4d462a4321f6f3a0",
+      "bytes": 75345
+    },
+    "evidence-focus-light-1440.png": {
+      "sha256": "59d4c13b25ccae76940f04147cec319e3684a3b1553a9271311568991ea0d400",
+      "bytes": 84944
+    },
+    "evidence-focus-light-390.png": {
+      "sha256": "518f838addb7562056585803063af802618568a0d3c632ed3756bb9877e1d1b7",
+      "bytes": 75410
+    },
+    "evidence-open-contrast-dark-1440.png": {
+      "sha256": "20af7fbace540519b44107a8cb097d2ce0627d44d81eccd93161dfd3873f5749",
+      "bytes": 78303
+    },
+    "evidence-open-contrast-dark-390.png": {
+      "sha256": "2c2735f9c3e7656fe61f45f40bf3f2f5a9ddbda7d7ca1201169746e15f2d98f2",
+      "bytes": 68526
+    },
+    "evidence-open-contrast-light-1440.png": {
+      "sha256": "549bcdf3fffc68561f95187816a443fd8224c75c45c8841714356979c0e826fd",
+      "bytes": 74774
+    },
+    "evidence-open-contrast-light-390.png": {
+      "sha256": "cf2dd22e43716f7ac8258e0c457c9a5eaa08111b3ffed8ab7e547f304131c8c7",
+      "bytes": 66307
+    },
+    "evidence-open-dark-1440.png": {
+      "sha256": "8c6535676a462451c9e8ab25b8d727cd56d62055c5649b9b64808fff9fa06e07",
+      "bytes": 85938
+    },
+    "evidence-open-dark-390.png": {
+      "sha256": "8bd7ccf869e9a90499109db089906563954412b32bfab73ecdccd32cc33e1397",
+      "bytes": 75340
+    },
+    "evidence-open-light-1440.png": {
+      "sha256": "47d08d844cf1cc9a43d86d9fdec8eb846dca692a41fdb2d08cd8429a225f1259",
+      "bytes": 84894
+    },
+    "evidence-open-light-390.png": {
+      "sha256": "50164c73489c8a35b05aaa26379cc6000bc77f5af24ed49229b5b74f3aa12b5a",
+      "bytes": 75369
+    },
+    "experience-dark-1440.png": {
+      "sha256": "b6da965c536635f0cd58a8906a5cfd4e07de8a11d0631e76cc6892e1b256d7f3",
+      "bytes": 186944
+    },
+    "experience-dark-390.png": {
+      "sha256": "246eb3a04a166103f63bb78dccd0f9bebfa3d16a4724a3113472a89335489e35",
+      "bytes": 185152
+    },
+    "hero-contrast-dark-1024.png": {
+      "sha256": "b03c14cf18a40f6ae1c6580f5c1ba236259c5042b59f8d43b8803e9e30eed310",
+      "bytes": 142186
+    },
+    "hero-contrast-dark-1440.png": {
+      "sha256": "6e14c366f90cdcb259ab37aa7e89523d3b605da67eab8a73309610905e40a845",
+      "bytes": 170107
+    },
+    "hero-contrast-dark-320.png": {
+      "sha256": "033dda70b109ef0210523b0ec290b4db6c746361bf77cc696e09a6a2f4c76a58",
+      "bytes": 70564
+    },
+    "hero-contrast-dark-390.png": {
+      "sha256": "630dda61946d1c62b0797ccaa5a466087f201a9fd6f210af4ee3b46ad9bfd3f8",
+      "bytes": 73628
+    },
+    "hero-contrast-dark-810.png": {
+      "sha256": "3411d2cfa6ddb6145fba5632bc2c0efbe51694e399ca1b9070585e5bd2dceee9",
+      "bytes": 84156
+    },
+    "hero-contrast-light-1024.png": {
+      "sha256": "daaf72272d458e707683bffe1b9d311040b8f61ef65dbd0f142adf0a4eb9bc36",
+      "bytes": 141610
+    },
+    "hero-contrast-light-1440.png": {
+      "sha256": "d0721bd0a64b2efadcb913270a8c306f206d2b4c17314cd12dc9a92168da4346",
+      "bytes": 170185
+    },
+    "hero-contrast-light-320.png": {
+      "sha256": "20436c0fe9b6e1b4529b65a5ba79da12c9492e6eb5e4314a59488f46e58ae54c",
+      "bytes": 70627
+    },
+    "hero-contrast-light-390.png": {
+      "sha256": "bab40aeba236f67ec380464219bf219c2732b7641016c44f1c7e33cea931d01d",
+      "bytes": 73726
+    },
+    "hero-contrast-light-810.png": {
+      "sha256": "aad8d1b1cef5d0eae41e574791ba3c6eb54d0ae48f3ad5b6fddd9a1265a84a1f",
+      "bytes": 84059
+    },
+    "hero-dark-1024.png": {
+      "sha256": "3434aaaf32651f2f95a7b469bb4c9c3c6005ee126e56faacf68906f64c6b8d70",
+      "bytes": 145181
+    },
+    "hero-dark-1440.png": {
+      "sha256": "37f8f58395afd290c50350ba4b17c10304b767af0fdafa222c9064ce18b838eb",
+      "bytes": 172155
+    },
+    "hero-dark-320.png": {
+      "sha256": "ca27277030fcd1795d3f476d28e4ec3cf7ab82901a2f538e10bceb24dd1b029f",
+      "bytes": 71288
+    },
+    "hero-dark-390.png": {
+      "sha256": "8982e01b994b41e75588fc30c726edb3ede32cd72ad91389e7eecd4021e9eb44",
+      "bytes": 74652
+    },
+    "hero-dark-810.png": {
+      "sha256": "3e956c7e33e97a57be82ae828b8f447fbc2cb54bb3ddeef6ac7ff7e04864fa8f",
+      "bytes": 85490
+    },
+    "hero-light-1024.png": {
+      "sha256": "98c8550233ae89d0fdfd8918da69e32a53a3ab2e524bba74ee62850d2bf5337f",
+      "bytes": 145776
+    },
+    "hero-light-1440.png": {
+      "sha256": "e33994c2432dd9497de4f9d6ee5eff6f9ae1eb03e5b3181c9849080b2ac54ad1",
+      "bytes": 173381
+    },
+    "hero-light-320.png": {
+      "sha256": "c20eab4f047cfbd724330e9472335317611d9da52e2c4517bbcd79f69a92f5d1",
+      "bytes": 71656
+    },
+    "hero-light-390.png": {
+      "sha256": "451fe80812ea4f7fe8a2194696d0b17b2fb1b7e1c75d21c1431d8a7280d1a31d",
+      "bytes": 75281
+    },
+    "hero-light-810.png": {
+      "sha256": "9b24e9633ef92df221dc0c4757670af1aa3e7d1ae9e72a3c28933dc2e02b7971",
+      "bytes": 85805
+    },
+    "light-1024.jpg": {
+      "sha256": "2e66a740444cab1172290dcd56f7ad008819e39e07ba086fbfb9218f9c48e075",
+      "bytes": 1054216
+    },
+    "light-1440.jpg": {
+      "sha256": "8eef26ec806c2f39d869115f652f09c40f227a3c47bbabff4e347f70c71603ab",
+      "bytes": 1158989
+    },
+    "light-320.jpg": {
+      "sha256": "6a1451ceec7a842dec9d759a01c3e66a885653cceced7a02c83a46038624bdaf",
+      "bytes": 972343
+    },
+    "light-390.jpg": {
+      "sha256": "ab29f0802419286b359efc488cad99552b395d62eb0d7fb74b02636af696b33b",
+      "bytes": 983398
+    },
+    "light-810.jpg": {
+      "sha256": "805ef974555fbd5351d214f73c7e50e85ae2f4e23e3a83886a802a875b139d01",
+      "bytes": 1033611
+    },
+    "programs-contrast-dark-1440.png": {
+      "sha256": "d6c4103aac33166069354352338e59a0772b64b40ab03c5e19092fe701925cdb",
+      "bytes": 142062
+    },
+    "programs-contrast-dark-390.png": {
+      "sha256": "f639482365217cd5087cd42b61518c42b57a215930f9e0ada235bf3a18e3ae97",
+      "bytes": 150044
+    },
+    "programs-contrast-light-1440.png": {
+      "sha256": "a5521bfc4486c35e01d24356ff4ca09c30e595f9e2bb178ed4ee7af758d6b89f",
+      "bytes": 136874
+    },
+    "programs-contrast-light-390.png": {
+      "sha256": "b3947d134d91c85078c5b0d9a90b4196da2108baaab9bc338b5a45599faa6774",
+      "bytes": 144853
+    },
+    "programs-dark-1440.png": {
+      "sha256": "5fddea17d045e45de5ec5d694c44ce2e712f6e4429b762696a774dc084f8b4a1",
+      "bytes": 151379
+    },
+    "programs-dark-390.png": {
+      "sha256": "ee46f3b44dc422426317cab8ee1e5992216aae25db70c700ee41424a6cf74a72",
+      "bytes": 160459
+    },
+    "programs-light-1440.png": {
+      "sha256": "a5ffe4f18bd4e7c89366f2cedadbddefd0df4cafb5fe648d19b15d9f3ff1ef5c",
+      "bytes": 150438
+    },
+    "programs-light-390.png": {
+      "sha256": "ce575fcbf1aa00f72ceec02c59c984ead57c0fa0861e11344c14105f800838b3",
+      "bytes": 159771
+    },
+    "projects-dark-1440.png": {
+      "sha256": "11d4faf7640553dbfde82abcd4cd2c8ca8ed0e9ffea7f376ca1e6638eb675961",
+      "bytes": 150686
+    },
+    "projects-dark-390.png": {
+      "sha256": "f55beab1b11dedfbcb3a935b81c65a8199b7d3ac0bee5d163cc8c5d4a0f09a82",
+      "bytes": 171469
+    },
+    "resume-1.png": {
+      "sha256": "c5ff831ff3de2974e54cfbf45c8969cdab15c5e0486509b0d82e491fa4731a26",
+      "bytes": 272817
+    },
+    "resume-2.png": {
+      "sha256": "53c19c97c0a5622b420182826306f7387cf07027a132503cb7d0e7587af7fb89",
+      "bytes": 208701
+    },
+    "skills-dark-1440.png": {
+      "sha256": "81e6affafbeefe662222488502b4ed95af43c5e4b00b0a64bd2680d4f9a663e4",
+      "bytes": 115070
+    },
+    "skills-dark-390.png": {
+      "sha256": "ba9c2792ba5ed0d1986642ff66946626abc34845947098d169d5c1c7030b268a",
+      "bytes": 132359
+    }
+  },
+  "pdf_inspection": [
+    {
+      "page": 1,
+      "text_bounds": [
+        26.829999923706055,
+        21.140024185180664,
+        585.1701049804688,
+        656.489990234375
+      ],
+      "bottom_whitespace_points": 135.510009765625,
+      "font_sizes": [
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        18.0
+      ],
+      "clipped_text": [],
+      "links": [
+        {
+          "uri": "mailto:WylElias.123@gmail.com",
+          "rect": [
+            356.3399963378906,
+            75.0,
+            469.8399963378906,
+            85.0
+          ]
+        },
+        {
+          "uri": "https://linkedin.com/in/wylelias",
+          "rect": [
+            122.5199966430664,
+            89.0,
+            226.42999267578125,
+            99.0
+          ]
+        },
+        {
+          "uri": "https://github.com/howlcipher",
+          "rect": [
+            234.58999633789062,
+            89.0,
+            334.05999755859375,
+            99.0
+          ]
+        },
+        {
+          "uri": "https://howlcipher.github.io/william_elias/",
+          "rect": [
+            342.2300109863281,
+            89.0,
+            489.489990234375,
+            99.0
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "text_bounds": [
+        26.829999923706055,
+        32.52998733520508,
+        585.1701049804688,
+        618.489990234375
+      ],
+      "bottom_whitespace_points": 173.510009765625,
+      "font_sizes": [
+        9.0,
+        10.0,
+        10.5,
+        11.0
+      ],
+      "clipped_text": [],
+      "links": [
+        {
+          "uri": "https://github.com/howlcipher/howlplane",
+          "rect": [
+            26.829999923706055,
+            266.5,
+            174.11000061035156,
+            276.5
+          ]
+        },
+        {
+          "uri": "https://github.com/howlcipher/baseball_optimizer",
+          "rect": [
+            26.829999923706055,
+            346.5,
+            212.4499969482422,
+            356.5
+          ]
+        }
+      ]
+    }
+  ],
+  "website_inspection": [
+    {
+      "viewport": 320,
+      "mode": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "theme": null,
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 320,
+      "mode": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "theme": "light",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 320,
+      "mode": "contrast-dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "theme": "colorblind",
+        "darkContrast": true,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 320,
+      "mode": "contrast-light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "theme": "colorblind",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 390,
+      "mode": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "theme": null,
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 390,
+      "mode": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "theme": "light",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 390,
+      "mode": "contrast-dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "theme": "colorblind",
+        "darkContrast": true,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 390,
+      "mode": "contrast-light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "theme": "colorblind",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 810,
+      "mode": "dark",
+      "geometry": {
+        "width": 810,
+        "scrollWidth": 810,
+        "theme": null,
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 810,
+      "mode": "light",
+      "geometry": {
+        "width": 810,
+        "scrollWidth": 810,
+        "theme": "light",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 810,
+      "mode": "contrast-dark",
+      "geometry": {
+        "width": 810,
+        "scrollWidth": 810,
+        "theme": "colorblind",
+        "darkContrast": true,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 810,
+      "mode": "contrast-light",
+      "geometry": {
+        "width": 810,
+        "scrollWidth": 810,
+        "theme": "colorblind",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1024,
+      "mode": "dark",
+      "geometry": {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "theme": null,
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1024,
+      "mode": "light",
+      "geometry": {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "theme": "light",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1024,
+      "mode": "contrast-dark",
+      "geometry": {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "theme": "colorblind",
+        "darkContrast": true,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1024,
+      "mode": "contrast-light",
+      "geometry": {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "theme": "colorblind",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1440,
+      "mode": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "theme": null,
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1440,
+      "mode": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "theme": "light",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1440,
+      "mode": "contrast-dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "theme": "colorblind",
+        "darkContrast": true,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    },
+    {
+      "viewport": 1440,
+      "mode": "contrast-light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "theme": "colorblind",
+        "darkContrast": false,
+        "brokenImages": 0,
+        "sections": [
+          "stats-target",
+          "about",
+          "programs",
+          "experience",
+          "projects",
+          "skills",
+          "education",
+          "contact-cta"
+        ]
+      },
+      "page_errors": []
+    }
+  ],
+  "external_destinations": {
+    "checked_at": "2026-09-07T20:27:52.747411+00:00",
+    "results": [
+      {
+        "url": "https://linkedin.com/in/wylelias",
+        "status": 200,
+        "final_url": "https://linkedin.com/in/wylelias",
+        "content_type": "text/html; charset=utf-8",
+        "title": "Checking your browser - reCAPTCHA"
+      },
+      {
+        "url": "https://github.com/howlcipher",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher",
+        "content_type": "text/html; charset=utf-8",
+        "title": "howlcipher (William Elias) \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/william_elias",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/william_elias",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/william_elias: Senior DevOps / Platform Engineer portfolio - CI/CD, release automation, production reliability, Python/.NET tooling, and agentic AI engineering. \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/howlplane",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/howlplane",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/howlplane: Autonomous AI engineering control plane: orchestration, persistent coding agents, adversarial falsification, and governance. \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/baseball_optimizer",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/baseball_optimizer",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/baseball_optimizer \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/ai_router",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/ai_router",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/ai_router: a router for selecting the proper model for the job us ai for dev \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/howlframe",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/howlframe",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/howlframe: HowlFrame is a verified execution platform for AI-native and adaptive software, combining deterministic authority boundaries with bounded probabilistic reasoning. \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/redistricting-map",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/redistricting-map",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/redistricting-map \u00b7 GitHub"
+      },
+      {
+        "url": "https://github.com/howlcipher/password_arena",
+        "status": 200,
+        "final_url": "https://github.com/howlcipher/password_arena",
+        "content_type": "text/html; charset=utf-8",
+        "title": "GitHub - howlcipher/password_arena \u00b7 GitHub"
+      },
+      {
+        "url": "https://howlcipher.github.io/william_elias/",
+        "status": 200,
+        "final_url": "https://howlcipher.github.io/william_elias/",
+        "content_type": "text/html; charset=utf-8",
+        "title": "William Elias | Software, DevOps &amp; Automation Engineer"
+      },
+      {
+        "url": "https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf",
+        "status": 200,
+        "final_url": "https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf",
+        "content_type": "application/pdf"
+      }
+    ],
+    "interpretation": "Ten destinations returned expected pages or PDF content. LinkedIn returned HTTP 200 with a reCAPTCHA challenge: profile content verification is inaccessible, not confirmed broken."
+  },
+  "validation": {
+    "python": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
+    "dependencies": {
+      "pytest": "9.0.3",
+      "playwright": "1.60.0",
+      "pytest-playwright": "0.8.0",
+      "fpdf2": "2.8.7",
+      "pypdf": "6.14.2",
+      "Pillow": "12.3.0"
+    },
+    "local_browser_platform_override": "ubuntu24.04-x64",
+    "commands": [
+      {
+        "name": "build_config",
+        "command": [
+          "/tmp/portfolio-ci/bin/python",
+          "-W",
+          "error",
+          "scripts/build_config.py"
+        ],
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "name": "build_html",
+        "command": [
+          "/tmp/portfolio-ci/bin/python",
+          "-W",
+          "error",
+          "scripts/build_html.py"
+        ],
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "name": "build_pdf",
+        "command": [
+          "/tmp/portfolio-ci/bin/python",
+          "-W",
+          "error",
+          "scripts/generate_resume_pdf.py"
+        ],
+        "exit_code": 0,
+        "output": "Wrote /run/media/system/tallgeese/dev/william_elias/William_Elias_Resume.pdf\n"
+      },
+      {
+        "name": "pytest",
+        "command": [
+          "/tmp/portfolio-ci/bin/python",
+          "-m",
+          "pytest",
+          "tests/",
+          "-W",
+          "error",
+          "-q"
+        ],
+        "exit_code": 0,
+        "output": "........................................................................ [ 35%]\n........................................................................ [ 71%]\n..........................................................               [100%]\n202 passed in 54.00s\n"
+      },
+      {
+        "name": "flake8_changed",
+        "command": [
+          "/tmp/portfolio-tools/bin/flake8",
+          "scripts/generate_resume_pdf.py",
+          "scripts/build_html.py",
+          "tests/test_browser.py",
+          "tests/test_hiring_contract.py",
+          "tests/test_generate_resume_pdf.py",
+          "tests/test_resume_content.py",
+          "tests/test_seo_and_navigation.py",
+          "tests/test_generated_artifacts.py",
+          "tests/test_pdf_skill_context.py",
+          "--extend-ignore",
+          "E501"
+        ],
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "name": "flake8_new",
+        "command": [
+          "/tmp/portfolio-tools/bin/flake8",
+          "tests/test_generated_artifacts.py",
+          "tests/test_pdf_skill_context.py"
+        ],
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "name": "diff_check",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "output": ""
+      }
+    ]
+  }
+}

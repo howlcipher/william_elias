@@ -63,7 +63,7 @@ class TestKeyMetrics:
         cfg = load_config()
         values = {s["value"] for s in cfg["stats"]}
         assert "~60" in values
-        assert "56" in values
+        assert "300+" in values
         assert "100+" in values
         assert len(cfg["stats"]) == 3
 
@@ -74,12 +74,13 @@ class TestKeyMetrics:
         assert "60 applications deployed" not in blob
         assert "60 applications migrated" not in blob
 
-    def test_summary_states_true_program_scope(self):
+    def test_experience_states_true_program_scope(self):
         cfg = load_config()
-        summary_lower = cfg["summary"].lower()
+        accomplishment = next(a for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a)
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
-        assert "60-application estate" in summary_lower
+        assert "~60-application .NET estate" in accomplishment
+        assert "first deployment pending approval" in accomplishment
 
     def test_summary_does_not_claim_100_plus_pipelines(self):
         cfg = load_config()
@@ -234,15 +235,14 @@ class TestCoreExpertiseCategories:
         assert "Additional Programming Foundations" not in blob
 
 
-
 class TestSelectedEngineeringPrograms:
     EXPECTED_PROGRAMS = {
         "CI/CD & Release Engineering",
-        "Credential Hygiene & Secrets Remediation",
-        "Server Migration & DR Cutover",
-        "Internal Web Apps & Support Portal",
-        "Observability & Telemetry",
-        "Python Ops Automation & Estate Reduction",
+        "Security & Secrets Remediation",
+        "Infrastructure & Disaster Recovery",
+        "Internal Tools & Developer Enablement",
+        "Production Reliability & Observability",
+        "Python Automation & Estate Reduction",
     }
 
     def test_six_programs_present(self):
@@ -265,9 +265,9 @@ class TestPdfEngineeringHighlights:
     """
 
     EXPECTED_HIGHLIGHTS = {
-        "CI/CD & Release Engineering",
-        "Security & Secrets Remediation",
-        "Platform Reliability & Developer Enablement",
+        "Internal Tools & Developer Enablement",
+        "Security & Rollback Safety",
+        "Production Reliability & Observability",
     }
 
     def test_three_curated_highlights_present(self):
@@ -287,7 +287,7 @@ class TestPdfEngineeringHighlights:
         for name in self.EXPECTED_HIGHLIGHTS:
             assert name in blob, f"'{name}' missing from generated PDF"
         # Website-only programs must stay off the PDF so page 2 stays scannable.
-        for name in ("Server Migration & DR Cutover", "Internal Web Apps & Support Portal"):
+        for name in ("Infrastructure & Disaster Recovery", "Python Automation & Estate Reduction", "CI/CD & Release Engineering"):
             assert name not in blob, f"'{name}' should be website-only, not in the PDF"
 
     def test_website_retains_all_six_programs(self):
@@ -383,12 +383,12 @@ class TestPdfContactLinks:
 
         assert targets, "expected clickable link annotations in the PDF"
         for uri in targets:
-            assert re.sub(r"^https?://", "", uri).rstrip("/") in blob
+            assert re.sub(r"^(https?://|mailto:)", "", uri).rstrip("/") in blob
 
 
 class TestSelectedOpenSourceProjects:
     EXPECTED_PROJECTS = {
-        "Multi-Agent Engineering Library",
+        "HowlPlane",
         "AI Router",
         "HowlFrame",
         "Baseball Optimizer",
@@ -434,7 +434,7 @@ class TestSelectedOpenSourceProjects:
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
         blob = "\n".join(pages)
-        assert "Multi-Agent Engineering Library" in blob
+        assert "HowlPlane" in blob
         assert "RedrawUS" not in blob
         assert "Password Arena" not in blob
 
@@ -517,14 +517,18 @@ class TestPdfLayout:
         pages = _extract_pdf_pages(cfg, tmp_path)
         assert len(pages) == 2
 
-    def test_engineering_highlights_carry_into_page_two(self, tmp_path):
-        # The strongest highlight (CI/CD) lands on page 1 under the experience
-        # block; the rest continue on page 2 under a "(Continued)" heading, so no
-        # highlight header is ever orphaned from its bullets.
+    def test_engineering_highlights_stay_together_on_page_two(self, tmp_path):
+        # Page 1 establishes employment and expertise; page 2 supplies software,
+        # security, and reliability evidence without repeating the delivery story.
+        # Each highlight header must stay with its bullets.
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
-        assert "SELECTED ENGINEERING HIGHLIGHTS" in pages[0].upper()
-        assert pages[1].upper().lstrip().startswith("SELECTED ENGINEERING HIGHLIGHTS (CONTINUED)")
+        assert "SELECTED ENGINEERING HIGHLIGHTS" not in pages[0].upper()
+        assert pages[1].upper().lstrip().startswith("SELECTED ENGINEERING HIGHLIGHTS")
+        normalized = " ".join(pages[1].split())
+        for highlight in cfg["pdfEngineeringHighlights"]:
+            assert highlight["name"] in pages[1]
+            assert all(bullet in normalized for bullet in highlight["bullets"])
 
     def test_page_one_has_summary_expertise_and_experience(self, tmp_path):
         cfg = load_config()

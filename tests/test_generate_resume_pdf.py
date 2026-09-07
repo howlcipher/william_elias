@@ -1,8 +1,7 @@
-import json
 from pathlib import Path
 import pytest
 
-from scripts.generate_resume_pdf import ResumePDF, build, load_config, validate_config, SITE_DIR
+from scripts.generate_resume_pdf import ResumePDF, build, load_config, validate_config
 
 
 class TestLoadConfig:
@@ -19,8 +18,6 @@ class TestLoadConfig:
         assert cfg["personal"]["name"] == "William Elias"
 
 
-
-
 class TestOrphanPreventionLogic:
     @pytest.fixture
     def pdf(self):
@@ -32,7 +29,7 @@ class TestOrphanPreventionLogic:
         """Verify bullet_height returns height for a single-line bullet (13pt per line)."""
         text = "Short achievement line."
         height = pdf.bullet_height(text)
-        assert height == 11.5
+        assert height == 13
 
     def test_bullet_height_multi_line(self, pdf: ResumePDF):
         """Verify bullet_height calculates wrapping line height for long text."""
@@ -44,8 +41,8 @@ class TestOrphanPreventionLogic:
         )
         height = pdf.bullet_height(long_text)
         # Should wrap into multiple lines (e.g. 3 lines = 39pt)
-        assert height > 11.5
-        assert height % 11.5 == 0
+        assert height > 13
+        assert height % 13 == 0
 
     def test_bullet_height_custom_indent(self, pdf: ResumePDF):
         """Verify modifying indent adjusts available width and resulting height."""
@@ -88,7 +85,7 @@ class TestValidateConfig:
     def test_validate_config_success(self):
         cfg = load_config()
         validate_config(cfg)
-        
+
     @pytest.mark.parametrize("key", ["skills", "selectedEngineeringPrograms", "pdfEngineeringHighlights"])
     def test_validate_config_missing_field(self, key):
         cfg = load_config()
@@ -101,7 +98,7 @@ class TestValidateConfig:
         cfg["pdfEngineeringHighlights"][0]["bullets"] = []
         with pytest.raises(ValueError, match=r"'pdfEngineeringHighlights\[0\].bullets' must be a non-empty array"):
             validate_config(cfg)
-            
+
     def test_validate_config_bad_url(self):
         cfg = load_config()
         cfg["personal"]["linkedin"] = "ftp://linkedin.com"
@@ -114,7 +111,7 @@ class TestValidateConfig:
         with pytest.raises(ValueError, match="must be an array"):
             validate_config(cfg)
 
-    @pytest.mark.parametrize("field", ["name", "phone", "email", "tagline"])
+    @pytest.mark.parametrize("field", ["name", "email", "tagline"])
     def test_validate_config_missing_personal_field(self, field):
         cfg = load_config()
         del cfg["personal"][field]

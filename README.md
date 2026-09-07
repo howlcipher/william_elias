@@ -8,9 +8,9 @@ Open to U.S. Remote Opportunities
 
 | | |
 |---|---|
-| **~60** | Applications in CI/CD standardization scope |
-| **56** | Build/release definitions created across 28 applications |
+| **~60** | Applications in delivery standardization scope |
 | **100+** | Repositories credential-remediated |
+| **300+** | Unused legacy applications retired |
 
 ---
 
@@ -20,15 +20,19 @@ This is the source for the resume website above: a professional, modern, and hig
 
 ## Deployment & Architecture
 - **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
-- **Generated Assets**: The static `config.js` used by the browser, the SEO/OG/Twitter meta tags, canonical link, JSON-LD structured data, and pre-rendered body content in `index.html`, `robots.txt`, `sitemap.xml`, and the downloadable `William_Elias_Resume.pdf` are all generated from `resume.json` via Python scripts. The generator paginates dynamically (measuring each block's height before placing it) and is tuned to keep the resume to two pages.
+- **Generated Assets**: Python scripts generate `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, `preview.jpg`, and `William_Elias_Resume.pdf` from `resume.json`. `scripts/build_html.py` reads the source layout in `scripts/site_template.html` and generates body content, metadata, structured data, and the 1200 × 630 social preview using the existing portrait. Edit the template for structural HTML changes; never use the generated page as the template. The PDF retains 10-point body text, clickable links, and all three engineering highlights together on page two.
 - **Website vs. PDF**: The two artifacts are deliberately different. The website shows breadth; the PDF is selective. `experience` renders as "Professional Experience" while `additionalExperience` gets its own compressed "Earlier Experience" section further down the PDF. `selectedEngineeringPrograms` (six entries) is **website-only**; the PDF instead renders `pdfEngineeringHighlights`, a curated three-entry condensation, under "Selected Engineering Highlights". All `projects` appear on the website, but only those with `pdfInclude: true` reach the PDF's "Selected Open-Source Engineering" section. Core Expertise shows every tag on the website and the leading `PDF_SKILL_TAG_LIMIT` tags per category in the PDF, so tag order in `resume.json` matters; a skill category can also carry `pdfInclude: false` to stay website-only entirely (the same idiom, applied to `skills` instead of `projects`), which is how the breadth-only "Web Development" and "Additional Programming Foundations" categories stay off the PDF's page budget while still showing on the site.
+- **Experience Qualifiers**: Website skill cards show `skills[].context`. Optional `skills[].pdfContext` is a non-empty string rendered in parentheses beside the PDF category, before its tags. Keep it compact: AI tooling is qualified as "Internal tools & projects" and additional hands-on technologies as "Projects & container-host proof of concept". Omit the field when no extra qualifier is needed; do not substitute project or proof-of-concept work for professional production experience. GitHub Actions remains explicitly project experience in its tag.
+- **Section Order**: Hero → metrics → About → Engineering Impact → Professional Experience (including Earlier Experience) → Open Source → Core Expertise → Education → Contact.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
 - **CI/CD**: GitHub Actions verify tests and ensure that the generated assets are fresh, but CI does not mutate the repository or push commits.
 
 ## Features
 - **Config-Driven**: Easily update your experience, skills, and contact info via a single `resume.json` file. No need to touch HTML!
+- **Engineering Impact**: Six professional programs lead with outcomes; native expandable "Implementation & validation" disclosures retain detailed evidence, validation counts, and rollout caveats. They work with keyboard controls and without JavaScript.
 - **Dark/Light Mode**: User preference is stored in LocalStorage.
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
+- **Readable Role Title**: A dedicated dark-theme text color keeps the small mobile role title above 4.5:1 contrast while retaining the existing decorative accent colors.
 - **Mobile Responsive**: Custom hamburger menu and flexible layout, including a hero photo that reflows between the tagline and contact actions on narrow viewports instead of trailing the whole hero.
 - **Print/PDF Download**: Embedded download link for the PDF version.
 - **Persistent Resume CTA**: A distinct "Resume" action lives in both the desktop navbar and the mobile menu, so it's reachable after scrolling past the hero.
@@ -40,7 +44,7 @@ This is the source for the resume website above: a professional, modern, and hig
 
 ## How to Update Your Information
 
-All your information is stored in the canonical `resume.json` file. Do not manually edit `config.js` or the SEO meta tags/pre-rendered content in `index.html`.
+All your information is stored in the canonical `resume.json` file. Do not manually edit generated artifacts. Use `scripts/site_template.html` for layout changes and `style.css` / `script.js` for styling and interactions.
 
 1. Open `resume.json` in any text editor and update your information.
 2. Regenerate the derived files by running the build sequence:
@@ -51,7 +55,7 @@ All your information is stored in the canonical `resume.json` file. Do not manua
    ```
    *(Note: This requires development dependencies, see below)*
 3. Verify your changes and run the automated tests.
-4. Commit all changes (including the updated `resume.json`, `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, and `William_Elias_Resume.pdf`) and push to `main`. CI will verify that the generated files are up to date before changes are fully integrated.
+4. Update `README.md` and `change_log.md`, review the diff, and make a signed conventional commit including all generated outputs. Publishing to `main` is a separate deployment action. CI checks freshness without modifying or committing files.
 
 ### Adding a New Job
 Find the `experience` array in `resume.json` and add a new object to the top of the list:
@@ -69,7 +73,7 @@ Find the `experience` array in `resume.json` and add a new object to the top of 
 }
 ```
 
-Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered on the website as "Selected Engineering Programs" using each entry's `bullets` array. That array is website-only: to change what the PDF shows, edit `pdfEngineeringHighlights` instead, keeping every claim traceable to a program in `selectedEngineeringPrograms` (a test enforces that any number in a PDF highlight also appears there). Open-source/personal work lives in `projects` (rendered on the website as "Selected Open-Source Engineering"; entries with `pdfInclude: true` are also included in that PDF section, subject to the two-page limit). The AI capability stack shown on the website comes from `aiEngineeringCapabilities`.
+Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered as "Engineering Impact" using each entry's `bullets` and optional expandable `details`. To change the PDF's curated evidence, edit `pdfEngineeringHighlights`. Each headline metric and PDF highlight identifies its `sourceProgram`; tests verify numerical claims against that specific program. Preserve scope, dry-run, pending-approval, co-led, and contributed qualifications. Open-source/personal work lives in `projects`; the PDF currently selects HowlPlane and Baseball Optimizer via `pdfInclude: true`. The website AI capability stack comes from `aiEngineeringCapabilities`.
 
 ## Local Development & Validation
 
@@ -78,7 +82,9 @@ Since this is a static site, you can view it locally by simply double-clicking `
 Before committing your changes, you should validate them end-to-end to ensure config validity, fresh generated files, and passing tests. Run the following sequence in your terminal from the project root:
 
 ```bash
-# 1. Install development dependencies (only needed once)
+# 1. Use Python 3.12, matching CI, and install pinned dependencies
+python3.12 -m venv /tmp/william-elias-venv
+source /tmp/william-elias-venv/bin/activate
 pip install -r requirements-dev.txt
 playwright install chromium --with-deps
 
@@ -89,4 +95,6 @@ python scripts/build_config.py && python scripts/build_html.py && python scripts
 PYTHONPATH=. pytest tests/
 ```
 
-If the tests pass, your changes are ready to commit and push.
+The suite builds all six artifacts in two independent temporary directories containing only source inputs. It checks both checked-in freshness and byte-for-byte repeatability, including PDF and social preview, without rewriting the working tree. Navigation tests wait up to five seconds for the requested scroll position and active state while preserving smooth scrolling.
+
+Also render and inspect both PDF pages and review the website at 320, 390, 810, 1024, and 1440 pixels across dark, light, and both contrast modes before publishing. The full suite uses Chromium; other browser engines are not covered. See [the optimization handoff](documentation/portfolio_optimization_handoff.md) for the latest validation evidence, reviewer perspectives, environment limitations, and deferred work.
