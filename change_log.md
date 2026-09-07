@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-09-07 — Final Polish and Metadata Alignment
+
+Aligned public GitHub repository metadata with canonical portfolio positioning and polished Engineering Impact card visual layout.
+
+### Changed
+
+- Aligned GitHub repository About description to: "Software, DevOps & Automation Engineer portfolio — Python/.NET software, automation, CI/CD, production reliability, security, and AI-enabled engineering."
+- Curated repository topics to a balanced 15-topic set: added `software-engineering`, `automation`, `fastapi`, `production-reliability`, `security-automation`, `ai-engineering`; retained core topics (`devops`, `python`, `dotnet`, `azure-devops`, `cicd`, `platform-engineering`, `production-engineering`, `developer-productivity`, `agentic-ai`); removed narrow implementation-detail topics (`ollama`, `rag`, `release-engineering`, `github-actions`).
+- Polished Engineering Impact cards in `style.css` so that in two-column desktop layouts, cards in each row have equal height and pixel-aligned "Implementation & validation" disclosure rows, with tags anchored cleanly above details.
+- Added dynamic `:has(details[open])` rule to allow expanded cards to grow naturally without forcing artificial dead space on sibling cards, while maintaining natural stacking on mobile viewports.
+
+### Added
+
+- Automated browser tests in `tests/test_browser.py` verifying two-column equal-height card alignment, pixel-aligned disclosures, expansion dynamics without sibling dead space, and clean single-column mobile layout.
+
 ## 2026-09-07
 
 Finished the inherited portfolio optimization with evidence-led software, automation, delivery, production, and security positioning and a synchronized two-page résumé.
