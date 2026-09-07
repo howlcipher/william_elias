@@ -504,3 +504,64 @@ def test_all_project_links_open_the_canonical_destination(page: Page, test_url: 
         popup = popup_info.value
         expect(popup).to_have_url(project["link"])
         popup.close()
+
+
+def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, test_url: str):
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(test_url)
+    page.evaluate("document.fonts.ready")
+
+    cards = page.locator(".program-card").all()
+    assert len(cards) == 6
+
+    # Verify each pair in 2-column layout has equal height and aligned disclosure rows
+    for i in range(0, 6, 2):
+        box_a = cards[i].bounding_box()
+        box_b = cards[i + 1].bounding_box()
+        assert abs(box_a["height"] - box_b["height"]) <= 1.5, (
+            f"Row {i // 2 + 1} cards height mismatch: {box_a['height']} vs {box_b['height']}"
+        )
+
+        det_a = cards[i].locator(".program-details").bounding_box()
+        det_b = cards[i + 1].locator(".program-details").bounding_box()
+        assert abs(det_a["y"] - det_b["y"]) <= 1.5, (
+            f"Row {i // 2 + 1} details alignment mismatch: {det_a['y']} vs {det_b['y']}"
+        )
+
+    # Test expansion behavior: expanding card 1 does not stretch card 2 awkwardly
+    collapsed_card2_height = cards[1].bounding_box()["height"]
+    cards[0].locator("summary").click()
+    expect(cards[0].locator(".program-details")).to_have_attribute("open", "")
+
+    expanded_card1_box = cards[0].bounding_box()
+    card2_box_after_open = cards[1].bounding_box()
+
+    assert expanded_card1_box["height"] > collapsed_card2_height + 100
+    assert abs(card2_box_after_open["height"] - collapsed_card2_height) <= 2.0, (
+        f"Card 2 should retain natural collapsed height when sibling expands, got {card2_box_after_open['height']}"
+    )
+
+    # Re-collapse and verify equal-height returns
+    cards[0].locator("summary").click()
+    expect(cards[0].locator(".program-details")).not_to_have_attribute("open", "")
+    box_a_rec = cards[0].bounding_box()
+    box_b_rec = cards[1].bounding_box()
+    assert abs(box_a_rec["height"] - box_b_rec["height"]) <= 1.5
+
+
+def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(test_url)
+    page.evaluate("document.fonts.ready")
+
+    cards = page.locator(".program-card").all()
+    assert len(cards) == 6
+
+    prev_bottom = 0
+    grid_box = page.locator(".programs-grid").bounding_box()
+    for card in cards:
+        box = card.bounding_box()
+        assert box["y"] >= prev_bottom - 1  # Stacking vertically
+        assert box["x"] >= grid_box["x"] - 1  # No horizontal overflow
+        assert box["x"] + box["width"] <= grid_box["x"] + grid_box["width"] + 1
+        prev_bottom = box["y"] + box["height"]
