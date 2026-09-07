@@ -369,7 +369,7 @@ def test_resume_action_never_marked_as_active_section(page: Page, test_url: str)
     page.set_viewport_size({"width": 1440, "height": 900})
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
-    page.evaluate("() => document.getElementById('education').scrollIntoView({block: 'start'})")
+    page.evaluate("() => document.getElementById('education').scrollIntoView({block: 'start', behavior: 'instant'})")
     wait_for_section(page, "education")
 
     resume_btn = page.locator(".nav-resume-btn")
