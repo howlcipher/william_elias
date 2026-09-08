@@ -85,7 +85,7 @@ def test_general_pdf_balances_software_delivery_and_production(tmp_path):
     text = " ".join(" ".join(p.extract_text().split()) for p in reader.pages)
     assert len(reader.pages) == 2
     assert text.count("56 Azure DevOps") == 1
-    for term in ("28 applications", "27/28", "25/28", "dry-run", "pending", "six latent", "FastAPI", "ASP.NET Core", "SQL Server", "100+ repositories", "300+", "156", "KQL", "Key Vault", "Co-led", "zero-downtime", "HowlPlane", "Baseball Optimizer"):
+    for term in ("28 applications", "27/28", "25/28", "dry-run", "six latent", "FastAPI", "ASP.NET Core", "SQL Server", "100+ repositories", "300+", "Blazor", "KQL", "BFG Repo-Cleaner", "Co-led", "zero-downtime", "HowlPlane", "RedrawUS"):
         assert term in text, term
     assert "AI Router" not in text
     assert text.index("PROFESSIONAL EXPERIENCE") < text.index("CORE EXPERTISE")
