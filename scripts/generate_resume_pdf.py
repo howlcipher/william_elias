@@ -14,7 +14,9 @@ SITE_DIR = Path(__file__).resolve().parent.parent
 MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
 # Cap the tag list rendered per Core Expertise category. The website shows every
 # tag from resume.json; the PDF shows the curated leading slice, so tag order in
-# resume.json determines what a recruiter sees on page 1. A skill category can also
+# resume.json determines what a recruiter sees on page 1. Optional pdfTags select
+# a concise subset explicitly when the broader website tag order is unsuitable.
+# A skill category can also
 # carry "pdfInclude": false to stay website-only entirely (same idiom as
 # projects[].pdfInclude), keeping breadth-only categories off the PDF's page budget.
 PDF_SKILL_TAG_LIMIT = 6
@@ -60,6 +62,16 @@ def validate_config(config: dict):
                 raise ValueError(
                     f"Validation failed: 'skills[{i}].pdfContext' "
                     "must be a non-empty string when provided"
+                )
+        if "pdfTags" in skill:
+            tags = skill["pdfTags"]
+            if (not isinstance(tags, list) or not tags
+                    or any(not isinstance(tag, str) or tag not in skill["tags"]
+                           for tag in tags)
+                    or len(set(tags)) != len(tags)):
+                raise ValueError(
+                    f"Validation failed: 'skills[{i}].pdfTags' "
+                    "must be a non-empty unique subset of tags"
                 )
 
     for i, job in enumerate(config.get("experience", [])):
@@ -257,7 +269,7 @@ def build(config: dict, out_path: Path):
         pdf.set_font("Helvetica", "B", 10)
         pdf.write(13, ': ')
         pdf.set_font("Helvetica", "", 10)
-        pdf.write(13, ", ".join(s["tags"][:PDF_SKILL_TAG_LIMIT]))
+        pdf.write(13, ", ".join(s.get("pdfTags", s["tags"][:PDF_SKILL_TAG_LIMIT])))
         pdf.ln(13)
 
     # Sourced from pdfEngineeringHighlights, a curated 3-entry condensation of the

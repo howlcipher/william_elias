@@ -506,9 +506,14 @@ def test_all_project_links_open_the_canonical_destination(page: Page, test_url: 
         popup.close()
 
 
-def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, test_url: str):
-    page.set_viewport_size({"width": 1440, "height": 900})
+@pytest.mark.parametrize("width", [1024, 1440])
+@pytest.mark.parametrize("theme", ["dark", "light", "contrast-dark", "contrast-light"])
+def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, test_url: str, width, theme):
+    page.set_viewport_size({"width": width, "height": 900})
+    page.emulate_media(color_scheme="light" if theme.endswith("light") else "dark")
     page.goto(test_url)
+    if theme.startswith("contrast"):
+        page.locator("#colorblind-toggle").click()
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()

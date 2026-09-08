@@ -43,20 +43,20 @@
       "Azure Monitor",
       "Application Insights",
       "KQL",
-      "Azure Key Vault",
       "Observability",
       "Git",
-      "GitHub Actions",
       "AI-Enabled Engineering",
-      "MCP",
       "Cybersecurity",
-      "Go",
-      "JavaScript",
-      "Platform Engineering"
+      "Platform Engineering",
+      "Blazor",
+      "Auth0",
+      "OAuth",
+      "OpenID Connect",
+      "IAM"
     ]
   },
-  "about": "I work where software and operations overlap. Across 10+ years in software delivery, production operations, infrastructure, and networking, I've built tools and automation that make day-to-day engineering work easier and systems safer to operate.\n\nThat work includes Python/FastAPI dashboards, an ASP.NET Core support portal, reusable delivery automation, and production releases and database migrations. I've added Application Insights telemetry and KQL diagnostics, remediated repository credentials, built Key Vault migration and rollback tooling, and developed internal AI-assisted knowledge and incident-triage tools with engineer-review controls.\n\nI'm looking for U.S. remote roles in software/backend engineering, DevOps, automation, platform and developer productivity, or production reliability, including AI-enabled engineering. The common thread: build useful software, automate work that shouldn't be manual, and make production systems easier to operate.",
-  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python/FastAPI tools and C#/.NET applications, automates delivery and operational workflows, and supports production releases and database migrations. Brings hands-on troubleshooting, observability, security remediation, and internal developer tooling, including AI-assisted engineering with human review.",
+  "about": "I work where software and operations overlap. Across 10+ years in software delivery, production operations, infrastructure, and networking, I've built tools and automation that make day-to-day engineering work easier and systems safer to operate.\n\nThat work includes Python/FastAPI dashboards, C#/.NET applications and a .NET 8 Blazor internal portal, delivery automation, and production releases and database migrations. I've added Application Insights telemetry and KQL diagnostics, remediated credentials in source code and Git history, troubleshot Auth0 authentication flows, and built AI-assisted knowledge and incident-triage tools with engineer-review controls.\n\nI'm looking for U.S. remote roles in software/backend engineering, DevOps, automation, platform and developer productivity, or production reliability, including AI-enabled engineering. The common thread: build useful software, automate work that shouldn't be manual, and make production systems easier to operate.",
+  "summary": "Software, DevOps, and automation engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python/FastAPI tools and C#/.NET applications with Blazor, automates delivery and operational workflows, and supports production releases and database migrations. Brings hands-on troubleshooting, observability, credential remediation, Auth0 identity troubleshooting, and internal developer tooling, including AI-assisted engineering with human review.",
   "stats": [
     {
       "value": "~60",
@@ -66,7 +66,7 @@
     {
       "value": "100+",
       "label": "Repositories credential-remediated",
-      "sourceProgram": "Security & Secrets Remediation"
+      "sourceProgram": "Security & Credential Remediation"
     },
     {
       "value": "300+",
@@ -78,8 +78,9 @@
     {
       "category": "Software & Backend",
       "icon": "fa-code",
-      "context": "Professional Python and .NET application development",
-      "tags": ["Python", "FastAPI", "C#", ".NET", "ASP.NET Core", "SQL Server", "REST APIs", "SQLite"]
+      "context": "Professional Python/.NET application development; Blazor internal tooling and frontend project experience",
+      "tags": ["Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "SQL Server", "REST APIs", "SQLite", "JavaScript", "HTML", "CSS"],
+      "pdfTags": ["Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "SQL Server", "REST APIs"]
     },
     {
       "category": "DevOps & Delivery",
@@ -91,7 +92,9 @@
       "category": "Automation",
       "icon": "fa-bolt",
       "context": "Python and PowerShell professionally; Go in projects",
-      "tags": ["Python", "PowerShell", "REST APIs", "Workflow Automation", "Operational Tooling", "Repo Automation", "Go"]
+      "tags": ["Python", "PowerShell", "REST APIs", "Workflow Automation", "Operational Tooling", "Repo Automation", "Go"],
+      "pdfContext": "Python/PowerShell professionally; Go in projects",
+      "pdfTags": ["Python", "PowerShell", "Workflow Automation", "Operational Tooling", "Go"]
     },
     {
       "category": "Production & Reliability",
@@ -108,8 +111,8 @@
     {
       "category": "Security & Identity",
       "icon": "fa-shield-halved",
-      "context": "Professional remediation, identity troubleshooting and safeguards",
-      "tags": ["Azure Key Vault", "Managed Identity", "OAuth / IAM", "Secrets Remediation", "PII Safeguards", "Audit Controls"]
+      "context": "Professional credential remediation, Auth0 identity troubleshooting, and security safeguards",
+      "tags": ["Auth0", "OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"]
     },
     {
       "category": "AI-Enabled Engineering",
@@ -119,38 +122,24 @@
       "tags": ["LLM APIs", "MCP", "RAG", "Agent Workflows", "Human Review", "Engineering Knowledge Systems"]
     },
     {
-      "category": "Web Development",
-      "icon": "fa-globe",
-      "context": "Internal Razor Pages tooling; frontend project experience",
-      "pdfInclude": false,
-      "tags": ["JavaScript", "HTML", "CSS", "Razor Pages"]
-    },
-    {
-      "category": "Additional Hands-On Technologies",
-      "icon": "fa-cubes",
-      "context": "Project packaging and container-host proof of concept, not production orchestration",
-      "pdfContext": "Projects & container-host proof of concept",
-      "tags": ["Docker", "Docker Compose", "Helm", "Rancher Desktop", "WSL2"]
-    },
-    {
-      "category": "Additional Programming Foundations",
+      "category": "Additional Technical Foundations",
       "icon": "fa-graduation-cap",
-      "context": "Coursework, not professional production experience",
+      "context": "Coursework and hands-on academic/project experience, not professional production ownership",
       "pdfInclude": false,
-      "tags": ["Java"]
+      "tags": ["Java", "Kotlin", "Android Development", "Digital Forensics", "FTK Imager", "EnCase", "Wireshark"]
     }
   ],
   "experience": [
     {
       "date": "Feb 2023 - Present",
-      "title": "Production Support Engineer - DevOps & Automation",
+      "title": "Production Support Engineer | DevOps & Automation",
       "company": "Stellantis Financial Services US",
-      "location": "Auburn Hills, MI · Remote",
+      "location": "Auburn Hills, MI · Hybrid",
       "achievements": [
-        "Built Python automation, FastAPI dashboards, and an ASP.NET Core support portal for operational workflows and engineering visibility; scripted retirement of 300+ unused legacy applications.",
-        "Designed delivery standardization for a ~60-application .NET estate: created 56 Azure DevOps build/release definitions across 28 applications and reusable automation. Verified 27/28 builds, dry-run validated 25/28 deployment paths, and identified six latent delivery defects before rollout; first deployment pending approval.",
-        "Lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot application, API, SQL Server, OAuth/IAM, configuration, and network issues.",
-        "Remediated exposed credentials across 100+ repositories, including Git history, and built Key Vault migration/rollback tooling with integrity validation and credential/PII safeguards.",
+        "Built Python automation, FastAPI dashboards, and a .NET 8 Blazor internal portal for operational workflows and engineering visibility; scripted retirement of 300+ unused legacy applications.",
+        "Designed delivery standardization for a ~60-application .NET estate: created 56 Azure DevOps build/release definitions across 28 applications and reusable automation. Verified 27/28 builds, dry-run validated 25/28 deployment paths, and identified six latent delivery defects during pre-deployment validation.",
+        "Lead weekly production releases, database migrations, and SLA-driven incident triage; troubleshoot application, API, SQL Server, Auth0, OAuth/OIDC, configuration, and network issues.",
+        "Built Python tooling to scan source code and Git history for exposed credentials; used BFG Repo-Cleaner to scrub historical records across 100+ repositories, completing the remediation.",
         "Co-led production/test server migration and DR work across Windows Server, IIS, Active Directory, firewall, database, and load-balancer layers; helped coordinate a zero-downtime cutover.",
         "Built AI-assisted knowledge and incident-triage tooling that synchronizes Jira, Confluence, and SharePoint context with credential, PII, provenance, and engineer-review controls."
       ]
@@ -172,11 +161,10 @@
       "name": "CI/CD & Release Engineering",
       "bullets": [
         "Built a reusable .NET delivery model for a ~60-application estate across five servers: repository-to-server inventory, a definition generator, templates, artifact checks, and environment-readiness guardrails.",
-        "Validated builds and deployment paths and found six latent delivery defects before rollout. First deployment remains pending approval."
+        "Validated builds and deployment paths and identified six latent delivery defects during pre-deployment validation."
       ],
       "details": [
         "Created 56 Azure DevOps build/release definitions (28 build + 28 Classic Release) across 28 applications. Executed all 28 builds: 27 verified green; dry-run deployment-path validation passed for 25 of 28 on the live deployment agent.",
-        "Zero applications are deployed through the new framework. Builds are manually triggered; releases above DEV require approval, pending go/no-go on the first real deployment.",
         "Validation exposed application-pool identity convergence risk, missing-artifact assumptions before a destructive robocopy /MIR step, and false completion states from unverified builds.",
         "Organized 157 Azure DevOps definitions into a new folder convention, with 95 legacy definitions inventoried/classified. Built reusable Python/.NET templates and a WSL2 + Rancher Desktop container-host proof of concept behind IIS ARR."
       ],
@@ -185,26 +173,25 @@
     {
       "name": "Internal Tools & Developer Enablement",
       "bullets": [
-        "Expanded a query extractor into a modular ASP.NET Core support portal with per-module access policies, database-backed workflows, and a permanently retained SOX audit trail.",
-        "Added DBA approve-only deployment scripts, live-object diffing, a pre-CAB dashboard, and service-desk request tracking; covered by 156 automated tests."
+        "Expanded an internal query extractor into a modular .NET 8 Blazor Web App using Interactive Server, with per-module access policies, database-backed workflows, and a permanently retained SOX audit trail.",
+        "Added DBA approve-only deployment scripts, live-object diffing, pre-CAB visibility, and service-desk request tracking."
       ],
       "details": [
-        "Built Python automation and FastAPI dashboards for operational workflows and engineering visibility.",
+        "Built separate Python automation and FastAPI dashboards for operational workflows and engineering visibility.",
         "Built internal AI-assisted knowledge and incident-triage tooling integrating Jira, Confluence, and SharePoint, with credential, PII, provenance, and engineer-review controls."
       ],
-      "technology": ["ASP.NET Core 8", "Razor Pages", "C#", "SQL Server", "SQLite", "xUnit", "FastAPI"]
+      "technology": ["C#", ".NET 8", "Blazor", "ASP.NET Core", "SQL Server", "SQLite"]
     },
     {
-      "name": "Security & Secrets Remediation",
+      "name": "Security & Credential Remediation",
       "bullets": [
-        "Built audit and Git-history remediation tooling that removed exposed credentials from 100+ repositories, including historical branches.",
-        "Built a .NET 8 Key Vault migration utility with hash-only discovery, classification, integrity-verified rollback, and 62 automated tests."
+        "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories.",
+        "A measured work scan processed 2,832 files and identified 67 distinct secrets in approximately 25 seconds."
       ],
       "details": [
-        "A measured server run scanned 2,832 files and identified 67 distinct secrets in 25 seconds.",
-        "Self-review caught and corrected a migration-path integrity flaw before rollout."
+        "Credential remediation across those repositories is complete; exposed credentials were scrubbed from historical Git records."
       ],
-      "technology": ["C#", "Azure Key Vault", "Managed Identity", "xUnit", "Python", "PowerShell"]
+      "technology": ["Python", "Git", "BFG Repo-Cleaner", "Credential Remediation", "Git History Remediation"]
     },
     {
       "name": "Production Reliability & Observability",
@@ -244,17 +231,17 @@
       "name": "Internal Tools & Developer Enablement",
       "sourceProgram": "Internal Tools & Developer Enablement",
       "bullets": [
-        "Expanded an internal query extractor into a modular ASP.NET Core portal with per-module access policies and a retained SOX audit trail; added DBA approve-only scripts, live-object diffing, and service-desk request tracking, covered by 156 automated tests."
+        "Expanded a query extractor into a modular .NET 8 Blazor Web App using Interactive Server, with per-module access policies, database-backed workflows, and a retained SOX audit trail. Added DBA approve-only scripts, live-object diffing, pre-CAB visibility, and service-desk request tracking."
       ],
-      "technology": ["C#", "Razor Pages", "SQL Server", "SQLite", "xUnit"]
+      "technology": ["C#", ".NET 8", "Blazor", "ASP.NET Core", "SQL Server", "SQLite"]
     },
     {
-      "name": "Security & Rollback Safety",
-      "sourceProgram": "Security & Secrets Remediation",
+      "name": "Security & Credential Remediation",
+      "sourceProgram": "Security & Credential Remediation",
       "bullets": [
-        "Built a .NET 8 utility for hash-only secret discovery, classification, Azure Key Vault migration, and integrity-verified rollback, backed by 62 automated tests. Caught and corrected a migration-path integrity flaw before rollout."
+        "Built Python tooling to scan source code and Git history for exposed credentials; used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured work scan processed 2,832 files and identified 67 distinct secrets in approximately 25 seconds."
       ],
-      "technology": ["C#", "Azure Key Vault", "Managed Identity", "xUnit"]
+      "technology": ["Python", "Git", "BFG Repo-Cleaner"]
     },
     {
       "name": "Production Reliability & Observability",
@@ -268,19 +255,19 @@
   "projects": [
     {
       "name": "HowlPlane",
-      "subtitle": "AI engineering control plane; formerly Multi-Agent Engineering Library",
+      "subtitle": "AI Engineering Control Plane",
       "pdfInclude": true,
       "link": "https://github.com/howlcipher/howlplane",
       "highlights": [
-        "Evolved a shared agent knowledge library into a Python/Go engineering control plane with task routing, review reconciliation, and deterministic verification.",
-        "Built structured evidence recording and human-approval boundaries for consequential actions, alongside shared agent context and GitHub Actions security checks."
+        "Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and runs deterministic verification.",
+        "Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared project context and CI/security checks."
       ],
       "tags": ["Python", "Go", "GitHub Actions", "MCP", "Developer Tooling"]
     },
     {
       "name": "Baseball Optimizer",
       "subtitle": "Rust backend for lineup and roster optimization",
-      "pdfInclude": true,
+      "pdfInclude": false,
       "link": "https://github.com/howlcipher/baseball_optimizer",
       "highlights": [
         "Migrated an optimization backend from Python to Rust/Axum with a SQLite-backed REST API, packaged with Docker and Docker Compose.",
@@ -311,13 +298,14 @@
     },
     {
       "name": "RedrawUS",
-      "subtitle": "Geospatial analysis and visualization platform",
+      "subtitle": "Geospatial Analysis & Visualization Platform",
       "link": "https://github.com/howlcipher/redistricting-map",
       "highlights": [
-        "Built a multi-state geospatial pipeline with Python/R simulation tooling and an interactive JavaScript map using browser caching and Web Workers.",
-        "Processes and validates geographic datasets with GeoPandas, Shapely, GerryChain, R tooling, and Playwright/Vitest/pytest tests."
+        "Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent browser caching, and Web Workers.",
+        "Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests for data processing and application behavior."
       ],
-      "tags": ["Python", "R", "Geospatial", "JavaScript", "Playwright", "Data Engineering"]
+      "tags": ["Python", "R", "Geospatial", "JavaScript", "Playwright", "Data Engineering"],
+      "pdfInclude": true
     },
     {
       "name": "Password Arena",

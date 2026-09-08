@@ -50,7 +50,7 @@ class TestHeadlineAndPositioning:
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
         stellantis = next(j for j in cfg["experience"] if "Stellantis Financial Services" in j["company"])
-        assert stellantis["title"] == "Production Support Engineer - DevOps & Automation"
+        assert stellantis["title"] == "Production Support Engineer | DevOps & Automation"
 
     def test_remote_availability_present(self):
         cfg = load_config()
@@ -80,7 +80,9 @@ class TestKeyMetrics:
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
         assert "~60-application .NET estate" in accomplishment
-        assert "first deployment pending approval" in accomplishment
+        assert "27/28" in accomplishment
+        assert "25/28" in accomplishment
+        assert "six latent" in accomplishment
 
     def test_summary_does_not_claim_100_plus_pipelines(self):
         cfg = load_config()
@@ -137,7 +139,8 @@ class TestKeyMetrics:
         )
         for phrase in banned_phrases:
             assert phrase not in blob, f"resume.json implies deployment via '{phrase}'"
-        assert "zero applications" in blob or "zero deployments" in blob
+        assert "zero applications" not in blob
+        assert "pending approval" not in blob
 
     def test_estate_organization_numbers_kept_separate_from_created_definitions(self):
         cfg = load_config()
@@ -168,21 +171,19 @@ class TestKeyMetrics:
         assert "27" in blob
         assert "25" in blob
         assert "six" in blob.lower()
-        assert "zero" in blob.lower()
+        assert "go/no-go" not in blob.lower()
 
 
 class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
         "Software & Backend",
-        "Web Development",
         "DevOps & Delivery",
         "Automation",
         "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
         "AI-Enabled Engineering",
-        "Additional Programming Foundations",
-        "Additional Hands-On Technologies",
+        "Additional Technical Foundations",
     }
 
     def test_curated_categories_present(self):
@@ -211,20 +212,20 @@ class TestCoreExpertiseCategories:
             assert core in combined
         assert "Java" not in combined
 
-    def test_web_development_category_has_frontend_basics(self):
+    def test_software_backend_category_has_merged_frontend_basics(self):
         cfg = load_config()
-        web = next(s for s in cfg["skills"] if s["category"] == "Web Development")
+        web = next(s for s in cfg["skills"] if s["category"] == "Software & Backend")
         for tag in ("JavaScript", "HTML", "CSS"):
             assert tag in web["tags"]
 
-    def test_additional_programming_foundations_represents_java_as_coursework(self):
+    def test_technical_foundations_represents_academic_experience(self):
         cfg = load_config()
         foundations = next(
-            s for s in cfg["skills"] if s["category"] == "Additional Programming Foundations"
+            s for s in cfg["skills"] if s["category"] == "Additional Technical Foundations"
         )
         assert "Java" in foundations["tags"]
-        # The non-professional framing has to live in the visible category name itself --
-        # render_skills() has no subtitle field to attach a caveat to.
+        assert "Coursework" in foundations["context"]
+        assert foundations["pdfInclude"] is False
         assert "Foundations" in foundations["category"]
         assert "Professional" not in foundations["category"]
 
@@ -232,13 +233,13 @@ class TestCoreExpertiseCategories:
         cfg = load_config()
         blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
         assert "Web Development" not in blob
-        assert "Additional Programming Foundations" not in blob
+        assert "Additional Technical Foundations" not in blob
 
 
 class TestSelectedEngineeringPrograms:
     EXPECTED_PROGRAMS = {
         "CI/CD & Release Engineering",
-        "Security & Secrets Remediation",
+        "Security & Credential Remediation",
         "Infrastructure & Disaster Recovery",
         "Internal Tools & Developer Enablement",
         "Production Reliability & Observability",
@@ -266,7 +267,7 @@ class TestPdfEngineeringHighlights:
 
     EXPECTED_HIGHLIGHTS = {
         "Internal Tools & Developer Enablement",
-        "Security & Rollback Safety",
+        "Security & Credential Remediation",
         "Production Reliability & Observability",
     }
 
@@ -435,7 +436,8 @@ class TestSelectedOpenSourceProjects:
         pages = _extract_pdf_pages(cfg, tmp_path)
         blob = "\n".join(pages)
         assert "HowlPlane" in blob
-        assert "RedrawUS" not in blob
+        assert "RedrawUS" in blob
+        assert "Baseball Optimizer" not in blob
         assert "Password Arena" not in blob
 
 
@@ -479,18 +481,16 @@ class TestNoUnsupportedClaims:
         for term in knows_about:
             assert "kubernetes" not in term.lower()
 
-    def test_helm_and_docker_framed_as_hands_on_project_technologies(self):
-        # Helm/Docker/Docker Compose/Rancher Desktop are framed as hands-on / project technologies.
+    def test_container_tools_stay_in_projects_and_qualified_poc_details(self):
         cfg = load_config()
-        hands_on = next(s for s in cfg["skills"] if "Hands-On" in s["category"])
-        assert "Docker" in hands_on["tags"]
-        assert "Docker Compose" in hands_on["tags"]
-        assert "Helm" in hands_on["tags"]
-        assert "Rancher Desktop" in hands_on["tags"]
-        # Ensure Docker and Helm are not placed beside core infrastructure experience
-        infra = next(s for s in cfg["skills"] if s["category"] == "Infrastructure & Application Operations")
-        assert "Docker" not in infra["tags"]
-        assert "Helm" not in infra["tags"]
+        skill_tags = {tag for s in cfg["skills"] for tag in s["tags"]}
+        assert not skill_tags & {"Docker", "Docker Compose", "Helm", "Rancher Desktop", "WSL2"}
+        baseball = next(p for p in cfg["projects"] if p["name"] == "Baseball Optimizer")
+        assert "Docker" in baseball["tags"]
+        assert "Docker Compose" in " ".join(baseball["highlights"])
+        cicd = cfg["selectedEngineeringPrograms"][0]
+        poc = next(t for t in cicd["details"] if "Rancher Desktop" in t)
+        assert "proof of concept" in poc
 
     def test_no_automated_identity_lifecycle_claim(self):
         cfg = load_config()

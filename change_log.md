@@ -48,3 +48,10 @@ Finished the inherited portfolio optimization with evidence-led software, automa
 The final Python 3.12 gate passed all 202 tests with warnings treated as errors. All six generated outputs passed isolated freshness and repeatability checks; both lint checks and whitespace validation passed.
 
 Final commands and results are recorded in `documentation/portfolio_optimization_evidence.json` and explained in `documentation/portfolio_optimization_handoff.md`. Reviewed both PDF pages and desktop/mobile screenshots in all four themes. LinkedIn presents a reCAPTCHA challenge; no link was confirmed broken. Local pinned Playwright uses its Ubuntu 24.04 Chromium fallback on the Ubuntu 26.04 host. Publication remains a separate action; this task does not push or deploy.
+## 2026-09-08
+
+### Factual correction publication
+
+* Corrected the canonical resume and portfolio content for the confirmed production role, location, technology scope, credential remediation work, authentication troubleshooting, and academic foundations.
+* Regenerated the website, metadata, PDF, and supporting assets from `resume.json`.
+* Added regression coverage for the corrected claims and the explicit PDF skill selections.

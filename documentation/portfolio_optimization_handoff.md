@@ -1,108 +1,80 @@
-# Portfolio optimization handoff
+# Portfolio factual-correction handoff
 
-The inherited portfolio optimization is implemented. The website retains broad software, DevOps, automation, production, and security positioning; the PDF remains a selective two-page companion. This document separates inherited work from the final corrections and records evidence and practical limits.
+This is the current-state handoff for the final factual correction and skills reconciliation. William's direct confirmation supersedes the earlier portfolio wording and tests. The errors were in the portfolio's description of his work, not evidence that the underlying work was incorrect. Previous commits remain in Git history.
 
-## 1. Scope and inherited state
+## Reconciled starting state
 
-Started on `main` at `07ac83e`, with 15 modified files, three untracked additions, and nothing staged. `git worktree list` showed only this checkout. Preserved the inherited title, three-paragraph About, independent metrics, Engineering Impact, source-specific claim tests, conservative employment language, selected project pair, static template, metadata, and visual identity. The initial targeted reproduction returned 63 passes and the two reported failures: stale README metrics and a premature navigation assertion.
+Started from clean, synchronized `main` at `0ef518a`, after fetching origin. Previous polish PR #9 was already merged. The prior design, native Engineering Impact disclosures, static HTML template, two-page PDF generator, and broad GitHub description/topics were present. No unrelated local changes existed. Work uses `fix/resume-factual-corrections`.
 
-## 2. Positioning and content hierarchy
+`resume.json` remains the canonical professional-content source. The headline remains **Software, DevOps & Automation Engineer**, supported by **Software • Automation • Delivery • Production Reliability**. AI remains one part of that identity. The About section retains three concise paragraphs and the existing layout and section order.
 
-The headline remains “Software, DevOps & Automation Engineer.” Software and automation evidence leads; official employment titles remain unchanged. Website order is Hero → metrics → About → Engineering Impact → Professional Experience → Open Source → Core Expertise → Education → Contact. Earlier Experience stays within Professional Experience on the website and has a compact separate PDF section.
+## Directly confirmed corrections
 
-## 3. Metrics and evidence provenance
-
-README now matches the canonical metrics: `~60` applications in delivery standardization scope, `100+` repositories credential-remediated, and `300+` unused legacy applications retired. The `300+` claim was already in committed `resume.json` at `07ac83e`. Each headline metric and PDF highlight names its own `sourceProgram`; tests retain that specific evidence relationship rather than searching the entire résumé for matching numbers.
-
-## 4. Conservative claims
-
-Retained 56 definitions across 28 applications, 27/28 verified builds, 25/28 dry-run deployment paths, and first deployment pending approval. The expanded delivery evidence explicitly says zero applications have deployed through the new framework. “Co-led” infrastructure/DR work and “Contributed” Application Insights proof-of-concept work remain qualified. No new employment accomplishments were introduced. Project, coursework, and proof-of-concept technologies do not imply production orchestration experience.
-
-## 5. Expandable evidence and static rendering
-
-Six Engineering Impact cards show outcomes with native `details` / `summary` disclosures for implementation and validation. Keyboard Enter/Space and no-JavaScript operation are verified. The inherited HTML template is `scripts/site_template.html`; `index.html` is output. The inherited section-order-aware navigation remains intact. No frontend framework, architecture migration, or SEO rebuild was introduced.
-
-## 6. PDF experience qualifiers
-
-Added optional `skills[].pdfContext`, validated as a non-empty string when present. It renders in 10-point italic text immediately beside its category before the tags. Current qualifiers are “Internal tools & projects” for AI-Enabled Engineering and “Projects & container-host proof of concept” for Additional Hands-On Technologies. The existing `GitHub Actions (projects)` tag remains. Omitted fields preserve the unqualified category format. Tests cover omission, valid rendering, invalid types/empty values, the current qualifiers, and pagination.
-
-## 7. PDF pagination and visual inspection
-
-Artifact: [`William_Elias_Resume.pdf`](../William_Elias_Resume.pdf).
-
-Regenerated with the inherited whole-section keep-together calculation. Both pages were rendered at 1.6× and visually reviewed. Exactly two Letter pages remain. All three engineering highlights and their bullets/technology lines stay together at the top of page two, followed by HowlPlane and Baseball Optimizer, earlier employment, and education. Professional summary, current employment, and all included expertise categories remain on page one.
-
-No clipping, overlapping text, broken wrapping, misaligned dates, or orphaned highlight headings were found. Body text and bullets remain 10 points; small supporting typography is 9–9.5 points. Paragraphs and bullets are left-aligned, and qualifications wrap legibly. Content occupies approximately y=21–656 points on page one and y=33–618 on page two, leaving about 136 and 174 points of bottom whitespace respectively. This whitespace is accepted to preserve the two-page structure and grouped highlights. Six link annotations are inside the page bounds: email, LinkedIn, GitHub, portfolio, and both selected repositories. The PDF is text-extractable; a tagged-PDF accessibility audit was not performed.
-
-## 8. Generated artifacts and repeatability
-
-All three generators ran under Python 3.12.14 using `requirements-dev.txt`: pytest 9.0.3, Playwright 1.60.0, pytest-playwright 0.8.0, fpdf2 2.8.7, pypdf 6.14.2, and Pillow 12.3.0. Six outputs are checked: `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, `preview.jpg`, and the PDF.
-
-New tests construct two separate temporary directories containing only canonical JSON, generator scripts, source HTML template, and assets. They run each CLI with warnings treated as errors, compare both independent builds byte-for-byte, and compare every output to the checked-in copy. Root outputs are never overwritten by those tests. PDF creation time remains fixed and compression remains disabled. Social-preview rendering uses Pillow's bundled font rather than a machine-specific font file. The 1200 × 630 preview was visually inspected for text wrapping, portrait alignment, and preserved identity.
-
-## 9. Navigation and browser contracts
-
-Replaced fixed navigation sleeps with bounded checks of the requested scroll destination and `aria-current` state. Tests wait for fonts before scrolling, since late font metrics can move the target. The check clamps the desired position to the document's scrollable range. Existing active-state, underline, logo-return, and résumé-not-active assertions remain; smooth scrolling is unchanged.
-
-Browser coverage now includes all six actual navigation links on desktop and mobile, menu closure, Escape/focus return, keyboard theme and contrast controls, native evidence disclosure, no-JavaScript content/disclosure, four real PDF downloads compared byte-for-byte, and all six project popup destinations. Project popup tests stub the destination response; separate live verification checks availability.
-
-## 10. Visual and accessibility review
-
-Captured all 20 width/theme combinations: 320, 390, 810, 1024, and 1440 pixels, each in dark, light, dark contrast, and light contrast. Fresh viewport, full-page, section, expanded-evidence, focus, and PDF images total 78 files. All 20 website captures report zero horizontal overflow, broken images, and uncaught page errors. Reviewed the responsive hero layouts, desktop/mobile text hierarchy, card alignment, tag wrapping, employment chronology, contact actions, expanded evidence, and visible keyboard focus.
-
-The review found a small dark-mode role title at 3.87:1 contrast. Added a dedicated `--red-text` token (`#ff6060` in dark mode), preserving the existing decorative red accents and other theme colors. A browser regression asserts at least 4.5:1 for the mobile title in every theme. This is targeted accessibility verification, not a claim of comprehensive WCAG certification or screen-reader testing.
-
-## 11. Verification environment and results
-
-Final gate: **202 tests passed in 54.00 seconds**, with zero failures and Python warnings treated as errors. All three generators, both lint checks, and `git diff --check` exited successfully. Freshness and independent repeat-generation checks passed for all six generated artifacts.
-
-See the companion [evidence manifest](portfolio_optimization_evidence.json) for final commands/results, output hashes, page/link geometry, screenshot hashes, and live destination records.
-
-The inherited `venv_ci` uses Python 3.14 and newer pytest/Playwright, so it was not used for the final gate. An isolated Python 3.12.14 environment was created at `/tmp/portfolio-ci`. This host is Ubuntu 26.04; pinned Playwright 1.60.0 rejects that host name during browser installation. Local browser commands therefore use `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64` with the matching Chromium build. Installation reports the unsupported-host fallback. The final test gate treats Python warnings as errors. This verifies Python 3.12 compatibility locally; no remote GitHub Actions execution or exact GitHub runner OS parity is claimed.
-
-There is no configured repository flake8 job. Local flake8 checked all changed Python files with inherited long-line style retained via `--extend-ignore E501`, and both new test modules also passed default flake8. Cleaned spacing and unused imports in touched files. No runtime dependency versions were changed beyond the inherited explicit Pillow pin. Direct dependencies are pinned; transitive dependencies and platform-native libraries are not fully locked.
-
-## 12. External destination checks
-
-Live HTTP GET checks on 2026-09-07 reached the six project repositories, GitHub profile, source repository, live portfolio, and published PDF with expected content. No destination was confirmed broken. LinkedIn returned HTTP 200 with the title “Checking your browser - reCAPTCHA”; the profile content cannot be verified by this automated check. Web browsing also produced cache/fetch failures for some URLs that direct HTTP requests subsequently reached; these were not treated as broken links.
-
-The published PDF was checked for availability only and predates this local commit. No email was sent, and no mail client was launched. GitHub repository “About” metadata still describes “Senior DevOps / Platform Engineer”; updating that external repository setting is deferred. Local résumé metadata uses the intended broader positioning.
-
-## 13. Five hiring perspectives
-
-The inherited plan did not supply the original five labels. A clarification was offered; this report uses the five disciplines named by the plan. These are evidence-based perspectives applied by one agent, not feedback from five actual recruiters or independent reviewers. Professional claims are checked against repository source consistency, not independently verified with employers.
-
-| Perspective | Concrete evidence visible to the reader | Assessment and limit |
+| Area | Incorrect previous wording | Correct current content |
 | --- | --- | --- |
-| Software/backend hiring manager | Python/FastAPI dashboards; modular ASP.NET Core support portal; SQL Server, per-module policies, audit trail, and 156 tests; Baseball Optimizer's Rust/Axum/SQLite API | Software-building evidence appears before skill inventory and on both PDF pages. Private employer implementation was not independently audited. |
-| Automation/developer-productivity recruiter | Python/PowerShell workflow tools; retirement of 300+ applications; HBK processing reduction and monthly hours saved; HowlPlane task routing and verification | Demonstrates operational automation plus reusable engineering tooling. Professional outcomes and independent projects stay distinguishable. |
-| DevOps/platform hiring manager | ~60-application scope; 56 definitions across 28 applications; 27/28 builds and 25/28 dry-run paths; six defects caught before rollout | Detailed validation supports delivery engineering breadth. First production deployment through the new framework remains pending; no production Kubernetes claim. |
-| Production/SRE hiring manager | Weekly releases, database migrations, incident triage, OAuth/IAM and networking diagnostics; Application Insights, KQL, structured logging; co-led DR/cutover work | Shows production operations grounded in applications and infrastructure. “Contributed” and “co-led” preserve shared ownership; no new SLO or scale claims. |
-| Security-focused hiring manager | 100+ repositories credential-remediated; Git-history cleanup; Key Vault migration and integrity-verified rollback with 62 tests; credential/PII/provenance/human-review safeguards | Security is demonstrated within software and production work. Proof-of-concept and internal AI tooling remain qualified; no unsupported security-leadership claims. |
+| Security work | .NET 8/C# utility, Azure Key Vault migration, integrity-verified rollback, Managed Identity, xUnit, 62 automated tests, migration-path self-review | Python scans of source code and Git history; BFG Repo-Cleaner history cleanup across 100+ repositories, completed; measured 2,832 files / 67 distinct secrets / approximately 25 seconds. No automated tests for this tool. |
+| Security technologies | C#, Azure Key Vault, Managed Identity, xUnit, Python, PowerShell | Python, Git, BFG Repo-Cleaner, Credential Remediation, Git History Remediation; compact PDF line: Python, Git, BFG Repo-Cleaner. |
+| Internal portal | Razor Pages, xUnit, 156 automated tests, FastAPI in the portal technology list | .NET 8 Blazor Web App using Interactive Server; per-module policies, database-backed workflows, permanently retained SOX audit trail, DBA approve-only scripts, live-object diffing, pre-CAB visibility, service-desk request tracking. |
+| Portal technologies | ASP.NET Core 8, Razor Pages, C#, SQL Server, SQLite, xUnit, FastAPI | C#, .NET 8, Blazor, ASP.NET Core, SQL Server, SQLite. FastAPI remains on separate professional dashboards/tooling. |
+| Identity | Unsupported Azure identity/security tools | Auth0, OAuth/OIDC, IAM and authentication troubleshooting; no expanded identity architecture ownership. |
+| Employment | Hyphenated descriptor and current role marked Remote | Production Support Engineer **\|** DevOps & Automation; Auburn Hills, MI · Hybrid. The first part is the official title, the second a résumé descriptor. U.S. remote availability remains the next-role preference. |
+| Delivery | First-deployment/approval, zero-deployment, go/no-go adoption commentary | Durable scope, implementation, and validation evidence without a current deployment count. |
 
-## 14. Durable evidence and reproduction
+Preserved delivery evidence: ~60-application .NET estate; 56 definitions across 28 applications; 27/28 builds verified; 25/28 deployment paths dry-run validated; six latent delivery defects discovered during validation; repository-to-server inventory, reusable definition/template automation, artifact checks, and environment-readiness guardrails. The inherited detailed evidence also supports 157 definitions organized and 95 legacy definitions inventoried/classified, kept distinct from the 56 created definitions. These private-work facts use William's supplied authority and existing detailed evidence, not an independent employer audit.
 
-Tracked manifest: `documentation/portfolio_optimization_evidence.json`. Full local evidence and capture script: `/run/media/system/tallgeese/dev/william_elias_evidence/2026-09-07/`. The screenshot binaries remain outside the Git repository to avoid adding approximately 28 MB of review images; the committed hashes make them identifiable. They are durable on this machine but are not included in a fresh clone.
+Preserved qualified shared ownership for observability and infrastructure/DR, 300+ application retirements, weekly releases, migrations, operational troubleshooting, and AI-assisted knowledge/incident tooling with human-review safeguards.
 
-Reproduce the normal CI gate from the repository root using a Python 3.12 environment:
+## Skills reconciliation
+
+Ten website groups become eight: Software & Backend; DevOps & Delivery; Automation; Production & Reliability; Infrastructure & Application Operations; Security & Identity; AI-Enabled Engineering; Additional Technical Foundations.
+
+Web Development is merged into Software & Backend, which now contains Python, FastAPI, C#, .NET, Blazor, ASP.NET Core, SQL Server, REST APIs, SQLite, JavaScript, HTML, and CSS. The explicit eight-tag PDF selection ends at REST APIs. Optional `skills[].pdfTags` must be a non-empty unique subset of website tags; absent fields retain the existing six-tag default. This small generator extension avoids expanding every PDF skill group just to accommodate software skills.
+
+Additional Hands-On Technologies is removed. Docker/Compose remains on the legitimate Baseball Optimizer project; the detailed delivery evidence retains its explicitly qualified WSL2/Rancher Desktop proof of concept. No top-level container/Helm proficiency is implied.
+
+Additional Programming Foundations becomes **Additional Technical Foundations**, website-only: Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, Wireshark. Visible context explicitly identifies coursework and academic/project experience, not professional production ownership. No professional forensics employment is claimed. GitHub Actions remains project-scoped, Go is explicitly project-scoped in both website and PDF context, and AI remains qualified as internal tools/projects.
+
+## Open-source verification and final wording
+
+Read-only shallow clones of current GitHub default branches were inspected. No changes or test executions were made in those external repositories; the review verifies implementation/test presence, not test success or adoption.
+
+**HowlPlane — AI Engineering Control Plane**, inspected at `e937d61d7168bda1d697a0d3ac81d36fb2813988`:
+
+- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and runs deterministic verification.
+- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared project context and CI/security checks.
+
+Evidence: `src/control_plane/router.py`, `reconciliation.py`, `verification.py`, `evidence_ledger.py`, `authority_envelope.py`, `human_boundary.py`; Go entrypoint/command layer in `cmd/howlplane/main.go` and `pkg/cli/command.go`; `.agents/` shared context; `.github/workflows/test.yml` and `codeql.yml`. No origin story, production adoption, unsupervised autonomy, or model-training claim is made.
+
+**RedrawUS — Geospatial Analysis & Visualization Platform**, inspected at `430129098b3f1e1192eae51bcc8f0ac4f26af3af`:
+
+- Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent browser caching, and Web Workers.
+- Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests for data processing and application behavior.
+
+Evidence: `pipeline/generate_maps.py`, `pipeline/run_pipeline.R`, `requirements.txt`, `src/DataService.js`, `src/MapController.js`, `src/worker.js`, `package.json`, `tests/python/test_data_processor.py`, `tests/js/DataService.test.js`, and `tests/e2e/dashboard.spec.js`. Vite and Leaflet are present; browser caching uses localforage. The source includes procedural/synthetic fallbacks, so no universal real-data accuracy or scale claim is inferred. `.github/workflows/ci.yml` runs SEO checks and `deploy.yml` builds/tests/deploys Pages; the résumé does not imply that CI runs every named test framework.
+
+The general PDF selects **HowlPlane + RedrawUS**. Baseball Optimizer remains on the broader website. The three PDF highlights are Internal Tools & Developer Enablement, Security & Credential Remediation, and Production Reliability & Observability.
+
+## Generated artifacts and validation
+
+The normal three-generator process produces `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, `preview.jpg`, and `William_Elias_Resume.pdf`. Generated content is never manually patched. SEO/JSON-LD removes the unsupported security term and adds Blazor/Auth0/OAuth/OpenID Connect/IAM while preserving the headline, curated existing metadata, and social preview identity. Robots, sitemap, and preview are regenerated but have no expected visual/content change.
+
+Reproduce with Python 3.12 and `requirements-dev.txt`:
 
 ```bash
-pip install -r requirements-dev.txt
-playwright install chromium --with-deps
 python scripts/build_config.py
 python scripts/build_html.py
 python scripts/generate_resume_pdf.py
 PYTHONPATH=. pytest tests/ -W error -q
 ```
 
-On this Ubuntu 26.04 host only, prefix Playwright installation/testing/capture with `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64`. Screenshot capture uses reduced motion to stabilize static images; navigation regression tests use normal smooth scrolling. Detailed section captures use an enlarged viewport height to avoid placing the fixed navigation bar across the captured element; the 20 full-page and hero captures use the normal 900-pixel viewport height.
+The pinned local environment is `/tmp/portfolio-ci`; local Chromium uses `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64` on this Ubuntu 26.04 host. The repository CI uses Python 3.12 and checks generated freshness. Local flake8 follows the existing long-line convention (`--extend-ignore E501`). New factual contracts first reproduced 12 failures against the old content. Old false assertions were replaced with semantic correctness checks; no useful coverage was discarded to retain false claims.
 
-## 15. Documentation, limitations, and deferred work
+Current artifact hashes, PDF geometry/link evidence, screenshot records, and final validation results are in [the evidence manifest](portfolio_optimization_evidence.json). Capture files are retained outside Git in `/run/media/system/tallgeese/dev/william_elias_evidence/factual-corrections/`; they are local evidence, not assets included in a fresh clone.
 
-README documents the metrics, source template, social preview, Engineering Impact, field semantics, generation, and verification workflow. `change_log.md` records inherited improvements and finishing fixes. The inherited canonical URL, metadata, ProfilePage/Person graph, `sameAs`, curated `knowsAbout`, and nested WebSite data remain unchanged in this finishing pass.
+## Visual and publication review
 
-Deferred: push/deployment; changing external GitHub About metadata; manually verifying LinkedIn past its challenge; Firefox/WebKit and real-device/screen-reader testing; actual recruiter feedback; transitive dependency locking and cross-platform byte equivalence beyond the tested environment. Auxiliary LinkedIn-banner generation is outside the requested three-generator build. No new accomplishments, architecture migration, or SEO rebuild are pending as part of this scope.
+Both PDF pages are rendered for inspection. The PDF retains 10-point body text and two Letter pages, with all three engineering highlights grouped on page two. Browser review covers 320, 390, 810, 1024, and 1440 pixels in dark, light, dark contrast, and light contrast modes, plus native disclosure expansion and keyboard operation. Final measured results are recorded in the evidence manifest.
 
-## 16. Commit and publication boundary
+GitHub repository description and all 15 topics already match the intended broad identity; no metadata churn is needed. Pages serves `main` at `https://howlcipher.github.io/william_elias/`. User authorization covers signed commit, push, PR, merge after successful checks, branch deletion, and published site/PDF verification. Publication identifiers and final deployment results are reported with task completion rather than embedding a self-referential commit hash here.
 
-The intended changes are committed together with an SSH-signed conventional commit using the existing local signing key. Signature verification and clean-tree results are reported in the completion response and local `commit-verification.txt`. The commit containing this handoff can also be found with `git log -1 --format='%H %s' -- documentation/portfolio_optimization_handoff.md`. The handoff does not embed its own commit hash, which would change that hash. No push or deployment is authorized by this task.
+This is the completed canonical general content after the publication gate. Future content work should follow new real experience or a target-specific role. No further general résumé rewrite is pending. Professional implementation was not independently audited with the employer; additional browser engines, screen readers, and a tagged-PDF accessibility audit are outside this verification scope.
