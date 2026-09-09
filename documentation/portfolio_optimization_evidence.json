@@ -1,15 +1,21 @@
 {
-  "date": "2026-09-07",
-  "base_commit": "07ac83e",
-  "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/2026-09-07",
+  "date": "2026-09-08",
+  "verified_at": "2026-09-09T00:46:16.803969+00:00",
+  "authority": "Direct user-confirmed corrections supersede prior portfolio wording and tests; private employer implementation was not independently audited.",
+  "base_commit": "0ef518ac33d1acfe4c40be6eb53a0c32b66a4663",
+  "content_commit": "97a01397edda6f97e44fa0f1556c81ff2aeba13a",
+  "content_merge": "4d361f1d7a658e31f5791ea41526c6a2c9f7a061",
+  "content_pr": "https://github.com/howlcipher/william_elias/pull/10",
+  "supersedes": "Prior current-state evidence manifest; historical evidence remains in Git history and the 2026-09-07 local evidence directory.",
+  "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/factual-corrections",
   "generated_artifacts": {
     "config.js": {
-      "sha256": "9d8c8f9d0f5ef7cdf0c092354b6a5a4ed4bcf5ff68e109ae8877a05b4673ceee",
-      "bytes": 26645
+      "sha256": "a02441c0827c485396e45179120465157e56e9377e72f7496680f1fd391fe76a",
+      "bytes": 26609
     },
     "index.html": {
-      "sha256": "5b3f47aab20e1041698d7b2d37847a09c9c3f8d5433d01cd91bc9b49c093aedb",
-      "bytes": 33877
+      "sha256": "bdc2c015a4c87898bae53f833f86f8c2c03240c3645b8a236ac7d47538108276",
+      "bytes": 33244
     },
     "robots.txt": {
       "sha256": "7140470d13d5081b0b4376b13f54d485fe373e8a060053ba22e548752e2b922a",
@@ -24,170 +30,1600 @@
       "bytes": 125410
     },
     "William_Elias_Resume.pdf": {
-      "sha256": "b90efd0a4f5eaa1ecd726a260ca9866b89357850440e75498f8f5841528e57c5",
-      "bytes": 13385
+      "sha256": "6f4af4053da8435bf2a8ab4368fe75f55315ef3f7dec58df1a84f719b728051a",
+      "bytes": 13437
     }
+  },
+  "input_fingerprints": {
+    "resume.json": {
+      "sha256": "897ba3fec1fa8e8e51a831181376f7b1a6a0cdf30a7604045a19ba30efeee167",
+      "bytes": 21152
+    },
+    "script.js": {
+      "sha256": "c98fdbc7b33eb8cfaf028ce82940002288f9f84583f5ac81520f1eb43d96c7ca",
+      "bytes": 14556
+    },
+    "scripts/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "scripts/build_config.py": {
+      "sha256": "c0dde1ef9f3695f7d4fee1fae89cc36f9be2bc3f0a2d35d700690012dd3b4a27",
+      "bytes": 314
+    },
+    "scripts/build_html.py": {
+      "sha256": "61dc2cfa64621e0e6a88b0bc735f69c6dc8e2d165f7c9ff2ba69be08ab875930",
+      "bytes": 20681
+    },
+    "scripts/generate_linkedin_banner.py": {
+      "sha256": "dfd86c391242efafb1fe93c8d410f3336d00edb4ec636e8eba3d66fea6ad61a9",
+      "bytes": 4271
+    },
+    "scripts/generate_resume_pdf.py": {
+      "sha256": "cf381f91f437212a65eca805be1924ad05e80f76b3343e846ce6c39fa82cba06",
+      "bytes": 16615
+    },
+    "scripts/site_template.html": {
+      "sha256": "c991bd0a05a9c48e5773bfcff43b48a9547d1c4404a6f739cb3eb4822ca31511",
+      "bytes": 7071
+    },
+    "style.css": {
+      "sha256": "6ecd64a70075844a2322c3e264993f14d648e4bf5cb75c9bae5d7f4d4ca57420",
+      "bytes": 17915
+    },
+    "tests/test_browser.py": {
+      "sha256": "4906b53c162d59875964e8a8a8bc3598b82f38f9726a1622c017e87ec7b7f6e1",
+      "bytes": 23396
+    },
+    "tests/test_build_config.py": {
+      "sha256": "c5b9273c55cdc9323a148d00f8e2655cae4c439cbb594428b37cd7a16e16f180",
+      "bytes": 504
+    },
+    "tests/test_build_html.py": {
+      "sha256": "4dcd63e40fc987365b13088be722374d3727c21b43b9b9e8be58b2875606bcb6",
+      "bytes": 2083
+    },
+    "tests/test_factual_corrections.py": {
+      "sha256": "cea0b648f865f451c8f889aeafe7d9215376732088c1b6ccdd19dd323cbcdca7",
+      "bytes": 5071
+    },
+    "tests/test_generate_resume_pdf.py": {
+      "sha256": "65c4dad8d620695881ff1e2594a08cad3dc44113fe7b2afe3bb70f35b4bd98b3",
+      "bytes": 6141
+    },
+    "tests/test_generated_artifacts.py": {
+      "sha256": "093b1b6b5c5cab949ff152957a6b42d29939be2109e2aa1c4df65c142e26c74f",
+      "bytes": 1713
+    },
+    "tests/test_hiring_contract.py": {
+      "sha256": "cf73f34ae5d7f9ab5082b77495154e71cd3e260cf0041123976069fad08b8331",
+      "bytes": 4563
+    },
+    "tests/test_pdf_skill_context.py": {
+      "sha256": "38bfdb7441f634b3c31d5ec52568b20f731b52b816036cea23923e48afc8c119",
+      "bytes": 2496
+    },
+    "tests/test_resume_content.py": {
+      "sha256": "178a8b59b3c595cdccb97fa7a3b6d29c2a16ee5837e9d18210250106dbffe850",
+      "bytes": 27253
+    },
+    "tests/test_seo_and_navigation.py": {
+      "sha256": "76540ca3615977629e497be2e151d83c6fd938435fc87d641baa93a2ff761aae",
+      "bytes": 8628
+    }
+  },
+  "project_claim_sources": {
+    "HowlPlane": {
+      "repository": "https://github.com/howlcipher/howlplane",
+      "commit": "e937d61d7168bda1d697a0d3ac81d36fb2813988",
+      "files": [
+        "src/control_plane/router.py",
+        "src/control_plane/reconciliation.py",
+        "src/control_plane/verification.py",
+        "src/control_plane/evidence_ledger.py",
+        "src/control_plane/authority_envelope.py",
+        "src/control_plane/human_boundary.py",
+        "cmd/howlplane/main.go",
+        "pkg/cli/command.go",
+        ".github/workflows/test.yml",
+        ".github/workflows/codeql.yml"
+      ],
+      "limit": "Source review only; no adoption, production deployment, unsupervised autonomy, or model-training claim."
+    },
+    "RedrawUS": {
+      "repository": "https://github.com/howlcipher/redistricting-map",
+      "commit": "430129098b3f1e1192eae51bcc8f0ac4f26af3af",
+      "files": [
+        "pipeline/generate_maps.py",
+        "pipeline/run_pipeline.R",
+        "requirements.txt",
+        "src/DataService.js",
+        "src/MapController.js",
+        "src/worker.js",
+        "package.json",
+        "tests/python/test_data_processor.py",
+        "tests/js/DataService.test.js",
+        "tests/e2e/dashboard.spec.js",
+        ".github/workflows/ci.yml",
+        ".github/workflows/deploy.yml"
+      ],
+      "limit": "Verified code and tests exist; did not execute external project tests. CI does not run every named test framework. No usage scale or universal geographic-data accuracy claim."
+    }
+  },
+  "pdf": {
+    "pages": 2,
+    "body_font_points": 10,
+    "visual_review": "Both rendered pages inspected: readable hierarchy, no overlap/clipping/orphaned headings/broken bullets, six in-bounds links, HowlPlane and RedrawUS selected.",
+    "page_geometry": [
+      {
+        "page": 1,
+        "text_bounds": [
+          21.140024185180664,
+          656.489990234375
+        ],
+        "links": [
+          {
+            "uri": "mailto:WylElias.123@gmail.com",
+            "bbox": [
+              356.3399963378906,
+              75.0,
+              469.8399963378906,
+              85.0
+            ]
+          },
+          {
+            "uri": "https://linkedin.com/in/wylelias",
+            "bbox": [
+              122.5199966430664,
+              89.0,
+              226.42999267578125,
+              99.0
+            ]
+          },
+          {
+            "uri": "https://github.com/howlcipher",
+            "bbox": [
+              234.58999633789062,
+              89.0,
+              334.05999755859375,
+              99.0
+            ]
+          },
+          {
+            "uri": "https://howlcipher.github.io/william_elias/",
+            "bbox": [
+              342.2300109863281,
+              89.0,
+              489.489990234375,
+              99.0
+            ]
+          }
+        ],
+        "font_sizes": [
+          9.5,
+          10.0,
+          10.5,
+          11.0,
+          18.0
+        ]
+      },
+      {
+        "page": 2,
+        "text_bounds": [
+          32.52998733520508,
+          644.489990234375
+        ],
+        "links": [
+          {
+            "uri": "https://github.com/howlcipher/howlplane",
+            "bbox": [
+              26.829999923706055,
+              279.5,
+              174.11000061035156,
+              289.5
+            ]
+          },
+          {
+            "uri": "https://github.com/howlcipher/redistricting-map",
+            "bbox": [
+              26.829999923706055,
+              359.5,
+              202.99000549316406,
+              369.5
+            ]
+          }
+        ],
+        "font_sizes": [
+          9.0,
+          10.0,
+          10.5,
+          11.0
+        ]
+      }
+    ]
+  },
+  "website": {
+    "visual_review": "Preserved design; reviewed five widths and all four themes, merged skills, evidence cards and expanded disclosures. No CSS change needed.",
+    "desktop_alignment": "Equal collapsed heights, aligned tag bottoms and disclosure rows in every pair at 1024 and 1440 pixels across all four themes; natural mobile/expanded heights.",
+    "captures": [
+      {
+        "viewport": 320,
+        "mode": "dark",
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "theme": null,
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 594.859375,
+            "top": 2417.890625,
+            "disclosure": 2942.5625,
+            "tagBottom": 2926.5625
+          },
+          {
+            "height": 603.015625,
+            "top": 3028.75,
+            "disclosure": 3561.578125,
+            "tagBottom": 3545.578125
+          },
+          {
+            "height": 562.546875,
+            "top": 3647.765625,
+            "disclosure": 4140.125,
+            "tagBottom": 4124.125
+          },
+          {
+            "height": 578.703125,
+            "top": 4226.3125,
+            "disclosure": 4734.828125,
+            "tagBottom": 4718.828125
+          },
+          {
+            "height": 400.515625,
+            "top": 4821.015625,
+            "disclosure": 5151.34375,
+            "tagBottom": 5135.34375
+          },
+          {
+            "height": 521.921875,
+            "top": 5237.53125,
+            "disclosure": 5689.265625,
+            "tagBottom": 5673.265625
+          }
+        ]
+      },
+      {
+        "viewport": 320,
+        "mode": "light",
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "theme": "light",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 594.859375,
+            "top": 2417.890625,
+            "disclosure": 2942.5625,
+            "tagBottom": 2926.5625
+          },
+          {
+            "height": 603.015625,
+            "top": 3028.75,
+            "disclosure": 3561.578125,
+            "tagBottom": 3545.578125
+          },
+          {
+            "height": 562.546875,
+            "top": 3647.765625,
+            "disclosure": 4140.125,
+            "tagBottom": 4124.125
+          },
+          {
+            "height": 578.703125,
+            "top": 4226.3125,
+            "disclosure": 4734.828125,
+            "tagBottom": 4718.828125
+          },
+          {
+            "height": 400.515625,
+            "top": 4821.015625,
+            "disclosure": 5151.34375,
+            "tagBottom": 5135.34375
+          },
+          {
+            "height": 521.921875,
+            "top": 5237.53125,
+            "disclosure": 5689.265625,
+            "tagBottom": 5673.265625
+          }
+        ]
+      },
+      {
+        "viewport": 320,
+        "mode": "contrast-dark",
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "theme": "colorblind",
+          "darkContrast": true,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 594.859375,
+            "top": 2417.890625,
+            "disclosure": 2942.5625,
+            "tagBottom": 2926.5625
+          },
+          {
+            "height": 603.015625,
+            "top": 3028.75,
+            "disclosure": 3561.578125,
+            "tagBottom": 3545.578125
+          },
+          {
+            "height": 562.546875,
+            "top": 3647.765625,
+            "disclosure": 4140.125,
+            "tagBottom": 4124.125
+          },
+          {
+            "height": 578.703125,
+            "top": 4226.3125,
+            "disclosure": 4734.828125,
+            "tagBottom": 4718.828125
+          },
+          {
+            "height": 400.515625,
+            "top": 4821.015625,
+            "disclosure": 5151.34375,
+            "tagBottom": 5135.34375
+          },
+          {
+            "height": 521.921875,
+            "top": 5237.53125,
+            "disclosure": 5689.265625,
+            "tagBottom": 5673.265625
+          }
+        ]
+      },
+      {
+        "viewport": 320,
+        "mode": "contrast-light",
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "theme": "colorblind",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 594.859375,
+            "top": 2417.890625,
+            "disclosure": 2942.5625,
+            "tagBottom": 2926.5625
+          },
+          {
+            "height": 603.015625,
+            "top": 3028.75,
+            "disclosure": 3561.578125,
+            "tagBottom": 3545.578125
+          },
+          {
+            "height": 562.546875,
+            "top": 3647.765625,
+            "disclosure": 4140.125,
+            "tagBottom": 4124.125
+          },
+          {
+            "height": 578.703125,
+            "top": 4226.3125,
+            "disclosure": 4734.828125,
+            "tagBottom": 4718.828125
+          },
+          {
+            "height": 400.515625,
+            "top": 4821.015625,
+            "disclosure": 5151.34375,
+            "tagBottom": 5135.34375
+          },
+          {
+            "height": 521.921875,
+            "top": 5237.53125,
+            "disclosure": 5689.265625,
+            "tagBottom": 5673.265625
+          }
+        ]
+      },
+      {
+        "viewport": 390,
+        "mode": "dark",
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "theme": null,
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 477.734375,
+            "top": 2060.96875,
+            "disclosure": 2468.515625,
+            "tagBottom": 2452.515625
+          },
+          {
+            "height": 497.609375,
+            "top": 2554.703125,
+            "disclosure": 2982.125,
+            "tagBottom": 2966.125
+          },
+          {
+            "height": 461.578125,
+            "top": 3068.3125,
+            "disclosure": 3459.703125,
+            "tagBottom": 3443.703125
+          },
+          {
+            "height": 497.609375,
+            "top": 3545.890625,
+            "disclosure": 3973.3125,
+            "tagBottom": 3957.3125
+          },
+          {
+            "height": 343.734375,
+            "top": 4059.5,
+            "disclosure": 4333.046875,
+            "tagBottom": 4317.046875
+          },
+          {
+            "height": 448.984375,
+            "top": 4419.234375,
+            "disclosure": 4798.03125,
+            "tagBottom": 4782.03125
+          }
+        ]
+      },
+      {
+        "viewport": 390,
+        "mode": "light",
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "theme": "light",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 477.734375,
+            "top": 2060.96875,
+            "disclosure": 2468.515625,
+            "tagBottom": 2452.515625
+          },
+          {
+            "height": 497.609375,
+            "top": 2554.703125,
+            "disclosure": 2982.125,
+            "tagBottom": 2966.125
+          },
+          {
+            "height": 461.578125,
+            "top": 3068.3125,
+            "disclosure": 3459.703125,
+            "tagBottom": 3443.703125
+          },
+          {
+            "height": 497.609375,
+            "top": 3545.890625,
+            "disclosure": 3973.3125,
+            "tagBottom": 3957.3125
+          },
+          {
+            "height": 343.734375,
+            "top": 4059.5,
+            "disclosure": 4333.046875,
+            "tagBottom": 4317.046875
+          },
+          {
+            "height": 448.984375,
+            "top": 4419.234375,
+            "disclosure": 4798.03125,
+            "tagBottom": 4782.03125
+          }
+        ]
+      },
+      {
+        "viewport": 390,
+        "mode": "contrast-dark",
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "theme": "colorblind",
+          "darkContrast": true,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 477.734375,
+            "top": 2060.96875,
+            "disclosure": 2468.515625,
+            "tagBottom": 2452.515625
+          },
+          {
+            "height": 497.609375,
+            "top": 2554.703125,
+            "disclosure": 2982.125,
+            "tagBottom": 2966.125
+          },
+          {
+            "height": 461.578125,
+            "top": 3068.3125,
+            "disclosure": 3459.703125,
+            "tagBottom": 3443.703125
+          },
+          {
+            "height": 497.609375,
+            "top": 3545.890625,
+            "disclosure": 3973.3125,
+            "tagBottom": 3957.3125
+          },
+          {
+            "height": 343.734375,
+            "top": 4059.5,
+            "disclosure": 4333.046875,
+            "tagBottom": 4317.046875
+          },
+          {
+            "height": 448.984375,
+            "top": 4419.234375,
+            "disclosure": 4798.03125,
+            "tagBottom": 4782.03125
+          }
+        ]
+      },
+      {
+        "viewport": 390,
+        "mode": "contrast-light",
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "theme": "colorblind",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 477.734375,
+            "top": 2060.96875,
+            "disclosure": 2468.515625,
+            "tagBottom": 2452.515625
+          },
+          {
+            "height": 497.609375,
+            "top": 2554.703125,
+            "disclosure": 2982.125,
+            "tagBottom": 2966.125
+          },
+          {
+            "height": 461.578125,
+            "top": 3068.3125,
+            "disclosure": 3459.703125,
+            "tagBottom": 3443.703125
+          },
+          {
+            "height": 497.609375,
+            "top": 3545.890625,
+            "disclosure": 3973.3125,
+            "tagBottom": 3957.3125
+          },
+          {
+            "height": 343.734375,
+            "top": 4059.5,
+            "disclosure": 4333.046875,
+            "tagBottom": 4317.046875
+          },
+          {
+            "height": 448.984375,
+            "top": 4419.234375,
+            "disclosure": 4798.03125,
+            "tagBottom": 4782.03125
+          }
+        ]
+      },
+      {
+        "viewport": 810,
+        "mode": "dark",
+        "geometry": {
+          "width": 810,
+          "scrollWidth": 810,
+          "theme": null,
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 323.703125,
+            "top": 1509.203125,
+            "disclosure": 1762.71875,
+            "tagBottom": 1746.71875
+          },
+          {
+            "height": 323.703125,
+            "top": 1848.90625,
+            "disclosure": 2102.421875,
+            "tagBottom": 2086.421875
+          },
+          {
+            "height": 299.390625,
+            "top": 2188.609375,
+            "disclosure": 2417.8125,
+            "tagBottom": 2401.8125
+          },
+          {
+            "height": 299.390625,
+            "top": 2504,
+            "disclosure": 2733.203125,
+            "tagBottom": 2717.203125
+          },
+          {
+            "height": 242.765625,
+            "top": 2819.390625,
+            "disclosure": 2991.96875,
+            "tagBottom": 2975.96875
+          },
+          {
+            "height": 299.390625,
+            "top": 3078.15625,
+            "disclosure": 3307.359375,
+            "tagBottom": 3291.359375
+          }
+        ]
+      },
+      {
+        "viewport": 810,
+        "mode": "light",
+        "geometry": {
+          "width": 810,
+          "scrollWidth": 810,
+          "theme": "light",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 323.703125,
+            "top": 1509.203125,
+            "disclosure": 1762.71875,
+            "tagBottom": 1746.71875
+          },
+          {
+            "height": 323.703125,
+            "top": 1848.90625,
+            "disclosure": 2102.421875,
+            "tagBottom": 2086.421875
+          },
+          {
+            "height": 299.390625,
+            "top": 2188.609375,
+            "disclosure": 2417.8125,
+            "tagBottom": 2401.8125
+          },
+          {
+            "height": 299.390625,
+            "top": 2504,
+            "disclosure": 2733.203125,
+            "tagBottom": 2717.203125
+          },
+          {
+            "height": 242.765625,
+            "top": 2819.390625,
+            "disclosure": 2991.96875,
+            "tagBottom": 2975.96875
+          },
+          {
+            "height": 299.390625,
+            "top": 3078.15625,
+            "disclosure": 3307.359375,
+            "tagBottom": 3291.359375
+          }
+        ]
+      },
+      {
+        "viewport": 810,
+        "mode": "contrast-dark",
+        "geometry": {
+          "width": 810,
+          "scrollWidth": 810,
+          "theme": "colorblind",
+          "darkContrast": true,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 323.703125,
+            "top": 1509.203125,
+            "disclosure": 1762.71875,
+            "tagBottom": 1746.71875
+          },
+          {
+            "height": 323.703125,
+            "top": 1848.90625,
+            "disclosure": 2102.421875,
+            "tagBottom": 2086.421875
+          },
+          {
+            "height": 299.390625,
+            "top": 2188.609375,
+            "disclosure": 2417.8125,
+            "tagBottom": 2401.8125
+          },
+          {
+            "height": 299.390625,
+            "top": 2504,
+            "disclosure": 2733.203125,
+            "tagBottom": 2717.203125
+          },
+          {
+            "height": 242.765625,
+            "top": 2819.390625,
+            "disclosure": 2991.96875,
+            "tagBottom": 2975.96875
+          },
+          {
+            "height": 299.390625,
+            "top": 3078.15625,
+            "disclosure": 3307.359375,
+            "tagBottom": 3291.359375
+          }
+        ]
+      },
+      {
+        "viewport": 810,
+        "mode": "contrast-light",
+        "geometry": {
+          "width": 810,
+          "scrollWidth": 810,
+          "theme": "colorblind",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 323.703125,
+            "top": 1509.203125,
+            "disclosure": 1762.71875,
+            "tagBottom": 1746.71875
+          },
+          {
+            "height": 323.703125,
+            "top": 1848.90625,
+            "disclosure": 2102.421875,
+            "tagBottom": 2086.421875
+          },
+          {
+            "height": 299.390625,
+            "top": 2188.609375,
+            "disclosure": 2417.8125,
+            "tagBottom": 2401.8125
+          },
+          {
+            "height": 299.390625,
+            "top": 2504,
+            "disclosure": 2733.203125,
+            "tagBottom": 2717.203125
+          },
+          {
+            "height": 242.765625,
+            "top": 2819.390625,
+            "disclosure": 2991.96875,
+            "tagBottom": 2975.96875
+          },
+          {
+            "height": 299.390625,
+            "top": 3078.15625,
+            "disclosure": 3307.359375,
+            "tagBottom": 3291.359375
+          }
+        ]
+      },
+      {
+        "viewport": 1024,
+        "mode": "dark",
+        "geometry": {
+          "width": 1024,
+          "scrollWidth": 1024,
+          "theme": null,
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          }
+        ]
+      },
+      {
+        "viewport": 1024,
+        "mode": "light",
+        "geometry": {
+          "width": 1024,
+          "scrollWidth": 1024,
+          "theme": "light",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          }
+        ]
+      },
+      {
+        "viewport": 1024,
+        "mode": "contrast-dark",
+        "geometry": {
+          "width": 1024,
+          "scrollWidth": 1024,
+          "theme": "colorblind",
+          "darkContrast": true,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          }
+        ]
+      },
+      {
+        "viewport": 1024,
+        "mode": "contrast-light",
+        "geometry": {
+          "width": 1024,
+          "scrollWidth": 1024,
+          "theme": "colorblind",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 429.109375,
+            "top": 1254.71875,
+            "disclosure": 1613.640625,
+            "tagBottom": 1597.640625
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 404.796875,
+            "top": 1699.828125,
+            "disclosure": 2034.4375,
+            "tagBottom": 2018.4375
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          },
+          {
+            "height": 348.015625,
+            "top": 2120.625,
+            "disclosure": 2398.453125,
+            "tagBottom": 2382.453125
+          }
+        ]
+      },
+      {
+        "viewport": 1440,
+        "mode": "dark",
+        "geometry": {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "theme": null,
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          }
+        ]
+      },
+      {
+        "viewport": 1440,
+        "mode": "light",
+        "geometry": {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "theme": "light",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          }
+        ]
+      },
+      {
+        "viewport": 1440,
+        "mode": "contrast-dark",
+        "geometry": {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "theme": "colorblind",
+          "darkContrast": true,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          }
+        ]
+      },
+      {
+        "viewport": 1440,
+        "mode": "contrast-light",
+        "geometry": {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "theme": "colorblind",
+          "darkContrast": false,
+          "brokenImages": 0,
+          "sections": [
+            "stats-target",
+            "about",
+            "programs",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "contact-cta"
+          ]
+        },
+        "page_errors": [],
+        "collapsed_cards": [
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 348.015625,
+            "top": 1273.484375,
+            "disclosure": 1551.3125,
+            "tagBottom": 1535.3125
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 356.171875,
+            "top": 1637.5,
+            "disclosure": 1923.484375,
+            "tagBottom": 1907.484375
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          },
+          {
+            "height": 323.703125,
+            "top": 2009.671875,
+            "disclosure": 2263.1875,
+            "tagBottom": 2247.1875
+          }
+        ]
+      }
+    ]
   },
   "screenshots": {
     "about-dark-1440.png": {
-      "sha256": "42472ae42450aee00f655267d3f65d455f98e1b23a66ca3586da65a12b6ea4ff",
-      "bytes": 59048
+      "sha256": "afea07f8bef5b85f8e171c33fb9904cf641c300a5480d003571b010cdce6b812",
+      "bytes": 59797
     },
     "about-dark-390.png": {
-      "sha256": "bbd5d757eaf800eb0ba5e872a386b709c07428112dd5835e69aadf86d7e24de0",
-      "bytes": 49754
+      "sha256": "09c0587cd9381cd0e5bfa72922e28914a56e76fa82eed948f010c3532ad59ff8",
+      "bytes": 50889
     },
     "contact-cta-dark-1440.png": {
-      "sha256": "0d54813c191fe087370439ba7c82832fc6495a3231bc9ef4453e74b25e902233",
-      "bytes": 22928
+      "sha256": "385ba2b2aac32756d6681379ccd53328bedc8fa3a7ae92952b64652a9c6ec37d",
+      "bytes": 22887
     },
     "contact-cta-dark-390.png": {
-      "sha256": "f8530a395f4219a6133522547bd435c8fc1a61d53ac5998f59f476527392072e",
-      "bytes": 18841
+      "sha256": "33d7729957e57d461e4707348ba11876ffcb452c7aa4cbd66a4abbfe233cc09e",
+      "bytes": 18939
     },
     "contrast-dark-1024.jpg": {
-      "sha256": "a13348a5fb30a1c0705a76e52f20c00d02d049ca6bf6c353a3094816e7f8ed6a",
-      "bytes": 1171801
+      "sha256": "3709653c575d65dc88f7b310df9673e8059f672d42edf7332172db9523ed7828",
+      "bytes": 1167251
     },
     "contrast-dark-1440.jpg": {
-      "sha256": "41ba5fd773a6f4061cd96ea82526c0618dbf1ee6c365fcda662b1010f368821a",
-      "bytes": 1314733
+      "sha256": "cfc5bfef77fb945d306f275fd781ca92e84aa35c3ad5876a992d888143e12424",
+      "bytes": 1294241
     },
     "contrast-dark-320.jpg": {
-      "sha256": "a003949cf055fe572b69dd0a732340bf32434a6539335358d8be29faf6ffbf79",
-      "bytes": 1059729
+      "sha256": "1e0d6c8ab6e3780823084c61b476b1770a07d767c6b420cb562a1a7af145c1c5",
+      "bytes": 1054024
     },
     "contrast-dark-390.jpg": {
-      "sha256": "b83d47a992e6ab7b507e3f66408681a137319fd87730a5c9f66da133d184c550",
-      "bytes": 1079136
+      "sha256": "3505dad3755c41672b0bcc19e91125be187b8712e749cd45bc87c43dbd200048",
+      "bytes": 1069979
     },
     "contrast-dark-810.jpg": {
-      "sha256": "a93bf1c66e22808a74c99f8c33173153f75b58ba72f9614b8ddf4b08d83495cd",
-      "bytes": 1149240
+      "sha256": "022448321de454af5e2cd6f5fab2e739533891d74b44368a990ba3243045ad4e",
+      "bytes": 1142589
     },
     "contrast-light-1024.jpg": {
-      "sha256": "60d4b5fe92ffcdf3926312d4f86462d3a474090e1474f41c851aa00ffe3fd432",
-      "bytes": 1191207
+      "sha256": "f4d0a99fd1d1802145d69c9f8b11afdb93c4da0de9a304b0e1238f81a5bc913d",
+      "bytes": 1186342
     },
     "contrast-light-1440.jpg": {
-      "sha256": "de1a26edff1b54da151e48a71216b0b13c93932c0a2acaa61634888fcbf205bf",
-      "bytes": 1329823
+      "sha256": "40fa6337ce8f964ee674feca695a2d65f79d42ede7cf87e5ddec7d502d0748c8",
+      "bytes": 1310383
     },
     "contrast-light-320.jpg": {
-      "sha256": "a231f6a865902a5aff456c8a7b4d8d477005a2ecc6d4cc40f510c0b21dedbdf5",
-      "bytes": 1081929
+      "sha256": "32f751797a37e1332f8f407089a0a1d31b778b61440f523a2bad0b6968381031",
+      "bytes": 1076329
     },
     "contrast-light-390.jpg": {
-      "sha256": "3648913e2a03322c7c021e41fe77999945838ceecbdfd1bbe1800e18225b656f",
-      "bytes": 1100663
+      "sha256": "46debbd506b661ab8ec48f7109698f0180369a9060fbe2b1c46689c56d55c91a",
+      "bytes": 1091141
     },
     "contrast-light-810.jpg": {
-      "sha256": "bb61d30f4f5b12a3e0d3d961387d3e3722689f596aa8874ec740428b1c7529b9",
-      "bytes": 1167575
+      "sha256": "95fe93915840db069ac9c241c91dd5129a15ed086b134d7c84c3bfc2ab402a79",
+      "bytes": 1160647
     },
     "dark-1024.jpg": {
-      "sha256": "3fe517da2d726e892d54161dfbf8e0b4180f8b267f935f2ba35e3d05fc45439a",
-      "bytes": 1099881
+      "sha256": "b2708abb68b9eba9c9826f73f09d56a0356b8eb1fce32afd548cd2fdffafe348",
+      "bytes": 1094325
     },
     "dark-1440.jpg": {
-      "sha256": "c7805bb7a0552f90151f1709a5cc3de6e046faaaa1f6d8985ce21a486bd1c90f",
-      "bytes": 1244645
+      "sha256": "6a5e48bb35909e57d6bd7c1faf9e383e9d2995d511a8cf3cad7210b0b82c4f9e",
+      "bytes": 1229384
     },
     "dark-320.jpg": {
-      "sha256": "50aad7a050b50031de7697fea757c14599d794aed54b7477d0a1dcf371010297",
-      "bytes": 987295
+      "sha256": "ead7f69856ec35f855670eec57c99a8c634190dc0d4df47874cf5aa5e2f6a4a2",
+      "bytes": 979254
     },
     "dark-390.jpg": {
-      "sha256": "b560ade4426a9c0d344f36ce5cf4716b3835b99d12eb4ef2bfd57907dd395c42",
-      "bytes": 1009152
+      "sha256": "9bdbc75e239c3be0577e062703fa06ae39fb5c5caca3eb3899f2068ddc9570f7",
+      "bytes": 998354
     },
     "dark-810.jpg": {
-      "sha256": "44d8924f9bd7f7594b346c8dd12b8a58bcf1b8993547290880037a026fa1b440",
-      "bytes": 1086564
+      "sha256": "09321e320fa12fdf5b0d9c0246ab7d0184cdf26108f55f183a7e2606778f6140",
+      "bytes": 1075615
     },
     "education-dark-1440.png": {
-      "sha256": "eab261137a6beac3d43267596451030c35a5474afa21ae553a381db563ca42bd",
-      "bytes": 32389
+      "sha256": "066cd18a0186ca6fc09186ce899f40e3aa9013fc717aa655b3b1032c7fe93998",
+      "bytes": 32487
     },
     "education-dark-390.png": {
-      "sha256": "f4f0530f0ec44be8b54222c5b6bd63a186e27d21643b6cdd2a64c34d56ff705f",
-      "bytes": 31867
+      "sha256": "5f6b310a9c3489b354f9ea71712a488f9f43c8845dd74399c18e41b389d9345e",
+      "bytes": 31886
     },
     "evidence-focus-contrast-dark-1440.png": {
-      "sha256": "62ddedc17274b7321e2d43cc6fdccc03cfd1ffc3f64fcb8831635906a2e14eba",
-      "bytes": 78400
+      "sha256": "79d16a819bec107e002eb0a572846221bda28620cb9a89cdb3727a153f8f6f94",
+      "bytes": 69559
     },
     "evidence-focus-contrast-dark-390.png": {
-      "sha256": "c490643cfa7a7514fefbe6d5046a75d1d5dbca2b87836596858b26abf06b81d7",
-      "bytes": 68612
+      "sha256": "a00b8974222e162903139ebaa521203711256375921b4b67b4f813eea2215a7c",
+      "bytes": 61661
     },
     "evidence-focus-contrast-light-1440.png": {
-      "sha256": "0c2b109e2ea9be6254a49a00344562fbb054b070a257ffe06daa32491f3996b8",
-      "bytes": 74866
+      "sha256": "2bc68467ef5cab7c84adf6348ff0556d53a39355cae97c8f53bf3dd06f065b59",
+      "bytes": 67927
     },
     "evidence-focus-contrast-light-390.png": {
-      "sha256": "969e68302de64844093bc2461e7f2e9b9c0b0099eeb8c48e2b7b458845b810a6",
-      "bytes": 66387
+      "sha256": "5aa1ce4dcad34c80f216b5eb027a29a3b9e15bb010ed617eb1195fbc1a93e2af",
+      "bytes": 59756
     },
     "evidence-focus-dark-1440.png": {
-      "sha256": "8ab7d370f30d73f4da3c187e2c582abf2f288c759ba14cb4670672a5523fda84",
-      "bytes": 85947
+      "sha256": "63945f8a11230e5c72b53ef16c9ab49220eea0264a2211313c48279189edfabd",
+      "bytes": 77580
     },
     "evidence-focus-dark-390.png": {
-      "sha256": "2b9c0585c441b0548ce121d7195bcb3705d3d4ab673d992c4d462a4321f6f3a0",
-      "bytes": 75345
+      "sha256": "da8fa45ab8b60b2b58e6000d58307297e77f2104d5175b94abc0d5fbba396627",
+      "bytes": 68712
     },
     "evidence-focus-light-1440.png": {
-      "sha256": "59d4c13b25ccae76940f04147cec319e3684a3b1553a9271311568991ea0d400",
-      "bytes": 84944
+      "sha256": "7800029a5cefdef5984eda5a393502b4ea2e06eafc4b632df13c1e4f3d8e6239",
+      "bytes": 75569
     },
     "evidence-focus-light-390.png": {
-      "sha256": "518f838addb7562056585803063af802618568a0d3c632ed3756bb9877e1d1b7",
-      "bytes": 75410
+      "sha256": "2beb3872584cbba5c72f3533ec4859e591e9951258a85331d74a7089e70ca41a",
+      "bytes": 67376
     },
     "evidence-open-contrast-dark-1440.png": {
-      "sha256": "20af7fbace540519b44107a8cb097d2ce0627d44d81eccd93161dfd3873f5749",
-      "bytes": 78303
+      "sha256": "df77e20c5e6f7af323feee6daef3716ce2b201f7f65f2b33d91b63971a119171",
+      "bytes": 69463
     },
     "evidence-open-contrast-dark-390.png": {
-      "sha256": "2c2735f9c3e7656fe61f45f40bf3f2f5a9ddbda7d7ca1201169746e15f2d98f2",
-      "bytes": 68526
+      "sha256": "8605cca32100b80bf3b68201fd933766212fc31f498371c4092eb737385e7e3e",
+      "bytes": 61578
     },
     "evidence-open-contrast-light-1440.png": {
-      "sha256": "549bcdf3fffc68561f95187816a443fd8224c75c45c8841714356979c0e826fd",
-      "bytes": 74774
+      "sha256": "1ea3e307fdd7caf0ca146f71ecf0733bf76cbcec60dd05891e2ae836252abf15",
+      "bytes": 67843
     },
     "evidence-open-contrast-light-390.png": {
-      "sha256": "cf2dd22e43716f7ac8258e0c457c9a5eaa08111b3ffed8ab7e547f304131c8c7",
-      "bytes": 66307
+      "sha256": "7f3ebc89637da9757f41d2077269d11e052b9eda0fa731575ab676a68762edfa",
+      "bytes": 59675
     },
     "evidence-open-dark-1440.png": {
-      "sha256": "8c6535676a462451c9e8ab25b8d727cd56d62055c5649b9b64808fff9fa06e07",
-      "bytes": 85938
+      "sha256": "4164f2734f5113ab1ae186e262deb98d50490099974cfa77d05d60950abf1b0e",
+      "bytes": 77572
     },
     "evidence-open-dark-390.png": {
-      "sha256": "8bd7ccf869e9a90499109db089906563954412b32bfab73ecdccd32cc33e1397",
-      "bytes": 75340
+      "sha256": "ff380ed161f33bf94ec368c8a1db66307566cb212f02175c4d44fbb9960edb5f",
+      "bytes": 68706
     },
     "evidence-open-light-1440.png": {
-      "sha256": "47d08d844cf1cc9a43d86d9fdec8eb846dca692a41fdb2d08cd8429a225f1259",
-      "bytes": 84894
+      "sha256": "7f1f1cf110664d7bb61150b90b206fc1bc291033f9909256d68696f685ce3282",
+      "bytes": 75522
     },
     "evidence-open-light-390.png": {
-      "sha256": "50164c73489c8a35b05aaa26379cc6000bc77f5af24ed49229b5b74f3aa12b5a",
-      "bytes": 75369
+      "sha256": "a97a423f85be27101daea113850f7017236a15763e748bc88d8feccc380951f2",
+      "bytes": 67334
     },
     "experience-dark-1440.png": {
-      "sha256": "b6da965c536635f0cd58a8906a5cfd4e07de8a11d0631e76cc6892e1b256d7f3",
-      "bytes": 186944
+      "sha256": "b794bff69646bda6530371c76c6e02625e6a6ef74f0442d89c71f97275ba7d5f",
+      "bytes": 186371
     },
     "experience-dark-390.png": {
-      "sha256": "246eb3a04a166103f63bb78dccd0f9bebfa3d16a4724a3113472a89335489e35",
-      "bytes": 185152
+      "sha256": "1b829637b9817003497de98952dc618d3863e78cca2f69c72b131a84ffe1c21a",
+      "bytes": 181954
+    },
+    "hero-contact-contrast-dark.jpg": {
+      "sha256": "e5ea0ef897a96bc70b98672df5914feae49077ac01b84ab2b06bfb05d9d5ff50",
+      "bytes": 169955
+    },
+    "hero-contact-contrast-light.jpg": {
+      "sha256": "a9f2bb01f5767efa3f4d7b2649645e84d623ef3d5f8aa248e35c3dfa4f027963",
+      "bytes": 161424
+    },
+    "hero-contact-dark.jpg": {
+      "sha256": "9e42dd22c62a2882010663c5c5476de924be5807d7fcd4ab87a6ee13cb87c3e5",
+      "bytes": 160471
+    },
+    "hero-contact-light.jpg": {
+      "sha256": "95acada324e6a97e7c443d7e9c23d6ded3f8eae5a40f715e2c1a6e2e49f8deb0",
+      "bytes": 157527
     },
     "hero-contrast-dark-1024.png": {
-      "sha256": "b03c14cf18a40f6ae1c6580f5c1ba236259c5042b59f8d43b8803e9e30eed310",
-      "bytes": 142186
+      "sha256": "e9b3e403d3c8a166800bda8416c6467f425d552fea2472657a5c05e4dc5fd608",
+      "bytes": 142281
     },
     "hero-contrast-dark-1440.png": {
       "sha256": "6e14c366f90cdcb259ab37aa7e89523d3b605da67eab8a73309610905e40a845",
@@ -206,8 +1642,8 @@
       "bytes": 84156
     },
     "hero-contrast-light-1024.png": {
-      "sha256": "daaf72272d458e707683bffe1b9d311040b8f61ef65dbd0f142adf0a4eb9bc36",
-      "bytes": 141610
+      "sha256": "e47cf1ed71b8ee44fd2478376c07011510ea98c9dd4762c30f56dc06dc541c00",
+      "bytes": 141694
     },
     "hero-contrast-light-1440.png": {
       "sha256": "d0721bd0a64b2efadcb913270a8c306f206d2b4c17314cd12dc9a92168da4346",
@@ -226,8 +1662,8 @@
       "bytes": 84059
     },
     "hero-dark-1024.png": {
-      "sha256": "3434aaaf32651f2f95a7b469bb4c9c3c6005ee126e56faacf68906f64c6b8d70",
-      "bytes": 145181
+      "sha256": "cb64b27f359b676d4ab9208a8dcdc3b6c7e1668ca0ef233928bdc7824870ca39",
+      "bytes": 145268
     },
     "hero-dark-1440.png": {
       "sha256": "37f8f58395afd290c50350ba4b17c10304b767af0fdafa222c9064ce18b838eb",
@@ -246,8 +1682,8 @@
       "bytes": 85490
     },
     "hero-light-1024.png": {
-      "sha256": "98c8550233ae89d0fdfd8918da69e32a53a3ab2e524bba74ee62850d2bf5337f",
-      "bytes": 145776
+      "sha256": "b2ee65926f223cbfe48525565289795dc7723db5a502b17d454d924054e0c106",
+      "bytes": 145838
     },
     "hero-light-1440.png": {
       "sha256": "e33994c2432dd9497de4f9d6ee5eff6f9ae1eb03e5b3181c9849080b2ac54ad1",
@@ -266,799 +1702,474 @@
       "bytes": 85805
     },
     "light-1024.jpg": {
-      "sha256": "2e66a740444cab1172290dcd56f7ad008819e39e07ba086fbfb9218f9c48e075",
-      "bytes": 1054216
+      "sha256": "b9e85fc800535ceab2e9a73c07a51a4b700f243d7e3ddb21a4e3eda439e1d77d",
+      "bytes": 1051406
     },
     "light-1440.jpg": {
-      "sha256": "8eef26ec806c2f39d869115f652f09c40f227a3c47bbabff4e347f70c71603ab",
-      "bytes": 1158989
+      "sha256": "131fa811b270de3634f5c2b46de4ba56ad681071b47308409347c7d536744a6c",
+      "bytes": 1141376
     },
     "light-320.jpg": {
-      "sha256": "6a1451ceec7a842dec9d759a01c3e66a885653cceced7a02c83a46038624bdaf",
-      "bytes": 972343
+      "sha256": "9346321d1f7cc28f875972619f8daef31e2dbded8f42961d4699db9d30a695de",
+      "bytes": 964833
     },
     "light-390.jpg": {
-      "sha256": "ab29f0802419286b359efc488cad99552b395d62eb0d7fb74b02636af696b33b",
-      "bytes": 983398
+      "sha256": "9e3d8461a88462fc7d6be69139bbe24698ad623abc47f0f692f2489899426124",
+      "bytes": 972165
     },
     "light-810.jpg": {
-      "sha256": "805ef974555fbd5351d214f73c7e50e85ae2f4e23e3a83886a802a875b139d01",
-      "bytes": 1033611
+      "sha256": "7b3917f752812fa830f2bfb60750885ca59d84d78ff760a0d20ea1f3b872310a",
+      "bytes": 1025510
+    },
+    "live-dark-320.png": {
+      "sha256": "fbe6b4aafb81ecc34e879ccd8f786ae1103e3f12505dcba3738c9456d312ce43",
+      "bytes": 864331
+    },
+    "live-light-1440.png": {
+      "sha256": "f759704009d6efa5b528a664ede5258beb7430728b675d78b6260cd06b24fdfe",
+      "bytes": 914967
+    },
+    "pdf-page-1.png": {
+      "sha256": "788ae2a99c94bae661d49b934d1dd9acd20e2c893e220e65212b5b829f7d9abf",
+      "bytes": 267642
+    },
+    "pdf-page-2.png": {
+      "sha256": "b319d7036f568229880b09a79e1bb090d17e569ec24c36d7aea94ac6f66d5169",
+      "bytes": 220680
+    },
+    "programs-contrast-dark-1024.png": {
+      "sha256": "ce06a15ce9d6f443c5bee92eb6b885ba22754dbf908173c42bad959440fc4f11",
+      "bytes": 140784
     },
     "programs-contrast-dark-1440.png": {
-      "sha256": "d6c4103aac33166069354352338e59a0772b64b40ab03c5e19092fe701925cdb",
-      "bytes": 142062
+      "sha256": "4dd185d755f4427e05092f5d8044c0bbab16c99a105d16904114ee08dadc12d2",
+      "bytes": 133832
+    },
+    "programs-contrast-dark-320.png": {
+      "sha256": "7d10ce6587d4f6348b7febf5f818031ed83c99856c3717a7889ffca426149928",
+      "bytes": 153393
     },
     "programs-contrast-dark-390.png": {
-      "sha256": "f639482365217cd5087cd42b61518c42b57a215930f9e0ada235bf3a18e3ae97",
-      "bytes": 150044
+      "sha256": "b111dc1ad607a0b0415b6126202ec768fff5aede439c2ba406d279933c4eae54",
+      "bytes": 149612
+    },
+    "programs-contrast-dark-810.png": {
+      "sha256": "9c02fe84759dd849cb595000843d967fca3c647bfdba9a5939e7354d17d0f34a",
+      "bytes": 153847
+    },
+    "programs-contrast-light-1024.png": {
+      "sha256": "6ef80d26c3c8f71eb9863a831b44ab4547d437c5c82902e0d5aa69b16daf183a",
+      "bytes": 136151
     },
     "programs-contrast-light-1440.png": {
-      "sha256": "a5521bfc4486c35e01d24356ff4ca09c30e595f9e2bb178ed4ee7af758d6b89f",
-      "bytes": 136874
+      "sha256": "666e17ac6b0a1b250587bb1dfde078f5ddeb14f80bd251f564f4b095f124810b",
+      "bytes": 128351
+    },
+    "programs-contrast-light-320.png": {
+      "sha256": "d2db8741a88299c218f0343aca533bd50586943012744c49646e530379c6673f",
+      "bytes": 147786
     },
     "programs-contrast-light-390.png": {
-      "sha256": "b3947d134d91c85078c5b0d9a90b4196da2108baaab9bc338b5a45599faa6774",
-      "bytes": 144853
+      "sha256": "7c178da1829e0a0998fbbdf2fdfed57d55568450d8a76e064d6433f382f0f783",
+      "bytes": 144927
+    },
+    "programs-contrast-light-810.png": {
+      "sha256": "4571f17751bb200990d8d2b870e1948dba69709752fcf8924018d2a3a2563132",
+      "bytes": 148894
+    },
+    "programs-dark-1024.png": {
+      "sha256": "153b578ff2b458184262a8193d89597ffa2effc89397b1fdee0bb04becbb5c30",
+      "bytes": 152403
     },
     "programs-dark-1440.png": {
-      "sha256": "5fddea17d045e45de5ec5d694c44ce2e712f6e4429b762696a774dc084f8b4a1",
-      "bytes": 151379
+      "sha256": "1d8a453c6c634f981a112f5121a1dfb0065a552be23eaa2c9214d979199766a1",
+      "bytes": 142745
+    },
+    "programs-dark-320.png": {
+      "sha256": "5524652bb9bb7d11ac998cdac8e2835594b678a3560bca078f3997fa8010cf62",
+      "bytes": 162439
     },
     "programs-dark-390.png": {
-      "sha256": "ee46f3b44dc422426317cab8ee1e5992216aae25db70c700ee41424a6cf74a72",
-      "bytes": 160459
+      "sha256": "3605d5ece01d8ee08489a36e6a4a40cb064796eed980ce372bd6a6c4f2e4fe3c",
+      "bytes": 159919
+    },
+    "programs-dark-810.png": {
+      "sha256": "d883334adf9f413deb99ef19a2edf06da58f01a530e2be5ec2508e7e7cc02baf",
+      "bytes": 165149
+    },
+    "programs-light-1024.png": {
+      "sha256": "3e085e6f1279c88ff7e6af7c7c49519f22ac58fa85ea7e6980b97ed68ab6e093",
+      "bytes": 151218
     },
     "programs-light-1440.png": {
-      "sha256": "a5ffe4f18bd4e7c89366f2cedadbddefd0df4cafb5fe648d19b15d9f3ff1ef5c",
-      "bytes": 150438
+      "sha256": "8e4d967e66bd6dfe38f52223372bad15302075d39aa49074f1532fad81b3b570",
+      "bytes": 142255
+    },
+    "programs-light-320.png": {
+      "sha256": "3b6d5d1ed3e819700423585f3c73eca5b901c723c2fa17036e3b3bc9e38ac45e",
+      "bytes": 161458
     },
     "programs-light-390.png": {
-      "sha256": "ce575fcbf1aa00f72ceec02c59c984ead57c0fa0861e11344c14105f800838b3",
-      "bytes": 159771
+      "sha256": "5bd95ae586e18656c4a351debd46cb2741ba3e4ed845a6517f8282ec31d0c026",
+      "bytes": 158642
+    },
+    "programs-light-810.png": {
+      "sha256": "a0c804ac1314b0d6b8058627dcbd763a3723d327d95a037ca85c616b57a099ca",
+      "bytes": 163053
     },
     "projects-dark-1440.png": {
-      "sha256": "11d4faf7640553dbfde82abcd4cd2c8ca8ed0e9ffea7f376ca1e6638eb675961",
-      "bytes": 150686
+      "sha256": "0dceba19897c174db8cd30faa6d43c8208a2eec829bc9f162afb7c6f42a03e6f",
+      "bytes": 152861
     },
     "projects-dark-390.png": {
-      "sha256": "f55beab1b11dedfbcb3a935b81c65a8199b7d3ac0bee5d163cc8c5d4a0f09a82",
-      "bytes": 171469
+      "sha256": "e92f02cebbeb252dc07c6b5fbd99db079155d051fa3e932aa4cc589700ceb0ec",
+      "bytes": 170503
     },
-    "resume-1.png": {
-      "sha256": "c5ff831ff3de2974e54cfbf45c8969cdab15c5e0486509b0d82e491fa4731a26",
-      "bytes": 272817
+    "review-programs-1024-0.jpg": {
+      "sha256": "cdb29319c6192d2eb62b52bdddb6b86fe54c0c2ec3f73c8557e99c9987e38c14",
+      "bytes": 642203
     },
-    "resume-2.png": {
-      "sha256": "53c19c97c0a5622b420182826306f7387cf07027a132503cb7d0e7587af7fb89",
-      "bytes": 208701
+    "review-programs-1024-1.jpg": {
+      "sha256": "357b7ccdde8d031c17916229eef06b3719fae86d09230ccf509d411135933249",
+      "bytes": 141099
+    },
+    "review-programs-320-0.jpg": {
+      "sha256": "e0963a1cb32f07d605e64fdf4cae918167623bde96a530e5a85d986918adf30d",
+      "bytes": 226852
+    },
+    "review-programs-320-1.jpg": {
+      "sha256": "192c95d07f102a9dbfb7b9c578eaefc938fba3f35ab29de601a9f72cedea74a5",
+      "bytes": 225723
+    },
+    "review-programs-320-2.jpg": {
+      "sha256": "bf854d717ef6df9de02ffa38dc91a580dc26ef5da157acf14f0283e025debdfc",
+      "bytes": 221733
+    },
+    "review-programs-320-3.jpg": {
+      "sha256": "b807acefbe80deae1b50efb304aba2949468238c9c9f1a0d82efffb921ecb778",
+      "bytes": 35403
+    },
+    "review-programs-390-0.jpg": {
+      "sha256": "6bb55f314e9584ffac8489399bd8a64d0dafbc402a518eb29bec062944bcdcad",
+      "bytes": 267832
+    },
+    "review-programs-390-1.jpg": {
+      "sha256": "f6b0ab716f95406470e6c0be11a126512e4444d8c34bc6cb66d753d5945bb152",
+      "bytes": 274498
+    },
+    "review-programs-390-2.jpg": {
+      "sha256": "fc2219e7e3bad9a60e34edcc270777ffadfa572cc31411e2dcfe766d780d3d0a",
+      "bytes": 181125
+    },
+    "review-programs-810-0.jpg": {
+      "sha256": "66fbcf10bbb78d961fa07badec9972cca351213051dcb3f66a79f12f677be71b",
+      "bytes": 425073
+    },
+    "review-programs-810-1.jpg": {
+      "sha256": "66fa20cb45ec1271f54c5e8220ca8349ba98dfa788538888b437439110a81d6a",
+      "bytes": 366224
+    },
+    "review-skills-1024-0.jpg": {
+      "sha256": "d2769774fc65dc82725d38a3d35fcf73cf5e89e3d4f2f7780cfbd95b3905b3ce",
+      "bytes": 557168
+    },
+    "review-skills-1024-1.jpg": {
+      "sha256": "4f941957abf5195777b36445f7bd6b6db99ad88d11e1e661b51fdc75dce8bd94",
+      "bytes": 67838
+    },
+    "review-skills-320-0.jpg": {
+      "sha256": "35e8da542b3812af23fb7578c2a5c1b1ddddad8ccca702cca58bb8fce49f2891",
+      "bytes": 200775
+    },
+    "review-skills-320-1.jpg": {
+      "sha256": "e6e30769e269d557aeef2aa39fff301827240a30dd49703ed2c0469ca2892726",
+      "bytes": 211625
+    },
+    "review-skills-320-2.jpg": {
+      "sha256": "88c24784d22150893b23da61866601a3c14d881abb1a9d61720fc34b1c4fb4b4",
+      "bytes": 135851
+    },
+    "review-skills-390-0.jpg": {
+      "sha256": "14d7617ba544d726b21146318005f61263b1e0e006bbee847c0895adc548b47f",
+      "bytes": 219258
+    },
+    "review-skills-390-1.jpg": {
+      "sha256": "9874002bdfc52f1059b4934a29693565ec71f1d7f6286ee30420c2a2a4c03e30",
+      "bytes": 246230
+    },
+    "review-skills-390-2.jpg": {
+      "sha256": "1b169fbd2cf3fd8537bf6d8f1446f285e7cb725f845674e0f2fad1096ffeec79",
+      "bytes": 98777
+    },
+    "review-skills-810-0.jpg": {
+      "sha256": "6c950b5ef55f6f4f954173dddca96dfdf88ca896c3d30c5dc5ba8f0302f05c11",
+      "bytes": 433827
+    },
+    "review-skills-810-1.jpg": {
+      "sha256": "58d9147ba85e57c20e86f6fcbfd22eb9e8912e4c4f00510846ebcc40cca8b1b0",
+      "bytes": 154243
+    },
+    "skills-contrast-dark-1024.png": {
+      "sha256": "3dca43f0dc67abb463f0f945ca06a4f5ea5a6d9b7de0489891464703a183a068",
+      "bytes": 104967
+    },
+    "skills-contrast-dark-1440.png": {
+      "sha256": "234b6a05f8c5fdb7e6edd7e430270d71689f56d127bd5654f4bd21fb8aa415cf",
+      "bytes": 107910
+    },
+    "skills-contrast-dark-320.png": {
+      "sha256": "0c48fbf2c05c027eaeecccbbf5001ece718d69643518c973c7a8bcd015d0752a",
+      "bytes": 108401
+    },
+    "skills-contrast-dark-390.png": {
+      "sha256": "e4a120afba437f9c39077cfbe4d033c5cd17344d6ddbd1287621f13e7be2ee33",
+      "bytes": 114677
+    },
+    "skills-contrast-dark-810.png": {
+      "sha256": "195cccf964a30d4c964f7f43ade84cf3c2e461e72e96d7d6d493278afd0406e2",
+      "bytes": 116478
+    },
+    "skills-contrast-light-1024.png": {
+      "sha256": "778a9eba35b080cf1552d17f59d53b8f3737f9e944f486224db912b0fa13632b",
+      "bytes": 101469
+    },
+    "skills-contrast-light-1440.png": {
+      "sha256": "854686bc7d0aec26d46dbb382986c02495f9af2394f597ebbec95f243b4493ba",
+      "bytes": 104210
+    },
+    "skills-contrast-light-320.png": {
+      "sha256": "8fef13a88bff2f02769eea0727a82b35a2bf8e7c9d854d3a2cf4447c11b74da3",
+      "bytes": 102271
+    },
+    "skills-contrast-light-390.png": {
+      "sha256": "79ad2835d89454e7ba37d9075ad236c1dae422896b196d74a04bdab2726e9f8b",
+      "bytes": 109802
+    },
+    "skills-contrast-light-810.png": {
+      "sha256": "53b6af4ad64af298a2f2e56b6a707bca92e8030f43fbf8e6fedec990e308f90b",
+      "bytes": 111707
+    },
+    "skills-dark-1024.png": {
+      "sha256": "50f091cab58eb0850f096f2cf3423558dae736509330a57080651e6d0a3ce07f",
+      "bytes": 109928
     },
     "skills-dark-1440.png": {
-      "sha256": "81e6affafbeefe662222488502b4ed95af43c5e4b00b0a64bd2680d4f9a663e4",
-      "bytes": 115070
+      "sha256": "69b4cb48b31650e38a039e3fdac827ad3e8240b25711aa077a6641738ad95f94",
+      "bytes": 112603
+    },
+    "skills-dark-320.png": {
+      "sha256": "dfe697c2017292142cbef02efc4ccc76c38085d44130a372e80adaf39a172696",
+      "bytes": 112350
     },
     "skills-dark-390.png": {
-      "sha256": "ba9c2792ba5ed0d1986642ff66946626abc34845947098d169d5c1c7030b268a",
-      "bytes": 132359
+      "sha256": "6a30ffb11dcbbfce8238551fcd9a7997ce578d2b1397f08a507dc3c3dd352483",
+      "bytes": 121186
+    },
+    "skills-dark-810.png": {
+      "sha256": "fc3d901135b9559797ff437fb12ca71eb41726b9a5deb54c1056b519904cf088",
+      "bytes": 122300
+    },
+    "skills-light-1024.png": {
+      "sha256": "9c120de02da68791acd60d8049a6fe202493766f78647c2c2ffda1de0937008c",
+      "bytes": 109490
+    },
+    "skills-light-1440.png": {
+      "sha256": "98ae55aea88ad7881c57c26f533e548b5f26f05a443fc062e4622b46b127797f",
+      "bytes": 112333
+    },
+    "skills-light-320.png": {
+      "sha256": "f79ff96b72822af0cd0f6e0a86c8066c96b400a269a8cd9d00d396b4e7e33f7f",
+      "bytes": 111026
+    },
+    "skills-light-390.png": {
+      "sha256": "7f9746068f2ddd1bbecd6eeaedcd942e016df5106383e216163625cb4faa5291",
+      "bytes": 119652
+    },
+    "skills-light-810.png": {
+      "sha256": "558aaa30550da91f76dba86c85bff3ed913abaab6a1a3c89d102c0edf390accf",
+      "bytes": 121391
     }
   },
-  "pdf_inspection": [
-    {
-      "page": 1,
-      "text_bounds": [
-        26.829999923706055,
-        21.140024185180664,
-        585.1701049804688,
-        656.489990234375
-      ],
-      "bottom_whitespace_points": 135.510009765625,
-      "font_sizes": [
-        9.5,
-        10.0,
-        10.5,
-        11.0,
-        18.0
-      ],
-      "clipped_text": [],
-      "links": [
-        {
-          "uri": "mailto:WylElias.123@gmail.com",
-          "rect": [
-            356.3399963378906,
-            75.0,
-            469.8399963378906,
-            85.0
-          ]
-        },
-        {
-          "uri": "https://linkedin.com/in/wylelias",
-          "rect": [
-            122.5199966430664,
-            89.0,
-            226.42999267578125,
-            99.0
-          ]
-        },
-        {
-          "uri": "https://github.com/howlcipher",
-          "rect": [
-            234.58999633789062,
-            89.0,
-            334.05999755859375,
-            99.0
-          ]
-        },
-        {
-          "uri": "https://howlcipher.github.io/william_elias/",
-          "rect": [
-            342.2300109863281,
-            89.0,
-            489.489990234375,
-            99.0
-          ]
-        }
-      ]
+  "capture_scripts": {
+    "capture_site.py": {
+      "sha256": "1f970d90dca4f62adbf3e9fe96e8312e497dc453bb681b9c1c8750c243911563",
+      "bytes": 5050
     },
-    {
-      "page": 2,
-      "text_bounds": [
-        26.829999923706055,
-        32.52998733520508,
-        585.1701049804688,
-        618.489990234375
-      ],
-      "bottom_whitespace_points": 173.510009765625,
-      "font_sizes": [
-        9.0,
-        10.0,
-        10.5,
-        11.0
-      ],
-      "clipped_text": [],
-      "links": [
-        {
-          "uri": "https://github.com/howlcipher/howlplane",
-          "rect": [
-            26.829999923706055,
-            266.5,
-            174.11000061035156,
-            276.5
-          ]
-        },
-        {
-          "uri": "https://github.com/howlcipher/baseball_optimizer",
-          "rect": [
-            26.829999923706055,
-            346.5,
-            212.4499969482422,
-            356.5
-          ]
-        }
-      ]
+    "live_smoke.py": {
+      "sha256": "527e4cca1e5bc23ffde4d890efe4dff3d0f3605696a8f87008f824990ad8f82a",
+      "bytes": 2436
     }
-  ],
-  "website_inspection": [
-    {
-      "viewport": 320,
-      "mode": "dark",
-      "geometry": {
-        "width": 320,
-        "scrollWidth": 320,
-        "theme": null,
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 320,
-      "mode": "light",
-      "geometry": {
-        "width": 320,
-        "scrollWidth": 320,
-        "theme": "light",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 320,
-      "mode": "contrast-dark",
-      "geometry": {
-        "width": 320,
-        "scrollWidth": 320,
-        "theme": "colorblind",
-        "darkContrast": true,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 320,
-      "mode": "contrast-light",
-      "geometry": {
-        "width": 320,
-        "scrollWidth": 320,
-        "theme": "colorblind",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 390,
-      "mode": "dark",
-      "geometry": {
-        "width": 390,
-        "scrollWidth": 390,
-        "theme": null,
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 390,
-      "mode": "light",
-      "geometry": {
-        "width": 390,
-        "scrollWidth": 390,
-        "theme": "light",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 390,
-      "mode": "contrast-dark",
-      "geometry": {
-        "width": 390,
-        "scrollWidth": 390,
-        "theme": "colorblind",
-        "darkContrast": true,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 390,
-      "mode": "contrast-light",
-      "geometry": {
-        "width": 390,
-        "scrollWidth": 390,
-        "theme": "colorblind",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 810,
-      "mode": "dark",
-      "geometry": {
-        "width": 810,
-        "scrollWidth": 810,
-        "theme": null,
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 810,
-      "mode": "light",
-      "geometry": {
-        "width": 810,
-        "scrollWidth": 810,
-        "theme": "light",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 810,
-      "mode": "contrast-dark",
-      "geometry": {
-        "width": 810,
-        "scrollWidth": 810,
-        "theme": "colorblind",
-        "darkContrast": true,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 810,
-      "mode": "contrast-light",
-      "geometry": {
-        "width": 810,
-        "scrollWidth": 810,
-        "theme": "colorblind",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1024,
-      "mode": "dark",
-      "geometry": {
-        "width": 1024,
-        "scrollWidth": 1024,
-        "theme": null,
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1024,
-      "mode": "light",
-      "geometry": {
-        "width": 1024,
-        "scrollWidth": 1024,
-        "theme": "light",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1024,
-      "mode": "contrast-dark",
-      "geometry": {
-        "width": 1024,
-        "scrollWidth": 1024,
-        "theme": "colorblind",
-        "darkContrast": true,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1024,
-      "mode": "contrast-light",
-      "geometry": {
-        "width": 1024,
-        "scrollWidth": 1024,
-        "theme": "colorblind",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1440,
-      "mode": "dark",
-      "geometry": {
-        "width": 1440,
-        "scrollWidth": 1440,
-        "theme": null,
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1440,
-      "mode": "light",
-      "geometry": {
-        "width": 1440,
-        "scrollWidth": 1440,
-        "theme": "light",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1440,
-      "mode": "contrast-dark",
-      "geometry": {
-        "width": 1440,
-        "scrollWidth": 1440,
-        "theme": "colorblind",
-        "darkContrast": true,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    },
-    {
-      "viewport": 1440,
-      "mode": "contrast-light",
-      "geometry": {
-        "width": 1440,
-        "scrollWidth": 1440,
-        "theme": "colorblind",
-        "darkContrast": false,
-        "brokenImages": 0,
-        "sections": [
-          "stats-target",
-          "about",
-          "programs",
-          "experience",
-          "projects",
-          "skills",
-          "education",
-          "contact-cta"
-        ]
-      },
-      "page_errors": []
-    }
-  ],
-  "external_destinations": {
-    "checked_at": "2026-09-07T20:27:52.747411+00:00",
-    "results": [
+  },
+  "validation": {
+    "environment": "Python 3.12, pinned requirements-dev.txt; local Playwright Chromium ubuntu24.04-x64 override on Ubuntu 26.04.",
+    "initial_factual_contract_reproduction": "12 failed against the old content.",
+    "commands": [
       {
-        "url": "https://linkedin.com/in/wylelias",
-        "status": 200,
-        "final_url": "https://linkedin.com/in/wylelias",
-        "content_type": "text/html; charset=utf-8",
-        "title": "Checking your browser - reCAPTCHA"
+        "command": "/tmp/portfolio-ci/bin/python -W error scripts/build_config.py",
+        "exit_code": 0
       },
       {
-        "url": "https://github.com/howlcipher",
-        "status": 200,
-        "final_url": "https://github.com/howlcipher",
-        "content_type": "text/html; charset=utf-8",
-        "title": "howlcipher (William Elias) \u00b7 GitHub"
+        "command": "/tmp/portfolio-ci/bin/python -W error scripts/build_html.py",
+        "exit_code": 0
       },
       {
-        "url": "https://github.com/howlcipher/william_elias",
-        "status": 200,
-        "final_url": "https://github.com/howlcipher/william_elias",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/william_elias: Senior DevOps / Platform Engineer portfolio - CI/CD, release automation, production reliability, Python/.NET tooling, and agentic AI engineering. \u00b7 GitHub"
+        "command": "/tmp/portfolio-ci/bin/python -W error scripts/generate_resume_pdf.py",
+        "exit_code": 0
       },
       {
-        "url": "https://github.com/howlcipher/howlplane",
-        "status": 200,
-        "final_url": "https://github.com/howlcipher/howlplane",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/howlplane: Autonomous AI engineering control plane: orchestration, persistent coding agents, adversarial falsification, and governance. \u00b7 GitHub"
+        "command": "PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 /tmp/portfolio-ci/bin/python -m pytest tests/ -W error -q",
+        "exit_code": 0,
+        "output": "........................................................................ [ 31%]\n........................................................................ [ 62%]\n........................................................................ [ 93%]\n...............                                                          [100%]\n231 passed in 52.49s"
       },
       {
-        "url": "https://github.com/howlcipher/baseball_optimizer",
-        "status": 200,
-        "final_url": "https://github.com/howlcipher/baseball_optimizer",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/baseball_optimizer \u00b7 GitHub"
+        "command": "/tmp/portfolio-tools/bin/flake8 scripts/generate_resume_pdf.py tests/test_factual_corrections.py tests/test_resume_content.py tests/test_pdf_skill_context.py tests/test_hiring_contract.py tests/test_browser.py --extend-ignore E501",
+        "exit_code": 0
       },
       {
-        "url": "https://github.com/howlcipher/ai_router",
+        "command": "git diff --check",
+        "exit_code": 0
+      }
+    ],
+    "generated_checks": "All six outputs fresh; independent repeat builds byte-identical.",
+    "content_signature": "SSH signature verified against the configured local public signing key using a temporary allowed-signers file."
+  },
+  "publication": {
+    "content_pr_checks": "SUCCESS before merge",
+    "content_main_ci": "https://github.com/howlcipher/william_elias/actions/runs/34222570671",
+    "content_main_ci_result": "success",
+    "content_pages": "https://github.com/howlcipher/william_elias/actions/runs/34222570352",
+    "content_pages_result": "success",
+    "live_assets": [
+      {
+        "url": "https://howlcipher.github.io/william_elias/index.html",
         "status": 200,
-        "final_url": "https://github.com/howlcipher/ai_router",
         "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/ai_router: a router for selecting the proper model for the job us ai for dev \u00b7 GitHub"
+        "sha256": "bdc2c015a4c87898bae53f833f86f8c2c03240c3645b8a236ac7d47538108276",
+        "matches_main": true
       },
       {
-        "url": "https://github.com/howlcipher/howlframe",
+        "url": "https://howlcipher.github.io/william_elias/config.js",
         "status": 200,
-        "final_url": "https://github.com/howlcipher/howlframe",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/howlframe: HowlFrame is a verified execution platform for AI-native and adaptive software, combining deterministic authority boundaries with bounded probabilistic reasoning. \u00b7 GitHub"
+        "content_type": "application/javascript; charset=utf-8",
+        "sha256": "a02441c0827c485396e45179120465157e56e9377e72f7496680f1fd391fe76a",
+        "matches_main": true
       },
       {
-        "url": "https://github.com/howlcipher/redistricting-map",
+        "url": "https://howlcipher.github.io/william_elias/style.css",
         "status": 200,
-        "final_url": "https://github.com/howlcipher/redistricting-map",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/redistricting-map \u00b7 GitHub"
+        "content_type": "text/css; charset=utf-8",
+        "sha256": "6ecd64a70075844a2322c3e264993f14d648e4bf5cb75c9bae5d7f4d4ca57420",
+        "matches_main": true
       },
       {
-        "url": "https://github.com/howlcipher/password_arena",
+        "url": "https://howlcipher.github.io/william_elias/script.js",
         "status": 200,
-        "final_url": "https://github.com/howlcipher/password_arena",
-        "content_type": "text/html; charset=utf-8",
-        "title": "GitHub - howlcipher/password_arena \u00b7 GitHub"
-      },
-      {
-        "url": "https://howlcipher.github.io/william_elias/",
-        "status": 200,
-        "final_url": "https://howlcipher.github.io/william_elias/",
-        "content_type": "text/html; charset=utf-8",
-        "title": "William Elias | Software, DevOps &amp; Automation Engineer"
+        "content_type": "application/javascript; charset=utf-8",
+        "sha256": "c98fdbc7b33eb8cfaf028ce82940002288f9f84583f5ac81520f1eb43d96c7ca",
+        "matches_main": true
       },
       {
         "url": "https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf",
         "status": 200,
-        "final_url": "https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf",
-        "content_type": "application/pdf"
+        "content_type": "application/pdf",
+        "sha256": "6f4af4053da8435bf2a8ab4368fe75f55315ef3f7dec58df1a84f719b728051a",
+        "matches_main": true
+      },
+      {
+        "url": "https://howlcipher.github.io/william_elias/preview.jpg",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "sha256": "636e8091e57a8ad5388bb9839ac7fae1b6b251cc1945042ac39e8f0903576c4e",
+        "matches_main": true
+      },
+      {
+        "url": "https://howlcipher.github.io/william_elias/robots.txt",
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "sha256": "7140470d13d5081b0b4376b13f54d485fe373e8a060053ba22e548752e2b922a",
+        "matches_main": true
+      },
+      {
+        "url": "https://howlcipher.github.io/william_elias/sitemap.xml",
+        "status": 200,
+        "content_type": "application/xml",
+        "sha256": "91f2e89decd69f9db82c4135ba85c1164f2451611dc4a04904542b4dbda5cd15",
+        "matches_main": true
       }
     ],
-    "interpretation": "Ten destinations returned expected pages or PDF content. LinkedIn returned HTTP 200 with a reCAPTCHA challenge: profile content verification is inaccessible, not confirmed broken."
-  },
-  "validation": {
-    "python": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
-    "dependencies": {
-      "pytest": "9.0.3",
-      "playwright": "1.60.0",
-      "pytest-playwright": "0.8.0",
-      "fpdf2": "2.8.7",
-      "pypdf": "6.14.2",
-      "Pillow": "12.3.0"
-    },
-    "local_browser_platform_override": "ubuntu24.04-x64",
-    "commands": [
+    "live_browser": [
       {
-        "name": "build_config",
-        "command": [
-          "/tmp/portfolio-ci/bin/python",
-          "-W",
-          "error",
-          "scripts/build_config.py"
-        ],
-        "exit_code": 0,
-        "output": ""
+        "width": 320,
+        "theme": "dark",
+        "status": 200,
+        "overflow": false,
+        "page_errors": [],
+        "keyboard_disclosures": "passed",
+        "pdf_download_matches_main": true
       },
       {
-        "name": "build_html",
-        "command": [
-          "/tmp/portfolio-ci/bin/python",
-          "-W",
-          "error",
-          "scripts/build_html.py"
-        ],
-        "exit_code": 0,
-        "output": ""
-      },
-      {
-        "name": "build_pdf",
-        "command": [
-          "/tmp/portfolio-ci/bin/python",
-          "-W",
-          "error",
-          "scripts/generate_resume_pdf.py"
-        ],
-        "exit_code": 0,
-        "output": "Wrote /run/media/system/tallgeese/dev/william_elias/William_Elias_Resume.pdf\n"
-      },
-      {
-        "name": "pytest",
-        "command": [
-          "/tmp/portfolio-ci/bin/python",
-          "-m",
-          "pytest",
-          "tests/",
-          "-W",
-          "error",
-          "-q"
-        ],
-        "exit_code": 0,
-        "output": "........................................................................ [ 35%]\n........................................................................ [ 71%]\n..........................................................               [100%]\n202 passed in 54.00s\n"
-      },
-      {
-        "name": "flake8_changed",
-        "command": [
-          "/tmp/portfolio-tools/bin/flake8",
-          "scripts/generate_resume_pdf.py",
-          "scripts/build_html.py",
-          "tests/test_browser.py",
-          "tests/test_hiring_contract.py",
-          "tests/test_generate_resume_pdf.py",
-          "tests/test_resume_content.py",
-          "tests/test_seo_and_navigation.py",
-          "tests/test_generated_artifacts.py",
-          "tests/test_pdf_skill_context.py",
-          "--extend-ignore",
-          "E501"
-        ],
-        "exit_code": 0,
-        "output": ""
-      },
-      {
-        "name": "flake8_new",
-        "command": [
-          "/tmp/portfolio-tools/bin/flake8",
-          "tests/test_generated_artifacts.py",
-          "tests/test_pdf_skill_context.py"
-        ],
-        "exit_code": 0,
-        "output": ""
-      },
-      {
-        "name": "diff_check",
-        "command": [
-          "git",
-          "diff",
-          "--check"
-        ],
-        "exit_code": 0,
-        "output": ""
+        "width": 1440,
+        "theme": "light",
+        "status": 200,
+        "overflow": false,
+        "page_errors": [],
+        "keyboard_disclosures": "passed",
+        "pdf_download_matches_main": true
       }
-    ]
-  }
+    ],
+    "metadata": {
+      "description": "Software, DevOps & Automation Engineer portfolio — Python/.NET software, automation, CI/CD, production reliability, security, and AI-enabled engineering.",
+      "homepageUrl": "https://howlcipher.github.io/william_elias/",
+      "repositoryTopics": [
+        {
+          "name": "agentic-ai"
+        },
+        {
+          "name": "azure-devops"
+        },
+        {
+          "name": "cicd"
+        },
+        {
+          "name": "developer-productivity"
+        },
+        {
+          "name": "devops"
+        },
+        {
+          "name": "dotnet"
+        },
+        {
+          "name": "platform-engineering"
+        },
+        {
+          "name": "production-engineering"
+        },
+        {
+          "name": "python"
+        },
+        {
+          "name": "ai-engineering"
+        },
+        {
+          "name": "automation"
+        },
+        {
+          "name": "fastapi"
+        },
+        {
+          "name": "security-automation"
+        },
+        {
+          "name": "software-engineering"
+        },
+        {
+          "name": "production-reliability"
+        }
+      ]
+    },
+    "metadata_action": "Verified aligned; no changes necessary.",
+    "followup": "This manifest is committed in the documentation follow-up; its own commit/PR and final deployment identifiers are reported at task completion."
+  },
+  "remaining_factual_uncertainty": "None identified within the requested corrections. Professional facts use direct user confirmation; public project claims use the inspected snapshots."
 }

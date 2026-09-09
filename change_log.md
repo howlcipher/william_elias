@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-09-08
+
+### Factual correction publication
+
+* Corrected the canonical resume and portfolio content for the confirmed production role, location, technology scope, credential remediation work, authentication troubleshooting, and academic foundations.
+* Regenerated the website, metadata, PDF, and supporting assets from `resume.json`.
+* Added regression coverage for the corrected claims and the explicit PDF skill selections.
+* Corrections follow William's direct confirmation: Python/Git/BFG credential remediation with the measured 2,832-file / 67-secret / approximately 25-second scan; Blazor Interactive Server portal with no invented test suites; Auth0 identity troubleshooting; transparent role descriptor and Hybrid location.
+* Preserved durable delivery validation metrics and removed changing rollout/adoption status. Merged web skills into Software & Backend, removed the top-level POC category, and kept the expanded academic technical foundations website-only.
+* Selected repository-grounded HowlPlane and RedrawUS for the PDF; retained broader website projects and the existing visual design. The two-page PDF retains 10-point body text. All 20 viewport/theme captures show no horizontal overflow, broken images, or page errors, and desktop collapsed cards retain aligned disclosure rows.
+* Completed 231 tests, including factual contracts, Playwright interaction/layout tests, and six-artifact freshness/repeatability checks; local lint and whitespace checks passed.
+* Main content was published through PR #10 (`97a0139`, merge `4d361f1`) with successful CI and Pages deployment. Final documentation replaces the stale evidence manifest with current hashes, visual results, project-source provenance, and live artifact comparisons. The prior optimization's logs remain in Git history.
+
 ## 2026-09-07 — Final Polish and Metadata Alignment
 
 Aligned public GitHub repository metadata with canonical portfolio positioning and polished Engineering Impact card visual layout.
@@ -48,10 +61,3 @@ Finished the inherited portfolio optimization with evidence-led software, automa
 The final Python 3.12 gate passed all 202 tests with warnings treated as errors. All six generated outputs passed isolated freshness and repeatability checks; both lint checks and whitespace validation passed.
 
 Final commands and results are recorded in `documentation/portfolio_optimization_evidence.json` and explained in `documentation/portfolio_optimization_handoff.md`. Reviewed both PDF pages and desktop/mobile screenshots in all four themes. LinkedIn presents a reCAPTCHA challenge; no link was confirmed broken. Local pinned Playwright uses its Ubuntu 24.04 Chromium fallback on the Ubuntu 26.04 host. Publication remains a separate action; this task does not push or deploy.
-## 2026-09-08
-
-### Factual correction publication
-
-* Corrected the canonical resume and portfolio content for the confirmed production role, location, technology scope, credential remediation work, authentication troubleshooting, and academic foundations.
-* Regenerated the website, metadata, PDF, and supporting assets from `resume.json`.
-* Added regression coverage for the corrected claims and the explicit PDF skill selections.

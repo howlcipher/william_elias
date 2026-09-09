@@ -24,7 +24,7 @@ The current content incorporates William's direct factual corrections. Security 
 
 The current role is **Production Support Engineer | DevOps & Automation**, with the latter a résumé descriptor, in **Auburn Hills, MI · Hybrid**. Remote availability describes the desired next role. Additional Technical Foundations covers academic/project Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, and Wireshark, without implying professional forensics employment.
 
-Treat this canonical general portfolio and résumé as complete after the factual-correction publication checks. Future content changes should follow new real experience or a specific target role. See the [current handoff](documentation/portfolio_optimization_handoff.md) for provenance and validation.
+Treat this canonical general portfolio and résumé as complete after the factual-correction publication checks. Future content changes should follow new real experience or a specific target role. See the [current handoff](documentation/portfolio_optimization_handoff.md) for provenance and validation. The [evidence manifest](documentation/portfolio_optimization_evidence.json) records 231 passing tests, two-page PDF inspection, 20 viewport/theme checks, and byte-identical live artifact verification following publication in PR #10.
 
 ## Deployment & Architecture
 - **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
