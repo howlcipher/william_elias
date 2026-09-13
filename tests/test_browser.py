@@ -517,10 +517,10 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 6
+    assert len(cards) == 7
 
     # Verify each pair in 2-column layout has equal height and aligned disclosure rows
-    for i in range(0, 6, 2):
+    for i in range(0, len(cards) - 1, 2):
         box_a = cards[i].bounding_box()
         box_b = cards[i + 1].bounding_box()
         assert abs(box_a["height"] - box_b["height"]) <= 1.5, (
@@ -560,7 +560,7 @@ def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 6
+    assert len(cards) == 7
 
     prev_bottom = 0
     grid_box = page.locator(".programs-grid").bounding_box()

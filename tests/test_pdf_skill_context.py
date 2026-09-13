@@ -34,7 +34,7 @@ def test_current_pdf_preserves_ai_and_go_experience_levels(tmp_path):
     skills = {skill["category"]: skill for skill in config["skills"]}
     expected = {
         "AI-Enabled Engineering": "Internal tools & projects",
-        "Automation": "Python/PowerShell professionally; Go in projects",
+        "Automation": "Python/PowerShell professionally; Go for deployment tooling",
     }
     output = tmp_path / "resume.pdf"
     build(config, output)
