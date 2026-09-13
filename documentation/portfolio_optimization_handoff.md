@@ -1,64 +1,68 @@
 # Portfolio factual-correction handoff
 
-This is the current-state handoff for the final factual correction and skills reconciliation. William's direct confirmation supersedes the earlier portfolio wording and tests. The errors were in the portfolio's description of his work, not evidence that the underlying work was incorrect. Previous commits remain in Git history.
+This is the current-state handoff for the independent work-machine audit update. The audit inspected 10 work repositories, with 9 active repositories evaluated through git history, repository contents, internal tracking data, and implementation artifacts. Its findings supersede the earlier factual-correction pass; previous commits remain in Git history.
 
 ## Reconciled starting state
 
-Started from clean, synchronized `main` at `0ef518a`, after fetching origin. Previous polish PR #9 was already merged. The prior design, native Engineering Impact disclosures, static HTML template, two-page PDF generator, and broad GitHub description/topics were present. No unrelated local changes existed. Content work used `fix/resume-factual-corrections`. It was committed and merged while this task was paused: signed commit `97a01397edda6f97e44fa0f1556c81ff2aeba13a`, [PR #10](https://github.com/howlcipher/william_elias/pull/10), merge `4d361f1d7a658e31f5791ea41526c6a2c9f7a061`. On resumption, clean/current main and successful PR CI, main CI, and Pages runs were verified. `docs/portfolio-truth-verification` completes the remaining evidence-documentation work.
+Started from clean, synchronized `main` after the 2026-09-08 factual-correction publication. The prior design, native Engineering Impact disclosures, static HTML template, two-page PDF generator, and broad GitHub description/topics were present. Content work used the repository's normal generator workflow; `resume.json` remains the canonical professional-content source.
 
-`resume.json` remains the canonical professional-content source. The headline remains **Software, DevOps & Automation Engineer**, supported by **Software • Automation • Delivery • Production Reliability**. AI remains one part of that identity. The About section retains three concise paragraphs and the existing layout and section order.
+The headline was changed to **DevOps, Platform & Automation Engineer**, supported by **CI/CD • Developer Tooling • Security Automation • Production Reliability**, because the audit's strongest role signals were DevOps Engineer, Azure DevOps Engineer, Production Engineer, and Infrastructure Automation Engineer, with moderate-strong signal for Platform Engineer and DevSecOps Engineer.
 
-## Directly confirmed corrections
+## Directly corrected claims
 
-| Area | Incorrect previous wording | Correct current content |
+| Area | Prior disproven / overstated wording | Correct current content |
 | --- | --- | --- |
-| Security work | .NET 8/C# utility, Azure Key Vault migration, integrity-verified rollback, Managed Identity, xUnit, 62 automated tests, migration-path self-review | Python scans of source code and Git history; BFG Repo-Cleaner history cleanup across 100+ repositories, completed; measured 2,832 files / 67 distinct secrets / approximately 25 seconds. No automated tests for this tool. |
-| Security technologies | C#, Azure Key Vault, Managed Identity, xUnit, Python, PowerShell | Python, Git, BFG Repo-Cleaner, Credential Remediation, Git History Remediation; compact PDF line: Python, Git, BFG Repo-Cleaner. |
-| Internal portal | Razor Pages, xUnit, 156 automated tests, FastAPI in the portal technology list | .NET 8 Blazor Web App using Interactive Server; per-module policies, database-backed workflows, permanently retained SOX audit trail, DBA approve-only scripts, live-object diffing, pre-CAB visibility, service-desk request tracking. |
-| Portal technologies | ASP.NET Core 8, Razor Pages, C#, SQL Server, SQLite, xUnit, FastAPI | C#, .NET 8, Blazor, ASP.NET Core, SQL Server, SQLite. FastAPI remains on separate professional dashboards/tooling. |
-| Identity | Unsupported Azure identity/security tools | Auth0, OAuth/OIDC, IAM and authentication troubleshooting; no expanded identity architecture ownership. |
-| Employment | Hyphenated descriptor and current role marked Remote | Production Support Engineer **\|** DevOps & Automation; Auburn Hills, MI · Hybrid. The first part is the official title, the second a résumé descriptor. U.S. remote availability remains the next-role preference. |
-| Delivery | First-deployment/approval, zero-deployment, go/no-go adoption commentary | Durable scope, implementation, and validation evidence without a current deployment count. |
+| CI/CD scope | "~60 applications" as the headline metric; implied ~60-application estate | 60 repositories, 104 applications, 171 application-to-server deployment combinations, 327 deployment paths, 28 repositories with completed standardized-pipeline rollout, 275 independently verified inventory entries |
+| Credential remediation | "100+ repositories credential-remediated" | Credential scan/reduction/classification: thousands of files scanned, 866 findings reduced/classified to 67 distinct exposed secrets; Azure Key Vault migration is ongoing |
+| 2,832 scan number | "processed 2,832 files and identified 67 distinct secrets" (implied files contained findings) | 2,832 configuration files scanned in one representative-host pass; 866 findings reduced to 67 distinct secrets; 619 connection-string instances found across 40 production applications |
+| Git history cleanup | "used BFG Repo-Cleaner to scrub historical records across 100+ repositories, completing the remediation" | Built and operated Git-history remediation automation with repository discovery, interchangeable rewrite engines, and coordinated force-push cleanup; no unverified repository count attached |
+| Server migration / DR | "co-led production/test server migration", "zero-downtime cutover", "completed DR cutover" | Investigated server/container migration paths and audited disaster-recovery pipeline definitions to identify broken or obsolete deployment paths and support remediation planning |
+| Deployment automation | Under-stated / absent | Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle |
+| Security/backend | Under-stated / absent | Designed a scoped OAuth 2.1 resource server integrating an enterprise AI assistant with internal engineering documentation |
+| Internal portal | Only the .NET 8 Blazor portal was described | Added the verified ASP.NET Core production-support application; kept existing Blazor claims where not contradicted, treating them as a separate application until the follow-up audit resolves scope |
 
-Preserved delivery evidence: ~60-application .NET estate; 56 definitions across 28 applications; 27/28 builds verified; 25/28 deployment paths dry-run validated; six latent delivery defects discovered during validation; repository-to-server inventory, reusable definition/template automation, artifact checks, and environment-readiness guardrails. The inherited detailed evidence also supports 157 definitions organized and 95 legacy definitions inventoried/classified, kept distinct from the 56 created definitions. These private-work facts use William's supplied authority and existing detailed evidence, not an independent employer audit.
+## Preserved claims awaiting the second work audit
 
-Preserved qualified shared ownership for observability and infrastructure/DR, 300+ application retirements, weekly releases, migrations, operational troubleshooting, and AI-assisted knowledge/incident tooling with human-review safeguards.
+The following existing claims were deliberately not deleted because this audit did not comprehensively evaluate them. They remain present but are not strengthened:
+
+* 300+ legacy applications retired
+* 56 Azure DevOps definitions / 27 successful builds / 25 dry-run deployment paths / six latent delivery defects
+* 157 Azure DevOps definitions reorganized / 95 legacy definitions inventoried
+* Exact scope of the .NET 8 Blazor internal portal
+* Auth0 troubleshooting scope
+* Weekly production releases
+* Database migration responsibility
+* Application Insights "team standard" contribution
+* Ownership/authorship of the reusable KQL library
 
 ## Skills reconciliation
 
-Ten website groups become eight: Software & Backend; DevOps & Delivery; Automation; Production & Reliability; Infrastructure & Application Operations; Security & Identity; AI-Enabled Engineering; Additional Technical Foundations.
+Eight website skill groups remain. Updates made:
 
-Web Development is merged into Software & Backend, which now contains Python, FastAPI, C#, .NET, Blazor, ASP.NET Core, SQL Server, REST APIs, SQLite, JavaScript, HTML, and CSS. The explicit eight-tag PDF selection ends at REST APIs. Optional `skills[].pdfTags` must be a non-empty unique subset of website tags; absent fields retain the existing six-tag default. This small generator extension avoids expanding every PDF skill group just to accommodate software skills.
+* **Software & Backend**: kept Blazor and added explicit ASP.NET Core production-support framing.
+* **DevOps & Delivery**: added Containerization as a proof-of-concept skill.
+* **Automation**: updated Go context to reflect the verified internal deployment CLI.
+* **Security & Identity**: added OAuth 2.1 / OIDC, Azure Key Vault, and Git History Remediation tags.
+* **AI-Enabled Engineering**: unchanged; still qualified as internal tools & projects.
+* **Additional Technical Foundations**: unchanged; still website-only and marked as academic/project experience.
 
-Additional Hands-On Technologies is removed. Docker/Compose remains on the legitimate Baseball Optimizer project; the detailed delivery evidence retains its explicitly qualified WSL2/Rancher Desktop proof of concept. No top-level container/Helm proficiency is implied.
+## Engineering Impact programs
 
-Additional Programming Foundations becomes **Additional Technical Foundations**, website-only: Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, Wireshark. Visible context explicitly identifies coursework and academic/project experience, not professional production ownership. No professional forensics employment is claimed. GitHub Actions remains project-scoped, Go is explicitly project-scoped in both website and PDF context, and AI remains qualified as internal tools/projects.
+The website now carries seven programs (a content-driven increase from six):
 
-## Open-source verification and final wording
+1. **CI/CD & Release Engineering** — verified 60-repo / 104-app scope plus preserved 56/28/27/25/six delivery evidence.
+2. **Security & Credential Remediation** — scan/reduction/classification to 67 distinct secrets, ongoing Key Vault migration.
+3. **Git History Remediation & Source-Control Security** — the previously under-sold Python automation for removing committed credentials.
+4. **Deployment Automation & Release Tooling** — the Go-based deployment CLI.
+5. **Internal Tools & Production Support** — ASP.NET Core production-support app, Blazor portal, Python/FastAPI dashboards, AI-assisted knowledge tooling, and estate-reduction Python automation.
+6. **Production Reliability & Observability** — preserved observability, KQL, and release-support claims.
+7. **Infrastructure Modernization & Disaster Recovery** — zero-disk-secret Blazor container migration proof of concept and DR pipeline auditing.
 
-Read-only shallow clones of current GitHub default branches were inspected. No changes or test executions were made in those external repositories; the review verifies implementation/test presence, not test success or adoption.
-
-**HowlPlane — AI Engineering Control Plane**, inspected at `e937d61d7168bda1d697a0d3ac81d36fb2813988`:
-
-- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and runs deterministic verification.
-- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared project context and CI/security checks.
-
-Evidence: `src/control_plane/router.py`, `reconciliation.py`, `verification.py`, `evidence_ledger.py`, `authority_envelope.py`, `human_boundary.py`; Go entrypoint/command layer in `cmd/howlplane/main.go` and `pkg/cli/command.go`; `.agents/` shared context; `.github/workflows/test.yml` and `codeql.yml`. No origin story, production adoption, unsupervised autonomy, or model-training claim is made.
-
-**RedrawUS — Geospatial Analysis & Visualization Platform**, inspected at `430129098b3f1e1192eae51bcc8f0ac4f26af3af`:
-
-- Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent browser caching, and Web Workers.
-- Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests for data processing and application behavior.
-
-Evidence: `pipeline/generate_maps.py`, `pipeline/run_pipeline.R`, `requirements.txt`, `src/DataService.js`, `src/MapController.js`, `src/worker.js`, `package.json`, `tests/python/test_data_processor.py`, `tests/js/DataService.test.js`, and `tests/e2e/dashboard.spec.js`. Vite and Leaflet are present; browser caching uses localforage. The source includes procedural/synthetic fallbacks, so no universal real-data accuracy or scale claim is inferred. `.github/workflows/ci.yml` runs SEO checks and `deploy.yml` builds/tests/deploys Pages; the résumé does not imply that CI runs every named test framework.
-
-The general PDF selects **HowlPlane + RedrawUS**. Baseball Optimizer remains on the broader website. The three PDF highlights are Internal Tools & Developer Enablement, Security & Credential Remediation, and Production Reliability & Observability.
+The PDF keeps three curated highlights: **CI/CD & Release Engineering**, **Security & Credential Remediation**, and **Deployment Automation & Release Tooling**, because those are the strongest verified evidence for a DevOps / platform résumé.
 
 ## Generated artifacts and validation
 
-The normal three-generator process produces `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, `preview.jpg`, and `William_Elias_Resume.pdf`. Generated content is never manually patched. SEO/JSON-LD removes the unsupported security term and adds Blazor/Auth0/OAuth/OpenID Connect/IAM while preserving the headline, curated existing metadata, and social preview identity. Robots, sitemap, and preview are regenerated but have no expected visual/content change.
-
-Reproduce with Python 3.12 and `requirements-dev.txt`:
+Reproduce with the pinned environment:
 
 ```bash
 python scripts/build_config.py
@@ -67,14 +71,16 @@ python scripts/generate_resume_pdf.py
 PYTHONPATH=. pytest tests/ -W error -q
 ```
 
-The pinned local environment is `/tmp/portfolio-ci`; local Chromium uses `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64` on this Ubuntu 26.04 host. The repository CI uses Python 3.12 and checks generated freshness. Local flake8 follows the existing long-line convention (`--extend-ignore E501`). New factual contracts first reproduced 12 failures against the old content. Old false assertions were replaced with semantic correctness checks; no useful coverage was discarded to retain false claims.
+The full local regression passed **230 tests** with warnings treated as errors, including generated-artifact freshness/repeatability for all six outputs and browser viewport/theme checks. Both PDF pages remain readable with no clipping, overlaps, orphaned headings, or broken bullets/links; text ends with balanced whitespace on each page. The PDF retains 10-point body text and two Letter pages.
 
-The final local full regression passed **231 tests in 52.49 seconds**, with warnings treated as errors, including generated freshness and independent repeatability for all six outputs. Changed Python files passed flake8 with the established long-line exception; `git diff --check` passed. Current artifact hashes, PDF geometry/link evidence, screenshot records, and final validation results are in [the evidence manifest](portfolio_optimization_evidence.json). Capture files are retained outside Git in `/run/media/system/tallgeese/dev/william_elias_evidence/factual-corrections/`; they are local evidence, not assets included in a fresh clone.
+## Open-source verification
+
+Open-source projects were not changed. HowlPlane and RedrawUS remain the PDF-selected projects; all six projects remain on the website. No external project tests were executed.
 
 ## Visual and publication review
 
-Both PDF pages were rendered and visually inspected: no clipping, overlaps, orphaned headings, or broken bullets/links. Six link annotations are within page bounds; the PDF is text-extractable. Text ends at approximately 656 points on page one and 644 points on page two, preserving balanced whitespace. The PDF retains 10-point body text and two Letter pages, with all three engineering highlights grouped on page two. Browser review covers 320, 390, 810, 1024, and 1440 pixels in dark, light, dark contrast, and light contrast modes, plus native disclosure expansion and keyboard operation. All 20 captures reported no horizontal overflow, broken images, or uncaught page errors. Collapsed desktop card pairs had equal heights and aligned tag bottoms/disclosures at 1024 and 1440 pixels in all four modes. Expanded cards grow naturally and keyboard/no-JavaScript disclosure tests pass; mobile cards and merged skill groups remain readable. Existing Grid/Flexbox CSS needed no further change. Final measured results are recorded in the evidence manifest.
+Browser review covers 320, 390, 810, 1024, and 1440 pixels in dark, light, dark-contrast, and light-contrast modes, plus native disclosure expansion and keyboard operation. The additional seventh program card flows naturally in the responsive grid; no CSS changes were required.
 
-GitHub repository description and all 15 topics already match the intended broad identity; no metadata churn is needed. Pages serves `main` at `https://howlcipher.github.io/william_elias/`. User authorization covers signed commit, push, PR, merge after successful checks, branch deletion, and published site/PDF verification. PR #10 checks passed before merge. Main CI run `34222570671` and Pages run `34222570352` succeeded. Live HTML, config, CSS, JavaScript, PDF, preview, robots, and sitemap returned HTTP 200 and matched main byte-for-byte. Live Chromium checks at 320/dark and 1440/light also verified content, native keyboard disclosures, no overflow/errors, and PDF downloads. Follow-up documentation publication identifiers are reported with task completion rather than embedding a self-referential commit hash here.
+Pages serves `main` at `https://howlcipher.github.io/william_elias/`. Publication identifiers and artifact hashes are recorded in [the evidence manifest](portfolio_optimization_evidence.json) and updated after the publication merge.
 
-This is the completed canonical general content after the publication gate. Future content work should follow new real experience or a target-specific role. No further general résumé rewrite is pending. Professional implementation was not independently audited with the employer; additional browser engines, screen readers, and a tagged-PDF accessibility audit are outside this verification scope.
+Future content work should follow new real experience or a target-specific role. No further general résumé rewrite is pending unless the follow-up work audit resolves the remaining open questions above.

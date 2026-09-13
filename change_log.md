@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-13
+
+### Independent work-machine audit update
+
+* Corrected CI/CD scope from "~60 applications" to the verified 60-repository, 104-application internal estate: 171 application-to-server deployment combinations, 327 deployment paths, 28 repositories with completed standardized-pipeline rollout, and 275 independently verified inventory entries.
+* Removed the unsupported "100+ repositories credential-remediated" claim. Reframed credential remediation as a scan/reduction/classification effort: thousands of configuration files scanned, 866 findings reduced/classified to 67 distinct exposed secrets, and migration-to-Azure-Key-Vault tooling (ongoing).
+* Added verified accomplishments: a Go-based self-service deployment CLI; Git-history remediation automation; a scoped OAuth 2.1 resource server integrating an enterprise AI assistant with internal documentation; an internal ASP.NET Core production-support application; and a zero-disk-secret Blazor container migration proof of concept.
+* Rewrote server-migration and disaster-recovery language from "completed zero-downtime cutover" to migration-path investigation, proof-of-concept work, and DR pipeline auditing to identify broken/obsolete deployment paths.
+* Updated professional headline to **DevOps, Platform & Automation Engineer** with supporting line **CI/CD • Developer Tooling • Security Automation • Production Reliability**.
+* Regenerated `config.js`, `index.html`, social preview, `robots.txt`, `sitemap.xml`, and `William_Elias_Resume.pdf` from `resume.json`.
+* Updated factual-contract tests for the new verified evidence; full regression passed 230 tests, including generated-artifact freshness/repeatability and browser viewport/theme checks.
+
 ## 2026-09-08
 
 ### Factual correction publication

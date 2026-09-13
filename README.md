@@ -1,16 +1,16 @@
 # William Elias
 
-**Software, DevOps & Automation Engineer**
-Building Software, Automating Work & Delivering Reliable Systems
+**DevOps, Platform & Automation Engineer**
+CI/CD • Developer Tooling • Security Automation • Production Reliability
 Open to U.S. Remote Opportunities
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
 
 | | |
 |---|---|
-| **~60** | Applications in delivery standardization scope |
-| **100+** | Repositories credential-remediated |
-| **300+** | Unused legacy applications retired |
+| **60** | Repositories in CI/CD standardization scope |
+| **104** | Applications inventoried for delivery standardization |
+| **67** | Distinct exposed secrets identified/classified |
 
 ---
 
@@ -20,7 +20,19 @@ This is the source for the resume website above: a professional, modern, and hig
 
 ## Confirmed Professional Content
 
-The current content incorporates William's direct factual corrections. Security work used Python, Git, and BFG Repo-Cleaner to complete credential/history remediation across 100+ repositories; a measured scan processed 2,832 files and found 67 distinct secrets in approximately 25 seconds. The portal is a .NET 8 Blazor Web App using Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite. Neither tool had the previously claimed automated test suites. FastAPI belongs to separate operational dashboards/tooling. Auth0/OAuth/OIDC/IAM represents authentication troubleshooting.
+The current content reflects an independent work-machine audit of internal professional repositories and supersedes the previous factual-correction pass.
+
+**CI/CD standardization — verified scope:** 60 distinct repositories, 104 applications, 171 application-to-server deployment combinations, 327 deployment paths, 28 repositories with standardized-pipeline rollout completed, 275 independently verified inventory entries, 39 unmapped, 20 legacy, 8 out of scope, 1 unreachable at scan time. William built the inventory, verification, and rollout-tracking system and the reusable standardization approach. Direct attribution for every individual pipeline edit across all 60 repositories was not independently audited. Earlier authenticated evidence remains for 56 Azure DevOps build/release definitions across 28 applications, 27/28 verified builds, 25/28 dry-run validated deployment paths, six latent delivery defects, 157 reorganized definitions, and 95 inventoried legacy definitions.
+
+**Credential and secrets remediation:** Python tooling scanned thousands of configuration files, reduced 866 findings to 67 distinct exposed secrets, and built classification tooling to support migration to Azure Key Vault (ongoing). A representative-host scan processed 2,832 configuration files across six applications; a separate connection-string scan found 619 instances across 40 production applications. Git-history remediation automation was built and operated to remove committed credentials from source control, with repository discovery, interchangeable rewrite engines, and coordinated force-push cleanup.
+
+**Deployment automation:** A Go-based self-service deployment CLI was designed and delivered, covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, generated pipeline configuration, host auditing, and automated post-deployment verification.
+
+**Production-support and internal tooling:** An internal ASP.NET Core production-support application is built and maintained with integrated observability and managed-secret access. Separately, a .NET 8 Blazor Web App using Interactive Server was expanded with per-module access policies, database-backed workflows, and a retained SOX audit trail. Python/FastAPI dashboards and AI-assisted knowledge tooling with engineer-review controls remain separate operational tooling.
+
+**Security / backend:** A scoped OAuth 2.1 resource server integrates an enterprise AI assistant with internal engineering documentation, including JWT/JWKS validation, content allowlisting, and explicit `alg=none` token-bypass defenses.
+
+**Container and infrastructure modernization:** A zero-disk-secret Blazor Web App container migration proof of concept was designed with fail-fast secret validation, database-connectivity health checks, and IIS-fronted container hosting. Server/container migration paths were investigated and disaster-recovery pipeline definitions were audited to identify broken or obsolete deployment paths and support remediation planning. No completed production server migration or zero-downtime DR cutover is claimed.
 
 The current role is **Production Support Engineer | DevOps & Automation**, with the latter a résumé descriptor, in **Auburn Hills, MI · Hybrid**. Remote availability describes the desired next role. Additional Technical Foundations covers academic/project Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, and Wireshark, without implying professional forensics employment.
 

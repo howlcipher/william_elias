@@ -25,10 +25,9 @@ class TestHeadlineAndPositioning:
     def test_public_headline_positioning(self):
         cfg = load_config()
         title = cfg["personal"]["title"]
-        assert "Software" in title
         assert "DevOps" in title
+        assert "Platform" in title
         assert "Automation Engineer" in title
-        assert "Platform Engineer" not in title
 
     def test_public_headline_does_not_lead_with_production_support(self):
         cfg = load_config()
@@ -43,9 +42,8 @@ class TestHeadlineAndPositioning:
 
     def test_summary_leads_with_software_devops_automation_positioning(self):
         cfg = load_config()
-        assert cfg["summary"].startswith("Software, DevOps, and automation engineer with 10+ years")
+        assert cfg["summary"].startswith("DevOps, Platform, and Automation Engineer with 10+ years")
         assert "Senior DevOps" not in cfg["summary"]
-        assert "Platform Engineer" not in cfg["summary"]
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
@@ -62,16 +60,17 @@ class TestKeyMetrics:
     def test_three_defensible_metrics_present_in_stats(self):
         cfg = load_config()
         values = {s["value"] for s in cfg["stats"]}
-        assert "~60" in values
-        assert "300+" in values
-        assert "100+" in values
+        assert "60" in values
+        assert "104" in values
+        assert "67" in values
         assert len(cfg["stats"]) == 3
 
     def test_estate_scope_not_overstated_as_migrated_or_deployed(self):
         cfg = load_config()
         blob = json.dumps(cfg).lower()
-        assert "~60 applications migrated" not in blob
-        assert "60 applications deployed" not in blob
+        assert "60 repositories migrated" not in blob
+        assert "104 applications deployed" not in blob
+        assert "104 applications migrated" not in blob
         assert "60 applications migrated" not in blob
 
     def test_experience_states_true_program_scope(self):
@@ -79,7 +78,7 @@ class TestKeyMetrics:
         accomplishment = next(a for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a)
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
-        assert "~60-application .NET estate" in accomplishment
+        assert "60-repository, 104-application" in accomplishment
         assert "27/28" in accomplishment
         assert "25/28" in accomplishment
         assert "six latent" in accomplishment
@@ -115,13 +114,15 @@ class TestKeyMetrics:
     def test_verified_cicd_rollout_numbers_present(self, tmp_path):
         cfg = load_config()
         blob = json.dumps(cfg)
+        assert "60" in blob
+        assert "104" in blob
         assert "56 Azure DevOps build/release definitions" in blob
         assert "28 applications" in blob
         assert "27" in blob
-        assert "25 deployment plans" in blob or "25 of 28" in blob
+        assert "25 of 28" in blob
 
         pages = _extract_pdf_pages(cfg, tmp_path)
-        pdf_blob = "\n".join(pages)
+        pdf_blob = " ".join("\n".join(pages).split())
         assert "56 Azure DevOps" in pdf_blob
         assert "28 applications" in pdf_blob
         assert "27" in pdf_blob
@@ -136,6 +137,10 @@ class TestKeyMetrics:
             "production deployments completed",
             "28 applications deployed",
             "28 applications to production",
+            "60 repositories deployed",
+            "104 applications deployed",
+            "rolled out to 60 repositories",
+            "all repositories migrated",
         )
         for phrase in banned_phrases:
             assert phrase not in blob, f"resume.json implies deployment via '{phrase}'"
@@ -156,11 +161,13 @@ class TestKeyMetrics:
     def test_credential_remediation_metric_intact(self):
         cfg = load_config()
         values = {s["value"] for s in cfg["stats"]}
-        assert "100+" in values
+        assert "100+" not in values
+        assert "67" in values
         stats_blob = json.dumps(cfg["stats"])
-        assert "credential" in stats_blob.lower() or "repositories" in stats_blob.lower()
-        summary_and_experience = cfg["summary"] + json.dumps(cfg["experience"])
-        assert "100+ repositories" in summary_and_experience
+        assert "credential" in stats_blob.lower() or "secret" in stats_blob.lower()
+        blob = json.dumps(cfg).lower()
+        assert "100+ repositories" not in blob
+        assert "credential-remediated" not in blob
 
     def test_cicd_program_preserves_verified_metrics(self):
         cfg = load_config()
@@ -240,13 +247,14 @@ class TestSelectedEngineeringPrograms:
     EXPECTED_PROGRAMS = {
         "CI/CD & Release Engineering",
         "Security & Credential Remediation",
-        "Infrastructure & Disaster Recovery",
-        "Internal Tools & Developer Enablement",
+        "Git History Remediation & Source-Control Security",
+        "Deployment Automation & Release Tooling",
+        "Internal Tools & Production Support",
         "Production Reliability & Observability",
-        "Python Automation & Estate Reduction",
+        "Infrastructure Modernization & Disaster Recovery",
     }
 
-    def test_six_programs_present(self):
+    def test_seven_programs_present(self):
         cfg = load_config()
         names = {p["name"] for p in cfg["selectedEngineeringPrograms"]}
         assert names == self.EXPECTED_PROGRAMS
@@ -266,9 +274,9 @@ class TestPdfEngineeringHighlights:
     """
 
     EXPECTED_HIGHLIGHTS = {
-        "Internal Tools & Developer Enablement",
+        "CI/CD & Release Engineering",
         "Security & Credential Remediation",
-        "Production Reliability & Observability",
+        "Deployment Automation & Release Tooling",
     }
 
     def test_three_curated_highlights_present(self):
@@ -288,10 +296,15 @@ class TestPdfEngineeringHighlights:
         for name in self.EXPECTED_HIGHLIGHTS:
             assert name in blob, f"'{name}' missing from generated PDF"
         # Website-only programs must stay off the PDF so page 2 stays scannable.
-        for name in ("Infrastructure & Disaster Recovery", "Python Automation & Estate Reduction", "CI/CD & Release Engineering"):
+        for name in (
+            "Git History Remediation & Source-Control Security",
+            "Internal Tools & Production Support",
+            "Production Reliability & Observability",
+            "Infrastructure Modernization & Disaster Recovery",
+        ):
             assert name not in blob, f"'{name}' should be website-only, not in the PDF"
 
-    def test_website_retains_all_six_programs(self):
+    def test_website_retains_all_programs(self):
         # Breadth belongs on the portfolio even though the PDF is selective.
         index_html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         for prog in load_config()["selectedEngineeringPrograms"]:
@@ -616,12 +629,12 @@ class TestGeneratedAssetsSynchronized:
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         assert cfg["personal"]["remote"] in html_content
 
-    def test_seo_meta_description_mentions_software_devops_automation(self):
+    def test_seo_meta_description_mentions_devops_platform_and_automation(self):
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content)
         assert desc_match
         desc = desc_match.group(1)
-        assert "Software" in desc
+        assert "Platform" in desc
         assert "DevOps" in desc
         assert "automation" in desc.lower()
         assert "Senior DevOps" not in desc

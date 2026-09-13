@@ -1,21 +1,21 @@
 {
-  "date": "2026-09-08",
-  "verified_at": "2026-09-09T00:46:16.803969+00:00",
+  "date": "2026-09-13",
+  "verified_at": "2026-09-13T00:00:00+00:00",
   "authority": "Direct user-confirmed corrections supersede prior portfolio wording and tests; private employer implementation was not independently audited.",
-  "base_commit": "0ef518ac33d1acfe4c40be6eb53a0c32b66a4663",
-  "content_commit": "97a01397edda6f97e44fa0f1556c81ff2aeba13a",
-  "content_merge": "4d361f1d7a658e31f5791ea41526c6a2c9f7a061",
-  "content_pr": "https://github.com/howlcipher/william_elias/pull/10",
-  "supersedes": "Prior current-state evidence manifest; historical evidence remains in Git history and the 2026-09-07 local evidence directory.",
-  "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/factual-corrections",
+  "base_commit": "4d361f1d7a658e31f5791ea41526c6a2c9f7a061",
+  "content_commit": "TBD \u2014 recorded after merge",
+  "content_merge": "TBD \u2014 recorded after merge",
+  "content_pr": "TBD \u2014 recorded after merge",
+  "supersedes": "2026-09-08 factual-correction evidence manifest",
+  "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/work-machine-audit-update",
   "generated_artifacts": {
     "config.js": {
-      "sha256": "a02441c0827c485396e45179120465157e56e9377e72f7496680f1fd391fe76a",
-      "bytes": 26609
+      "sha256": "568c376aef201a7f3ad1ab504176f8d1f209e615ff02925f191ba246fd531b64",
+      "bytes": 29606
     },
     "index.html": {
-      "sha256": "bdc2c015a4c87898bae53f833f86f8c2c03240c3645b8a236ac7d47538108276",
-      "bytes": 33244
+      "sha256": "3b3472ca5e46fa8cfa3f20c0138f467ad3af82d9ee1baa908c516870b24427b9",
+      "bytes": 35994
     },
     "robots.txt": {
       "sha256": "7140470d13d5081b0b4376b13f54d485fe373e8a060053ba22e548752e2b922a",
@@ -26,18 +26,18 @@
       "bytes": 186
     },
     "preview.jpg": {
-      "sha256": "636e8091e57a8ad5388bb9839ac7fae1b6b251cc1945042ac39e8f0903576c4e",
-      "bytes": 125410
+      "sha256": "9e2a30e4edc93d5d919e43fe916f6ba2cd90b375d51bf66add9642a6f59a7904",
+      "bytes": 127367
     },
     "William_Elias_Resume.pdf": {
-      "sha256": "6f4af4053da8435bf2a8ab4368fe75f55315ef3f7dec58df1a84f719b728051a",
-      "bytes": 13437
+      "sha256": "0550044ae4f2080842616ae456fcba9361ee2e08442d4398f57827b8977008c7",
+      "bytes": 14141
     }
   },
   "input_fingerprints": {
     "resume.json": {
-      "sha256": "897ba3fec1fa8e8e51a831181376f7b1a6a0cdf30a7604045a19ba30efeee167",
-      "bytes": 21152
+      "sha256": "0053132f9895790852ff2b0094703f56d7d96c334a767533af526418e739fe94",
+      "bytes": 23882
     },
     "script.js": {
       "sha256": "c98fdbc7b33eb8cfaf028ce82940002288f9f84583f5ac81520f1eb43d96c7ca",
@@ -72,8 +72,8 @@
       "bytes": 17915
     },
     "tests/test_browser.py": {
-      "sha256": "4906b53c162d59875964e8a8a8bc3598b82f38f9726a1622c017e87ec7b7f6e1",
-      "bytes": 23396
+      "sha256": "b83404d66f29a8211a71346c02408c407549388beef906d96d9b31c032b6c8f9",
+      "bytes": 23409
     },
     "tests/test_build_config.py": {
       "sha256": "c5b9273c55cdc9323a148d00f8e2655cae4c439cbb594428b37cd7a16e16f180",
@@ -84,8 +84,8 @@
       "bytes": 2083
     },
     "tests/test_factual_corrections.py": {
-      "sha256": "cea0b648f865f451c8f889aeafe7d9215376732088c1b6ccdd19dd323cbcdca7",
-      "bytes": 5071
+      "sha256": "185bddf6e0354a61e4175b8346449757ddcb456ee9fe66bd69b25751b20aa1ff",
+      "bytes": 5297
     },
     "tests/test_generate_resume_pdf.py": {
       "sha256": "65c4dad8d620695881ff1e2594a08cad3dc44113fe7b2afe3bb70f35b4bd98b3",
@@ -96,19 +96,19 @@
       "bytes": 1713
     },
     "tests/test_hiring_contract.py": {
-      "sha256": "cf73f34ae5d7f9ab5082b77495154e71cd3e260cf0041123976069fad08b8331",
-      "bytes": 4563
+      "sha256": "b61eb3e8894176db0bb80fe321df430f86ee214ef344e71df3b8e885d4dc7bc4",
+      "bytes": 4632
     },
     "tests/test_pdf_skill_context.py": {
-      "sha256": "38bfdb7441f634b3c31d5ec52568b20f731b52b816036cea23923e48afc8c119",
-      "bytes": 2496
+      "sha256": "6a3100935601345bd0fd88494bc37e52aef3984939098dda8b950945f5877d23",
+      "bytes": 2507
     },
     "tests/test_resume_content.py": {
-      "sha256": "178a8b59b3c595cdccb97fa7a3b6d29c2a16ee5837e9d18210250106dbffe850",
-      "bytes": 27253
+      "sha256": "be3cb643016f36aec22c5f3c0f48e53d3aaa2fc1b2f536ecce3791bec49b1a78",
+      "bytes": 27640
     },
     "tests/test_seo_and_navigation.py": {
-      "sha256": "76540ca3615977629e497be2e151d83c6fd938435fc87d641baa93a2ff761aae",
+      "sha256": "914b15fe3c95259d44c9f224f24eb468dcc00f455d370576ae0a45041bd111d9",
       "bytes": 8628
     }
   },
@@ -153,7 +153,7 @@
   "pdf": {
     "pages": 2,
     "body_font_points": 10,
-    "visual_review": "Both rendered pages inspected: readable hierarchy, no overlap/clipping/orphaned headings/broken bullets, six in-bounds links, HowlPlane and RedrawUS selected.",
+    "visual_review": "Both rendered pages inspected: readable hierarchy, no overlap/clipping/orphaned headings/broken bullets, all engineering highlights on page two.",
     "page_geometry": [
       {
         "page": 1,
@@ -243,7 +243,7 @@
     ]
   },
   "website": {
-    "visual_review": "Preserved design; reviewed five widths and all four themes, merged skills, evidence cards and expanded disclosures. No CSS change needed.",
+    "visual_review": "Preserved design; reviewed five widths and all four themes. Seven program cards flow naturally in the responsive grid.",
     "desktop_alignment": "Equal collapsed heights, aligned tag bottoms and disclosure rows in every pair at 1024 and 1440 pixels across all four themes; natural mobile/expanded heights.",
     "captures": [
       {
@@ -2118,7 +2118,7 @@
       }
     ],
     "metadata": {
-      "description": "Software, DevOps & Automation Engineer portfolio — Python/.NET software, automation, CI/CD, production reliability, security, and AI-enabled engineering.",
+      "description": "Software, DevOps & Automation Engineer portfolio \u2014 Python/.NET software, automation, CI/CD, production reliability, security, and AI-enabled engineering.",
       "homepageUrl": "https://howlcipher.github.io/william_elias/",
       "repositoryTopics": [
         {

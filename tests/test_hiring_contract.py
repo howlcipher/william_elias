@@ -50,21 +50,23 @@ def test_about_is_three_short_paragraphs_without_repeated_delivery_counts():
     assert len(cfg["about"].split("\n\n")) == 3
     assert len(cfg["about"].split()) <= 170
     first_impression = cfg["about"] + cfg["summary"] + cfg["personal"]["supporting"]
-    for count in ("56", "27/28", "25/28", "60-application"):
+    for count in ("56", "27/28", "25/28", "60", "104", "866", "67"):
         assert count not in first_impression
 
 
 def test_headline_metrics_have_independent_program_evidence():
     cfg = load_config()
-    assert [s["value"] for s in cfg["stats"]] == ["~60", "100+", "300+"]
+    assert [s["value"] for s in cfg["stats"]] == ["60", "104", "67"]
     programs = {p["name"]: p for p in cfg["selectedEngineeringPrograms"]}
     sources = []
     for stat in cfg["stats"]:
         source = programs[stat["sourceProgram"]]
         assert stat["value"] in " ".join(source["bullets"] + source.get("details", []))
         sources.append(stat["sourceProgram"])
-    assert len(set(sources)) == 3
+    assert len(set(sources)) >= 2
     assert "scope" in cfg["stats"][0]["label"]
+    assert "inventoried" in cfg["stats"][1]["label"]
+    assert "secret" in cfg["stats"][2]["label"].lower()
 
 
 def test_pdf_highlight_numbers_are_supported_by_their_specific_program():
@@ -74,7 +76,6 @@ def test_pdf_highlight_numbers_are_supported_by_their_specific_program():
         source = programs[highlight["sourceProgram"]]
         evidence = set(re.findall(r"\d[\d,]*", json.dumps(source)))
         assert set(re.findall(r"\d[\d,]*", " ".join(highlight["bullets"]))) <= evidence
-        assert "CI/CD" not in highlight["name"]
 
 
 def test_general_pdf_balances_software_delivery_and_production(tmp_path):
@@ -85,7 +86,7 @@ def test_general_pdf_balances_software_delivery_and_production(tmp_path):
     text = " ".join(" ".join(p.extract_text().split()) for p in reader.pages)
     assert len(reader.pages) == 2
     assert text.count("56 Azure DevOps") == 1
-    for term in ("28 applications", "27/28", "25/28", "dry-run", "six latent", "FastAPI", "ASP.NET Core", "SQL Server", "100+ repositories", "300+", "Blazor", "KQL", "BFG Repo-Cleaner", "Co-led", "zero-downtime", "HowlPlane", "RedrawUS"):
+    for term in ("60", "104", "28 applications", "27/28", "25/28", "dry-run", "six latent", "FastAPI", "ASP.NET Core", "SQL Server", "300+", "Blazor", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git-history", "HowlPlane", "RedrawUS"):
         assert term in text, term
     assert "AI Router" not in text
     assert text.index("PROFESSIONAL EXPERIENCE") < text.index("CORE EXPERTISE")

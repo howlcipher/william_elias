@@ -33,11 +33,13 @@ def test_false_and_stale_claims_absent(config, pdf_text, source):
         text = (SITE_DIR / source).read_text()
     text = " ".join(text.lower().split())
     for term in (
-        "key vault", "managed identity", "xunit", "62 automated tests",
-        "156 automated tests", "razor pages", "first deployment pending",
+        "managed identity", "xunit", "62 automated tests",
+        "156 automated tests", "first deployment pending",
         "pending approval", "zero applications", "go/no-go", "rollout pending",
         "formerly multi-agent engineering library",
         "evolved a shared agent knowledge library",
+        "100+ repositories", "~60 applications", "60-application",
+        "credential-remediated", "zero-downtime", "cutover",
     ):
         assert term not in text, (source, term)
 
@@ -50,24 +52,23 @@ def test_security_is_python_git_bfg_without_invented_tests(config, field):
     assert security["name"] == "Security & Credential Remediation"
     assert {"Python", "Git", "BFG Repo-Cleaner"} <= set(security["technology"])
     text = json.dumps(security).lower()
-    for term in ("100+ repositories", "2,832", "67 distinct secrets", "25 seconds"):
+    for term in ("67 distinct exposed secrets", "866", "azure key vault"):
         assert term in text
-    assert "history" in text or "historical" in text
+    if field == "selectedEngineeringPrograms":
+        assert "2,832" in text
+    for term in ("100+ repositories", "25 seconds", "2,832 files remediated", "2,832 files contained secrets"):
+        assert term not in text
     for term in ("c#", ".net", "test", "rollback", "azure sdk"):
         assert term not in text
 
 
-@pytest.mark.parametrize("field", [
-    "selectedEngineeringPrograms", "pdfEngineeringHighlights",
-])
-def test_portal_stack_and_capabilities_are_user_confirmed(config, field):
-    portal = next(p for p in config[field] if p["name"].startswith("Internal Tools"))
-    assert set(portal["technology"]) == {
-        "C#", ".NET 8", "Blazor", "ASP.NET Core", "SQL Server", "SQLite",
-    }
+def test_portal_stack_and_capabilities_are_user_confirmed(config):
+    portal = next(p for p in config["selectedEngineeringPrograms"] if p["name"].startswith("Internal Tools"))
+    assert {"C#", ".NET 8", "Blazor", "ASP.NET Core", "SQL Server", "SQLite"} <= set(portal["technology"])
     text = " ".join(portal["bullets"])
     for term in ("Blazor Web App", "Interactive Server", "SOX", "DBA",
-                 "diffing", "pre-CAB", "service-desk", "database-backed"):
+                 "diffing", "pre-CAB", "service-desk", "database-backed",
+                 "ASP.NET Core production-support"):
         assert term in text
     assert "FastAPI" not in text
     assert "FastAPI dashboards" in json.dumps(config["experience"])
@@ -87,8 +88,8 @@ def test_current_employment_and_remote_target_are_distinct(config, pdf_text):
 def test_identity_and_foundations_keep_experience_context(config, pdf_text):
     skills = {s["category"]: s for s in config["skills"]}
     security = skills["Security & Identity"]
-    assert {"Auth0", "OAuth / OIDC", "IAM", "Credential Remediation",
-            "Git History Remediation", "PII Safeguards", "Audit Controls"} <= set(security["tags"])
+    assert {"Auth0", "OAuth 2.1 / OIDC", "IAM", "Credential Remediation",
+            "Git History Remediation", "Azure Key Vault", "PII Safeguards", "Audit Controls"} <= set(security["tags"])
     foundations = skills["Additional Technical Foundations"]
     assert set(foundations["tags"]) == {
         "Java", "Kotlin", "Android Development", "Digital Forensics",
@@ -119,6 +120,6 @@ def test_general_pdf_project_pair_and_security_scan_evidence(config, pdf_text):
     assert [p["name"] for p in config["projects"] if p.get("pdfInclude")] == [
         "HowlPlane", "RedrawUS",
     ]
-    for term in ("HowlPlane", "RedrawUS", "2,832", "67 distinct secrets", "25 seconds"):
+    for term in ("HowlPlane", "RedrawUS", "67 distinct exposed secrets", "866"):
         assert term in pdf_text
     assert "Baseball Optimizer" not in pdf_text

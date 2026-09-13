@@ -38,7 +38,7 @@ class TestCanonicalAndOgMeta:
         assert match
         desc = match.group(1)
         assert len(desc) <= 160, f"meta description is {len(desc)} chars and will be truncated"
-        assert "Software" in desc
+        assert "Platform" in desc
         assert "DevOps" in desc
         assert "CI/CD" in desc
         assert "Senior DevOps" not in desc
