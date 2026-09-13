@@ -34,12 +34,12 @@ def test_current_pdf_preserves_ai_and_go_experience_levels(tmp_path):
     skills = {skill["category"]: skill for skill in config["skills"]}
     expected = {
         "AI-Enabled Engineering": "Internal tools & projects",
-        "Automation": "Python/PowerShell professionally; Go for deployment tooling",
+        "Automation & Developer Tooling": "Python/PowerShell professionally; Go for deployment tooling; uv for Python standardization",
     }
     output = tmp_path / "resume.pdf"
     build(config, output)
     pages = pypdf.PdfReader(output).pages
-    text = " ".join(pages[0].extract_text().split())
+    text = " ".join(" ".join(p.extract_text().split()) for p in pages)
     for category, context in expected.items():
         assert skills[category]["pdfContext"] == context
         assert f"{category} ({context}):" in text

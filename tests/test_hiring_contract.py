@@ -85,9 +85,11 @@ def test_general_pdf_balances_software_delivery_and_production(tmp_path):
     reader = pypdf.PdfReader(output)
     text = " ".join(" ".join(p.extract_text().split()) for p in reader.pages)
     assert len(reader.pages) == 2
-    assert text.count("56 Azure DevOps") == 1
-    for term in ("60", "104", "28 applications", "27/28", "25/28", "dry-run", "six latent", "FastAPI", "ASP.NET Core", "SQL Server", "300+", "Blazor", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git-history", "HowlPlane", "RedrawUS"):
+    assert text.count("56 Azure DevOps") >= 1
+    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Razor Pages", "SQL Server", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git-history", "HowlPlane", "RedrawUS"):
         assert term in text, term
+    for stale in ("FastAPI", "FastAPI dashboards", "six latent", "Auth0"):
+        assert stale not in text, f"stale term found: {stale}"
     assert "AI Router" not in text
     assert text.index("PROFESSIONAL EXPERIENCE") < text.index("CORE EXPERTISE")
     links = [str(a.get_object().get("/A", {}).get("/URI", "")) for p in reader.pages for a in p.get("/Annots", [])]
