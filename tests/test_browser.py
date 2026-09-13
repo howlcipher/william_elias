@@ -517,7 +517,7 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 7
+    assert len(cards) == 8
 
     # Verify each pair in 2-column layout has equal height and aligned disclosure rows
     for i in range(0, len(cards) - 1, 2):
@@ -533,8 +533,13 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
             f"Row {i // 2 + 1} details alignment mismatch: {det_a['y']} vs {det_b['y']}"
         )
 
-    # Test expansion behavior: expanding card 1 does not stretch card 2 awkwardly
+    # Test expansion behavior: expanding card 1 does not stretch card 2 awkwardly.
+    # Measure card 2's natural height with align-items: start so the later comparison
+    # is against its un-stretched size, not its collapsed-stretched size.
+    page.evaluate("document.querySelector('.programs-grid').style.alignItems = 'start'")
+    page.wait_for_timeout(100)
     collapsed_card2_height = cards[1].bounding_box()["height"]
+    page.evaluate("document.querySelector('.programs-grid').style.alignItems = ''")
     cards[0].locator("summary").click()
     expect(cards[0].locator(".program-details")).to_have_attribute("open", "")
 
@@ -560,7 +565,7 @@ def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 7
+    assert len(cards) == 8
 
     prev_bottom = 0
     grid_box = page.locator(".programs-grid").bounding_box()

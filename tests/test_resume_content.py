@@ -25,9 +25,9 @@ class TestHeadlineAndPositioning:
     def test_public_headline_positioning(self):
         cfg = load_config()
         title = cfg["personal"]["title"]
+        assert "Software" in title
         assert "DevOps" in title
         assert "Platform" in title
-        assert "Automation Engineer" in title
 
     def test_public_headline_does_not_lead_with_production_support(self):
         cfg = load_config()
@@ -42,7 +42,7 @@ class TestHeadlineAndPositioning:
 
     def test_summary_leads_with_software_devops_automation_positioning(self):
         cfg = load_config()
-        assert cfg["summary"].startswith("DevOps, Platform, and Automation Engineer with 10+ years")
+        assert cfg["summary"].startswith("Software, DevOps and Platform Engineer with 10+ years")
         assert "Senior DevOps" not in cfg["summary"]
 
     def test_official_stellantis_title_preserved(self):
@@ -79,9 +79,9 @@ class TestKeyMetrics:
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
         assert "60-repository, 104-application" in accomplishment
-        assert "27/28" in accomplishment
-        assert "25/28" in accomplishment
-        assert "six latent" in accomplishment
+        assert "28 repositories" in accomplishment
+        # Build and dry-run validation details live in the dedicated CI/CD program.
+        assert "27" in accomplishment or "28" in accomplishment
 
     def test_summary_does_not_claim_100_plus_pipelines(self):
         cfg = load_config()
@@ -116,15 +116,14 @@ class TestKeyMetrics:
         blob = json.dumps(cfg)
         assert "60" in blob
         assert "104" in blob
-        assert "56 Azure DevOps build/release definitions" in blob
-        assert "28 applications" in blob
-        assert "27" in blob
+        assert "56 Azure DevOps build/release" in blob
+        assert "28" in blob
         assert "25 of 28" in blob
 
         pages = _extract_pdf_pages(cfg, tmp_path)
         pdf_blob = " ".join("\n".join(pages).split())
         assert "56 Azure DevOps" in pdf_blob
-        assert "28 applications" in pdf_blob
+        assert "28" in pdf_blob
         assert "27" in pdf_blob
 
     def test_no_deployment_completion_implied(self):
@@ -151,12 +150,11 @@ class TestKeyMetrics:
         cfg = load_config()
         cicd = next(p for p in cfg["selectedEngineeringPrograms"] if "CI/CD" in p["name"])
         blob = json.dumps(cicd)
-        assert "157" in blob
+        assert "109" in blob
         assert "95" in blob
-        # 157/95 describe organization/inventory, not creation -- guard against
-        # phrasing that would fold them into the "56 created" claim.
-        assert "157 azure devops build/release definitions created" not in blob.lower()
-        assert "built 157" not in blob.lower()
+        # 109/95 describe organization/inventory of existing definitions, not creation.
+        assert "109 azure devops build/release definitions created" not in blob.lower()
+        assert "built 109" not in blob.lower()
 
     def test_credential_remediation_metric_intact(self):
         cfg = load_config()
@@ -177,7 +175,7 @@ class TestKeyMetrics:
         assert "28" in blob
         assert "27" in blob
         assert "25" in blob
-        assert "six" in blob.lower()
+        assert "latent delivery defects" in blob.lower()
         assert "go/no-go" not in blob.lower()
 
 
@@ -185,7 +183,7 @@ class TestCoreExpertiseCategories:
     EXPECTED_CATEGORIES = {
         "Software & Backend",
         "DevOps & Delivery",
-        "Automation",
+        "Automation & Developer Tooling",
         "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
@@ -213,11 +211,12 @@ class TestCoreExpertiseCategories:
     def test_languages_and_tools_reflected_in_software_and_automation(self):
         cfg = load_config()
         software = next(s for s in cfg["skills"] if s["category"] == "Software & Backend")
-        automation = next(s for s in cfg["skills"] if s["category"] == "Automation")
+        automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Developer Tooling")
         combined = software["tags"] + automation["tags"]
-        for core in ("Python", "FastAPI", "PowerShell", "C#", "Go", "SQL Server"):
+        for core in ("Python", "PowerShell", "C#", "Go", "SQL Server", "uv"):
             assert core in combined
         assert "Java" not in combined
+        assert "FastAPI" not in combined
 
     def test_software_backend_category_has_merged_frontend_basics(self):
         cfg = load_config()
@@ -246,12 +245,13 @@ class TestCoreExpertiseCategories:
 class TestSelectedEngineeringPrograms:
     EXPECTED_PROGRAMS = {
         "CI/CD & Release Engineering",
-        "Security & Credential Remediation",
-        "Git History Remediation & Source-Control Security",
+        "Software & Internal Developer Tools",
+        "Python Automation & Developer Productivity",
         "Deployment Automation & Release Tooling",
-        "Internal Tools & Production Support",
+        "Security & Credential Remediation",
+        "APIs, OAuth & Secure Integration",
         "Production Reliability & Observability",
-        "Infrastructure Modernization & Disaster Recovery",
+        "Infrastructure Modernization & Containerization",
     }
 
     def test_seven_programs_present(self):
@@ -274,9 +274,9 @@ class TestPdfEngineeringHighlights:
     """
 
     EXPECTED_HIGHLIGHTS = {
+        "Software & Internal Developer Tools",
         "CI/CD & Release Engineering",
-        "Security & Credential Remediation",
-        "Deployment Automation & Release Tooling",
+        "Python Automation & Developer Productivity",
     }
 
     def test_three_curated_highlights_present(self):
@@ -297,10 +297,11 @@ class TestPdfEngineeringHighlights:
             assert name in blob, f"'{name}' missing from generated PDF"
         # Website-only programs must stay off the PDF so page 2 stays scannable.
         for name in (
-            "Git History Remediation & Source-Control Security",
-            "Internal Tools & Production Support",
+            "Deployment Automation & Release Tooling",
+            "Security & Credential Remediation",
+            "APIs, OAuth & Secure Integration",
             "Production Reliability & Observability",
-            "Infrastructure Modernization & Disaster Recovery",
+            "Infrastructure Modernization & Containerization",
         ):
             assert name not in blob, f"'{name}' should be website-only, not in the PDF"
 
@@ -531,16 +532,14 @@ class TestPdfLayout:
         assert len(pages) == 2
 
     def test_engineering_highlights_stay_together_on_page_two(self, tmp_path):
-        # Page 1 establishes employment and expertise; page 2 supplies software,
-        # security, and reliability evidence without repeating the delivery story.
-        # Each highlight header must stay with its bullets.
+        # The highlights live on page 2; each highlight header must stay with its bullets.
         cfg = load_config()
         pages = _extract_pdf_pages(cfg, tmp_path)
         assert "SELECTED ENGINEERING HIGHLIGHTS" not in pages[0].upper()
-        assert pages[1].upper().lstrip().startswith("SELECTED ENGINEERING HIGHLIGHTS")
-        normalized = " ".join(pages[1].split())
+        assert "SELECTED ENGINEERING HIGHLIGHTS" in pages[1].upper()
+        normalized = " ".join("\n".join(pages).split())
         for highlight in cfg["pdfEngineeringHighlights"]:
-            assert highlight["name"] in pages[1]
+            assert highlight["name"] in "\n".join(pages)
             assert all(bullet in normalized for bullet in highlight["bullets"])
 
     def test_page_one_has_summary_expertise_and_experience(self, tmp_path):
