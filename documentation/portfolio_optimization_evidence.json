@@ -4,8 +4,8 @@
   "authority": "Independent work-machine audit findings supersede prior portfolio wording and tests; private employer implementation details were not independently verified beyond the audit scope.",
   "base_commit": "4d361f1d7a658e31f5791ea41526c6a2c9f7a061",
   "content_commit": "fe9a8abf65d9a60568e78903e167ccebaed29f10",
-  "content_merge": "TBD \u2014 recorded after PR merge",
-  "content_pr": "TBD \u2014 recorded after PR merge",
+  "content_merge": "14fea901c6f117d31cd15fb78b55f3197f1a3083",
+  "content_pr": "https://github.com/howlcipher/william_elias/pull/12",
   "supersedes": "2026-09-08 factual-correction evidence manifest",
   "local_evidence_directory": "/run/media/system/tallgeese/dev/william_elias_evidence/work-machine-audit-update",
   "generated_artifacts": {
