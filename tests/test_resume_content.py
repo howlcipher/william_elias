@@ -27,7 +27,7 @@ class TestHeadlineAndPositioning:
         title = cfg["personal"]["title"]
         assert "Software" in title
         assert "DevOps" in title
-        assert "Platform" in title
+        assert "Production" in title
 
     def test_public_headline_does_not_lead_with_production_support(self):
         cfg = load_config()
@@ -40,9 +40,9 @@ class TestHeadlineAndPositioning:
         assert "Automating" in tagline or "Automation" in tagline
         assert "Reliable" in tagline or "Reliability" in tagline
 
-    def test_summary_leads_with_software_devops_automation_positioning(self):
+    def test_summary_leads_with_devops_software_production_positioning(self):
         cfg = load_config()
-        assert cfg["summary"].startswith("Software, DevOps and Platform Engineer with 10+ years")
+        assert cfg["summary"].startswith("DevOps, Software and Production Engineer with 10+ years")
         assert "Senior DevOps" not in cfg["summary"]
 
     def test_official_stellantis_title_preserved(self):
@@ -628,12 +628,13 @@ class TestGeneratedAssetsSynchronized:
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         assert cfg["personal"]["remote"] in html_content
 
-    def test_seo_meta_description_mentions_devops_platform_and_automation(self):
+    def test_seo_meta_description_mentions_devops_software_production_and_automation(self):
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content)
         assert desc_match
         desc = desc_match.group(1)
-        assert "Platform" in desc
         assert "DevOps" in desc
+        assert "Software" in desc
+        assert "Production" in desc
         assert "automation" in desc.lower()
         assert "Senior DevOps" not in desc

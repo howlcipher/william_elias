@@ -1,11 +1,11 @@
 const config = {
     "personal": {
         "name": "William Elias",
-        "title": "Software, DevOps & Platform Engineer",
+        "title": "DevOps, Software & Production Engineer",
         "tagline": "Building Software, Automating Work & Delivering Reliable Systems",
-        "supporting": "Python \u2022 C#/.NET \u2022 Go \u2022 Azure DevOps \u2022 CI/CD \u2022 Developer Tooling",
+        "supporting": "Python \u2022 C#/.NET \u2022 Go \u2022 Azure DevOps \u2022 CI/CD \u2022 REST APIs",
         "pdfSupporting": "Python \u2022 C#/.NET \u2022 Go \u2022 Azure DevOps \u2022 CI/CD \u2022 REST APIs \u2022 ASP.NET Core",
-        "contactCopy": "Open to remote Software Engineering, DevOps/Azure DevOps, Platform Engineering, Production Engineering, Developer Productivity, and Security Automation roles. Let's talk about the delivery, platform, and operational problems your team needs to solve.",
+        "contactCopy": "Open to U.S. fully remote DevOps, Azure DevOps, Production Engineering, software engineering (internal tools, automation, and backend), infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps roles. I build software and automation for delivery, production reliability, developer tooling, security, and operational problems.",
         "location": "Michigan",
         "remote": "Open to U.S. Remote Opportunities",
         "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
@@ -20,22 +20,22 @@ const config = {
     },
     "seo": {
         "canonicalUrl": "https://howlcipher.github.io/william_elias/",
-        "siteName": "William Elias | Software, DevOps & Platform Engineer",
-        "description": "William Elias is a Software, DevOps and Platform Engineer building Python, C#/.NET and Go tooling, Azure DevOps CI/CD, APIs and security automation.",
-        "socialDescription": "Software, DevOps and Platform Engineering. Python, C#/.NET, Go, CI/CD, APIs, developer tooling, security automation and production reliability.",
+        "siteName": "William Elias | DevOps, Software & Production Engineer",
+        "description": "William Elias: DevOps, Software and Production Engineer building Python, C#/.NET and Go tools, Azure DevOps CI/CD, APIs, security automation, reliable systems.",
+        "socialDescription": "DevOps, Software and Production Engineering. Python, C#/.NET, Go, CI/CD, REST APIs, developer tooling, security automation and production reliability.",
         "knowsAbout": [
-            "Software Engineering",
-            "Python",
             "DevOps",
             "Azure DevOps",
+            "Python",
+            "Software Engineering",
             "CI/CD",
-            "Platform Engineering",
+            "Production Engineering",
             "C# / .NET",
             "Go",
             "REST APIs",
             "Developer Tooling",
             "Automation",
-            "Production Engineering",
+            "Platform Engineering",
             "ASP.NET Core",
             "PowerShell",
             "Git",
@@ -44,14 +44,12 @@ const config = {
             "Application Insights",
             "KQL",
             "OAuth 2.1",
-            "IIS",
             "Razor Pages",
-            "Containerization",
             "AI-Enabled Engineering"
         ]
     },
-    "about": "I work where software engineering, DevOps, platform engineering, and production operations overlap. I build Python, C#/.NET, and Go software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes a CI/CD standardization program across a large internal application estate; an ASP.NET Core (.NET 8) Razor Pages production-support portal; a Go-based self-service deployment CLI; Python developer and operations tooling; credential-remediation and Git-history automation; a scoped OAuth 2.1 resource server; and a reusable KQL library used for production diagnostics.\n\nI am looking for U.S. remote roles in Software Engineering, DevOps/Azure DevOps, Platform Engineering, Production Engineering, Developer Productivity, and Security Automation. The common thread: build useful software, automate work that should not be manual, and make production systems easier to operate.",
-    "summary": "Software, DevOps and Platform Engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python, C#/.NET and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation automation, and production-support systems. Brings hands-on production troubleshooting, observability, API security, release automation, and AI-assisted engineering with human review.",
+    "about": "I work where software engineering, DevOps, and production operations overlap. I build Python, C#/.NET, and Go software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes CI/CD standardization; an ASP.NET Core (.NET 8) Razor Pages production-support portal; Python developer and operations tooling; a Go deployment CLI; security automation; OAuth/API work; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in DevOps/Azure DevOps, Production Engineering, software engineering for internal tools, automation, and backend systems, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps. The common thread is building useful software and making production systems easier to operate.",
+    "summary": "DevOps, Software and Production Engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python, C#/.NET and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation automation, and production-support systems. Brings hands-on production troubleshooting, observability, API security, release automation, and AI-enabled engineering with human review.",
     "stats": [
         {
             "value": "60",
@@ -219,7 +217,8 @@ const config = {
                 "Built a suite of Python developer and operations tools spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management.",
                 "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation.",
                 "Led a credential-remediation initiative that scanned thousands of configuration files, reduced 866 findings to 67 distinct exposed secrets, and built classification tooling to support migration to Azure Key Vault. Built Git-history remediation automation with repository discovery, interchangeable rewrite engines (including BFG Repo-Cleaner), and coordinated force-push cleanup.",
-                "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across monitoring and troubleshooting automation. Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
+                "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
+                "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
             ]
         },
         {
@@ -392,6 +391,20 @@ const config = {
     ],
     "pdfEngineeringHighlights": [
         {
+            "name": "CI/CD & Release Engineering",
+            "sourceProgram": "CI/CD & Release Engineering",
+            "bullets": [
+                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories, executing and validating builds and representative deployment paths before rollout."
+            ],
+            "technology": [
+                "Azure DevOps",
+                "Python",
+                "PowerShell",
+                ".NET",
+                "IIS"
+            ]
+        },
+        {
             "name": "Software & Internal Developer Tools",
             "sourceProgram": "Software & Internal Developer Tools",
             "bullets": [
@@ -404,20 +417,6 @@ const config = {
                 "ASP.NET Core",
                 "SQL Server",
                 "SQLite"
-            ]
-        },
-        {
-            "name": "CI/CD & Release Engineering",
-            "sourceProgram": "CI/CD & Release Engineering",
-            "bullets": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories, executing and validating builds and representative deployment paths before rollout."
-            ],
-            "technology": [
-                "Azure DevOps",
-                "Python",
-                "PowerShell",
-                ".NET",
-                "IIS"
             ]
         },
         {

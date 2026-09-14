@@ -2,6 +2,14 @@
 
 ## 2026-09-13
 
+### DevOps, software, and production positioning
+
+* Updated the public identity to **DevOps, Software & Production Engineer** while retaining Platform Engineering as a supported role target and technical signal.
+* Made Python prominent in the hero, About, professional summary, experience, Engineering Impact, skills, PDF, README, metadata, and structured data; the supporting line is now **Python • C#/.NET • Go • Azure DevOps • CI/CD • REST APIs**.
+* Reordered Engineering Impact cards and PDF accomplishments to lead with CI/CD/Azure DevOps scale, then ASP.NET Core software and Python automation, followed by Go deployment tooling, security automation, production reliability, and OAuth/API work.
+* Updated SEO, Open Graph, Twitter, JSON-LD, social preview, and recruiter CTA copy for the DevOps / Software / Production identity, U.S. fully remote targets, Security Automation, and AI-Enabled Engineering.
+* Preserved corrected evidence boundaries for CI/CD scopes, portal architecture, Blazor PoC separation, credential remediation, Key Vault migration status, KQL, OAuth, releases, and infrastructure work. Added semantic tests for the new positioning and preserved constraints.
+
 ### Independent work-machine audit update
 
 * Corrected CI/CD scope from "~60 applications" to the verified 60-repository, 104-application internal estate: 171 application-to-server deployment combinations, 327 deployment paths, 28 repositories with completed standardized-pipeline rollout, and 275 independently verified inventory entries.
