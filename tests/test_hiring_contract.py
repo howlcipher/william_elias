@@ -108,6 +108,50 @@ def test_seo_and_cta_copy_are_canonical():
     assert "Platform Engineering" in cfg["seo"]["knowsAbout"]
 
 
+def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visible():
+    cfg = load_config()
+    title = cfg["personal"]["title"]
+    assert title == "DevOps, Software & Production Engineer"
+    for term in ("DevOps", "Software", "Production"):
+        assert term in title
+    assert cfg["personal"]["supporting"] == (
+        "Python • C#/.NET • Go • Azure DevOps • CI/CD • REST APIs"
+    )
+
+    canonical = json.dumps(cfg)
+    for term in ("Python", "Security Automation", "AI-Enabled Engineering"):
+        assert term in canonical
+    assert "U.S. fully remote" in cfg["personal"]["contactCopy"]
+
+
+def test_engineering_impact_is_the_requested_eight_card_order():
+    cfg = load_config()
+    assert [program["name"] for program in cfg["selectedEngineeringPrograms"]] == [
+        "CI/CD & Release Engineering",
+        "Software & Internal Developer Tools",
+        "Python Automation & Developer Productivity",
+        "Deployment Automation & Release Tooling",
+        "Security & Credential Remediation",
+        "APIs, OAuth & Secure Integration",
+        "Production Reliability & Observability",
+        "Infrastructure Modernization & Containerization",
+    ]
+
+
+def test_verified_cicd_and_security_scope_language_remains_unambiguous():
+    cfg = load_config()
+    cicd = next(p for p in cfg["selectedEngineeringPrograms"] if p["name"] == "CI/CD & Release Engineering")
+    cicd_text = " ".join(cicd["bullets"] + cicd["details"])
+    for term in (
+        "60-repository, 104-application",
+        "56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories",
+        "representative deployment paths for 25 of 28 standardized repositories",
+    ):
+        assert term in cicd_text
+    security = next(p for p in cfg["selectedEngineeringPrograms"] if p["name"].startswith("Security"))
+    assert "67 distinct exposed secrets" in json.dumps(security)
+
+
 def test_no_phone_or_street_address_in_public_source():
     personal = load_config()["personal"]
     assert "phone" not in personal

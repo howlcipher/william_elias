@@ -1,7 +1,7 @@
 # William Elias
 
-**Software, DevOps & Platform Engineer**
-Python • C#/.NET • Go • Azure DevOps • CI/CD • Developer Tooling
+**DevOps, Software & Production Engineer**
+Python • C#/.NET • Go • Azure DevOps • CI/CD • REST APIs
 Open to U.S. Remote Opportunities
 
 [Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
@@ -16,7 +16,7 @@ Open to U.S. Remote Opportunities
 
 ## About This Repository
 
-This is the source for the resume website above: a professional, modern, and highly performant resume site built with HTML, CSS, and vanilla JavaScript.
+This is the source for the resume website above: a professional, modern, and highly performant resume site built with HTML, CSS, and vanilla JavaScript. It positions William for U.S. fully remote DevOps, Azure DevOps, Production Engineering, internal-tools/automation/backend software engineering, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps roles.
 
 ## Confirmed Professional Content
 
@@ -49,7 +49,7 @@ Treat this canonical general portfolio and résumé as complete after the factua
 
 ## Features
 - **Config-Driven**: Easily update your experience, skills, and contact info via a single `resume.json` file. No need to touch HTML!
-- **Engineering Impact**: Six professional programs lead with outcomes; native expandable "Implementation & validation" disclosures retain detailed evidence, validation counts, and shared-ownership qualifications. They work with keyboard controls and without JavaScript.
+- **Engineering Impact**: Eight professional programs lead with outcomes; native expandable "Implementation & validation" disclosures retain detailed evidence, validation counts, and shared-ownership qualifications. They work with keyboard controls and without JavaScript.
 - **Dark/Light Mode**: User preference is stored in LocalStorage.
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
 - **Readable Role Title**: A dedicated dark-theme text color keeps the small mobile role title above 4.5:1 contrast while retaining the existing decorative accent colors.

@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 6914
+/Length 6723
 >>
 stream
 2 J
@@ -59,7 +59,7 @@ stream
 BT /F1 18.00 Tf ET
 BT 238.50 751.60 Td (WILLIAM ELIAS) Tj ET
 BT /F1 11.00 Tf ET
-BT 180.71 735.70 Td (SOFTWARE, DEVOPS & PLATFORM ENGINEER) Tj ET
+BT 174.29 735.70 Td (DEVOPS, SOFTWARE & PRODUCTION ENGINEER) Tj ET
 BT /F2 9.50 Tf ET
 BT 143.64 722.65 Td (Python | C#/.NET | Go | Azure DevOps | CI/CD | REST APIs | ASP.NET Core) Tj ET
 BT /F3 10.00 Tf ET
@@ -77,10 +77,10 @@ BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 653.50 Td (Software, DevOps and Platform Engineer with 10+ years across software delivery, production operations, infrastructure, and) Tj ET
-BT 26.83 640.50 Td (networking. Builds Python, C#/.NET and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation) Tj ET
+BT 26.83 653.50 Td (DevOps, Software and Production Engineer with 10+ years across software delivery, production operations, infrastructure,) Tj ET
+BT 26.83 640.50 Td (and networking. Builds Python, C#/.NET and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation) Tj ET
 BT 26.83 627.50 Td (automation, and production-support systems. Brings hands-on production troubleshooting, observability, API security, release) Tj ET
-BT 26.83 614.50 Td (automation, and AI-assisted engineering with human review.) Tj ET
+BT 26.83 614.50 Td (automation, and AI-enabled engineering with human review.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 590.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
 24.00 587.00 m 588.00 587.00 l S
@@ -114,48 +114,44 @@ BT 38.83 300.50 Td (exposed secrets, and built classification tooling to support
 BT 38.83 287.50 Td (automation with repository discovery, interchangeable rewrite engines \(including BFG Repo-Cleaner\), and coordinated) Tj ET
 BT 38.83 274.50 Td (force-push cleanup.) Tj ET
 BT 38.83 261.50 Td (- Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly) Tj ET
-BT 38.83 248.50 Td (in production deployments. Authored and maintain a reusable 22-query KQL library used across monitoring and) Tj ET
-BT 38.83 235.50 Td (troubleshooting automation. Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting,) Tj ET
-BT 38.83 222.50 Td (and explicit token-validation-bypass defenses.) Tj ET
+BT 38.83 248.50 Td (in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and) Tj ET
+BT 38.83 235.50 Td (troubleshooting automation.) Tj ET
+BT 38.83 222.50 Td (- Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit) Tj ET
+BT 38.83 209.50 Td (token-validation-bypass defenses.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 207.35 Td (HBK - Hottinger Brüel & Kjær) Tj ET
+BT 26.83 194.35 Td (HBK - Hottinger Brüel & Kjær) Tj ET
 BT /F3 10.00 Tf ET
-BT 496.23 207.50 Td (Jul 2020 - Feb 2023) Tj ET
+BT 496.23 194.50 Td (Jul 2020 - Feb 2023) Tj ET
 BT /F2 9.50 Tf ET
-BT 26.83 194.65 Td (DevOps Engineer - Python Automation | Southfield, MI · Remote) Tj ET
+BT 26.83 181.65 Td (DevOps Engineer - Python Automation | Southfield, MI · Remote) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 181.50 Td (- Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output) Tj ET
-BT 38.83 168.50 Td (processing to save more than 40 hours per month.) Tj ET
-BT 38.83 155.50 Td (- Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.) Tj ET
-BT 38.83 142.50 Td (- Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer) Tj ET
-BT 38.83 129.50 Td (troubleshooting.) Tj ET
+BT 38.83 168.50 Td (- Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output) Tj ET
+BT 38.83 155.50 Td (processing to save more than 40 hours per month.) Tj ET
+BT 38.83 142.50 Td (- Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.) Tj ET
+BT 38.83 129.50 Td (- Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer) Tj ET
+BT 38.83 116.50 Td (troubleshooting.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 103.70 Td (CORE EXPERTISE) Tj ET
-24.00 100.00 m 588.00 100.00 l S
+BT 26.83 90.70 Td (CORE EXPERTISE) Tj ET
+24.00 87.00 m 588.00 87.00 l S
 BT /F1 10.00 Tf ET
-BT 26.83 86.50 Td (Software & Backend) Tj ET
-BT 123.52 86.50 Td (: ) Tj ET
+BT 26.83 73.50 Td (Software & Backend) Tj ET
+BT 123.52 73.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 129.63 86.50 Td (Python, C#, .NET, ASP.NET Core, REST APIs, Go) Tj ET
+BT 129.63 73.50 Td (Python, C#, .NET, ASP.NET Core, REST APIs, Go) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 73.50 Td (DevOps & Delivery) Tj ET
-BT 116.31 73.50 Td (: ) Tj ET
+BT 26.83 60.50 Td (DevOps & Delivery) Tj ET
+BT 116.31 60.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 122.42 73.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, Containerization) Tj ET
+BT 122.42 60.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, Containerization) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 60.50 Td (Automation & Developer Tooling) Tj ET
+BT 26.83 47.50 Td (Automation & Developer Tooling) Tj ET
 BT /F2 10.00 Tf ET
-BT 182.40 60.50 Td ( \(Python/PowerShell professionally; Go for deployment tooling; uv for Python) Tj ET
-BT 26.83 47.50 Td (standardization\)) Tj ET
+BT 182.40 47.50 Td ( \(Python/PowerShell professionally; Go for deployment tooling; uv for Python) Tj ET
+BT 26.83 34.50 Td (standardization\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 97.97 47.50 Td (: ) Tj ET
+BT 97.97 34.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 104.08 47.50 Td (Python, PowerShell, REST APIs, Go, uv, Developer Tooling) Tj ET
-BT /F1 10.00 Tf ET
-BT 26.83 34.50 Td (Production & Reliability) Tj ET
-BT 139.63 34.50 Td (: ) Tj ET
-BT /F3 10.00 Tf ET
-BT 145.74 34.50 Td (Azure Monitor, Application Insights, KQL, Structured Logging, Incident Triage, RCA) Tj ET
+BT 104.08 34.50 Td (Python, PowerShell, REST APIs, Go, uv, Developer Tooling) Tj ET
 
 endstream
 endobj
@@ -164,13 +160,13 @@ endobj
 /Annots [<</A <</S /URI /URI (https://github.com/howlcipher/howlplane)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 437.50 174.11 447.50]
+/Rect [26.83 424.50 174.11 434.50]
 /Subtype /Link
 /Type /Annot>>
 <</A <</S /URI /URI (https://github.com/howlcipher/redistricting-map)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 357.50 202.99 367.50]
+/Rect [26.83 344.50 202.99 354.50]
 /Subtype /Link
 /Type /Annot>>]
 /Contents 6 0 R
@@ -181,107 +177,112 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 5678
+/Length 5909
 >>
 stream
 2 J
 0.57 w
 BT /F1 10.00 Tf ET
-BT 26.83 758.50 Td (Security & Identity) Tj ET
-BT 114.63 758.50 Td (: ) Tj ET
+BT 26.83 758.50 Td (Production & Reliability) Tj ET
+BT 139.63 758.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 120.74 758.50 Td (OAuth 2.1 / OIDC, JWT, Credential Remediation, Git History Remediation, Azure Key Vault, PII) Tj ET
-BT 26.83 745.50 Td (Safeguards) Tj ET
+BT 145.74 758.50 Td (Azure Monitor, Application Insights, KQL, Structured Logging, Incident Triage, RCA) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 732.50 Td (Infrastructure & Application Operations) Tj ET
-BT 214.64 732.50 Td (: ) Tj ET
+BT 26.83 745.50 Td (Security & Identity) Tj ET
+BT 114.63 745.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 220.75 732.50 Td (Windows Server, IIS, Active Directory, SQL Server, Load Balancers, Firewalls) Tj ET
+BT 120.74 745.50 Td (OAuth 2.1 / OIDC, JWT, Credential Remediation, Git History Remediation, Azure Key Vault, PII) Tj ET
+BT 26.83 732.50 Td (Safeguards) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 719.50 Td (AI-Enabled Engineering) Tj ET
+BT 26.83 719.50 Td (Infrastructure & Application Operations) Tj ET
+BT 214.64 719.50 Td (: ) Tj ET
+BT /F3 10.00 Tf ET
+BT 220.75 719.50 Td (Windows Server, IIS, Active Directory, SQL Server, Load Balancers, Firewalls) Tj ET
+BT /F1 10.00 Tf ET
+BT 26.83 706.50 Td (AI-Enabled Engineering) Tj ET
 BT /F2 10.00 Tf ET
-BT 139.63 719.50 Td ( \(Internal tools & projects\)) Tj ET
+BT 139.63 706.50 Td ( \(Internal tools & projects\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 253.56 719.50 Td (: ) Tj ET
+BT 253.56 706.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 259.67 719.50 Td (LLM APIs, MCP, RAG, Agent Workflows, Human Review, Engineering) Tj ET
-BT 26.83 706.50 Td (Knowledge Systems) Tj ET
+BT 259.67 706.50 Td (LLM APIs, MCP, RAG, Agent Workflows, Human Review, Engineering) Tj ET
+BT 26.83 693.50 Td (Knowledge Systems) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 682.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
-24.00 679.00 m 588.00 679.00 l S
+BT 26.83 669.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
+24.00 666.00 m 588.00 666.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 665.35 Td (Software & Internal Developer Tools) Tj ET
+BT 26.83 652.35 Td (CI/CD & Release Engineering) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 652.50 Td (- Built and maintain an internal ASP.NET Core \(.NET 8\) Razor Pages production-support portal with SQL Server and) Tj ET
-BT 38.83 639.50 Td (SQLite persistence, role-gated approval workflows, audit logging, live configuration diffing, pre-change-review visibility, and) Tj ET
-BT 38.83 626.50 Td (integrated service-desk request tracking.) Tj ET
+BT 38.83 639.50 Td (- Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing) Tj ET
+BT 38.83 626.50 Td (standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28) Tj ET
+BT 38.83 613.50 Td (standardized application repositories, executing and validating builds and representative deployment paths before rollout.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 614.30 Td 0.3529 0.3529 0.3529 rg (Tech: C#, .NET 8, Razor Pages, ASP.NET Core, SQL Server, SQLite) Tj ET Q
+q BT 38.83 601.30 Td 0.3529 0.3529 0.3529 rg (Tech: Azure DevOps, Python, PowerShell, .NET, IIS) Tj ET Q
 BT /F1 10.50 Tf ET
-BT 26.83 599.35 Td (CI/CD & Release Engineering) Tj ET
+BT 26.83 586.35 Td (Software & Internal Developer Tools) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 586.50 Td (- Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing) Tj ET
-BT 38.83 573.50 Td (standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28) Tj ET
-BT 38.83 560.50 Td (standardized application repositories, executing and validating builds and representative deployment paths before rollout.) Tj ET
+BT 38.83 573.50 Td (- Built and maintain an internal ASP.NET Core \(.NET 8\) Razor Pages production-support portal with SQL Server and) Tj ET
+BT 38.83 560.50 Td (SQLite persistence, role-gated approval workflows, audit logging, live configuration diffing, pre-change-review visibility, and) Tj ET
+BT 38.83 547.50 Td (integrated service-desk request tracking.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 548.30 Td 0.3529 0.3529 0.3529 rg (Tech: Azure DevOps, Python, PowerShell, .NET, IIS) Tj ET Q
+q BT 38.83 535.30 Td 0.3529 0.3529 0.3529 rg (Tech: C#, .NET 8, Razor Pages, ASP.NET Core, SQL Server, SQLite) Tj ET Q
 BT /F1 10.50 Tf ET
-BT 26.83 533.35 Td (Python Automation & Developer Productivity) Tj ET
+BT 26.83 520.35 Td (Python Automation & Developer Productivity) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 520.50 Td (- Built a suite of Python developer and operations tools spanning API automation, failed-payload triage, scheduled) Tj ET
-BT 38.83 507.50 Td (reporting, integration-log analysis, engineering search, RCA, and recurring support workflows.) Tj ET
+BT 38.83 507.50 Td (- Built a suite of Python developer and operations tools spanning API automation, failed-payload triage, scheduled) Tj ET
+BT 38.83 494.50 Td (reporting, integration-log analysis, engineering search, RCA, and recurring support workflows.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 495.30 Td 0.3529 0.3529 0.3529 rg (Tech: Python, REST APIs, Azure DevOps, Automation, uv) Tj ET Q
+q BT 38.83 482.30 Td 0.3529 0.3529 0.3529 rg (Tech: Python, REST APIs, Azure DevOps, Automation, uv) Tj ET Q
 BT /F1 11.00 Tf ET
-BT 26.83 469.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
-24.00 466.00 m 588.00 466.00 l S
+BT 26.83 456.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
+24.00 453.00 m 588.00 453.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 452.35 Td (HowlPlane) Tj ET
+BT 26.83 439.35 Td (HowlPlane) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 439.50 Td (github.com/howlcipher/howlplane) Tj ET
-BT 38.83 426.50 Td (- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and) Tj ET
-BT 38.83 413.50 Td (runs deterministic verification.) Tj ET
-BT 38.83 400.50 Td (- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared) Tj ET
-BT 38.83 387.50 Td (project context and CI/security checks.) Tj ET
+BT 26.83 426.50 Td (github.com/howlcipher/howlplane) Tj ET
+BT 38.83 413.50 Td (- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and) Tj ET
+BT 38.83 400.50 Td (runs deterministic verification.) Tj ET
+BT 38.83 387.50 Td (- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared) Tj ET
+BT 38.83 374.50 Td (project context and CI/security checks.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 372.35 Td (RedrawUS) Tj ET
+BT 26.83 359.35 Td (RedrawUS) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 359.50 Td (github.com/howlcipher/redistricting-map) Tj ET
-BT 38.83 346.50 Td (- Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent) Tj ET
-BT 38.83 333.50 Td (browser caching, and Web Workers.) Tj ET
-BT 38.83 320.50 Td (- Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests) Tj ET
-BT 38.83 307.50 Td (for data processing and application behavior.) Tj ET
+BT 26.83 346.50 Td (github.com/howlcipher/redistricting-map) Tj ET
+BT 38.83 333.50 Td (- Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent) Tj ET
+BT 38.83 320.50 Td (browser caching, and Web Workers.) Tj ET
+BT 38.83 307.50 Td (- Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests) Tj ET
+BT 38.83 294.50 Td (for data processing and application behavior.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 281.70 Td (EARLIER EXPERIENCE) Tj ET
-24.00 278.00 m 588.00 278.00 l S
+BT 26.83 268.70 Td (EARLIER EXPERIENCE) Tj ET
+24.00 265.00 m 588.00 265.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 264.35 Td (QA Developer, Intrepid Control Systems) Tj ET
+BT 26.83 251.35 Td (QA Developer, Intrepid Control Systems) Tj ET
 BT /F3 10.00 Tf ET
-BT 493.46 264.50 Td (Mar 2020 - Apr 2020) Tj ET
-BT 38.83 251.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
+BT 493.46 251.50 Td (Mar 2020 - Apr 2020) Tj ET
+BT 38.83 238.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 236.35 Td (Network Engineer, Project Worldwide) Tj ET
+BT 26.83 223.35 Td (Network Engineer, Project Worldwide) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.90 236.50 Td (Jan 2020 - Mar 2020) Tj ET
-BT 38.83 223.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
+BT 492.90 223.50 Td (Jan 2020 - Mar 2020) Tj ET
+BT 38.83 210.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 208.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
+BT 26.83 195.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
 BT /F3 10.00 Tf ET
-BT 490.67 208.50 Td (Sep 2019 - Dec 2019) Tj ET
-BT 38.83 195.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
+BT 490.67 195.50 Td (Sep 2019 - Dec 2019) Tj ET
+BT 38.83 182.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 180.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
+BT 26.83 167.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.33 180.50 Td (Sep 2015 - Jun 2019) Tj ET
-BT 38.83 167.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
+BT 492.33 167.50 Td (Sep 2015 - Jun 2019) Tj ET
+BT 38.83 154.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 141.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
-24.00 138.00 m 588.00 138.00 l S
+BT 26.83 128.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
+24.00 125.00 m 588.00 125.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 124.50 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
-BT 26.83 111.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT 26.83 98.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 26.83 85.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 26.83 111.50 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
+BT 26.83 98.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT 26.83 85.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
+BT 26.83 72.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -340,21 +341,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000007849 00000 n 
-0000008248 00000 n 
-0000013978 00000 n 
-0000014080 00000 n 
-0000014185 00000 n 
-0000014282 00000 n 
-0000014390 00000 n 
-0000014498 00000 n 
+0000007658 00000 n 
+0000008057 00000 n 
+0000014018 00000 n 
+0000014120 00000 n 
+0000014225 00000 n 
+0000014322 00000 n 
+0000014430 00000 n 
+0000014538 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<5D2F356940A58CAC148D0A8C920AE480><5D2F356940A58CAC148D0A8C920AE480>]
+/ID [<37EE00CA18CCB488378DD2834BCCFFCE><37EE00CA18CCB488378DD2834BCCFFCE>]
 >>
 startxref
-14644
+14684
 %%EOF
