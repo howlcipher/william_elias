@@ -12,16 +12,17 @@ William builds software and automation for delivery, production reliability, dev
 
 `resume.json` is the canonical content source. Regenerate all public artifacts with the scripts in `scripts/`; do not use generated assets as sources.
 
-* CI/CD scope remains 60 repositories and 104 applications. Standardized rollout is complete for 28 repositories, with 56 Azure DevOps build/release definitions across those 28. Build validation was 27/28; representative deployment-path dry runs were 25/28. The separate review of existing definitions found 95 legacy definitions out of 109 reviewed.
-* The production-support portal is ASP.NET Core on .NET 8 with Razor Pages, SQL Server and SQLite, role-gated workflows, audit logging, live configuration diffing, pre-change-review visibility, and service-desk integration. It is not Blazor.
-* The separate Blazor Web App is a container-deployment proof of concept using Interactive Server. Do not combine it with the production-support portal.
-* Security evidence is credential discovery/classification, Git-history remediation, Azure Key Vault migration support, and the scoped OAuth 2.1 resource-server work. Credential findings were reduced from 866 to 67 distinct exposed secrets; the Key Vault migration remains ongoing.
-* Python remains central through developer and operations tooling, Azure DevOps REST API automation, payload triage, scheduled reporting, integration-log parsing, engineering search, RCA, operations CLI work, and recurring production-support workflows.
+* CI/CD scope remains 60 repositories and 104 applications. Durable evidence includes 56 Azure DevOps build/release definitions across 28 standardized application repositories, 27/28 build validation, 25/28 representative deployment-path dry runs, and 109 existing definitions reviewed/classified (95 legacy and 14 aligned). Do not publish changing rollout or adoption status.
+* The production-support portal is a .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite. It has per-module access policies, database-backed workflows, retained SOX/audit history where supported, DBA approve-only deployment scripts, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk tracking. It is not Razor Pages.
+* FastAPI is professional experience for separate internal dashboards and operational tooling; do not attach it to the Blazor portal.
+* Security evidence is Python source-code and Git-history scanning, BFG Repo-Cleaner remediation across 100+ repositories, and complete remediation records. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds. Do not claim Azure Key Vault, Managed Identity, Azure SDK, .NET/C#, or automated tests for this tooling.
+* Auth0, OAuth/OIDC, IAM, authentication/identity troubleshooting, PII safeguards, and audit controls are supported security/identity content. Do not inflate this to Azure identity architecture ownership.
+* Python remains central through FastAPI dashboards, developer and operations tooling, Azure DevOps REST API automation, payload triage, scheduled reporting, integration-log parsing, engineering search, RCA, operations CLI work, and recurring production-support workflows.
 * The reusable 22-query KQL library is authored and maintained for internal monitoring and troubleshooting automation. Release tracking is maintained for a recurring, roughly weekly cadence, with direct deployment participation.
 
 ## Explicit exclusions
 
-Do not assert: credential remediation across 100+ repositories; 157 definitions; six latent defects; FastAPI dashboards; Auth0 troubleshooting; Application Insights adoption claims; a Blazor production-support portal; formal SOX compliance; sole authorship of 300+ retirements; leading weekly production releases; unqualified migrations; Python apps hosted on IIS; vendor-report conversion; a completed DR cutover; a zero-downtime production-server migration; or a completed organization-wide Key Vault migration.
+Do not assert: Razor Pages for the portal; Azure Key Vault, Managed Identity, Azure SDK, .NET/C#, xUnit, 62 automated tests, or 156 automated tests for the corrected systems; formal SOX compliance; sole authorship of 300+ retirements; leading weekly production releases; unqualified migrations; Python apps hosted on IIS; vendor-report conversion; a completed DR cutover; a zero-downtime production-server migration; or Azure identity architecture ownership.
 
 ## Artifact and validation workflow
 

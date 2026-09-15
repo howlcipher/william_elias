@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-15
+
+### Final factual-correction pass
+
+* Applied William Elias's authoritative corrections over conflicting earlier audit wording and tests. The public identity remains **DevOps, Software & Production Engineer**.
+* Corrected the internal production-support portal to a **.NET 8 Blazor Web App with Interactive Server** using C#, ASP.NET Core, SQL Server, and SQLite; removed Razor Pages and unsupported portal test-count claims.
+* Restored professional FastAPI experience for separate internal dashboards and operational tooling, without attaching FastAPI to the Blazor portal.
+* Reframed security work as Python source-code/Git-history scanning and BFG Repo-Cleaner remediation across 100+ repositories. Preserved the measured 2,832-file, 67-secret, approximately 25-second scan and complete remediation records; removed Key Vault, Managed Identity, Azure SDK, .NET/C#, and invented-test claims.
+* Restored Auth0, OAuth/OIDC, IAM, and identity troubleshooting while retaining security safeguards and avoiding Azure identity architecture claims.
+* Removed changing public CI/CD rollout/adoption status while retaining durable engineering evidence and validation counts. Kept HowlPlane and RedrawUS as the PDF project pair and Additional Technical Foundations website-only.
+* Updated current-state documentation and semantic factual-contract tests; regenerated the portfolio artifacts from `resume.json`.
+
 ## 2026-09-13
 
 ### DevOps, software, and production positioning
