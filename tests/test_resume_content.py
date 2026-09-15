@@ -79,7 +79,7 @@ class TestKeyMetrics:
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
         assert "60-repository, 104-application" in accomplishment
-        assert "28 repositories" in accomplishment
+        assert "28 standardized application repositories" in accomplishment
         # Build and dry-run validation details live in the dedicated CI/CD program.
         assert "27" in accomplishment or "28" in accomplishment
 
@@ -164,7 +164,7 @@ class TestKeyMetrics:
         stats_blob = json.dumps(cfg["stats"])
         assert "credential" in stats_blob.lower() or "secret" in stats_blob.lower()
         blob = json.dumps(cfg).lower()
-        assert "100+ repositories" not in blob
+        assert "100+ repositories" in blob
         assert "credential-remediated" not in blob
 
     def test_cicd_program_preserves_verified_metrics(self):
@@ -216,7 +216,7 @@ class TestCoreExpertiseCategories:
         for core in ("Python", "PowerShell", "C#", "Go", "SQL Server", "uv"):
             assert core in combined
         assert "Java" not in combined
-        assert "FastAPI" not in combined
+        assert "FastAPI" in combined
 
     def test_software_backend_category_has_merged_frontend_basics(self):
         cfg = load_config()

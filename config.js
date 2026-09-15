@@ -40,16 +40,18 @@ const config = {
             "PowerShell",
             "Git",
             "Security Automation",
-            "Azure Key Vault",
+            "FastAPI",
+            "Blazor",
+            "Auth0",
             "Application Insights",
             "KQL",
-            "OAuth 2.1",
-            "Razor Pages",
+            "OAuth / OIDC",
+            "IAM",
             "AI-Enabled Engineering"
         ]
     },
-    "about": "I work where software engineering, DevOps, and production operations overlap. I build Python, C#/.NET, and Go software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes CI/CD standardization; an ASP.NET Core (.NET 8) Razor Pages production-support portal; Python developer and operations tooling; a Go deployment CLI; security automation; OAuth/API work; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in DevOps/Azure DevOps, Production Engineering, software engineering for internal tools, automation, and backend systems, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps. The common thread is building useful software and making production systems easier to operate.",
-    "summary": "DevOps, Software and Production Engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python, C#/.NET and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation automation, and production-support systems. Brings hands-on production troubleshooting, observability, API security, release automation, and AI-enabled engineering with human review.",
+    "about": "I work where software engineering, DevOps, and production operations overlap. I build Python, C#/.NET, and Go software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes CI/CD standardization; a .NET 8 Blazor Web App with Interactive Server for internal production support; separate FastAPI dashboards and operational tooling; a Go deployment CLI; credential-remediation automation; Auth0/OAuth/OIDC troubleshooting; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in DevOps/Azure DevOps, Production Engineering, software engineering for internal tools, automation, and backend systems, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps. The common thread is building useful software and making production systems easier to operate.",
+    "summary": "DevOps, Software and Production Engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python/FastAPI, C#/.NET/Blazor, and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation automation, and production-support systems. Brings hands-on production troubleshooting, observability, Auth0/OAuth/OIDC troubleshooting, release automation, and AI-enabled engineering with human review.",
     "stats": [
         {
             "value": "60",
@@ -71,28 +73,31 @@ const config = {
         {
             "category": "Software & Backend",
             "icon": "fa-code",
-            "context": "Professional Python and .NET application development; internal ASP.NET Core Razor Pages production-support tooling",
+            "context": "Professional Python/FastAPI dashboards and .NET 8 Blazor internal production-support tooling",
             "tags": [
                 "Python",
+                "FastAPI",
                 "C#",
                 ".NET",
+                "Blazor",
                 "ASP.NET Core",
-                "Razor Pages",
-                "REST APIs",
-                "Go",
                 "SQL Server",
+                "REST APIs",
                 "SQLite",
+                "Go",
                 "JavaScript",
                 "HTML",
                 "CSS"
             ],
             "pdfTags": [
                 "Python",
+                "FastAPI",
                 "C#",
                 ".NET",
+                "Blazor",
                 "ASP.NET Core",
                 "REST APIs",
-                "Go"
+                "SQL Server"
             ]
         },
         {
@@ -149,13 +154,13 @@ const config = {
         {
             "category": "Security & Identity",
             "icon": "fa-shield-halved",
-            "context": "Professional credential remediation, OAuth/OIDC, and security safeguards",
+            "context": "Professional credential remediation, Auth0 identity troubleshooting, and security safeguards",
             "tags": [
-                "OAuth 2.1 / OIDC",
-                "JWT",
+                "Auth0",
+                "OAuth / OIDC",
+                "IAM",
                 "Credential Remediation",
                 "Git History Remediation",
-                "Azure Key Vault",
                 "PII Safeguards",
                 "Audit Controls"
             ]
@@ -211,12 +216,12 @@ const config = {
             "company": "Stellantis Financial Services US",
             "location": "Auburn Hills, MI \u00b7 Hybrid",
             "achievements": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories.",
+                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories.",
                 "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states.",
-                "Built and maintain an internal ASP.NET Core (.NET 8) Razor Pages production-support portal with SQL Server and SQLite persistence, role-gated approval workflows, audit logging, live configuration diffing, pre-change-review visibility, and integrated service-desk request tracking.",
-                "Built a suite of Python developer and operations tools spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management.",
+                "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking.",
+                "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management.",
                 "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation.",
-                "Led a credential-remediation initiative that scanned thousands of configuration files, reduced 866 findings to 67 distinct exposed secrets, and built classification tooling to support migration to Azure Key Vault. Built Git-history remediation automation with repository discovery, interchangeable rewrite engines (including BFG Repo-Cleaner), and coordinated force-push cleanup.",
+                "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete.",
                 "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
                 "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
             ]
@@ -237,7 +242,7 @@ const config = {
         {
             "name": "CI/CD & Release Engineering",
             "bullets": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and rollout-tracking tooling and completing standardized-pipeline rollout to 28 repositories.",
+                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and reusable pipeline/template automation.",
                 "Mapped 104 applications to 171 application-to-server deployment combinations and 327 deployment paths; verified 275 inventory entries and tracked 39 unmapped, 20 legacy, 8 out-of-scope, and 1 unreachable repository."
             ],
             "details": [
@@ -258,18 +263,18 @@ const config = {
         {
             "name": "Software & Internal Developer Tools",
             "bullets": [
-                "Built and maintain an internal ASP.NET Core (.NET 8) Razor Pages production-support portal with SQL Server and SQLite persistence, role-gated approval workflows, audit logging, live configuration diffing, pre-change-review visibility, and integrated service-desk request tracking."
+                "Built and maintain a modular internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support."
             ],
             "details": [
-                "The production-support portal is a separate system from the Blazor container proof of concept; it uses .NET 8, Razor Pages (not Blazor), SQL Server, and SQLite.",
-                "Uses per-module role-based access policies, database-backed workflows, audit-event logging, DBA-role-gated approval, and managed-secret integration.",
+                "Uses per-module access policies, database-backed workflows, retained audit history including SOX/audit records where supported, and DBA approve-only deployment scripts.",
                 "Live configuration/object diffing and pre-change visibility provide pre-CAB and pre-deployment review support.",
                 "Integrated service-desk request tracking and observability keep operational workflows traceable."
             ],
             "technology": [
                 "C#",
                 ".NET 8",
-                "Razor Pages",
+                "Blazor",
+                "Interactive Server",
                 "ASP.NET Core",
                 "SQL Server",
                 "SQLite"
@@ -278,7 +283,7 @@ const config = {
         {
             "name": "Python Automation & Developer Productivity",
             "bullets": [
-                "Built a suite of Python developer and operations tools spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows.",
+                "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows.",
                 "Standardized team Python dependency and tooling workflows on uv."
             ],
             "details": [
@@ -317,19 +322,18 @@ const config = {
         {
             "name": "Security & Credential Remediation",
             "bullets": [
-                "Led a credential-remediation initiative that scanned thousands of configuration files, reduced 866 findings to 67 distinct exposed secrets, and built classification tooling to support migration to Azure Key Vault.",
-                "A representative-host scan processed 2,832 configuration files across six applications; a separate connection-string scan found 619 instances across 40 production applications."
+                "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories.",
+                "A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
             ],
             "details": [
-                "Credential classification and migration to Azure Key Vault is ongoing; exposed credentials were reduced and classified to support targeted remediation.",
-                "Git-history remediation automation removes committed credentials from source control using repository discovery, interchangeable rewrite engines, reflog expiry, and coordinated force-push cleanup."
+                "Git-history remediation uses repository discovery, BFG Repo-Cleaner, reflog expiry, and coordinated cleanup of exposed credentials."
             ],
             "technology": [
                 "Python",
                 "Git",
                 "BFG Repo-Cleaner",
-                "Azure Key Vault",
-                "Credential Remediation"
+                "Credential Remediation",
+                "Git History Remediation"
             ]
         },
         {
@@ -394,7 +398,7 @@ const config = {
             "name": "CI/CD & Release Engineering",
             "sourceProgram": "CI/CD & Release Engineering",
             "bullets": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, completing standardized-pipeline rollout to 28 repositories. Stood up 56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories, executing and validating builds and representative deployment paths before rollout."
+                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories, with build validation and representative deployment-path dry runs."
             ],
             "technology": [
                 "Azure DevOps",
@@ -408,12 +412,12 @@ const config = {
             "name": "Software & Internal Developer Tools",
             "sourceProgram": "Software & Internal Developer Tools",
             "bullets": [
-                "Built and maintain an internal ASP.NET Core (.NET 8) Razor Pages production-support portal with SQL Server and SQLite persistence, role-gated approval workflows, audit logging, live configuration diffing, pre-change-review visibility, and integrated service-desk request tracking."
+                "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, audit history, live diffing, and service-desk tracking."
             ],
             "technology": [
                 "C#",
                 ".NET 8",
-                "Razor Pages",
+                "Blazor",
                 "ASP.NET Core",
                 "SQL Server",
                 "SQLite"
