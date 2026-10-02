@@ -10,7 +10,7 @@ class TestLoadConfig:
         cfg = load_config()
         assert isinstance(cfg, dict)
         assert "personal" in cfg
-        assert "summary" in cfg
+        assert "positioningStatements" in cfg
         assert "skills" in cfg
         assert "experience" in cfg
         assert "projects" in cfg
@@ -86,7 +86,7 @@ class TestValidateConfig:
         cfg = load_config()
         validate_config(cfg)
 
-    @pytest.mark.parametrize("key", ["skills", "selectedEngineeringPrograms", "pdfEngineeringHighlights"])
+    @pytest.mark.parametrize("key", ["skills", "selectedEngineeringPrograms", "pdfEngineeringHighlights", "positioningStatements"])
     def test_validate_config_missing_field(self, key):
         cfg = load_config()
         del cfg[key]

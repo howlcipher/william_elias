@@ -1,7 +1,7 @@
 import json
 import re
 
-from scripts.generate_resume_pdf import SITE_DIR, load_config
+from scripts.generate_resume_pdf import SITE_DIR, load_config, load_variants
 
 
 def _index_html():
@@ -75,9 +75,35 @@ class TestJsonLd:
         data = self._extract_json_ld()
         person = data["mainEntity"]
         assert person["name"] == cfg["personal"]["name"]
-        assert person["jobTitle"] == cfg["personal"]["title"]
+        assert person["jobTitle"] == cfg["experience"][0]["officialTitle"]
         assert cfg["personal"]["linkedin"] in person["sameAs"]
         assert cfg["personal"]["github"] in person["sameAs"]
+
+    def test_json_ld_job_title_is_the_official_employer_title(self):
+        person = self._extract_json_ld()["mainEntity"]
+        assert person["jobTitle"] == "Production Support Engineer"
+        for positioning in ("Software & Automation Engineer", "Platform Engineer",
+                            "Developer Productivity Engineer", "DevOps Engineer",
+                            "Production & DevOps Automation Engineer"):
+            assert positioning not in person["jobTitle"]
+        # Positioning belongs in descriptive fields instead.
+        assert "software and automation engineer" in person["description"].lower()
+        for term in ("Developer Productivity", "Developer Experience (DevEx)", "Developer Tooling",
+                     "Platform Engineering", "Internal Tools", "Production Engineering", "DevOps",
+                     "Azure DevOps", "CI/CD", "Infrastructure Automation", "Production Reliability",
+                     "Security Automation", "DevSecOps", "Python", "Go", "C# / .NET", "ASP.NET Core",
+                     "REST APIs"):
+            assert term in person["knowsAbout"], term
+
+    def test_page_title_and_social_metadata_use_new_positioning(self):
+        html_content = _index_html()
+        assert "<title>William Elias | Software &amp; Automation Engineer</title>" in html_content
+        for prop in ('property="og:title"', 'name="twitter:title"'):
+            assert f'<meta {prop} content="William Elias | Software &amp; Automation Engineer">' in html_content
+        for prop in ('property="og:description"', 'name="twitter:description"'):
+            match = re.search(rf'<meta {prop} content="(.*?)">', html_content)
+            assert "Developer tooling" in match.group(1) or "developer tooling" in match.group(1)
+        assert "DevOps, Software &amp; Production Engineer" not in html_content
 
     def test_json_ld_uses_curated_knows_about_subset(self):
         cfg = load_config()
@@ -125,11 +151,12 @@ class TestRobotsAndSitemap:
 
 class TestNavigationCtas:
     def test_desktop_resume_nav_cta_exists(self):
-        cfg = load_config()
         html_content = _index_html()
         nav_section = html_content.split('<div class="nav-right">')[1].split("</nav>")[0]
         assert "nav-resume-btn" in nav_section
-        assert cfg["personal"]["resumePdf"] in nav_section
+        # One compact navbar control jumps to the labelled two-résumé choice.
+        assert 'href="#resume-downloads" class="nav-resume-btn"' in nav_section
+        assert 'id="resume-downloads"' in html_content
 
     def test_mobile_resume_nav_cta_exists(self):
         html_content = _index_html()
@@ -179,7 +206,8 @@ class TestBottomRecruiterCta:
         cta_section = html_content.split('id="contact-cta"')[1].split("</section>")[0]
         assert f'mailto:{cfg["personal"]["email"]}' in cta_section
         assert cfg["personal"]["linkedin"] in cta_section
-        assert cfg["personal"]["resumePdf"] in cta_section
+        for variant in load_variants()["variants"].values():
+            assert f'href="{variant["file"]}"' in cta_section
 
     def test_recruiter_cta_precedes_footer(self):
         html_content = _index_html()

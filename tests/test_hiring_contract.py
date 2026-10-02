@@ -3,8 +3,10 @@ import json
 import re
 from html.parser import HTMLParser
 
-from scripts.generate_resume_pdf import SITE_DIR, build, load_config
-import pypdf
+import pytest
+
+from conftest import VARIANT_NAMES
+from scripts.generate_resume_pdf import SITE_DIR, load_config, load_variants
 
 
 class StructuredDataParser(HTMLParser):
@@ -49,7 +51,12 @@ def test_about_is_three_short_paragraphs_without_repeated_delivery_counts():
     cfg = load_config()
     assert len(cfg["about"].split("\n\n")) == 3
     assert len(cfg["about"].split()) <= 170
-    first_impression = cfg["about"] + cfg["summary"] + cfg["personal"]["supporting"]
+    variants = load_variants()["variants"].values()
+    first_impression = " ".join([
+        cfg["about"], cfg["personal"]["supporting"],
+        *(s["text"] for s in cfg["positioningStatements"]),
+        *(v["title"] + v["supporting"] for v in variants),
+    ])
     for count in ("56", "27/28", "25/28", "60", "104", "866", "67"):
         assert count not in first_impression
 
@@ -78,15 +85,14 @@ def test_pdf_highlight_numbers_are_supported_by_their_specific_program():
         assert set(re.findall(r"\d[\d,]*", " ".join(highlight["bullets"]))) <= evidence
 
 
-def test_general_pdf_balances_software_delivery_and_production(tmp_path):
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_each_targeted_pdf_balances_software_delivery_and_production(variant_pdfs, variants, variant):
     cfg = load_config()
-    output = tmp_path / "resume.pdf"
-    build(cfg, output)
-    reader = pypdf.PdfReader(output)
-    text = " ".join(" ".join(p.extract_text().split()) for p in reader.pages)
+    reader = variant_pdfs[variant]["reader"]
+    text = variant_pdfs[variant]["text"]
     assert len(reader.pages) == 2
     assert text.count("56 Azure DevOps") >= 1
-    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Auth0", "HowlPlane", "RedrawUS"):
+    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Auth0", "HowlPlane"):
         assert term in text, term
     for stale in ("Razor Pages", "Azure Key Vault", "Managed Identity", "six latent"):
         assert stale not in text, f"stale term found: {stale}"
@@ -94,8 +100,9 @@ def test_general_pdf_balances_software_delivery_and_production(tmp_path):
     assert text.index("PROFESSIONAL EXPERIENCE") < text.index("CORE EXPERTISE")
     links = [str(a.get_object().get("/A", {}).get("/URI", "")) for p in reader.pages for a in p.get("/Annots", [])]
     assert f'mailto:{cfg["personal"]["email"]}' in links
+    selected = set(variants["variants"][variant]["projectIds"])
     for project in cfg["projects"]:
-        assert (project["link"] in links) == bool(project.get("pdfInclude"))
+        assert (project["link"] in links) == (project["id"] in selected)
 
 
 def test_seo_and_cta_copy_are_canonical():
@@ -111,12 +118,18 @@ def test_seo_and_cta_copy_are_canonical():
 def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visible():
     cfg = load_config()
     title = cfg["personal"]["title"]
-    assert title == "DevOps, Software & Production Engineer"
-    for term in ("DevOps", "Software", "Production"):
-        assert term in title
+    assert title == "Software & Automation Engineer"
     assert cfg["personal"]["supporting"] == (
-        "Python • C#/.NET • Go • Azure DevOps • CI/CD • REST APIs"
+        "Developer Tooling • Platform Engineering • CI/CD • Production Engineering"
     )
+    # DevOps and Production roles stay discoverable through descriptive fields
+    # and the Production & DevOps résumé, not through the broad site headline.
+    for term in ("DevOps", "Azure DevOps", "Production Engineering", "Developer Productivity",
+                 "Platform Engineering", "Developer Tooling", "Internal Tools"):
+        assert term in cfg["seo"]["knowsAbout"]
+    pd_title = load_variants()["variants"]["production_devops"]["title"]
+    for term in ("Production", "DevOps"):
+        assert term in pd_title
 
     canonical = json.dumps(cfg)
     for term in ("Python", "Security Automation", "AI-Enabled Engineering"):

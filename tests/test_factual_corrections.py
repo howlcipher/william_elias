@@ -2,10 +2,10 @@
 import json
 import re
 
-import pypdf
 import pytest
 
-from scripts.generate_resume_pdf import SITE_DIR, build, load_config
+from conftest import VARIANT_NAMES
+from scripts.generate_resume_pdf import SITE_DIR, load_config
 
 
 @pytest.fixture(scope="module")
@@ -13,22 +13,15 @@ def config():
     return load_config()
 
 
-@pytest.fixture(scope="module")
-def pdf_text(config, tmp_path_factory):
-    output = tmp_path_factory.mktemp("truth") / "resume.pdf"
-    build(config, output)
-    return " ".join(
-        " ".join(page.extract_text().split())
-        for page in pypdf.PdfReader(output).pages
-    )
-
-
-@pytest.mark.parametrize("source", ["canonical", "config.js", "index.html", "pdf"])
-def test_false_and_stale_claims_absent(config, pdf_text, source):
+@pytest.mark.parametrize("source", ["canonical", "variants", "config.js", "index.html",
+                                    *(f"pdf:{name}" for name in VARIANT_NAMES)])
+def test_false_and_stale_claims_absent(config, variant_pdfs, source):
     if source == "canonical":
         text = json.dumps(config)
-    elif source == "pdf":
-        text = pdf_text
+    elif source == "variants":
+        text = (SITE_DIR / "resume_variants.json").read_text()
+    elif source.startswith("pdf:"):
+        text = variant_pdfs[source[4:]]["text"]
     else:
         text = (SITE_DIR / source).read_text()
     text = " ".join(text.lower().split())
@@ -70,18 +63,23 @@ def test_portal_stack_and_capabilities_are_user_confirmed(config):
     assert "Razor Pages" not in text
 
 
-def test_current_employment_and_remote_target_are_distinct(config, pdf_text):
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs, variant):
+    pdf_text = variant_pdfs[variant]["text"]
     role = config["experience"][0]
     assert role["title"].split(" | ") == [
         "Production Support Engineer", "DevOps & Automation",
     ]
+    assert role["officialTitle"] == "Production Support Engineer"
     assert role["location"] == "Auburn Hills, MI · Hybrid"
     assert config["personal"]["remote"] == "Open to U.S. Remote Opportunities"
     for term in (role["title"], "Auburn Hills, MI", "Hybrid", "OAuth", "OIDC"):
         assert term in pdf_text
 
 
-def test_identity_and_foundations_keep_experience_context(config, pdf_text):
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, variant):
+    pdf_text = variant_pdfs[variant]["text"]
     skills = {s["category"]: s for s in config["skills"]}
     security = skills["Security & Identity"]
     assert {"Auth0", "OAuth / OIDC", "IAM", "Credential Remediation",
@@ -100,24 +98,35 @@ def test_identity_and_foundations_keep_experience_context(config, pdf_text):
     assert "Digital Forensics" not in security["tags"]
 
 
-def test_pdf_software_selection_retains_backend_strength_without_web_bloat(config, pdf_text):
-    software = config["skills"][0]
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_pdf_software_selection_retains_backend_strength_without_web_bloat(config, variants, variant_pdfs, variant):
+    software = next(s for s in config["skills"] if s["id"] == "skill-software-backend")
     assert {"JavaScript", "HTML", "CSS"} <= set(software["tags"])
     assert "FastAPI" in software["tags"]
     assert software["pdfTags"] == [
         "Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server",
     ]
-    expertise = pdf_text.split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
-    for tag in software["pdfTags"]:
+    selected = variants["variants"][variant].get("skillTags", {}).get(software["id"], software["pdfTags"])
+    expertise = variant_pdfs[variant]["text"].split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
+    for tag in selected:
         assert tag in expertise
     for term in ("HTML", "CSS", "Docker", "Helm", "Rancher", "WSL2"):
         assert term not in expertise
 
 
-def test_general_pdf_project_pair_and_security_scan_evidence(config, pdf_text):
-    assert [p["name"] for p in config["projects"] if p.get("pdfInclude")] == [
-        "HowlPlane", "RedrawUS",
-    ]
-    for term in ("HowlPlane", "RedrawUS", "67 distinct exposed secrets", "2,832", "25 seconds"):
+EXPECTED_VARIANT_PROJECTS = {
+    "software_platform": ["HowlPlane", "HowlFrame"],
+    "production_devops": ["HowlPlane"],
+}
+
+
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_variant_projects_and_security_scan_evidence(config, variants, variant_pdfs, variant):
+    projects = {p["id"]: p["name"] for p in config["projects"]}
+    chosen = [projects[i] for i in variants["variants"][variant]["projectIds"]]
+    assert chosen == EXPECTED_VARIANT_PROJECTS[variant]
+    pdf_text = variant_pdfs[variant]["text"]
+    for term in (*chosen, "67 distinct exposed secrets", "2,832", "25 seconds"):
         assert term in pdf_text
-    assert "Baseball Optimizer" not in pdf_text
+    for name in set(projects.values()) - set(chosen):
+        assert name not in pdf_text
