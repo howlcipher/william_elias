@@ -75,7 +75,7 @@ class TestKeyMetrics:
 
     def test_experience_states_true_program_scope(self):
         cfg = load_config()
-        accomplishment = next(a for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a)
+        accomplishment = next(a["text"] for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a["text"])
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
         assert "60-repository, 104-application" in accomplishment

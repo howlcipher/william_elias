@@ -123,7 +123,7 @@ def render_experience(experience):
         subtitle = esc(job.get('company', ''))
         if job.get('location'):
             subtitle += f' | {esc(job["location"])}'
-        achievements = ''.join(f'<li>{esc(a)}</li>' for a in (job.get('achievements') or []))
+        achievements = ''.join(f'<li>{esc(a["text"])}</li>' for a in (job.get('achievements') or []))
         parts.append(
             '<div class="timeline-item card">'
             '<div class="timeline-dot"></div>'

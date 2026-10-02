@@ -71,6 +71,7 @@ const config = {
     ],
     "skills": [
         {
+            "id": "skill-software-backend",
             "category": "Software & Backend",
             "icon": "fa-code",
             "context": "Professional Python/FastAPI dashboards and .NET 8 Blazor internal production-support tooling",
@@ -101,6 +102,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-devops-delivery",
             "category": "DevOps & Delivery",
             "icon": "fa-cloud",
             "context": "Azure DevOps professionally; containerization proof of concept",
@@ -115,6 +117,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-automation-tooling",
             "category": "Automation & Developer Tooling",
             "icon": "fa-bolt",
             "context": "Python and PowerShell professionally; Go for deployment CLI and tooling; uv for Python dependency standardization",
@@ -139,6 +142,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-production-reliability",
             "category": "Production & Reliability",
             "icon": "fa-chart-line",
             "context": "Professional production operations and diagnostics",
@@ -152,6 +156,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-security-identity",
             "category": "Security & Identity",
             "icon": "fa-shield-halved",
             "context": "Professional credential remediation, Auth0 identity troubleshooting, and security safeguards",
@@ -166,6 +171,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-infrastructure-operations",
             "category": "Infrastructure & Application Operations",
             "icon": "fa-server",
             "context": "Professional application hosting and infrastructure",
@@ -180,6 +186,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-ai-engineering",
             "category": "AI-Enabled Engineering",
             "icon": "fa-robot",
             "context": "Internal engineering tools and independent projects",
@@ -194,6 +201,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-technical-foundations",
             "category": "Additional Technical Foundations",
             "icon": "fa-graduation-cap",
             "context": "Coursework and hands-on academic/project experience, not professional production ownership",
@@ -211,35 +219,72 @@ const config = {
     ],
     "experience": [
         {
+            "id": "exp-stellantis",
             "date": "Feb 2023 - Present",
             "title": "Production Support Engineer | DevOps & Automation",
+            "officialTitle": "Production Support Engineer",
             "company": "Stellantis Financial Services US",
             "location": "Auburn Hills, MI \u00b7 Hybrid",
             "achievements": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories.",
-                "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states.",
-                "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking.",
-                "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management.",
-                "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation.",
-                "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete.",
-                "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
-                "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
+                {
+                    "id": "ach-cicd-standardization",
+                    "text": "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories."
+                },
+                {
+                    "id": "ach-cicd-validation",
+                    "text": "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states."
+                },
+                {
+                    "id": "ach-internal-dotnet-app",
+                    "text": "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking."
+                },
+                {
+                    "id": "ach-python-tooling",
+                    "text": "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management."
+                },
+                {
+                    "id": "ach-go-deployment-cli",
+                    "text": "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation."
+                },
+                {
+                    "id": "ach-credential-remediation",
+                    "text": "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
+                },
+                {
+                    "id": "ach-release-kql",
+                    "text": "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation."
+                },
+                {
+                    "id": "ach-oauth-resource-server",
+                    "text": "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
+                }
             ]
         },
         {
+            "id": "exp-hbk",
             "date": "Jul 2020 - Feb 2023",
             "title": "DevOps Engineer - Python Automation",
             "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
             "location": "Southfield, MI \u00b7 Remote",
             "achievements": [
-                "Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month.",
-                "Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.",
-                "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting."
+                {
+                    "id": "ach-hbk-xml-automation",
+                    "text": "Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month."
+                },
+                {
+                    "id": "ach-hbk-database-tools",
+                    "text": "Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup."
+                },
+                {
+                    "id": "ach-hbk-installers-tooling",
+                    "text": "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting."
+                }
             ]
         }
     ],
     "selectedEngineeringPrograms": [
         {
+            "id": "program-cicd-release",
             "name": "CI/CD & Release Engineering",
             "bullets": [
                 "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and reusable pipeline/template automation.",
@@ -261,6 +306,7 @@ const config = {
             ]
         },
         {
+            "id": "program-internal-software",
             "name": "Software & Internal Developer Tools",
             "bullets": [
                 "Built and maintain a modular internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support."
@@ -281,6 +327,7 @@ const config = {
             ]
         },
         {
+            "id": "program-python-productivity",
             "name": "Python Automation & Developer Productivity",
             "bullets": [
                 "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows.",
@@ -303,6 +350,7 @@ const config = {
             ]
         },
         {
+            "id": "program-deployment-tooling",
             "name": "Deployment Automation & Release Tooling",
             "bullets": [
                 "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle, including guided setup, Azure DevOps REST integration, generated pipeline configuration, host auditing, and automated post-deployment verification."
@@ -320,6 +368,7 @@ const config = {
             ]
         },
         {
+            "id": "program-security-remediation",
             "name": "Security & Credential Remediation",
             "bullets": [
                 "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories.",
@@ -337,6 +386,7 @@ const config = {
             ]
         },
         {
+            "id": "program-oauth-integration",
             "name": "APIs, OAuth & Secure Integration",
             "bullets": [
                 "Designed a scoped OAuth 2.1 resource server integrating an enterprise AI assistant with internal engineering documentation, with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
@@ -354,6 +404,7 @@ const config = {
             ]
         },
         {
+            "id": "program-production-reliability",
             "name": "Production Reliability & Observability",
             "bullets": [
                 "Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
@@ -374,6 +425,7 @@ const config = {
             ]
         },
         {
+            "id": "program-infrastructure-modernization",
             "name": "Infrastructure Modernization & Containerization",
             "bullets": [
                 "Designed a zero-disk-secret Blazor Web App container migration proof of concept with Interactive Server, fail-fast secret validation, database connectivity health checks, and IIS-fronted container hosting.",
@@ -395,6 +447,7 @@ const config = {
     ],
     "pdfEngineeringHighlights": [
         {
+            "id": "highlight-cicd-release",
             "name": "CI/CD & Release Engineering",
             "sourceProgram": "CI/CD & Release Engineering",
             "bullets": [
@@ -409,6 +462,7 @@ const config = {
             ]
         },
         {
+            "id": "highlight-internal-software",
             "name": "Software & Internal Developer Tools",
             "sourceProgram": "Software & Internal Developer Tools",
             "bullets": [
@@ -424,6 +478,7 @@ const config = {
             ]
         },
         {
+            "id": "highlight-python-productivity",
             "name": "Python Automation & Developer Productivity",
             "sourceProgram": "Python Automation & Developer Productivity",
             "bullets": [
@@ -440,6 +495,7 @@ const config = {
     ],
     "projects": [
         {
+            "id": "project-howlplane",
             "name": "HowlPlane",
             "subtitle": "AI Engineering Control Plane",
             "pdfInclude": true,
@@ -457,6 +513,7 @@ const config = {
             ]
         },
         {
+            "id": "project-baseball-optimizer",
             "name": "Baseball Optimizer",
             "subtitle": "Rust backend for lineup and roster optimization",
             "pdfInclude": false,
@@ -474,6 +531,7 @@ const config = {
             ]
         },
         {
+            "id": "project-ai-router",
             "name": "AI Router",
             "subtitle": "Local multi-provider coding-agent orchestrator",
             "pdfInclude": false,
@@ -490,6 +548,7 @@ const config = {
             ]
         },
         {
+            "id": "project-howlframe",
             "name": "HowlFrame",
             "subtitle": "Experimental language and toolchain, written in Go",
             "link": "https://github.com/howlcipher/howlframe",
@@ -506,6 +565,7 @@ const config = {
             ]
         },
         {
+            "id": "project-redrawus",
             "name": "RedrawUS",
             "subtitle": "Geospatial Analysis & Visualization Platform",
             "link": "https://github.com/howlcipher/redistricting-map",
@@ -524,6 +584,7 @@ const config = {
             "pdfInclude": true
         },
         {
+            "id": "project-password-arena",
             "name": "Password Arena",
             "subtitle": "Synthetic password-strength learning sandbox",
             "link": "https://github.com/howlcipher/password_arena",
@@ -587,24 +648,28 @@ const config = {
     ],
     "additionalExperience": [
         {
+            "id": "exp-intrepid",
             "company": "Intrepid Control Systems",
             "title": "QA Developer",
             "date": "Mar 2020 - Apr 2020",
             "summary": "Wrote Mocha tests and debugged APIs across software and hardware integrations."
         },
         {
+            "id": "exp-project-worldwide",
             "company": "Project Worldwide",
             "title": "Network Engineer",
             "date": "Jan 2020 - Mar 2020",
             "summary": "Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime."
         },
         {
+            "id": "exp-ford",
             "company": "Ford Motor Company",
             "title": "Network Standards Engineer",
             "date": "Sep 2019 - Dec 2019",
             "summary": "Implemented global network standards, documentation, and IP-management systems."
         },
         {
+            "id": "exp-trendset",
             "company": "Trendset Communications Group",
             "title": "IT Network Engineer",
             "date": "Sep 2015 - Jun 2019",
@@ -613,24 +678,28 @@ const config = {
     ],
     "education": [
         {
+            "id": "edu-ms-cyber-defense",
             "icon": "fa-user-graduate",
             "degree": "M.S. Cyber Defense (In Progress)",
             "school": "Dakota State University",
             "year": ""
         },
         {
+            "id": "edu-bs-information-technology",
             "icon": "fa-university",
             "degree": "B.S. Information Technology",
             "school": "Colorado State University Global Campus",
             "year": ""
         },
         {
+            "id": "edu-bba-business",
             "icon": "fa-graduation-cap",
             "degree": "B.B.A. Business Administration",
             "school": "Rochester College",
             "year": ""
         },
         {
+            "id": "edu-ccna",
             "icon": "fa-certificate",
             "degree": "CCNA (Previously Held)",
             "school": "Cisco Networking Academy",

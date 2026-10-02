@@ -80,6 +80,9 @@ def validate_config(config: dict):
                 raise ValueError(f"Validation failed: 'experience[{i}].{field}' is required and must be non-empty")
         if not isinstance(job.get("achievements"), list):
             raise ValueError(f"Validation failed: 'experience[{i}].achievements' must be an array")
+        for j, achievement in enumerate(job["achievements"]):
+            if not isinstance(achievement, dict) or not achievement.get("text"):
+                raise ValueError(f"Validation failed: 'experience[{i}].achievements[{j}]' must be an object with non-empty text")
 
     for i, proj in enumerate(config.get("projects", [])):
         for field in ["name", "subtitle"]:
@@ -106,6 +109,44 @@ def validate_config(config: dict):
             raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].name' is required and must be non-empty")
         if not hl.get("bullets") or not isinstance(hl.get("bullets"), list):
             raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].bullets' must be a non-empty array")
+
+    canonical_index(config)
+
+
+# Canonical collections whose entries carry a stable, human-readable "id".
+# Variant selection references these IDs, never array positions.
+ID_COLLECTIONS = (
+    "skills", "experience", "additionalExperience", "selectedEngineeringPrograms",
+    "pdfEngineeringHighlights", "projects", "education",
+)
+ID_PATTERN = re.compile(r"^[a-z]+(?:-[a-z]+)+$")
+
+
+def canonical_index(config: dict) -> dict:
+    """Return {id: (kind, item)} for every identified canonical item.
+
+    IDs must be unique across the whole document, lowercase-hyphenated, and
+    free of digits so they can never encode an array position or a metric.
+    """
+    index = {}
+
+    def register(kind, item, where):
+        item_id = item.get("id") if isinstance(item, dict) else None
+        if not isinstance(item_id, str) or not ID_PATTERN.match(item_id):
+            raise ValueError(f"Validation failed: '{where}.id' must be a lowercase hyphenated ID without digits")
+        if item_id in index:
+            raise ValueError(f"Validation failed: duplicate canonical ID '{item_id}'")
+        index[item_id] = (kind, item)
+
+    for kind in ID_COLLECTIONS:
+        for i, item in enumerate(config.get(kind) or []):
+            register(kind, item, f"{kind}[{i}]")
+    for i, job in enumerate(config.get("experience") or []):
+        for j, achievement in enumerate(job.get("achievements") or []):
+            register("achievement", achievement, f"experience[{i}].achievements[{j}]")
+    for i, statement in enumerate(config.get("positioningStatements") or []):
+        register("positioningStatements", statement, f"positioningStatements[{i}]")
+    return index
 
 
 class ResumePDF(FPDF):
@@ -240,7 +281,7 @@ def build(config: dict, out_path: Path):
     pdf.section_title("Professional Experience")
     for job in config.get("experience", []):
         achievements = job.get("achievements", [])
-        block_h = 13 + 13 + sum(pdf.bullet_height(a) for a in achievements) + 2
+        block_h = 13 + 13 + sum(pdf.bullet_height(a["text"]) for a in achievements) + 2
         if pdf.will_page_break(block_h):
             pdf.add_page()
             pdf.section_title("Professional Experience (Continued)")
@@ -254,7 +295,7 @@ def build(config: dict, out_path: Path):
         title_line = job["title"] + (f' | {job["location"]}' if job.get("location") else "")
         pdf.cell(0, 13, title_line, new_x="LMARGIN", new_y="NEXT")
         for a in achievements:
-            pdf.bullet(a)
+            pdf.bullet(a["text"])
         pdf.ln(2)
 
     pdf.section_title("Core Expertise")
