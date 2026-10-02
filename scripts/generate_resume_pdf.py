@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
-"""Render William_Elias_Resume.pdf from resume.json so the site and PDF share one source of truth.
+"""Render the targeted résumé PDFs from resume.json + resume_variants.json.
+
+resume.json is the single canonical evidence base. resume_variants.json only
+selects and orders canonical items by stable ID (plus presentation-only
+headline text), so every variant is a view of the same facts. The legacy
+William_Elias_Resume.pdf is a byte-for-byte copy of the configured
+compatibility variant, never a separately maintained résumé.
 
 Usage: python3 scripts/generate_resume_pdf.py
 """
 import json
 import re
+import shutil
 import datetime
 from pathlib import Path
 
@@ -16,10 +23,22 @@ MARGIN = 24  # 0.33 * 72, to ensure it strictly fits onto 2 pages
 # tag from resume.json; the PDF shows the curated leading slice, so tag order in
 # resume.json determines what a recruiter sees on page 1. Optional pdfTags select
 # a concise subset explicitly when the broader website tag order is unsuitable.
-# A skill category can also
-# carry "pdfInclude": false to stay website-only entirely (same idiom as
-# projects[].pdfInclude), keeping breadth-only categories off the PDF's page budget.
+# A skill category can also carry "pdfInclude": false to stay website-only
+# entirely; variants cannot select such a category. A variant's skillTags may
+# override the tag selection with another unique subset of the website tags.
 PDF_SKILL_TAG_LIMIT = 6
+VARIANTS_FILE = "resume_variants.json"
+VARIANT_REQUIRED_KEYS = (
+    "label", "audience", "file", "title", "supporting", "summaryStatementIds",
+    "experienceAchievementIds", "skillIds", "highlightIds", "projectIds",
+)
+VARIANT_OPTIONAL_KEYS = ("skillTags",)
+# Presentation-only strings a variant may carry. Everything factual comes from
+# canonical items referenced by ID.
+VARIANT_TEXT_KEYS = ("label", "audience", "title", "supporting")
+VARIANT_TEXT_MAX = 90
+NUMBER_PATTERN = re.compile(r"\d[\d,]*")
+YEARS_CLAIM_PATTERN = re.compile(r"\b(\d+)\+ years\b")
 
 
 def load_config(config_path: Path | str | None = None) -> dict:
@@ -33,7 +52,7 @@ def load_config(config_path: Path | str | None = None) -> dict:
 
 
 def validate_config(config: dict):
-    required_top = ["personal", "summary", "skills", "experience", "projects", "education", "selectedEngineeringPrograms", "pdfEngineeringHighlights"]
+    required_top = ["personal", "positioningStatements", "skills", "experience", "projects", "education", "selectedEngineeringPrograms", "pdfEngineeringHighlights"]
     for k in required_top:
         if k not in config:
             raise ValueError(f"Validation failed: Missing required top-level field '{k}'")
@@ -110,7 +129,191 @@ def validate_config(config: dict):
         if not hl.get("bullets") or not isinstance(hl.get("bullets"), list):
             raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].bullets' must be a non-empty array")
 
-    canonical_index(config)
+    index = canonical_index(config)
+
+    programs = {p.get("name"): p for p in config.get("selectedEngineeringPrograms", [])}
+    for i, hl in enumerate(config.get("pdfEngineeringHighlights", [])):
+        source = programs.get(hl.get("sourceProgram"))
+        if source is None:
+            raise ValueError(f"Validation failed: 'pdfEngineeringHighlights[{i}].sourceProgram' must name an engineering program")
+        missing = untraced_numbers(" ".join(hl["bullets"]), [source])
+        if missing:
+            raise ValueError(
+                f"Validation failed: 'pdfEngineeringHighlights[{i}]' numbers {missing} "
+                f"are not in its source program '{hl['sourceProgram']}'"
+            )
+
+    for i, statement in enumerate(config.get("positioningStatements") or []):
+        where = f"positioningStatements[{i}]"
+        if not isinstance(statement.get("text"), str) or not statement["text"].strip():
+            raise ValueError(f"Validation failed: '{where}.text' must be a non-empty string")
+        evidence_ids = statement.get("evidenceIds")
+        if not isinstance(evidence_ids, list) or not evidence_ids:
+            raise ValueError(f"Validation failed: '{where}.evidenceIds' must be a non-empty array")
+        evidence = []
+        for evidence_id in evidence_ids:
+            kind, item = index.get(evidence_id, (None, None))
+            if kind is None or kind == "positioningStatements":
+                raise ValueError(f"Validation failed: '{where}' references unknown evidence ID '{evidence_id}'")
+            evidence.append(item)
+        missing = untraced_numbers(statement["text"], evidence)
+        if missing:
+            raise ValueError(f"Validation failed: '{where}' numbers {missing} are not traceable to its evidence")
+
+
+def untraced_numbers(text: str, evidence: list) -> list:
+    """Numbers in `text` that do not appear in the canonical `evidence` items.
+
+    "N+ years" is traced to the earliest start year among dated evidence
+    items instead, since tenure is derived from dates rather than stated.
+    """
+    for match in YEARS_CLAIM_PATTERN.finditer(text):
+        years = [int(y) for item in evidence
+                 for y in re.findall(r"\b(?:19|20)\d\d\b", str(item.get("date", "")))]
+        if not years or datetime.date.today().year - min(years) < int(match.group(1)):
+            return [match.group(0)]
+    supported = set(NUMBER_PATTERN.findall(json.dumps(evidence, ensure_ascii=False)))
+    remaining = YEARS_CLAIM_PATTERN.sub("", text)
+    return [n for n in NUMBER_PATTERN.findall(remaining) if n not in supported]
+
+
+def load_variants(variants_path: Path | str | None = None) -> dict:
+    if variants_path is None:
+        variants_path = SITE_DIR / VARIANTS_FILE
+    try:
+        return json.loads(Path(variants_path).read_text(encoding="utf-8"))
+    except Exception as e:
+        raise ValueError(f"Failed to parse {VARIANTS_FILE}. Underlying error: {e}") from e
+
+
+def _strings(value):
+    if isinstance(value, dict):
+        for key, inner in value.items():
+            yield key
+            yield from _strings(inner)
+    elif isinstance(value, list):
+        for inner in value:
+            yield from _strings(inner)
+    elif isinstance(value, str):
+        yield value
+    else:
+        yield repr(value)
+
+
+def _unique_id_list(value, where, index, kind):
+    if not isinstance(value, list) or not value:
+        raise ValueError(f"Validation failed: '{where}' must be a non-empty array of IDs")
+    if len(set(value)) != len(value):
+        raise ValueError(f"Validation failed: '{where}' must not repeat IDs")
+    for item_id in value:
+        if index.get(item_id, (None,))[0] != kind:
+            raise ValueError(f"Validation failed: '{where}' references unknown {kind} ID '{item_id}'")
+    return [index[item_id][1] for item_id in value]
+
+
+def validate_variants(config: dict, variants: dict):
+    """Variants may only select/reorder canonical items and add short headline text.
+
+    Any digit anywhere in the variant document fails validation, so a variant
+    can never introduce its own metric; every number on a résumé comes from a
+    referenced canonical item.
+    """
+    if not isinstance(variants, dict) or set(variants) != {"compatibility", "variants"}:
+        raise ValueError("Validation failed: variants must contain exactly 'compatibility' and 'variants'")
+    for text in _strings(variants):
+        if any(ch.isdigit() for ch in text):
+            raise ValueError(f"Validation failed: variant configuration must not contain numbers: {text!r}")
+    index = canonical_index(config)
+    defined = variants["variants"]
+    if not isinstance(defined, dict) or not defined:
+        raise ValueError("Validation failed: 'variants' must be a non-empty object")
+    files = set()
+    for name, variant in defined.items():
+        where = f"variants.{name}"
+        if not isinstance(variant, dict):
+            raise ValueError(f"Validation failed: '{where}' must be an object")
+        unknown = set(variant) - set(VARIANT_REQUIRED_KEYS) - set(VARIANT_OPTIONAL_KEYS)
+        if unknown:
+            raise ValueError(f"Validation failed: '{where}' has unsupported keys {sorted(unknown)}")
+        for key in VARIANT_REQUIRED_KEYS:
+            if key not in variant:
+                raise ValueError(f"Validation failed: '{where}.{key}' is required")
+        for key in VARIANT_TEXT_KEYS:
+            value = variant[key]
+            if not isinstance(value, str) or not value.strip() or len(value) > VARIANT_TEXT_MAX:
+                raise ValueError(f"Validation failed: '{where}.{key}' must be short presentation text")
+        if not re.fullmatch(r"[A-Za-z_]+\.pdf", variant["file"]) or variant["file"] in files:
+            raise ValueError(f"Validation failed: '{where}.file' must be a unique PDF filename")
+        files.add(variant["file"])
+
+        _unique_id_list(variant["summaryStatementIds"], f"{where}.summaryStatementIds", index, "positioningStatements")
+        skills = _unique_id_list(variant["skillIds"], f"{where}.skillIds", index, "skills")
+        for skill in skills:
+            if skill.get("pdfInclude") is False:
+                raise ValueError(f"Validation failed: '{where}.skillIds' selects website-only skill '{skill['id']}'")
+        skill_tags = variant.get("skillTags", {})
+        if not isinstance(skill_tags, dict):
+            raise ValueError(f"Validation failed: '{where}.skillTags' must be an object")
+        for skill_id, tags in skill_tags.items():
+            if skill_id not in variant["skillIds"]:
+                raise ValueError(f"Validation failed: '{where}.skillTags' references unselected skill '{skill_id}'")
+            allowed = index[skill_id][1]["tags"]
+            if (not isinstance(tags, list) or not tags or len(set(tags)) != len(tags)
+                    or any(tag not in allowed for tag in tags)):
+                raise ValueError(f"Validation failed: '{where}.skillTags.{skill_id}' must be a non-empty unique subset of tags")
+        _unique_id_list(variant["highlightIds"], f"{where}.highlightIds", index, "pdfEngineeringHighlights")
+        _unique_id_list(variant["projectIds"], f"{where}.projectIds", index, "projects")
+
+        selections = variant["experienceAchievementIds"]
+        if not isinstance(selections, dict):
+            raise ValueError(f"Validation failed: '{where}.experienceAchievementIds' must be an object")
+        for job_id, achievement_ids in selections.items():
+            if index.get(job_id, (None,))[0] != "experience":
+                raise ValueError(f"Validation failed: '{where}.experienceAchievementIds' references unknown experience ID '{job_id}'")
+            owned = {a["id"] for a in index[job_id][1]["achievements"]}
+            _unique_id_list(achievement_ids, f"{where}.experienceAchievementIds.{job_id}", index, "achievement")
+            stray = [a for a in achievement_ids if a not in owned]
+            if stray:
+                raise ValueError(f"Validation failed: '{where}.experienceAchievementIds.{job_id}' selects achievements of another role: {stray}")
+
+    compatibility = variants["compatibility"]
+    if (not isinstance(compatibility, dict) or set(compatibility) != {"file", "variant"}
+            or compatibility["variant"] not in defined
+            or not re.fullmatch(r"[A-Za-z_]+\.pdf", str(compatibility["file"]))
+            or compatibility["file"] in files):
+        raise ValueError("Validation failed: 'compatibility' must alias a defined variant under a distinct PDF filename")
+
+
+def resolve_variant(config: dict, variants: dict, name: str) -> dict:
+    """Build the render view for one variant from canonical items only."""
+    if name not in variants["variants"]:
+        raise ValueError(f"Validation failed: unknown résumé variant '{name}'")
+    variant = variants["variants"][name]
+    index = canonical_index(config)
+    selections = variant["experienceAchievementIds"]
+    experience = []
+    for job in config["experience"]:
+        chosen = selections.get(job["id"])
+        achievements = [index[a][1] for a in chosen] if chosen is not None else list(job["achievements"])
+        experience.append({**job, "achievements": achievements})
+    skills = []
+    for skill_id in variant["skillIds"]:
+        skill = dict(index[skill_id][1])
+        if skill_id in variant.get("skillTags", {}):
+            skill["pdfTags"] = variant["skillTags"][skill_id]
+        skills.append(skill)
+    return {
+        "name": name,
+        "label": variant["label"],
+        "file": variant["file"],
+        "title": variant["title"],
+        "supporting": variant["supporting"],
+        "summary": " ".join(index[s][1]["text"] for s in variant["summaryStatementIds"]),
+        "experience": experience,
+        "skills": skills,
+        "highlights": [index[h][1] for h in variant["highlightIds"]],
+        "projects": [index[p][1] for p in variant["projectIds"]],
+    }
 
 
 # Canonical collections whose entries carry a stable, human-readable "id".
@@ -227,10 +430,16 @@ class ResumePDF(FPDF):
         self.ln(height)
 
 
-def build(config: dict, out_path: Path):
+def build(config: dict, out_path: Path, variant: str | None = None, variants: dict | None = None):
+    """Render one résumé variant. Defaults to the compatibility variant, i.e.
+    exactly what William_Elias_Resume.pdf contains."""
+    if variants is None:
+        variants = load_variants()
+    validate_variants(config, variants)
+    view = resolve_variant(config, variants, variant or variants["compatibility"]["variant"])
     p = config["personal"]
     pdf = ResumePDF()
-    pdf.set_title(f'{p["name"]} - Resume')
+    pdf.set_title(f'{p["name"]} - {view["label"]}')
     pdf.set_author(p["name"])
     pdf.set_creator("generate_resume_pdf.py")
     # Make generation deterministic for CI byte-for-byte checks.
@@ -247,11 +456,10 @@ def build(config: dict, out_path: Path):
     # Title and tagline get their own lines: the target role should read as the
     # headline, not as the first half of a long combined string.
     pdf.set_font("Helvetica", "B", 11)
-    pdf.cell(0, 14, p["title"].replace("//", "|").upper(), align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 14, view["title"].upper(), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "I", 9.5)
-    pdf_tagline = p.get("pdfSupporting") or p.get("supporting") or p["tagline"]
-    pdf.cell(0, 13, pdf_tagline.replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 13, view["supporting"].replace("•", "|"), align="C", new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "", 10)
     pdf.centered_link_row([
@@ -274,12 +482,12 @@ def build(config: dict, out_path: Path):
 
     pdf.section_title("Professional Summary")
     pdf.set_font("Helvetica", "", 10)
-    pdf.multi_cell(0, 13, config.get("resumeSummary") or config["summary"], align="L")
+    pdf.multi_cell(0, 13, view["summary"], align="L")
 
     # Only the two current-era roles carry bullets here; earlier roles get their
     # own compressed section further down so they cost minimal page space.
     pdf.section_title("Professional Experience")
-    for job in config.get("experience", []):
+    for job in view["experience"]:
         achievements = job.get("achievements", [])
         block_h = 13 + 13 + sum(pdf.bullet_height(a["text"]) for a in achievements) + 2
         if pdf.will_page_break(block_h):
@@ -299,9 +507,11 @@ def build(config: dict, out_path: Path):
         pdf.ln(2)
 
     pdf.section_title("Core Expertise")
-    for s in config["skills"]:
-        if s.get("pdfInclude") is False:
-            continue
+    for s in view["skills"]:
+        # A category line that wraps must not split across the page break.
+        context = f' ({s["pdfContext"]})' if s.get("pdfContext") else ""
+        line = f'{s["category"]}{context}: ' + ", ".join(s.get("pdfTags", s["tags"][:PDF_SKILL_TAG_LIMIT]))
+        pdf.keep_together(pdf.wrapped_text_height(line, size=10))
         pdf.set_font("Helvetica", "B", 10)
         pdf.write(13, s["category"])
         if s.get("pdfContext"):
@@ -313,18 +523,18 @@ def build(config: dict, out_path: Path):
         pdf.write(13, ", ".join(s.get("pdfTags", s["tags"][:PDF_SKILL_TAG_LIMIT])))
         pdf.ln(13)
 
-    # Sourced from pdfEngineeringHighlights, a curated 3-entry condensation of the
-    # website's selectedEngineeringPrograms. The site keeps all six programs; the
-    # PDF carries only the strongest evidence so page 2 stays scannable.
+    # Sourced from the variant's highlightIds: curated condensations of the
+    # website's selectedEngineeringPrograms. The site keeps all programs; each
+    # PDF carries only the evidence its target roles care about most.
     highlights_height = 28
-    for highlight in config.get("pdfEngineeringHighlights", []):
+    for highlight in view["highlights"]:
         highlights_height += 15 + sum(pdf.bullet_height(b) for b in highlight['bullets'])
         if highlight.get('technology'):
             highlights_height += pdf.indented_text_height('Tech: ' + ', '.join(highlight['technology']))
     pdf.keep_together(highlights_height)
 
     pdf.section_title("Selected Engineering Highlights")
-    for prog in config.get("pdfEngineeringHighlights") or []:
+    for prog in view["highlights"]:
         bullets = prog.get("bullets") or []
         tech = prog.get("technology") or []
         tech_line = ("Tech: " + ", ".join(tech)) if tech else ""
@@ -344,7 +554,7 @@ def build(config: dict, out_path: Path):
             pdf.indented_text(tech_line)
         pdf.ln(2)
 
-    pdf_projects = [p for p in config.get("projects", []) if p.get("pdfInclude")]
+    pdf_projects = view["projects"]
     if pdf_projects:
         pdf.section_title("Selected Open-Source Engineering")
         for proj in pdf_projects:
@@ -389,9 +599,24 @@ def build(config: dict, out_path: Path):
     pdf.output(str(out_path))
 
 
-if __name__ == "__main__":
-    cfg = load_config()
+def generate_all(site_dir: Path = SITE_DIR) -> list[Path]:
+    """Write every variant PDF, then the legacy compatibility alias as a byte copy."""
+    cfg = load_config(site_dir / "resume.json")
     validate_config(cfg)
-    out = SITE_DIR / "William_Elias_Resume.pdf"
-    build(cfg, out)
-    print(f"Wrote {out}")
+    variants = load_variants(site_dir / VARIANTS_FILE)
+    validate_variants(cfg, variants)
+    written = []
+    for name, variant in variants["variants"].items():
+        out = site_dir / variant["file"]
+        build(cfg, out, name, variants)
+        written.append(out)
+    compatibility = variants["compatibility"]
+    alias = site_dir / compatibility["file"]
+    shutil.copyfile(site_dir / variants["variants"][compatibility["variant"]]["file"], alias)
+    written.append(alias)
+    return written
+
+
+if __name__ == "__main__":
+    for path in generate_all():
+        print(f"Wrote {path}")
