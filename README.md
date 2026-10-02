@@ -1,10 +1,10 @@
 # William Elias
 
-**DevOps, Software & Production Engineer**
-Python • C#/.NET • Go • Azure DevOps • CI/CD • REST APIs
+**Software & Automation Engineer**
+Developer Tooling • Platform Engineering • CI/CD • Production Engineering
 Open to U.S. Remote Opportunities
 
-[Live Portfolio](https://howlcipher.github.io/william_elias/) · [Download Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
+[Live Portfolio](https://howlcipher.github.io/william_elias/) · [Software & Platform Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf) · [Production & DevOps Resume (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Production_DevOps_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
 
 | | |
 |---|---|
@@ -16,7 +16,21 @@ Open to U.S. Remote Opportunities
 
 ## About This Repository
 
-This is the source for the resume website above: a professional, modern, and highly performant resume site built with HTML, CSS, and vanilla JavaScript. It positions William for U.S. fully remote DevOps, Azure DevOps, Production Engineering, internal-tools/automation/backend software engineering, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps roles.
+This is the source for the portfolio website above and William's résumés: a fast static site built with HTML, CSS, and vanilla JavaScript, plus two targeted PDF résumés generated from the same data.
+
+The architecture is **one person → one canonical evidence base → one broad website → two targeted résumé views**:
+
+* **One canonical website.** The site is William's general professional profile. It presents him as a **Software & Automation Engineer** who builds software, automation, developer tools, delivery systems, and production engineering systems that make software easier to build, ship, secure, troubleshoot, and operate. It is not itself one of the targeted résumés.
+* **Two targeted résumés**, both derived from `resume.json`:
+
+| Résumé | File | Headline | Target role families |
+|---|---|---|---|
+| Software & Platform | `William_Elias_Software_Platform_Resume.pdf` | Software & Automation Engineer | Developer Productivity, Developer Experience / DevEx, Developer Platform, Software Engineer — Developer Infrastructure / Internal Platform / Tooling, Internal Tools, Platform Software, Infrastructure Software, automation-focused Software Engineering |
+| Production & DevOps | `William_Elias_Production_DevOps_Resume.pdf` | Production & DevOps Automation Engineer | Production Engineering, DevOps, Azure DevOps, CI/CD, Build & Release / Release Engineering, Infrastructure Automation, automation-heavy SRE, DevSecOps / Security Automation where appropriate |
+
+* **Legacy PDF compatibility.** `William_Elias_Resume.pdf` already lives in applications, LinkedIn, email, and bookmarks, so it keeps working. It is a generated **byte-for-byte copy of the Production & DevOps résumé** (the closest match to the previous DevOps / Production / CI/CD-positioned résumé), not a third résumé. Its target is set by `compatibility` in `resume_variants.json`, and tests and CI fail if it ever differs from that variant. The website links only the two targeted résumés.
+
+The Software & Platform résumé leads with the Go self-service deployment CLI, Python developer-productivity tooling, and the C#/.NET internal application, and adds HowlPlane and HowlFrame. The Production & DevOps résumé leads with CI/CD standardization scope and validation, release tracking and KQL diagnostics, production reliability, and infrastructure investigation work. Both keep the same facts, metrics, qualifiers, and official job titles.
 
 ## Confirmed Professional Content
 
@@ -34,18 +48,22 @@ The current content reflects an independent work-machine audit of internal profe
 
 **Container and infrastructure modernization:** A zero-disk-secret Blazor Web App container migration proof of concept was designed with fail-fast secret validation, database-connectivity health checks, and IIS-fronted container hosting. Server/container migration paths were investigated and disaster-recovery pipeline definitions were audited to identify broken or obsolete deployment paths and support remediation planning. No completed production server migration or zero-downtime DR cutover is claimed.
 
-The current role is **Production Support Engineer | DevOps & Automation**, with the latter a résumé descriptor, in **Auburn Hills, MI · Hybrid**. Remote availability describes the desired next role. Additional Technical Foundations covers academic/project Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, and Wireshark, without implying professional forensics employment.
+The current role is **Production Support Engineer | DevOps & Automation**, with the latter a résumé descriptor, in **Auburn Hills, MI · Hybrid**. The official employer-issued title, `Production Support Engineer`, is stored as `officialTitle` and is the only value used for the JSON-LD `jobTitle`; positioning terms (Software & Automation Engineer, platform, DevEx, DevOps) appear only in descriptive fields. Remote availability describes the desired next role. Additional Technical Foundations covers academic/project Java, Kotlin, Android Development, Digital Forensics, FTK Imager, EnCase, and Wireshark, without implying professional forensics employment.
 
-Treat this canonical general portfolio and résumé as complete after the factual-correction publication checks. Future content changes should follow new real experience or a specific target role. See the [current handoff](documentation/portfolio_optimization_handoff.md) for provenance and validation. The [evidence manifest](documentation/portfolio_optimization_evidence.json) records 231 passing tests, two-page PDF inspection, 20 viewport/theme checks, and byte-identical live artifact verification following publication in PR #10.
+Future content changes should follow new real experience. See the [current handoff](documentation/portfolio_optimization_handoff.md) for provenance and the [targeted résumé validation](documentation/targeted_resume_validation.md) for the factual-drift review and verification of this architecture. The [evidence manifest](documentation/portfolio_optimization_evidence.json) is the historical record of the 2026-09 factual-correction publication and is kept unchanged.
 
 ## Deployment & Architecture
-- **Data Source**: A single `resume.json` acts as the canonical source of truth for all content, including the `seo` block (canonical URL, OG/Twitter site name, curated `knowsAbout` list) used for structured data.
-- **Generated Assets**: Python scripts generate `config.js`, `index.html`, `robots.txt`, `sitemap.xml`, `preview.jpg`, and `William_Elias_Resume.pdf` from `resume.json`. `scripts/build_html.py` reads the source layout in `scripts/site_template.html` and generates body content, metadata, structured data, and the 1200 × 630 social preview using the existing portrait. Edit the template for structural HTML changes; never use the generated page as the template. The PDF retains 10-point body text, clickable links, and all three engineering highlights together on page two.
-- **Website vs. PDF**: The two artifacts are deliberately different. The website shows breadth; the PDF is selective. `experience` renders as "Professional Experience" while `additionalExperience` gets its own compressed "Earlier Experience" section further down the PDF. `selectedEngineeringPrograms` (eight entries) is **website-only**; the PDF instead renders `pdfEngineeringHighlights`, a curated three-entry condensation, under "Selected Engineering Highlights". All `projects` appear on the website, but only those with `pdfInclude: true` reach the PDF's "Selected Open-Source Engineering" section. Core Expertise shows every tag on the website. The PDF uses an explicit `skills[].pdfTags` selection when present (a non-empty unique subset of the website tags), otherwise the leading `PDF_SKILL_TAG_LIMIT` tags; a skill category can also carry `pdfInclude: false` to stay website-only entirely (the same idiom, applied to `skills` instead of `projects`), which keeps "Additional Technical Foundations" website-only. Software & Backend includes website basics while its PDF selection prioritizes recruiter-relevant Python/FastAPI and C#/.NET/Blazor backend skills.
-- **Experience Qualifiers**: Website skill cards show `skills[].context`. Optional `skills[].pdfContext` is a non-empty string rendered in parentheses beside the PDF category, before its tags. Keep it compact: AI tooling is qualified as "Internal tools & projects" and Automation as "Python/PowerShell professionally; Go in projects". Omit the field when no extra qualifier is needed; do not substitute project or proof-of-concept work for professional production experience. GitHub Actions remains explicitly project experience in its tag.
+- **Canonical data**: `resume.json` is the single source of professional facts, including the `seo` block (canonical URL, site name, descriptions, curated `knowsAbout`) used for metadata and structured data.
+- **Variant selection**: `resume_variants.json` defines each targeted résumé as a *selection* of canonical items by stable ID — `summaryStatementIds`, `experienceAchievementIds` (per role, ordered), `skillIds`, optional `skillTags` (a subset of a skill's website tags), `highlightIds`, and `projectIds` — plus presentation-only `label`, `audience`, `title`, `supporting`, and `file`. It cannot hold experience, achievements, project descriptions, or metrics: unknown keys, unknown or wrong-kind IDs, achievements from another role, website-only skills, prose-length text, and **any digit anywhere in the file** fail generation.
+- **Canonical IDs**: lowercase, hyphenated, digit-free, and unique across the document — `skill-*`, `exp-*` (roles), `ach-*` (individual achievements), `program-*` (website Engineering Impact), `highlight-*` (PDF condensations), `project-*`, `edu-*`, and `summary-*` (positioning statements). Selection never depends on array position.
+- **Evidence-linked summaries**: résumé summaries are assembled from `positioningStatements`, each with `evidenceIds` pointing at the canonical roles, programs, skills, or education that support it. Numbers in a statement must appear in its evidence; "N+ years" is checked against the earliest dated evidence. `pdfEngineeringHighlights` keep a `sourceProgram`, and their numbers must appear in that program.
+- **Generated assets**: `scripts/build_config.py` writes `config.js`; `scripts/build_html.py` reads `scripts/site_template.html`, `resume.json`, and `resume_variants.json` and writes `index.html`, metadata, JSON-LD, `robots.txt`, `sitemap.xml`, and the 1200 × 630 `preview.jpg`; `scripts/generate_resume_pdf.py` writes both targeted PDFs and then copies the compatibility variant to `William_Elias_Resume.pdf`. Edit the template for structural HTML changes; never use the generated page as the template.
+- **Website vs. PDFs**: The website shows breadth: all eight `selectedEngineeringPrograms`, every project, every skill tag, and Additional Technical Foundations. Each PDF is selective: chosen achievements in a chosen order, chosen skill categories (website-only categories with `pdfInclude: false` cannot be selected), chosen highlights, and chosen open-source projects under "Selected Open-Source Engineering". Earlier Experience and Education appear in both PDFs. Canonical qualifiers such as `skills[].pdfContext` (e.g. "Python/PowerShell professionally; Go for deployment tooling") always render with their category; variants cannot remove them.
+- **Résumé UX**: two plain links, "Software & Platform Resume" and "Production & DevOps Resume", appear in the hero, in the mobile menu, and with one-line audience hints in the recruiter CTA (`#resume-downloads`). The navbar "Resumes" control jumps to that labelled choice. There is no dropdown or hover-only behavior; controls are at least 44 × 44 CSS pixels and stack at narrow widths.
+- **Determinism**: PDFs use a fixed creation date and uncompressed streams, so fpdf2's content-derived document ID and every byte are reproducible across environments. The alias is a file copy.
 - **Section Order**: Hero → metrics → About → Engineering Impact → Professional Experience (including Earlier Experience) → Open Source → Core Expertise → Education → Contact.
 - **Deployment**: Deployed via classic GitHub Pages (serving directly from the `main` branch).
-- **CI/CD**: GitHub Actions verify tests and ensure that the generated assets are fresh, but CI does not mutate the repository or push commits.
+- **CI/CD**: GitHub Actions runs the tests (with `poppler-utils` for `pdftotext` ATS checks), rebuilds everything, fails if any generated file — including all three PDFs — is stale, and checks the alias is identical to its variant. CI does not mutate the repository or push commits.
 
 ## Features
 - **Config-Driven**: Easily update your experience, skills, and contact info via a single `resume.json` file. No need to touch HTML!
@@ -54,9 +72,9 @@ Treat this canonical general portfolio and résumé as complete after the factua
 - **Colorblind / High-Contrast Mode**: Built-in accessibility theme.
 - **Readable Role Title**: A dedicated dark-theme text color keeps the small mobile role title above 4.5:1 contrast while retaining the existing decorative accent colors.
 - **Mobile Responsive**: Custom hamburger menu and flexible layout, including a hero photo that reflows between the tagline and contact actions on narrow viewports instead of trailing the whole hero.
-- **Print/PDF Download**: Embedded download link for the PDF version.
-- **Persistent Resume CTA**: A distinct "Resume" action lives in both the desktop navbar and the mobile menu, so it's reachable after scrolling past the hero.
-- **Recruiter Contact CTA**: A focused "Open to U.S. Remote Opportunities" section before the footer surfaces Email/LinkedIn/Resume/GitHub actions, generated from `resume.json`.
+- **Targeted Resume Downloads**: Software & Platform and Production & DevOps PDFs in the hero, mobile menu, and recruiter CTA.
+- **Persistent Resume CTA**: A navbar "Resumes" action is visible at every width and jumps to the labelled résumé choice.
+- **Recruiter Contact CTA**: A focused "Open to U.S. Remote Opportunities" section before the footer surfaces both résumés plus Email/LinkedIn/GitHub, generated from `resume.json` and `resume_variants.json`.
 - **Scroll-Aware Navigation**: An `IntersectionObserver`-based active state highlights the nav link for the section currently in view (`aria-current="page"` plus a non-color underline indicator).
 - **SEO / Structured Data**: Canonical link, complete OG/Twitter metadata, and a generated JSON-LD `ProfilePage`/`Person` block, plus a generated `robots.txt` and `sitemap.xml`.
 - **Terminal-Style Intro**: One-time CSS typewriter reveal on the tagline (respects `prefers-reduced-motion`).
@@ -64,36 +82,48 @@ Treat this canonical general portfolio and résumé as complete after the factua
 
 ## How to Update Your Information
 
-All your information is stored in the canonical `resume.json` file. Do not manually edit generated artifacts. Use `scripts/site_template.html` for layout changes and `style.css` / `script.js` for styling and interactions.
+All professional facts live in `resume.json`; which facts each résumé shows lives in `resume_variants.json`. Do not manually edit generated artifacts. Use `scripts/site_template.html` for layout changes and `style.css` / `script.js` for styling and interactions.
 
-1. Open `resume.json` in any text editor and update your information.
-2. Regenerate the derived files by running the build sequence:
+1. Update facts in `resume.json` (or selection in `resume_variants.json`).
+2. Regenerate the derived files:
    ```bash
    python scripts/build_config.py
    python scripts/build_html.py
    python scripts/generate_resume_pdf.py
    ```
-   *(Note: This requires development dependencies, see below)*
-3. Verify your changes and run the automated tests.
-4. Update `README.md` and `change_log.md`, review the diff, and make a signed conventional commit including all generated outputs. Publishing to `main` is a separate deployment action. CI checks freshness without modifying or committing files.
+3. Run the tests and inspect all four PDF pages (both résumés are required to stay exactly two pages).
+4. Update `README.md` and `change_log.md`, review the diff, and commit the sources together with all generated outputs. Publishing to `main` is a separate deployment action. CI checks freshness without modifying or committing files.
+
+### Updating facts safely
+- Change a fact in **one** place: the canonical item in `resume.json`. Both résumés and the website pick it up.
+- Keep scope, dry-run, co-led, contributed, proof-of-concept, investigation, academic, and project qualifiers. Do not turn Azure DevOps into Azure cloud ownership, project work into professional work, or shared work into sole ownership.
+- Keep historical job titles exactly as issued; the current role's `officialTitle` feeds structured data.
+- A new number in a positioning statement needs evidence carrying that number; a new number in a PDF highlight must already appear in its `sourceProgram`. Validation fails otherwise.
+
+### Changing what a résumé shows
+- Reorder or drop items by editing the ID lists in `resume_variants.json`. To show a different skill selection, use `skillTags` with a subset of that skill's canonical tags.
+- Need wording that does not exist yet? Add a canonical item (for example a new `positioningStatements` entry with `evidenceIds`, or a new `pdfEngineeringHighlights` entry with `sourceProgram`) to `resume.json`, then reference its ID. Never paste prose or metrics into the variant file.
+- To change which variant the legacy `William_Elias_Resume.pdf` mirrors, change `compatibility.variant`. Do not add a third résumé configuration.
 
 ### Adding a New Job
-Find the `experience` array in `resume.json` and add a new object to the top of the list:
+Find the `experience` array in `resume.json` and add a new object to the top of the list. Give the role and each achievement a stable ID, and record the employer-issued title in `officialTitle`:
 
 ```json
 {
+    "id": "exp-new-company",
     "date": "March 2026 - Present",
     "title": "Senior Security Engineer",
+    "officialTitle": "Senior Security Engineer",
     "company": "New Company Inc.",
     "location": "Remote",
     "achievements": [
-        "First bullet point goes here.",
-        "Second bullet point goes here."
+        {"id": "ach-new-first", "text": "First bullet point goes here."},
+        {"id": "ach-new-second", "text": "Second bullet point goes here."}
     ]
 }
 ```
 
-Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered as "Engineering Impact" using each entry's `bullets` and optional expandable `details`. To change the PDF's curated evidence, edit `pdfEngineeringHighlights`. Each headline metric and PDF highlight identifies its `sourceProgram`; tests verify numerical claims against that specific program. Preserve scope, dry-run, co-led, and contributed qualifications; avoid dynamic deployment/adoption counts. Open-source/personal work lives in `projects`; the PDF currently selects HowlPlane and RedrawUS via `pdfInclude: true`. The website AI capability stack comes from `aiEngineeringCapabilities`.
+Then add the role's achievement IDs, in the order you want, to each variant's `experienceAchievementIds` (a role left out shows all of its achievements in canonical order). Professional depth beyond the `experience` entries lives in `selectedEngineeringPrograms`, rendered as "Engineering Impact" with expandable `details`. Each headline metric identifies its `sourceProgram`; tests verify numerical claims against that specific program. Avoid dynamic deployment/adoption counts. Open-source/personal work lives in `projects`; each variant selects projects by ID. The website AI capability stack comes from `aiEngineeringCapabilities`.
 
 ## Local Development & Validation
 
@@ -107,6 +137,7 @@ python3.12 -m venv /tmp/william-elias-venv
 source /tmp/william-elias-venv/bin/activate
 pip install -r requirements-dev.txt
 playwright install chromium --with-deps
+sudo apt-get install -y poppler-utils  # pdftotext/pdftoppm for ATS checks and page renders
 
 # 2. Rebuild all derived files
 python scripts/build_config.py && python scripts/build_html.py && python scripts/generate_resume_pdf.py
@@ -115,6 +146,6 @@ python scripts/build_config.py && python scripts/build_html.py && python scripts
 PYTHONPATH=. pytest tests/
 ```
 
-The suite builds all six artifacts in two independent temporary directories containing only source inputs. It checks both checked-in freshness and byte-for-byte repeatability, including PDF and social preview, without rewriting the working tree. Navigation tests wait up to five seconds for the requested scroll position and active state while preserving smooth scrolling.
+The suite builds all eight artifacts (including both targeted PDFs and the legacy alias) in two independent temporary directories containing only source inputs. It checks both checked-in freshness and byte-for-byte repeatability, including PDF and social preview, without rewriting the working tree. Navigation tests wait up to five seconds for the requested scroll position and active state while preserving smooth scrolling.
 
-Also render and inspect both PDF pages and review the website at 320, 390, 810, 1024, and 1440 pixels across dark, light, and both contrast modes before publishing. The full suite uses Chromium; other browser engines are not covered. See [the optimization handoff](documentation/portfolio_optimization_handoff.md) for the latest validation evidence, reviewer perspectives, environment limitations, and deferred work.
+It also checks variant integrity, exact two-page counts, the alias, `pdftotext` ATS extraction, résumé control tap targets, and keyboard focus. Also render and inspect all four targeted-PDF pages (`pdftoppm -png -r 80 <file>.pdf page`) and review the website at 320, 390, 810, 1024, and 1440 pixels across dark, light, and both contrast modes before publishing. The full suite uses Chromium; other browser engines are not covered. See [the optimization handoff](documentation/portfolio_optimization_handoff.md) for the latest validation evidence, reviewer perspectives, environment limitations, and deferred work.
