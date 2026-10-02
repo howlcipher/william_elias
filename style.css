@@ -94,7 +94,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .nav-links a { padding-bottom: 2px; color: var(--muted); font-size: .76rem; font-weight: 600; letter-spacing: .04em; text-decoration: none; text-transform: uppercase; border-bottom: 2px solid transparent; }
 .nav-links a:hover { color: var(--blue); }
 .nav-links a.active { color: var(--blue); border-bottom-color: var(--red); }
-.nav-resume-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .85rem; color: #fff; background: var(--red-solid); border: 1px solid var(--red); font-size: .74rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+.nav-resume-btn { display: inline-flex; align-items: center; min-height: 44px; gap: .4rem; padding: .5rem .85rem; color: #fff; background: var(--red-solid); border: 1px solid var(--red); font-size: .74rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: transform .15s ease, background .15s ease; }
 .nav-resume-btn:hover { background: var(--blue-solid); border-color: var(--blue); transform: translate(-2px, -2px); }
 .theme-controls { gap: .25rem; }
 .icon-btn, .mobile-menu-btn { display: grid; place-items: center; width: 34px; height: 34px; color: var(--ink); background: transparent; border: 1px solid var(--line); cursor: pointer; }
@@ -119,6 +119,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
         "subtitle   photo"
         "tagline    photo"
         "supporting photo"
+        "resumes    photo"
         "contact    photo";
     column-gap: 2.5rem;
     padding: 2.25rem;
@@ -127,7 +128,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
     box-shadow: var(--shadow);
     overflow: visible;
 }
-.hero-content::before { content: "SOFTWARE // DEVOPS // AUTOMATION"; position: absolute; top: .65rem; right: .85rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; }
+.hero-content::before { content: "SOFTWARE // AUTOMATION // PLATFORM"; position: absolute; top: .65rem; right: .85rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; }
 .hero-content::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 7px; background: linear-gradient(to right, var(--red) 0 42%, var(--blue) 42% 100%); }
 .eyebrow, .timeline-date, .project-subtitle { color: var(--blue); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .hero-content .eyebrow { grid-area: eyebrow; }
@@ -143,6 +144,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .contact-pill { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .75rem; color: var(--ink); border: 1px solid var(--line); background: var(--paper); font-size: .75rem; font-weight: 600; text-decoration: none; transition: transform .15s ease, background .15s ease; }
 .contact-pill:hover { color: #fff; background: var(--blue-solid); border-color: var(--blue); transform: translate(-2px, -2px); }
 .primary-action { color: #fff; background: var(--red-solid); border-color: var(--red); }
+/* Targeted résumé downloads: plain anchors sized as comfortable touch targets. */
+.hero-content .resume-actions { grid-area: resumes; margin-bottom: .75rem; }
+.resume-actions, .resume-choice-actions { display: flex; flex-wrap: wrap; gap: .65rem; }
+.resume-action { min-height: 44px; font-size: .8rem; }
+.resume-text { display: flex; flex-direction: column; text-align: left; }
+.resume-audience { font-size: .7rem; font-weight: 500; }
+.resume-choice { margin: 0 auto 1.5rem; scroll-margin-top: 90px; }
+.resume-choice-label { margin-bottom: .75rem; color: var(--ink); font-size: .85rem; font-weight: 600; }
+.resume-choice-actions { justify-content: center; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .profile-module {
     position: relative;
     display: block;
@@ -301,6 +312,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
             "tagline"
             "supporting"
             "photo"
+            "resumes"
             "contact";
         row-gap: .55rem;
     }
@@ -324,6 +336,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .hero-content .subtitle, .hero-content .tagline, .hero-supporting { margin-bottom: .4rem; }
     .hero-content .contact-info { margin-top: .5rem; }
     .nav-resume-btn { padding: .5rem; }
+    .resume-actions, .resume-choice-actions { flex-direction: column; align-items: stretch; }
     #summary-target { padding: 1.25rem; }
     .timeline { padding-left: 1rem; }
     .timeline-item { padding: 1.2rem; }

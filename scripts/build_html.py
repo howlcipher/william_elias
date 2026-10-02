@@ -21,7 +21,39 @@ def esc(value):
     return html.escape(str(value or ''), quote=True)
 
 
-def render_hero(personal):
+def load_resume_variants():
+    """Targeted résumé downloads, in the order resume_variants.json defines them."""
+    with open(SITE_DIR / 'resume_variants.json', 'r') as f:
+        variants = json.load(f)['variants']
+    return [
+        {'key': key, 'label': v['label'], 'audience': v['audience'], 'file': v['file']}
+        for key, v in variants.items()
+    ]
+
+
+def render_resume_links(resumes, link_class, with_audience=False):
+    # Plain anchors, one per targeted résumé: no dropdown, hover, or nested
+    # focus state, so touch, keyboard, and no-JS visitors get the same choice.
+    parts = []
+    for resume in resumes or []:
+        href = get_valid_url(resume.get('file'), allow_relative=True)
+        if not href:
+            continue
+        audience = (
+            f'<span class="resume-audience">{esc(resume["audience"])}</span>'
+            if with_audience and resume.get('audience') else ''
+        )
+        parts.append(
+            f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer" class="{link_class}" '
+            f'data-resume-variant="{esc(resume["key"])}">'
+            '<i class="fas fa-file-arrow-down" aria-hidden="true"></i> '
+            f'<span class="resume-text"><span class="resume-label">{esc(resume["label"])}</span>{audience}</span>'
+            '<span class="visually-hidden"> (PDF)</span></a>'
+        )
+    return ''.join(parts)
+
+
+def render_hero(personal, resumes=()):
     # Keep the content in reading order -- eyebrow, heading, subtitle, tagline,
     # supporting line, portrait, then contact actions -- so the mobile single-column grid needs
     # no order overrides. Desktop uses named grid areas on `.hero-content` to
@@ -51,6 +83,13 @@ def render_hero(personal):
             '</div>'
         )
 
+    resume_links = render_resume_links(resumes, 'contact-pill primary-action resume-action')
+    if resume_links:
+        parts.append(
+            '<div class="resume-actions" role="group" aria-label="Download a targeted resume (PDF)">'
+            f'{resume_links}</div>'
+        )
+
     parts.append('<div class="contact-info">')
 
     if personal.get('email'):
@@ -71,13 +110,6 @@ def render_hero(personal):
         parts.append(
             f'<a href="{esc(github)}" target="_blank" rel="noopener noreferrer" class="contact-pill">'
             '<i class="fab fa-github" aria-hidden="true"></i> GitHub</a>'
-        )
-
-    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
-    if resume_pdf:
-        parts.append(
-            f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="contact-pill primary-action">'
-            '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume PDF</a>'
         )
 
     parts.append('</div>')
@@ -123,7 +155,7 @@ def render_experience(experience):
         subtitle = esc(job.get('company', ''))
         if job.get('location'):
             subtitle += f' | {esc(job["location"])}'
-        achievements = ''.join(f'<li>{esc(a)}</li>' for a in (job.get('achievements') or []))
+        achievements = ''.join(f'<li>{esc(a["text"])}</li>' for a in (job.get('achievements') or []))
         parts.append(
             '<div class="timeline-item card">'
             '<div class="timeline-dot"></div>'
@@ -197,25 +229,31 @@ def render_projects(projects):
     return ''.join(parts)
 
 
-def render_nav_resume(personal):
-    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
-    if not resume_pdf:
+def render_nav_resume(resumes):
+    # The navbar has room for one compact control at every width, so it jumps
+    # to the labelled two-résumé choice instead of picking a variant itself.
+    if not resumes:
         return ''
     return (
-        f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="nav-resume-btn">'
-        '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume</a>'
+        '<a href="#resume-downloads" class="nav-resume-btn">'
+        '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resumes</a>'
     )
 
 
-def render_mobile_nav_resume(personal):
-    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
-    if not resume_pdf:
+def render_mobile_nav_resume(resumes):
+    return ''.join(
+        f'<li>{render_resume_links([resume], "mobile-link mobile-resume-link")}</li>'
+        for resume in resumes or []
+    )
+
+
+def render_cta_resumes(resumes):
+    links = render_resume_links(resumes, 'contact-pill primary-action resume-action', with_audience=True)
+    if not links:
         return ''
     return (
-        '<li>'
-        f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="mobile-link mobile-resume-link">'
-        '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume</a>'
-        '</li>'
+        '<p class="resume-choice-label" id="resume-choice-label">Choose the resume that fits the role:</p>'
+        f'<div class="resume-choice-actions" role="group" aria-labelledby="resume-choice-label">{links}</div>'
     )
 
 
@@ -237,13 +275,6 @@ def render_cta_actions(personal):
         parts.append(
             f'<a href="{esc(linkedin)}" target="_blank" rel="noopener noreferrer" class="contact-pill">'
             '<i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>'
-        )
-
-    resume_pdf = get_valid_url(personal.get('resumePdf'), allow_relative=True)
-    if resume_pdf:
-        parts.append(
-            f'<a href="{esc(resume_pdf)}" target="_blank" rel="noopener noreferrer" class="contact-pill primary-action">'
-            '<i class="fas fa-file-pdf" aria-hidden="true"></i> Resume PDF</a>'
         )
 
     github = get_valid_url(personal.get('github'))
@@ -268,11 +299,15 @@ def render_json_ld(data):
 
     same_as = [u for u in (get_valid_url(personal.get('linkedin')), get_valid_url(personal.get('github'))) if u]
 
+    # jobTitle is the official, employer-issued current title. Positioning
+    # language (Software & Automation Engineer, platform, DevEx, ...) belongs in
+    # description/knowsAbout, never in a title the person does not hold.
+    current = next(iter(data.get('experience') or []), {})
     person = {
         '@type': 'Person',
         'name': personal.get('name', ''),
-        'jobTitle': personal.get('title', ''),
-        'description': personal.get('tagline', ''),
+        'jobTitle': current.get('officialTitle') or current.get('title', ''),
+        'description': seo.get('personDescription') or personal.get('tagline', ''),
     }
     if canonical_url:
         person['url'] = canonical_url
@@ -511,7 +546,8 @@ def build_html():
     )
 
     # Pre-render body content sections for SEO/no-JS visibility
-    html_content = inject(html_content, 'HERO', render_hero(personal))
+    resumes = load_resume_variants()
+    html_content = inject(html_content, 'HERO', render_hero(personal, resumes))
     html_content = inject(html_content, 'SUMMARY', render_summary(data.get('about') or data.get('summary', '')))
     html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
@@ -529,8 +565,9 @@ def build_html():
 
     html_content = inject(html_content, 'EDUCATION', render_education(data.get('education')))
     html_content = inject(html_content, 'FOOTER', esc(data.get('footerText', '')))
-    html_content = inject(html_content, 'NAV_RESUME', render_nav_resume(personal))
-    html_content = inject(html_content, 'MOBILE_NAV_RESUME', render_mobile_nav_resume(personal))
+    html_content = inject(html_content, 'NAV_RESUME', render_nav_resume(resumes))
+    html_content = inject(html_content, 'MOBILE_NAV_RESUME', render_mobile_nav_resume(resumes))
+    html_content = inject(html_content, 'CTA_RESUMES', render_cta_resumes(resumes))
     html_content = inject(html_content, 'CTA_COPY', render_cta_copy(personal))
     html_content = inject(html_content, 'CTA_ACTIONS', render_cta_actions(personal))
     html_content = inject(html_content, 'JSONLD', '<script type="application/ld+json">' + render_json_ld(data) + '</script>')

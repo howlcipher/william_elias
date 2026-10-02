@@ -1,0 +1,107 @@
+{
+  "compatibility": {
+    "file": "William_Elias_Resume.pdf",
+    "variant": "production_devops"
+  },
+  "variants": {
+    "software_platform": {
+      "label": "Software & Platform Resume",
+      "audience": "Developer tooling, platform, and internal software roles",
+      "file": "William_Elias_Software_Platform_Resume.pdf",
+      "title": "Software & Automation Engineer",
+      "supporting": "Developer Tooling • Platform Engineering • Python • Go • C#/.NET • CI/CD",
+      "summaryStatementIds": [
+        "summary-software-opening",
+        "summary-build-tools",
+        "summary-delivery-enablement",
+        "summary-security-depth"
+      ],
+      "experienceAchievementIds": {
+        "exp-stellantis": [
+          "ach-go-deployment-cli",
+          "ach-python-tooling",
+          "ach-internal-dotnet-app",
+          "ach-cicd-standardization",
+          "ach-cicd-validation",
+          "ach-credential-remediation",
+          "ach-oauth-resource-server",
+          "ach-release-kql"
+        ],
+        "exp-hbk": [
+          "ach-hbk-xml-automation",
+          "ach-hbk-database-tools",
+          "ach-hbk-installers-tooling"
+        ]
+      },
+      "skillIds": [
+        "skill-software-backend",
+        "skill-automation-tooling",
+        "skill-devops-delivery",
+        "skill-security-identity",
+        "skill-ai-engineering",
+        "skill-production-reliability"
+      ],
+      "skillTags": {
+        "skill-software-backend": ["Python", "Go", "C#", ".NET", "ASP.NET Core", "Blazor", "FastAPI", "REST APIs", "SQL Server", "SQLite"]
+      },
+      "highlightIds": [
+        "highlight-deployment-tooling",
+        "highlight-python-workflow-tools",
+        "highlight-portal-change-safety"
+      ],
+      "projectIds": [
+        "project-howlplane",
+        "project-howlframe"
+      ]
+    },
+    "production_devops": {
+      "label": "Production & DevOps Resume",
+      "audience": "Production, DevOps, CI/CD, and release engineering roles",
+      "file": "William_Elias_Production_DevOps_Resume.pdf",
+      "title": "Production & DevOps Automation Engineer",
+      "supporting": "CI/CD • Azure DevOps • Automation • Reliability • Python • Production Systems",
+      "summaryStatementIds": [
+        "summary-production-opening",
+        "summary-cicd-delivery",
+        "summary-production-reliability",
+        "summary-security-infrastructure"
+      ],
+      "experienceAchievementIds": {
+        "exp-stellantis": [
+          "ach-cicd-standardization",
+          "ach-cicd-validation",
+          "ach-release-kql",
+          "ach-go-deployment-cli",
+          "ach-python-tooling",
+          "ach-credential-remediation",
+          "ach-internal-dotnet-app",
+          "ach-oauth-resource-server"
+        ],
+        "exp-hbk": [
+          "ach-hbk-xml-automation",
+          "ach-hbk-database-tools",
+          "ach-hbk-installers-tooling"
+        ]
+      },
+      "skillIds": [
+        "skill-devops-delivery",
+        "skill-production-reliability",
+        "skill-automation-tooling",
+        "skill-infrastructure-operations",
+        "skill-security-identity",
+        "skill-software-backend"
+      ],
+      "skillTags": {
+        "skill-infrastructure-operations": ["Windows Server", "IIS", "Active Directory", "SQL Server", "Load Balancers", "Firewalls", "Cisco / Meraki"]
+      },
+      "highlightIds": [
+        "highlight-production-reliability",
+        "highlight-deployment-tooling",
+        "highlight-infrastructure-investigation"
+      ],
+      "projectIds": [
+        "project-howlplane"
+      ]
+    }
+  }
+}

@@ -377,24 +377,45 @@ def test_resume_action_never_marked_as_active_section(page: Page, test_url: str)
     assert resume_btn.get_attribute("aria-current") is None
 
 
-def test_desktop_nav_resume_cta_visible_and_safe_external_link(page: Page, test_url: str):
-    page.set_viewport_size({"width": 1440, "height": 900})
+with open(os.path.join(DIRECTORY, "resume_variants.json")) as _source:
+    RESUME_FILES = {name: v["file"] for name, v in json.load(_source)["variants"].items()}
+
+
+@pytest.mark.parametrize("width", [390, 1440])
+def test_nav_resume_cta_jumps_to_targeted_resume_choice(page: Page, test_url: str, width):
+    page.set_viewport_size({"width": width, "height": 900})
     page.goto(test_url)
+    page.evaluate("document.fonts.ready")
 
     resume_btn = page.locator(".nav-resume-btn")
     assert resume_btn.is_visible()
-    assert resume_btn.get_attribute("href") == "William_Elias_Resume.pdf"
-    assert resume_btn.get_attribute("rel") == "noopener noreferrer"
+    assert resume_btn.get_attribute("href") == "#resume-downloads"
+    resume_btn.click()
+    choice = page.locator("#resume-downloads")
+    expect(choice).to_be_in_viewport(timeout=5000)
+    page.wait_for_function(
+        "() => document.getElementById('resume-downloads').getBoundingClientRect().top >= 72",
+        timeout=5000,
+    )
+    links = choice.locator("a.resume-action")
+    assert [links.nth(i).get_attribute("href") for i in range(links.count())] == list(RESUME_FILES.values())
+    for i in range(links.count()):
+        expect(links.nth(i)).to_be_visible()
 
 
-def test_mobile_nav_resume_cta_present_in_menu(page: Page, test_url: str):
+def test_mobile_nav_lists_both_targeted_resumes(page: Page, test_url: str):
     page.set_viewport_size({"width": 375, "height": 667})
     page.goto(test_url)
 
     page.locator(".mobile-menu-btn").click()
-    resume_link = page.locator(".mobile-resume-link")
-    assert resume_link.is_visible()
-    assert resume_link.get_attribute("href") == "William_Elias_Resume.pdf"
+    links = page.locator(".mobile-resume-link")
+    assert links.count() == len(RESUME_FILES)
+    for i, (name, file) in enumerate(RESUME_FILES.items()):
+        link = links.nth(i)
+        assert link.is_visible()
+        assert link.get_attribute("href") == file
+        assert link.get_attribute("data-resume-variant") == name
+        assert link.get_attribute("rel") == "noopener noreferrer"
 
 
 def test_bottom_recruiter_cta_renders_with_actions(page: Page, test_url: str):
@@ -471,23 +492,76 @@ def test_evidence_and_theme_controls_work_with_keyboard(page: Page, test_url: st
         expect(detail).not_to_have_attribute("open", "")
 
 
-@pytest.mark.parametrize("selector", [
-    ".nav-resume-btn", ".hero .primary-action",
-    "#contact-cta .primary-action", ".mobile-resume-link",
-])
-def test_resume_actions_download_current_pdf(page: Page, test_url: str, selector, tmp_path):
+@pytest.mark.parametrize("variant", list(RESUME_FILES))
+@pytest.mark.parametrize("scope", [".hero", "#contact-cta", ".mobile-nav"])
+def test_resume_actions_download_targeted_pdf(page: Page, test_url: str, scope, variant, tmp_path):
     page.set_viewport_size({"width": 390, "height": 900})
     page.goto(test_url)
-    if selector == ".mobile-resume-link":
+    if scope == ".mobile-nav":
         page.locator(".mobile-menu-btn").click()
     with page.expect_download() as download_info:
-        page.locator(selector).click()
+        page.locator(f'{scope} a[data-resume-variant="{variant}"]').click()
     download = download_info.value
-    assert download.suggested_filename == "William_Elias_Resume.pdf"
+    assert download.suggested_filename == RESUME_FILES[variant]
     output = tmp_path / download.suggested_filename
     download.save_as(output)
-    with open(os.path.join(DIRECTORY, "William_Elias_Resume.pdf"), "rb") as source:
+    with open(os.path.join(DIRECTORY, RESUME_FILES[variant]), "rb") as source:
         assert output.read_bytes() == source.read()
+
+
+def test_legacy_resume_url_still_serves_the_compatibility_pdf(page: Page, test_url: str):
+    response = page.request.get(test_url.replace("index.html", "William_Elias_Resume.pdf"))
+    assert response.ok
+    with open(os.path.join(DIRECTORY, RESUME_FILES["production_devops"]), "rb") as source:
+        assert response.body() == source.read()
+
+
+@pytest.mark.parametrize("width", [320, 390, 810, 1024, 1440])
+def test_resume_controls_are_touch_sized_and_need_no_hover(page: Page, test_url: str, width):
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(test_url)
+    page.evaluate("document.fonts.ready")
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    controls = page.locator("a.resume-action")
+    assert controls.count() == 2 * len(RESUME_FILES)
+    for i in range(controls.count()):
+        control = controls.nth(i)
+        control.scroll_into_view_if_needed()
+        box = control.bounding_box()
+        assert box["height"] >= 44 and box["width"] >= 44, box
+        assert box["x"] >= 0 and box["x"] + box["width"] <= width
+        # Visible without hovering: real text, not a hover-revealed menu.
+        expect(control).to_be_visible()
+        assert control.evaluate("el => el.tagName") == "A"
+        assert control.get_attribute("href").endswith(".pdf")
+    nav = page.locator(".nav-resume-btn").bounding_box()
+    assert nav["height"] >= 44
+    if width <= 620:
+        # Stacked on narrow screens so each target spans the available width.
+        hero = page.locator(".hero .resume-action")
+        assert abs(hero.nth(0).bounding_box()["x"] - hero.nth(1).bounding_box()["x"]) <= 1
+
+
+@pytest.mark.parametrize("width", [320, 1440])
+def test_resume_controls_are_keyboard_reachable_with_visible_focus(page: Page, test_url: str, width):
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(test_url)
+    seen = []
+    for _ in range(40):
+        page.keyboard.press("Tab")
+        info = page.evaluate("""() => {
+            const el = document.activeElement;
+            return {variant: el.dataset.resumeVariant || null,
+                    inHero: !!el.closest('.hero'),
+                    outline: getComputedStyle(el).outlineStyle,
+                    width: getComputedStyle(el).outlineWidth};
+        }""")
+        if info["variant"] and info["inHero"]:
+            assert info["outline"] == "solid" and info["width"] != "0px", info
+            seen.append(info["variant"])
+        if len(seen) == len(RESUME_FILES):
+            break
+    assert seen == list(RESUME_FILES)
 
 
 def test_all_project_links_open_the_canonical_destination(page: Page, test_url: str):

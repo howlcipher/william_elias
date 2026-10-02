@@ -1,11 +1,10 @@
 const config = {
     "personal": {
         "name": "William Elias",
-        "title": "DevOps, Software & Production Engineer",
+        "title": "Software & Automation Engineer",
         "tagline": "Building Software, Automating Work & Delivering Reliable Systems",
-        "supporting": "Python \u2022 C#/.NET \u2022 Go \u2022 Azure DevOps \u2022 CI/CD \u2022 REST APIs",
-        "pdfSupporting": "Python \u2022 C#/.NET \u2022 Go \u2022 Azure DevOps \u2022 CI/CD \u2022 REST APIs \u2022 ASP.NET Core",
-        "contactCopy": "Open to U.S. fully remote DevOps, Azure DevOps, Production Engineering, software engineering (internal tools, automation, and backend), infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps roles. I build software and automation for delivery, production reliability, developer tooling, security, and operational problems.",
+        "supporting": "Developer Tooling \u2022 Platform Engineering \u2022 CI/CD \u2022 Production Engineering",
+        "contactCopy": "Open to U.S. fully remote roles in software engineering for developer tooling, internal platforms, and automation; developer productivity and developer experience (DevEx); platform engineering; production engineering; DevOps, Azure DevOps, and CI/CD; infrastructure automation; and security automation / DevSecOps. I build software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.",
         "location": "Michigan",
         "remote": "Open to U.S. Remote Opportunities",
         "photo": "assets/images/william-elias-profile-hoodie-dark.webp",
@@ -14,44 +13,127 @@ const config = {
         "email": "WylElias.123@gmail.com",
         "linkedin": "https://linkedin.com/in/wylelias",
         "github": "https://github.com/howlcipher",
-        "resumePdf": "William_Elias_Resume.pdf",
         "sourceRepo": "https://github.com/howlcipher/william_elias",
         "sourceBranch": "main"
     },
     "seo": {
         "canonicalUrl": "https://howlcipher.github.io/william_elias/",
-        "siteName": "William Elias | DevOps, Software & Production Engineer",
-        "description": "William Elias: DevOps, Software and Production Engineer building Python, C#/.NET and Go tools, Azure DevOps CI/CD, APIs, security automation, reliable systems.",
-        "socialDescription": "DevOps, Software and Production Engineering. Python, C#/.NET, Go, CI/CD, REST APIs, developer tooling, security automation and production reliability.",
+        "siteName": "William Elias | Software & Automation Engineer",
+        "description": "William Elias, Software & Automation Engineer: Developer Tooling, Platform Engineering, Azure DevOps CI/CD, Production Engineering, Python, Go and C#/.NET.",
+        "personDescription": "Software and automation engineer who builds developer tools, internal software, CI/CD and delivery automation, and production engineering systems that make software easier to build, ship, secure, troubleshoot, and operate.",
+        "socialDescription": "Software & Automation Engineer: developer tooling, internal platforms, CI/CD and production engineering with Python, Go, C#/.NET, Azure DevOps and security automation.",
         "knowsAbout": [
+            "Software Engineering",
+            "Automation",
+            "Developer Tooling",
+            "Developer Productivity",
+            "Developer Experience (DevEx)",
+            "Platform Engineering",
+            "Internal Tools",
+            "Production Engineering",
             "DevOps",
             "Azure DevOps",
-            "Python",
-            "Software Engineering",
             "CI/CD",
-            "Production Engineering",
-            "C# / .NET",
-            "Go",
-            "REST APIs",
-            "Developer Tooling",
-            "Automation",
-            "Platform Engineering",
-            "ASP.NET Core",
-            "PowerShell",
-            "Git",
+            "Infrastructure Automation",
+            "Production Reliability",
             "Security Automation",
+            "DevSecOps",
+            "Python",
+            "Go",
+            "C# / .NET",
+            "ASP.NET Core",
+            "REST APIs",
             "FastAPI",
             "Blazor",
-            "Auth0",
-            "Application Insights",
+            "PowerShell",
             "KQL",
+            "Application Insights",
             "OAuth / OIDC",
-            "IAM",
+            "Auth0",
             "AI-Enabled Engineering"
         ]
     },
-    "about": "I work where software engineering, DevOps, and production operations overlap. I build Python, C#/.NET, and Go software and automation that make systems easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes CI/CD standardization; a .NET 8 Blazor Web App with Interactive Server for internal production support; separate FastAPI dashboards and operational tooling; a Go deployment CLI; credential-remediation automation; Auth0/OAuth/OIDC troubleshooting; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in DevOps/Azure DevOps, Production Engineering, software engineering for internal tools, automation, and backend systems, infrastructure automation, developer productivity, platform engineering, and security automation / DevSecOps. The common thread is building useful software and making production systems easier to operate.",
-    "summary": "DevOps, Software and Production Engineer with 10+ years across software delivery, production operations, infrastructure, and networking. Builds Python/FastAPI, C#/.NET/Blazor, and Go tooling, Azure DevOps CI/CD, internal applications, credential-remediation automation, and production-support systems. Brings hands-on production troubleshooting, observability, Auth0/OAuth/OIDC troubleshooting, release automation, and AI-enabled engineering with human review.",
+    "about": "I am a software and automation engineer. I build developer tools, internal software, delivery automation, and production engineering systems in Python, Go, and C#/.NET that make software easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes a Go self-service deployment CLI; Azure DevOps CI/CD standardization; a .NET 8 Blazor Web App with Interactive Server for internal production support; separate FastAPI dashboards and Python workflow automation; credential-remediation tooling; Auth0/OAuth/OIDC troubleshooting; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in software engineering for developer tooling, internal platforms, and automation; developer productivity; platform engineering; production engineering; DevOps/Azure DevOps; and security automation / DevSecOps. My in-progress M.S. in Cyber Defense adds security depth to that engineering work.",
+    "positioningStatements": [
+        {
+            "id": "summary-software-opening",
+            "text": "Software and automation engineer with 10+ years across software delivery, production operations, infrastructure, and networking, building developer tools, internal applications, and delivery automation.",
+            "evidenceIds": [
+                "exp-stellantis",
+                "exp-hbk",
+                "exp-trendset",
+                "program-deployment-tooling",
+                "program-internal-software",
+                "program-python-productivity"
+            ]
+        },
+        {
+            "id": "summary-build-tools",
+            "text": "Builds a Go self-service deployment CLI, Python/FastAPI dashboards and Azure DevOps REST automation, and a C#/.NET Blazor internal production-support application.",
+            "evidenceIds": [
+                "program-deployment-tooling",
+                "program-python-productivity",
+                "program-internal-software"
+            ]
+        },
+        {
+            "id": "summary-delivery-enablement",
+            "text": "Turns CI/CD standardization, credential remediation, and recurring production-support work into reusable pipeline templates, CLI tooling, and scheduled automation.",
+            "evidenceIds": [
+                "program-cicd-release",
+                "program-security-remediation",
+                "program-python-productivity"
+            ]
+        },
+        {
+            "id": "summary-security-depth",
+            "text": "Adds security depth through credential-remediation tooling, OAuth/OIDC/JWT work, Auth0 identity troubleshooting, and in-progress M.S. Cyber Defense studies.",
+            "evidenceIds": [
+                "program-security-remediation",
+                "program-oauth-integration",
+                "skill-security-identity",
+                "edu-ms-cyber-defense"
+            ]
+        },
+        {
+            "id": "summary-production-opening",
+            "text": "Production and DevOps automation engineer with 10+ years across production operations, software delivery, infrastructure, and networking.",
+            "evidenceIds": [
+                "exp-stellantis",
+                "exp-hbk",
+                "exp-trendset"
+            ]
+        },
+        {
+            "id": "summary-cicd-delivery",
+            "text": "Builds Azure DevOps CI/CD standardization, reusable pipeline templates, release tracking, and Go and Python deployment and operations automation.",
+            "evidenceIds": [
+                "program-cicd-release",
+                "program-production-reliability",
+                "program-deployment-tooling",
+                "program-python-productivity"
+            ]
+        },
+        {
+            "id": "summary-production-reliability",
+            "text": "Troubleshoots production API/integration, database, configuration, and infrastructure issues with Azure Monitor, Application Insights, KQL, structured logging, incident triage, and RCA.",
+            "evidenceIds": [
+                "program-production-reliability",
+                "skill-production-reliability"
+            ]
+        },
+        {
+            "id": "summary-security-infrastructure",
+            "text": "Adds credential remediation, Auth0/OAuth/OIDC troubleshooting, and a Windows Server, IIS, Active Directory, SQL Server, and network infrastructure background.",
+            "evidenceIds": [
+                "program-security-remediation",
+                "skill-security-identity",
+                "skill-infrastructure-operations",
+                "exp-trendset",
+                "exp-project-worldwide"
+            ]
+        }
+    ],
     "stats": [
         {
             "value": "60",
@@ -71,6 +153,7 @@ const config = {
     ],
     "skills": [
         {
+            "id": "skill-software-backend",
             "category": "Software & Backend",
             "icon": "fa-code",
             "context": "Professional Python/FastAPI dashboards and .NET 8 Blazor internal production-support tooling",
@@ -101,6 +184,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-devops-delivery",
             "category": "DevOps & Delivery",
             "icon": "fa-cloud",
             "context": "Azure DevOps professionally; containerization proof of concept",
@@ -115,6 +199,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-automation-tooling",
             "category": "Automation & Developer Tooling",
             "icon": "fa-bolt",
             "context": "Python and PowerShell professionally; Go for deployment CLI and tooling; uv for Python dependency standardization",
@@ -139,6 +224,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-production-reliability",
             "category": "Production & Reliability",
             "icon": "fa-chart-line",
             "context": "Professional production operations and diagnostics",
@@ -152,6 +238,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-security-identity",
             "category": "Security & Identity",
             "icon": "fa-shield-halved",
             "context": "Professional credential remediation, Auth0 identity troubleshooting, and security safeguards",
@@ -166,6 +253,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-infrastructure-operations",
             "category": "Infrastructure & Application Operations",
             "icon": "fa-server",
             "context": "Professional application hosting and infrastructure",
@@ -180,6 +268,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-ai-engineering",
             "category": "AI-Enabled Engineering",
             "icon": "fa-robot",
             "context": "Internal engineering tools and independent projects",
@@ -194,6 +283,7 @@ const config = {
             ]
         },
         {
+            "id": "skill-technical-foundations",
             "category": "Additional Technical Foundations",
             "icon": "fa-graduation-cap",
             "context": "Coursework and hands-on academic/project experience, not professional production ownership",
@@ -211,35 +301,72 @@ const config = {
     ],
     "experience": [
         {
+            "id": "exp-stellantis",
             "date": "Feb 2023 - Present",
             "title": "Production Support Engineer | DevOps & Automation",
+            "officialTitle": "Production Support Engineer",
             "company": "Stellantis Financial Services US",
             "location": "Auburn Hills, MI \u00b7 Hybrid",
             "achievements": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories.",
-                "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states.",
-                "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking.",
-                "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management.",
-                "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation.",
-                "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete.",
-                "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
-                "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
+                {
+                    "id": "ach-cicd-standardization",
+                    "text": "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories."
+                },
+                {
+                    "id": "ach-cicd-validation",
+                    "text": "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states."
+                },
+                {
+                    "id": "ach-internal-dotnet-app",
+                    "text": "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking."
+                },
+                {
+                    "id": "ach-python-tooling",
+                    "text": "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management."
+                },
+                {
+                    "id": "ach-go-deployment-cli",
+                    "text": "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation."
+                },
+                {
+                    "id": "ach-credential-remediation",
+                    "text": "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
+                },
+                {
+                    "id": "ach-release-kql",
+                    "text": "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation."
+                },
+                {
+                    "id": "ach-oauth-resource-server",
+                    "text": "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
+                }
             ]
         },
         {
+            "id": "exp-hbk",
             "date": "Jul 2020 - Feb 2023",
             "title": "DevOps Engineer - Python Automation",
             "company": "HBK - Hottinger Br\u00fcel & Kj\u00e6r",
             "location": "Southfield, MI \u00b7 Remote",
             "achievements": [
-                "Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month.",
-                "Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.",
-                "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting."
+                {
+                    "id": "ach-hbk-xml-automation",
+                    "text": "Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month."
+                },
+                {
+                    "id": "ach-hbk-database-tools",
+                    "text": "Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup."
+                },
+                {
+                    "id": "ach-hbk-installers-tooling",
+                    "text": "Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting."
+                }
             ]
         }
     ],
     "selectedEngineeringPrograms": [
         {
+            "id": "program-cicd-release",
             "name": "CI/CD & Release Engineering",
             "bullets": [
                 "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and reusable pipeline/template automation.",
@@ -261,6 +388,7 @@ const config = {
             ]
         },
         {
+            "id": "program-internal-software",
             "name": "Software & Internal Developer Tools",
             "bullets": [
                 "Built and maintain a modular internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support."
@@ -281,6 +409,7 @@ const config = {
             ]
         },
         {
+            "id": "program-python-productivity",
             "name": "Python Automation & Developer Productivity",
             "bullets": [
                 "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows.",
@@ -303,6 +432,7 @@ const config = {
             ]
         },
         {
+            "id": "program-deployment-tooling",
             "name": "Deployment Automation & Release Tooling",
             "bullets": [
                 "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle, including guided setup, Azure DevOps REST integration, generated pipeline configuration, host auditing, and automated post-deployment verification."
@@ -320,6 +450,7 @@ const config = {
             ]
         },
         {
+            "id": "program-security-remediation",
             "name": "Security & Credential Remediation",
             "bullets": [
                 "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories.",
@@ -337,6 +468,7 @@ const config = {
             ]
         },
         {
+            "id": "program-oauth-integration",
             "name": "APIs, OAuth & Secure Integration",
             "bullets": [
                 "Designed a scoped OAuth 2.1 resource server integrating an enterprise AI assistant with internal engineering documentation, with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
@@ -354,6 +486,7 @@ const config = {
             ]
         },
         {
+            "id": "program-production-reliability",
             "name": "Production Reliability & Observability",
             "bullets": [
                 "Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation.",
@@ -374,6 +507,7 @@ const config = {
             ]
         },
         {
+            "id": "program-infrastructure-modernization",
             "name": "Infrastructure Modernization & Containerization",
             "bullets": [
                 "Designed a zero-disk-secret Blazor Web App container migration proof of concept with Interactive Server, fail-fast secret validation, database connectivity health checks, and IIS-fronted container hosting.",
@@ -395,24 +529,41 @@ const config = {
     ],
     "pdfEngineeringHighlights": [
         {
-            "name": "CI/CD & Release Engineering",
-            "sourceProgram": "CI/CD & Release Engineering",
+            "id": "highlight-deployment-tooling",
+            "name": "Self-Service Deployment CLI (Go)",
+            "sourceProgram": "Deployment Automation & Release Tooling",
             "bullets": [
-                "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories, with build validation and representative deployment-path dry runs."
+                "Guided setup and project initialization/scaffolding generate pipeline configuration; Azure DevOps REST integration drives build, push, deploy, rollback, status, and audit; host auditing, fail-fast deployment-path validation, container-lifecycle integration, and automated post-deployment verification are built in."
             ],
             "technology": [
+                "Go",
                 "Azure DevOps",
-                "Python",
-                "PowerShell",
-                ".NET",
+                "REST APIs",
+                "CI/CD",
                 "IIS"
             ]
         },
         {
-            "name": "Software & Internal Developer Tools",
+            "id": "highlight-python-workflow-tools",
+            "name": "Python Developer Productivity Tooling",
+            "sourceProgram": "Python Automation & Developer Productivity",
+            "bullets": [
+                "Sole-authored Python tools parse failed integration payloads into a structured DBA-approval queue, run scheduled query-to-email reports, and summarize processing errors embedded in XML integration logs; repository-discovery and Git-history remediation tooling supports single-repository and whole-project modes with interchangeable rewrite engines."
+            ],
+            "technology": [
+                "Python",
+                "REST APIs",
+                "Azure DevOps",
+                "Automation",
+                "uv"
+            ]
+        },
+        {
+            "id": "highlight-portal-change-safety",
+            "name": "Internal Production-Support Software (C#/.NET)",
             "sourceProgram": "Software & Internal Developer Tools",
             "bullets": [
-                "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, audit history, live diffing, and service-desk tracking."
+                "Change-safety features in the modular .NET 8 Blazor Web App include DBA approve-only deployment scripts, live configuration/object diffing for pre-CAB and pre-deployment review, per-module access policies, and retained audit history; integrated service-desk request tracking keeps operational workflows traceable."
             ],
             "technology": [
                 "C#",
@@ -424,25 +575,43 @@ const config = {
             ]
         },
         {
-            "name": "Python Automation & Developer Productivity",
-            "sourceProgram": "Python Automation & Developer Productivity",
+            "id": "highlight-production-reliability",
+            "name": "Production Reliability & Observability",
+            "sourceProgram": "Production Reliability & Observability",
             "bullets": [
-                "Built a suite of Python developer and operations tools spanning API automation, failed-payload triage, scheduled reporting, integration-log analysis, engineering search, RCA, and recurring support workflows."
+                "Troubleshoot production application issues as the primary responsibility, across API/integration, database, configuration, and infrastructure problems, using Azure Monitor, Application Insights, KQL, and structured logging; support data-migration and infrastructure-migration efforts, including scripted data moves and DR-related database migration work."
             ],
             "technology": [
-                "Python",
-                "REST APIs",
-                "Azure DevOps",
-                "Automation",
-                "uv"
+                "Application Insights",
+                "Azure Monitor",
+                "KQL",
+                "Serilog",
+                ".NET",
+                "Python"
+            ]
+        },
+        {
+            "id": "highlight-infrastructure-investigation",
+            "name": "Infrastructure Investigation & Modernization",
+            "sourceProgram": "Infrastructure Modernization & Containerization",
+            "bullets": [
+                "Investigated server/container migration paths and audited disaster-recovery pipeline definitions to identify broken or obsolete deployment paths and support remediation planning, working across OS configuration, IIS, Active Directory, firewall rules, databases, and load balancers; designed a zero-disk-secret Blazor Web App container migration proof of concept."
+            ],
+            "technology": [
+                "Windows Server",
+                "IIS",
+                "Active Directory",
+                "PowerShell",
+                "SQL Server",
+                "Containerization"
             ]
         }
     ],
     "projects": [
         {
+            "id": "project-howlplane",
             "name": "HowlPlane",
             "subtitle": "AI Engineering Control Plane",
-            "pdfInclude": true,
             "link": "https://github.com/howlcipher/howlplane",
             "highlights": [
                 "Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and runs deterministic verification.",
@@ -457,9 +626,9 @@ const config = {
             ]
         },
         {
+            "id": "project-baseball-optimizer",
             "name": "Baseball Optimizer",
             "subtitle": "Rust backend for lineup and roster optimization",
-            "pdfInclude": false,
             "link": "https://github.com/howlcipher/baseball_optimizer",
             "highlights": [
                 "Migrated an optimization backend from Python to Rust/Axum with a SQLite-backed REST API, packaged with Docker and Docker Compose.",
@@ -474,9 +643,9 @@ const config = {
             ]
         },
         {
+            "id": "project-ai-router",
             "name": "AI Router",
             "subtitle": "Local multi-provider coding-agent orchestrator",
-            "pdfInclude": false,
             "link": "https://github.com/howlcipher/ai_router",
             "highlights": [
                 "Built a local coding-agent orchestrator with task classification, provider health checks, fallback logic, circuit breakers, and cooldown handling.",
@@ -490,6 +659,7 @@ const config = {
             ]
         },
         {
+            "id": "project-howlframe",
             "name": "HowlFrame",
             "subtitle": "Experimental language and toolchain, written in Go",
             "link": "https://github.com/howlcipher/howlframe",
@@ -506,6 +676,7 @@ const config = {
             ]
         },
         {
+            "id": "project-redrawus",
             "name": "RedrawUS",
             "subtitle": "Geospatial Analysis & Visualization Platform",
             "link": "https://github.com/howlcipher/redistricting-map",
@@ -520,10 +691,10 @@ const config = {
                 "JavaScript",
                 "Playwright",
                 "Data Engineering"
-            ],
-            "pdfInclude": true
+            ]
         },
         {
+            "id": "project-password-arena",
             "name": "Password Arena",
             "subtitle": "Synthetic password-strength learning sandbox",
             "link": "https://github.com/howlcipher/password_arena",
@@ -587,24 +758,28 @@ const config = {
     ],
     "additionalExperience": [
         {
+            "id": "exp-intrepid",
             "company": "Intrepid Control Systems",
             "title": "QA Developer",
             "date": "Mar 2020 - Apr 2020",
             "summary": "Wrote Mocha tests and debugged APIs across software and hardware integrations."
         },
         {
+            "id": "exp-project-worldwide",
             "company": "Project Worldwide",
             "title": "Network Engineer",
             "date": "Jan 2020 - Mar 2020",
             "summary": "Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime."
         },
         {
+            "id": "exp-ford",
             "company": "Ford Motor Company",
             "title": "Network Standards Engineer",
             "date": "Sep 2019 - Dec 2019",
             "summary": "Implemented global network standards, documentation, and IP-management systems."
         },
         {
+            "id": "exp-trendset",
             "company": "Trendset Communications Group",
             "title": "IT Network Engineer",
             "date": "Sep 2015 - Jun 2019",
@@ -613,24 +788,28 @@ const config = {
     ],
     "education": [
         {
+            "id": "edu-ms-cyber-defense",
             "icon": "fa-user-graduate",
             "degree": "M.S. Cyber Defense (In Progress)",
             "school": "Dakota State University",
             "year": ""
         },
         {
+            "id": "edu-bs-information-technology",
             "icon": "fa-university",
             "degree": "B.S. Information Technology",
             "school": "Colorado State University Global Campus",
             "year": ""
         },
         {
+            "id": "edu-bba-business",
             "icon": "fa-graduation-cap",
             "degree": "B.B.A. Business Administration",
             "school": "Rochester College",
             "year": ""
         },
         {
+            "id": "edu-ccna",
             "icon": "fa-certificate",
             "degree": "CCNA (Previously Held)",
             "school": "Cisco Networking Academy",

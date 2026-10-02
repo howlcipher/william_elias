@@ -10,6 +10,8 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = (
     "config.js", "index.html", "robots.txt", "sitemap.xml", "preview.jpg",
+    "William_Elias_Software_Platform_Resume.pdf",
+    "William_Elias_Production_DevOps_Resume.pdf",
     "William_Elias_Resume.pdf",
 )
 GENERATORS = ("build_config.py", "build_html.py", "generate_resume_pdf.py")
@@ -21,6 +23,7 @@ def isolated_builds(tmp_path_factory):
     for name in ("first", "repeat"):
         directory = tmp_path_factory.mktemp(name)
         shutil.copy2(ROOT / "resume.json", directory)
+        shutil.copy2(ROOT / "resume_variants.json", directory)
         shutil.copytree(ROOT / "assets", directory / "assets")
         (directory / "scripts").mkdir()
         for source in (*GENERATORS, "site_template.html"):

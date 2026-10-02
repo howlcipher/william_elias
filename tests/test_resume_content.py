@@ -3,15 +3,23 @@ import json
 import re
 
 import pypdf
+import pytest
 
-from scripts.generate_resume_pdf import build, load_config, SITE_DIR
+from conftest import VARIANT_NAMES
+from scripts.generate_resume_pdf import build, load_config, load_variants, SITE_DIR
 
 
-def _extract_pdf_pages(cfg, tmp_path):
+def _extract_pdf_pages(cfg, tmp_path, variant=None):
     out_pdf = tmp_path / "content_check.pdf"
-    build(cfg, out_pdf)
+    build(cfg, out_pdf, variant)
     reader = pypdf.PdfReader(out_pdf)
     return [page.extract_text() for page in reader.pages]
+
+
+def _variant_summary(cfg, variant):
+    statements = {s["id"]: s["text"] for s in cfg["positioningStatements"]}
+    ids = load_variants()["variants"][variant]["summaryStatementIds"]
+    return " ".join(statements[i] for i in ids)
 
 
 class TestResumeJsonValidity:
@@ -24,10 +32,10 @@ class TestResumeJsonValidity:
 class TestHeadlineAndPositioning:
     def test_public_headline_positioning(self):
         cfg = load_config()
-        title = cfg["personal"]["title"]
-        assert "Software" in title
-        assert "DevOps" in title
-        assert "Production" in title
+        assert cfg["personal"]["title"] == "Software & Automation Engineer"
+        supporting = cfg["personal"]["supporting"]
+        for term in ("Developer Tooling", "Platform Engineering", "CI/CD", "Production Engineering"):
+            assert term in supporting
 
     def test_public_headline_does_not_lead_with_production_support(self):
         cfg = load_config()
@@ -40,10 +48,14 @@ class TestHeadlineAndPositioning:
         assert "Automating" in tagline or "Automation" in tagline
         assert "Reliable" in tagline or "Reliability" in tagline
 
-    def test_summary_leads_with_devops_software_production_positioning(self):
-        cfg = load_config()
-        assert cfg["summary"].startswith("DevOps, Software and Production Engineer with 10+ years")
-        assert "Senior DevOps" not in cfg["summary"]
+    @pytest.mark.parametrize("variant,opening", [
+        ("software_platform", "Software and automation engineer with 10+ years"),
+        ("production_devops", "Production and DevOps automation engineer with 10+ years"),
+    ])
+    def test_variant_summary_leads_with_its_positioning(self, variant, opening):
+        summary = _variant_summary(load_config(), variant)
+        assert summary.startswith(opening)
+        assert "Senior DevOps" not in summary
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
@@ -75,7 +87,7 @@ class TestKeyMetrics:
 
     def test_experience_states_true_program_scope(self):
         cfg = load_config()
-        accomplishment = next(a for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a)
+        accomplishment = next(a["text"] for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a["text"])
         # "estate" framing keeps the ~60 figure as scope, never as applications
         # migrated or deployed.
         assert "60-repository, 104-application" in accomplishment
@@ -83,10 +95,11 @@ class TestKeyMetrics:
         # Build and dry-run validation details live in the dedicated CI/CD program.
         assert "27" in accomplishment or "28" in accomplishment
 
-    def test_summary_does_not_claim_100_plus_pipelines(self):
-        cfg = load_config()
-        assert "100+ azure devops ci/cd pipelines" not in cfg["summary"].lower()
-        assert "100+ azure devops" not in cfg["summary"].lower()
+    @pytest.mark.parametrize("variant", VARIANT_NAMES)
+    def test_summary_does_not_claim_100_plus_pipelines(self, variant):
+        summary = _variant_summary(load_config(), variant).lower()
+        assert "100+ azure devops ci/cd pipelines" not in summary
+        assert "100+ azure devops" not in summary
 
     def test_no_100_plus_pipeline_claim_anywhere(self, tmp_path):
         cfg = load_config()
@@ -267,22 +280,32 @@ class TestSelectedEngineeringPrograms:
 
 
 class TestPdfEngineeringHighlights:
-    """The PDF carries a curated condensation of the website's six programs.
+    """Each variant renders curated condensations of the website programs.
 
     `selectedEngineeringPrograms` is website-only and shows breadth;
-    `pdfEngineeringHighlights` is PDF-only and shows the strongest evidence.
+    `pdfEngineeringHighlights` are canonical PDF condensations that each
+    variant selects by ID.
     """
 
     EXPECTED_HIGHLIGHTS = {
-        "Software & Internal Developer Tools",
-        "CI/CD & Release Engineering",
-        "Python Automation & Developer Productivity",
+        "software_platform": [
+            "Self-Service Deployment CLI (Go)",
+            "Python Developer Productivity Tooling",
+            "Internal Production-Support Software (C#/.NET)",
+        ],
+        "production_devops": [
+            "Production Reliability & Observability",
+            "Self-Service Deployment CLI (Go)",
+            "Infrastructure Investigation & Modernization",
+        ],
     }
 
-    def test_three_curated_highlights_present(self):
+    @pytest.mark.parametrize("variant", VARIANT_NAMES)
+    def test_variant_selects_expected_highlights(self, variant):
         cfg = load_config()
-        names = {h["name"] for h in cfg["pdfEngineeringHighlights"]}
-        assert names == self.EXPECTED_HIGHLIGHTS
+        names = {h["id"]: h["name"] for h in cfg["pdfEngineeringHighlights"]}
+        ids = load_variants()["variants"][variant]["highlightIds"]
+        assert [names[i] for i in ids] == self.EXPECTED_HIGHLIGHTS[variant]
 
     def test_every_highlight_has_bullets_and_technology(self):
         cfg = load_config()
@@ -290,20 +313,21 @@ class TestPdfEngineeringHighlights:
             assert hl.get("bullets"), f"{hl['name']} missing bullets"
             assert hl.get("technology"), f"{hl['name']} missing technology"
 
-    def test_pdf_renders_only_the_curated_highlights(self, tmp_path):
+    @pytest.mark.parametrize("variant", VARIANT_NAMES)
+    def test_pdf_renders_only_the_selected_highlights(self, variant, variant_pdfs):
         cfg = load_config()
-        blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
-        for name in self.EXPECTED_HIGHLIGHTS:
+        blob = "\n".join(variant_pdfs[variant]["pages"])
+        selected = self.EXPECTED_HIGHLIGHTS[variant]
+        for name in selected:
             assert name in blob, f"'{name}' missing from generated PDF"
-        # Website-only programs must stay off the PDF so page 2 stays scannable.
-        for name in (
-            "Deployment Automation & Release Tooling",
-            "Security & Credential Remediation",
-            "APIs, OAuth & Secure Integration",
-            "Production Reliability & Observability",
-            "Infrastructure Modernization & Containerization",
-        ):
-            assert name not in blob, f"'{name}' should be website-only, not in the PDF"
+        for hl in cfg["pdfEngineeringHighlights"]:
+            if hl["name"] not in selected:
+                assert hl["name"] not in blob, f"'{hl['name']}' is not selected by {variant}"
+        # Website program cards stay off the PDF unless a selected highlight
+        # deliberately shares the program's name.
+        for prog in cfg["selectedEngineeringPrograms"]:
+            if prog["name"] not in selected:
+                assert prog["name"] not in blob, f"'{prog['name']}' should be website-only"
 
     def test_website_retains_all_programs(self):
         # Breadth belongs on the portfolio even though the PDF is selective.
@@ -445,14 +469,15 @@ class TestSelectedOpenSourceProjects:
         for tag in ("Python", "Cybersecurity", "Docker", "pytest"):
             assert tag in proj["tags"]
 
-    def test_pdf_includes_only_selected_projects(self, tmp_path):
-        cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
-        blob = "\n".join(pages)
-        assert "HowlPlane" in blob
-        assert "RedrawUS" in blob
-        assert "Baseball Optimizer" not in blob
-        assert "Password Arena" not in blob
+    @pytest.mark.parametrize("variant,expected", [
+        ("software_platform", {"HowlPlane", "HowlFrame"}),
+        ("production_devops", {"HowlPlane"}),
+    ])
+    def test_pdf_includes_only_selected_projects(self, variant_pdfs, variant, expected):
+        blob = "\n".join(variant_pdfs[variant]["pages"])
+        for name in self.EXPECTED_PROJECTS:
+            assert (name in blob) == (name in expected), name
+        assert "SELECTED OPEN-SOURCE ENGINEERING" in blob.upper()
 
 
 class TestNoUnsupportedClaims:
@@ -525,51 +550,53 @@ class TestNoUnsupportedClaims:
         assert "production kubernetes" not in blob
 
 
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
 class TestPdfLayout:
-    def test_pdf_is_exactly_two_pages(self, tmp_path):
+    def test_pdf_is_exactly_two_pages(self, tmp_path, variant):
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         assert len(pages) == 2
 
-    def test_engineering_highlights_stay_together_on_page_two(self, tmp_path):
+    def test_engineering_highlights_stay_together_on_page_two(self, tmp_path, variant):
         # The highlights live on page 2; each highlight header must stay with its bullets.
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         assert "SELECTED ENGINEERING HIGHLIGHTS" not in pages[0].upper()
         assert "SELECTED ENGINEERING HIGHLIGHTS" in pages[1].upper()
         normalized = " ".join("\n".join(pages).split())
-        for highlight in cfg["pdfEngineeringHighlights"]:
+        selected = load_variants()["variants"][variant]["highlightIds"]
+        for highlight in (h for h in cfg["pdfEngineeringHighlights"] if h["id"] in selected):
             assert highlight["name"] in "\n".join(pages)
             assert all(bullet in normalized for bullet in highlight["bullets"])
 
-    def test_page_one_has_summary_expertise_and_experience(self, tmp_path):
+    def test_page_one_has_summary_expertise_and_experience(self, tmp_path, variant):
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         page_one_upper = pages[0].upper()
         assert "PROFESSIONAL SUMMARY" in page_one_upper
         assert "CORE EXPERTISE" in page_one_upper
         assert "PROFESSIONAL EXPERIENCE" in page_one_upper
 
-    def test_page_two_has_education(self, tmp_path):
+    def test_page_two_has_education(self, tmp_path, variant):
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         page_two_upper = pages[1].upper()
         assert "EDUCATION & CERTIFICATION" in page_two_upper
 
-    def test_additional_experience_rendered_as_its_own_section(self, tmp_path):
+    def test_additional_experience_rendered_as_its_own_section(self, tmp_path, variant):
         # Earlier roles are split out of Professional Experience into a compressed
         # section so they establish the progression without eating resume space.
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         blob = "\n".join(pages)
         assert "EARLIER EXPERIENCE" in blob.upper()
         for job in cfg["additionalExperience"]:
             assert job["company"] in blob
             assert job["title"] in blob
 
-    def test_all_six_employers_present_in_pdf(self, tmp_path):
+    def test_all_six_employers_present_in_pdf(self, tmp_path, variant):
         cfg = load_config()
-        pages = _extract_pdf_pages(cfg, tmp_path)
+        pages = _extract_pdf_pages(cfg, tmp_path, variant)
         blob = "\n".join(pages)
         expected_employers = [job["company"] for job in cfg["experience"]] + [
             job["company"] for job in cfg["additionalExperience"]

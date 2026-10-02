@@ -22,6 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
         playwright install chromium --with-deps
+        sudo apt-get install -y poppler-utils
         
     - name: Run tests
       run: |
@@ -32,4 +33,8 @@ jobs:
         python scripts/build_config.py
         python scripts/build_html.py
         python scripts/generate_resume_pdf.py
-        git diff --exit-code config.js index.html robots.txt sitemap.xml preview.jpg William_Elias_Resume.pdf
+        git diff --exit-code config.js index.html robots.txt sitemap.xml preview.jpg \
+          William_Elias_Software_Platform_Resume.pdf William_Elias_Production_DevOps_Resume.pdf \
+          William_Elias_Resume.pdf
+        # The legacy URL is a compatibility alias of the Production & DevOps résumé.
+        cmp William_Elias_Resume.pdf William_Elias_Production_DevOps_Resume.pdf
