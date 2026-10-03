@@ -39,12 +39,14 @@ def test_structured_data_is_parseable_without_stripping_html_comments():
     assert profile["isPartOf"]["url"] == load_config()["seo"]["canonicalUrl"]
 
 
-def test_proof_precedes_keyword_inventory():
+def test_artifacts_precede_metrics_and_keyword_inventory():
     page = (SITE_DIR / "index.html").read_text()
-    ids = ["hero-content-target", "stats-target", "about", "programs", "experience", "projects", "skills", "education", "contact-cta"]
+    ids = ["hero-content-target", "what-i-build", "resume-downloads", "programs", "experience", "projects",
+           "education", "skills", "portfolio-build", "contact-cta"]
     positions = [page.index(f'id="{section}"') for section in ids]
     assert positions == sorted(positions)
-    assert '>Engineering Impact</h2>' in page
+    assert '>Selected Work</h2>' in page
+    assert 'id="stats-target"' not in page
 
 
 def test_about_is_three_short_paragraphs_without_repeated_delivery_counts():
@@ -137,7 +139,7 @@ def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visibl
     assert "U.S. fully remote" in cfg["personal"]["contactCopy"]
 
 
-def test_engineering_impact_is_the_requested_eight_card_order():
+def test_canonical_program_order_is_unchanged_for_the_pdfs():
     cfg = load_config()
     assert [program["name"] for program in cfg["selectedEngineeringPrograms"]] == [
         "CI/CD & Release Engineering",

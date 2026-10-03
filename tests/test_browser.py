@@ -316,19 +316,19 @@ def test_scroll_spy_activates_correct_nav_link(page: Page, test_url: str):
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
 
-    about_link = page.locator('.nav-links a[href="#about"]')
+    build_link = page.locator('.nav-links a[href="#what-i-build"]')
     skills_link = page.locator('.nav-links a[href="#skills"]')
 
     # Force a scroll (scroll_into_view_if_needed is a no-op when the section is
     # already on screen at this viewport size) to exercise the observer band.
-    page.evaluate("() => document.getElementById('about').scrollIntoView({block: 'start'})")
-    wait_for_section(page, "about")
-    assert about_link.get_attribute("aria-current") == "page"
+    page.evaluate("() => document.getElementById('what-i-build').scrollIntoView({block: 'start'})")
+    wait_for_section(page, "what-i-build")
+    assert build_link.get_attribute("aria-current") == "page"
 
     page.evaluate("() => document.getElementById('skills').scrollIntoView({block: 'start'})")
     wait_for_section(page, "skills")
     assert skills_link.get_attribute("aria-current") == "page"
-    assert about_link.get_attribute("aria-current") is None
+    assert build_link.get_attribute("aria-current") is None
     # Active state is not conveyed by color alone: a non-color affordance must change too.
     border_color = skills_link.evaluate("el => getComputedStyle(el).borderBottomColor")
     assert border_color != "rgba(0, 0, 0, 0)"
@@ -456,7 +456,7 @@ def test_navigation_links_reach_each_section(page: Page, test_url: str, width):
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
-    for section in ("about", "programs", "experience", "projects", "skills", "education"):
+    for section in ("what-i-build", "programs", "experience", "projects", "education", "skills"):
         if width < 768:
             page.locator(".mobile-menu-btn").click()
             page.locator(f'.mobile-nav-links a[href="#{section}"]').click()
@@ -493,7 +493,7 @@ def test_evidence_and_theme_controls_work_with_keyboard(page: Page, test_url: st
 
 
 @pytest.mark.parametrize("variant", list(RESUME_FILES))
-@pytest.mark.parametrize("scope", [".hero", "#contact-cta", ".mobile-nav"])
+@pytest.mark.parametrize("scope", [".hero", "#resume-downloads", ".mobile-nav"])
 def test_resume_actions_download_targeted_pdf(page: Page, test_url: str, scope, variant, tmp_path):
     page.set_viewport_size({"width": 390, "height": 900})
     page.goto(test_url)
