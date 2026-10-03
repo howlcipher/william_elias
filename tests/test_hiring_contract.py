@@ -41,7 +41,7 @@ def test_structured_data_is_parseable_without_stripping_html_comments():
 
 def test_artifacts_precede_metrics_and_keyword_inventory():
     page = (SITE_DIR / "index.html").read_text()
-    ids = ["hero-content-target", "what-i-build", "resume-downloads", "programs", "experience", "projects",
+    ids = ["hero-content-target", "about", "what-i-build", "resume-downloads", "programs", "experience", "projects",
            "education", "skills", "portfolio-build", "contact-cta"]
     positions = [page.index(f'id="{section}"') for section in ids]
     assert positions == sorted(positions)
@@ -51,8 +51,14 @@ def test_artifacts_precede_metrics_and_keyword_inventory():
 
 def test_about_is_three_short_paragraphs_without_repeated_delivery_counts():
     cfg = load_config()
-    assert len(cfg["about"].split("\n\n")) == 3
+    paragraphs = [part.strip() for part in cfg["about"].split("\n\n") if part.strip()]
+    assert len(paragraphs) == 3
     assert len(cfg["about"].split()) <= 170
+    page = (SITE_DIR / "index.html").read_text()
+    about = page.split('id="about"')[1].split("</section>")[0]
+    assert ">About</h2>" in about
+    for paragraph in paragraphs:
+        assert html.escape(paragraph) in about
     variants = load_variants()["variants"].values()
     first_impression = " ".join([
         cfg["about"], cfg["personal"]["supporting"],
@@ -94,8 +100,10 @@ def test_each_targeted_pdf_balances_software_delivery_and_production(variant_pdf
     text = variant_pdfs[variant]["text"]
     assert len(reader.pages) == 2
     assert text.count("56 Azure DevOps") >= 1
-    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Auth0", "HowlPlane"):
+    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "SQLite", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Audit Controls", "HowlPlane", "OAuth 2.1", "containerization proof of concept"):
         assert term in text, term
+    assert "Auth0" not in text
+    assert "Serilog" not in text
     for stale in ("Razor Pages", "Azure Key Vault", "Managed Identity", "six latent"):
         assert stale not in text, f"stale term found: {stale}"
     assert "AI Router" not in text
@@ -161,8 +169,14 @@ def test_verified_cicd_and_security_scope_language_remains_unambiguous():
         "60-repository, 104-application",
         "56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories",
         "representative deployment paths for 25 of 28 standardized repositories",
+        "171 application-to-server deployment combinations",
+        "327 deployment paths",
+        "275 inventory entries",
     ):
         assert term in cicd_text
+    # 39 + 20 + 8 + 1 = 68, which is not the 60-repository scope. That breakdown is omitted.
+    for dropped in ("39 unmapped", "20 legacy", "8 out-of-scope", "1 unreachable"):
+        assert dropped not in cicd_text
     security = next(p for p in cfg["selectedEngineeringPrograms"] if p["name"].startswith("Security"))
     assert "67 distinct exposed secrets" in json.dumps(security)
 

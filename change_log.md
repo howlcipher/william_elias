@@ -2,10 +2,26 @@
 
 ## 2026-10-03
 
+### Public-claim alignment
+
+* The LinkedIn banner headline is generated from `resume.json` `personal.title` (**Software & Automation Engineer**). Rebuilding it no longer republishes "Software, DevOps & Automation Engineer".
+* Removed the unreferenced root image `1778619951750.jpg`.
+* The existing three-paragraph `about` bio is rendered in an About section under the hero. `config.js` now publishes only the source repository and branch used by the last-synced footer.
+* The tagline still shows in full with a blinking caret. The README no longer calls that a typewriter reveal.
+* README section names match the page: `selectedEngineeringPrograms` render as **Selected Work**. The 60 and 104 figures stay headline figures on the wide CI/CD card. The 67 count stays a normal bullet on the credential-remediation card.
+* Skill and education icons use `aria-hidden="true"`, matching the contact icons.
+* The M.S. card shows **In Progress** on the school line because that status is already in the degree and the year is blank. B.S. and B.B.A. still have no year in the source, so those cards show the school only. No start or end year was added.
+* The current Stellantis experience summary now includes the existing 60-repository, 104-application, and 28-standardized-repository figures. The hero names Stellantis Financial Services US from that experience entry. The experience line stays **Production Support Engineer | DevOps & Automation**. JSON-LD `jobTitle` stays the documented official title, **Production Support Engineer**. The Production & DevOps PDF positioning line stays the documented targeted headline, **Production & DevOps Automation Engineer**. The site title, hero, and Software & Platform PDF stay **Software & Automation Engineer**.
+* PDF summaries no longer say "10+ years" of software or automation work. Software and automation work is dated to 2020 (HBK). The broader infrastructure and networking career is dated to 2015 (Trendset). No new start date was invented.
+* Auth0 is no longer a public claim. The identity work described in the résumé is the scoped OAuth 2.1 resource server. Serilog was only a tech tag, so it was dropped. Both PDFs include Audit Controls, and the production skill line includes SQLite. Containerization on both PDFs uses the site qualifier "containerization proof of concept". The Software PDF core line includes JavaScript, HTML, and CSS.
+* HowlPlane, HowlFrame, RedrawUS, and Password Arena link their live GitHub Pages next to the repository. The Go CLI, the Blazor app, Baseball Optimizer, and AI Router do not get a live link. Those live URLs are on the site cards; adding them to the PDFs pushed the software résumé past two pages, so the PDFs keep the repository URL.
+* HowlFrame bullets now say the toolchain is experimental and that the production flip is deferred. Both PDFs stayed two pages, and the ATS section order is unchanged.
+* The CI/CD mapping sentence no longer lists "39 unmapped, 20 legacy, 8 out-of-scope, and 1 unreachable" (those four sum to 68, not the 60-repository scope). It keeps 104 applications, 171 deployment combinations, 327 deployment paths, and 275 verified inventory entries. The 60-repository scope and the 28 standardized repositories stay in the other CI/CD sentences.
+
 ### Artifact-first information architecture
 
 * The page now leads with **What I Build** (Self-Service Deployment CLI in Go, Internal Production-Support Software in C#/.NET 8 Blazor, Python Developer & Operations Tooling with FastAPI) directly after the hero, before any operational metric. The headline stays **Software & Automation Engineer**.
-* The stats band under the hero is gone. The 60 / 104 / 67 figures now sit inside the CI/CD and credential-remediation Selected Work cards with their canonical labels, and CI/CD gains Scope / Implementation / Verification lines that keep "dry-run" and "representative".
+* The stats band under the hero is gone. The 60 and 104 headline figures sit on the wide CI/CD card. The 67 secret count stays a normal bullet on the credential-remediation card. CI/CD gains Scope / Implementation / Verification lines that keep "dry-run" and "representative".
 * **Engineering Impact** is now **Selected Work**: the same eight programs, software artifacts first, each labelled Professional. **Professional Experience** shows a one-line summary for the current role that links to Selected Work instead of repeating its case studies. The About section was removed because the hero and What I Build carry its content.
 * A **Two Targeted Resumes** section after What I Build explains the two PDFs. Open-source projects sit under **Open Source & Independent Engineering**, each labelled Independent open source. A short **How This Portfolio Is Built** note links the source.
 * Website-only copy and ordering live in a new `site` object in `resume.json`. The PDFs, legacy alias, preview image, robots and sitemap are byte-identical. JSON-LD `jobTitle` is unchanged.

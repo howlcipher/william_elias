@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 6583
+/Length 6761
 >>
 stream
 2 J
@@ -77,12 +77,12 @@ BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 653.50 Td (Production and DevOps automation engineer with 10+ years across production operations, software delivery, infrastructure,) Tj ET
-BT 26.83 640.50 Td (and networking. Builds Azure DevOps CI/CD standardization, reusable pipeline templates, release tracking, and Go and) Tj ET
-BT 26.83 627.50 Td (Python deployment and operations automation. Troubleshoots production API/integration, database, configuration, and) Tj ET
-BT 26.83 614.50 Td (infrastructure issues with Azure Monitor, Application Insights, KQL, structured logging, incident triage, and RCA. Adds) Tj ET
-BT 26.83 601.50 Td (credential remediation, Auth0/OAuth/OIDC troubleshooting, and a Windows Server, IIS, Active Directory, SQL Server, and) Tj ET
-BT 26.83 588.50 Td (network infrastructure background.) Tj ET
+BT 26.83 653.50 Td (Production and DevOps automation engineer working across production operations and software delivery, with a broader) Tj ET
+BT 26.83 640.50 Td (infrastructure and networking career dating to 2015. Builds Azure DevOps CI/CD standardization, reusable pipeline templates,) Tj ET
+BT 26.83 627.50 Td (release tracking, and Go and Python deployment and operations automation. Troubleshoots production API/integration,) Tj ET
+BT 26.83 614.50 Td (database, configuration, and infrastructure issues with Azure Monitor, Application Insights, KQL, structured logging, incident) Tj ET
+BT 26.83 601.50 Td (triage, and RCA. Adds credential remediation and OAuth/OIDC work, plus a Windows Server, IIS, Active Directory, SQL) Tj ET
+BT 26.83 588.50 Td (Server, and network infrastructure background.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 564.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
 24.00 561.00 m 588.00 561.00 l S
@@ -136,14 +136,18 @@ BT 26.83 77.70 Td (CORE EXPERTISE) Tj ET
 24.00 74.00 m 588.00 74.00 l S
 BT /F1 10.00 Tf ET
 BT 26.83 60.50 Td (DevOps & Delivery) Tj ET
-BT 116.31 60.50 Td (: ) Tj ET
-BT /F3 10.00 Tf ET
-BT 122.42 60.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, Containerization) Tj ET
+BT /F2 10.00 Tf ET
+BT 116.31 60.50 Td ( \(Azure DevOps professionally; containerization proof of concept\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 47.50 Td (Production & Reliability) Tj ET
-BT 139.63 47.50 Td (: ) Tj ET
+BT 404.76 60.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 145.74 47.50 Td (Azure Monitor, Application Insights, KQL, Structured Logging, Incident Triage, RCA) Tj ET
+BT 410.87 60.50 Td (Azure DevOps, CI/CD, Release) Tj ET
+BT 26.83 47.50 Td (Automation, YAML Pipelines, Git, Containerization) Tj ET
+BT /F1 10.00 Tf ET
+BT 26.83 34.50 Td (Production & Reliability) Tj ET
+BT 139.63 34.50 Td (: ) Tj ET
+BT /F3 10.00 Tf ET
+BT 145.74 34.50 Td (Azure Monitor, Application Insights, KQL, Structured Logging, Incident Triage, RCA) Tj ET
 
 endstream
 endobj
@@ -163,7 +167,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 5660
+/Length 5668
 >>
 stream
 2 J
@@ -187,12 +191,12 @@ BT /F1 10.00 Tf ET
 BT 26.83 706.50 Td (Security & Identity) Tj ET
 BT 114.63 706.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 120.74 706.50 Td (Auth0, OAuth / OIDC, IAM, Credential Remediation, Git History Remediation, PII Safeguards) Tj ET
+BT 120.74 706.50 Td (OAuth / OIDC, IAM, Credential Remediation, Git History Remediation, PII Safeguards, Audit Controls) Tj ET
 BT /F1 10.00 Tf ET
 BT 26.83 693.50 Td (Software & Backend) Tj ET
 BT 123.52 693.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 129.63 693.50 Td (Python, FastAPI, C#, .NET, Blazor, ASP.NET Core, REST APIs, SQL Server) Tj ET
+BT 129.63 693.50 Td (Python, FastAPI, C#, .NET, Blazor, ASP.NET Core, REST APIs, SQL Server, SQLite) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 669.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
 24.00 666.00 m 588.00 666.00 l S
@@ -203,7 +207,7 @@ BT 38.83 639.50 Td (- Troubleshoot production application issues as the primary 
 BT 38.83 626.50 Td (and infrastructure problems, using Azure Monitor, Application Insights, KQL, and structured logging; support data-migration) Tj ET
 BT 38.83 613.50 Td (and infrastructure-migration efforts, including scripted data moves and DR-related database migration work.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 601.30 Td 0.3529 0.3529 0.3529 rg (Tech: Application Insights, Azure Monitor, KQL, Serilog, .NET, Python) Tj ET Q
+q BT 38.83 601.30 Td 0.3529 0.3529 0.3529 rg (Tech: Application Insights, Azure Monitor, KQL, .NET, Python) Tj ET Q
 BT /F1 10.50 Tf ET
 BT 26.83 586.35 Td (Self-Service Deployment CLI \(Go\)) Tj ET
 BT /F3 10.00 Tf ET
@@ -321,21 +325,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000007518 00000 n 
-0000007759 00000 n 
-0000013471 00000 n 
-0000013573 00000 n 
-0000013678 00000 n 
-0000013775 00000 n 
-0000013883 00000 n 
-0000013991 00000 n 
+0000007696 00000 n 
+0000007937 00000 n 
+0000013657 00000 n 
+0000013759 00000 n 
+0000013864 00000 n 
+0000013961 00000 n 
+0000014069 00000 n 
+0000014177 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<80CD860B68D0829331E6C98E2E6827A3><80CD860B68D0829331E6C98E2E6827A3>]
+/ID [<8101C9F0923EE52A3DC31E4373703149><8101C9F0923EE52A3DC31E4373703149>]
 >>
 startxref
-14157
+14343
 %%EOF

@@ -1,5 +1,9 @@
+import html
+
 import pytest
 from scripts.build_html import esc, get_valid_url, inject, render_hero
+from scripts.generate_linkedin_banner import banner_markup
+from scripts.generate_resume_pdf import load_config
 
 def test_esc():
     assert esc("hello") == "hello"
@@ -41,3 +45,13 @@ def test_render_hero_uses_theme_aware_portrait_with_intrinsic_dimensions():
     assert 'data-photo-light="assets/images/william-elias-profile-hoodie-light.webp"' in hero
     assert 'width="512" height="512"' in hero
     assert 'alt="Portrait of William Elias"' in hero
+
+
+def test_linkedin_banner_uses_the_current_title():
+    personal = load_config()["personal"]
+    markup = banner_markup(personal)
+    assert html.escape(personal["title"]) in markup
+    assert html.escape(personal["tagline"]) in markup
+    assert "SOFTWARE // AUTOMATION" in markup
+    assert "Software, DevOps" not in markup
+    assert "DevOps &amp;" not in markup

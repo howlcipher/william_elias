@@ -42,7 +42,7 @@
         "skill-production-reliability"
       ],
       "skillTags": {
-        "skill-software-backend": ["Python", "Go", "C#", ".NET", "ASP.NET Core", "Blazor", "FastAPI", "REST APIs", "SQL Server", "SQLite"]
+        "skill-software-backend": ["Python", "Go", "C#", ".NET", "ASP.NET Core", "Blazor", "FastAPI", "REST APIs", "SQL Server", "SQLite", "JavaScript", "HTML", "CSS"]
       },
       "highlightIds": [
         "highlight-deployment-tooling",

@@ -49,12 +49,14 @@ class TestHeadlineAndPositioning:
         assert "Reliable" in tagline or "Reliability" in tagline
 
     @pytest.mark.parametrize("variant,opening", [
-        ("software_platform", "Software and automation engineer with 10+ years"),
-        ("production_devops", "Production and DevOps automation engineer with 10+ years"),
+        ("software_platform", "Software and automation engineer building developer tools"),
+        ("production_devops", "Production and DevOps automation engineer working across production operations"),
     ])
     def test_variant_summary_leads_with_its_positioning(self, variant, opening):
         summary = _variant_summary(load_config(), variant)
         assert summary.startswith(opening)
+        assert "10+ years" not in summary
+        assert "dating to 2015" in summary
         assert "Senior DevOps" not in summary
 
     def test_official_stellantis_title_preserved(self):
@@ -383,6 +385,19 @@ class TestEducationHonesty:
         assert "In Progress" in blob
         assert "Previously Held" in blob
 
+    def test_missing_years_are_not_invented_and_in_progress_stays_visible(self):
+        cfg = load_config()
+        page = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+        education = page.split('id="education"')[1].split("</section>")[0]
+        assert "Dakota State University (In Progress)" in education
+        assert "Cisco Networking Academy (2014 - 2017)" in education
+        for school in ("Colorado State University Global Campus", "Rochester College"):
+            assert school in education
+            assert f"{school} (" not in education
+        for entry in cfg["education"]:
+            if not entry.get("year") and "In Progress" not in entry["degree"]:
+                assert entry["year"] == ""
+
     def test_masters_stays_out_of_the_headline(self):
         # Education supports the story; it is not the positioning.
         cfg = load_config()
@@ -629,19 +644,28 @@ class TestReadmeRecruiterFacing:
 
 
 class TestGeneratedAssetsSynchronized:
-    def test_config_js_matches_resume_json(self):
+    def test_config_js_publishes_only_the_last_synced_source(self):
         cfg = load_config()
         config_js = (SITE_DIR / "config.js").read_text(encoding="utf-8")
         match = re.search(r"const config = (.*);\s*$", config_js, re.DOTALL)
         assert match, "config.js must define `const config = {...};`"
         embedded = json.loads(match.group(1))
-        assert embedded == cfg
+        assert embedded == {
+            "personal": {
+                "sourceRepo": cfg["personal"]["sourceRepo"],
+                "sourceBranch": cfg["personal"]["sourceBranch"],
+            }
+        }
 
     def test_index_html_reflects_current_title(self):
         cfg = load_config()
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         assert cfg["personal"]["name"] in html_content
         assert cfg["personal"]["title"] in html_content
+        employer = cfg["experience"][0]["company"]
+        assert f'class="hero-employer">{html.escape(employer)}</p>' in html_content
+        assert 'aria-hidden="true"' in html_content.split('class="skill-icon"')[1].split("</div>")[0]
+        assert 'aria-hidden="true"' in html_content.split('class="edu-icon"')[1].split("</div>")[0]
 
     def test_index_html_has_programs_and_ai_capabilities_sections(self):
         html_content = (SITE_DIR / "index.html").read_text(encoding="utf-8")

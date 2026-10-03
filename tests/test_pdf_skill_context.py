@@ -37,6 +37,7 @@ def test_each_pdf_preserves_ai_and_go_experience_levels(variant_pdfs, variants, 
     expected = {
         "skill-ai-engineering": "Internal tools & projects",
         "skill-automation-tooling": "Python/PowerShell professionally; Go for deployment tooling; uv for Python standardization",
+        "skill-devops-delivery": "Azure DevOps professionally; containerization proof of concept",
     }
     for skill_id, context in expected.items():
         assert skills[skill_id]["pdfContext"] == context

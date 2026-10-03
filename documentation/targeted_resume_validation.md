@@ -67,7 +67,7 @@ No professional-experience claims were intentionally upgraded, invented, or conv
 
 * **"Directed a CI/CD standardization program"**: the existing verb was kept verbatim. The evidence describes building the inventory, verification, templates, and definitions; earlier documentation mentions preserving "co-led"/"contributed" qualifiers generally. The verb was neither strengthened nor softened here; William should confirm it if the program had a different formal lead.
 * **"Self-service" deployment CLI**: canonical wording kept. The evidence does not document adoption or user counts, so none is claimed, and the CLI is not called an Internal Developer Platform.
-* **"10+ years"**: unchanged from the prior summary. It spans Sep 2015 to present and includes the networking roles; the text says "across software delivery, production operations, infrastructure, and networking".
+* **"10+ years"**: this 2026-10-02 review left the phrase in place. The 2026-10-03 pass removed it. Software and automation work is dated to 2020 (HBK). The broader infrastructure and networking career is dated to 2015 (Trendset). Auth0 is not a current public claim.
 * **"Platform Engineering" / "Infrastructure Automation"**: used only as domain/target-role terms (supporting line, metadata, contact copy), as before. They are not presented as a held role or IaC ownership.
 
 ## Verification (2026-10-02)

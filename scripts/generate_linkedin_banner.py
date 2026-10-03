@@ -3,7 +3,13 @@
 Generate the personal profile LinkedIn banner (1584 x 396) matching the
 site's dark navy blueprint aesthetic, Space Grotesk / IBM Plex Mono typography,
 and safe-area margin for the avatar overlay.
+
+The headline and tagline come from resume.json so a rebuild cannot republish
+a retired title.
 """
+import html
+import json
+import re
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
@@ -122,11 +128,11 @@ body {
 </style>
 </head>
 <body>
-    <div class="corner-decor">SOFTWARE // DEVOPS // AUTOMATION</div>
+    <div class="corner-decor">{{CORNER}}</div>
     <div class="logo-mark">WE.</div>
     <div class="banner-content">
-        <h1 class="headline">Software, DevOps &amp;<br>Automation Engineer</h1>
-        <div class="tagline"><span class="tagline-caret">&gt;</span>Building Software, Automating Work &amp; Delivering Reliable Systems</div>
+        <h1 class="headline">{{HEADLINE}}</h1>
+        <div class="tagline"><span class="tagline-caret">&gt;</span>{{TAGLINE}}</div>
         <div class="tech-stack">Python &amp; FastAPI &nbsp;|&nbsp; CI/CD &nbsp;|&nbsp; Azure DevOps</div>
         <div class="ai-layer">AI-Enabled Engineering</div>
     </div>
@@ -135,15 +141,29 @@ body {
 </html>
 """
 
+def banner_markup(personal: dict) -> str:
+    """Fill the banner from the canonical title. Do not hard-code a retired headline."""
+    title = personal.get("title") or ""
+    words = [word for word in re.split(r"\s+|&", title) if word and word.lower() != "engineer"]
+    corner = " // ".join(word.upper() for word in words) or "SOFTWARE // AUTOMATION"
+    return (
+        HTML_TEMPLATE
+        .replace("{{CORNER}}", html.escape(corner))
+        .replace("{{HEADLINE}}", html.escape(title))
+        .replace("{{TAGLINE}}", html.escape(personal.get("tagline") or ""))
+    )
+
+
 def generate_banner(output_path: Path = None):
     if output_path is None:
         output_path = SITE_DIR / "assets" / "images" / "linkedin-banner.png"
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    personal = json.loads((SITE_DIR / "resume.json").read_text(encoding="utf-8"))["personal"]
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1584, "height": 396}, device_scale_factor=1)
-        page.set_content(HTML_TEMPLATE)
+        page.set_content(banner_markup(personal))
         page.wait_for_load_state("networkidle")
         page.screenshot(path=str(output_path))
         browser.close()

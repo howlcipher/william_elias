@@ -109,10 +109,14 @@ def validate_config(config: dict):
                 raise ValueError(f"Validation failed: 'projects[{i}].{field}' is required and must be non-empty")
         if not isinstance(proj.get("highlights"), list):
             raise ValueError(f"Validation failed: 'projects[{i}].highlights' must be an array")
-        if "link" in proj:
-            val = proj["link"]
-            if val and not (val.startswith("http://") or val.startswith("https://")):
-                raise ValueError(f"Validation failed: 'projects[{i}].link' must be a valid URL starting with http:// or https://")
+        for field in ("link", "liveUrl"):
+            if field in proj:
+                val = proj[field]
+                if val and not (val.startswith("http://") or val.startswith("https://")):
+                    raise ValueError(
+                        f"Validation failed: 'projects[{i}].{field}' must be a valid URL "
+                        "starting with http:// or https://"
+                    )
 
     for i, edu in enumerate(config.get("education", [])):
         for field in ["degree", "school"]:
@@ -558,6 +562,9 @@ def build(config: dict, out_path: Path, variant: str | None = None, variants: di
     if pdf_projects:
         pdf.section_title("Selected Open-Source Engineering")
         for proj in pdf_projects:
+            # Live Pages links render on the website cards. A second URL line
+            # here pushed the software résumé onto a third page, so the PDF
+            # keeps the repository link only.
             block_h = 13 + 13 + sum(pdf.bullet_height(h) for h in proj["highlights"]) + 2
             pdf.keep_together(block_h)
             pdf.set_font("Helvetica", "B", 10.5)
