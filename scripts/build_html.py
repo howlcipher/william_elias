@@ -175,6 +175,7 @@ def order_programs(programs, selected_work=None):
 def render_programs(programs, selected_work=None, stats=None):
     selected_work = selected_work or {}
     featured = set(selected_work.get('featured') or [])
+    wide = set(selected_work.get('wide') or [])
     context = selected_work.get('context') or {}
     label = selected_work.get('provenanceLabel', '')
     metrics_by_program = {}
@@ -205,6 +206,7 @@ def render_programs(programs, selected_work=None, stats=None):
         )
         lines = f'<dl class="program-context">{lines}</dl>' if lines else ''
         classes = 'program-card card' + (' program-featured' if prog.get('id') in featured else '')
+        classes += ' program-wide' if prog.get('id') in wide else ''
         provenance = f'<p class="provenance-label">{esc(label)}</p>' if label else ''
         parts.append(
             f'<article class="{classes}" id="{esc(prog.get("id", ""))}">'

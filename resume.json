@@ -527,15 +527,18 @@
         "program-internal-software",
         "program-python-productivity"
       ],
+      "wide": [
+        "program-cicd-release"
+      ],
       "order": [
         "program-deployment-tooling",
         "program-internal-software",
         "program-python-productivity",
         "program-cicd-release",
         "program-security-remediation",
+        "program-infrastructure-modernization",
         "program-production-reliability",
-        "program-oauth-integration",
-        "program-infrastructure-modernization"
+        "program-oauth-integration"
       ],
       "context": {
         "program-cicd-release": [

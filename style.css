@@ -271,7 +271,18 @@ summary { cursor: pointer; color: var(--blue); padding: .55rem 0; font-weight: 6
 .timeline-content li, .project-card li { margin-bottom: .6rem; }
 .timeline-content li::marker, .project-card li::marker { color: var(--red); }
 
-.programs-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+.programs-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+/* Software artifacts share one row of three; the CI/CD case study spans the row so
+   its Scope / Implementation / Verification lines sit side by side instead of
+   stretching a neighbour; everything else pairs up. */
+.program-card { grid-column: span 3; }
+.program-card.program-featured { grid-column: span 2; }
+.program-card.program-wide { grid-column: 1 / -1; }
+.program-wide .program-context { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.program-wide .program-context div { grid-template-columns: 1fr; gap: .35rem; align-content: start; }
+/* Featured cards keep their natural height: a one-bullet card should not be
+   stretched to match a long neighbour and left mostly empty. */
+.program-card.program-featured { align-self: start; }
 .programs-grid:has(details[open]) { align-items: start; }
 .program-card { padding: 1.5rem; display: flex; flex-direction: column; }
 .program-card h3 { margin-bottom: .8rem; font-size: 1.15rem; }
@@ -319,6 +330,10 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .nav-links { display: none; }
     .mobile-menu-btn { display: grid; }
 }
+@media (max-width: 1100px) {
+    .program-card.program-featured { grid-column: span 3; }
+    .program-card.program-featured:nth-child(3) { grid-column: 1 / -1; }
+}
 @media (max-width: 900px) {
     .hero-content {
         grid-template-columns: 1fr;
@@ -342,6 +357,8 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .profile-module::before,
     .profile-module::after { display: none; }
     .projects-grid, .programs-grid, .build-grid { grid-template-columns: 1fr; }
+    .program-card, .program-card.program-featured, .program-card.program-featured:nth-child(3) { grid-column: auto; }
+    .program-wide .program-context { grid-template-columns: 1fr; }
 }
 @media (max-width: 620px) {
     .container, .nav-content { padding-left: 1rem; padding-right: 1rem; }
