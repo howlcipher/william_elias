@@ -49,15 +49,14 @@
       "KQL",
       "Application Insights",
       "OAuth / OIDC",
-      "Auth0",
       "AI-Enabled Engineering"
     ]
   },
-  "about": "I am a software and automation engineer. I build developer tools, internal software, delivery automation, and production engineering systems in Python, Go, and C#/.NET that make software easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes a Go self-service deployment CLI; Azure DevOps CI/CD standardization; a .NET 8 Blazor Web App with Interactive Server for internal production support; separate FastAPI dashboards and Python workflow automation; credential-remediation tooling; Auth0/OAuth/OIDC troubleshooting; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in software engineering for developer tooling, internal platforms, and automation; developer productivity; platform engineering; production engineering; DevOps/Azure DevOps; and security automation / DevSecOps. My in-progress M.S. in Cyber Defense adds security depth to that engineering work.",
+  "about": "I am a software and automation engineer. I build developer tools, internal software, delivery automation, and production engineering systems in Python, Go, and C#/.NET that make software easier to build, ship, secure, troubleshoot, and operate.\n\nRecent work includes a Go self-service deployment CLI; Azure DevOps CI/CD standardization; a .NET 8 Blazor Web App with Interactive Server for internal production support; separate FastAPI dashboards and Python workflow automation; credential-remediation tooling; a scoped OAuth 2.1 resource server; and KQL-based production diagnostics.\n\nI am looking for U.S. fully remote roles in software engineering for developer tooling, internal platforms, and automation; developer productivity; platform engineering; production engineering; DevOps/Azure DevOps; and security automation / DevSecOps. My in-progress M.S. in Cyber Defense adds security depth to that engineering work.",
   "positioningStatements": [
     {
       "id": "summary-software-opening",
-      "text": "Software and automation engineer with 10+ years across software delivery, production operations, infrastructure, and networking, building developer tools, internal applications, and delivery automation.",
+      "text": "Software and automation engineer building developer tools, internal applications, and delivery automation, with software and automation work since 2020 and a broader infrastructure and networking career dating to 2015.",
       "evidenceIds": ["exp-stellantis", "exp-hbk", "exp-trendset", "program-deployment-tooling", "program-internal-software", "program-python-productivity"]
     },
     {
@@ -72,12 +71,12 @@
     },
     {
       "id": "summary-security-depth",
-      "text": "Adds security depth through credential-remediation tooling, OAuth/OIDC/JWT work, Auth0 identity troubleshooting, and in-progress M.S. Cyber Defense studies.",
+      "text": "Adds security depth through credential-remediation tooling, a scoped OAuth 2.1 resource server with JWT/JWKS validation, and in-progress M.S. Cyber Defense studies.",
       "evidenceIds": ["program-security-remediation", "program-oauth-integration", "skill-security-identity", "edu-ms-cyber-defense"]
     },
     {
       "id": "summary-production-opening",
-      "text": "Production and DevOps automation engineer with 10+ years across production operations, software delivery, infrastructure, and networking.",
+      "text": "Production and DevOps automation engineer working across production operations and software delivery, with a broader infrastructure and networking career dating to 2015.",
       "evidenceIds": ["exp-stellantis", "exp-hbk", "exp-trendset"]
     },
     {
@@ -92,7 +91,7 @@
     },
     {
       "id": "summary-security-infrastructure",
-      "text": "Adds credential remediation, Auth0/OAuth/OIDC troubleshooting, and a Windows Server, IIS, Active Directory, SQL Server, and network infrastructure background.",
+      "text": "Adds credential remediation and OAuth/OIDC work, plus a Windows Server, IIS, Active Directory, SQL Server, and network infrastructure background.",
       "evidenceIds": ["program-security-remediation", "skill-security-identity", "skill-infrastructure-operations", "exp-trendset", "exp-project-worldwide"]
     }
   ],
@@ -120,13 +119,14 @@
       "icon": "fa-code",
       "context": "Professional Python/FastAPI dashboards and .NET 8 Blazor internal production-support tooling",
       "tags": ["Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "SQL Server", "REST APIs", "SQLite", "Go", "JavaScript", "HTML", "CSS"],
-      "pdfTags": ["Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server"]
+      "pdfTags": ["Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server", "SQLite"]
     },
     {
       "id": "skill-devops-delivery",
       "category": "DevOps & Delivery",
       "icon": "fa-cloud",
       "context": "Azure DevOps professionally; containerization proof of concept",
+      "pdfContext": "Azure DevOps professionally; containerization proof of concept",
       "tags": ["Azure DevOps", "CI/CD", "Release Automation", "YAML Pipelines", "Git", "Containerization", "GitHub Actions (projects)"]
     },
     {
@@ -149,8 +149,9 @@
       "id": "skill-security-identity",
       "category": "Security & Identity",
       "icon": "fa-shield-halved",
-      "context": "Professional credential remediation, Auth0 identity troubleshooting, and security safeguards",
-      "tags": ["Auth0", "OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"]
+      "context": "Professional credential remediation, scoped OAuth 2.1 resource-server work, and security safeguards",
+      "tags": ["OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"],
+      "pdfTags": ["OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"]
     },
     {
       "id": "skill-infrastructure-operations",
@@ -214,7 +215,7 @@
       "name": "CI/CD & Release Engineering",
       "bullets": [
         "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and reusable pipeline/template automation.",
-        "Mapped 104 applications to 171 application-to-server deployment combinations and 327 deployment paths; verified 275 inventory entries and tracked 39 unmapped, 20 legacy, 8 out-of-scope, and 1 unreachable repository."
+        "Mapped 104 applications to 171 application-to-server deployment combinations and 327 deployment paths; verified 275 inventory entries."
       ],
       "details": [
         "Stood up 56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories. Executed and validated builds across all 28 repositories (27 passed; the remaining failure was diagnosed and logged).",
@@ -302,7 +303,7 @@
         "Uses Azure Monitor, Application Insights, KQL, and structured logging for production diagnostics.",
         "Supports data-migration and infrastructure-migration efforts, including scripted data moves and DR-related database migration work."
       ],
-      "technology": ["Application Insights", "Azure Monitor", "KQL", "Serilog", ".NET", "Python"]
+      "technology": ["Application Insights", "Azure Monitor", "KQL", ".NET", "Python"]
     },
     {
       "id": "program-infrastructure-modernization",
@@ -353,7 +354,7 @@
       "bullets": [
         "Troubleshoot production application issues as the primary responsibility, across API/integration, database, configuration, and infrastructure problems, using Azure Monitor, Application Insights, KQL, and structured logging; support data-migration and infrastructure-migration efforts, including scripted data moves and DR-related database migration work."
       ],
-      "technology": ["Application Insights", "Azure Monitor", "KQL", "Serilog", ".NET", "Python"]
+      "technology": ["Application Insights", "Azure Monitor", "KQL", ".NET", "Python"]
     },
     {
       "id": "highlight-infrastructure-investigation",
@@ -371,6 +372,7 @@
       "name": "HowlPlane",
       "subtitle": "AI Engineering Control Plane",
       "link": "https://github.com/howlcipher/howlplane",
+      "liveUrl": "https://howlcipher.github.io/howlplane/",
       "highlights": [
         "Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and runs deterministic verification.",
         "Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared project context and CI/security checks."
@@ -404,8 +406,9 @@
       "name": "HowlFrame",
       "subtitle": "Experimental language and toolchain, written in Go",
       "link": "https://github.com/howlcipher/howlframe",
+      "liveUrl": "https://howlcipher.github.io/howlframe/",
       "highlights": [
-        "Built a language and compiler toolchain in Go with a lexer, parser, typed AST/IR, bytecode VM, WebAssembly target, and capability-based security model.",
+        "Built an experimental language and compiler toolchain in Go with a lexer, parser, typed AST/IR, bytecode VM, WebAssembly target, and capability-based security model; production flip deferred.",
         "Explores constrained AI code generation against typed IR, with local Ollama integration."
       ],
       "tags": ["Go", "Compilers", "WebAssembly", "Bytecode VM", "Ollama"]
@@ -415,6 +418,7 @@
       "name": "RedrawUS",
       "subtitle": "Geospatial Analysis & Visualization Platform",
       "link": "https://github.com/howlcipher/redistricting-map",
+      "liveUrl": "https://howlcipher.github.io/redistricting-map/",
       "highlights": [
         "Built a multi-state geospatial analysis platform with Python/R data pipelines and an interactive JavaScript map, persistent browser caching, and Web Workers.",
         "Processes geographic datasets with GeoPandas, Shapely, and GerryChain; includes pytest, Vitest, and Playwright tests for data processing and application behavior."
@@ -426,6 +430,7 @@
       "name": "Password Arena",
       "subtitle": "Synthetic password-strength learning sandbox",
       "link": "https://github.com/howlcipher/password_arena",
+      "liveUrl": "https://howlcipher.github.io/password_arena/",
       "highlights": [
         "Built a local attacker/defender simulation for synthetic password-strength experiments with bounded budgets, reproducible test modes, metrics, and audit reports.",
         "Added synthetic-only safety boundaries, CSPRNG generation, and pytest, mypy, and Ruff quality checks."
@@ -563,7 +568,7 @@
       }
     },
     "experienceSummaries": {
-      "exp-stellantis": "Builds developer tools, internal software, delivery automation, credential-remediation tooling, and production engineering systems in Python, Go, and C#/.NET."
+      "exp-stellantis": "Builds developer tools, internal software, delivery automation, credential-remediation tooling, and production engineering systems in Python, Go, and C#/.NET, including CI/CD standardization across a 60-repository, 104-application estate and 28 standardized application repositories."
     },
     "projectsIntro": "Personal projects built outside employment. None of them is an employer production system.",
     "projectsProvenanceLabel": "Independent open source",

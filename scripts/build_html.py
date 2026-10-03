@@ -53,7 +53,7 @@ def render_resume_links(resumes, link_class, with_audience=False):
     return ''.join(parts)
 
 
-def render_hero(personal, resumes=()):
+def render_hero(personal, resumes=(), employer=""):
     # Keep the content in reading order -- eyebrow, heading, subtitle, tagline,
     # supporting line, portrait, then contact actions -- so the mobile single-column grid needs
     # no order overrides. Desktop uses named grid areas on `.hero-content` to
@@ -63,6 +63,8 @@ def render_hero(personal, resumes=()):
     parts.append(f'<p class="eyebrow">{esc(" | ".join(eyebrow_bits))}</p>')
     parts.append(f'<h1>{esc(personal.get("name", ""))}</h1>')
     parts.append(f'<h2 class="subtitle">{esc(personal.get("title", ""))}</h2>')
+    if employer:
+        parts.append(f'<p class="hero-employer">{esc(employer)}</p>')
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
     if personal.get('supporting'):
         parts.append(f'<p class="hero-supporting">{esc(personal.get("supporting"))}</p>')
@@ -123,7 +125,7 @@ def render_skills(skills):
         tags = ''.join(f'<span>{esc(tag)}</span>' for tag in (skill.get('tags') or []))
         parts.append(
             '<div class="skill-category card">'
-            f'<div class="skill-icon"><i class="fas {esc(skill.get("icon", ""))}"></i></div>'
+            f'<div class="skill-icon"><i class="fas {esc(skill.get("icon", ""))}" aria-hidden="true"></i></div>'
             f'<h3>{esc(skill.get("category", ""))}</h3>'
             f'<p class="skill-context">{esc(skill.get("context", ""))}</p>'
             f'<div class="skill-tags">{tags}</div>'
@@ -266,6 +268,14 @@ def render_ai_capabilities(tiers):
     return '<div class="capability-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>'.join(parts)
 
 
+def render_about(about):
+    paragraphs = [part.strip() for part in (about or '').split('\n\n') if part.strip()]
+    if not paragraphs:
+        return ''
+    body = ''.join(f'<p>{esc(paragraph)}</p>' for paragraph in paragraphs)
+    return f'<div class="card about-copy">{body}</div>'
+
+
 def render_projects(projects, provenance_label=''):
     parts = []
     for proj in projects or []:
@@ -279,15 +289,23 @@ def render_projects(projects, provenance_label=''):
             f'<ul>{highlights}</ul>',
             f'<div class="skill-tags">{tags}</div>',
         ]
+        actions = []
         link = get_valid_url(proj.get('link'))
         if link:
-            card.append(
-                '<div class="project-card-footer">'
+            actions.append(
                 f'<a href="{esc(link)}" target="_blank" rel="noopener noreferrer" class="contact-pill project-link">'
                 '<i class="fas fa-code-branch" aria-hidden="true"></i> View Repository '
                 '<span aria-hidden="true">&rarr;</span></a>'
-                '</div>'
             )
+        live = get_valid_url(proj.get('liveUrl'))
+        if live:
+            actions.append(
+                f'<a href="{esc(live)}" target="_blank" rel="noopener noreferrer" class="contact-pill project-live-link">'
+                '<i class="fas fa-globe" aria-hidden="true"></i> View Live Page '
+                '<span aria-hidden="true">&rarr;</span></a>'
+            )
+        if actions:
+            card.append(f'<div class="project-card-footer">{"".join(actions)}</div>')
         card.append('</div>')
         parts.append(''.join(card))
     return ''.join(parts)
@@ -482,16 +500,29 @@ def render_additional_experience(items):
     return ''.join(parts)
 
 
+def education_meta(edu):
+    """School line. A missing year is omitted; an in-progress degree keeps that status.
+
+    Do not invent a start or end year. B.S. and B.B.A. have neither a year nor
+    an in-progress status in the source, so those cards show the school only.
+    """
+    school = edu.get('school', '')
+    year = (edu.get('year') or '').strip()
+    if year:
+        return f'{school} ({year})'
+    if 'In Progress' in (edu.get('degree') or ''):
+        return f'{school} (In Progress)'
+    return school
+
+
 def render_education(education):
     parts = []
     for edu in education or []:
-        school = esc(edu.get('school', ''))
-        if edu.get('year'):
-            school += f' ({esc(edu["year"])})'
         parts.append(
             '<div class="edu-card card">'
-            f'<div class="edu-icon"><i class="fas {esc(edu.get("icon", ""))}"></i></div>'
-            f'<div class="edu-info"><h3>{esc(edu.get("degree", ""))}</h3><p>{school}</p></div>'
+            f'<div class="edu-icon"><i class="fas {esc(edu.get("icon", ""))}" aria-hidden="true"></i></div>'
+            f'<div class="edu-info"><h3>{esc(edu.get("degree", ""))}</h3>'
+            f'<p>{esc(education_meta(edu))}</p></div>'
             '</div>'
         )
     return ''.join(parts)
@@ -613,7 +644,9 @@ def build_html():
     # Pre-render body content sections for SEO/no-JS visibility
     resumes = load_resume_variants()
     site = data.get('site') or {}
-    html_content = inject(html_content, 'HERO', render_hero(personal, resumes))
+    current_role = next(iter(data.get('experience') or []), {})
+    html_content = inject(html_content, 'HERO', render_hero(personal, resumes, current_role.get('company', '')))
+    html_content = inject(html_content, 'ABOUT', render_about(data.get('about')))
     html_content = inject(html_content, 'WHAT_I_BUILD', render_what_i_build(site.get('whatIBuild')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
     experience = '<div class="timeline">' + render_experience(

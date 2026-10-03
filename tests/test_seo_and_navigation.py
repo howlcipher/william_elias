@@ -227,7 +227,9 @@ class TestProjectCardActions:
         html_content = _index_html()
         projects_section = html_content.split('id="projects-target"')[1].split('<!-- BUILD:PROJECTS:END -->')[0]
         assert projects_section.count("project-link") == 6
+        assert projects_section.count("project-live-link") == 4
         assert "View Repository" in projects_section
+        assert "View Live Page" in projects_section
 
     def test_project_links_use_safe_external_attributes(self):
         html_content = _index_html()

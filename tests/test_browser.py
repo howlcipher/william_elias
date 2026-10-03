@@ -310,6 +310,19 @@ def test_six_project_cards_render_with_correct_links(page: Page, test_url: str):
     password_arena_link = page.locator("#projects-target .project-card", has=page.locator("h3", has_text="Password Arena")).locator("a.project-link")
     assert password_arena_link.get_attribute("href") == "https://github.com/howlcipher/password_arena"
 
+    live_pages = {
+        "HowlPlane": "https://howlcipher.github.io/howlplane/",
+        "HowlFrame": "https://howlcipher.github.io/howlframe/",
+        "RedrawUS": "https://howlcipher.github.io/redistricting-map/",
+        "Password Arena": "https://howlcipher.github.io/password_arena/",
+    }
+    for title, href in live_pages.items():
+        card = page.locator("#projects-target .project-card", has=page.locator("h3", has_text=title))
+        assert card.locator("a.project-live-link").get_attribute("href") == href
+    for title in ("Baseball Optimizer", "AI Router"):
+        card = page.locator("#projects-target .project-card", has=page.locator("h3", has_text=title))
+        assert card.locator("a.project-live-link").count() == 0
+
 
 def test_scroll_spy_activates_correct_nav_link(page: Page, test_url: str):
     page.set_viewport_size({"width": 1440, "height": 900})

@@ -82,8 +82,11 @@ def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, 
     pdf_text = variant_pdfs[variant]["text"]
     skills = {s["category"]: s for s in config["skills"]}
     security = skills["Security & Identity"]
-    assert {"Auth0", "OAuth / OIDC", "IAM", "Credential Remediation",
+    assert "Auth0" not in security["tags"]
+    assert "Auth0" not in json.dumps(config)
+    assert {"OAuth / OIDC", "IAM", "Credential Remediation",
             "Git History Remediation", "PII Safeguards", "Audit Controls"} <= set(security["tags"])
+    assert "Audit Controls" in (security.get("pdfTags") or security["tags"])
     assert "Azure Key Vault" not in security["tags"]
     assert "Managed Identity" not in security["tags"]
     foundations = skills["Additional Technical Foundations"]
@@ -96,6 +99,11 @@ def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, 
     for term in (foundations["category"], *foundations["tags"]):
         assert not re.search(r"\b" + re.escape(term) + r"\b", pdf_text)
     assert "Digital Forensics" not in security["tags"]
+    assert "Auth0" not in pdf_text
+    assert "Serilog" not in pdf_text
+    assert "Serilog" not in json.dumps(config)
+    assert "Audit Controls" in pdf_text
+    assert "containerization proof of concept" in pdf_text
 
 
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
@@ -104,14 +112,22 @@ def test_pdf_software_selection_retains_backend_strength_without_web_bloat(confi
     assert {"JavaScript", "HTML", "CSS"} <= set(software["tags"])
     assert "FastAPI" in software["tags"]
     assert software["pdfTags"] == [
-        "Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server",
+        "Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server", "SQLite",
     ]
     selected = variants["variants"][variant].get("skillTags", {}).get(software["id"], software["pdfTags"])
     expertise = variant_pdfs[variant]["text"].split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
     for tag in selected:
         assert tag in expertise
-    for term in ("HTML", "CSS", "Docker", "Helm", "Rancher", "WSL2"):
+    assert "SQLite" in expertise
+    for term in ("Docker", "Helm", "Rancher", "WSL2"):
         assert term not in expertise
+    web = ("JavaScript", "HTML", "CSS")
+    if variant == "software_platform":
+        for term in web:
+            assert term in expertise
+    else:
+        for term in web:
+            assert term not in expertise
 
 
 EXPECTED_VARIANT_PROJECTS = {

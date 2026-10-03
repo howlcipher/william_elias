@@ -203,7 +203,7 @@ def test_statement_with_untraceable_number_fails(config):
 
 def test_statement_years_claim_must_match_dated_evidence(config):
     statement = next(s for s in config["positioningStatements"] if s["id"] == "summary-software-opening")
-    statement["text"] = statement["text"].replace("10+ years", "25+ years")
+    statement["text"] += " Claims 25+ years."
     with pytest.raises(ValueError, match="not traceable"):
         validate_config(config)
 
@@ -260,7 +260,8 @@ def test_software_platform_leads_with_software_and_tooling(variant_pdfs, variant
     assert experience.index("Go-based self-service deployment CLI") < experience.index("CI/CD standardization program")
     assert experience.index("Python/FastAPI") < experience.index("CI/CD standardization program")
     for term in ("initialization/scaffolding", "host auditing", "post-deployment verification", "HowlFrame",
-                 "bytecode VM", "WebAssembly", "Blazor", "ASP.NET Core", "SQLite", "uv", "FastAPI"):
+                 "bytecode VM", "WebAssembly", "experimental", "production flip deferred",
+                 "Blazor", "ASP.NET Core", "SQLite", "uv", "FastAPI"):
         assert term in text, term
     expertise = text.split("CORE EXPERTISE")[1]
     assert expertise.lstrip().startswith("Software & Backend")

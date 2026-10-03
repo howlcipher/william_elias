@@ -130,6 +130,8 @@ def test_current_role_links_to_selected_work_instead_of_repeating_case_studies(p
     experience = section(page, "experience")
     summary = cfg["site"]["experienceSummaries"]["exp-stellantis"]
     assert html.escape(summary, quote=False) in experience
+    for fact in ("60-repository", "104-application", "28 standardized application repositories"):
+        assert fact in summary
     assert 'href="#programs"' in experience
     current = cfg["experience"][0]
     for achievement in current["achievements"]:
