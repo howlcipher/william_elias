@@ -476,5 +476,104 @@
     {"id": "edu-bba-business", "icon": "fa-graduation-cap", "degree": "B.B.A. Business Administration", "school": "Rochester College", "year": ""},
     {"id": "edu-ccna", "icon": "fa-certificate", "degree": "CCNA (Previously Held)", "school": "Cisco Networking Academy", "year": "2014 - 2017"}
   ],
+  "site": {
+    "whatIBuild": {
+      "items": [
+        {
+          "id": "build-deployment-cli",
+          "name": "Self-Service Deployment CLI",
+          "stack": [
+            "Go",
+            "Azure DevOps REST",
+            "CI/CD"
+          ],
+          "summary": "A Go command-line tool that lets engineers initialize, build, push, deploy, roll back, check status and audit hosts through Azure DevOps REST integration, with guided setup and post-deployment verification.",
+          "programId": "program-deployment-tooling",
+          "provenance": "Professional"
+        },
+        {
+          "id": "build-internal-software",
+          "name": "Internal Production-Support Software",
+          "stack": [
+            "C#",
+            ".NET 8",
+            "Blazor",
+            "SQL Server"
+          ],
+          "summary": "An internal .NET 8 Blazor Web App (Interactive Server, SQL Server, SQLite) for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration diffing and service-desk request tracking.",
+          "programId": "program-internal-software",
+          "provenance": "Professional"
+        },
+        {
+          "id": "build-python-tooling",
+          "name": "Python Developer & Operations Tooling",
+          "stack": [
+            "Python",
+            "FastAPI",
+            "REST APIs",
+            "Azure DevOps"
+          ],
+          "summary": "Python and FastAPI dashboards and operational tooling, separate from the Blazor portal, that automate Azure DevOps REST tasks, triage failed payloads, email scheduled query reports, parse XML integration logs and automate RCA.",
+          "programId": "program-python-productivity",
+          "provenance": "Professional"
+        }
+      ]
+    },
+    "resumeChoiceIntro": "Both resumes use the same facts; Software & Platform leads with developer tooling and internal software, Production & DevOps with CI/CD, release and production engineering.",
+    "selectedWork": {
+      "provenanceLabel": "Professional",
+      "featured": [
+        "program-deployment-tooling",
+        "program-internal-software",
+        "program-python-productivity"
+      ],
+      "order": [
+        "program-deployment-tooling",
+        "program-internal-software",
+        "program-python-productivity",
+        "program-cicd-release",
+        "program-security-remediation",
+        "program-production-reliability",
+        "program-oauth-integration",
+        "program-infrastructure-modernization"
+      ],
+      "context": {
+        "program-cicd-release": [
+          {
+            "label": "Scope",
+            "text": "CI/CD standardization program across a 60-repository, 104-application internal estate, with inventory, verification and reusable pipeline/template automation."
+          },
+          {
+            "label": "Implementation",
+            "text": "Built 56 Azure DevOps build/release definitions across 28 standardized application repositories, plus reusable pipeline/template automation."
+          },
+          {
+            "label": "Verification",
+            "text": "Validated builds across all 28 repositories: 27 passed and the remaining failure was diagnosed and logged. Dry-run validated representative deployment paths for 25 of 28 standardized repositories; three checks were blocked by upstream/environment or tooling conditions."
+          }
+        ],
+        "program-security-remediation": [
+          {
+            "label": "Verification",
+            "text": "A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
+          }
+        ]
+      },
+      "restatedBullets": {
+        "program-cicd-release": [
+          0
+        ],
+        "program-security-remediation": [
+          1
+        ]
+      }
+    },
+    "experienceSummaries": {
+      "exp-stellantis": "Builds developer tools, internal software, delivery automation, credential-remediation tooling, and production engineering systems in Python, Go, and C#/.NET."
+    },
+    "projectsIntro": "Personal projects built outside employment. None of them is an employer production system.",
+    "projectsProvenanceLabel": "Independent open source",
+    "portfolioNote": "resume.json is the only factual source. Scripts in this repository generate the website, both targeted resumes and a compatibility PDF from it, and the test suite checks generated-artifact freshness and repeatability, evidence tracing, ATS text extraction, metadata, and browser accessibility and responsive behavior."
+  },
   "footerText": "\u00a9 2026 William Elias. All rights reserved."
 }

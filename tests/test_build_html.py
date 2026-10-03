@@ -1,5 +1,5 @@
 import pytest
-from scripts.build_html import esc, get_valid_url, inject, render_hero, render_summary
+from scripts.build_html import esc, get_valid_url, inject, render_hero
 
 def test_esc():
     assert esc("hello") == "hello"
@@ -23,11 +23,6 @@ def test_inject_missing_marker():
     html = "<div>No marker here</div>"
     with pytest.raises(ValueError, match="Marker pair for TEST not found in HTML content"):
         inject(html, "TEST", "new")
-
-def test_render_summary():
-    res = render_summary("A summary with <br> tag")
-    assert res == "<p>A summary with &lt;br&gt; tag</p>"
-
 
 def test_render_hero_uses_theme_aware_portrait_with_intrinsic_dimensions():
     personal = {

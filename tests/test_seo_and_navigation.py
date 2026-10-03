@@ -1,3 +1,4 @@
+import html
 import json
 import re
 
@@ -200,14 +201,21 @@ class TestBottomRecruiterCta:
         for phrase in ("hire me", "let's build the future", "10x engineer"):
             assert phrase not in lowered
 
-    def test_recruiter_cta_exposes_email_linkedin_and_resume(self):
+    def test_recruiter_cta_exposes_email_and_linkedin(self):
         cfg = load_config()
         html_content = _index_html()
         cta_section = html_content.split('id="contact-cta"')[1].split("</section>")[0]
         assert f'mailto:{cfg["personal"]["email"]}' in cta_section
         assert cfg["personal"]["linkedin"] in cta_section
+
+    def test_resume_choice_section_explains_and_links_both_resumes(self):
+        cfg = load_config()
+        html_content = _index_html()
+        choice = html_content.split('id="resume-downloads"')[1].split("</section>")[0]
+        assert html.escape(cfg["site"]["resumeChoiceIntro"], quote=False) in choice
         for variant in load_variants()["variants"].values():
-            assert f'href="{variant["file"]}"' in cta_section
+            assert f'href="{variant["file"]}"' in choice
+            assert html.escape(variant["audience"], quote=False) in choice
 
     def test_recruiter_cta_precedes_footer(self):
         html_content = _index_html()

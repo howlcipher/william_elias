@@ -117,23 +117,6 @@ def render_hero(personal, resumes=()):
     return ''.join(parts)
 
 
-def render_summary(about_or_summary):
-    paragraphs = [p.strip() for p in str(about_or_summary or '').split('\n\n') if p.strip()]
-    return ''.join(f'<p>{esc(p)}</p>' for p in paragraphs)
-
-
-def render_stats(stats):
-    parts = []
-    for stat in stats or []:
-        parts.append(
-            '<div class="stat-card">'
-            f'<strong>{esc(stat.get("value", ""))}</strong>'
-            f'<span>{esc(stat.get("label", ""))}</span>'
-            '</div>'
-        )
-    return ''.join(parts)
-
-
 def render_skills(skills):
     parts = []
     for skill in skills or []:
@@ -149,13 +132,24 @@ def render_skills(skills):
     return ''.join(parts)
 
 
-def render_experience(experience):
+def render_experience(experience, summaries=None):
+    # A role with a site summary links to Selected Work instead of repeating its
+    # case studies; the PDFs still list every selected achievement.
+    summaries = summaries or {}
     parts = []
     for job in experience or []:
         subtitle = esc(job.get('company', ''))
         if job.get('location'):
             subtitle += f' | {esc(job["location"])}'
-        achievements = ''.join(f'<li>{esc(a["text"])}</li>' for a in (job.get('achievements') or []))
+        summary = summaries.get(job.get('id'))
+        if summary:
+            achievements = (
+                f'<li>{esc(summary)}</li>'
+                '<li><a href="#programs" class="inline-link">Selected Work</a> '
+                'has the systems, scope, and verification behind this role.</li>'
+            )
+        else:
+            achievements = ''.join(f'<li>{esc(a["text"])}</li>' for a in (job.get('achievements') or []))
         parts.append(
             '<div class="timeline-item card">'
             '<div class="timeline-dot"></div>'
@@ -170,24 +164,86 @@ def render_experience(experience):
     return ''.join(parts)
 
 
-def render_programs(programs):
+def order_programs(programs, selected_work=None):
+    """Programs in Selected Work order; any program not listed keeps its place at the end."""
+    order = (selected_work or {}).get('order') or []
+    by_id = {p.get('id'): p for p in programs or []}
+    ordered = [by_id[i] for i in order if i in by_id]
+    return ordered + [p for p in programs or [] if p.get('id') not in order]
+
+
+def render_programs(programs, selected_work=None, stats=None):
+    selected_work = selected_work or {}
+    featured = set(selected_work.get('featured') or [])
+    context = selected_work.get('context') or {}
+    label = selected_work.get('provenanceLabel', '')
+    metrics_by_program = {}
+    for stat in stats or []:
+        metrics_by_program.setdefault(stat.get('sourceProgram'), []).append(stat)
     parts = []
-    for prog in programs or []:
-        bullets = ''.join(f'<li>{esc(b)}</li>' for b in (prog.get('bullets') or []))
+    for prog in order_programs(programs, selected_work):
+        # Context lines restate some bullets as Scope / Implementation / Verification;
+        # those bullets are not repeated on the site (the PDFs still use them).
+        restated = set((selected_work.get('restatedBullets') or {}).get(prog.get('id'), []))
+        bullets = ''.join(
+            f'<li>{esc(b)}</li>' for i, b in enumerate(prog.get('bullets') or []) if i not in restated)
+        bullets = f'<ul>{bullets}</ul>' if bullets else ''
         details = ''.join(f'<li>{esc(b)}</li>' for b in (prog.get('details') or []))
         tech = ''.join(f'<span>{esc(t)}</span>' for t in (prog.get('technology') or []))
         evidence = (
             '<details class="program-details"><summary>Implementation &amp; validation</summary>'
             f'<ul>{details}</ul></details>'
         ) if details else ''
+        metrics = ''.join(
+            f'<li><strong>{esc(m.get("value", ""))}</strong> <span>{esc(m.get("label", ""))}</span></li>'
+            for m in metrics_by_program.get(prog.get('name'), [])
+        )
+        metrics = f'<ul class="program-metrics" aria-label="Key figures">{metrics}</ul>' if metrics else ''
+        lines = ''.join(
+            f'<div><dt>{esc(line.get("label", ""))}</dt><dd>{esc(line.get("text", ""))}</dd></div>'
+            for line in context.get(prog.get('id'), [])
+        )
+        lines = f'<dl class="program-context">{lines}</dl>' if lines else ''
+        classes = 'program-card card' + (' program-featured' if prog.get('id') in featured else '')
+        provenance = f'<p class="provenance-label">{esc(label)}</p>' if label else ''
         parts.append(
-            '<article class="program-card card">'
-            f'<h3>{esc(prog.get("name", ""))}</h3>'
-            f'<ul>{bullets}</ul>'
+            f'<article class="{classes}" id="{esc(prog.get("id", ""))}">'
+            f'{provenance}<h3>{esc(prog.get("name", ""))}</h3>'
+            f'{metrics}{lines}{bullets}'
             f'<div class="skill-tags">{tech}</div>'
             f'{evidence}</article>'
         )
     return ''.join(parts)
+
+
+def render_what_i_build(what_i_build):
+    parts = []
+    for item in (what_i_build or {}).get('items') or []:
+        stack = ''.join(f'<span>{esc(t)}</span>' for t in (item.get('stack') or []))
+        target = esc(item.get('programId', ''))
+        parts.append(
+            '<article class="build-card card">'
+            f'<p class="provenance-label">{esc(item.get("provenance", ""))}</p>'
+            f'<h3>{esc(item.get("name", ""))}</h3>'
+            f'<div class="skill-tags build-stack">{stack}</div>'
+            f'<p class="build-summary">{esc(item.get("summary", ""))}</p>'
+            f'<a href="#{target}" class="inline-link build-link">How it was built '
+            '<span aria-hidden="true">&rarr;</span></a>'
+            '</article>'
+        )
+    return ''.join(parts)
+
+
+def render_portfolio_note(personal, note):
+    if not note:
+        return ''
+    source = get_valid_url(personal.get('sourceRepo'))
+    link = (
+        f' <a href="{esc(source)}" target="_blank" rel="noopener noreferrer" class="inline-link">'
+        'View the source<span class="visually-hidden"> (opens in a new tab)</span></a>'
+    ) if source else ''
+    return f'<p>{esc(note)}{link}</p>'
+
 
 
 def render_ai_capabilities(tiers):
@@ -203,13 +259,14 @@ def render_ai_capabilities(tiers):
     return '<div class="capability-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>'.join(parts)
 
 
-def render_projects(projects):
+def render_projects(projects, provenance_label=''):
     parts = []
     for proj in projects or []:
         highlights = ''.join(f'<li>{esc(h)}</li>' for h in (proj.get('highlights') or []))
         tags = ''.join(f'<span>{esc(tag)}</span>' for tag in (proj.get('tags') or []))
         card = [
             '<div class="project-card card">',
+            f'<p class="provenance-label provenance-independent">{esc(provenance_label)}</p>' if provenance_label else '',
             f'<h3>{esc(proj.get("name", ""))}</h3>',
             f'<div class="project-subtitle">{esc(proj.get("subtitle", ""))}</div>',
             f'<ul>{highlights}</ul>',
@@ -247,12 +304,13 @@ def render_mobile_nav_resume(resumes):
     )
 
 
-def render_cta_resumes(resumes):
+def render_cta_resumes(resumes, intro=''):
     links = render_resume_links(resumes, 'contact-pill primary-action resume-action', with_audience=True)
     if not links:
         return ''
+    intro_html = f'<p class="resume-choice-intro">{esc(intro)}</p>' if intro else ''
     return (
-        '<p class="resume-choice-label" id="resume-choice-label">Choose the resume that fits the role:</p>'
+        f'{intro_html}<p class="resume-choice-label" id="resume-choice-label">Choose the resume that fits the role:</p>'
         f'<div class="resume-choice-actions" role="group" aria-labelledby="resume-choice-label">{links}</div>'
     )
 
@@ -547,11 +605,12 @@ def build_html():
 
     # Pre-render body content sections for SEO/no-JS visibility
     resumes = load_resume_variants()
+    site = data.get('site') or {}
     html_content = inject(html_content, 'HERO', render_hero(personal, resumes))
-    html_content = inject(html_content, 'SUMMARY', render_summary(data.get('about') or data.get('summary', '')))
-    html_content = inject(html_content, 'STATS', render_stats(data.get('stats')))
+    html_content = inject(html_content, 'WHAT_I_BUILD', render_what_i_build(site.get('whatIBuild')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))
-    experience = '<div class="timeline">' + render_experience(data.get('experience')) + '</div>'
+    experience = '<div class="timeline">' + render_experience(
+        data.get('experience'), site.get('experienceSummaries')) + '</div>'
     if data.get('additionalExperience'):
         experience += (
             '<div class="earlier-experience"><h3>Earlier Experience</h3>'
@@ -559,15 +618,19 @@ def build_html():
             + render_additional_experience(data['additionalExperience']) + '</div></div>'
         )
     html_content = inject(html_content, 'EXPERIENCE', experience)
-    html_content = inject(html_content, 'PROGRAMS', render_programs(data.get('selectedEngineeringPrograms')))
+    html_content = inject(html_content, 'PROGRAMS', render_programs(
+        data.get('selectedEngineeringPrograms'), site.get('selectedWork'), data.get('stats')))
     html_content = inject(html_content, 'AI_CAPABILITIES', render_ai_capabilities(data.get('aiEngineeringCapabilities')))
-    html_content = inject(html_content, 'PROJECTS', render_projects(data.get('projects')))
+    html_content = inject(html_content, 'PROJECTS_INTRO', esc(site.get('projectsIntro', '')))
+    html_content = inject(html_content, 'PROJECTS', render_projects(
+        data.get('projects'), site.get('projectsProvenanceLabel', '')))
+    html_content = inject(html_content, 'PORTFOLIO_NOTE', render_portfolio_note(personal, site.get('portfolioNote')))
 
     html_content = inject(html_content, 'EDUCATION', render_education(data.get('education')))
     html_content = inject(html_content, 'FOOTER', esc(data.get('footerText', '')))
     html_content = inject(html_content, 'NAV_RESUME', render_nav_resume(resumes))
     html_content = inject(html_content, 'MOBILE_NAV_RESUME', render_mobile_nav_resume(resumes))
-    html_content = inject(html_content, 'CTA_RESUMES', render_cta_resumes(resumes))
+    html_content = inject(html_content, 'RESUME_CHOICE', render_cta_resumes(resumes, site.get('resumeChoiceIntro', '')))
     html_content = inject(html_content, 'CTA_COPY', render_cta_copy(personal))
     html_content = inject(html_content, 'CTA_ACTIONS', render_cta_actions(personal))
     html_content = inject(html_content, 'JSONLD', '<script type="application/ld+json">' + render_json_ld(data) + '</script>')
