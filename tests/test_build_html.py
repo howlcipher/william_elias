@@ -1,7 +1,7 @@
 import html
 
 import pytest
-from scripts.build_html import esc, get_valid_url, inject, render_hero
+from scripts.build_html import education_meta, esc, get_valid_url, inject, render_education, render_hero
 from scripts.generate_linkedin_banner import banner_markup
 from scripts.generate_resume_pdf import load_config
 
@@ -45,6 +45,45 @@ def test_render_hero_uses_theme_aware_portrait_with_intrinsic_dimensions():
     assert 'data-photo-light="assets/images/william-elias-profile-hoodie-light.webp"' in hero
     assert 'width="512" height="512"' in hero
     assert 'alt="Portrait of William Elias"' in hero
+
+
+def test_in_progress_is_shown_once_and_blank_years_stay_blank():
+    masters = {
+        "icon": "fa-user-graduate",
+        "degree": "M.S. Cyber Defense (In Progress)",
+        "school": "Dakota State University",
+        "year": "",
+    }
+    bachelor = {
+        "icon": "fa-university",
+        "degree": "B.S. Information Technology",
+        "school": "Colorado State University Global Campus",
+        "year": "",
+    }
+    business = {
+        "icon": "fa-graduation-cap",
+        "degree": "B.B.A. Business Administration",
+        "school": "Rochester College",
+        "year": "",
+    }
+    ccna = {
+        "icon": "fa-certificate",
+        "degree": "CCNA (Previously Held)",
+        "school": "Cisco Networking Academy",
+        "year": "2014 - 2017",
+    }
+
+    assert education_meta(masters) == "Dakota State University"
+    assert education_meta(bachelor) == "Colorado State University Global Campus"
+    assert education_meta(business) == "Rochester College"
+    assert education_meta(ccna) == "Cisco Networking Academy (2014 - 2017)"
+
+    card = render_education([masters, bachelor, business])
+    assert card.count("In Progress") == 1
+    assert "<h3>M.S. Cyber Defense (In Progress)</h3>" in card
+    assert "<p>Dakota State University</p>" in card
+    assert "<p>Colorado State University Global Campus</p>" in card
+    assert "<p>Rochester College</p>" in card
 
 
 def test_linkedin_banner_uses_the_current_title():

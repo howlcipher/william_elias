@@ -2,6 +2,12 @@
 
 ## 2026-10-03
 
+### Nav, education card, and banner freshness
+
+* The M.S. card keeps **In Progress** in the degree heading only. The school line is Dakota State University, with no second copy and no invented year. B.S. and B.B.A. still have no year, so those cards stay school-only. CCNA still shows 2014 - 2017.
+* About is the first item in the desktop and mobile nav, after the hero and before Build. The existing scroll spy marks that link while `#about` is the section in view.
+* CI and the generated-artifact tests rebuild `assets/images/linkedin-banner.png` from `resume.json` and fail if the committed PNG is stale.
+
 ### Public-claim alignment
 
 * The LinkedIn banner headline is generated from `resume.json` `personal.title` (**Software & Automation Engineer**). Rebuilding it no longer republishes "Software, DevOps & Automation Engineer".

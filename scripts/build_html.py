@@ -501,17 +501,17 @@ def render_additional_experience(items):
 
 
 def education_meta(edu):
-    """School line. A missing year is omitted; an in-progress degree keeps that status.
+    """School line. A parenthetical is the source year, never a second status.
 
-    Do not invent a start or end year. B.S. and B.B.A. have neither a year nor
-    an in-progress status in the source, so those cards show the school only.
+    The degree heading already carries qualifiers such as "In Progress".
+    Copying that qualifier here shows it twice. A blank year stays blank:
+    do not invent a start or end year. B.S. and B.B.A. have no year, so
+    those cards show the school only.
     """
     school = edu.get('school', '')
     year = (edu.get('year') or '').strip()
     if year:
         return f'{school} ({year})'
-    if 'In Progress' in (edu.get('degree') or ''):
-        return f'{school} (In Progress)'
     return school
 
 

@@ -389,13 +389,20 @@ class TestEducationHonesty:
         cfg = load_config()
         page = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         education = page.split('id="education"')[1].split("</section>")[0]
-        assert "Dakota State University (In Progress)" in education
+        # The degree heading already says "In Progress". The school line is not
+        # a second copy, and a blank year is not filled in.
+        assert education.count("In Progress") == 1
+        assert "<h3>M.S. Cyber Defense (In Progress)</h3>" in education
+        assert "<p>Dakota State University</p>" in education
+        assert "Dakota State University (In Progress)" not in education
         assert "Cisco Networking Academy (2014 - 2017)" in education
+        masters = self._entry(cfg, "M.S.")
+        assert masters["year"] == ""
         for school in ("Colorado State University Global Campus", "Rochester College"):
             assert school in education
             assert f"{school} (" not in education
         for entry in cfg["education"]:
-            if not entry.get("year") and "In Progress" not in entry["degree"]:
+            if not entry.get("year"):
                 assert entry["year"] == ""
 
     def test_masters_stays_out_of_the_headline(self):
