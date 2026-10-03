@@ -88,3 +88,19 @@ Environment: Python 3.12.3 with pinned `requirements-dev.txt` (fpdf2 2.8.7, pypd
 | PDF visual inspection | All four targeted-PDF pages rendered with `pdftoppm -r 100` and inspected: no clipping, overlap, page-three spill, orphaned headings, or split skill lines; 10 pt body text retained; links/URLs intact. Alias proven identical, so not rendered separately. |
 
 Rendered pages and screenshots were kept as local session artifacts and are not committed, following repository convention.
+
+## Artifact-first website refresh (2026-10-03)
+
+The website-only `site` copy was rewritten through HowlWriter's native path. That path uses a structured request with canonical evidence per slot, makes one bounded remote call, and runs a deterministic fidelity check that binds each number to its unit and qualifiers. The result was then reviewed against `resume.json`.
+
+| Slot | Origin | Result |
+| --- | --- | --- |
+| What I Build: deployment CLI, .NET app | Writer | Factually preserved. Command list, host auditing and stack are canonical. No users or adoption claimed. |
+| What I Build: Python tooling | Writer | A review flag (the dropped "team" uv clause) was resolved. The text is narrower than canonical, makes no ownership claim, and keeps FastAPI separate from the Blazor portal. |
+| Current-role summary | Operator edit | Canonical about wording plus credential-remediation tooling. Writer's narrower version was not used. |
+| Resume explanation | Writer | Matches variant audiences. The compatibility PDF is not presented as a third resume. |
+| CI/CD Scope / Verification | Writer | 60-repository, 104-application estate kept. 27 of 28 builds and dry-run validation of representative deployment paths for 25 of 28 kept. Blocked checks retained. |
+| CI/CD Implementation | Operator edit | Restored the canonical verb "Built" in place of Writer's "Implemented". 56 definitions and 28 repositories kept. |
+| Credential Verification, portfolio note | Writer | Verbatim or factually preserved. |
+
+Nothing was removed from `resume.json` or the PDFs. The site no longer repeats current-role achievements, CI/CD bullet 1 or credential bullet 2. Those are restated by context lines, and every number in them stays visible (test-enforced). The full audit with current and proposed text for every slot is kept with the mission evidence.

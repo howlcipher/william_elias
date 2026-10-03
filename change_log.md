@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-03
+
+### Artifact-first information architecture
+
+* The page now leads with **What I Build** (Self-Service Deployment CLI in Go, Internal Production-Support Software in C#/.NET 8 Blazor, Python Developer & Operations Tooling with FastAPI) directly after the hero, before any operational metric. The headline stays **Software & Automation Engineer**.
+* The stats band under the hero is gone. The 60 / 104 / 67 figures now sit inside the CI/CD and credential-remediation Selected Work cards with their canonical labels, and CI/CD gains Scope / Implementation / Verification lines that keep "dry-run" and "representative".
+* **Engineering Impact** is now **Selected Work**: the same eight programs, software artifacts first, each labelled Professional. **Professional Experience** shows a one-line summary for the current role that links to Selected Work instead of repeating its case studies. The About section was removed because the hero and What I Build carry its content.
+* A **Two Targeted Resumes** section after What I Build explains the two PDFs. Open-source projects sit under **Open Source & Independent Engineering**, each labelled Independent open source. A short **How This Portfolio Is Built** note links the source.
+* Website-only copy and ordering live in a new `site` object in `resume.json`. The PDFs, legacy alias, preview image, robots and sitemap are byte-identical. JSON-LD `jobTitle` is unchanged.
+* Copy for the new slots went through HowlWriter's native path with unit-aware fidelity checks. Two proposals were edited by the operator and recorded as such, and one review flag was resolved; see `documentation/targeted_resume_validation.md`.
+* Tests: 356 → 370 collected (368 pass, 2 skipped). The new `tests/test_artifact_first_layout.py` locks in the hierarchy, in-context metrics, qualifiers, provenance labels, two resume paths with no persona switcher, and the official job title.
+
 ## 2026-10-02
 
 ### Targeted résumé variants
