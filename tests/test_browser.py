@@ -592,45 +592,55 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
 
     cards = page.locator(".program-card").all()
     assert len(cards) == 8
+    grid = page.locator(".programs-grid").bounding_box()
+    classes = [card.get_attribute("class") for card in cards]
 
-    # Verify each pair in 2-column layout has equal height and aligned disclosure rows
-    for i in range(0, len(cards) - 1, 2):
-        box_a = cards[i].bounding_box()
-        box_b = cards[i + 1].bounding_box()
+    # Featured software cards share the first row, top-aligned at natural height,
+    # so a one-bullet card is never stretched into an empty box.
+    featured = [c for c, cls in zip(cards, classes) if "program-featured" in cls]
+    assert len(featured) == 3
+    tops = [c.bounding_box()["y"] for c in featured]
+    if width >= 1100:
+        assert max(tops) - min(tops) <= 1.5
+
+    # The wide case study spans the whole grid.
+    wide = [c for c, cls in zip(cards, classes) if "program-wide" in cls]
+    assert len(wide) == 1
+    assert abs(wide[0].bounding_box()["width"] - grid["width"]) <= 1.5
+
+    # Remaining cards pair up with equal heights and aligned disclosure rows.
+    paired = [c for c, cls in zip(cards, classes) if "program-featured" not in cls and "program-wide" not in cls]
+    assert len(paired) == 4
+    for i in range(0, len(paired), 2):
+        box_a, box_b = paired[i].bounding_box(), paired[i + 1].bounding_box()
+        assert abs(box_a["y"] - box_b["y"]) <= 1.5
         assert abs(box_a["height"] - box_b["height"]) <= 1.5, (
-            f"Row {i // 2 + 1} cards height mismatch: {box_a['height']} vs {box_b['height']}"
+            f"Pair {i // 2 + 1} cards height mismatch: {box_a['height']} vs {box_b['height']}"
         )
-
-        det_a = cards[i].locator(".program-details").bounding_box()
-        det_b = cards[i + 1].locator(".program-details").bounding_box()
+        det_a = paired[i].locator(".program-details").bounding_box()
+        det_b = paired[i + 1].locator(".program-details").bounding_box()
         assert abs(det_a["y"] - det_b["y"]) <= 1.5, (
-            f"Row {i // 2 + 1} details alignment mismatch: {det_a['y']} vs {det_b['y']}"
+            f"Pair {i // 2 + 1} details alignment mismatch: {det_a['y']} vs {det_b['y']}"
         )
 
-    # Test expansion behavior: expanding card 1 does not stretch card 2 awkwardly.
-    # Measure card 2's natural height with align-items: start so the later comparison
-    # is against its un-stretched size, not its collapsed-stretched size.
+    # Expanding one card of a pair does not stretch its sibling awkwardly.
+    first, second = paired[0], paired[1]
     page.evaluate("document.querySelector('.programs-grid').style.alignItems = 'start'")
     page.wait_for_timeout(100)
-    collapsed_card2_height = cards[1].bounding_box()["height"]
+    collapsed_second_height = second.bounding_box()["height"]
     page.evaluate("document.querySelector('.programs-grid').style.alignItems = ''")
-    cards[0].locator("summary").click()
-    expect(cards[0].locator(".program-details")).to_have_attribute("open", "")
+    first.locator("summary").click()
+    expect(first.locator(".program-details")).to_have_attribute("open", "")
 
-    expanded_card1_box = cards[0].bounding_box()
-    card2_box_after_open = cards[1].bounding_box()
-
-    assert expanded_card1_box["height"] > collapsed_card2_height + 100
-    assert abs(card2_box_after_open["height"] - collapsed_card2_height) <= 2.0, (
-        f"Card 2 should retain natural collapsed height when sibling expands, got {card2_box_after_open['height']}"
+    assert first.bounding_box()["height"] > collapsed_second_height + 50
+    assert abs(second.bounding_box()["height"] - collapsed_second_height) <= 2.0, (
+        f"Sibling should retain natural collapsed height, got {second.bounding_box()['height']}"
     )
 
     # Re-collapse and verify equal-height returns
-    cards[0].locator("summary").click()
-    expect(cards[0].locator(".program-details")).not_to_have_attribute("open", "")
-    box_a_rec = cards[0].bounding_box()
-    box_b_rec = cards[1].bounding_box()
-    assert abs(box_a_rec["height"] - box_b_rec["height"]) <= 1.5
+    first.locator("summary").click()
+    expect(first.locator(".program-details")).not_to_have_attribute("open", "")
+    assert abs(first.bounding_box()["height"] - second.bounding_box()["height"]) <= 1.5
 
 
 def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
