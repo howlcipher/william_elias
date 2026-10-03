@@ -431,6 +431,9 @@ def test_bottom_recruiter_cta_renders_with_actions(page: Page, test_url: str):
 def test_no_js_content(browser, test_url: str):
     context = browser.new_context(java_script_enabled=False)
     page = context.new_page()
+    # Instant scrolling: the first disclosure sits at the bottom of a tall card,
+    # and smooth scroll keeps the summary "unstable" long enough to miss the click.
+    page.emulate_media(reduced_motion="reduce")
     page.goto(test_url)
 
     # Assert core resume content is visible
@@ -595,13 +598,16 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     grid = page.locator(".programs-grid").bounding_box()
     classes = [card.get_attribute("class") for card in cards]
 
-    # Featured software cards share the first row, top-aligned at natural height,
-    # so a one-bullet card is never stretched into an empty box.
+    # Featured software cards share one row of equal columns and equal height,
+    # with skill tags and disclosures aligned along the bottom.
     featured = [c for c, cls in zip(cards, classes) if "program-featured" in cls]
     assert len(featured) == 3
-    tops = [c.bounding_box()["y"] for c in featured]
-    if width >= 1100:
-        assert max(tops) - min(tops) <= 1.5
+    boxes = [c.bounding_box() for c in featured]
+    assert max(b["y"] for b in boxes) - min(b["y"] for b in boxes) <= 1.5
+    assert max(b["width"] for b in boxes) - min(b["width"] for b in boxes) <= 1.5
+    assert max(b["height"] for b in boxes) - min(b["height"] for b in boxes) <= 1.5
+    details = [c.locator(".program-details").bounding_box() for c in featured]
+    assert max(d["y"] for d in details) - min(d["y"] for d in details) <= 1.5
 
     # The wide case study spans the whole grid.
     wide = [c for c, cls in zip(cards, classes) if "program-wide" in cls]
@@ -624,15 +630,18 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
         )
 
     # Expanding one card of a pair does not stretch its sibling awkwardly.
+    # Compare against each card's own natural height: a shorter card can open
+    # without exceeding its taller neighbour.
     first, second = paired[0], paired[1]
     page.evaluate("document.querySelector('.programs-grid').style.alignItems = 'start'")
     page.wait_for_timeout(100)
+    collapsed_first_height = first.bounding_box()["height"]
     collapsed_second_height = second.bounding_box()["height"]
     page.evaluate("document.querySelector('.programs-grid').style.alignItems = ''")
     first.locator("summary").click()
     expect(first.locator(".program-details")).to_have_attribute("open", "")
 
-    assert first.bounding_box()["height"] > collapsed_second_height + 50
+    assert first.bounding_box()["height"] > collapsed_first_height + 50
     assert abs(second.bounding_box()["height"] - collapsed_second_height) <= 2.0, (
         f"Sibling should retain natural collapsed height, got {second.bounding_box()['height']}"
     )

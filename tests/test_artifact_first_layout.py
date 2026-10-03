@@ -34,7 +34,11 @@ def test_what_i_build_names_the_three_artifact_families_before_any_metric(page, 
         assert name in build
     for tech in ("Go", ".NET 8", "Blazor", "Python", "FastAPI"):
         assert f"<span>{html.escape(tech)}</span>" in build
-    first_metric = min(page.index(f"<strong>{s['value']}</strong>") for s in cfg["stats"])
+    # Headline figures (the wide CI/CD card) stay below What I Build. The
+    # credential count is a normal bullet on its card, not a <strong> figure.
+    figure_values = [s["value"] for s in cfg["stats"] if f"<strong>{s['value']}</strong>" in page]
+    assert {"60", "104"} <= set(figure_values)
+    first_metric = min(page.index(f"<strong>{value}</strong>") for value in figure_values)
     assert page.index('id="what-i-build"') < first_metric
 
 
@@ -62,10 +66,30 @@ def test_selected_work_renders_in_site_order(page, cfg):
 
 def test_every_headline_metric_stays_visible_inside_its_program(page, cfg):
     programs = {p["name"]: p["id"] for p in cfg["selectedEngineeringPrograms"]}
+    wide = set(cfg["site"]["selectedWork"]["wide"])
     for stat in cfg["stats"]:
-        card = page.split(f'id="{programs[stat["sourceProgram"]]}"')[1].split("</article>")[0]
-        assert f"<strong>{stat['value']}</strong>" in card
-        assert html.escape(stat["label"]) in card
+        program_id = programs[stat["sourceProgram"]]
+        card = page.split(f'id="{program_id}"')[1].split("</article>")[0]
+        assert stat["value"] in card
+        if program_id in wide:
+            assert f"<strong>{stat['value']}</strong>" in card
+            assert html.escape(stat["label"]) in card
+        else:
+            assert "program-metrics" not in card
+
+
+def test_security_card_uses_the_standard_program_pattern(page, cfg):
+    """Paired cards are title, body bullets, tags, and the disclosure — no hero stat."""
+    card = page.split('id="program-security-remediation"')[1].split("</article>")[0]
+    security = next(p for p in cfg["selectedEngineeringPrograms"] if p["id"] == "program-security-remediation")
+    body = card.split("<details")[0]
+    assert "program-metrics" not in card
+    assert "program-context" not in card
+    assert "<dt>" not in card
+    for bullet in security["bullets"]:
+        assert f"<li>{html.escape(bullet, quote=True)}</li>" in body
+    assert 'class="skill-tags"' in card
+    assert "Implementation &amp; validation" in card
 
 
 def test_cicd_context_lines_keep_units_and_qualifiers(cfg):
@@ -82,10 +106,14 @@ def test_cicd_context_lines_keep_units_and_qualifiers(cfg):
     assert not re.search(r"\bdeployed\b|\bin production\b", verification)
 
 
-def test_credential_context_keeps_the_measured_scan(cfg):
-    line = cfg["site"]["selectedWork"]["context"]["program-security-remediation"][0]["text"]
+def test_credential_scan_stays_a_body_bullet(cfg):
+    security = next(p for p in cfg["selectedEngineeringPrograms"] if p["id"] == "program-security-remediation")
+    bullet = next(b for b in security["bullets"] if "2,832" in b)
     for fact in ("2,832 files", "67 distinct exposed secrets", "approximately 25 seconds"):
-        assert fact in line
+        assert fact in bullet
+    work = cfg["site"]["selectedWork"]
+    assert "program-security-remediation" not in work.get("context", {})
+    assert "program-security-remediation" not in work.get("restatedBullets", {})
 
 
 def test_professional_and_independent_work_are_labelled(page, cfg):

@@ -894,20 +894,11 @@ const config = {
                         "label": "Verification",
                         "text": "Validated builds across all 28 repositories: 27 passed and the remaining failure was diagnosed and logged. Dry-run validated representative deployment paths for 25 of 28 standardized repositories; three checks were blocked by upstream/environment or tooling conditions."
                     }
-                ],
-                "program-security-remediation": [
-                    {
-                        "label": "Verification",
-                        "text": "A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
-                    }
                 ]
             },
             "restatedBullets": {
                 "program-cicd-release": [
                     0
-                ],
-                "program-security-remediation": [
-                    1
                 ]
             }
         },

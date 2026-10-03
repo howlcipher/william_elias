@@ -195,11 +195,16 @@ def render_programs(programs, selected_work=None, stats=None):
             '<details class="program-details"><summary>Implementation &amp; validation</summary>'
             f'<ul>{details}</ul></details>'
         ) if details else ''
-        metrics = ''.join(
-            f'<li><strong>{esc(m.get("value", ""))}</strong> <span>{esc(m.get("label", ""))}</span></li>'
-            for m in metrics_by_program.get(prog.get('name'), [])
-        )
-        metrics = f'<ul class="program-metrics" aria-label="Key figures">{metrics}</ul>' if metrics else ''
+        # Hero figures belong on the wide case-study card. A single figure on a
+        # paired card (credential remediation) is a one-off layout; that count
+        # stays in the program's normal bullets instead.
+        metrics = ''
+        if prog.get('id') in wide:
+            metrics = ''.join(
+                f'<li><strong>{esc(m.get("value", ""))}</strong> <span>{esc(m.get("label", ""))}</span></li>'
+                for m in metrics_by_program.get(prog.get('name'), [])
+            )
+            metrics = f'<ul class="program-metrics" aria-label="Key figures">{metrics}</ul>' if metrics else ''
         lines = ''.join(
             f'<div><dt>{esc(line.get("label", ""))}</dt><dd>{esc(line.get("text", ""))}</dd></div>'
             for line in context.get(prog.get('id'), [])
