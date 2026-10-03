@@ -163,6 +163,15 @@ class TestNavigationCtas:
         html_content = _index_html()
         assert "mobile-resume-link" in html_content
 
+    def test_about_is_the_first_section_link_in_both_navs(self):
+        html_content = _index_html()
+        desktop = html_content.split('<ul class="nav-links">')[1].split("</ul>")[0]
+        mobile = html_content.split('<ul class="mobile-nav-links">')[1].split("</ul>")[0]
+        for nav in (desktop, mobile):
+            assert 'href="#about"' in nav
+            assert nav.index('href="#about"') < nav.index('href="#what-i-build"')
+            assert nav.index('href="#what-i-build"') < nav.index('href="#programs"')
+
     def test_nav_resume_cta_not_marked_as_scroll_section(self):
         html_content = _index_html()
         nav_section = html_content.split('<div class="nav-right">')[1].split("</nav>")[0]

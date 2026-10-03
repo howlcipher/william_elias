@@ -42,6 +42,7 @@ Do not assert: Razor Pages for the portal; Azure Key Vault, Managed Identity, Az
 python3 scripts/build_config.py
 python3 scripts/build_html.py
 python3 scripts/generate_resume_pdf.py   # both targeted PDFs + legacy alias
+python3 scripts/generate_linkedin_banner.py   # assets/images/linkedin-banner.png
 PYTHONPATH=. pytest tests/ -W error       # needs poppler-utils for pdftotext
 git diff --check
 ```

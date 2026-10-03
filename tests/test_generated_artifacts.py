@@ -10,11 +10,15 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = (
     "config.js", "index.html", "robots.txt", "sitemap.xml", "preview.jpg",
+    "assets/images/linkedin-banner.png",
     "William_Elias_Software_Platform_Resume.pdf",
     "William_Elias_Production_DevOps_Resume.pdf",
     "William_Elias_Resume.pdf",
 )
-GENERATORS = ("build_config.py", "build_html.py", "generate_resume_pdf.py")
+GENERATORS = (
+    "build_config.py", "build_html.py", "generate_resume_pdf.py",
+    "generate_linkedin_banner.py",
+)
 
 
 @pytest.fixture(scope="module")
@@ -29,9 +33,11 @@ def isolated_builds(tmp_path_factory):
         for source in (*GENERATORS, "site_template.html"):
             shutil.copy2(ROOT / "scripts" / source, directory / "scripts")
         for generator in GENERATORS:
+            # The banner launches Chromium and waits on webfonts.
+            timeout = 120 if generator == "generate_linkedin_banner.py" else 30
             subprocess.run(
                 [sys.executable, "-W", "error", f"scripts/{generator}"],
-                cwd=directory, check=True, capture_output=True, timeout=30,
+                cwd=directory, check=True, capture_output=True, timeout=timeout,
             )
         builds.append(directory)
     return builds

@@ -329,14 +329,25 @@ def test_scroll_spy_activates_correct_nav_link(page: Page, test_url: str):
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
 
+    about_link = page.locator('.nav-links a[href="#about"]')
+    mobile_about = page.locator('.mobile-nav-links a[href="#about"]')
     build_link = page.locator('.nav-links a[href="#what-i-build"]')
     skills_link = page.locator('.nav-links a[href="#skills"]')
 
     # Force a scroll (scroll_into_view_if_needed is a no-op when the section is
     # already on screen at this viewport size) to exercise the observer band.
+    # About sits under the hero. The spy must mark that link, not clear every
+    # active state, while that section is the one in the focus band.
+    page.evaluate("() => document.getElementById('about').scrollIntoView({block: 'start'})")
+    wait_for_section(page, "about")
+    assert about_link.get_attribute("aria-current") == "page"
+    assert mobile_about.get_attribute("aria-current") == "page"
+    assert build_link.get_attribute("aria-current") is None
+
     page.evaluate("() => document.getElementById('what-i-build').scrollIntoView({block: 'start'})")
     wait_for_section(page, "what-i-build")
     assert build_link.get_attribute("aria-current") == "page"
+    assert about_link.get_attribute("aria-current") is None
 
     page.evaluate("() => document.getElementById('skills').scrollIntoView({block: 'start'})")
     wait_for_section(page, "skills")
@@ -472,7 +483,7 @@ def test_navigation_links_reach_each_section(page: Page, test_url: str, width):
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
-    for section in ("what-i-build", "programs", "experience", "projects", "education", "skills"):
+    for section in ("about", "what-i-build", "programs", "experience", "projects", "education", "skills"):
         if width < 768:
             page.locator(".mobile-menu-btn").click()
             page.locator(f'.mobile-nav-links a[href="#{section}"]').click()
