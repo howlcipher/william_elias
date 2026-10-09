@@ -181,8 +181,12 @@
     {
       "id": "exp-stellantis",
       "date": "Feb 2023 - Present",
-      "title": "Production Support Engineer | DevOps & Automation",
-      "officialTitle": "Production Support Engineer",
+      "title": "Senior Production Support Engineer | DevOps & Automation",
+      "officialTitle": "Senior Production Support Engineer",
+      "promotion": {
+        "effectiveDate": "2026-09",
+        "previousOfficialTitle": "Production Support Engineer"
+      },
       "company": "Stellantis Financial Services US",
       "location": "Auburn Hills, MI \u00b7 Hybrid",
       "achievements": [

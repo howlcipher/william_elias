@@ -2,6 +2,7 @@
 import json
 import re
 import html
+import datetime
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -65,6 +66,9 @@ def render_hero(personal, resumes=(), employer=""):
     parts.append(f'<h2 class="subtitle">{esc(personal.get("title", ""))}</h2>')
     if employer:
         parts.append(f'<p class="hero-employer">{esc(employer)}</p>')
+    current_role = personal.get("currentRole")
+    if current_role:
+        parts.append(f'<p class="hero-current-role">{esc(current_role)}</p>')
     parts.append(f'<p class="tagline terminal-type">{esc(personal.get("tagline", ""))}</p>')
     if personal.get('supporting'):
         parts.append(f'<p class="hero-supporting">{esc(personal.get("supporting"))}</p>')
@@ -152,6 +156,15 @@ def render_experience(experience, summaries=None):
             )
         else:
             achievements = ''.join(f'<li>{esc(a["text"])}</li>' for a in (job.get('achievements') or []))
+        promotion = job.get("promotion")
+        progression = ""
+        if promotion:
+            month = datetime.datetime.strptime(promotion["effectiveDate"], "%Y-%m").strftime("%B %Y")
+            progression = (
+                '<p class="timeline-promotion">'
+                f'Promoted {esc(month)}; previously {esc(promotion["previousOfficialTitle"])}'
+                '</p>'
+            )
         parts.append(
             '<div class="timeline-item card">'
             '<div class="timeline-dot"></div>'
@@ -159,6 +172,7 @@ def render_experience(experience, summaries=None):
             '<div class="timeline-content">'
             f'<h3>{esc(job.get("title", ""))}</h3>'
             f'<h4>{subtitle}</h4>'
+            f'{progression}'
             f'<ul>{achievements}</ul>'
             '</div>'
             '</div>'
@@ -645,7 +659,10 @@ def build_html():
     resumes = load_resume_variants()
     site = data.get('site') or {}
     current_role = next(iter(data.get('experience') or []), {})
-    html_content = inject(html_content, 'HERO', render_hero(personal, resumes, current_role.get('company', '')))
+    hero_personal = dict(personal)
+    if current_role.get("title"):
+        hero_personal["currentRole"] = current_role["title"]
+    html_content = inject(html_content, 'HERO', render_hero(hero_personal, resumes, current_role.get('company', '')))
     html_content = inject(html_content, 'ABOUT', render_about(data.get('about')))
     html_content = inject(html_content, 'WHAT_I_BUILD', render_what_i_build(site.get('whatIBuild')))
     html_content = inject(html_content, 'SKILLS', render_skills(data.get('skills')))

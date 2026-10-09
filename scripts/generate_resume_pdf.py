@@ -99,6 +99,38 @@ def validate_config(config: dict):
                 raise ValueError(f"Validation failed: 'experience[{i}].{field}' is required and must be non-empty")
         if not isinstance(job.get("achievements"), list):
             raise ValueError(f"Validation failed: 'experience[{i}].achievements' must be an array")
+        if "promotion" in job:
+            promotion = job["promotion"]
+            where = f"experience[{i}].promotion"
+            if not isinstance(promotion, dict) or set(promotion) != {"effectiveDate", "previousOfficialTitle"}:
+                raise ValueError(
+                    f"Validation failed: '{where}' must contain exactly 'effectiveDate' and 'previousOfficialTitle'"
+                )
+            effective_date = promotion["effectiveDate"]
+            previous_title = promotion["previousOfficialTitle"]
+            if not isinstance(effective_date, str) or not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", effective_date):
+                raise ValueError(f"Validation failed: '{where}.effectiveDate' must use YYYY-MM format")
+            if not isinstance(previous_title, str) or not previous_title.strip():
+                raise ValueError(f"Validation failed: '{where}.previousOfficialTitle' must be a non-empty string")
+            current_title = job.get("officialTitle")
+            display_title = job.get("title", "").split(" | ", 1)[0]
+            if not current_title or display_title != current_title:
+                raise ValueError(f"Validation failed: '{where}' must match the role's current official title")
+            if previous_title == current_title:
+                raise ValueError(f"Validation failed: '{where}.previousOfficialTitle' must differ from the current official title")
+            start_match = re.match(r"^([A-Za-z]{3,9} \d{4})\s*[-–—]", job["date"])
+            end_match = re.search(r"[-–—]\s*([A-Za-z]{3,9} \d{4})$", job["date"])
+            try:
+                effective = datetime.datetime.strptime(effective_date, "%Y-%m").date().replace(day=1)
+                start = datetime.datetime.strptime(start_match.group(1), "%b %Y").date().replace(day=1) if start_match else None
+                end = datetime.datetime.strptime(end_match.group(1), "%b %Y").date().replace(day=1) if end_match else None
+            except ValueError as exc:
+                raise ValueError(f"Validation failed: '{where}.effectiveDate' must fall within a valid employer date range") from exc
+            current_month = datetime.date.today().replace(day=1)
+            is_current = job["date"].rstrip().lower().endswith("present")
+            if (start is None or effective < start or (end is not None and effective > end)
+                    or (is_current and effective > current_month)):
+                raise ValueError(f"Validation failed: '{where}.effectiveDate' must fall within the employer tenure")
         for j, achievement in enumerate(job["achievements"]):
             if not isinstance(achievement, dict) or not achievement.get("text"):
                 raise ValueError(f"Validation failed: 'experience[{i}].achievements[{j}]' must be an object with non-empty text")
@@ -493,7 +525,14 @@ def build(config: dict, out_path: Path, variant: str | None = None, variants: di
     pdf.section_title("Professional Experience")
     for job in view["experience"]:
         achievements = job.get("achievements", [])
-        block_h = 13 + 13 + sum(pdf.bullet_height(a["text"]) for a in achievements) + 2
+        title_line = job["title"] + (f' | {job["location"]}' if job.get("location") else "")
+        title_height = pdf.wrapped_text_height(title_line, size=9.5)
+        promotion_line = ""
+        if job.get("promotion"):
+            month = datetime.datetime.strptime(job["promotion"]["effectiveDate"], "%Y-%m").strftime("%B %Y")
+            promotion_line = f'Promoted {month}; previously {job["promotion"]["previousOfficialTitle"]}'
+        promotion_height = pdf.wrapped_text_height(promotion_line, size=9) if promotion_line else 0
+        block_h = 13 + title_height + promotion_height + sum(pdf.bullet_height(a["text"]) for a in achievements) + 4
         if pdf.will_page_break(block_h):
             pdf.add_page()
             pdf.section_title("Professional Experience (Continued)")
@@ -504,8 +543,10 @@ def build(config: dict, out_path: Path, variant: str | None = None, variants: di
         pdf.set_font("Helvetica", "", 10)
         pdf.cell(140, 13, job["date"], align="R", new_x="LMARGIN", new_y="NEXT")
         pdf.set_font("Helvetica", "I", 9.5)
-        title_line = job["title"] + (f' | {job["location"]}' if job.get("location") else "")
-        pdf.cell(0, 13, title_line, new_x="LMARGIN", new_y="NEXT")
+        pdf.multi_cell(0, 13, title_line, new_x="LMARGIN", new_y="NEXT")
+        if promotion_line:
+            pdf.set_font("Helvetica", "", 9)
+            pdf.multi_cell(0, 13, promotion_line, new_x="LMARGIN", new_y="NEXT")
         for a in achievements:
             pdf.bullet(a["text"])
         pdf.ln(2)

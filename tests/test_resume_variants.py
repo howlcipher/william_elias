@@ -243,7 +243,8 @@ def test_qualifiers_survive_into_each_pdf(variant_pdfs, variant):
     text = variant_pdfs[variant]["text"]
     for qualifier in ("dry-run validated representative deployment paths", "remaining checks blocked",
                       "In Progress", "Previously Held", "Python/PowerShell professionally",
-                      "Production Support Engineer | DevOps & Automation"):
+                      "Senior Production Support Engineer | DevOps & Automation",
+                      "Promoted September 2026; previously Production Support Engineer"):
         assert qualifier in text, qualifier
     if variant == "production_devops":
         assert "proof of concept" in text
@@ -289,8 +290,11 @@ def test_targeted_pdf_does_not_inflate_scope(variant_pdfs, variant):
     text = variant_pdfs[variant]["text"].lower()
     for term in ("kubernetes", "terraform", "aws", "gcp", "azure cloud", "cloud platform owner",
                  "internal developer platform", "led a team", "zero-downtime", "cutover",
-                 "completed migration", "platform engineer at", "senior "):
+                 "completed migration", "platform engineer at", "senior software engineer",
+                 "senior platform engineer", "senior devops"):
         assert term not in text, term
+    assert "senior production support engineer" in text
+    assert text.count("senior ") == 1
 
 
 # --- Generated files and compatibility alias --------------------------------

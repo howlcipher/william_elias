@@ -68,12 +68,17 @@ def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs,
     pdf_text = variant_pdfs[variant]["text"]
     role = config["experience"][0]
     assert role["title"].split(" | ") == [
-        "Production Support Engineer", "DevOps & Automation",
+        "Senior Production Support Engineer", "DevOps & Automation",
     ]
-    assert role["officialTitle"] == "Production Support Engineer"
+    assert role["officialTitle"] == "Senior Production Support Engineer"
+    assert role["promotion"] == {
+        "effectiveDate": "2026-09",
+        "previousOfficialTitle": "Production Support Engineer",
+    }
     assert role["location"] == "Auburn Hills, MI · Hybrid"
     assert config["personal"]["remote"] == "Open to U.S. Remote Opportunities"
-    for term in (role["title"], "Auburn Hills, MI", "Hybrid", "OAuth", "OIDC"):
+    for term in (role["title"], "Promoted September 2026; previously Production Support Engineer",
+                 "Auburn Hills, MI", "Hybrid", "OAuth", "OIDC"):
         assert term in pdf_text
 
 

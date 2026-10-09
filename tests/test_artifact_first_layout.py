@@ -158,7 +158,7 @@ def test_portfolio_note_links_the_source(page, cfg):
 def test_json_ld_keeps_the_official_job_title(page):
     block = re.search(r'<script type="application/ld\+json">(.*?)</script>', page, re.S).group(1)
     person = json.loads(block)["mainEntity"]
-    assert person["jobTitle"] == "Production Support Engineer"
+    assert person["jobTitle"] == "Senior Production Support Engineer"
 
 
 def test_site_copy_contains_no_unsupported_scope_terms(cfg):
