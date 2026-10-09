@@ -62,7 +62,10 @@ class TestHeadlineAndPositioning:
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
         stellantis = next(j for j in cfg["experience"] if "Stellantis Financial Services" in j["company"])
-        assert stellantis["title"] == "Production Support Engineer | DevOps & Automation"
+        assert stellantis["title"] == "Senior Production Support Engineer | DevOps & Automation"
+        assert stellantis["officialTitle"] == "Senior Production Support Engineer"
+        assert stellantis["promotion"]["previousOfficialTitle"] == "Production Support Engineer"
+        assert stellantis["promotion"]["effectiveDate"] == "2026-09"
 
     def test_remote_availability_present(self):
         cfg = load_config()

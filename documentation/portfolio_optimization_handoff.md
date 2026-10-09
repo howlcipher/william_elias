@@ -8,7 +8,7 @@ Supporting line: **Developer Tooling • Platform Engineering • CI/CD • Prod
 
 William builds software, automation, developer tools, delivery systems, and production engineering systems that make software easier to build, ship, secure, troubleshoot, and operate. The website is the single broad profile. Security Automation, the in-progress M.S. Cyber Defense, and AI-Enabled Engineering are supporting depth, not primary identities. The previous headline, **DevOps, Software & Production Engineer**, is recorded in `change_log.md`.
 
-The official current title is **Production Support Engineer** (`officialTitle`). It is the only value used as JSON-LD `jobTitle`. "DevOps & Automation" remains a transparent résumé descriptor on the experience line.
+The official current title is **Senior Production Support Engineer** (`officialTitle`), promoted September 2026 (previously `Production Support Engineer`). It is the only value used as JSON-LD `jobTitle`. "DevOps & Automation" remains a transparent résumé descriptor on the experience line.
 
 ## Targeted résumés
 

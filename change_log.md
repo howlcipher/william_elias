@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-09
+
+### Senior promotion reflect and career progression
+
+* Updated current Stellantis role to **Senior Production Support Engineer | DevOps & Automation** with official title **Senior Production Support Engineer** and canonical promotion metadata (`effectiveDate: 2026-09`, `previousOfficialTitle: Production Support Engineer`).
+* Preserved employer tenure (Feb 2023 - Present) and unchanged job duties across all existing achievement IDs (`ach-cicd-standardization`, `ach-cicd-validation`, etc.).
+* Rendered career progression line ("Promoted September 2026; previously Production Support Engineer") in the website experience timeline and in both targeted PDFs without backdating senior status.
+* Surfaced current role (`hero-current-role`) in the hero section below employer.
+* Updated JSON-LD `Person.jobTitle` to the confirmed official title **Senior Production Support Engineer**.
+* Extended PDF generator with measured wrapping (`multi_cell`) and height reservation for title and progression lines to preserve two-page limits and ATS reading order.
+* Retained legacy `William_Elias_Resume.pdf` as a byte-identical copy of `William_Elias_Production_DevOps_Resume.pdf`.
+* Added focused test coverage in `tests/test_promotion.py` for promotion metadata validation, chronology, JSON-LD, website rendering, and targeted PDF rendering. Updated obsolete title expectations across tests.
+
 ## 2026-10-03
 
 ### Nav, education card, and banner freshness

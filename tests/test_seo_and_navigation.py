@@ -82,7 +82,7 @@ class TestJsonLd:
 
     def test_json_ld_job_title_is_the_official_employer_title(self):
         person = self._extract_json_ld()["mainEntity"]
-        assert person["jobTitle"] == "Production Support Engineer"
+        assert person["jobTitle"] == "Senior Production Support Engineer"
         for positioning in ("Software & Automation Engineer", "Platform Engineer",
                             "Developer Productivity Engineer", "DevOps Engineer",
                             "Production & DevOps Automation Engineer"):
