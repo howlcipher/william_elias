@@ -2,7 +2,7 @@
 
 The site leads with what William builds, keeps every operational metric but
 places it inside the engineering work it describes, separates professional
-from independent work, and explains the two targeted resumes near the top.
+from independent work, and explains the targeted resumes near the top.
 """
 import html
 import json
@@ -29,8 +29,8 @@ def section(page, section_id):
 
 def test_what_i_build_names_the_three_artifact_families_before_any_metric(page, cfg):
     build = section(page, "what-i-build")
-    for name in ("Self-Service Deployment CLI", "Internal Production-Support Software",
-                 "Python Developer &amp; Operations Tooling"):
+    for name in ("Self-Service Deployment CLI", "Internal Web Application",
+                 "Python Developer &amp; Automation Tooling"):
         assert name in build
     for tech in ("Go", ".NET 8", "Blazor", "Python", "FastAPI"):
         assert f"<span>{html.escape(tech)}</span>" in build
@@ -140,11 +140,17 @@ def test_current_role_links_to_selected_work_instead_of_repeating_case_studies(p
         assert html.escape(achievement["text"], quote=False) in experience
 
 
-def test_exactly_two_resume_paths_and_no_persona_switcher(page):
+def test_two_primary_resume_paths_one_secondary_and_no_persona_switcher(page):
     variants = load_variants()["variants"]
-    assert len(variants) == 2
+    assert len(variants) == 3
+    listing = {name: v.get("listing", "primary") for name, v in variants.items()}
+    assert listing == {"software_platform": "primary", "security_automation": "primary",
+                       "production_devops": "secondary"}
     hrefs = set(re.findall(r'data-resume-variant="([a-z_]+)"', page))
     assert hrefs == set(variants)
+    # The hero offers only the two primary résumés.
+    hero = page.split('id="hero-content-target"')[1].split("</header>")[0]
+    assert set(re.findall(r'data-resume-variant="([a-z_]+)"', hero)) == {"software_platform", "security_automation"}
     for marker in ("data-persona", "role-switch", "persona-toggle", "site-mode"):
         assert marker not in page
 

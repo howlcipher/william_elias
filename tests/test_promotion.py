@@ -60,7 +60,7 @@ def test_website_and_json_ld_render_promotion_and_official_title():
     assert person["jobTitle"] == "Senior Production Support Engineer"
 
 
-@pytest.mark.parametrize("variant", ["software_platform", "production_devops"])
+@pytest.mark.parametrize("variant", ["software_platform", "security_automation", "production_devops"])
 def test_targeted_pdf_keeps_title_progression_and_shared_achievements(tmp_path, variant):
     config = promoted_config()
     output = tmp_path / f"{variant}.pdf"

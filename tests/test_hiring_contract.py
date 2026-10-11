@@ -130,7 +130,7 @@ def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visibl
     title = cfg["personal"]["title"]
     assert title == "Software & Automation Engineer"
     assert cfg["personal"]["supporting"] == (
-        "Developer Tooling • Platform Engineering • CI/CD • Production Engineering"
+        "Software Development • Developer Tooling • Security Automation • Platform Engineering"
     )
     # DevOps and Production roles stay discoverable through descriptive fields
     # and the Production & DevOps résumé, not through the broad site headline.

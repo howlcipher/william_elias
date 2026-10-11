@@ -12,6 +12,7 @@ ARTIFACTS = (
     "config.js", "index.html", "robots.txt", "sitemap.xml", "preview.jpg",
     "assets/images/linkedin-banner.png",
     "William_Elias_Software_Platform_Resume.pdf",
+    "William_Elias_Security_Automation_Resume.pdf",
     "William_Elias_Production_DevOps_Resume.pdf",
     "William_Elias_Resume.pdf",
 )

@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 6591
+/Length 6600
 >>
 stream
 2 J
@@ -61,7 +61,7 @@ BT 238.50 751.60 Td (WILLIAM ELIAS) Tj ET
 BT /F1 11.00 Tf ET
 BT 199.97 735.70 Td (SOFTWARE & AUTOMATION ENGINEER) Tj ET
 BT /F2 9.50 Tf ET
-BT 151.46 722.65 Td (Developer Tooling | Platform Engineering | Python | Go | C#/.NET | CI/CD) Tj ET
+BT 121.62 722.65 Td (Developer Tooling | Internal Applications | Platform Engineering | Python | Go | C#/.NET) Tj ET
 BT /F3 10.00 Tf ET
 BT 142.16 709.00 Td (Michigan) Tj ET
 BT 182.17 709.00 Td ( | ) Tj ET
@@ -77,12 +77,12 @@ BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 653.50 Td (Software and automation engineer building developer tools, internal applications, and delivery automation, with software and) Tj ET
-BT 26.83 640.50 Td (automation work since 2020 and a broader infrastructure and networking career dating to 2015. Builds a Go self-service) Tj ET
-BT 26.83 627.50 Td (deployment CLI, Python/FastAPI dashboards and Azure DevOps REST automation, and a C#/.NET Blazor internal) Tj ET
-BT 26.83 614.50 Td (production-support application. Turns CI/CD standardization, credential remediation, and recurring production-support work) Tj ET
-BT 26.83 601.50 Td (into reusable pipeline templates, CLI tooling, and scheduled automation. Adds security depth through credential-remediation) Tj ET
-BT 26.83 588.50 Td (tooling, a scoped OAuth 2.1 resource server with JWT/JWKS validation, and in-progress M.S. Cyber Defense studies.) Tj ET
+BT 26.83 653.50 Td (Software and automation engineer building developer tools, internal applications, and automation, with software and) Tj ET
+BT 26.83 640.50 Td (automation work since 2020 and production and infrastructure experience dating to 2015. Builds a Go self-service deployment) Tj ET
+BT 26.83 627.50 Td (CLI, Python/FastAPI dashboards and Azure DevOps REST automation, and a C#/.NET Blazor internal application with access) Tj ET
+BT 26.83 614.50 Td (policies and audit history. Turns CI/CD standardization, credential remediation, and recurring manual work into reusable) Tj ET
+BT 26.83 601.50 Td (pipeline templates, CLI tooling, and scheduled automation. Adds security depth through credential-remediation tooling, a) Tj ET
+BT 26.83 588.50 Td (scoped OAuth 2.1 resource server with JWT/JWKS validation, and in-progress M.S. Cyber Defense studies.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 564.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
 24.00 561.00 m 588.00 561.00 l S
@@ -98,26 +98,26 @@ BT /F3 10.00 Tf ET
 BT 38.83 508.50 Td (- Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup,) Tj ET
 BT 38.83 495.50 Td (Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and) Tj ET
 BT 38.83 482.50 Td (post-deployment validation.) Tj ET
-BT 38.83 469.50 Td (- Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST) Tj ET
-BT 38.83 456.50 Td (API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering) Tj ET
-BT 38.83 443.50 Td (search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized) Tj ET
-BT 38.83 430.50 Td (the team on uv for Python dependency and tooling management.) Tj ET
-BT 38.83 417.50 Td (- Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and) Tj ET
-BT 38.83 404.50 Td (SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live) Tj ET
-BT 38.83 391.50 Td (configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking.) Tj ET
-BT 38.83 378.50 Td (- Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable) Tj ET
-BT 38.83 365.50 Td (pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application) Tj ET
-BT 38.83 352.50 Td (repositories.) Tj ET
-BT 38.83 339.50 Td (- Executed and validated builds across all 28 repositories \(27 passed, with the remaining failure diagnosed and logged\);) Tj ET
-BT 38.83 326.50 Td (dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by) Tj ET
-BT 38.83 313.50 Td (upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14) Tj ET
-BT 38.83 300.50 Td (already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration) Tj ET
-BT 38.83 287.50 Td (drift, and false-success states.) Tj ET
-BT 38.83 274.50 Td (- Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub) Tj ET
-BT 38.83 261.50 Td (historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed) Tj ET
-BT 38.83 248.50 Td (secrets in approximately 25 seconds; remediation records are complete.) Tj ET
-BT 38.83 235.50 Td (- Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit) Tj ET
-BT 38.83 222.50 Td (token-validation-bypass defenses.) Tj ET
+BT 38.83 469.50 Td (- Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and) Tj ET
+BT 38.83 456.50 Td (SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live) Tj ET
+BT 38.83 443.50 Td (configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking.) Tj ET
+BT 38.83 430.50 Td (- Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST) Tj ET
+BT 38.83 417.50 Td (API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering) Tj ET
+BT 38.83 404.50 Td (search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized) Tj ET
+BT 38.83 391.50 Td (the team on uv for Python dependency and tooling management.) Tj ET
+BT 38.83 378.50 Td (- Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub) Tj ET
+BT 38.83 365.50 Td (historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed) Tj ET
+BT 38.83 352.50 Td (secrets in approximately 25 seconds; remediation records are complete.) Tj ET
+BT 38.83 339.50 Td (- Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit) Tj ET
+BT 38.83 326.50 Td (token-validation-bypass defenses.) Tj ET
+BT 38.83 313.50 Td (- Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable) Tj ET
+BT 38.83 300.50 Td (pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application) Tj ET
+BT 38.83 287.50 Td (repositories.) Tj ET
+BT 38.83 274.50 Td (- Executed and validated builds across all 28 repositories \(27 passed, with the remaining failure diagnosed and logged\);) Tj ET
+BT 38.83 261.50 Td (dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by) Tj ET
+BT 38.83 248.50 Td (upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14) Tj ET
+BT 38.83 235.50 Td (already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration) Tj ET
+BT 38.83 222.50 Td (drift, and false-success states.) Tj ET
 BT 38.83 209.50 Td (- Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly) Tj ET
 BT 38.83 196.50 Td (in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and) Tj ET
 BT 38.83 183.50 Td (troubleshooting automation.) Tj ET
@@ -167,7 +167,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 6509
+/Length 6540
 >>
 stream
 2 J
@@ -221,21 +221,21 @@ BT 38.83 587.50 Td (integration, and automated post-deployment verification are 
 BT /F2 9.00 Tf ET
 q BT 38.83 575.30 Td 0.3529 0.3529 0.3529 rg (Tech: Go, Azure DevOps, REST APIs, CI/CD, IIS) Tj ET Q
 BT /F1 10.50 Tf ET
-BT 26.83 560.35 Td (Python Developer Productivity Tooling) Tj ET
+BT 26.83 560.35 Td (Internal Web Application with Access Policies & Audit \(C#/.NET\)) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 547.50 Td (- Sole-authored Python tools parse failed integration payloads into a structured DBA-approval queue, run scheduled) Tj ET
-BT 38.83 534.50 Td (query-to-email reports, and summarize processing errors embedded in XML integration logs; repository-discovery and) Tj ET
-BT 38.83 521.50 Td (Git-history remediation tooling supports single-repository and whole-project modes with interchangeable rewrite engines.) Tj ET
+BT 38.83 547.50 Td (- Change-safety features in the modular .NET 8 Blazor Web App include DBA approve-only deployment scripts, live) Tj ET
+BT 38.83 534.50 Td (configuration/object diffing for pre-CAB and pre-deployment review, per-module access policies, and retained audit history;) Tj ET
+BT 38.83 521.50 Td (integrated service-desk request tracking keeps operational workflows traceable.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 509.30 Td 0.3529 0.3529 0.3529 rg (Tech: Python, REST APIs, Azure DevOps, Automation, uv) Tj ET Q
+q BT 38.83 509.30 Td 0.3529 0.3529 0.3529 rg (Tech: C#, .NET 8, Blazor, ASP.NET Core, SQL Server, SQLite) Tj ET Q
 BT /F1 10.50 Tf ET
-BT 26.83 494.35 Td (Internal Production-Support Software \(C#/.NET\)) Tj ET
+BT 26.83 494.35 Td (Python Developer Productivity Tooling) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 481.50 Td (- Change-safety features in the modular .NET 8 Blazor Web App include DBA approve-only deployment scripts, live) Tj ET
-BT 38.83 468.50 Td (configuration/object diffing for pre-CAB and pre-deployment review, per-module access policies, and retained audit history;) Tj ET
-BT 38.83 455.50 Td (integrated service-desk request tracking keeps operational workflows traceable.) Tj ET
+BT 38.83 481.50 Td (- Sole-authored Python tools parse failed integration payloads into a structured DBA-approval queue, run scheduled) Tj ET
+BT 38.83 468.50 Td (query-to-email reports, and summarize processing errors embedded in XML integration logs; repository-discovery and) Tj ET
+BT 38.83 455.50 Td (Git-history remediation tooling supports single-repository and whole-project modes with interchangeable rewrite engines.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 443.30 Td 0.3529 0.3529 0.3529 rg (Tech: C#, .NET 8, Blazor, ASP.NET Core, SQL Server, SQLite) Tj ET Q
+q BT 38.83 443.30 Td 0.3529 0.3529 0.3529 rg (Tech: Python, REST APIs, Azure DevOps, Automation, uv) Tj ET Q
 BT /F1 11.00 Tf ET
 BT 26.83 417.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
 24.00 414.00 m 588.00 414.00 l S
@@ -245,14 +245,14 @@ BT /F3 10.00 Tf ET
 BT 26.83 387.50 Td (github.com/howlcipher/howlplane) Tj ET
 BT 38.83 374.50 Td (- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and) Tj ET
 BT 38.83 361.50 Td (runs deterministic verification.) Tj ET
-BT 38.83 348.50 Td (- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared) Tj ET
-BT 38.83 335.50 Td (project context and CI/security checks.) Tj ET
+BT 38.83 348.50 Td (- Added durable evidence records, human approval gates for consequential actions, and CI evidence bound to the) Tj ET
+BT 38.83 335.50 Td (pull-request head commit.) Tj ET
 BT /F1 10.50 Tf ET
 BT 26.83 320.35 Td (HowlFrame) Tj ET
 BT /F3 10.00 Tf ET
 BT 26.83 307.50 Td (github.com/howlcipher/howlframe) Tj ET
 BT 38.83 294.50 Td (- Built an experimental language and compiler toolchain in Go with a lexer, parser, typed AST/IR, bytecode VM,) Tj ET
-BT 38.83 281.50 Td (WebAssembly target, and capability-based security model; production flip deferred.) Tj ET
+BT 38.83 281.50 Td (WebAssembly target, and a capability-based security model enforced by the VM.) Tj ET
 BT 38.83 268.50 Td (- Explores constrained AI code generation against typed IR, with local Ollama integration.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 242.70 Td (EARLIER EXPERIENCE) Tj ET
@@ -281,7 +281,7 @@ BT /F1 11.00 Tf ET
 BT 26.83 102.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
 24.00 99.00 m 588.00 99.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 85.50 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
+BT 26.83 85.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
 BT 26.83 72.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
 BT 26.83 59.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
 BT 26.83 46.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
@@ -333,7 +333,7 @@ endobj
 /Author (William Elias)
 /CreationDate (D:20240101000000Z)
 /Creator (generate_resume_pdf.py)
-/Title (William Elias - Software & Platform Resume)
+/Title (William Elias - Software Engineering & Developer Tools Resume)
 >>
 endobj
 xref
@@ -343,21 +343,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000007526 00000 n 
-0000007917 00000 n 
-0000014478 00000 n 
-0000014580 00000 n 
-0000014685 00000 n 
-0000014782 00000 n 
-0000014890 00000 n 
-0000014998 00000 n 
+0000007535 00000 n 
+0000007926 00000 n 
+0000014518 00000 n 
+0000014620 00000 n 
+0000014725 00000 n 
+0000014822 00000 n 
+0000014930 00000 n 
+0000015038 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<0C214F60BCCED2E279A2F8D4FFA43ED3><0C214F60BCCED2E279A2F8D4FFA43ED3>]
+/ID [<11AC1548BB1469A960C540CCF6CF4FDB><11AC1548BB1469A960C540CCF6CF4FDB>]
 >>
 startxref
-15164
+15223
 %%EOF

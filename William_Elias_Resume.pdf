@@ -164,7 +164,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 5900
+/Length 5919
 >>
 stream
 2 J
@@ -236,8 +236,8 @@ BT /F3 10.00 Tf ET
 BT 26.83 387.50 Td (github.com/howlcipher/howlplane) Tj ET
 BT 38.83 374.50 Td (- Built a Python/Go engineering control plane that routes work across coding agents, reconciles independent reviews, and) Tj ET
 BT 38.83 361.50 Td (runs deterministic verification.) Tj ET
-BT 38.83 348.50 Td (- Added durable evidence recording and human-controlled authority boundaries for consequential actions, with shared) Tj ET
-BT 38.83 335.50 Td (project context and CI/security checks.) Tj ET
+BT 38.83 348.50 Td (- Added durable evidence records, human approval gates for consequential actions, and CI evidence bound to the) Tj ET
+BT 38.83 335.50 Td (pull-request head commit.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 309.70 Td (EARLIER EXPERIENCE) Tj ET
 24.00 306.00 m 588.00 306.00 l S
@@ -265,7 +265,7 @@ BT /F1 11.00 Tf ET
 BT 26.83 169.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
 24.00 166.00 m 588.00 166.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 152.50 Td (M.S. Cyber Defense \(In Progress\) - Dakota State University) Tj ET
+BT 26.83 152.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
 BT 26.83 139.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
 BT 26.83 126.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
 BT 26.83 113.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
@@ -329,19 +329,19 @@ xref
 0000000883 00000 n 
 0000007582 00000 n 
 0000007823 00000 n 
-0000013775 00000 n 
-0000013877 00000 n 
-0000013982 00000 n 
-0000014079 00000 n 
-0000014187 00000 n 
-0000014295 00000 n 
+0000013794 00000 n 
+0000013896 00000 n 
+0000014001 00000 n 
+0000014098 00000 n 
+0000014206 00000 n 
+0000014314 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<D102EF451230B4E9543B7E74840376C5><D102EF451230B4E9543B7E74840376C5>]
+/ID [<8904C67893D917F34C71EE20FA2EE060><8904C67893D917F34C71EE20FA2EE060>]
 >>
 startxref
-14461
+14480
 %%EOF

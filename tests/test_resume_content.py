@@ -34,22 +34,26 @@ class TestHeadlineAndPositioning:
         cfg = load_config()
         assert cfg["personal"]["title"] == "Software & Automation Engineer"
         supporting = cfg["personal"]["supporting"]
-        for term in ("Developer Tooling", "Platform Engineering", "CI/CD", "Production Engineering"):
+        for term in ("Software Development", "Developer Tooling", "Security Automation", "Platform Engineering"):
             assert term in supporting
+        # Production and DevOps depth stays discoverable, but not in the headline.
+        for term in ("Production Support", "DevOps"):
+            assert term not in supporting
 
     def test_public_headline_does_not_lead_with_production_support(self):
         cfg = load_config()
         assert "Production Support" not in cfg["personal"]["title"]
 
-    def test_tagline_states_software_automation_and_reliability_positioning(self):
+    def test_tagline_states_software_automation_and_security_positioning(self):
         cfg = load_config()
         tagline = cfg["personal"]["tagline"]
         assert "Software" in tagline or "Building" in tagline
         assert "Automating" in tagline or "Automation" in tagline
-        assert "Reliable" in tagline or "Reliability" in tagline
+        assert "Secure" in tagline or "Security" in tagline
 
     @pytest.mark.parametrize("variant,opening", [
         ("software_platform", "Software and automation engineer building developer tools"),
+        ("security_automation", "Software and automation engineer building security tooling and automation"),
         ("production_devops", "Production and DevOps automation engineer working across production operations"),
     ])
     def test_variant_summary_leads_with_its_positioning(self, variant, opening):
@@ -295,8 +299,13 @@ class TestPdfEngineeringHighlights:
     EXPECTED_HIGHLIGHTS = {
         "software_platform": [
             "Self-Service Deployment CLI (Go)",
+            "Internal Web Application with Access Policies & Audit (C#/.NET)",
             "Python Developer Productivity Tooling",
-            "Internal Production-Support Software (C#/.NET)",
+        ],
+        "security_automation": [
+            "Credential Discovery & Git-History Remediation (Python)",
+            "Scoped OAuth 2.1 Resource Server (Python)",
+            "Internal Web Application with Access Policies & Audit (C#/.NET)",
         ],
         "production_devops": [
             "Production Reliability & Observability",
@@ -386,21 +395,30 @@ class TestEducationHonesty:
         cfg = load_config()
         blob = "\n".join(_extract_pdf_pages(cfg, tmp_path))
         assert "In Progress" in blob
+        assert "Expected Winter 2027" in blob
         assert "Previously Held" in blob
+
+    @pytest.mark.parametrize("variant", VARIANT_NAMES)
+    def test_expected_graduation_reaches_every_variant(self, variant_pdfs, variant):
+        text = variant_pdfs[variant]["text"]
+        assert "M.S. Cyber Defense (In Progress, Second Year) - Dakota State University (Expected Winter 2027)" in text
+        # Never presented as conferred.
+        assert "M.S. Cyber Defense - " not in text
 
     def test_missing_years_are_not_invented_and_in_progress_stays_visible(self):
         cfg = load_config()
         page = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         education = page.split('id="education"')[1].split("</section>")[0]
         # The degree heading already says "In Progress". The school line is not
-        # a second copy, and a blank year is not filled in.
+        # a second copy; it carries only the expected completion term, with no
+        # invented month or day.
         assert education.count("In Progress") == 1
-        assert "<h3>M.S. Cyber Defense (In Progress)</h3>" in education
-        assert "<p>Dakota State University</p>" in education
+        assert "<h3>M.S. Cyber Defense (In Progress, Second Year)</h3>" in education
+        assert "<p>Dakota State University (Expected Winter 2027)</p>" in education
         assert "Dakota State University (In Progress)" not in education
         assert "Cisco Networking Academy (2014 - 2017)" in education
         masters = self._entry(cfg, "M.S.")
-        assert masters["year"] == ""
+        assert masters["year"] == "Expected Winter 2027"
         for school in ("Colorado State University Global Campus", "Rochester College"):
             assert school in education
             assert f"{school} (" not in education
@@ -496,6 +514,7 @@ class TestSelectedOpenSourceProjects:
 
     @pytest.mark.parametrize("variant,expected", [
         ("software_platform", {"HowlPlane", "HowlFrame"}),
+        ("security_automation", {"Password Arena", "HowlPlane"}),
         ("production_devops", {"HowlPlane"}),
     ])
     def test_pdf_includes_only_selected_projects(self, variant_pdfs, variant, expected):

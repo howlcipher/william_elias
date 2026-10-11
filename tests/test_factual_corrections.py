@@ -137,6 +137,7 @@ def test_pdf_software_selection_retains_backend_strength_without_web_bloat(confi
 
 EXPECTED_VARIANT_PROJECTS = {
     "software_platform": ["HowlPlane", "HowlFrame"],
+    "security_automation": ["Password Arena", "HowlPlane"],
     "production_devops": ["HowlPlane"],
 }
 

@@ -17,8 +17,10 @@ from scripts.generate_resume_pdf import (
 LEGACY_PDF = "William_Elias_Resume.pdf"
 EXPECTED_FILES = {
     "software_platform": "William_Elias_Software_Platform_Resume.pdf",
+    "security_automation": "William_Elias_Security_Automation_Resume.pdf",
     "production_devops": "William_Elias_Production_DevOps_Resume.pdf",
 }
+PRIMARY = ("software_platform", "security_automation")
 
 
 @pytest.fixture
@@ -37,8 +39,12 @@ def _numbers(text):
 
 # --- Variant contract -------------------------------------------------------
 
-def test_two_targeted_variants_and_one_compatibility_alias(variant_doc):
+def test_three_targeted_variants_and_one_compatibility_alias(variant_doc):
     assert {n: v["file"] for n, v in variant_doc["variants"].items()} == EXPECTED_FILES
+    assert list(variant_doc["variants"]) == list(EXPECTED_FILES)
+    listed = {n: v.get("listing", "primary") for n, v in variant_doc["variants"].items()}
+    assert tuple(n for n, value in listed.items() if value == "primary") == PRIMARY
+    assert listed["production_devops"] == "secondary"
     assert variant_doc["compatibility"] == {"file": LEGACY_PDF, "variant": "production_devops"}
     assert LEGACY_PDF not in {v["file"] for v in variant_doc["variants"].values()}
 
@@ -136,6 +142,20 @@ def test_variant_cannot_carry_its_own_professional_records(config, variant_doc, 
         validate_variants(config, variant_doc)
 
 
+@pytest.mark.parametrize("value", ["featured", "", True, None])
+def test_variant_listing_must_be_primary_or_secondary(config, variant_doc, value):
+    variant_doc["variants"]["security_automation"]["listing"] = value
+    with pytest.raises(ValueError, match="listing"):
+        validate_variants(config, variant_doc)
+
+
+def test_at_least_one_variant_must_be_primary(config, variant_doc):
+    for variant in variant_doc["variants"].values():
+        variant["listing"] = "secondary"
+    with pytest.raises(ValueError, match="at least one variant must be listed as primary"):
+        validate_variants(config, variant_doc)
+
+
 def test_variant_presentation_text_cannot_become_prose(config, variant_doc):
     variant_doc["variants"]["production_devops"]["supporting"] = "Built and owned the entire Azure cloud platform. " * 3
     with pytest.raises(ValueError, match="short presentation text"):
@@ -151,7 +171,8 @@ def test_variants_do_not_duplicate_canonical_prose(config, variant_doc):
     canonical_text += [h for p in config["projects"] for h in p["highlights"]]
     for variant in variant_doc["variants"].values():
         assert set(variant) <= {"label", "audience", "file", "title", "supporting", "summaryStatementIds",
-                                "experienceAchievementIds", "skillIds", "skillTags", "highlightIds", "projectIds"}
+                                "experienceAchievementIds", "skillIds", "skillTags", "highlightIds", "projectIds",
+                                "listing"}
         for key in VARIANT_TEXT_KEYS:
             assert all(variant[key] not in text for text in canonical_text if len(variant[key]) > 40)
             assert len(variant[key]) <= 90
@@ -256,17 +277,40 @@ def test_qualifiers_survive_into_each_pdf(variant_pdfs, variant):
 def test_software_platform_leads_with_software_and_tooling(variant_pdfs, variant_doc):
     text = variant_pdfs["software_platform"]["text"]
     assert "SOFTWARE & AUTOMATION ENGINEER" in text
-    assert "Developer Tooling | Platform Engineering | Python | Go | C#/.NET | CI/CD" in text
+    assert "Developer Tooling | Internal Applications | Platform Engineering | Python | Go | C#/.NET" in text
     experience = text.split("PROFESSIONAL EXPERIENCE")[1]
     assert experience.index("Go-based self-service deployment CLI") < experience.index("CI/CD standardization program")
     assert experience.index("Python/FastAPI") < experience.index("CI/CD standardization program")
     for term in ("initialization/scaffolding", "host auditing", "post-deployment verification", "HowlFrame",
-                 "bytecode VM", "WebAssembly", "experimental", "production flip deferred",
+                 "bytecode VM", "WebAssembly", "experimental",
                  "Blazor", "ASP.NET Core", "SQLite", "uv", "FastAPI"):
         assert term in text, term
+    # HowlFrame stays labelled experimental, in plain language rather than internal jargon.
+    assert "production flip" not in text
     expertise = text.split("CORE EXPERTISE")[1]
     assert expertise.lstrip().startswith("Software & Backend")
     assert "Infrastructure & Application Operations" not in text
+
+
+def test_security_automation_leads_with_security_tooling(variant_pdfs):
+    text = variant_pdfs["security_automation"]["text"]
+    assert "SOFTWARE & SECURITY AUTOMATION ENGINEER" in text
+    assert "Security Automation | Credential Remediation | OAuth / JWT | Python | Go | C#/.NET" in text
+    experience = text.split("PROFESSIONAL EXPERIENCE")[1]
+    assert experience.index("exposed credentials") < experience.index("OAuth 2.1 resource server")
+    assert experience.index("OAuth 2.1 resource server") < experience.index("CI/CD standardization program")
+    assert text.split("CORE EXPERTISE")[1].lstrip().startswith("Security & Identity")
+    highlights = text.split("SELECTED ENGINEERING HIGHLIGHTS")[1].split("SELECTED OPEN-SOURCE")[0]
+    assert highlights.lstrip().startswith("Credential Discovery & Git-History Remediation")
+    assert "Password Arena" in text and "synthetic" in text
+    # Security automation is software work, not security operations.
+    lowered = text.lower()
+    for term in ("penetration test", "pentest", "red team", "soc analyst", "threat hunting",
+                 "security architect", "incident responder", "zero trust", "key vault", "rotated"):
+        assert term not in lowered, term
+    # The OAuth work keeps its "designed" qualifier rather than claiming deployment.
+    assert "Designed a scoped OAuth 2.1 resource server" in text
+    assert "deployed oauth" not in lowered
 
 
 def test_production_devops_leads_with_delivery_and_reliability(variant_pdfs):
@@ -307,7 +351,7 @@ def generated(tmp_path_factory):
     return directory, generate_all(directory)
 
 
-def test_generation_writes_all_three_filenames(generated):
+def test_generation_writes_every_variant_and_the_alias(generated):
     directory, written = generated
     assert sorted(p.name for p in written) == sorted([*EXPECTED_FILES.values(), LEGACY_PDF])
     for path in written:
@@ -330,6 +374,7 @@ def test_legacy_pdf_is_a_byte_copy_of_the_production_devops_variant(generated):
     alias = (directory / LEGACY_PDF).read_bytes()
     assert alias == (directory / EXPECTED_FILES["production_devops"]).read_bytes()
     assert alias != (directory / EXPECTED_FILES["software_platform"]).read_bytes()
+    assert alias != (directory / EXPECTED_FILES["security_automation"]).read_bytes()
     # The checked-in alias cannot drift from its source either.
     assert (SITE_DIR / LEGACY_PDF).read_bytes() == (SITE_DIR / EXPECTED_FILES["production_devops"]).read_bytes()
 
@@ -371,6 +416,9 @@ ATS_KEYWORDS = {
     "software_platform": ("Software", "Automation", "Developer Tooling", "Platform Engineering", "Python", "Go",
                           "C#", ".NET", "ASP.NET Core", "REST API", "CI/CD", "Azure DevOps", "FastAPI",
                           "self-service", "Security", "OAuth"),
+    "security_automation": ("Security Automation", "Credential Remediation", "Git History", "BFG Repo-Cleaner",
+                            "OAuth 2.1", "JWT", "JWKS", "alg=none", "Audit Controls", "access policies",
+                            "Python", "Go", "C#", "Cyber Defense", "Password Arena", "DevOps"),
     "production_devops": ("DevOps", "Azure DevOps", "CI/CD", "Release", "Production", "Reliability", "KQL",
                           "Application Insights", "Azure Monitor", "Python", "PowerShell", "IIS",
                           "Windows Server", "SQL Server", "Credential Remediation", "RCA"),
@@ -423,14 +471,21 @@ def test_ats_keywords_are_text_not_graphics(variant_pdfs, variant):
 
 # --- Website ---------------------------------------------------------------
 
-def test_website_offers_only_the_two_targeted_resumes():
+def test_website_offers_two_primary_resumes_and_one_secondary():
     page = (SITE_DIR / "index.html").read_text(encoding="utf-8")
     pdf_links = re.findall(r'href="([^"]+\.pdf)"', page)
     assert set(pdf_links) == set(EXPECTED_FILES.values())
     assert f'href="{LEGACY_PDF}"' not in page
-    for scope in ('class="resume-actions"', 'id="resume-downloads"'):
-        block = page.split(scope)[1].split("</div>")[0]
-        assert [f for f in EXPECTED_FILES.values() if f in block] == list(EXPECTED_FILES.values())
+    primary_files = [EXPECTED_FILES[name] for name in PRIMARY]
+    hero = page.split('class="resume-actions"')[1].split("</div>")[0]
+    assert [f for f in EXPECTED_FILES.values() if f in hero] == primary_files
+    choice = page.split('id="resume-downloads"')[1].split("</section>")[0]
+    assert [f for f in EXPECTED_FILES.values() if f in choice] == list(EXPECTED_FILES.values())
+    secondary = choice.split('resume-secondary-actions')[1]
+    assert EXPECTED_FILES["production_devops"] in secondary
+    assert not any(f in secondary for f in primary_files)
+    mobile = page.split('<ul class="mobile-nav-links">')[1].split("</ul>")[0]
+    assert [f for f in EXPECTED_FILES.values() if f in mobile] == primary_files
     assert 'data-resume-variant="software_platform"' in page
     assert "Resume PDF" not in page
 

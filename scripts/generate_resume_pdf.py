@@ -32,7 +32,11 @@ VARIANT_REQUIRED_KEYS = (
     "label", "audience", "file", "title", "supporting", "summaryStatementIds",
     "experienceAchievementIds", "skillIds", "highlightIds", "projectIds",
 )
-VARIANT_OPTIONAL_KEYS = ("skillTags",)
+VARIANT_OPTIONAL_KEYS = ("skillTags", "listing")
+# How the website offers a variant: "primary" résumés are the headline choices
+# (hero, mobile menu, résumé section); a "secondary" one stays generated and
+# linked from the résumé section only. Omitted means primary.
+VARIANT_LISTINGS = ("primary", "secondary")
 # Presentation-only strings a variant may carry. Everything factual comes from
 # canonical items referenced by ID.
 VARIANT_TEXT_KEYS = ("label", "audience", "title", "supporting")
@@ -281,6 +285,8 @@ def validate_variants(config: dict, variants: dict):
         if not re.fullmatch(r"[A-Za-z_]+\.pdf", variant["file"]) or variant["file"] in files:
             raise ValueError(f"Validation failed: '{where}.file' must be a unique PDF filename")
         files.add(variant["file"])
+        if variant.get("listing", "primary") not in VARIANT_LISTINGS:
+            raise ValueError(f"Validation failed: '{where}.listing' must be one of {list(VARIANT_LISTINGS)}")
 
         _unique_id_list(variant["summaryStatementIds"], f"{where}.summaryStatementIds", index, "positioningStatements")
         skills = _unique_id_list(variant["skillIds"], f"{where}.skillIds", index, "skills")
@@ -318,6 +324,8 @@ def validate_variants(config: dict, variants: dict):
             or not re.fullmatch(r"[A-Za-z_]+\.pdf", str(compatibility["file"]))
             or compatibility["file"] in files):
         raise ValueError("Validation failed: 'compatibility' must alias a defined variant under a distinct PDF filename")
+    if not any(v.get("listing", "primary") == "primary" for v in defined.values()):
+        raise ValueError("Validation failed: at least one variant must be listed as primary")
 
 
 def resolve_variant(config: dict, variants: dict, name: str) -> dict:
