@@ -27,9 +27,15 @@ def load_resume_variants():
     with open(SITE_DIR / 'resume_variants.json', 'r') as f:
         variants = json.load(f)['variants']
     return [
-        {'key': key, 'label': v['label'], 'audience': v['audience'], 'file': v['file']}
+        {'key': key, 'label': v['label'], 'audience': v['audience'], 'file': v['file'],
+         'listing': v.get('listing', 'primary')}
         for key, v in variants.items()
     ]
+
+
+def primary_resumes(resumes):
+    """The headline résumé choices; secondary variants appear only in the résumé section."""
+    return [r for r in resumes or [] if r.get('listing', 'primary') == 'primary']
 
 
 def render_resume_links(resumes, link_class, with_audience=False):
@@ -89,7 +95,7 @@ def render_hero(personal, resumes=(), employer=""):
             '</div>'
         )
 
-    resume_links = render_resume_links(resumes, 'contact-pill primary-action resume-action')
+    resume_links = render_resume_links(primary_resumes(resumes), 'contact-pill primary-action resume-action')
     if resume_links:
         parts.append(
             '<div class="resume-actions" role="group" aria-label="Download a targeted resume (PDF)">'
@@ -327,7 +333,7 @@ def render_projects(projects, provenance_label=''):
 
 def render_nav_resume(resumes):
     # The navbar has room for one compact control at every width, so it jumps
-    # to the labelled two-résumé choice instead of picking a variant itself.
+    # to the labelled résumé choice instead of picking a variant itself.
     if not resumes:
         return ''
     return (
@@ -339,18 +345,27 @@ def render_nav_resume(resumes):
 def render_mobile_nav_resume(resumes):
     return ''.join(
         f'<li>{render_resume_links([resume], "mobile-link mobile-resume-link")}</li>'
-        for resume in resumes or []
+        for resume in primary_resumes(resumes)
     )
 
 
 def render_cta_resumes(resumes, intro=''):
-    links = render_resume_links(resumes, 'contact-pill primary-action resume-action', with_audience=True)
+    links = render_resume_links(primary_resumes(resumes), 'contact-pill primary-action resume-action', with_audience=True)
     if not links:
         return ''
     intro_html = f'<p class="resume-choice-intro">{esc(intro)}</p>' if intro else ''
+    secondary = [r for r in resumes or [] if r.get('listing', 'primary') == 'secondary']
+    secondary_links = render_resume_links(secondary, 'contact-pill resume-secondary', with_audience=True)
+    secondary_html = (
+        '<p class="resume-choice-label resume-secondary-label" id="resume-secondary-label">'
+        'Also available for production and DevOps roles:</p>'
+        f'<div class="resume-choice-actions resume-secondary-actions" role="group" '
+        f'aria-labelledby="resume-secondary-label">{secondary_links}</div>'
+    ) if secondary_links else ''
     return (
         f'{intro_html}<p class="resume-choice-label" id="resume-choice-label">Choose the resume that fits the role:</p>'
         f'<div class="resume-choice-actions" role="group" aria-labelledby="resume-choice-label">{links}</div>'
+        f'{secondary_html}'
     )
 
 
@@ -517,10 +532,11 @@ def render_additional_experience(items):
 def education_meta(edu):
     """School line. A parenthetical is the source year, never a second status.
 
-    The degree heading already carries qualifiers such as "In Progress".
-    Copying that qualifier here shows it twice. A blank year stays blank:
-    do not invent a start or end year. B.S. and B.B.A. have no year, so
-    those cards show the school only.
+    The degree heading already carries qualifiers such as "In Progress";
+    copying that qualifier here would show it twice. The year field holds
+    only what the record supports (e.g. "Expected Winter 2027" for the
+    in-progress M.S.). A blank year stays blank: do not invent a start or
+    end year. B.S. and B.B.A. have no year, so those cards show the school only.
     """
     school = edu.get('school', '')
     year = (edu.get('year') or '').strip()

@@ -68,7 +68,7 @@ def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs,
     pdf_text = variant_pdfs[variant]["text"]
     role = config["experience"][0]
     assert role["title"].split(" | ") == [
-        "Senior Production Support Engineer", "DevOps & Automation",
+        "Senior Production Support Engineer", "Software & Automation",
     ]
     assert role["officialTitle"] == "Senior Production Support Engineer"
     assert role["promotion"] == {
@@ -78,7 +78,7 @@ def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs,
     assert role["location"] == "Auburn Hills, MI · Hybrid"
     assert config["personal"]["remote"] == "Open to U.S. Remote Opportunities"
     for term in (role["title"], "Promoted September 2026; previously Production Support Engineer",
-                 "Auburn Hills, MI", "Hybrid", "OAuth", "OIDC"):
+                 "Auburn Hills, MI", "Hybrid", "Credential Remediation"):
         assert term in pdf_text
 
 
@@ -89,7 +89,10 @@ def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, 
     security = skills["Security & Identity"]
     assert "Auth0" not in security["tags"]
     assert "Auth0" not in json.dumps(config)
-    assert {"OAuth / OIDC", "IAM", "Credential Remediation",
+    # The OAuth resource-server work was removed at William's request; no OAuth claim remains.
+    assert "oauth" not in json.dumps(config).lower()
+    assert "oauth" not in pdf_text.lower()
+    assert {"IAM", "Credential Remediation",
             "Git History Remediation", "PII Safeguards", "Audit Controls"} <= set(security["tags"])
     assert "Audit Controls" in (security.get("pdfTags") or security["tags"])
     assert "Azure Key Vault" not in security["tags"]
@@ -137,6 +140,7 @@ def test_pdf_software_selection_retains_backend_strength_without_web_bloat(confi
 
 EXPECTED_VARIANT_PROJECTS = {
     "software_platform": ["HowlPlane", "HowlFrame"],
+    "security_automation": ["Password Arena", "HowlPlane", "HowlFrame"],
     "production_devops": ["HowlPlane"],
 }
 

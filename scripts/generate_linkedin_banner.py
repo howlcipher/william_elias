@@ -133,8 +133,8 @@ body {
     <div class="banner-content">
         <h1 class="headline">{{HEADLINE}}</h1>
         <div class="tagline"><span class="tagline-caret">&gt;</span>{{TAGLINE}}</div>
-        <div class="tech-stack">Python &amp; FastAPI &nbsp;|&nbsp; CI/CD &nbsp;|&nbsp; Azure DevOps</div>
-        <div class="ai-layer">AI-Enabled Engineering</div>
+        <div class="tech-stack">Python &nbsp;|&nbsp; Go &nbsp;|&nbsp; C#/.NET</div>
+        <div class="ai-layer">Developer Tools &amp; Security Automation</div>
     </div>
     <div class="accent-bar"></div>
 </body>

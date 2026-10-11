@@ -155,7 +155,7 @@ class TestNavigationCtas:
         html_content = _index_html()
         nav_section = html_content.split('<div class="nav-right">')[1].split("</nav>")[0]
         assert "nav-resume-btn" in nav_section
-        # One compact navbar control jumps to the labelled two-résumé choice.
+        # One compact navbar control jumps to the labelled résumé choice.
         assert 'href="#resume-downloads" class="nav-resume-btn"' in nav_section
         assert 'id="resume-downloads"' in html_content
 

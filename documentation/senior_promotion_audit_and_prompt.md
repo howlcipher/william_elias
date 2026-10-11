@@ -1,5 +1,7 @@
 # William Elias: senior promotion audit and implementation prompt
 
+> Historical record (2026-10-09). Since 2026-10-11 there are three variants (two primary, one secondary); see `ARCHITECTURE.md` and `portfolio_optimization_handoff.md`.
+
 Audit date: 2026-10-08. This document is a plan and a reusable implementation prompt. The audit did not modify the website, resumes, profile, or existing working changes.
 
 ## 1. Recommended outcome

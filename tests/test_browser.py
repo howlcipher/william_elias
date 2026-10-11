@@ -402,7 +402,12 @@ def test_resume_action_never_marked_as_active_section(page: Page, test_url: str)
 
 
 with open(os.path.join(DIRECTORY, "resume_variants.json")) as _source:
-    RESUME_FILES = {name: v["file"] for name, v in json.load(_source)["variants"].items()}
+    _variants = json.load(_source)["variants"]
+RESUME_FILES = {name: v["file"] for name, v in _variants.items()}
+# Primary résumés appear in the hero, mobile menu and résumé section; a
+# secondary one (Production & DevOps) only in the résumé section.
+PRIMARY_RESUMES = {n: f for n, f in RESUME_FILES.items() if _variants[n].get("listing", "primary") == "primary"}
+SECONDARY_RESUMES = {n: f for n, f in RESUME_FILES.items() if n not in PRIMARY_RESUMES}
 
 
 @pytest.mark.parametrize("width", [390, 1440])
@@ -422,19 +427,22 @@ def test_nav_resume_cta_jumps_to_targeted_resume_choice(page: Page, test_url: st
         timeout=5000,
     )
     links = choice.locator("a.resume-action")
-    assert [links.nth(i).get_attribute("href") for i in range(links.count())] == list(RESUME_FILES.values())
-    for i in range(links.count()):
-        expect(links.nth(i)).to_be_visible()
+    assert [links.nth(i).get_attribute("href") for i in range(links.count())] == list(PRIMARY_RESUMES.values())
+    secondary = choice.locator("a.resume-secondary")
+    assert [secondary.nth(i).get_attribute("href") for i in range(secondary.count())] == list(SECONDARY_RESUMES.values())
+    for group in (links, secondary):
+        for i in range(group.count()):
+            expect(group.nth(i)).to_be_visible()
 
 
-def test_mobile_nav_lists_both_targeted_resumes(page: Page, test_url: str):
+def test_mobile_nav_lists_the_primary_resumes(page: Page, test_url: str):
     page.set_viewport_size({"width": 375, "height": 667})
     page.goto(test_url)
 
     page.locator(".mobile-menu-btn").click()
     links = page.locator(".mobile-resume-link")
-    assert links.count() == len(RESUME_FILES)
-    for i, (name, file) in enumerate(RESUME_FILES.items()):
+    assert links.count() == len(PRIMARY_RESUMES)
+    for i, (name, file) in enumerate(PRIMARY_RESUMES.items()):
         link = links.nth(i)
         assert link.is_visible()
         assert link.get_attribute("href") == file
@@ -519,8 +527,10 @@ def test_evidence_and_theme_controls_work_with_keyboard(page: Page, test_url: st
         expect(detail).not_to_have_attribute("open", "")
 
 
-@pytest.mark.parametrize("variant", list(RESUME_FILES))
-@pytest.mark.parametrize("scope", [".hero", "#resume-downloads", ".mobile-nav"])
+@pytest.mark.parametrize("scope,variant", [
+    *((scope, name) for scope in (".hero", ".mobile-nav") for name in PRIMARY_RESUMES),
+    *(("#resume-downloads", name) for name in RESUME_FILES),
+])
 def test_resume_actions_download_targeted_pdf(page: Page, test_url: str, scope, variant, tmp_path):
     page.set_viewport_size({"width": 390, "height": 900})
     page.goto(test_url)
@@ -549,8 +559,8 @@ def test_resume_controls_are_touch_sized_and_need_no_hover(page: Page, test_url:
     page.goto(test_url)
     page.evaluate("document.fonts.ready")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    controls = page.locator("a.resume-action")
-    assert controls.count() == 2 * len(RESUME_FILES)
+    controls = page.locator("a.resume-action, a.resume-secondary")
+    assert controls.count() == 2 * len(PRIMARY_RESUMES) + len(SECONDARY_RESUMES)
     for i in range(controls.count()):
         control = controls.nth(i)
         control.scroll_into_view_if_needed()
@@ -586,9 +596,9 @@ def test_resume_controls_are_keyboard_reachable_with_visible_focus(page: Page, t
         if info["variant"] and info["inHero"]:
             assert info["outline"] == "solid" and info["width"] != "0px", info
             seen.append(info["variant"])
-        if len(seen) == len(RESUME_FILES):
+        if len(seen) == len(PRIMARY_RESUMES):
             break
-    assert seen == list(RESUME_FILES)
+    assert seen == list(PRIMARY_RESUMES)
 
 
 def test_all_project_links_open_the_canonical_destination(page: Page, test_url: str):
@@ -618,7 +628,7 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 8
+    assert len(cards) == 7
     grid = page.locator(".programs-grid").bounding_box()
     classes = [card.get_attribute("class") for card in cards]
 
@@ -633,14 +643,15 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     details = [c.locator(".program-details").bounding_box() for c in featured]
     assert max(d["y"] for d in details) - min(d["y"] for d in details) <= 1.5
 
-    # The wide case study spans the whole grid.
+    # The wide case studies (CI/CD, production reliability) span the whole grid.
     wide = [c for c, cls in zip(cards, classes) if "program-wide" in cls]
-    assert len(wide) == 1
-    assert abs(wide[0].bounding_box()["width"] - grid["width"]) <= 1.5
+    assert len(wide) == 2
+    for card in wide:
+        assert abs(card.bounding_box()["width"] - grid["width"]) <= 1.5
 
     # Remaining cards pair up with equal heights and aligned disclosure rows.
     paired = [c for c, cls in zip(cards, classes) if "program-featured" not in cls and "program-wide" not in cls]
-    assert len(paired) == 4
+    assert len(paired) == 2
     for i in range(0, len(paired), 2):
         box_a, box_b = paired[i].bounding_box(), paired[i + 1].bounding_box()
         assert abs(box_a["y"] - box_b["y"]) <= 1.5
@@ -682,7 +693,7 @@ def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 8
+    assert len(cards) == 7
 
     prev_bottom = 0
     grid_box = page.locator(".programs-grid").bounding_box()

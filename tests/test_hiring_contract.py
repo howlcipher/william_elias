@@ -100,9 +100,10 @@ def test_each_targeted_pdf_balances_software_delivery_and_production(variant_pdf
     text = variant_pdfs[variant]["text"]
     assert len(reader.pages) == 2
     assert text.count("56 Azure DevOps") >= 1
-    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "SQLite", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Audit Controls", "HowlPlane", "OAuth 2.1", "containerization proof of concept"):
+    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "SQLite", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Audit Controls", "HowlPlane", "containerization proof of concept"):
         assert term in text, term
     assert "Auth0" not in text
+    assert "OAuth" not in text
     assert "Serilog" not in text
     for stale in ("Razor Pages", "Azure Key Vault", "Managed Identity", "six latent"):
         assert stale not in text, f"stale term found: {stale}"
@@ -130,7 +131,7 @@ def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visibl
     title = cfg["personal"]["title"]
     assert title == "Software & Automation Engineer"
     assert cfg["personal"]["supporting"] == (
-        "Developer Tooling • Platform Engineering • CI/CD • Production Engineering"
+        "Software Development • Developer Tooling • Security Automation • Platform Engineering"
     )
     # DevOps and Production roles stay discoverable through descriptive fields
     # and the Production & DevOps résumé, not through the broad site headline.
@@ -155,7 +156,6 @@ def test_canonical_program_order_is_unchanged_for_the_pdfs():
         "Python Automation & Developer Productivity",
         "Deployment Automation & Release Tooling",
         "Security & Credential Remediation",
-        "APIs, OAuth & Secure Integration",
         "Production Reliability & Observability",
         "Infrastructure Modernization & Containerization",
     ]

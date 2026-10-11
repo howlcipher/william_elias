@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-10-11
+
+### Evidence tightening (at William's direction)
+
+* Removed the OAuth 2.1 resource-server claim everywhere: the experience achievement, the "APIs, OAuth & Secure Integration" Selected Work program, its PDF highlight, the OAuth / OIDC skill tag, `knowsAbout`, About, and the README. Selected Work now has seven programs: credential remediation pairs with infrastructure modernization, and CI/CD and production reliability are full width. The security résumé fills the space with existing items: the access-policy/audit highlight and HowlFrame's capability model.
+* Replaced "Directed a CI/CD standardization program" with the documented work (building the inventory, verification, reusable pipeline/template automation, and 56 definitions).
+* Labelled "100+ repositories" as a scope separate from the 60-repository CI/CD program. Changed "remediation records are complete" to "Git-history cleanup records are complete" so it does not imply secret rotation.
+* Changed the résumé descriptor from "| DevOps & Automation" to "| Software & Automation". The official title is unchanged.
+
+
+### Software and security repositioning
+
+* Repositioned the supporting copy around software engineering, developer tooling, and security automation. New tagline: "Building Software, Automating Complex Workflows & Engineering Secure Systems". New supporting line: "Software Development • Developer Tooling • Security Automation • Platform Engineering". Updated About, contact copy, SEO, Open Graph, the social preview, and the LinkedIn banner to match. The official title and promotion record are unchanged.
+* Added a third résumé variant, **Security Software & Automation** (`William_Elias_Security_Automation_Resume.pdf`), backed by new canonical security positioning statements and two PDF highlights: credential discovery/Git-history remediation and the scoped OAuth 2.1 resource server.
+* Renamed the software résumé label to **Software Engineering & Developer Tools** and kept its filename. Reordered its achievements so the Go CLI, .NET application, Python tooling, credential remediation, and OAuth work come before CI/CD.
+* Added an optional, validated `listing` key to variants. The hero and mobile menu offer the two primary résumés. The Production & DevOps résumé is secondary and appears only in the "Targeted Resumes" section. `William_Elias_Resume.pdf` remains a byte copy of Production & DevOps.
+* Education now reads **M.S. Cyber Defense (In Progress, Second Year)**, Dakota State University, **Expected Winter 2027**, on the site and in every PDF. No month or day is invented.
+* Selected Work now runs: software, then security, then CI/CD and production programs. Skills put Security & Identity third. Projects lead with HowlPlane, HowlFrame, and Password Arena. AI Router is identified as HowlPlane's routing predecessor, HowlFrame's "production flip deferred" jargon now reads "experimental", and the projects intro says the projects are AI-assisted.
+* Rewrote the README for recruiters first and moved the maintenance and architecture detail to `documentation/ARCHITECTURE.md`.
+* Professional verbs, metrics, scope qualifiers, and proof-of-concept labels are unchanged. The independent-project bullets were refreshed from each project's own README: HowlPlane's CI evidence bound to the live PR head SHA, HowlFrame's VM-level capability enforcement, and AI Router's "usable alpha" status and its place as the predecessor of HowlPlane's routing layer (`howlplane/documentation/IMPLEMENTATION_STATUS.md`). Open evidence questions are listed in `documentation/portfolio_optimization_handoff.md`.
+
 ## 2026-10-09
 
 ### Senior promotion reflect and career progression
