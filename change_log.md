@@ -11,7 +11,7 @@
 * Education now reads **M.S. Cyber Defense (In Progress, Second Year)**, Dakota State University, **Expected Winter 2027**, on the site and in every PDF. No month or day is invented.
 * Selected Work now runs: software, then security, then CI/CD and production programs. Skills put Security & Identity third. Projects lead with HowlPlane, HowlFrame, and Password Arena. AI Router is identified as HowlPlane's routing predecessor, HowlFrame's "production flip deferred" jargon now reads "experimental", and the projects intro says the projects are AI-assisted.
 * Rewrote the README for recruiters first and moved the maintenance and architecture detail to `documentation/ARCHITECTURE.md`.
-* Verbs, metrics, scope qualifiers, and proof-of-concept labels are unchanged. Open evidence questions are listed in `documentation/portfolio_optimization_handoff.md`.
+* Professional verbs, metrics, scope qualifiers, and proof-of-concept labels are unchanged. The independent-project bullets were refreshed from each project's own README: HowlPlane's CI evidence bound to the live PR head SHA, HowlFrame's VM-level capability enforcement, and AI Router's "usable alpha" status and its place as the predecessor of HowlPlane's routing layer (`howlplane/documentation/IMPLEMENTATION_STATUS.md`). Open evidence questions are listed in `documentation/portfolio_optimization_handoff.md`.
 
 ## 2026-10-09
 

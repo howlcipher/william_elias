@@ -300,8 +300,12 @@ def test_security_automation_leads_with_security_tooling(variant_pdfs):
     assert experience.index("exposed credentials") < experience.index("OAuth 2.1 resource server")
     assert experience.index("OAuth 2.1 resource server") < experience.index("CI/CD standardization program")
     assert text.split("CORE EXPERTISE")[1].lstrip().startswith("Security & Identity")
+    # Lead only with security tags that a selected bullet supports.
+    expertise = text.split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
+    for unsupported in ("IAM", "PII Safeguards"):
+        assert unsupported not in expertise, unsupported
     highlights = text.split("SELECTED ENGINEERING HIGHLIGHTS")[1].split("SELECTED OPEN-SOURCE")[0]
-    assert highlights.lstrip().startswith("Credential Discovery & Git-History Remediation")
+    assert highlights.lstrip().startswith("Git-History Credential Remediation")
     assert "Password Arena" in text and "synthetic" in text
     # Security automation is software work, not security operations.
     lowered = text.lower()

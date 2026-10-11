@@ -90,6 +90,9 @@
         "skill-software-backend",
         "skill-devops-delivery"
       ],
+      "skillTags": {
+        "skill-security-identity": ["OAuth / OIDC", "Credential Remediation", "Git History Remediation", "Audit Controls"]
+      },
       "highlightIds": [
         "highlight-credential-remediation",
         "highlight-secure-integration",

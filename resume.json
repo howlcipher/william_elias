@@ -77,7 +77,7 @@
     },
     {
       "id": "summary-security-opening",
-      "text": "Software and automation engineer building security tooling and automation in Python, Go, and C#/.NET, with software and automation work since 2020 and production and infrastructure experience dating to 2015.",
+      "text": "Software and automation engineer building security tooling and automation in Python, plus developer tools and internal software in Go and C#/.NET, with software and automation work since 2020 and production and infrastructure experience dating to 2015.",
       "evidenceIds": ["exp-stellantis", "exp-hbk", "exp-trendset", "program-security-remediation", "program-oauth-integration"]
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "id": "summary-security-controls",
-      "text": "Designs secure integrations and controls, including a scoped OAuth 2.1 resource server with JWT/JWKS validation and access policies with retained audit history in internal C#/.NET software.",
+      "text": "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation; builds per-module access policies and retained audit history into internal C#/.NET software.",
       "evidenceIds": ["program-oauth-integration", "program-internal-software"]
     },
     {
@@ -374,7 +374,7 @@
     },
     {
       "id": "highlight-credential-remediation",
-      "name": "Credential Discovery & Git-History Remediation (Python)",
+      "name": "Git-History Credential Remediation (Python)",
       "sourceProgram": "Security & Credential Remediation",
       "bullets": [
         "Git-history remediation tooling combines repository discovery, BFG Repo-Cleaner, reflog expiry, and coordinated cleanup of exposed credentials, supporting single-repository and whole-project modes with interchangeable rewrite engines."

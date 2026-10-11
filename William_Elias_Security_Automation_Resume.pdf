@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 6931
+/Length 6928
 >>
 stream
 2 J
@@ -77,12 +77,12 @@ BT /F1 11.00 Tf ET
 BT 26.83 670.70 Td (PROFESSIONAL SUMMARY) Tj ET
 24.00 667.00 m 588.00 667.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 653.50 Td (Software and automation engineer building security tooling and automation in Python, Go, and C#/.NET, with software and) Tj ET
-BT 26.83 640.50 Td (automation work since 2020 and production and infrastructure experience dating to 2015. Builds Python tooling that scans) Tj ET
-BT 26.83 627.50 Td (source code and Git history for exposed credentials, plus Git-history remediation tooling with interchangeable rewrite engines.) Tj ET
-BT 26.83 614.50 Td (Designs secure integrations and controls, including a scoped OAuth 2.1 resource server with JWT/JWKS validation and) Tj ET
-BT 26.83 601.50 Td (access policies with retained audit history in internal C#/.NET software. M.S. Cyber Defense in progress at Dakota State) Tj ET
-BT 26.83 588.50 Td (University, expected Winter 2027.) Tj ET
+BT 26.83 653.50 Td (Software and automation engineer building security tooling and automation in Python, plus developer tools and internal) Tj ET
+BT 26.83 640.50 Td (software in Go and C#/.NET, with software and automation work since 2020 and production and infrastructure experience) Tj ET
+BT 26.83 627.50 Td (dating to 2015. Builds Python tooling that scans source code and Git history for exposed credentials, plus Git-history) Tj ET
+BT 26.83 614.50 Td (remediation tooling with interchangeable rewrite engines. Designed a scoped OAuth 2.1 resource server with JWT/JWKS) Tj ET
+BT 26.83 601.50 Td (validation; builds per-module access policies and retained audit history into internal C#/.NET software. M.S. Cyber Defense in) Tj ET
+BT 26.83 588.50 Td (progress at Dakota State University, expected Winter 2027.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 564.70 Td (PROFESSIONAL EXPERIENCE) Tj ET
 24.00 561.00 m 588.00 561.00 l S
@@ -138,7 +138,7 @@ BT /F1 10.00 Tf ET
 BT 26.83 73.50 Td (Security & Identity) Tj ET
 BT 114.63 73.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 120.74 73.50 Td (OAuth / OIDC, IAM, Credential Remediation, Git History Remediation, PII Safeguards, Audit Controls) Tj ET
+BT 120.74 73.50 Td (OAuth / OIDC, Credential Remediation, Git History Remediation, Audit Controls) Tj ET
 BT /F1 10.00 Tf ET
 BT 26.83 60.50 Td (Automation & Developer Tooling) Tj ET
 BT /F2 10.00 Tf ET
@@ -178,7 +178,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 5214
+/Length 5202
 >>
 stream
 2 J
@@ -196,7 +196,7 @@ BT /F1 11.00 Tf ET
 BT 26.83 721.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
 24.00 718.00 m 588.00 718.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 704.35 Td (Credential Discovery & Git-History Remediation \(Python\)) Tj ET
+BT 26.83 704.35 Td (Git-History Credential Remediation \(Python\)) Tj ET
 BT /F3 10.00 Tf ET
 BT 38.83 691.50 Td (- Git-history remediation tooling combines repository discovery, BFG Repo-Cleaner, reflog expiry, and coordinated cleanup) Tj ET
 BT 38.83 678.50 Td (of exposed credentials, supporting single-repository and whole-project modes with interchangeable rewrite engines.) Tj ET
@@ -325,21 +325,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000007866 00000 n 
-0000008262 00000 n 
-0000013528 00000 n 
-0000013630 00000 n 
-0000013735 00000 n 
-0000013832 00000 n 
-0000013940 00000 n 
-0000014048 00000 n 
+0000007863 00000 n 
+0000008259 00000 n 
+0000013513 00000 n 
+0000013615 00000 n 
+0000013720 00000 n 
+0000013817 00000 n 
+0000013925 00000 n 
+0000014033 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<BDCC95092888A5B9BECC0B82CFF79745><BDCC95092888A5B9BECC0B82CFF79745>]
+/ID [<BEE2C5DB39EBE4B0D3BF741D48374B39><BEE2C5DB39EBE4B0D3BF741D48374B39>]
 >>
 startxref
-14225
+14210
 %%EOF

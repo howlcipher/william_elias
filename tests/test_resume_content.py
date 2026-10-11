@@ -303,7 +303,7 @@ class TestPdfEngineeringHighlights:
             "Python Developer Productivity Tooling",
         ],
         "security_automation": [
-            "Credential Discovery & Git-History Remediation (Python)",
+            "Git-History Credential Remediation (Python)",
             "Scoped OAuth 2.1 Resource Server (Python)",
             "Internal Web Application with Access Policies & Audit (C#/.NET)",
         ],
