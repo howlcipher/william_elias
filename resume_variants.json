@@ -23,7 +23,6 @@
           "ach-internal-dotnet-app",
           "ach-python-tooling",
           "ach-credential-remediation",
-          "ach-oauth-resource-server",
           "ach-cicd-standardization",
           "ach-cicd-validation",
           "ach-release-kql"
@@ -61,7 +60,7 @@
       "file": "William_Elias_Security_Automation_Resume.pdf",
       "listing": "primary",
       "title": "Software & Security Automation Engineer",
-      "supporting": "Security Automation • Credential Remediation • OAuth / JWT • Python • Go • C#/.NET",
+      "supporting": "Security Automation • Credential Remediation • Access Control • Python • Go • C#/.NET",
       "summaryStatementIds": [
         "summary-security-opening",
         "summary-security-tooling",
@@ -71,7 +70,6 @@
       "experienceAchievementIds": {
         "exp-stellantis": [
           "ach-credential-remediation",
-          "ach-oauth-resource-server",
           "ach-internal-dotnet-app",
           "ach-python-tooling",
           "ach-go-deployment-cli",
@@ -91,16 +89,16 @@
         "skill-devops-delivery"
       ],
       "skillTags": {
-        "skill-security-identity": ["OAuth / OIDC", "Credential Remediation", "Git History Remediation", "Audit Controls"]
+        "skill-security-identity": ["Credential Remediation", "Git History Remediation", "Audit Controls"]
       },
       "highlightIds": [
         "highlight-credential-remediation",
-        "highlight-secure-integration",
         "highlight-portal-change-safety"
       ],
       "projectIds": [
         "project-password-arena",
-        "project-howlplane"
+        "project-howlplane",
+        "project-howlframe"
       ]
     },
     "production_devops": {
@@ -124,8 +122,7 @@
           "ach-go-deployment-cli",
           "ach-python-tooling",
           "ach-credential-remediation",
-          "ach-internal-dotnet-app",
-          "ach-oauth-resource-server"
+          "ach-internal-dotnet-app"
         ],
         "exp-hbk": [
           "ach-hbk-xml-automation",

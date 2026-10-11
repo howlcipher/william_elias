@@ -11,7 +11,7 @@ def promoted_config():
     config = load_config()
     role = config["experience"][0]
     role["officialTitle"] = "Senior Production Support Engineer"
-    role["title"] = "Senior Production Support Engineer | DevOps & Automation"
+    role["title"] = "Senior Production Support Engineer | Software & Automation"
     role["promotion"] = {
         "effectiveDate": "2026-09",
         "previousOfficialTitle": "Production Support Engineer",
@@ -53,7 +53,7 @@ def test_website_and_json_ld_render_promotion_and_official_title():
     config = promoted_config()
     role = config["experience"][0]
     rendered = render_experience([role])
-    assert "Senior Production Support Engineer | DevOps &amp; Automation" in rendered
+    assert "Senior Production Support Engineer | Software &amp; Automation" in rendered
     assert "Promoted September 2026; previously Production Support Engineer" in rendered
     assert role["date"] in rendered
     person = json.loads(render_json_ld(config))["mainEntity"]
@@ -67,7 +67,7 @@ def test_targeted_pdf_keeps_title_progression_and_shared_achievements(tmp_path, 
     build(config, output, variant, load_variants())
     reader = PdfReader(output)
     text = " ".join(page.extract_text() or "" for page in reader.pages)
-    assert "Senior Production Support Engineer | DevOps & Automation" in text
+    assert "Senior Production Support Engineer | Software & Automation" in text
     assert "Promoted September 2026; previously Production Support Engineer" in text
     assert "Feb 2023 - Present" in text
     assert "CI/CD standardization program" in text

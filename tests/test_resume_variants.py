@@ -264,7 +264,7 @@ def test_qualifiers_survive_into_each_pdf(variant_pdfs, variant):
     text = variant_pdfs[variant]["text"]
     for qualifier in ("dry-run validated representative deployment paths", "remaining checks blocked",
                       "In Progress", "Previously Held", "Python/PowerShell professionally",
-                      "Senior Production Support Engineer | DevOps & Automation",
+                      "Senior Production Support Engineer | Software & Automation",
                       "Promoted September 2026; previously Production Support Engineer"):
         assert qualifier in text, qualifier
     if variant == "production_devops":
@@ -295,10 +295,10 @@ def test_software_platform_leads_with_software_and_tooling(variant_pdfs, variant
 def test_security_automation_leads_with_security_tooling(variant_pdfs):
     text = variant_pdfs["security_automation"]["text"]
     assert "SOFTWARE & SECURITY AUTOMATION ENGINEER" in text
-    assert "Security Automation | Credential Remediation | OAuth / JWT | Python | Go | C#/.NET" in text
+    assert "Security Automation | Credential Remediation | Access Control | Python | Go | C#/.NET" in text
     experience = text.split("PROFESSIONAL EXPERIENCE")[1]
-    assert experience.index("exposed credentials") < experience.index("OAuth 2.1 resource server")
-    assert experience.index("OAuth 2.1 resource server") < experience.index("CI/CD standardization program")
+    assert experience.index("exposed credentials") < experience.index("per-module access policies")
+    assert experience.index("per-module access policies") < experience.index("56 Azure DevOps build/release definitions")
     assert text.split("CORE EXPERTISE")[1].lstrip().startswith("Security & Identity")
     # Lead only with security tags that a selected bullet supports.
     expertise = text.split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
@@ -312,9 +312,9 @@ def test_security_automation_leads_with_security_tooling(variant_pdfs):
     for term in ("penetration test", "pentest", "red team", "soc analyst", "threat hunting",
                  "security architect", "incident responder", "zero trust", "key vault", "rotated"):
         assert term not in lowered, term
-    # The OAuth work keeps its "designed" qualifier rather than claiming deployment.
-    assert "Designed a scoped OAuth 2.1 resource server" in text
-    assert "deployed oauth" not in lowered
+    assert "oauth" not in lowered
+    # Remediation is described as Git-history cleanup, not as secret rotation.
+    assert "Git-history cleanup records are complete" in text
 
 
 def test_production_devops_leads_with_delivery_and_reliability(variant_pdfs):
@@ -419,9 +419,9 @@ SECTIONS = ("PROFESSIONAL SUMMARY", "PROFESSIONAL EXPERIENCE", "CORE EXPERTISE",
 ATS_KEYWORDS = {
     "software_platform": ("Software", "Automation", "Developer Tooling", "Platform Engineering", "Python", "Go",
                           "C#", ".NET", "ASP.NET Core", "REST API", "CI/CD", "Azure DevOps", "FastAPI",
-                          "self-service", "Security", "OAuth"),
+                          "self-service", "Security", "Credential Remediation"),
     "security_automation": ("Security Automation", "Credential Remediation", "Git History", "BFG Repo-Cleaner",
-                            "OAuth 2.1", "JWT", "JWKS", "alg=none", "Audit Controls", "access policies",
+                            "Audit Controls", "access policies", "audit history", "HowlFrame",
                             "Python", "Go", "C#", "Cyber Defense", "Password Arena", "DevOps"),
     "production_devops": ("DevOps", "Azure DevOps", "CI/CD", "Release", "Production", "Reliability", "KQL",
                           "Application Insights", "Azure Monitor", "Python", "PowerShell", "IIS",

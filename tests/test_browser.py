@@ -628,7 +628,7 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 8
+    assert len(cards) == 7
     grid = page.locator(".programs-grid").bounding_box()
     classes = [card.get_attribute("class") for card in cards]
 
@@ -643,14 +643,15 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     details = [c.locator(".program-details").bounding_box() for c in featured]
     assert max(d["y"] for d in details) - min(d["y"] for d in details) <= 1.5
 
-    # The wide case study spans the whole grid.
+    # The wide case studies (CI/CD, production reliability) span the whole grid.
     wide = [c for c, cls in zip(cards, classes) if "program-wide" in cls]
-    assert len(wide) == 1
-    assert abs(wide[0].bounding_box()["width"] - grid["width"]) <= 1.5
+    assert len(wide) == 2
+    for card in wide:
+        assert abs(card.bounding_box()["width"] - grid["width"]) <= 1.5
 
     # Remaining cards pair up with equal heights and aligned disclosure rows.
     paired = [c for c, cls in zip(cards, classes) if "program-featured" not in cls and "program-wide" not in cls]
-    assert len(paired) == 4
+    assert len(paired) == 2
     for i in range(0, len(paired), 2):
         box_a, box_b = paired[i].bounding_box(), paired[i + 1].bounding_box()
         assert abs(box_a["y"] - box_b["y"]) <= 1.5
@@ -692,7 +693,7 @@ def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
     page.evaluate("document.fonts.ready")
 
     cards = page.locator(".program-card").all()
-    assert len(cards) == 8
+    assert len(cards) == 7
 
     prev_bottom = 0
     grid_box = page.locator(".programs-grid").bounding_box()

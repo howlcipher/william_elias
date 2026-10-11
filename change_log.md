@@ -2,6 +2,14 @@
 
 ## 2026-10-11
 
+### Evidence tightening (at William's direction)
+
+* Removed the OAuth 2.1 resource-server claim everywhere: the experience achievement, the "APIs, OAuth & Secure Integration" Selected Work program, its PDF highlight, the OAuth / OIDC skill tag, `knowsAbout`, About, and the README. Selected Work now has seven programs: credential remediation pairs with infrastructure modernization, and CI/CD and production reliability are full width. The security résumé fills the space with existing items: the access-policy/audit highlight and HowlFrame's capability model.
+* Replaced "Directed a CI/CD standardization program" with the documented work (building the inventory, verification, reusable pipeline/template automation, and 56 definitions).
+* Labelled "100+ repositories" as a scope separate from the 60-repository CI/CD program. Changed "remediation records are complete" to "Git-history cleanup records are complete" so it does not imply secret rotation.
+* Changed the résumé descriptor from "| DevOps & Automation" to "| Software & Automation". The official title is unchanged.
+
+
 ### Software and security repositioning
 
 * Repositioned the supporting copy around software engineering, developer tooling, and security automation. New tagline: "Building Software, Automating Complex Workflows & Engineering Secure Systems". New supporting line: "Software Development • Developer Tooling • Security Automation • Platform Engineering". Updated About, contact copy, SEO, Open Graph, the social preview, and the LinkedIn banner to match. The official title and promotion record are unchanged.

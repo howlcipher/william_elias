@@ -66,7 +66,7 @@ class TestHeadlineAndPositioning:
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
         stellantis = next(j for j in cfg["experience"] if "Stellantis Financial Services" in j["company"])
-        assert stellantis["title"] == "Senior Production Support Engineer | DevOps & Automation"
+        assert stellantis["title"] == "Senior Production Support Engineer | Software & Automation"
         assert stellantis["officialTitle"] == "Senior Production Support Engineer"
         assert stellantis["promotion"]["previousOfficialTitle"] == "Production Support Engineer"
         assert stellantis["promotion"]["effectiveDate"] == "2026-09"
@@ -271,7 +271,6 @@ class TestSelectedEngineeringPrograms:
         "Python Automation & Developer Productivity",
         "Deployment Automation & Release Tooling",
         "Security & Credential Remediation",
-        "APIs, OAuth & Secure Integration",
         "Production Reliability & Observability",
         "Infrastructure Modernization & Containerization",
     }
@@ -304,7 +303,6 @@ class TestPdfEngineeringHighlights:
         ],
         "security_automation": [
             "Git-History Credential Remediation (Python)",
-            "Scoped OAuth 2.1 Resource Server (Python)",
             "Internal Web Application with Access Policies & Audit (C#/.NET)",
         ],
         "production_devops": [
@@ -514,7 +512,7 @@ class TestSelectedOpenSourceProjects:
 
     @pytest.mark.parametrize("variant,expected", [
         ("software_platform", {"HowlPlane", "HowlFrame"}),
-        ("security_automation", {"Password Arena", "HowlPlane"}),
+        ("security_automation", {"Password Arena", "HowlPlane", "HowlFrame"}),
         ("production_devops", {"HowlPlane"}),
     ])
     def test_pdf_includes_only_selected_projects(self, variant_pdfs, variant, expected):

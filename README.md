@@ -10,14 +10,13 @@ I build developer tools, internal applications, APIs, and automation that replac
 
 ## Professional Work
 
-At Stellantis Financial Services US (official title: Senior Production Support Engineer, promoted September 2026):
+At Stellantis Financial Services US (official title: Senior Production Support Engineer, promoted September 2026; résumé descriptor: Software & Automation):
 
 * **Go self-service deployment CLI.** I designed and delivered a CLI that covers the build-to-rollback lifecycle: guided setup, project scaffolding, Azure DevOps REST integration, generated pipeline configuration, build/push/deploy, rollback, status, host auditing, and post-deployment verification.
 * **.NET 8 Blazor internal application.** I built and maintain a modular C#/ASP.NET Core application on SQL Server and SQLite. It has per-module access policies, database-backed workflows, retained audit history, DBA approve-only deployment scripts, and live configuration diffing for pre-change review.
 * **Python/FastAPI tooling.** This covers dashboards, Azure DevOps REST automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, and a reusable operations CLI. I also standardized the team's Python tooling on uv.
-* **Credential discovery and remediation.** I wrote Python tooling that scans source code and Git history for exposed credentials, plus Git-history remediation with BFG Repo-Cleaner. A measured scan processed 2,832 files and found 67 distinct exposed secrets in about 25 seconds.
-* **OAuth 2.1 resource server design.** It is scoped and read-only, with JWT/JWKS validation, issuer/audience checks, restricted signing algorithms, tests that reject `alg=none` tokens, and content allowlisting.
-* **CI/CD standardization.** The scope was a 60-repository, 104-application estate. I built 56 Azure DevOps build/release definitions across 28 standardized repositories. Builds passed in 27 of 28; dry runs validated representative deployment paths for 25 of 28.
+* **Credential discovery and remediation.** I wrote Python tooling that scans source code and Git history for exposed credentials, plus Git-history remediation with BFG Repo-Cleaner across 100+ repositories (a scope separate from the CI/CD program). A measured scan processed 2,832 files and found 67 distinct exposed secrets in about 25 seconds.
+* **CI/CD standardization.** The scope was a 60-repository, 104-application estate. I built the inventory, verification, and reusable pipeline templates, including 56 Azure DevOps build/release definitions across 28 standardized repositories. Builds passed in 27 of 28; dry runs validated representative deployment paths for 25 of 28.
 
 | | |
 |---|---|

@@ -40,7 +40,6 @@
       "ASP.NET Core",
       "FastAPI",
       "Blazor",
-      "OAuth / OIDC",
       "CI/CD",
       "Azure DevOps",
       "DevOps",
@@ -53,7 +52,7 @@
       "AI-Enabled Engineering"
     ]
   },
-  "about": "I am a software and automation engineer. I build developer tools, internal applications, APIs, and automation that replace manual work with tested, maintainable software, and I work across languages and platforms rather than within a single stack.\n\nProfessional work includes a Go self-service deployment CLI with rollback and post-deployment verification; a .NET 8 Blazor internal application with per-module access policies and audit history; Python/FastAPI tooling and Azure DevOps REST automation; Python tooling that scans source code and Git history for exposed credentials; and a scoped OAuth 2.1 resource server design with JWT/JWKS validation. Production and CI/CD experience shapes how I design software for the systems it runs on.\n\nI am looking for U.S. fully remote software engineering roles in developer tooling, internal software, automation, and security engineering. I am in the second year of an M.S. in Cyber Defense at Dakota State University, expected Winter 2027.",
+  "about": "I am a software and automation engineer. I build developer tools, internal applications, APIs, and automation that replace manual work with tested, maintainable software, and I work across languages and platforms rather than within a single stack.\n\nProfessional work includes a Go self-service deployment CLI with rollback and post-deployment verification; a .NET 8 Blazor internal application with per-module access policies and audit history; Python/FastAPI tooling and Azure DevOps REST automation; and Python tooling that scans source code and Git history for exposed credentials. Production and CI/CD experience shapes how I design software for the systems it runs on.\n\nI am looking for U.S. fully remote software engineering roles in developer tooling, internal software, automation, and security engineering. I am in the second year of an M.S. in Cyber Defense at Dakota State University, expected Winter 2027.",
   "positioningStatements": [
     {
       "id": "summary-software-opening",
@@ -72,13 +71,13 @@
     },
     {
       "id": "summary-security-depth",
-      "text": "Adds security depth through credential-remediation tooling, a scoped OAuth 2.1 resource server with JWT/JWKS validation, and in-progress M.S. Cyber Defense studies.",
-      "evidenceIds": ["program-security-remediation", "program-oauth-integration", "skill-security-identity", "edu-ms-cyber-defense"]
+      "text": "Adds security depth through credential-discovery and Git-history remediation tooling, access policies with retained audit history, and in-progress M.S. Cyber Defense studies.",
+      "evidenceIds": ["program-security-remediation", "program-internal-software", "skill-security-identity", "edu-ms-cyber-defense"]
     },
     {
       "id": "summary-security-opening",
       "text": "Software and automation engineer building security tooling and automation in Python, plus developer tools and internal software in Go and C#/.NET, with software and automation work since 2020 and production and infrastructure experience dating to 2015.",
-      "evidenceIds": ["exp-stellantis", "exp-hbk", "exp-trendset", "program-security-remediation", "program-oauth-integration"]
+      "evidenceIds": ["exp-stellantis", "exp-hbk", "exp-trendset", "program-security-remediation", "program-deployment-tooling", "program-internal-software"]
     },
     {
       "id": "summary-security-tooling",
@@ -87,8 +86,8 @@
     },
     {
       "id": "summary-security-controls",
-      "text": "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation; builds per-module access policies and retained audit history into internal C#/.NET software.",
-      "evidenceIds": ["program-oauth-integration", "program-internal-software"]
+      "text": "Builds per-module access policies, retained audit history, and DBA approve-only deployment scripts into internal C#/.NET software.",
+      "evidenceIds": ["program-internal-software"]
     },
     {
       "id": "summary-security-education",
@@ -112,7 +111,7 @@
     },
     {
       "id": "summary-security-infrastructure",
-      "text": "Adds credential remediation and OAuth/OIDC work, plus a Windows Server, IIS, Active Directory, SQL Server, and network infrastructure background.",
+      "text": "Adds credential remediation work, plus a Windows Server, IIS, Active Directory, SQL Server, and network infrastructure background.",
       "evidenceIds": ["program-security-remediation", "skill-security-identity", "skill-infrastructure-operations", "exp-trendset", "exp-project-worldwide"]
     }
   ],
@@ -155,9 +154,9 @@
       "id": "skill-security-identity",
       "category": "Security & Identity",
       "icon": "fa-shield-halved",
-      "context": "Professional credential remediation, scoped OAuth 2.1 resource-server work, and security safeguards",
-      "tags": ["OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"],
-      "pdfTags": ["OAuth / OIDC", "IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"]
+      "context": "Professional credential remediation, access-policy and audit-history work, and security safeguards",
+      "tags": ["IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"],
+      "pdfTags": ["IAM", "Credential Remediation", "Git History Remediation", "PII Safeguards", "Audit Controls"]
     },
     {
       "id": "skill-devops-delivery",
@@ -202,7 +201,7 @@
     {
       "id": "exp-stellantis",
       "date": "Feb 2023 - Present",
-      "title": "Senior Production Support Engineer | DevOps & Automation",
+      "title": "Senior Production Support Engineer | Software & Automation",
       "officialTitle": "Senior Production Support Engineer",
       "promotion": {
         "effectiveDate": "2026-09",
@@ -211,14 +210,13 @@
       "company": "Stellantis Financial Services US",
       "location": "Auburn Hills, MI \u00b7 Hybrid",
       "achievements": [
-        {"id": "ach-cicd-standardization", "text": "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories."},
+        {"id": "ach-cicd-standardization", "text": "Built reusable pipeline/template automation and 56 Azure DevOps build/release definitions across 28 standardized application repositories for a CI/CD standardization program spanning a 60-repository, 104-application internal estate."},
         {"id": "ach-cicd-validation", "text": "Executed and validated builds across all 28 repositories (27 passed, with the remaining failure diagnosed and logged); dry-run validated representative deployment paths for 25 of 28, with the remaining checks blocked by upstream/environment or tooling conditions. Reviewed and classified 109 existing definitions, identifying 95 legacy and 14 already-aligned definitions, and resolved several latent delivery defects spanning path-handling assumptions, configuration drift, and false-success states."},
         {"id": "ach-internal-dotnet-app", "text": "Built and maintain an internal .NET 8 Blazor Web App with Interactive Server, C#, ASP.NET Core, SQL Server, and SQLite for production support, with per-module access policies, database-backed workflows, retained audit history, live configuration/object diffing, pre-change/pre-CAB visibility, and service-desk request tracking."},
         {"id": "ach-python-tooling", "text": "Built Python/FastAPI dashboards and operational tooling separate from the Blazor portal, spanning Azure DevOps REST API automation, failed-payload triage, scheduled query-to-email reporting, XML integration-log parsing, ranked engineering search, automated RCA, reusable operations CLI functionality, and recurring production-support workflows; standardized the team on uv for Python dependency and tooling management."},
         {"id": "ach-go-deployment-cli", "text": "Designed and delivered a Go-based self-service deployment CLI covering the build-to-rollback lifecycle with guided setup, Azure DevOps REST integration, config parsing, pipeline generation, build/push/deploy, rollback, status, audit, and post-deployment validation."},
-        {"id": "ach-credential-remediation", "text": "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."},
-        {"id": "ach-release-kql", "text": "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation."},
-        {"id": "ach-oauth-resource-server", "text": "Designed a scoped OAuth 2.1 resource server with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."}
+        {"id": "ach-credential-remediation", "text": "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories, a scope separate from the CI/CD standardization program. A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; Git-history cleanup records are complete."},
+        {"id": "ach-release-kql", "text": "Maintain the release-tracking process for a recurring, roughly weekly production release cadence and participate directly in production deployments. Authored and maintain a reusable 22-query KQL library used across internal monitoring and troubleshooting automation."}
       ]
     },
     {
@@ -239,7 +237,7 @@
       "id": "program-cicd-release",
       "name": "CI/CD & Release Engineering",
       "bullets": [
-        "Directed a CI/CD standardization program across a 60-repository, 104-application internal estate, building inventory, verification, and reusable pipeline/template automation.",
+        "Built inventory, verification, and reusable pipeline/template automation for a CI/CD standardization program across a 60-repository, 104-application internal estate.",
         "Mapped 104 applications to 171 application-to-server deployment combinations and 327 deployment paths; verified 275 inventory entries."
       ],
       "details": [
@@ -296,25 +294,13 @@
       "id": "program-security-remediation",
       "name": "Security & Credential Remediation",
       "bullets": [
-        "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories.",
-        "A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; remediation records are complete."
+        "Built Python tooling to scan source code and Git history for exposed credentials and used BFG Repo-Cleaner to scrub historical records across 100+ repositories, a scope separate from the CI/CD standardization program.",
+        "A measured scan processed 2,832 files and identified 67 distinct exposed secrets in approximately 25 seconds; Git-history cleanup records are complete."
       ],
       "details": [
         "Git-history remediation uses repository discovery, BFG Repo-Cleaner, reflog expiry, and coordinated cleanup of exposed credentials."
       ],
       "technology": ["Python", "Git", "BFG Repo-Cleaner", "Credential Remediation", "Git History Remediation"]
-    },
-    {
-      "id": "program-oauth-integration",
-      "name": "APIs, OAuth & Secure Integration",
-      "bullets": [
-        "Designed a scoped OAuth 2.1 resource server integrating an enterprise AI assistant with internal engineering documentation, with JWT/JWKS validation, content allowlisting, and explicit token-validation-bypass defenses."
-      ],
-      "details": [
-        "Validates issuer and audience claims, restricts signing algorithms, and tests rejection of unsigned / alg=none tokens.",
-        "Read-only AI/internal-documentation integration with scoped content allowlisting."
-      ],
-      "technology": ["Python", "OAuth 2.1", "JWT", "JWKS", "REST APIs"]
     },
     {
       "id": "program-production-reliability",
@@ -380,15 +366,6 @@
         "Git-history remediation tooling combines repository discovery, BFG Repo-Cleaner, reflog expiry, and coordinated cleanup of exposed credentials, supporting single-repository and whole-project modes with interchangeable rewrite engines."
       ],
       "technology": ["Python", "Git", "BFG Repo-Cleaner", "Credential Remediation", "Git History Remediation"]
-    },
-    {
-      "id": "highlight-secure-integration",
-      "name": "Scoped OAuth 2.1 Resource Server (Python)",
-      "sourceProgram": "APIs, OAuth & Secure Integration",
-      "bullets": [
-        "Design for a read-only resource server integrating an enterprise AI assistant with internal engineering documentation: validates issuer and audience claims through JWT/JWKS, restricts signing algorithms, tests rejection of unsigned / alg=none tokens, and enforces scoped content allowlisting."
-      ],
-      "technology": ["Python", "OAuth 2.1", "JWT", "JWKS", "REST APIs"]
     },
     {
       "id": "highlight-production-reliability",
@@ -567,7 +544,7 @@
         }
       ]
     },
-    "resumeChoiceIntro": "All three resumes use the same facts. Software Engineering & Developer Tools leads with the Go CLI, .NET application and Python tooling; Security Software & Automation leads with credential-remediation tooling, OAuth/JWT validation and access controls. Production & DevOps remains available for delivery and reliability roles.",
+    "resumeChoiceIntro": "All three resumes use the same facts. Software Engineering & Developer Tools leads with the Go CLI, .NET application and Python tooling; Security Software & Automation leads with credential discovery and Git-history remediation tooling, access controls and audit history. Production & DevOps remains available for delivery and reliability roles.",
     "selectedWork": {
       "provenanceLabel": "Professional",
       "featured": [
@@ -576,17 +553,17 @@
         "program-python-productivity"
       ],
       "wide": [
-        "program-cicd-release"
+        "program-cicd-release",
+        "program-production-reliability"
       ],
       "order": [
         "program-deployment-tooling",
         "program-internal-software",
         "program-python-productivity",
         "program-security-remediation",
-        "program-oauth-integration",
+        "program-infrastructure-modernization",
         "program-cicd-release",
-        "program-production-reliability",
-        "program-infrastructure-modernization"
+        "program-production-reliability"
       ],
       "context": {
         "program-cicd-release": [
