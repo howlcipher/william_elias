@@ -2,6 +2,8 @@
 
 Date: 2026-10-02. Branch: `feat/targeted-resume-variants`. Base: `main` at `6652b70`.
 
+> Historical record. Since 2026-10-11 there are three variants (two primary, one secondary); see `ARCHITECTURE.md` and `portfolio_optimization_handoff.md` for the current model.
+
 ## What changed
 
 The model is now **one person → one canonical evidence base (`resume.json`) → one broad website → two targeted résumé views (`resume_variants.json`)**.

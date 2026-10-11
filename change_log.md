@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-11
+
+### Software and security repositioning
+
+* Repositioned the supporting copy around software engineering, developer tooling, and security automation. New tagline: "Building Software, Automating Complex Workflows & Engineering Secure Systems". New supporting line: "Software Development • Developer Tooling • Security Automation • Platform Engineering". Updated About, contact copy, SEO, Open Graph, the social preview, and the LinkedIn banner to match. The official title and promotion record are unchanged.
+* Added a third résumé variant, **Security Software & Automation** (`William_Elias_Security_Automation_Resume.pdf`), backed by new canonical security positioning statements and two PDF highlights: credential discovery/Git-history remediation and the scoped OAuth 2.1 resource server.
+* Renamed the software résumé label to **Software Engineering & Developer Tools** and kept its filename. Reordered its achievements so the Go CLI, .NET application, Python tooling, credential remediation, and OAuth work come before CI/CD.
+* Added an optional, validated `listing` key to variants. The hero and mobile menu offer the two primary résumés. The Production & DevOps résumé is secondary and appears only in the "Targeted Resumes" section. `William_Elias_Resume.pdf` remains a byte copy of Production & DevOps.
+* Education now reads **M.S. Cyber Defense (In Progress, Second Year)**, Dakota State University, **Expected Winter 2027**, on the site and in every PDF. No month or day is invented.
+* Selected Work now runs: software, then security, then CI/CD and production programs. Skills put Security & Identity third. Projects lead with HowlPlane, HowlFrame, and Password Arena. AI Router is identified as HowlPlane's routing predecessor, HowlFrame's "production flip deferred" jargon now reads "experimental", and the projects intro says the projects are AI-assisted.
+* Rewrote the README for recruiters first and moved the maintenance and architecture detail to `documentation/ARCHITECTURE.md`.
+* Verbs, metrics, scope qualifiers, and proof-of-concept labels are unchanged. Open evidence questions are listed in `documentation/portfolio_optimization_handoff.md`.
+
 ## 2026-10-09
 
 ### Senior promotion reflect and career progression
