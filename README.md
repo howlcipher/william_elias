@@ -37,4 +37,4 @@ python scripts/generate_linkedin_profile.py
 PYTHONPATH=. pytest tests/ -W error
 ```
 
-Use Python 3.12 and install Poppler for the PDF checks. Pytest runs serially by default.
+Use Python 3.12 and install Poppler for the PDF checks. Pytest runs serially by default. CI uses Ubuntu 24.04 for the pinned Playwright version.

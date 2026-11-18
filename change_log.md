@@ -2,6 +2,8 @@
 
 ## 2026-11-17
 
+* Pinned GitHub Actions to Ubuntu 24.04 for compatibility with the current Playwright dependency.
+
 * Balanced the nine independent project cards in a three-column desktop grid with equal card sizes. Narrow screens retain a single column.
 * Reconciled the portal stack, shared ownership, and rollout boundaries. Replaced the deployment CLI lifecycle claim with prototype scope and separated configuration discovery from Git-history tooling.
 * Reordered professional work for developer productivity and internal software roles, refreshed independent projects, and regenerated the three targeted PDFs plus their compatibility alias.
