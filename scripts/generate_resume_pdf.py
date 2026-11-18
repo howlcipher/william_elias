@@ -584,6 +584,8 @@ def build(config: dict, out_path: Path, variant: str | None = None, variants: di
         highlights_height += 15 + sum(pdf.bullet_height(b) for b in highlight['bullets'])
         if highlight.get('technology'):
             highlights_height += pdf.indented_text_height('Tech: ' + ', '.join(highlight['technology']))
+    if pdf.page_no() == 1:
+        pdf.add_page()
     pdf.keep_together(highlights_height)
 
     pdf.section_title("Selected Engineering Highlights")
@@ -609,7 +611,14 @@ def build(config: dict, out_path: Path, variant: str | None = None, variants: di
 
     pdf_projects = view["projects"]
     if pdf_projects:
+        provenance = (config.get("site") or {}).get("projectsIntro", "")
+        first_project_height = 28 + sum(pdf.bullet_height(h) for h in pdf_projects[0]["highlights"])
+        provenance_height = pdf.wrapped_text_height(provenance) if provenance else 0
+        pdf.keep_together(28 + provenance_height + first_project_height)
         pdf.section_title("Selected Open-Source Engineering")
+        if provenance:
+            pdf.set_font("Helvetica", "", 9)
+            pdf.multi_cell(0, 13, provenance, new_x="LMARGIN", new_y="NEXT")
         for proj in pdf_projects:
             # Live Pages links render on the website cards. A second URL line
             # here pushed the software résumé onto a third page, so the PDF

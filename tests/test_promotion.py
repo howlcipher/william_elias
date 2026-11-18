@@ -70,5 +70,5 @@ def test_targeted_pdf_keeps_title_progression_and_shared_achievements(tmp_path, 
     assert "Senior Production Support Engineer | Software & Automation" in text
     assert "Promoted September 2026; previously Production Support Engineer" in text
     assert "Feb 2023 - Present" in text
-    assert "CI/CD standardization program" in text
+    assert "Razor Pages" in text
     assert len(reader.pages) == 2

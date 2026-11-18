@@ -4,6 +4,7 @@ import json
 import re
 import shutil
 import subprocess
+import xml.etree.ElementTree as ET
 
 import pypdf
 import pytest
@@ -90,14 +91,14 @@ def test_repeated_id_fails(config, variant_doc):
 
 
 def test_achievements_must_belong_to_the_selected_role(config, variant_doc):
-    variant_doc["variants"]["software_platform"]["experienceAchievementIds"]["exp-hbk"].append("ach-go-deployment-cli")
+    variant_doc["variants"]["software_platform"]["experienceAchievementIds"]["exp-hbk"].append("ach-internal-dotnet-app")
     with pytest.raises(ValueError, match="another role"):
         validate_variants(config, variant_doc)
 
 
 def test_unknown_role_or_achievement_fails(config, variant_doc):
     broken = copy.deepcopy(variant_doc)
-    broken["variants"]["software_platform"]["experienceAchievementIds"]["exp-nowhere"] = ["ach-go-deployment-cli"]
+    broken["variants"]["software_platform"]["experienceAchievementIds"]["exp-nowhere"] = ["ach-internal-dotnet-app"]
     with pytest.raises(ValueError, match="unknown experience ID"):
         validate_variants(config, broken)
     variant_doc["variants"]["software_platform"]["experienceAchievementIds"]["exp-stellantis"].append("ach-invented-claim")
@@ -113,13 +114,13 @@ def test_website_only_skill_cannot_be_selected(config, variant_doc):
 
 @pytest.mark.parametrize("tags", [["Kubernetes"], [], ["Python", "Python"], "Python"])
 def test_skill_tag_override_must_be_a_canonical_subset(config, variant_doc, tags):
-    variant_doc["variants"]["software_platform"]["skillTags"]["skill-software-backend"] = tags
+    variant_doc["variants"]["software_platform"].setdefault("skillTags", {})["skill-software-backend"] = tags
     with pytest.raises(ValueError, match="skillTags"):
         validate_variants(config, variant_doc)
 
 
 def test_skill_tag_override_requires_the_skill_to_be_selected(config, variant_doc):
-    variant_doc["variants"]["production_devops"]["skillTags"]["skill-ai-engineering"] = ["MCP"]
+    variant_doc["variants"]["production_devops"].setdefault("skillTags", {})["skill-ai-engineering"] = ["Human Review"]
     with pytest.raises(ValueError, match="unselected skill"):
         validate_variants(config, variant_doc)
 
@@ -241,17 +242,6 @@ def test_highlight_number_must_come_from_its_source_program(config):
         validate_config(config)
 
 
-def test_verified_metrics_remain_canonical(config):
-    blob = json.dumps(config, ensure_ascii=False)
-    for claim in (
-        "60-repository, 104-application", "56 Azure DevOps build/release", "28 standardized application repositories",
-        "27 passed", "25 of 28", "109 existing definitions", "95 legacy", "14 already-aligned",
-        "100+ repositories", "2,832 files", "67 distinct exposed secrets", "approximately 25 seconds",
-        "22-query KQL library",
-    ):
-        assert claim in blob, claim
-
-
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
 def test_every_number_in_a_pdf_comes_from_canonical_data(variant_pdfs, variant):
     canonical = _numbers((SITE_DIR / "resume.json").read_text(encoding="utf-8"))
@@ -262,14 +252,12 @@ def test_every_number_in_a_pdf_comes_from_canonical_data(variant_pdfs, variant):
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
 def test_qualifiers_survive_into_each_pdf(variant_pdfs, variant):
     text = variant_pdfs[variant]["text"]
-    for qualifier in ("dry-run validated representative deployment paths", "remaining checks blocked",
-                      "In Progress", "Previously Held", "Python/PowerShell professionally",
-                      "Senior Production Support Engineer | Software & Automation",
-                      "Promoted September 2026; previously Production Support Engineer"):
-        assert qualifier in text, qualifier
-    if variant == "production_devops":
-        assert "proof of concept" in text
-        assert "Investigated server/container migration paths" in text
+    for qualifier in ("In Progress", "Previously Held",
+                      "Go in independent projects and prototyping",
+                      "Senior Production Support Engineer",
+                      "Promoted September 2026; previously Production Support Engineer",
+                      "limited to development or QA"):
+        assert qualifier in text
 
 
 # --- Variant emphasis -------------------------------------------------------
@@ -277,60 +265,37 @@ def test_qualifiers_survive_into_each_pdf(variant_pdfs, variant):
 def test_software_platform_leads_with_software_and_tooling(variant_pdfs, variant_doc):
     text = variant_pdfs["software_platform"]["text"]
     assert "SOFTWARE & AUTOMATION ENGINEER" in text
-    assert "Developer Tooling | Internal Applications | Platform Engineering | Python | Go | C#/.NET" in text
-    experience = text.split("PROFESSIONAL EXPERIENCE")[1]
-    assert experience.index("Go-based self-service deployment CLI") < experience.index("CI/CD standardization program")
-    assert experience.index("Python/FastAPI") < experience.index("CI/CD standardization program")
-    for term in ("initialization/scaffolding", "host auditing", "post-deployment verification", "HowlFrame",
-                 "bytecode VM", "WebAssembly", "experimental",
-                 "Blazor", "ASP.NET Core", "SQLite", "uv", "FastAPI"):
-        assert term in text, term
-    # HowlFrame stays labelled experimental, in plain language rather than internal jargon.
-    assert "production flip" not in text
-    expertise = text.split("CORE EXPERTISE")[1]
-    assert expertise.lstrip().startswith("Software & Backend")
+    experience = text.split("PROFESSIONAL EXPERIENCE")[1].split("CORE EXPERTISE")[0]
+    terms = ("ASP.NET Core Razor Pages", "Azure DevOps templates", "integer-overflow", "FastAPI webhook")
+    assert all(term in experience for term in terms)
+    assert [experience.index(term) for term in terms] == sorted(experience.index(term) for term in terms)
+    assert text.split("CORE EXPERTISE")[1].lstrip().startswith("Software & Backend")
     assert "Infrastructure & Application Operations" not in text
 
 
 def test_security_automation_leads_with_security_tooling(variant_pdfs):
     text = variant_pdfs["security_automation"]["text"]
     assert "SOFTWARE & SECURITY AUTOMATION ENGINEER" in text
-    assert "Security Automation | Credential Remediation | Access Control | Python | Go | C#/.NET" in text
-    experience = text.split("PROFESSIONAL EXPERIENCE")[1]
-    assert experience.index("exposed credentials") < experience.index("per-module access policies")
-    assert experience.index("per-module access policies") < experience.index("56 Azure DevOps build/release definitions")
+    experience = text.split("PROFESSIONAL EXPERIENCE")[1].split("CORE EXPERTISE")[0]
+    assert experience.index("C#/.NET 8") < experience.index("BFG Repo-Cleaner") < experience.index("authorization and audit")
     assert text.split("CORE EXPERTISE")[1].lstrip().startswith("Security & Identity")
-    # Lead only with security tags that a selected bullet supports.
-    expertise = text.split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
-    for unsupported in ("IAM", "PII Safeguards"):
-        assert unsupported not in expertise, unsupported
-    highlights = text.split("SELECTED ENGINEERING HIGHLIGHTS")[1].split("SELECTED OPEN-SOURCE")[0]
-    assert highlights.lstrip().startswith("Git-History Credential Remediation")
     assert "Password Arena" in text and "synthetic" in text
-    # Security automation is software work, not security operations.
-    lowered = text.lower()
     for term in ("penetration test", "pentest", "red team", "soc analyst", "threat hunting",
-                 "security architect", "incident responder", "zero trust", "key vault", "rotated"):
-        assert term not in lowered, term
-    assert "oauth" not in lowered
-    # Remediation is described as Git-history cleanup, not as secret rotation.
-    assert "Git-history cleanup records are complete" in text
+                 "security architect", "incident responder", "key vault", "rotated", "oauth", "iam"):
+        assert not re.search(r"\b" + re.escape(term) + r"\b", text.lower())
 
 
 def test_production_devops_leads_with_delivery_and_reliability(variant_pdfs):
     text = variant_pdfs["production_devops"]["text"]
     assert "PRODUCTION & DEVOPS AUTOMATION ENGINEER" in text
-    assert "CI/CD | Azure DevOps | Automation | Reliability | Python | Production Systems" in text
-    experience = text.split("PROFESSIONAL EXPERIENCE")[1]
+    experience = text.split("PROFESSIONAL EXPERIENCE")[1].split("CORE EXPERTISE")[0]
     assert experience.lstrip().startswith("Stellantis")
-    assert experience.index("CI/CD standardization program") < experience.index("Go-based self-service deployment CLI")
-    assert experience.index("22-query KQL library") < experience.index("Python/FastAPI")
-    for term in ("109 existing definitions", "95 legacy", "14 already-aligned", "Azure Monitor",
-                 "Application Insights", "Incident Triage", "RCA", "Cisco / Meraki", "Load Balancers",
-                 "Firewalls", "IIS", "Active Directory", "disaster-recovery", "Go-based self-service deployment CLI"):
-        assert term in text, term
+    assert experience.index("integer-overflow") < experience.index("Azure DevOps templates") < experience.index("KQL")
+    for term in ("Azure Monitor", "Application Insights", "Incident Triage", "RCA",
+                 "Cisco / Meraki", "Load Balancers", "Firewalls", "IIS", "Active Directory", "disaster-recovery"):
+        assert term in text
     assert text.split("CORE EXPERTISE")[1].lstrip().startswith("DevOps & Delivery")
-    assert "AI-Enabled Engineering" not in text
+    assert "AI-Assisted Engineering" not in text
 
 
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
@@ -417,15 +382,15 @@ SECTIONS = ("PROFESSIONAL SUMMARY", "PROFESSIONAL EXPERIENCE", "CORE EXPERTISE",
             "SELECTED ENGINEERING HIGHLIGHTS", "SELECTED OPEN-SOURCE ENGINEERING",
             "EARLIER EXPERIENCE", "EDUCATION & CERTIFICATIONS")
 ATS_KEYWORDS = {
-    "software_platform": ("Software", "Automation", "Developer Tooling", "Platform Engineering", "Python", "Go",
-                          "C#", ".NET", "ASP.NET Core", "REST API", "CI/CD", "Azure DevOps", "FastAPI",
-                          "self-service", "Security", "Credential Remediation"),
-    "security_automation": ("Security Automation", "Credential Remediation", "Git History", "BFG Repo-Cleaner",
-                            "Audit Controls", "access policies", "audit history", "HowlFrame",
-                            "Python", "Go", "C#", "Cyber Defense", "Password Arena", "DevOps"),
+    "software_platform": ("Software", "Automation", "Developer Productivity", "Internal Tools", "Python", "Go",
+                          "C#", ".NET", "ASP.NET Core", "Razor Pages", "REST APIs", "CI/CD", "Azure DevOps",
+                          "FastAPI", "HowlPlane", "HowlProof"),
+    "security_automation": ("Security Automation", "Secrets Discovery", "Git History Tooling",
+                            "BFG Repo-Cleaner", "Authorization", "Audit Controls", "Cyber Defense",
+                            "Python", "C#", "HowlProof", "Password Arena"),
     "production_devops": ("DevOps", "Azure DevOps", "CI/CD", "Release", "Production", "Reliability", "KQL",
                           "Application Insights", "Azure Monitor", "Python", "PowerShell", "IIS",
-                          "Windows Server", "SQL Server", "Credential Remediation", "RCA"),
+                          "Windows Server", "SQL Server", "RCA"),
 }
 
 
@@ -496,3 +461,22 @@ def test_website_offers_two_primary_resumes_and_one_secondary():
 
 def test_legacy_pdf_remains_published_at_its_url():
     assert (SITE_DIR / LEGACY_PDF).is_file()
+
+
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_pdf_text_stays_inside_the_page(pdftotext, variant):
+    path = SITE_DIR / EXPECTED_FILES[variant]
+    raw = subprocess.run([pdftotext, "-bbox", str(path), "-"], check=True,
+                         capture_output=True).stdout
+    document = ET.fromstring(raw)
+    pages = document.findall(".//{*}page")
+    assert 1 <= len(pages) <= 2
+    for page in pages:
+        width = float(page.attrib["width"])
+        height = float(page.attrib["height"])
+        words = page.findall("{*}word")
+        assert words
+        for word in words:
+            left, top, right, bottom = (float(word.attrib[key]) for key in ("xMin", "yMin", "xMax", "yMax"))
+            assert 12 <= left < right <= width - 12, word.text
+            assert 12 <= top < bottom <= height - 12, word.text

@@ -307,7 +307,7 @@ summary { cursor: pointer; color: var(--blue); padding: .55rem 0; font-weight: 6
 .capability-tier .skill-tags { justify-content: center; }
 .capability-arrow { color: var(--red); font-size: 1rem; }
 
-.projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 1rem; }
 .project-card { padding: 1.5rem; display: flex; flex-direction: column; }
 .project-card h3 { margin-bottom: .5rem; font-size: 1.2rem; }
 .project-subtitle { margin-bottom: 1rem; font-size: .68rem; }
@@ -364,6 +364,7 @@ footer { padding: 3rem 2rem 2rem; margin-top: 4rem; color: var(--muted); border-
     .profile-module::before,
     .profile-module::after { display: none; }
     .projects-grid, .programs-grid, .build-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-auto-rows: auto; }
     .program-card, .program-card.program-featured { grid-column: auto; }
     .program-wide .program-context { grid-template-columns: 1fr; }
 }

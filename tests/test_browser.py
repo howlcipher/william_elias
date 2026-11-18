@@ -6,6 +6,8 @@ import threading
 import http.server
 import socketserver
 
+from scripts.generate_resume_pdf import load_config
+
 DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -84,6 +86,9 @@ def test_mobile_resume_visible_without_opening_menu(page: Page, test_url: str):
     assert button.is_visible()
     box = button.bounding_box()
     assert box['y'] + box['height'] < 844
+    hero = page.locator("#hero-content-target")
+    expect(hero.locator(".resume-action").first).to_have_attribute("data-resume-variant", "software_platform")
+    expect(hero.get_by_role("link", name="Email", exact=True)).to_be_visible()
 
 
 @pytest.mark.parametrize("theme", ["dark", "light", "contrast-dark", "contrast-light"])
@@ -294,11 +299,11 @@ def test_terminal_caret_is_inline_pseudo_element_not_border(page: Page, test_url
     assert after_style["animationName"] == "terminal-caret"
 
 
-def test_six_project_cards_render_with_correct_links(page: Page, test_url: str):
+def test_project_cards_render_with_correct_links(page: Page, test_url: str):
     page.goto(test_url)
 
     cards = page.locator("#projects-target .project-card")
-    assert cards.count() == 6
+    assert cards.count() == len(load_config()["projects"])
 
     titles = cards.locator("h3").all_inner_texts()
     assert "RedrawUS" in titles
@@ -643,7 +648,7 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     details = [c.locator(".program-details").bounding_box() for c in featured]
     assert max(d["y"] for d in details) - min(d["y"] for d in details) <= 1.5
 
-    # The wide case studies (CI/CD, production reliability) span the whole grid.
+    # Wide case studies span the whole grid.
     wide = [c for c, cls in zip(cards, classes) if "program-wide" in cls]
     assert len(wide) == 2
     for card in wide:
@@ -676,7 +681,9 @@ def test_engineering_impact_cards_desktop_alignment_and_expansion(page: Page, te
     first.locator("summary").click()
     expect(first.locator(".program-details")).to_have_attribute("open", "")
 
-    assert first.bounding_box()["height"] > collapsed_first_height + 50
+    disclosed = first.locator(".program-details ul")
+    expect(disclosed).to_be_visible()
+    assert first.bounding_box()["height"] >= collapsed_first_height + disclosed.bounding_box()["height"] - 2
     assert abs(second.bounding_box()["height"] - collapsed_second_height) <= 2.0, (
         f"Sibling should retain natural collapsed height, got {second.bounding_box()['height']}"
     )
@@ -703,3 +710,18 @@ def test_engineering_impact_cards_mobile_layout(page: Page, test_url: str):
         assert box["x"] >= grid_box["x"] - 1  # No horizontal overflow
         assert box["x"] + box["width"] <= grid_box["x"] + grid_box["width"] + 1
         prev_bottom = box["y"] + box["height"]
+
+
+@pytest.mark.parametrize(("width", "columns"), [(390, 1), (1024, 3), (1440, 3)])
+def test_open_source_cards_form_balanced_columns(page: Page, test_url: str, width, columns):
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(test_url)
+    page.evaluate("document.fonts.ready")
+    cards = page.locator("#projects-target .project-card").all()
+    boxes = [card.bounding_box() for card in cards]
+    positions = {round(box["x"]) for box in boxes}
+    assert len(positions) == columns
+    assert all(sum(round(box["x"]) == x for box in boxes) == len(cards) // columns for x in positions)
+    assert max(box["width"] for box in boxes) - min(box["width"] for box in boxes) <= 1
+    if columns > 1:
+        assert max(box["height"] for box in boxes) - min(box["height"] for box in boxes) <= 1

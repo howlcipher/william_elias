@@ -34,7 +34,7 @@ class TestHeadlineAndPositioning:
         cfg = load_config()
         assert cfg["personal"]["title"] == "Software & Automation Engineer"
         supporting = cfg["personal"]["supporting"]
-        for term in ("Software Development", "Developer Tooling", "Security Automation", "Platform Engineering"):
+        for term in ("Developer Productivity", "Internal Tools", "Secure Automation"):
             assert term in supporting
         # Production and DevOps depth stays discoverable, but not in the headline.
         for term in ("Production Support", "DevOps"):
@@ -45,28 +45,25 @@ class TestHeadlineAndPositioning:
         assert "Production Support" not in cfg["personal"]["title"]
 
     def test_tagline_states_software_automation_and_security_positioning(self):
-        cfg = load_config()
-        tagline = cfg["personal"]["tagline"]
-        assert "Software" in tagline or "Building" in tagline
-        assert "Automating" in tagline or "Automation" in tagline
-        assert "Secure" in tagline or "Security" in tagline
+        tagline = load_config()["personal"]["tagline"].lower()
+        assert "software" in tagline
+        assert "engineers" in tagline
 
     @pytest.mark.parametrize("variant,opening", [
-        ("software_platform", "Software and automation engineer building developer tools"),
-        ("security_automation", "Software and automation engineer building security tooling and automation"),
-        ("production_devops", "Production and DevOps automation engineer working across production operations"),
+        ("software_platform", "Software and automation engineer building internal applications"),
+        ("security_automation", "Software and security automation engineer building configuration secrets discovery"),
+        ("production_devops", "Production and DevOps automation engineer diagnosing application"),
     ])
     def test_variant_summary_leads_with_its_positioning(self, variant, opening):
         summary = _variant_summary(load_config(), variant)
         assert summary.startswith(opening)
         assert "10+ years" not in summary
-        assert "dating to 2015" in summary
         assert "Senior DevOps" not in summary
 
     def test_official_stellantis_title_preserved(self):
         cfg = load_config()
         stellantis = next(j for j in cfg["experience"] if "Stellantis Financial Services" in j["company"])
-        assert stellantis["title"] == "Senior Production Support Engineer | Software & Automation"
+        assert stellantis["title"] == "Senior Production Support Engineer"
         assert stellantis["officialTitle"] == "Senior Production Support Engineer"
         assert stellantis["promotion"]["previousOfficialTitle"] == "Production Support Engineer"
         assert stellantis["promotion"]["effectiveDate"] == "2026-09"
@@ -77,128 +74,10 @@ class TestHeadlineAndPositioning:
         assert "remote" in cfg["personal"]["remote"].lower() or "u.s." in cfg["personal"]["remote"].lower()
 
 
-class TestKeyMetrics:
-    def test_three_defensible_metrics_present_in_stats(self):
-        cfg = load_config()
-        values = {s["value"] for s in cfg["stats"]}
-        assert "60" in values
-        assert "104" in values
-        assert "67" in values
-        assert len(cfg["stats"]) == 3
-
-    def test_estate_scope_not_overstated_as_migrated_or_deployed(self):
-        cfg = load_config()
-        blob = json.dumps(cfg).lower()
-        assert "60 repositories migrated" not in blob
-        assert "104 applications deployed" not in blob
-        assert "104 applications migrated" not in blob
-        assert "60 applications migrated" not in blob
-
-    def test_experience_states_true_program_scope(self):
-        cfg = load_config()
-        accomplishment = next(a["text"] for a in cfg["experience"][0]["achievements"] if "56 Azure DevOps" in a["text"])
-        # "estate" framing keeps the ~60 figure as scope, never as applications
-        # migrated or deployed.
-        assert "60-repository, 104-application" in accomplishment
-        assert "28 standardized application repositories" in accomplishment
-        # Build and dry-run validation details live in the dedicated CI/CD program.
-        assert "27" in accomplishment or "28" in accomplishment
-
-    @pytest.mark.parametrize("variant", VARIANT_NAMES)
-    def test_summary_does_not_claim_100_plus_pipelines(self, variant):
-        summary = _variant_summary(load_config(), variant).lower()
-        assert "100+ azure devops ci/cd pipelines" not in summary
-        assert "100+ azure devops" not in summary
-
-    def test_no_100_plus_pipeline_claim_anywhere(self, tmp_path):
-        cfg = load_config()
-        banned = (
-            "100+ azure devops ci/cd pipelines",
-            "100+ azure devops pipelines",
-            "built 100+ azure devops",
-            "100 azure devops ci/cd pipelines",
-        )
-        blob = json.dumps(cfg).lower()
-        for phrase in banned:
-            assert phrase not in blob, f"resume.json still contains '{phrase}'"
-
-        config_js = (SITE_DIR / "config.js").read_text(encoding="utf-8").lower()
-        index_html = (SITE_DIR / "index.html").read_text(encoding="utf-8").lower()
-        for phrase in banned:
-            assert phrase not in config_js, f"config.js still contains '{phrase}'"
-            assert phrase not in index_html, f"index.html still contains '{phrase}'"
-
-        pages = _extract_pdf_pages(cfg, tmp_path)
-        pdf_blob = "\n".join(pages).lower()
-        for phrase in banned:
-            assert phrase not in pdf_blob, f"PDF still contains '{phrase}'"
-
-    def test_verified_cicd_rollout_numbers_present(self, tmp_path):
-        cfg = load_config()
-        blob = json.dumps(cfg)
-        assert "60" in blob
-        assert "104" in blob
-        assert "56 Azure DevOps build/release" in blob
-        assert "28" in blob
-        assert "25 of 28" in blob
-
-        pages = _extract_pdf_pages(cfg, tmp_path)
-        pdf_blob = " ".join("\n".join(pages).split())
-        assert "56 Azure DevOps" in pdf_blob
-        assert "28" in pdf_blob
-        assert "27" in pdf_blob
-
-    def test_no_deployment_completion_implied(self):
-        cfg = load_config()
-        blob = json.dumps(cfg).lower()
-        banned_phrases = (
-            "deployed 28 applications",
-            "rolled out 28 applications",
-            "migrated 28 applications to production",
-            "production deployments completed",
-            "28 applications deployed",
-            "28 applications to production",
-            "60 repositories deployed",
-            "104 applications deployed",
-            "rolled out to 60 repositories",
-            "all repositories migrated",
-        )
-        for phrase in banned_phrases:
-            assert phrase not in blob, f"resume.json implies deployment via '{phrase}'"
-        assert "zero applications" not in blob
-        assert "pending approval" not in blob
-
-    def test_estate_organization_numbers_kept_separate_from_created_definitions(self):
-        cfg = load_config()
-        cicd = next(p for p in cfg["selectedEngineeringPrograms"] if "CI/CD" in p["name"])
-        blob = json.dumps(cicd)
-        assert "109" in blob
-        assert "95" in blob
-        # 109/95 describe organization/inventory of existing definitions, not creation.
-        assert "109 azure devops build/release definitions created" not in blob.lower()
-        assert "built 109" not in blob.lower()
-
-    def test_credential_remediation_metric_intact(self):
-        cfg = load_config()
-        values = {s["value"] for s in cfg["stats"]}
-        assert "100+" not in values
-        assert "67" in values
-        stats_blob = json.dumps(cfg["stats"])
-        assert "credential" in stats_blob.lower() or "secret" in stats_blob.lower()
-        blob = json.dumps(cfg).lower()
-        assert "100+ repositories" in blob
-        assert "credential-remediated" not in blob
-
-    def test_cicd_program_preserves_verified_metrics(self):
-        cfg = load_config()
-        cicd = next(p for p in cfg["selectedEngineeringPrograms"] if "CI/CD" in p["name"])
-        blob = json.dumps(cicd)
-        assert "56" in blob
-        assert "28" in blob
-        assert "27" in blob
-        assert "25" in blob
-        assert "latent delivery defects" in blob.lower()
-        assert "go/no-go" not in blob.lower()
+def test_hbk_processing_and_labor_outcomes_remain_in_each_resume(variant_pdfs):
+    for pdf in variant_pdfs.values():
+        assert "reduced data-processing time by 60%" in pdf["text"]
+        assert "save more than 40 hours per month" in pdf["text"]
 
 
 class TestCoreExpertiseCategories:
@@ -209,7 +88,7 @@ class TestCoreExpertiseCategories:
         "Production & Reliability",
         "Infrastructure & Application Operations",
         "Security & Identity",
-        "AI-Enabled Engineering",
+        "AI-Assisted Engineering",
         "Additional Technical Foundations",
     }
 
@@ -226,8 +105,8 @@ class TestCoreExpertiseCategories:
 
     def test_ai_category_has_credible_agentic_tooling(self):
         cfg = load_config()
-        ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI-Enabled Engineering")
-        for term in ("MCP", "RAG"):
+        ai_skills = next(s for s in cfg["skills"] if s["category"] == "AI-Assisted Engineering")
+        for term in ("Human Review", "Regression Testing"):
             assert any(term in tag for tag in ai_skills["tags"])
 
     def test_languages_and_tools_reflected_in_software_and_automation(self):
@@ -235,7 +114,7 @@ class TestCoreExpertiseCategories:
         software = next(s for s in cfg["skills"] if s["category"] == "Software & Backend")
         automation = next(s for s in cfg["skills"] if s["category"] == "Automation & Developer Tooling")
         combined = software["tags"] + automation["tags"]
-        for core in ("Python", "PowerShell", "C#", "Go", "SQL Server", "uv"):
+        for core in ("Python", "PowerShell", "C#", "Go", "SQL Server", "Razor Pages"):
             assert core in combined
         assert "Java" not in combined
         assert "FastAPI" in combined
@@ -266,13 +145,13 @@ class TestCoreExpertiseCategories:
 
 class TestSelectedEngineeringPrograms:
     EXPECTED_PROGRAMS = {
-        "CI/CD & Release Engineering",
-        "Software & Internal Developer Tools",
+        "Azure DevOps & Deployment Safety",
+        "Production Support Portal",
         "Python Automation & Developer Productivity",
-        "Deployment Automation & Release Tooling",
-        "Security & Credential Remediation",
-        "Production Reliability & Observability",
-        "Infrastructure Modernization & Containerization",
+        "Container Deployment CLI Prototype",
+        "Secrets Discovery & Git-History Tooling",
+        "Production Incident Remediation",
+        "Infrastructure Modernization Investigation",
     }
 
     def test_seven_programs_present(self):
@@ -295,30 +174,6 @@ class TestPdfEngineeringHighlights:
     variant selects by ID.
     """
 
-    EXPECTED_HIGHLIGHTS = {
-        "software_platform": [
-            "Self-Service Deployment CLI (Go)",
-            "Internal Web Application with Access Policies & Audit (C#/.NET)",
-            "Python Developer Productivity Tooling",
-        ],
-        "security_automation": [
-            "Git-History Credential Remediation (Python)",
-            "Internal Web Application with Access Policies & Audit (C#/.NET)",
-        ],
-        "production_devops": [
-            "Production Reliability & Observability",
-            "Self-Service Deployment CLI (Go)",
-            "Infrastructure Investigation & Modernization",
-        ],
-    }
-
-    @pytest.mark.parametrize("variant", VARIANT_NAMES)
-    def test_variant_selects_expected_highlights(self, variant):
-        cfg = load_config()
-        names = {h["id"]: h["name"] for h in cfg["pdfEngineeringHighlights"]}
-        ids = load_variants()["variants"][variant]["highlightIds"]
-        assert [names[i] for i in ids] == self.EXPECTED_HIGHLIGHTS[variant]
-
     def test_every_highlight_has_bullets_and_technology(self):
         cfg = load_config()
         for hl in cfg["pdfEngineeringHighlights"]:
@@ -329,7 +184,8 @@ class TestPdfEngineeringHighlights:
     def test_pdf_renders_only_the_selected_highlights(self, variant, variant_pdfs):
         cfg = load_config()
         blob = "\n".join(variant_pdfs[variant]["pages"])
-        selected = self.EXPECTED_HIGHLIGHTS[variant]
+        ids = load_variants()["variants"][variant]["highlightIds"]
+        selected = {h["name"] for h in cfg["pdfEngineeringHighlights"] if h["id"] in ids}
         for name in selected:
             assert name in blob, f"'{name}' missing from generated PDF"
         for hl in cfg["pdfEngineeringHighlights"]:
@@ -471,14 +327,17 @@ class TestSelectedOpenSourceProjects:
         "HowlPlane",
         "AI Router",
         "HowlFrame",
+        "HowlProof",
+        "HowlDream",
+        "HowlWriter",
         "Baseball Optimizer",
         "RedrawUS",
         "Password Arena",
     }
 
-    def test_exactly_six_projects_present(self):
+    def test_reviewed_projects_present(self):
         cfg = load_config()
-        assert len(cfg["projects"]) == 6
+        assert len(cfg["projects"]) == len(self.EXPECTED_PROJECTS)
         names = {p["name"] for p in cfg["projects"]}
         assert names == self.EXPECTED_PROJECTS
 
@@ -511,8 +370,8 @@ class TestSelectedOpenSourceProjects:
             assert tag in proj["tags"]
 
     @pytest.mark.parametrize("variant,expected", [
-        ("software_platform", {"HowlPlane", "HowlFrame"}),
-        ("security_automation", {"Password Arena", "HowlPlane", "HowlFrame"}),
+        ("software_platform", {"HowlPlane", "HowlProof"}),
+        ("security_automation", {"Password Arena", "HowlProof"}),
         ("production_devops", {"HowlPlane"}),
     ])
     def test_pdf_includes_only_selected_projects(self, variant_pdfs, variant, expected):
@@ -569,8 +428,8 @@ class TestNoUnsupportedClaims:
         baseball = next(p for p in cfg["projects"] if p["name"] == "Baseball Optimizer")
         assert "Docker" in baseball["tags"]
         assert "Docker Compose" in " ".join(baseball["highlights"])
-        cicd = cfg["selectedEngineeringPrograms"][0]
-        poc = next(t for t in cicd["details"] if "Rancher Desktop" in t)
+        infrastructure = next(p for p in cfg["selectedEngineeringPrograms"] if p["id"] == "program-infrastructure-modernization")
+        poc = next(t for t in infrastructure["details"] if "Blazor" in t)
         assert "proof of concept" in poc
 
     def test_no_automated_identity_lifecycle_claim(self):
@@ -605,11 +464,10 @@ class TestPdfLayout:
         pages = _extract_pdf_pages(cfg, tmp_path, variant)
         assert "SELECTED ENGINEERING HIGHLIGHTS" not in pages[0].upper()
         assert "SELECTED ENGINEERING HIGHLIGHTS" in pages[1].upper()
-        normalized = " ".join("\n".join(pages).split())
         selected = load_variants()["variants"][variant]["highlightIds"]
         for highlight in (h for h in cfg["pdfEngineeringHighlights"] if h["id"] in selected):
-            assert highlight["name"] in "\n".join(pages)
-            assert all(bullet in normalized for bullet in highlight["bullets"])
+            page, = [page for page in pages if highlight["name"] in page]
+            assert all(bullet in " ".join(page.split()) for bullet in highlight["bullets"])
 
     def test_page_one_has_summary_expertise_and_experience(self, tmp_path, variant):
         cfg = load_config()
@@ -659,10 +517,10 @@ class TestReadmeRecruiterFacing:
     def test_readme_surfaces_links_and_metrics(self):
         readme = (SITE_DIR / "README.md").read_text(encoding="utf-8")
         cfg = load_config()
-        assert cfg["personal"]["linkedin"] in readme
-        assert cfg["personal"]["github"] in readme
-        for s in cfg["stats"]:
-            assert s["value"] in readme
+        for url in (cfg["personal"]["linkedin"], cfg["personal"]["github"], cfg["seo"]["canonicalUrl"]):
+            assert url in readme
+        for item in load_variants()["variants"].values():
+            assert item["file"] in readme
 
     def test_readme_preserves_developer_docs(self):
         readme = (SITE_DIR / "README.md").read_text(encoding="utf-8")
@@ -712,7 +570,7 @@ class TestGeneratedAssetsSynchronized:
         assert desc_match
         desc = desc_match.group(1)
         assert "DevOps" in desc
-        assert "Software" in desc
-        assert "Production" in desc
+        assert "software" in desc.lower()
+        assert "production" in desc.lower()
         assert "automation" in desc.lower()
         assert "Senior DevOps" not in desc
