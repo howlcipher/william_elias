@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-17
+
+* Balanced the nine independent project cards in a three-column desktop grid with equal card sizes. Narrow screens retain a single column.
+* Reconciled the portal stack, shared ownership, and rollout boundaries. Replaced the deployment CLI lifecycle claim with prototype scope and separated configuration discovery from Git-history tooling.
+* Reordered professional work for developer productivity and internal software roles, refreshed independent projects, and regenerated the three targeted PDFs plus their compatibility alias.
+* Added generated LinkedIn copy for manual review, an evidence reconciliation record, and regression coverage for the corrected claims.
+
 ## 2026-10-11
 
 ### Evidence tightening (at William's direction)

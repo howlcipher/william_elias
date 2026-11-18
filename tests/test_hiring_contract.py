@@ -69,21 +69,6 @@ def test_about_is_three_short_paragraphs_without_repeated_delivery_counts():
         assert count not in first_impression
 
 
-def test_headline_metrics_have_independent_program_evidence():
-    cfg = load_config()
-    assert [s["value"] for s in cfg["stats"]] == ["60", "104", "67"]
-    programs = {p["name"]: p for p in cfg["selectedEngineeringPrograms"]}
-    sources = []
-    for stat in cfg["stats"]:
-        source = programs[stat["sourceProgram"]]
-        assert stat["value"] in " ".join(source["bullets"] + source.get("details", []))
-        sources.append(stat["sourceProgram"])
-    assert len(set(sources)) >= 2
-    assert "scope" in cfg["stats"][0]["label"]
-    assert "inventoried" in cfg["stats"][1]["label"]
-    assert "secret" in cfg["stats"][2]["label"].lower()
-
-
 def test_pdf_highlight_numbers_are_supported_by_their_specific_program():
     cfg = load_config()
     programs = {p["name"]: p for p in cfg["selectedEngineeringPrograms"]}
@@ -98,18 +83,14 @@ def test_each_targeted_pdf_balances_software_delivery_and_production(variant_pdf
     cfg = load_config()
     reader = variant_pdfs[variant]["reader"]
     text = variant_pdfs[variant]["text"]
-    assert len(reader.pages) == 2
-    assert text.count("56 Azure DevOps") >= 1
-    for term in ("60", "104", "28", "27", "25 of 28", "dry-run", "ASP.NET Core", "Blazor", "Interactive Server", "FastAPI", "SQL Server", "SQLite", "KQL", "BFG Repo-Cleaner", "Go", "deployment CLI", "Git History", "Audit Controls", "HowlPlane", "containerization proof of concept"):
-        assert term in text, term
-    assert "Auth0" not in text
-    assert "OAuth" not in text
-    assert "Serilog" not in text
-    for stale in ("Razor Pages", "Azure Key Vault", "Managed Identity", "six latent"):
-        assert stale not in text, f"stale term found: {stale}"
-    assert "AI Router" not in text
+    assert 1 <= len(reader.pages) <= 2
+    for term in ("ASP.NET Core", "Razor Pages", "FastAPI", "SQL Server", "SQLite"):
+        assert term in text
+    for stale in ("Auth0", "OAuth", "Serilog", "Blazor", "Interactive Server", "Managed Identity"):
+        assert stale not in text
     assert text.index("PROFESSIONAL EXPERIENCE") < text.index("CORE EXPERTISE")
-    links = [str(a.get_object().get("/A", {}).get("/URI", "")) for p in reader.pages for a in p.get("/Annots", [])]
+    assert cfg["site"]["projectsIntro"] in text
+    links = [a.get_object().get("/A", {}).get("/URI") for p in reader.pages for a in p.get("/Annots", [])]
     assert f'mailto:{cfg["personal"]["email"]}' in links
     selected = set(variants["variants"][variant]["projectIds"])
     for project in cfg["projects"]:
@@ -123,62 +104,27 @@ def test_seo_and_cta_copy_are_canonical():
     assert "William Elias" in cfg["seo"]["description"]
     assert len(cfg["seo"]["description"]) <= 160
     assert html.escape(cfg["personal"]["contactCopy"], quote=True) in page
-    assert "Platform Engineering" in cfg["seo"]["knowsAbout"]
 
 
 def test_recruiter_positioning_keeps_each_primary_role_and_differentiator_visible():
     cfg = load_config()
-    title = cfg["personal"]["title"]
-    assert title == "Software & Automation Engineer"
-    assert cfg["personal"]["supporting"] == (
-        "Software Development • Developer Tooling • Security Automation • Platform Engineering"
-    )
-    # DevOps and Production roles stay discoverable through descriptive fields
-    # and the Production & DevOps résumé, not through the broad site headline.
-    for term in ("DevOps", "Azure DevOps", "Production Engineering", "Developer Productivity",
-                 "Platform Engineering", "Developer Tooling", "Internal Tools"):
+    assert cfg["personal"]["title"] == "Software & Automation Engineer"
+    for term in ("Developer Productivity", "Internal Tools", "Security Automation", "Azure DevOps"):
         assert term in cfg["seo"]["knowsAbout"]
-    pd_title = load_variants()["variants"]["production_devops"]["title"]
-    for term in ("Production", "DevOps"):
-        assert term in pd_title
-
-    canonical = json.dumps(cfg)
-    for term in ("Python", "Security Automation", "AI-Enabled Engineering"):
-        assert term in canonical
-    assert "U.S. fully remote" in cfg["personal"]["contactCopy"]
-
-
-def test_canonical_program_order_is_unchanged_for_the_pdfs():
-    cfg = load_config()
-    assert [program["name"] for program in cfg["selectedEngineeringPrograms"]] == [
-        "CI/CD & Release Engineering",
-        "Software & Internal Developer Tools",
-        "Python Automation & Developer Productivity",
-        "Deployment Automation & Release Tooling",
-        "Security & Credential Remediation",
-        "Production Reliability & Observability",
-        "Infrastructure Modernization & Containerization",
-    ]
+    assert "Production" in load_variants()["variants"]["production_devops"]["title"]
+    assert "remote" in cfg["personal"]["contactCopy"].lower()
 
 
 def test_verified_cicd_and_security_scope_language_remains_unambiguous():
     cfg = load_config()
-    cicd = next(p for p in cfg["selectedEngineeringPrograms"] if p["name"] == "CI/CD & Release Engineering")
-    cicd_text = " ".join(cicd["bullets"] + cicd["details"])
-    for term in (
-        "60-repository, 104-application",
-        "56 Azure DevOps build/release pipeline definitions across 28 standardized application repositories",
-        "representative deployment paths for 25 of 28 standardized repositories",
-        "171 application-to-server deployment combinations",
-        "327 deployment paths",
-        "275 inventory entries",
-    ):
-        assert term in cicd_text
-    # 39 + 20 + 8 + 1 = 68, which is not the 60-repository scope. That breakdown is omitted.
-    for dropped in ("39 unmapped", "20 legacy", "8 out-of-scope", "1 unreachable"):
-        assert dropped not in cicd_text
-    security = next(p for p in cfg["selectedEngineeringPrograms"] if p["name"].startswith("Security"))
-    assert "67 distinct exposed secrets" in json.dumps(security)
+    delivery = next(p for p in cfg["selectedEngineeringPrograms"] if p["id"] == "program-cicd-release")
+    assert "subset" in " ".join(delivery["bullets"]).lower()
+    details = " ".join(delivery["details"]).lower()
+    for phase in ("inventory", "pipeline configuration", "build checks", "dry runs", "production deployments"):
+        assert phase in details
+    assert re.search(r"dry runs.*separately from production deployments", details)
+    assert not re.search(r"\d", json.dumps(delivery))
+    assert not cfg["stats"]
 
 
 def test_no_phone_or_street_address_in_public_source():

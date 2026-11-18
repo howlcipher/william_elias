@@ -4,8 +4,7 @@ Generate the personal profile LinkedIn banner (1584 x 396) matching the
 site's dark navy blueprint aesthetic, Space Grotesk / IBM Plex Mono typography,
 and safe-area margin for the avatar overlay.
 
-The headline and tagline come from resume.json so a rebuild cannot republish
-a retired title.
+The headline, tagline, and supporting line come from resume.json.
 """
 import html
 import json
@@ -103,16 +102,7 @@ body {
     margin-right: 6px;
 }
 
-.tech-stack {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 19px;
-    font-weight: 600;
-    color: #9fd3f4;
-    margin-top: 16px;
-    letter-spacing: 0.04em;
-}
-
-.ai-layer {
+.positioning {
     display: inline-block;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 14px;
@@ -133,8 +123,7 @@ body {
     <div class="banner-content">
         <h1 class="headline">{{HEADLINE}}</h1>
         <div class="tagline"><span class="tagline-caret">&gt;</span>{{TAGLINE}}</div>
-        <div class="tech-stack">Python &nbsp;|&nbsp; Go &nbsp;|&nbsp; C#/.NET</div>
-        <div class="ai-layer">Developer Tools &amp; Security Automation</div>
+        <div class="positioning">{{SUPPORTING}}</div>
     </div>
     <div class="accent-bar"></div>
 </body>
@@ -151,6 +140,7 @@ def banner_markup(personal: dict) -> str:
         .replace("{{CORNER}}", html.escape(corner))
         .replace("{{HEADLINE}}", html.escape(title))
         .replace("{{TAGLINE}}", html.escape(personal.get("tagline") or ""))
+        .replace("{{SUPPORTING}}", html.escape(personal.get("supporting") or ""))
     )
 
 

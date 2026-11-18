@@ -91,6 +91,7 @@ def test_linkedin_banner_uses_the_current_title():
     markup = banner_markup(personal)
     assert html.escape(personal["title"]) in markup
     assert html.escape(personal["tagline"]) in markup
+    assert html.escape(personal["supporting"]) in markup
     assert "SOFTWARE // AUTOMATION" in markup
     assert "Software, DevOps" not in markup
     assert "DevOps &amp;" not in markup

@@ -40,10 +40,9 @@ class TestCanonicalAndOgMeta:
         desc = match.group(1)
         assert len(desc) <= 160, f"meta description is {len(desc)} chars and will be truncated"
         assert "DevOps" in desc
-        assert "Software" in desc
-        assert "Production" in desc
+        assert "software" in desc.lower()
+        assert "production" in desc.lower()
         assert "Python" in desc
-        assert "CI/CD" in desc
         assert "Senior DevOps" not in desc
 
     def test_twitter_title_and_description_present(self):
@@ -89,11 +88,8 @@ class TestJsonLd:
             assert positioning not in person["jobTitle"]
         # Positioning belongs in descriptive fields instead.
         assert "software and automation engineer" in person["description"].lower()
-        for term in ("Developer Productivity", "Developer Experience (DevEx)", "Developer Tooling",
-                     "Platform Engineering", "Internal Tools", "Production Engineering", "DevOps",
-                     "Azure DevOps", "CI/CD", "Infrastructure Automation", "Production Reliability",
-                     "Security Automation", "DevSecOps", "Python", "Go", "C# / .NET", "ASP.NET Core",
-                     "REST APIs"):
+        for term in ("Developer Productivity", "Internal Tools", "Azure DevOps", "CI/CD",
+                     "Production Reliability", "Security Automation", "Python", "ASP.NET Core", "Razor Pages"):
             assert term in person["knowsAbout"], term
 
     def test_page_title_and_social_metadata_use_new_positioning(self):
@@ -103,7 +99,7 @@ class TestJsonLd:
             assert f'<meta {prop} content="William Elias | Software &amp; Automation Engineer">' in html_content
         for prop in ('property="og:description"', 'name="twitter:description"'):
             match = re.search(rf'<meta {prop} content="(.*?)">', html_content)
-            assert "Developer tooling" in match.group(1) or "developer tooling" in match.group(1)
+            assert "developer productivity" in match.group(1).lower()
         assert "DevOps, Software &amp; Production Engineer" not in html_content
 
     def test_json_ld_uses_curated_knows_about_subset(self):
@@ -235,8 +231,9 @@ class TestProjectCardActions:
     def test_project_cards_expose_explicit_repository_action(self):
         html_content = _index_html()
         projects_section = html_content.split('id="projects-target"')[1].split('<!-- BUILD:PROJECTS:END -->')[0]
-        assert projects_section.count("project-link") == 6
-        assert projects_section.count("project-live-link") == 4
+        projects = load_config()["projects"]
+        assert projects_section.count("project-link") == len(projects)
+        assert projects_section.count("project-live-link") == sum("liveUrl" in p for p in projects)
         assert "View Repository" in projects_section
         assert "View Live Page" in projects_section
 

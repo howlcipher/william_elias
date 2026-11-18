@@ -10,22 +10,19 @@
       "file": "William_Elias_Software_Platform_Resume.pdf",
       "listing": "primary",
       "title": "Software & Automation Engineer",
-      "supporting": "Developer Tooling • Internal Applications • Platform Engineering • Python • Go • C#/.NET",
+      "supporting": "Developer Productivity • Internal Tools • Delivery Automation • Python • C#",
       "summaryStatementIds": [
         "summary-software-opening",
-        "summary-build-tools",
-        "summary-delivery-enablement",
-        "summary-security-depth"
+        "summary-delivery-enablement"
       ],
       "experienceAchievementIds": {
         "exp-stellantis": [
-          "ach-go-deployment-cli",
           "ach-internal-dotnet-app",
-          "ach-python-tooling",
-          "ach-credential-remediation",
           "ach-cicd-standardization",
           "ach-cicd-validation",
-          "ach-release-kql"
+          "ach-production-remediation",
+          "ach-python-tooling",
+          "ach-portal-controls"
         ],
         "exp-hbk": [
           "ach-hbk-xml-automation",
@@ -38,20 +35,14 @@
         "skill-automation-tooling",
         "skill-devops-delivery",
         "skill-security-identity",
-        "skill-ai-engineering",
-        "skill-production-reliability"
+        "skill-ai-engineering"
       ],
-      "skillTags": {
-        "skill-software-backend": ["Python", "Go", "C#", ".NET", "ASP.NET Core", "Blazor", "FastAPI", "REST APIs", "SQL Server", "SQLite", "JavaScript", "HTML", "CSS"]
-      },
       "highlightIds": [
-        "highlight-deployment-tooling",
-        "highlight-portal-change-safety",
-        "highlight-python-workflow-tools"
+        "highlight-modular-architecture"
       ],
       "projectIds": [
         "project-howlplane",
-        "project-howlframe"
+        "project-howlproof"
       ]
     },
     "security_automation": {
@@ -60,22 +51,19 @@
       "file": "William_Elias_Security_Automation_Resume.pdf",
       "listing": "primary",
       "title": "Software & Security Automation Engineer",
-      "supporting": "Security Automation • Credential Remediation • Access Control • Python • Go • C#/.NET",
+      "supporting": "Security Automation • Secrets Discovery • Authorization • Python • C#",
       "summaryStatementIds": [
         "summary-security-opening",
-        "summary-security-tooling",
-        "summary-security-controls",
         "summary-security-education"
       ],
       "experienceAchievementIds": {
         "exp-stellantis": [
-          "ach-credential-remediation",
+          "ach-secrets-discovery",
+          "ach-git-history-tooling",
+          "ach-portal-controls",
           "ach-internal-dotnet-app",
-          "ach-python-tooling",
-          "ach-go-deployment-cli",
-          "ach-cicd-standardization",
           "ach-cicd-validation",
-          "ach-release-kql"
+          "ach-python-tooling"
         ],
         "exp-hbk": [
           "ach-hbk-xml-automation",
@@ -84,21 +72,16 @@
       },
       "skillIds": [
         "skill-security-identity",
-        "skill-automation-tooling",
         "skill-software-backend",
+        "skill-automation-tooling",
         "skill-devops-delivery"
       ],
-      "skillTags": {
-        "skill-security-identity": ["Credential Remediation", "Git History Remediation", "Audit Controls"]
-      },
       "highlightIds": [
-        "highlight-credential-remediation",
-        "highlight-portal-change-safety"
+        "highlight-discovery-boundary"
       ],
       "projectIds": [
-        "project-password-arena",
-        "project-howlplane",
-        "project-howlframe"
+        "project-howlproof",
+        "project-password-arena"
       ]
     },
     "production_devops": {
@@ -110,18 +93,15 @@
       "supporting": "CI/CD • Azure DevOps • Automation • Reliability • Python • Production Systems",
       "summaryStatementIds": [
         "summary-production-opening",
-        "summary-cicd-delivery",
-        "summary-production-reliability",
-        "summary-security-infrastructure"
+        "summary-cicd-delivery"
       ],
       "experienceAchievementIds": {
         "exp-stellantis": [
+          "ach-production-remediation",
           "ach-cicd-standardization",
           "ach-cicd-validation",
           "ach-release-kql",
-          "ach-go-deployment-cli",
           "ach-python-tooling",
-          "ach-credential-remediation",
           "ach-internal-dotnet-app"
         ],
         "exp-hbk": [
@@ -135,15 +115,10 @@
         "skill-production-reliability",
         "skill-automation-tooling",
         "skill-infrastructure-operations",
-        "skill-security-identity",
         "skill-software-backend"
       ],
-      "skillTags": {
-        "skill-infrastructure-operations": ["Windows Server", "IIS", "Active Directory", "SQL Server", "Load Balancers", "Firewalls", "Cisco / Meraki"]
-      },
       "highlightIds": [
-        "highlight-production-reliability",
-        "highlight-deployment-tooling",
+        "highlight-rollout-validation",
         "highlight-infrastructure-investigation"
       ],
       "projectIds": [

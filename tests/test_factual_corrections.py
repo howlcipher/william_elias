@@ -13,7 +13,7 @@ def config():
     return load_config()
 
 
-@pytest.mark.parametrize("source", ["canonical", "variants", "config.js", "index.html",
+@pytest.mark.parametrize("source", ["canonical", "variants", "config.js", "index.html", "README.md", "documentation/linkedin_profile.md",
                                     *(f"pdf:{name}" for name in VARIANT_NAMES)])
 def test_false_and_stale_claims_absent(config, variant_pdfs, source):
     if source == "canonical":
@@ -26,7 +26,10 @@ def test_false_and_stale_claims_absent(config, variant_pdfs, source):
         text = (SITE_DIR / source).read_text()
     text = " ".join(text.lower().split())
     for term in (
-        "managed identity", "xunit", "62 automated tests",
+        "interactive server", "dba approve", "build-to-rollback", "100+ repositories",
+        "60-repository", "104-application", "56 azure devops", "66 build/release",
+        "27/28", "28/28", "25/28", "25 of 28", "2,832", "866 raw", "67 distinct", "22-query",
+        "cleanup records are complete", "managed identity", "xunit", "62 automated tests",
         "156 automated tests", "first deployment pending",
         "pending approval", "zero applications", "go/no-go", "rollout pending",
         "formerly multi-agent engineering library",
@@ -39,37 +42,33 @@ def test_false_and_stale_claims_absent(config, variant_pdfs, source):
         assert term not in text, (source, term)
 
 
-def test_security_is_python_git_bfg_without_invented_tests(config):
-    field = "selectedEngineeringPrograms"
-    security = next(p for p in config[field] if p["name"].startswith("Security"))
-    assert security["name"] == "Security & Credential Remediation"
-    assert {"Python", "Git", "BFG Repo-Cleaner"} <= set(security["technology"])
-    text = json.dumps(security).lower()
-    for term in ("100+ repositories", "67 distinct exposed secrets", "2,832", "25 seconds"):
-        assert term in text
-    for term in ("azure key vault", "managed identity", "azure sdk", "c#", ".net", "xunit", "62 automated tests", "test", "rollback"):
-        assert term not in text
+def test_configuration_discovery_and_git_history_use_distinct_tools(config):
+    role = config["experience"][0]
+    facts = {a["id"]: a["text"] for a in role["achievements"]}
+    discovery = facts["ach-secrets-discovery"]
+    history = facts["ach-git-history-tooling"]
+    assert {"C#/.NET", "configuration"} <= set(discovery.split())
+    assert not re.search(r"python|migration|rotation|revocation", discovery, re.I)
+    assert "Python" in history and "BFG Repo-Cleaner" in history and "git-filter-repo" in history
+    assert not re.search(r"scrubbed|rotated|revoked|completed|migrated", history, re.I)
 
 
-def test_portal_stack_and_capabilities_are_user_confirmed(config):
-    portal = next(p for p in config["selectedEngineeringPrograms"] if p["name"].startswith("Software & Internal"))
-    assert {"C#", ".NET 8", "Blazor", "Interactive Server", "ASP.NET Core", "SQL Server", "SQLite"} <= set(portal["technology"])
-    assert "Razor Pages" not in portal["technology"]
-    text = " ".join(portal["bullets"] + portal.get("details", []))
-    for term in ("blazor", "interactive server", "dba", "diffing", "pre-change",
-                 "service-desk", "database-backed", "asp.net core", "production support"):
+def test_portal_stack_permissions_and_shipping_boundaries(config):
+    portal = next(p for p in config["selectedEngineeringPrograms"] if p["id"] == "program-internal-software")
+    assert {"C#", ".NET 10", "ASP.NET Core Razor Pages", "Razor Class Libraries",
+            "SQL Server", "SQLite"} <= set(portal["technology"])
+    text = " ".join(portal["bullets"] + portal["details"])
+    for term in ("authorization", "audit", "windows authentication", "active directory",
+                 "production", "development", "qa", "multiple developers"):
         assert term in text.lower()
-    assert "FastAPI" not in text
-    assert "Razor Pages" not in text
+    assert not re.search(r"blazor|interactive server|dba|fastapi|sole", json.dumps(portal), re.I)
 
 
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
 def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs, variant):
     pdf_text = variant_pdfs[variant]["text"]
     role = config["experience"][0]
-    assert role["title"].split(" | ") == [
-        "Senior Production Support Engineer", "Software & Automation",
-    ]
+    assert role["title"] == role["officialTitle"]
     assert role["officialTitle"] == "Senior Production Support Engineer"
     assert role["promotion"] == {
         "effectiveDate": "2026-09",
@@ -78,7 +77,7 @@ def test_current_employment_and_remote_target_are_distinct(config, variant_pdfs,
     assert role["location"] == "Auburn Hills, MI · Hybrid"
     assert config["personal"]["remote"] == "Open to U.S. Remote Opportunities"
     for term in (role["title"], "Promoted September 2026; previously Production Support Engineer",
-                 "Auburn Hills, MI", "Hybrid", "Credential Remediation"):
+                 "Auburn Hills, MI", "Hybrid"):
         assert term in pdf_text
 
 
@@ -92,8 +91,7 @@ def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, 
     # The OAuth resource-server work was removed at William's request; no OAuth claim remains.
     assert "oauth" not in json.dumps(config).lower()
     assert "oauth" not in pdf_text.lower()
-    assert {"IAM", "Credential Remediation",
-            "Git History Remediation", "PII Safeguards", "Audit Controls"} <= set(security["tags"])
+    assert {"Secrets Discovery", "Git History Tooling", "Authorization", "Audit Controls"} <= set(security["tags"])
     assert "Audit Controls" in (security.get("pdfTags") or security["tags"])
     assert "Azure Key Vault" not in security["tags"]
     assert "Managed Identity" not in security["tags"]
@@ -110,8 +108,6 @@ def test_identity_and_foundations_keep_experience_context(config, variant_pdfs, 
     assert "Auth0" not in pdf_text
     assert "Serilog" not in pdf_text
     assert "Serilog" not in json.dumps(config)
-    assert "Audit Controls" in pdf_text
-    assert "containerization proof of concept" in pdf_text
 
 
 @pytest.mark.parametrize("variant", VARIANT_NAMES)
@@ -119,9 +115,7 @@ def test_pdf_software_selection_retains_backend_strength_without_web_bloat(confi
     software = next(s for s in config["skills"] if s["id"] == "skill-software-backend")
     assert {"JavaScript", "HTML", "CSS"} <= set(software["tags"])
     assert "FastAPI" in software["tags"]
-    assert software["pdfTags"] == [
-        "Python", "FastAPI", "C#", ".NET", "Blazor", "ASP.NET Core", "REST APIs", "SQL Server", "SQLite",
-    ]
+    assert {"Python", "C#", "ASP.NET Core", "Razor Pages", "REST APIs", "SQLite"} <= set(software["pdfTags"])
     selected = variants["variants"][variant].get("skillTags", {}).get(software["id"], software["pdfTags"])
     expertise = variant_pdfs[variant]["text"].split("CORE EXPERTISE")[1].split("SELECTED ENGINEERING")[0]
     for tag in selected:
@@ -130,28 +124,41 @@ def test_pdf_software_selection_retains_backend_strength_without_web_bloat(confi
     for term in ("Docker", "Helm", "Rancher", "WSL2"):
         assert term not in expertise
     web = ("JavaScript", "HTML", "CSS")
-    if variant == "software_platform":
-        for term in web:
-            assert term in expertise
-    else:
-        for term in web:
-            assert term not in expertise
+    for term in web:
+        assert term not in expertise
 
 
-EXPECTED_VARIANT_PROJECTS = {
-    "software_platform": ["HowlPlane", "HowlFrame"],
-    "security_automation": ["Password Arena", "HowlPlane", "HowlFrame"],
-    "production_devops": ["HowlPlane"],
-}
+def test_delivery_prototype_stays_out_of_professional_resume_claims(config, variants, variant_pdfs):
+    prototype = next(p for p in config["selectedEngineeringPrograms"] if p["id"] == "program-deployment-tooling")
+    assert "prototype" in prototype["name"].lower()
+    assert "proof of concept" in " ".join(prototype["details"]).replace("-", " ")
+    assert re.search(r"push and rollback .*unimplemented", " ".join(prototype["details"]), re.I)
+    assert "verification was incomplete" in " ".join(prototype["details"])
+    for variant in variants["variants"]:
+        text = variant_pdfs[variant]["text"].lower()
+        assert "deployment cli" not in text
+        assert "blazor" not in text
+    page = (SITE_DIR / "index.html").read_text()
+    for card in re.findall(r'<article class="program-card.*?</article>', page, re.S):
+        if "Blazor" in card:
+            assert 'id="program-infrastructure-modernization"' in card
+            assert "proof of concept" in card
 
 
-@pytest.mark.parametrize("variant", VARIANT_NAMES)
-def test_variant_projects_and_security_scan_evidence(config, variants, variant_pdfs, variant):
-    projects = {p["id"]: p["name"] for p in config["projects"]}
-    chosen = [projects[i] for i in variants["variants"][variant]["projectIds"]]
-    assert chosen == EXPECTED_VARIANT_PROJECTS[variant]
-    pdf_text = variant_pdfs[variant]["text"]
-    for term in (*chosen, "67 distinct exposed secrets", "2,832", "25 seconds"):
-        assert term in pdf_text
-    for name in set(projects.values()) - set(chosen):
-        assert name not in pdf_text
+def test_linkedin_shares_the_primary_resumes_selected_career_facts(config, variants, variant_pdfs):
+    markdown = (SITE_DIR / "documentation/linkedin_profile.md").read_text()
+    current = config["experience"][0]
+    experience = markdown.split("## Current Experience")[1].split("## Skills")[0]
+    assert f'**{current["officialTitle"]}**' in experience
+    software = variants["variants"]["software_platform"]
+    achievements = {item["id"]: item["text"] for item in current["achievements"]}
+    assert [line[2:] for line in experience.splitlines() if line.startswith("- ")] == [
+        achievements[key] for key in software["experienceAchievementIds"][current["id"]]
+    ]
+    pdf = variant_pdfs["software_platform"]["text"]
+    for line in experience.splitlines():
+        if line.startswith("- "):
+            assert line[2:] in pdf
+    assert config["about"] in markdown
+    assert config["seo"]["canonicalUrl"] + software["file"] in markdown
+    assert "AI-assisted development" in markdown
