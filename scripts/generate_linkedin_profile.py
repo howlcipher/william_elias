@@ -105,6 +105,38 @@ Use this headline by default. It identifies the software you build and the engin
 5. **Keep implementation and approval separate.** Use a public HowlPlane example to illustrate explicit action permissions and human review.
 
 Use public examples or synthetic data for these posts.
+
+## Recruiter Search & Profile Configuration Runbook
+
+### Step-by-Step Owner Application Checklist
+1. **Headline:** Update headline to:
+   `Software & Automation Engineer | Developer Productivity | Internal Tools | CI/CD Tooling`
+2. **About:** Copy the canonical text from the `## About` section above verbatim into your profile summary.
+3. **Current Experience:** Ensure the official job title is strictly `Senior Production Support Engineer` at `Stellantis Financial Services US`, and update the bullet points using the exact verified bullets listed in `## Current Experience`.
+4. **Earlier Experience:** Ensure title is `DevOps Engineer` at `HBK - Hottinger Brüel & Kjær`, and update bullets using `## Earlier Experience`.
+5. **Featured Section:**
+   - Link 1: Personal Portfolio (`https://howlcipher.github.io/william_elias/`) with title: "Software & Automation Engineer Portfolio"
+   - Link 2: Primary Resume PDF (`https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf`) with title: "Software Engineering & Developer Tools Resume (PDF)"
+   - Link 3: GitHub HowlPlane (`https://github.com/howlcipher/howlplane`) with title: "HowlPlane — Multi-Agent Coordination Architecture"
+   - Link 4: GitHub HowlProof (`https://github.com/howlcipher/howlproof`) with title: "HowlProof — Deterministic Evidence Sandbox"
+6. **Skills & Top 3 Pinning:**
+   - Top 3 Pinned Skills:
+     1. Developer Tooling
+     2. Continuous Integration and Continuous Delivery (CI/CD)
+     3. Python
+   - Add the remaining 15 skills in the exact order recommended in `## Skills in recommended order`.
+
+### Recruiter "Open to Work" Configuration Guidance
+- **Visibility:** Set to **Recruiters only** (avoids public badge while signaling active interest to technical recruiters).
+- **Job Titles:**
+  - Developer Productivity Engineer
+  - Software Engineer
+  - Platform Engineer
+  - Systems Engineer
+  - DevOps Engineer
+- **Location Types:** Select **Remote only** (Location: United States).
+- **Start Date:** Select **Immediately / Flexible**.
+- **Employment Types:** Full-time.
 """
 
 

@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "entity": "CandidateProfile",
+  "candidate": {
+    "name": "William Elias",
+    "officialCurrentTitle": "Senior Production Support Engineer",
+    "positioningTitle": "Software & Automation Engineer",
+    "targetRoles": [
+      "Developer Productivity Engineer",
+      "Software Engineer \u2014 Internal Tools",
+      "Platform Software Engineer / Developer Tooling",
+      "Security Automation Engineer",
+      "Production Engineer \u2014 Automation Focus"
+    ],
+    "location": "Michigan",
+    "workPreference": "Open to U.S. Remote Opportunities",
+    "contact": {
+      "email": "WylElias.123@gmail.com",
+      "github": "https://github.com/howlcipher",
+      "linkedin": "https://linkedin.com/in/wylelias",
+      "portfolio": "https://howlcipher.github.io/william_elias"
+    },
+    "resumes": {
+      "software_platform": "https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf",
+      "security_automation": "https://howlcipher.github.io/william_elias/William_Elias_Security_Automation_Resume.pdf",
+      "production_devops": "https://howlcipher.github.io/william_elias/William_Elias_Production_DevOps_Resume.pdf"
+    },
+    "coreCompetencies": [
+      "Developer Productivity & CI/CD",
+      "Internal Tools & Fullstack Web Development",
+      "Production Reliability & Incident Triage",
+      "Defensive Security & Credentials Remediation",
+      "Multi-Agent Automation & Deterministic Verification"
+    ],
+    "technicalStack": {
+      "languages": [
+        "Python",
+        "C#",
+        "SQL (T-SQL)",
+        "Bash",
+        "PowerShell",
+        "JavaScript",
+        "HTML/CSS"
+      ],
+      "frameworks": [
+        "ASP.NET Core",
+        "Razor Pages",
+        "FastAPI",
+        "Flask",
+        "pytest",
+        "Playwright"
+      ],
+      "platformsAndDatabases": [
+        "Azure DevOps",
+        "SQL Server",
+        "SQLite",
+        "IIS",
+        "Linux"
+      ],
+      "practices": [
+        "Preflight CI/CD Checks",
+        "Automated Rollback",
+        "Deterministic Testing",
+        "Zero Production Regression"
+      ]
+    },
+    "verifiedExperience": [
+      {
+        "company": "Stellantis Financial Services US",
+        "officialTitle": "Senior Production Support Engineer",
+        "date": "Feb 2023 - Present",
+        "summary": "Develop and maintain internal software, delivery automation, and production diagnostics."
+      }
+    ],
+    "independentEngineering": [
+      {
+        "name": "HowlPlane",
+        "id": "project-howlplane",
+        "repository": "https://github.com/howlcipher/howlplane",
+        "subtitle": "AI Engineering Control Plane"
+      },
+      {
+        "name": "HowlProof",
+        "id": "project-howlproof",
+        "repository": "https://github.com/howlcipher/howlproof",
+        "subtitle": "Independent Software Verification"
+      },
+      {
+        "name": "HowlFrame",
+        "id": "project-howlframe",
+        "repository": "https://github.com/howlcipher/howlframe",
+        "subtitle": "Experimental language and toolchain, written in Go"
+      },
+      {
+        "name": "Password Arena",
+        "id": "project-password-arena",
+        "repository": "https://github.com/howlcipher/password_arena",
+        "subtitle": "Synthetic password-strength learning sandbox"
+      },
+      {
+        "name": "HowlDream",
+        "id": "project-howldream",
+        "repository": "https://github.com/howlcipher/howldream",
+        "subtitle": "Experimental evaluation of AI-generated proposals"
+      },
+      {
+        "name": "HowlWriter",
+        "id": "project-howlwriter",
+        "repository": "https://github.com/howlcipher/howlwriter",
+        "subtitle": "Writing and evidence verification tooling"
+      },
+      {
+        "name": "AI Router",
+        "id": "project-ai-router",
+        "repository": "https://github.com/howlcipher/ai_router",
+        "subtitle": "Local coding-agent orchestrator; predecessor of HowlPlane's routing layer"
+      },
+      {
+        "name": "Baseball Optimizer",
+        "id": "project-baseball-optimizer",
+        "repository": "https://github.com/howlcipher/baseball_optimizer",
+        "subtitle": "Rust backend for lineup and roster optimization"
+      },
+      {
+        "name": "RedrawUS",
+        "id": "project-redrawus",
+        "repository": "https://github.com/howlcipher/redistricting-map",
+        "subtitle": "Geospatial Analysis & Visualization Platform"
+      }
+    ],
+    "education": [
+      {
+        "degree": "M.S. Cyber Defense (In Progress, Second Year)",
+        "school": "Dakota State University",
+        "year": "Expected Winter 2027"
+      },
+      {
+        "degree": "B.S. Information Technology",
+        "school": "Colorado State University Global Campus",
+        "year": ""
+      },
+      {
+        "degree": "B.B.A. Business Administration",
+        "school": "Rochester College",
+        "year": ""
+      },
+      {
+        "degree": "CCNA (Previously Held)",
+        "school": "Cisco Networking Academy",
+        "year": "2014 - 2017"
+      }
+    ],
+    "verificationStandard": "Backed by inspectable primary evidence and verified production deliverables."
+  }
+}

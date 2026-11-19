@@ -16,6 +16,8 @@ ARTIFACTS = (
     "William_Elias_Security_Automation_Resume.pdf",
     "William_Elias_Production_DevOps_Resume.pdf",
     "William_Elias_Resume.pdf",
+    "candidate-profile.json",
+    "llms.txt",
 )
 GENERATORS = (
     "build_config.py", "build_html.py", "generate_resume_pdf.py",
