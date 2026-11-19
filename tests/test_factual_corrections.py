@@ -148,7 +148,7 @@ def test_delivery_prototype_stays_out_of_professional_resume_claims(config, vari
 def test_linkedin_shares_the_primary_resumes_selected_career_facts(config, variants, variant_pdfs):
     markdown = (SITE_DIR / "documentation/linkedin_profile.md").read_text()
     current = config["experience"][0]
-    experience = markdown.split("## Current Experience")[1].split("## Skills")[0]
+    experience = markdown.split("## Current Experience")[1].split("## Earlier Experience")[0]
     assert f'**{current["officialTitle"]}**' in experience
     software = variants["variants"]["software_platform"]
     achievements = {item["id"]: item["text"] for item in current["achievements"]}
@@ -161,4 +161,24 @@ def test_linkedin_shares_the_primary_resumes_selected_career_facts(config, varia
             assert line[2:] in pdf
     assert config["about"] in markdown
     assert config["seo"]["canonicalUrl"] + software["file"] in markdown
-    assert "AI-assisted development" in markdown
+    assert "coding assistants for implementation and review" in markdown
+
+
+def test_security_highlight_describes_completed_discovery_work(config, variant_pdfs):
+    highlight = next(h for h in config["pdfEngineeringHighlights"] if h["id"] == "highlight-discovery-boundary")
+    program = next(p for p in config["selectedEngineeringPrograms"] if p["name"] == highlight["sourceProgram"])
+    assert set(highlight["bullets"]) <= set(program["details"])
+    text = variant_pdfs["security_automation"]["text"].lower().split("earlier experience")[0]
+    assert "integrity checks" in text
+    assert not re.search(r"canceled|migration|rotated|revoked", text)
+
+
+def test_linkedin_prior_role_uses_canonical_experience(config, variants):
+    markdown = (SITE_DIR / "documentation/linkedin_profile.md").read_text()
+    earlier = markdown.split("## Earlier Experience")[1].split("## Skills")[0]
+    role = next(role for role in config["experience"] if role["id"] == "exp-hbk")
+    selected = variants["variants"]["software_platform"]["experienceAchievementIds"][role["id"]]
+    assert role["title"] in earlier and role["date"] in earlier
+    assert [line[2:] for line in earlier.splitlines() if line.startswith("- ")] == [
+        a["text"] for a in role["achievements"] if a["id"] in selected
+    ]

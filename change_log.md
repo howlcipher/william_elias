@@ -1,6 +1,14 @@
 # Changelog
 
+## 2026-11-19
+
+* Refined frontend visual direction and typography: implemented an "Engineering field notes meets technical editorial design" aesthetic preserving the Chicago Cubs palette (deep navy `#0b1422`, ice blue `#9fd3f4`, cardinal red `#ef4444`).
+* Eliminated generic AI clichés and repetitive card walls in favor of distinctive section topologies: an executive abstract callout for About, an architectural index for What I Build, a tiered case file archive for Selected Work, and a chronological engineering logbook for Experience.
+* Integrated Inter typography alongside Space Grotesk and IBM Plex Mono, polished responsive layout down to 320px, confirmed WCAG AA contrast compliance across all four themes, and verified 100% test pass (415/415).
+
 ## 2026-11-17
+
+* Clarified shared portal work and deployment safeguards, emphasized completed configuration discovery, and gave the software résumé the primary site action. Refreshed the generated LinkedIn draft and reduced operational detail in the evidence ledger.
 
 * Pinned GitHub Actions to Ubuntu 24.04 for compatibility with the current Playwright dependency.
 

@@ -6,7 +6,7 @@ Open to U.S. Remote Opportunities
 
 [Portfolio](https://howlcipher.github.io/william_elias/) · [Primary résumé (PDF)](https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf) · [LinkedIn](https://linkedin.com/in/wylelias) · [GitHub](https://github.com/howlcipher)
 
-I build internal software and tools that help engineers ship and troubleshoot. My work spans internal applications, release automation, Python tooling, and application security controls. Production troubleshooting informs how I design and verify changes.
+I build internal software and tools for safer releases and faster diagnosis. My work spans internal applications, release automation, Python tooling, and application security controls. Production troubleshooting informs how I design and verify changes.
 
 ## Targeted résumés
 

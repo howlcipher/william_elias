@@ -105,17 +105,17 @@ def test_current_role_links_to_selected_work_instead_of_repeating_case_studies(p
         assert html.escape(achievement["text"], quote=False) in experience
 
 
-def test_two_primary_resume_paths_one_secondary_and_no_persona_switcher(page):
+def test_one_primary_resume_and_two_specialist_options_without_persona_switcher(page):
     variants = load_variants()["variants"]
     assert len(variants) == 3
     listing = {name: v.get("listing", "primary") for name, v in variants.items()}
-    assert listing == {"software_platform": "primary", "security_automation": "primary",
+    assert listing == {"software_platform": "primary", "security_automation": "secondary",
                        "production_devops": "secondary"}
     hrefs = set(re.findall(r'data-resume-variant="([a-z_]+)"', page))
     assert hrefs == set(variants)
-    # The hero offers only the two primary résumés.
+    # The hero offers only the primary résumé.
     hero = page.split('id="hero-content-target"')[1].split("</header>")[0]
-    assert set(re.findall(r'data-resume-variant="([a-z_]+)"', hero)) == {"software_platform", "security_automation"}
+    assert set(re.findall(r'data-resume-variant="([a-z_]+)"', hero)) == {"software_platform"}
     for marker in ("data-persona", "role-switch", "persona-toggle", "site-mode"):
         assert marker not in page
 
