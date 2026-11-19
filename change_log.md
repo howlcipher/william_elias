@@ -2,6 +2,12 @@
 
 ## 2026-11-19
 
+* Strengthened technical keyword presentation on the primary Software Engineering & Developer Tools résumé: updated supporting header line to `Python | C#/.NET` to accurately reflect .NET 10/C# portal and discovery tooling without introducing unverified claims or bloating skills.
+* Refined primary résumé Selected Engineering Highlight: enhanced `highlight-modular-architecture` to "Portal Modular Architecture & Access Controls", communicating both modular Razor Class Libraries and Active Directory authorization/audit logging boundaries within strict two-page constraints.
+* Improved project hierarchy in independent engineering section: highlighted core flagship systems (HowlPlane, HowlProof, HowlFrame) with subtle ice-blue accent styling (`.project-featured`) while maintaining 3-column desktop grid balance and 100% test pass.
+* Standardized title casing for HowlProof (`Independent Software Verification`).
+* Rebuilt and verified all derived artifacts (`index.html`, `config.js`, all three PDFs, legacy alias, LinkedIn profile, LinkedIn banner).
+* Conducted bounded, read-only HowlDream exploratory assessment and generated `documentation/howldream_portfolio_ideas.md` (report-only, zero implementation).
 * Refined frontend visual direction and typography: implemented an "Engineering field notes meets technical editorial design" aesthetic preserving the Chicago Cubs palette (deep navy `#0b1422`, ice blue `#9fd3f4`, cardinal red `#ef4444`).
 * Eliminated generic AI clichés and repetitive card walls in favor of distinctive section topologies: an executive abstract callout for About, an architectural index for What I Build, a tiered case file archive for Selected Work, and a chronological engineering logbook for Experience.
 * Integrated Inter typography alongside Space Grotesk and IBM Plex Mono, polished responsive layout down to 320px, confirmed WCAG AA contrast compliance across all four themes, and verified 100% test pass (415/415).

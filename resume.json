@@ -425,13 +425,16 @@
   "pdfEngineeringHighlights": [
     {
       "id": "highlight-modular-architecture",
-      "name": "Portal Module Architecture",
+      "name": "Portal Modular Architecture & Access Controls",
       "sourceProgram": "Production Support Portal",
       "bullets": [
-        "Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite."
+        "Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite.",
+        "Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory identities."
       ],
       "technology": [
-        "Razor Class Libraries"
+        "ASP.NET Core",
+        "Razor Class Libraries",
+        "Active Directory"
       ]
     },
     {
@@ -491,7 +494,7 @@
     {
       "id": "project-howlproof",
       "name": "HowlProof",
-      "subtitle": "Independent software verification",
+      "subtitle": "Independent Software Verification",
       "link": "https://github.com/howlcipher/howlproof",
       "highlights": [
         "Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records verification gaps in advisory verdicts."

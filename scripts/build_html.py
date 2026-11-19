@@ -298,11 +298,13 @@ def render_about(about):
 
 def render_projects(projects, provenance_label=''):
     parts = []
+    featured_ids = {'project-howlplane', 'project-howlproof', 'project-howlframe'}
     for proj in projects or []:
         highlights = ''.join(f'<li>{esc(h)}</li>' for h in (proj.get('highlights') or []))
         tags = ''.join(f'<span>{esc(tag)}</span>' for tag in (proj.get('tags') or []))
+        featured_class = ' project-featured' if proj.get('id') in featured_ids else ''
         card = [
-            '<div class="project-card card">',
+            f'<div class="project-card card{featured_class}">',
             f'<p class="provenance-label provenance-independent">{esc(provenance_label)}</p>' if provenance_label else '',
             f'<h3>{esc(proj.get("name", ""))}</h3>',
             f'<div class="project-subtitle">{esc(proj.get("subtitle", ""))}</div>',

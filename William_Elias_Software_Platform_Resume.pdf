@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 5359
+/Length 5364
 >>
 stream
 2 J
@@ -61,7 +61,7 @@ BT 238.50 751.60 Td (WILLIAM ELIAS) Tj ET
 BT /F1 11.00 Tf ET
 BT 199.97 735.70 Td (SOFTWARE & AUTOMATION ENGINEER) Tj ET
 BT /F2 9.50 Tf ET
-BT 150.85 722.65 Td (Developer Productivity | Internal Tools | Delivery Automation | Python | C#) Tj ET
+BT 138.71 722.65 Td (Developer Productivity | Internal Tools | Delivery Automation | Python | C#/.NET) Tj ET
 BT /F3 10.00 Tf ET
 BT 142.16 709.00 Td (Michigan) Tj ET
 BT 182.17 709.00 Td ( | ) Tj ET
@@ -160,13 +160,13 @@ endobj
 /Annots [<</A <</S /URI /URI (https://github.com/howlcipher/howlplane)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 634.50 174.11 644.50]
+/Rect [26.83 608.50 174.11 618.50]
 /Subtype /Link
 /Type /Annot>>
 <</A <</S /URI /URI (https://github.com/howlcipher/howlproof)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 580.50 172.44 590.50]
+/Rect [26.83 554.50 172.44 564.50]
 /Subtype /Link
 /Type /Annot>>]
 /Contents 6 0 R
@@ -177,7 +177,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 3170
+/Length 3407
 >>
 stream
 2 J
@@ -186,59 +186,61 @@ BT /F1 11.00 Tf ET
 BT 26.83 747.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
 24.00 744.00 m 588.00 744.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 730.35 Td (Portal Module Architecture) Tj ET
+BT 26.83 730.35 Td (Portal Modular Architecture & Access Controls) Tj ET
 BT /F3 10.00 Tf ET
 BT 38.83 717.50 Td (- Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite.) Tj ET
+BT 38.83 704.50 Td (- Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory) Tj ET
+BT 38.83 691.50 Td (identities.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 705.30 Td 0.3529 0.3529 0.3529 rg (Tech: Razor Class Libraries) Tj ET Q
+q BT 38.83 679.30 Td 0.3529 0.3529 0.3529 rg (Tech: ASP.NET Core, Razor Class Libraries, Active Directory) Tj ET Q
 BT /F1 11.00 Tf ET
-BT 26.83 679.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
-24.00 676.00 m 588.00 676.00 l S
+BT 26.83 653.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
+24.00 650.00 m 588.00 650.00 l S
 BT /F3 9.00 Tf ET
-BT 26.83 662.80 Td (Independent projects developed with AI coding assistants under my direction and review.) Tj ET
+BT 26.83 636.80 Td (Independent projects developed with AI coding assistants under my direction and review.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 649.35 Td (HowlPlane) Tj ET
+BT 26.83 623.35 Td (HowlPlane) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 636.50 Td (github.com/howlcipher/howlplane) Tj ET
-BT 38.83 623.50 Td (- Coordinates coding-agent tasks and independent reviews, with repeatable checks and durable run records.) Tj ET
-BT 38.83 610.50 Td (- Supports policy-based execution limits and human approval for consequential actions.) Tj ET
+BT 26.83 610.50 Td (github.com/howlcipher/howlplane) Tj ET
+BT 38.83 597.50 Td (- Coordinates coding-agent tasks and independent reviews, with repeatable checks and durable run records.) Tj ET
+BT 38.83 584.50 Td (- Supports policy-based execution limits and human approval for consequential actions.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 595.35 Td (HowlProof) Tj ET
+BT 26.83 569.35 Td (HowlProof) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 582.50 Td (github.com/howlcipher/howlproof) Tj ET
-BT 38.83 569.50 Td (- Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records) Tj ET
-BT 38.83 556.50 Td (verification gaps in advisory verdicts.) Tj ET
+BT 26.83 556.50 Td (github.com/howlcipher/howlproof) Tj ET
+BT 38.83 543.50 Td (- Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records) Tj ET
+BT 38.83 530.50 Td (verification gaps in advisory verdicts.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 530.70 Td (EARLIER EXPERIENCE) Tj ET
-24.00 527.00 m 588.00 527.00 l S
+BT 26.83 504.70 Td (EARLIER EXPERIENCE) Tj ET
+24.00 501.00 m 588.00 501.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 513.35 Td (QA Developer, Intrepid Control Systems) Tj ET
+BT 26.83 487.35 Td (QA Developer, Intrepid Control Systems) Tj ET
 BT /F3 10.00 Tf ET
-BT 493.46 513.50 Td (Mar 2020 - Apr 2020) Tj ET
-BT 38.83 500.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
+BT 493.46 487.50 Td (Mar 2020 - Apr 2020) Tj ET
+BT 38.83 474.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 485.35 Td (Network Engineer, Project Worldwide) Tj ET
+BT 26.83 459.35 Td (Network Engineer, Project Worldwide) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.90 485.50 Td (Jan 2020 - Mar 2020) Tj ET
-BT 38.83 472.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
+BT 492.90 459.50 Td (Jan 2020 - Mar 2020) Tj ET
+BT 38.83 446.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 457.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
+BT 26.83 431.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
 BT /F3 10.00 Tf ET
-BT 490.67 457.50 Td (Sep 2019 - Dec 2019) Tj ET
-BT 38.83 444.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
+BT 490.67 431.50 Td (Sep 2019 - Dec 2019) Tj ET
+BT 38.83 418.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 429.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
+BT 26.83 403.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.33 429.50 Td (Sep 2015 - Jun 2019) Tj ET
-BT 38.83 416.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
+BT 492.33 403.50 Td (Sep 2015 - Jun 2019) Tj ET
+BT 38.83 390.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 390.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
-24.00 387.00 m 588.00 387.00 l S
+BT 26.83 364.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
+24.00 361.00 m 588.00 361.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 373.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
-BT 26.83 360.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT 26.83 347.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 26.83 334.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 26.83 347.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
+BT 26.83 334.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT 26.83 321.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
+BT 26.83 308.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -297,21 +299,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000006294 00000 n 
-0000006685 00000 n 
-0000009907 00000 n 
-0000010009 00000 n 
-0000010114 00000 n 
-0000010211 00000 n 
-0000010319 00000 n 
-0000010427 00000 n 
+0000006299 00000 n 
+0000006690 00000 n 
+0000010149 00000 n 
+0000010251 00000 n 
+0000010356 00000 n 
+0000010453 00000 n 
+0000010561 00000 n 
+0000010669 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<00E5A4DF2E0026C29B8F324EB91C4568><00E5A4DF2E0026C29B8F324EB91C4568>]
+/ID [<4C5D2612FC64D03EAB3B77629541507C><4C5D2612FC64D03EAB3B77629541507C>]
 >>
 startxref
-10612
+10854
 %%EOF
