@@ -2,7 +2,7 @@ import pypdf
 import pytest
 
 from conftest import VARIANT_NAMES
-from scripts.generate_resume_pdf import build, load_config, validate_config
+from scripts.generate_resume_pdf import build, load_config, load_variants, validate_config
 
 
 @pytest.mark.parametrize("context", [None, 42, [], "", "   "])
@@ -64,7 +64,9 @@ def test_pdf_tags_default_to_leading_slice_when_omitted(tmp_path):
     config["skills"][0].pop("pdfTags")
     validate_config(config)
     output = tmp_path / "default-tags.pdf"
-    build(config, output)
+    variants = load_variants()
+    variants["variants"][variants["compatibility"]["variant"]].pop("skillTags", None)
+    build(config, output, variants=variants)
     text = " ".join(
         " ".join(page.extract_text().split()) for page in pypdf.PdfReader(output).pages
     )

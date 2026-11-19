@@ -43,13 +43,26 @@
       "projectIds": [
         "project-howlplane",
         "project-howlproof"
-      ]
+      ],
+      "skillTags": {
+        "skill-software-backend": [
+          "Python",
+          "C#",
+          "ASP.NET Core",
+          "Razor Pages",
+          "Razor Class Libraries",
+          "FastAPI",
+          "REST APIs",
+          "SQL Server",
+          "SQLite"
+        ]
+      }
     },
     "security_automation": {
       "label": "Security Software & Automation Resume",
       "audience": "Security automation, security tooling, and development-focused DevSecOps roles",
       "file": "William_Elias_Security_Automation_Resume.pdf",
-      "listing": "primary",
+      "listing": "secondary",
       "title": "Software & Security Automation Engineer",
       "supporting": "Security Automation • Secrets Discovery • Authorization • Python • C#",
       "summaryStatementIds": [
@@ -82,7 +95,19 @@
       "projectIds": [
         "project-howlproof",
         "project-password-arena"
-      ]
+      ],
+      "skillTags": {
+        "skill-software-backend": [
+          "C#",
+          ".NET",
+          "ASP.NET Core",
+          "Razor Pages",
+          "Python",
+          "FastAPI",
+          "SQL Server",
+          "SQLite"
+        ]
+      }
     },
     "production_devops": {
       "label": "Production & DevOps Resume",
@@ -123,7 +148,18 @@
       ],
       "projectIds": [
         "project-howlplane"
-      ]
+      ],
+      "skillTags": {
+        "skill-software-backend": [
+          "Python",
+          ".NET",
+          "ASP.NET Core",
+          "Razor Pages",
+          "FastAPI",
+          "SQL Server",
+          "SQLite"
+        ]
+      }
     }
   }
 }

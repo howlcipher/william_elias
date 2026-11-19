@@ -14,6 +14,11 @@ def render_profile(data, variants):
     experience = "\n".join(
         f"- {achievements[key]}" for key in software["experienceAchievementIds"][current["id"]]
     )
+    prior = next(role for role in data["experience"] if role["id"] == "exp-hbk")
+    prior_achievements = {item["id"]: item["text"] for item in prior["achievements"]}
+    prior_experience = "\n".join(
+        f"- {prior_achievements[key]}" for key in software["experienceAchievementIds"][prior["id"]]
+    )
     projects = {item["id"]: item for item in data["projects"]}
     featured = "\n".join(
         f'- [{projects[key]["name"]}]({projects[key]["link"]})'
@@ -25,7 +30,7 @@ def render_profile(data, variants):
 
 ## Headline
 
-{personal['title']} | Developer Productivity | Internal Tools | Secure Delivery Automation
+{personal['title']} | Developer Productivity | Internal Tools | CI/CD Tooling
 
 Use this headline by default. It identifies the software you build and the engineers it serves while leaving your official title in Experience.
 
@@ -47,13 +52,21 @@ Use this headline by default. It identifies the software you build and the engin
 
 {experience}
 
+## Earlier Experience
+
+**{prior['title']}**
+
+{prior['company']} · {prior['date']}
+
+{prior_experience}
+
 ## Skills in recommended order
 
 1. Software Engineering
 2. Developer Tooling
 3. Python
-4. C#
-5. Azure DevOps
+4. Azure DevOps
+5. C#
 6. ASP.NET Core
 7. Continuous Integration and Continuous Delivery (CI/CD)
 8. .NET

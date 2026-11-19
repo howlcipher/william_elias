@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 4530
+/Length 4454
 >>
 stream
 2 J
@@ -91,54 +91,53 @@ BT 26.83 586.65 Td (Senior Production Support Engineer | Auburn Hills, MI · Hybr
 BT /F3 9.00 Tf ET
 BT 26.83 573.80 Td (Promoted September 2026; previously Production Support Engineer) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 560.50 Td (- Developed C#/.NET 8 tooling to find and classify secrets in configuration files and generate reports without exposing their) Tj ET
-BT 38.83 547.50 Td (values.) Tj ET
-BT 38.83 534.50 Td (- Developed Python tooling that supports Git-history cleanup with BFG Repo-Cleaner and git-filter-repo.) Tj ET
-BT 38.83 521.50 Td (- Implemented authorization and audit controls for portal workflows, with Windows authentication and Active Directory) Tj ET
-BT 38.83 508.50 Td (identities.) Tj ET
-BT 38.83 495.50 Td (- Contributed to and maintain a modular internal operations portal using C# and .NET 10 ASP.NET Core Razor Pages.) Tj ET
-BT 38.83 482.50 Td (Selected modules run in production, with others limited to development or QA.) Tj ET
-BT 38.83 469.50 Td (- Added deployment preflight and artifact checks to detect configuration and source drift, flag unsafe copy operations, and) Tj ET
-BT 38.83 456.50 Td (protect server-specific files during releases.) Tj ET
-BT 38.83 443.50 Td (- Built Python reporting automation, integration-log analysis tools, and operational CLIs. Separately implemented a FastAPI) Tj ET
-BT 38.83 430.50 Td (webhook integration and Azure DevOps API tooling.) Tj ET
+BT 38.83 560.50 Td (- Built C#/.NET 8 tooling to scan configuration files and classify secrets.) Tj ET
+BT 38.83 547.50 Td (- Developed Python tooling that supports Git-history cleanup with BFG Repo-Cleaner and git-filter-repo.) Tj ET
+BT 38.83 534.50 Td (- Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory) Tj ET
+BT 38.83 521.50 Td (identities.) Tj ET
+BT 38.83 508.50 Td (- Develop and maintain a shared internal operations portal built with ASP.NET Core Razor Pages on .NET 10. Selected) Tj ET
+BT 38.83 495.50 Td (workflows run in production, with others limited to development or QA.) Tj ET
+BT 38.83 482.50 Td (- Added deployment preflight checks for source and configuration drift, verified release artifacts, and added safeguards for) Tj ET
+BT 38.83 469.50 Td (server-specific files.) Tj ET
+BT 38.83 456.50 Td (- Automated recurring report generation and delivery in Python, summarized integration-log errors, and built operational) Tj ET
+BT 38.83 443.50 Td (CLIs. Implemented a FastAPI webhook integration and Azure DevOps API automation.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 415.35 Td (HBK - Hottinger Brüel & Kjær) Tj ET
+BT 26.83 428.35 Td (HBK - Hottinger Brüel & Kjær) Tj ET
 BT /F3 10.00 Tf ET
-BT 496.23 415.50 Td (Jul 2020 - Feb 2023) Tj ET
+BT 496.23 428.50 Td (Jul 2020 - Feb 2023) Tj ET
 BT /F2 9.50 Tf ET
-BT 26.83 402.65 Td (DevOps Engineer | Southfield, MI · Remote) Tj ET
+BT 26.83 415.65 Td (DevOps Engineer | Southfield, MI · Remote) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 389.50 Td (- Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output) Tj ET
-BT 38.83 376.50 Td (processing to save more than 40 hours per month.) Tj ET
-BT 38.83 363.50 Td (- Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.) Tj ET
+BT 38.83 402.50 Td (- Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output) Tj ET
+BT 38.83 389.50 Td (processing to save more than 40 hours per month.) Tj ET
+BT 38.83 376.50 Td (- Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 337.70 Td (CORE EXPERTISE) Tj ET
-24.00 334.00 m 588.00 334.00 l S
+BT 26.83 350.70 Td (CORE EXPERTISE) Tj ET
+24.00 347.00 m 588.00 347.00 l S
 BT /F1 10.00 Tf ET
-BT 26.83 320.50 Td (Security & Identity) Tj ET
-BT 114.63 320.50 Td (: ) Tj ET
+BT 26.83 333.50 Td (Security & Identity) Tj ET
+BT 114.63 333.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 120.74 320.50 Td (Secrets Discovery, Git History Tooling, Authorization, Audit Controls) Tj ET
+BT 120.74 333.50 Td (Secrets Discovery, Git History Tooling, Authorization, Audit Controls, Integrity Checks) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 307.50 Td (Software & Backend) Tj ET
-BT 123.52 307.50 Td (: ) Tj ET
+BT 26.83 320.50 Td (Software & Backend) Tj ET
+BT 123.52 320.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 129.63 307.50 Td (Python, C#, .NET, ASP.NET Core, Razor Pages, FastAPI, REST APIs, SQL Server, SQLite) Tj ET
+BT 129.63 320.50 Td (C#, .NET, ASP.NET Core, Razor Pages, Python, FastAPI, SQL Server, SQLite) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 294.50 Td (Automation & Developer Tooling) Tj ET
+BT 26.83 307.50 Td (Automation & Developer Tooling) Tj ET
 BT /F2 10.00 Tf ET
-BT 182.40 294.50 Td ( \(Go in independent projects and prototyping\)) Tj ET
+BT 182.40 307.50 Td ( \(Go in independent projects and prototyping\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 383.06 294.50 Td (: ) Tj ET
+BT 383.06 307.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 389.17 294.50 Td (Developer Tooling, PowerShell, Go,) Tj ET
-BT 26.83 281.50 Td (Operational Tooling) Tj ET
+BT 389.17 307.50 Td (Developer Tooling, PowerShell, Go,) Tj ET
+BT 26.83 294.50 Td (Operational Tooling) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 268.50 Td (DevOps & Delivery) Tj ET
-BT 116.31 268.50 Td (: ) Tj ET
+BT 26.83 281.50 Td (DevOps & Delivery) Tj ET
+BT 116.31 281.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 122.42 268.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, GitHub Actions \(projects\)) Tj ET
+BT 122.42 281.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, GitHub Actions \(projects\)) Tj ET
 
 endstream
 endobj
@@ -147,13 +146,13 @@ endobj
 /Annots [<</A <</S /URI /URI (https://github.com/howlcipher/howlproof)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 621.50 172.44 631.50]
+/Rect [26.83 634.50 172.44 644.50]
 /Subtype /Link
 /Type /Annot>>
 <</A <</S /URI /URI (https://github.com/howlcipher/password_arena)>>
 /Border [0 0 0]
 /F 4
-/Rect [26.83 567.50 203.01 577.50]
+/Rect [26.83 580.50 203.01 590.50]
 /Subtype /Link
 /Type /Annot>>]
 /Contents 6 0 R
@@ -164,7 +163,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 3151
+/Length 3118
 >>
 stream
 2 J
@@ -173,60 +172,59 @@ BT /F1 11.00 Tf ET
 BT 26.83 747.70 Td (SELECTED ENGINEERING HIGHLIGHTS) Tj ET
 24.00 744.00 m 588.00 744.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 730.35 Td (Configuration Discovery Scope) Tj ET
+BT 26.83 730.35 Td (Configuration Scan Integrity) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 717.50 Td (- Configuration discovery used integrity checks and produced a migration proposal. The migration was canceled before) Tj ET
-BT 38.83 704.50 Td (execution.) Tj ET
+BT 38.83 717.50 Td (- Used integrity checks during configuration scans and kept secret values out of the resulting reports.) Tj ET
 BT /F2 9.00 Tf ET
-q BT 38.83 692.30 Td 0.3529 0.3529 0.3529 rg (Tech: C#, .NET 8) Tj ET Q
+q BT 38.83 705.30 Td 0.3529 0.3529 0.3529 rg (Tech: Configuration Analysis) Tj ET Q
 BT /F1 11.00 Tf ET
-BT 26.83 666.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
-24.00 663.00 m 588.00 663.00 l S
+BT 26.83 679.70 Td (SELECTED OPEN-SOURCE ENGINEERING) Tj ET
+24.00 676.00 m 588.00 676.00 l S
 BT /F3 9.00 Tf ET
-BT 26.83 649.80 Td (Independent projects developed with AI coding assistants under my direction and review.) Tj ET
+BT 26.83 662.80 Td (Independent projects developed with AI coding assistants under my direction and review.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 636.35 Td (HowlProof) Tj ET
+BT 26.83 649.35 Td (HowlProof) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 623.50 Td (github.com/howlcipher/howlproof) Tj ET
-BT 38.83 610.50 Td (- Beta toolkit for adversarial evaluation of trusted local software artifacts, with replayable evidence and advisory verdicts) Tj ET
-BT 38.83 597.50 Td (that record verification gaps.) Tj ET
+BT 26.83 636.50 Td (github.com/howlcipher/howlproof) Tj ET
+BT 38.83 623.50 Td (- Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records) Tj ET
+BT 38.83 610.50 Td (verification gaps in advisory verdicts.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 582.35 Td (Password Arena) Tj ET
+BT 26.83 595.35 Td (Password Arena) Tj ET
 BT /F3 10.00 Tf ET
-BT 26.83 569.50 Td (github.com/howlcipher/password_arena) Tj ET
-BT 38.83 556.50 Td (- Local educational simulator for synthetic password-strength experiments, with bounded runs, reproducible test modes,) Tj ET
-BT 38.83 543.50 Td (and audit reports.) Tj ET
+BT 26.83 582.50 Td (github.com/howlcipher/password_arena) Tj ET
+BT 38.83 569.50 Td (- Local educational simulator for synthetic password-strength experiments, with bounded runs, reproducible test modes,) Tj ET
+BT 38.83 556.50 Td (and audit reports.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 517.70 Td (EARLIER EXPERIENCE) Tj ET
-24.00 514.00 m 588.00 514.00 l S
+BT 26.83 530.70 Td (EARLIER EXPERIENCE) Tj ET
+24.00 527.00 m 588.00 527.00 l S
 BT /F1 10.50 Tf ET
-BT 26.83 500.35 Td (QA Developer, Intrepid Control Systems) Tj ET
+BT 26.83 513.35 Td (QA Developer, Intrepid Control Systems) Tj ET
 BT /F3 10.00 Tf ET
-BT 493.46 500.50 Td (Mar 2020 - Apr 2020) Tj ET
-BT 38.83 487.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
+BT 493.46 513.50 Td (Mar 2020 - Apr 2020) Tj ET
+BT 38.83 500.50 Td (- Wrote Mocha tests and debugged APIs across software and hardware integrations.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 472.35 Td (Network Engineer, Project Worldwide) Tj ET
+BT 26.83 485.35 Td (Network Engineer, Project Worldwide) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.90 472.50 Td (Jan 2020 - Mar 2020) Tj ET
-BT 38.83 459.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
+BT 492.90 485.50 Td (Jan 2020 - Mar 2020) Tj ET
+BT 38.83 472.50 Td (- Configured Cisco/Meraki infrastructure and executed multi-state network migrations with minimal downtime.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 444.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
+BT 26.83 457.35 Td (Network Standards Engineer, Ford Motor Company) Tj ET
 BT /F3 10.00 Tf ET
-BT 490.67 444.50 Td (Sep 2019 - Dec 2019) Tj ET
-BT 38.83 431.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
+BT 490.67 457.50 Td (Sep 2019 - Dec 2019) Tj ET
+BT 38.83 444.50 Td (- Implemented global network standards, documentation, and IP-management systems.) Tj ET
 BT /F1 10.50 Tf ET
-BT 26.83 416.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
+BT 26.83 429.35 Td (IT Network Engineer, Trendset Communications Group) Tj ET
 BT /F3 10.00 Tf ET
-BT 492.33 416.50 Td (Sep 2015 - Jun 2019) Tj ET
-BT 38.83 403.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
+BT 492.33 429.50 Td (Sep 2015 - Jun 2019) Tj ET
+BT 38.83 416.50 Td (- Maintained network standards, configurations, and documentation; supported critical production infrastructure.) Tj ET
 BT /F1 11.00 Tf ET
-BT 26.83 377.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
-24.00 374.00 m 588.00 374.00 l S
+BT 26.83 390.70 Td (EDUCATION & CERTIFICATIONS) Tj ET
+24.00 387.00 m 588.00 387.00 l S
 BT /F3 10.00 Tf ET
-BT 26.83 360.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
-BT 26.83 347.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
-BT 26.83 334.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
-BT 26.83 321.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
+BT 26.83 373.50 Td (M.S. Cyber Defense \(In Progress, Second Year\) - Dakota State University \(Expected Winter 2027\)) Tj ET
+BT 26.83 360.50 Td (B.S. Information Technology - Colorado State University Global Campus) Tj ET
+BT 26.83 347.50 Td (B.B.A. Business Administration - Rochester College) Tj ET
+BT 26.83 334.50 Td (CCNA \(Previously Held\) - Cisco Networking Academy \(2014 - 2017\)) Tj ET
 
 endstream
 endobj
@@ -285,21 +283,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000005465 00000 n 
-0000005861 00000 n 
-0000009064 00000 n 
-0000009166 00000 n 
-0000009271 00000 n 
-0000009368 00000 n 
-0000009476 00000 n 
-0000009584 00000 n 
+0000005389 00000 n 
+0000005785 00000 n 
+0000008955 00000 n 
+0000009057 00000 n 
+0000009162 00000 n 
+0000009259 00000 n 
+0000009367 00000 n 
+0000009475 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<FCF00C1A9C9BFCDFC3E8AD4CDBD124EE><FCF00C1A9C9BFCDFC3E8AD4CDBD124EE>]
+/ID [<EC40CC1893603F4CC0D6A7CD37FC0387><EC40CC1893603F4CC0D6A7CD37FC0387>]
 >>
 startxref
-9761
+9652
 %%EOF

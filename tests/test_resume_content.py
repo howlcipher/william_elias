@@ -44,10 +44,10 @@ class TestHeadlineAndPositioning:
         cfg = load_config()
         assert "Production Support" not in cfg["personal"]["title"]
 
-    def test_tagline_states_software_automation_and_security_positioning(self):
+    def test_tagline_states_software_and_delivery_value(self):
         tagline = load_config()["personal"]["tagline"].lower()
         assert "software" in tagline
-        assert "engineers" in tagline
+        assert "releases" in tagline and "diagnosis" in tagline
 
     @pytest.mark.parametrize("variant,opening", [
         ("software_platform", "Software and automation engineer building internal applications"),

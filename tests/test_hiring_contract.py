@@ -120,9 +120,9 @@ def test_verified_cicd_and_security_scope_language_remains_unambiguous():
     delivery = next(p for p in cfg["selectedEngineeringPrograms"] if p["id"] == "program-cicd-release")
     assert "subset" in " ".join(delivery["bullets"]).lower()
     details = " ".join(delivery["details"]).lower()
-    for phase in ("inventory", "pipeline configuration", "build checks", "dry runs", "production deployments"):
+    for phase in ("inventory", "pipeline configuration", "build verification", "dry runs", "production rollout"):
         assert phase in details
-    assert re.search(r"dry runs.*separately from production deployments", details)
+    assert re.search(r"dry runs.*separately from production rollout", details)
     assert not re.search(r"\d", json.dumps(delivery))
     assert not cfg["stats"]
 

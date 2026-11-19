@@ -2,7 +2,7 @@
   "personal": {
     "name": "William Elias",
     "title": "Software & Automation Engineer",
-    "tagline": "I build internal software and tools that help engineers ship and troubleshoot.",
+    "tagline": "I build internal software and tools for safer releases and faster diagnosis.",
     "supporting": "Developer Productivity • Internal Tools • Secure Automation",
     "contactCopy": "Open to U.S. remote engineering roles building internal software, developer tools, and secure delivery automation.",
     "location": "Michigan",
@@ -20,7 +20,7 @@
     "canonicalUrl": "https://howlcipher.github.io/william_elias/",
     "siteName": "William Elias | Software & Automation Engineer",
     "description": "William Elias builds internal software, developer tools, and security automation using Python, .NET, and Azure DevOps, with production reliability experience.",
-    "personDescription": "Software and automation engineer building internal applications, developer tools, and secure delivery automation.",
+    "personDescription": "Software and automation engineer building internal applications and developer tools for safer releases and production diagnostics.",
     "socialDescription": "Internal software, developer productivity, and secure automation grounded in production engineering.",
     "knowsAbout": [
       "Software Engineering",
@@ -36,7 +36,7 @@
       "Production Reliability"
     ]
   },
-  "about": "I build internal applications, developer tools, and automation that help engineers ship and troubleshoot software. At Stellantis Financial Services US, my work includes a modular operations portal, reusable Azure DevOps pipelines, and Python tools for recurring operational workflows.\n\nProduction troubleshooting shapes how I build: I look for what failed, make the correction traceable, and add checks where the same failure could recur. In AI-assisted development, I define requirements, use read-only review where appropriate, verify results with repeatable checks, and keep production actions under human approval.\n\nI am looking for U.S. remote software engineering roles focused on developer productivity, internal tools, platform software, or security automation.",
+  "about": "I build internal applications and tools that help engineers deploy, diagnose, and automate routine work. At Stellantis Financial Services US, I develop a shared operations portal and build Azure DevOps automation. I added deployment preflight checks for source and configuration drift and checks that verify release artifacts.\n\nI use coding assistants for implementation and review. I set requirements, check the output against repeatable tests, and leave production decisions to human approval.\n\nI am looking for U.S. remote software engineering roles in developer productivity, internal tools, platform software, or security automation.",
   "positioningStatements": [
     {
       "id": "summary-software-opening",
@@ -99,6 +99,7 @@
         ".NET",
         "ASP.NET Core",
         "Razor Pages",
+        "Razor Class Libraries",
         "FastAPI",
         "REST APIs",
         "SQL Server",
@@ -113,6 +114,7 @@
         ".NET",
         "ASP.NET Core",
         "Razor Pages",
+        "Razor Class Libraries",
         "FastAPI",
         "REST APIs",
         "SQL Server",
@@ -148,13 +150,15 @@
         "Secrets Discovery",
         "Git History Tooling",
         "Authorization",
-        "Audit Controls"
+        "Audit Controls",
+        "Integrity Checks"
       ],
       "pdfTags": [
         "Secrets Discovery",
         "Git History Tooling",
         "Authorization",
-        "Audit Controls"
+        "Audit Controls",
+        "Integrity Checks"
       ]
     },
     {
@@ -244,27 +248,27 @@
       "achievements": [
         {
           "id": "ach-internal-dotnet-app",
-          "text": "Contributed to and maintain a modular internal operations portal using C# and .NET 10 ASP.NET Core Razor Pages. Selected modules run in production, with others limited to development or QA."
+          "text": "Develop and maintain a shared internal operations portal built with ASP.NET Core Razor Pages on .NET 10. Selected workflows run in production, with others limited to development or QA."
         },
         {
           "id": "ach-cicd-standardization",
-          "text": "Built reusable Azure DevOps templates and standardized build and release definitions. Supported a staged rollout with successful production deployments for a subset of repositories."
+          "text": "Built reusable Azure DevOps templates to standardize build and release definitions. Supported staged rollout and successful production deployments for a subset of repositories."
         },
         {
           "id": "ach-cicd-validation",
-          "text": "Added deployment preflight and artifact checks to detect configuration and source drift, flag unsafe copy operations, and protect server-specific files during releases."
+          "text": "Added deployment preflight checks for source and configuration drift, verified release artifacts, and added safeguards for server-specific files."
         },
         {
           "id": "ach-production-remediation",
-          "text": "Diagnosed an integer-overflow failure in an operational process and coordinated application source corrections after a retired database dependency caused a production incident."
+          "text": "Diagnosed an integer-overflow failure in an operational process. In a separate production incident, traced the failure to a retired database dependency and coordinated corrections to application source references."
         },
         {
           "id": "ach-python-tooling",
-          "text": "Built Python reporting automation, integration-log analysis tools, and operational CLIs. Separately implemented a FastAPI webhook integration and Azure DevOps API tooling."
+          "text": "Automated recurring report generation and delivery in Python, summarized integration-log errors, and built operational CLIs. Implemented a FastAPI webhook integration and Azure DevOps API automation."
         },
         {
           "id": "ach-secrets-discovery",
-          "text": "Developed C#/.NET 8 tooling to find and classify secrets in configuration files and generate reports without exposing their values."
+          "text": "Built C#/.NET 8 tooling to scan configuration files and classify secrets."
         },
         {
           "id": "ach-git-history-tooling",
@@ -272,7 +276,7 @@
         },
         {
           "id": "ach-portal-controls",
-          "text": "Implemented authorization and audit controls for portal workflows, with Windows authentication and Active Directory identities."
+          "text": "Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory identities."
         },
         {
           "id": "ach-release-kql",
@@ -307,10 +311,10 @@
       "id": "program-internal-software",
       "name": "Production Support Portal",
       "bullets": [
-        "Contributed to and maintain a modular internal operations portal using C# and .NET 10 ASP.NET Core Razor Pages. Selected modules run in production, with others limited to development or QA."
+        "Develop and maintain a shared internal operations portal built with ASP.NET Core Razor Pages on .NET 10. Selected workflows run in production, with others limited to development or QA."
       ],
       "details": [
-        "Implemented authorization and audit controls for portal workflows, with Windows authentication and Active Directory identities.",
+        "Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory identities.",
         "Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite."
       ],
       "technology": [
@@ -326,11 +330,11 @@
       "id": "program-cicd-release",
       "name": "Azure DevOps & Deployment Safety",
       "bullets": [
-        "Built reusable Azure DevOps templates and standardized build and release definitions. Supported a staged rollout with successful production deployments for a subset of repositories."
+        "Built reusable Azure DevOps templates to standardize build and release definitions. Supported staged rollout and successful production deployments for a subset of repositories."
       ],
       "details": [
-        "Added deployment preflight and artifact checks to detect configuration and source drift, flag unsafe copy operations, and protect server-specific files during releases.",
-        "Inventory documented the estate. Pipeline configuration, build checks, and deployment dry runs tracked rollout progress separately from production deployments."
+        "Added deployment preflight checks for source and configuration drift, verified release artifacts, and added safeguards for server-specific files.",
+        "Tracked the repository inventory, pipeline configuration, build verification, and deployment dry runs separately from production rollout."
       ],
       "technology": [
         "Azure DevOps",
@@ -343,11 +347,10 @@
       "id": "program-python-productivity",
       "name": "Python Automation & Developer Productivity",
       "bullets": [
-        "Built Python reporting automation, integration-log analysis tools, and operational CLIs. Separately implemented a FastAPI webhook integration and Azure DevOps API tooling."
+        "Automated recurring report generation and delivery in Python, summarized integration-log errors, and built operational CLIs. Implemented a FastAPI webhook integration and Azure DevOps API automation."
       ],
       "details": [
-        "Automated recurring report generation and delivery and summarized processing errors from integration logs.",
-        "Built engineering-document search and operational command-line tools."
+        "Built engineering-document search alongside tools for routine operations."
       ],
       "technology": [
         "Python",
@@ -359,7 +362,7 @@
       "id": "program-production-reliability",
       "name": "Production Incident Remediation",
       "bullets": [
-        "Diagnosed an integer-overflow failure in an operational process and coordinated application source corrections after a retired database dependency caused a production incident."
+        "Diagnosed an integer-overflow failure in an operational process. In a separate production incident, traced the failure to a retired database dependency and coordinated corrections to application source references."
       ],
       "details": [
         "Participate in production releases and investigate application, integration, and database issues using KQL, Azure Monitor, and Application Insights."
@@ -375,12 +378,12 @@
       "id": "program-security-remediation",
       "name": "Secrets Discovery & Git-History Tooling",
       "bullets": [
-        "Developed C#/.NET 8 tooling to find and classify secrets in configuration files and generate reports without exposing their values.",
+        "Built C#/.NET 8 tooling to scan configuration files and classify secrets.",
         "Developed Python tooling that supports Git-history cleanup with BFG Repo-Cleaner and git-filter-repo."
       ],
       "details": [
-        "Configuration discovery used integrity checks and produced a migration proposal. The migration was canceled before execution.",
-        "Git-history tooling supports repository cleanup workflows. Credential rotation and revocation are separate operations."
+        "Used integrity checks during configuration scans and kept secret values out of the resulting reports.",
+        "Git-history cleanup and credential lifecycle actions have separate scopes."
       ],
       "technology": [
         "C#",
@@ -433,14 +436,13 @@
     },
     {
       "id": "highlight-discovery-boundary",
-      "name": "Configuration Discovery Scope",
+      "name": "Configuration Scan Integrity",
       "sourceProgram": "Secrets Discovery & Git-History Tooling",
       "bullets": [
-        "Configuration discovery used integrity checks and produced a migration proposal. The migration was canceled before execution."
+        "Used integrity checks during configuration scans and kept secret values out of the resulting reports."
       ],
       "technology": [
-        "C#",
-        ".NET 8"
+        "Configuration Analysis"
       ]
     },
     {
@@ -448,7 +450,7 @@
       "name": "Release Validation",
       "sourceProgram": "Azure DevOps & Deployment Safety",
       "bullets": [
-        "Inventory documented the estate. Pipeline configuration, build checks, and deployment dry runs tracked rollout progress separately from production deployments."
+        "Tracked the repository inventory, pipeline configuration, build verification, and deployment dry runs separately from production rollout."
       ],
       "technology": [
         "Azure DevOps"
@@ -492,7 +494,7 @@
       "subtitle": "Independent software verification",
       "link": "https://github.com/howlcipher/howlproof",
       "highlights": [
-        "Beta toolkit for adversarial evaluation of trusted local software artifacts, with replayable evidence and advisory verdicts that record verification gaps."
+        "Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records verification gaps in advisory verdicts."
       ],
       "tags": [
         "Python",
@@ -699,41 +701,41 @@
       "items": [
         {
           "id": "build-internal-software",
-          "name": "Production Support Portal",
+          "name": "Internal Applications",
           "stack": [
             "C#",
             ".NET 10",
             "Razor Pages"
           ],
-          "summary": "Modular operations workflows with access controls and audit records.",
+          "summary": "Put recurring operations workflows behind an internal application with authorization and audit logging.",
           "programId": "program-internal-software",
           "provenance": "Professional"
         },
         {
           "id": "build-delivery-automation",
-          "name": "Azure DevOps & Deployment Safety",
+          "name": "Release Engineering Tools",
           "stack": [
             "Azure DevOps",
             "CI/CD"
           ],
-          "summary": "Reusable release automation with deployment preflight and artifact checks.",
+          "summary": "Give engineers repeatable build and release workflows and checks they can run before deployment.",
           "programId": "program-cicd-release",
           "provenance": "Professional"
         },
         {
           "id": "build-python-tooling",
-          "name": "Python Automation & Developer Productivity",
+          "name": "Python Workflow Automation",
           "stack": [
             "Python",
             "FastAPI"
           ],
-          "summary": "Reporting, diagnostics, operational CLIs, and webhook integration.",
+          "summary": "Turn recurring reports and integration diagnostics into repeatable tools and API workflows.",
           "programId": "program-python-productivity",
           "provenance": "Professional"
         }
       ]
     },
-    "resumeChoiceIntro": "Start with Software Engineering & Developer Tools for internal software and developer productivity roles. The other versions emphasize security tooling or production engineering.",
+    "resumeChoiceIntro": "Start with Software Engineering & Developer Tools. Choose a targeted version for security automation or production engineering.",
     "selectedWork": {
       "provenanceLabel": "Professional",
       "featured": [

@@ -358,12 +358,12 @@ def render_cta_resumes(resumes, intro=''):
     secondary_links = render_resume_links(secondary, 'contact-pill resume-secondary', with_audience=True)
     secondary_html = (
         '<p class="resume-choice-label resume-secondary-label" id="resume-secondary-label">'
-        'Also available for production and DevOps roles:</p>'
+        'Additional targeted resumes:</p>'
         f'<div class="resume-choice-actions resume-secondary-actions" role="group" '
         f'aria-labelledby="resume-secondary-label">{secondary_links}</div>'
     ) if secondary_links else ''
     return (
-        f'{intro_html}<p class="resume-choice-label" id="resume-choice-label">Choose the resume that fits the role:</p>'
+        f'{intro_html}<p class="resume-choice-label" id="resume-choice-label">Primary resume:</p>'
         f'<div class="resume-choice-actions" role="group" aria-labelledby="resume-choice-label">{links}</div>'
         f'{secondary_html}'
     )

@@ -80,3 +80,28 @@ Changed files
 The existing project link and responsive overflow checks still apply. They did not cover column counts or equal desktop card dimensions. The focused Chromium acceptance test adds those assertions at 1024 and 1440 pixels and verifies the mobile single-column layout at 390 pixels. The two desktop cases reproduced the imbalance before the fix. No test contracts were removed or weakened.
 
 Focused browser regression passed 24 tests. Final serial `PYTHONPATH=. pytest -q tests/ -W error` passed 415 tests with zero failures or skips.
+
+## Final career audit follow-up
+
+Starting point `2ddb937`, clean `main`, with work on local branch `final-career-audit`. The agent requests contained public source excerpts and the proposed wording. No employer records were supplied to either reviewer. Review feedback was treated as editorial input.
+
+| Finding | Claude | AGY | Codex assessment | Decision | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| Shared portal and staged releases read too cautiously | Unavailable | Sharpen ownership and rollout verbs | Direct work can be stated with specific actions. Leadership and broader deployment need evidence. | MODIFY | `ach-internal-dotnet-app`, `ach-portal-controls`, `ach-cicd-validation` |
+| Portal runtime might be a preview | Unavailable | Generalize or use .NET 8 | .NET 10 was released in November 2025. The owner-provided audit identifies this version. Employer deployment remains provisional. | REJECT | [Microsoft support policy](https://dotnet.microsoft.com/en-us/platform/support/policy), evidence ledger |
+| Remove canceled migration from résumé | Unavailable | Feature completed discovery | Integrity checks and redacted reporting are in scope. Specific detection mechanisms and migration execution lack evidence. | ACCEPT | `highlight-discovery-boundary`, `program-security-remediation` |
+| Change generic résumé to software | Unavailable | Remap compatibility alias | Existing recipients expect the production version. Change the site’s primary action while preserving the alias contract. | MODIFY | Variant listing and compatibility configuration |
+| Move Python above incident diagnosis | Unavailable | Reorder software résumé and LinkedIn | Keep the requested order and sharpen Python's deliverables. Preserve diagnosis as the lead on Production & DevOps. | MODIFY | `ach-python-tooling`, software and production selections |
+| Reduce repeated portal and rollout material | Unavailable | Replace related highlights | Keep nonduplicated details on module architecture and verification boundaries. Put capability statements in What I Build and evidence in Selected Work. | MODIFY | `whatIBuild`, `highlight-modular-architecture`, `highlight-rollout-validation` |
+| Add HBK to LinkedIn | Unavailable | Generate full earlier career | Generate the relevant HBK entry from the same selection as the software résumé. Keep the figures owner-reported in the ledger. | MODIFY | `exp-hbk`, LinkedIn Earlier Experience |
+| Confirm claims about production and security scope | Unavailable | Suggested stronger rollout phrasing | Release counts, leadership scope, completed restoration, and credential actions require approved evidence. | NEEDS EVIDENCE | Evidence ledger |
+
+Claude Code's default model requested usage credits and the Sonnet initial attempt timed out. AGY completed the independent first round. Both agents received the consolidated candidate for one final adversarial round. Claude Sonnet and AGY both timed out without findings in that round. The candidate has Codex review and test evidence.
+
+### Test impact and verification
+
+The observable changes are the sole primary résumé action, targeted skills, completed-work discovery highlight, and canonical HBK block in the LinkedIn package. Browser acceptance continues to exercise all three résumé downloads through their supported entry points, plus project grid, navigation, contact, contrast, and keyboard behavior. The filename, alias, ownership, status, no-inflation, and artifact assertions still apply.
+
+The new contracts check that security describes completed discovery and that LinkedIn carries canonical HBK achievements. Assertions about primary listing were updated for the requested single-primary hierarchy. The skills fallback fixture removes the variant tag override so it still reaches the fallback it is intended to test. Fast verification found project names in unselected PDFs when the shared attribution line named featured projects. Restoring attribution-only copy fixed the content, preserving the existing selection assertions. No new generator or dependencies were needed.
+
+Five generators ran with Python 3.12 and `-W error`. The fast suite excluded browser and isolated artifact tests for staging and passed 320 tests after corrections. The final serial gate includes both suites. Poppler rendered the six pages for visual inspection. PDF HTTPS annotations returned HTTP 200 and the email annotation was syntax checked.

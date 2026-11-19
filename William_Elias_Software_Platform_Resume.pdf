@@ -51,7 +51,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Length 5263
+/Length 5359
 >>
 stream
 2 J
@@ -91,17 +91,17 @@ BT 26.83 586.65 Td (Senior Production Support Engineer | Auburn Hills, MI · Hybr
 BT /F3 9.00 Tf ET
 BT 26.83 573.80 Td (Promoted September 2026; previously Production Support Engineer) Tj ET
 BT /F3 10.00 Tf ET
-BT 38.83 560.50 Td (- Contributed to and maintain a modular internal operations portal using C# and .NET 10 ASP.NET Core Razor Pages.) Tj ET
-BT 38.83 547.50 Td (Selected modules run in production, with others limited to development or QA.) Tj ET
-BT 38.83 534.50 Td (- Built reusable Azure DevOps templates and standardized build and release definitions. Supported a staged rollout with) Tj ET
+BT 38.83 560.50 Td (- Develop and maintain a shared internal operations portal built with ASP.NET Core Razor Pages on .NET 10. Selected) Tj ET
+BT 38.83 547.50 Td (workflows run in production, with others limited to development or QA.) Tj ET
+BT 38.83 534.50 Td (- Built reusable Azure DevOps templates to standardize build and release definitions. Supported staged rollout and) Tj ET
 BT 38.83 521.50 Td (successful production deployments for a subset of repositories.) Tj ET
-BT 38.83 508.50 Td (- Added deployment preflight and artifact checks to detect configuration and source drift, flag unsafe copy operations, and) Tj ET
-BT 38.83 495.50 Td (protect server-specific files during releases.) Tj ET
-BT 38.83 482.50 Td (- Diagnosed an integer-overflow failure in an operational process and coordinated application source corrections after a) Tj ET
-BT 38.83 469.50 Td (retired database dependency caused a production incident.) Tj ET
-BT 38.83 456.50 Td (- Built Python reporting automation, integration-log analysis tools, and operational CLIs. Separately implemented a FastAPI) Tj ET
-BT 38.83 443.50 Td (webhook integration and Azure DevOps API tooling.) Tj ET
-BT 38.83 430.50 Td (- Implemented authorization and audit controls for portal workflows, with Windows authentication and Active Directory) Tj ET
+BT 38.83 508.50 Td (- Added deployment preflight checks for source and configuration drift, verified release artifacts, and added safeguards for) Tj ET
+BT 38.83 495.50 Td (server-specific files.) Tj ET
+BT 38.83 482.50 Td (- Diagnosed an integer-overflow failure in an operational process. In a separate production incident, traced the failure to a) Tj ET
+BT 38.83 469.50 Td (retired database dependency and coordinated corrections to application source references.) Tj ET
+BT 38.83 456.50 Td (- Automated recurring report generation and delivery in Python, summarized integration-log errors, and built operational) Tj ET
+BT 38.83 443.50 Td (CLIs. Implemented a FastAPI webhook integration and Azure DevOps API automation.) Tj ET
+BT 38.83 430.50 Td (- Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory) Tj ET
 BT 38.83 417.50 Td (identities.) Tj ET
 BT /F1 10.50 Tf ET
 BT 26.83 402.35 Td (HBK - Hottinger Brüel & Kjær) Tj ET
@@ -122,35 +122,36 @@ BT /F1 10.00 Tf ET
 BT 26.83 281.50 Td (Software & Backend) Tj ET
 BT 123.52 281.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 129.63 281.50 Td (Python, C#, .NET, ASP.NET Core, Razor Pages, FastAPI, REST APIs, SQL Server, SQLite) Tj ET
+BT 129.63 281.50 Td (Python, C#, ASP.NET Core, Razor Pages, Razor Class Libraries, FastAPI, REST APIs, SQL Server,) Tj ET
+BT 26.83 268.50 Td (SQLite) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 268.50 Td (Automation & Developer Tooling) Tj ET
+BT 26.83 255.50 Td (Automation & Developer Tooling) Tj ET
 BT /F2 10.00 Tf ET
-BT 182.40 268.50 Td ( \(Go in independent projects and prototyping\)) Tj ET
+BT 182.40 255.50 Td ( \(Go in independent projects and prototyping\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 383.06 268.50 Td (: ) Tj ET
+BT 383.06 255.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 389.17 268.50 Td (Developer Tooling, PowerShell, Go,) Tj ET
-BT 26.83 255.50 Td (Operational Tooling) Tj ET
+BT 389.17 255.50 Td (Developer Tooling, PowerShell, Go,) Tj ET
+BT 26.83 242.50 Td (Operational Tooling) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 242.50 Td (DevOps & Delivery) Tj ET
-BT 116.31 242.50 Td (: ) Tj ET
+BT 26.83 229.50 Td (DevOps & Delivery) Tj ET
+BT 116.31 229.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 122.42 242.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, GitHub Actions \(projects\)) Tj ET
+BT 122.42 229.50 Td (Azure DevOps, CI/CD, Release Automation, YAML Pipelines, Git, GitHub Actions \(projects\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 229.50 Td (Security & Identity) Tj ET
-BT 114.63 229.50 Td (: ) Tj ET
+BT 26.83 216.50 Td (Security & Identity) Tj ET
+BT 114.63 216.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 120.74 229.50 Td (Secrets Discovery, Git History Tooling, Authorization, Audit Controls) Tj ET
+BT 120.74 216.50 Td (Secrets Discovery, Git History Tooling, Authorization, Audit Controls, Integrity Checks) Tj ET
 BT /F1 10.00 Tf ET
-BT 26.83 216.50 Td (AI-Assisted Engineering) Tj ET
+BT 26.83 203.50 Td (AI-Assisted Engineering) Tj ET
 BT /F2 10.00 Tf ET
-BT 142.41 216.50 Td ( \(Human technical direction and review\)) Tj ET
+BT 142.41 203.50 Td ( \(Human technical direction and review\)) Tj ET
 BT /F1 10.00 Tf ET
-BT 318.02 216.50 Td (: ) Tj ET
+BT 318.02 203.50 Td (: ) Tj ET
 BT /F3 10.00 Tf ET
-BT 324.13 216.50 Td (Agent Workflows, Human Review, Regression Testing,) Tj ET
-BT 26.83 203.50 Td (Engineering Knowledge Systems) Tj ET
+BT 324.13 203.50 Td (Agent Workflows, Human Review, Regression Testing,) Tj ET
+BT 26.83 190.50 Td (Engineering Knowledge Systems) Tj ET
 
 endstream
 endobj
@@ -176,7 +177,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 3163
+/Length 3170
 >>
 stream
 2 J
@@ -205,8 +206,8 @@ BT /F1 10.50 Tf ET
 BT 26.83 595.35 Td (HowlProof) Tj ET
 BT /F3 10.00 Tf ET
 BT 26.83 582.50 Td (github.com/howlcipher/howlproof) Tj ET
-BT 38.83 569.50 Td (- Beta toolkit for adversarial evaluation of trusted local software artifacts, with replayable evidence and advisory verdicts) Tj ET
-BT 38.83 556.50 Td (that record verification gaps.) Tj ET
+BT 38.83 569.50 Td (- Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records) Tj ET
+BT 38.83 556.50 Td (verification gaps in advisory verdicts.) Tj ET
 BT /F1 11.00 Tf ET
 BT 26.83 530.70 Td (EARLIER EXPERIENCE) Tj ET
 24.00 527.00 m 588.00 527.00 l S
@@ -296,21 +297,21 @@ xref
 0000000108 00000 n 
 0000000211 00000 n 
 0000000883 00000 n 
-0000006198 00000 n 
-0000006589 00000 n 
-0000009804 00000 n 
-0000009906 00000 n 
-0000010011 00000 n 
-0000010108 00000 n 
-0000010216 00000 n 
-0000010324 00000 n 
+0000006294 00000 n 
+0000006685 00000 n 
+0000009907 00000 n 
+0000010009 00000 n 
+0000010114 00000 n 
+0000010211 00000 n 
+0000010319 00000 n 
+0000010427 00000 n 
 trailer
 <<
 /Size 13
 /Root 2 0 R
 /Info 12 0 R
-/ID [<EF75319704208AB15FED4220DE5456B3><EF75319704208AB15FED4220DE5456B3>]
+/ID [<00E5A4DF2E0026C29B8F324EB91C4568><00E5A4DF2E0026C29B8F324EB91C4568>]
 >>
 startxref
-10509
+10612
 %%EOF

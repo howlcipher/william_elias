@@ -3,7 +3,7 @@
 
 ## Headline
 
-Software & Automation Engineer | Developer Productivity | Internal Tools | Secure Delivery Automation
+Software & Automation Engineer | Developer Productivity | Internal Tools | CI/CD Tooling
 
 Use this headline by default. It identifies the software you build and the engineers it serves while leaving your official title in Experience.
 
@@ -15,11 +15,11 @@ Use this headline by default. It identifies the software you build and the engin
 
 ## About
 
-I build internal applications, developer tools, and automation that help engineers ship and troubleshoot software. At Stellantis Financial Services US, my work includes a modular operations portal, reusable Azure DevOps pipelines, and Python tools for recurring operational workflows.
+I build internal applications and tools that help engineers deploy, diagnose, and automate routine work. At Stellantis Financial Services US, I develop a shared operations portal and build Azure DevOps automation. I added deployment preflight checks for source and configuration drift and checks that verify release artifacts.
 
-Production troubleshooting shapes how I build: I look for what failed, make the correction traceable, and add checks where the same failure could recur. In AI-assisted development, I define requirements, use read-only review where appropriate, verify results with repeatable checks, and keep production actions under human approval.
+I use coding assistants for implementation and review. I set requirements, check the output against repeatable tests, and leave production decisions to human approval.
 
-I am looking for U.S. remote software engineering roles focused on developer productivity, internal tools, platform software, or security automation.
+I am looking for U.S. remote software engineering roles in developer productivity, internal tools, platform software, or security automation.
 
 ## Current Experience
 
@@ -27,20 +27,30 @@ I am looking for U.S. remote software engineering roles focused on developer pro
 
 Stellantis Financial Services US · Feb 2023 - Present
 
-- Contributed to and maintain a modular internal operations portal using C# and .NET 10 ASP.NET Core Razor Pages. Selected modules run in production, with others limited to development or QA.
-- Built reusable Azure DevOps templates and standardized build and release definitions. Supported a staged rollout with successful production deployments for a subset of repositories.
-- Added deployment preflight and artifact checks to detect configuration and source drift, flag unsafe copy operations, and protect server-specific files during releases.
-- Diagnosed an integer-overflow failure in an operational process and coordinated application source corrections after a retired database dependency caused a production incident.
-- Built Python reporting automation, integration-log analysis tools, and operational CLIs. Separately implemented a FastAPI webhook integration and Azure DevOps API tooling.
-- Implemented authorization and audit controls for portal workflows, with Windows authentication and Active Directory identities.
+- Develop and maintain a shared internal operations portal built with ASP.NET Core Razor Pages on .NET 10. Selected workflows run in production, with others limited to development or QA.
+- Built reusable Azure DevOps templates to standardize build and release definitions. Supported staged rollout and successful production deployments for a subset of repositories.
+- Added deployment preflight checks for source and configuration drift, verified release artifacts, and added safeguards for server-specific files.
+- Diagnosed an integer-overflow failure in an operational process. In a separate production incident, traced the failure to a retired database dependency and coordinated corrections to application source references.
+- Automated recurring report generation and delivery in Python, summarized integration-log errors, and built operational CLIs. Implemented a FastAPI webhook integration and Azure DevOps API automation.
+- Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory identities.
+
+## Earlier Experience
+
+**DevOps Engineer**
+
+HBK - Hottinger Brüel & Kjær · Jul 2020 - Feb 2023
+
+- Created Python/Tkinter XML-output automation that reduced data-processing time by 60%; automated SQL output processing to save more than 40 hours per month.
+- Developed database-configuration tools to streamline customer onboarding and reduce repetitive environment setup.
+- Built NSIS installer/uninstaller packages, maintained Git workflows and developer tooling, and provided live customer troubleshooting.
 
 ## Skills in recommended order
 
 1. Software Engineering
 2. Developer Tooling
 3. Python
-4. C#
-5. Azure DevOps
+4. Azure DevOps
+5. C#
 6. ASP.NET Core
 7. Continuous Integration and Continuous Delivery (CI/CD)
 8. .NET

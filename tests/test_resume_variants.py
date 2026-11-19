@@ -21,7 +21,7 @@ EXPECTED_FILES = {
     "security_automation": "William_Elias_Security_Automation_Resume.pdf",
     "production_devops": "William_Elias_Production_DevOps_Resume.pdf",
 }
-PRIMARY = ("software_platform", "security_automation")
+PRIMARY = ("software_platform",)
 
 
 @pytest.fixture
@@ -440,7 +440,7 @@ def test_ats_keywords_are_text_not_graphics(variant_pdfs, variant):
 
 # --- Website ---------------------------------------------------------------
 
-def test_website_offers_two_primary_resumes_and_one_secondary():
+def test_website_offers_one_primary_resume_and_both_specialist_versions():
     page = (SITE_DIR / "index.html").read_text(encoding="utf-8")
     pdf_links = re.findall(r'href="([^"]+\.pdf)"', page)
     assert set(pdf_links) == set(EXPECTED_FILES.values())
@@ -451,7 +451,7 @@ def test_website_offers_two_primary_resumes_and_one_secondary():
     choice = page.split('id="resume-downloads"')[1].split("</section>")[0]
     assert [f for f in EXPECTED_FILES.values() if f in choice] == list(EXPECTED_FILES.values())
     secondary = choice.split('resume-secondary-actions')[1]
-    assert EXPECTED_FILES["production_devops"] in secondary
+    assert all(EXPECTED_FILES[name] in secondary for name in ("security_automation", "production_devops"))
     assert not any(f in secondary for f in primary_files)
     mobile = page.split('<ul class="mobile-nav-links">')[1].split("</ul>")[0]
     assert [f for f in EXPECTED_FILES.values() if f in mobile] == primary_files
