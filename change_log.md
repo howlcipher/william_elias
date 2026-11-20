@@ -2,6 +2,14 @@
 
 ## 2026-11-19
 
+### Source-of-Truth Harmonization & Recruiter Discovery Completion
+
+* **Single-Source GitHub Profile README:** Refactored `scripts/generate_github_profile_readme.py` to derive the flagship project table directly from `resume.json["projects"]`, dynamically extracting repository URLs, tags, and canonical highlights without hardcoded template duplication.
+* **Controlled Synchronization:** Added `--sync-repo` flag and `SYNC_PROFILE_REPO` environment guard to prevent unintended writes to sibling repositories during isolated test runs, while synchronizing `howlcipher/README.md` via explicit Git workflows.
+* **Regression Protection:** Added `test_github_profile_readme_matches_canonical_source` to `tests/test_factual_integrity_hotfix.py` enforcing identity facts, canonical highlight presence, and strict absence of prohibited terms.
+* **LinkedIn Recruiter Package:** Verified live LinkedIn profile boundaries, verified all 4 featured links return HTTP 200, and finalized the complete owner-action package for headline, about, current experience, featured order, and Open-to-Work preferences.
+* **Public Discovery Audit:** Verified live deployment endpoints (homepage, resume PDF, candidate profile JSON, llms.txt, sitemap XML, robots.txt, schema JSON-LD) and verified 430 total tests (357 unit/freshness + 73 browser).
+
 ### Final Identity Network Rollout & Release (F0-F7)
 
 * **GitHub Special Profile Repository:** Created, verified, and published `https://github.com/howlcipher/howlcipher` with a canonical, evidence-based profile README linking directly to William's portfolio, LinkedIn, and primary software engineering resume.

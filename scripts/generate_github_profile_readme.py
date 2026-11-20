@@ -1,10 +1,21 @@
 """Generate canonical GitHub profile README from resume.json."""
 
+import argparse
 import json
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HOWLCIPHER_REPO = ROOT.parent / "howlcipher"
+
+# Presentation focus mappings for profile display, grounded in canonical subtitles
+CANONICAL_FOCUS_MAP = {
+    "project-howlplane": "AI Engineering Control Plane",
+    "project-howlproof": "Independent Software Verification",
+    "project-howlframe": "Language & Compiler Runtime",
+    "project-password-arena": "Defensive Security Arena",
+    "project-howldream": "Experimental Evaluation Lab",
+}
 
 
 def render_readme(data):
@@ -14,6 +25,33 @@ def render_readme(data):
     official_title = current_role["officialTitle"]
     company = current_role["company"]
     location = personal.get("location", "Michigan")
+
+    projects_by_id = {p["id"]: p for p in data.get("projects", [])}
+
+    # Core flagship repositories derived dynamically from canonical projects
+    featured_order = [
+        "project-howlplane",
+        "project-howlproof",
+        "project-howlframe",
+        "project-password-arena",
+        "project-howldream",
+    ]
+
+    rows = []
+    for pid in featured_order:
+        proj = projects_by_id.get(pid)
+        if not proj:
+            continue
+        repo_name = proj["link"].rstrip("/").split("/")[-1]
+        focus = CANONICAL_FOCUS_MAP.get(pid, proj.get("subtitle", "Engineering Project"))
+        tech = ", ".join(proj.get("tags", [])[:3])
+        highlights = " ".join(proj.get("highlights", []))
+        rows.append(f"| **[{repo_name}]({proj['link']})** | {focus} | {tech} | {highlights} |")
+
+    # william_elias portfolio row
+    portfolio_highlights = "Accessible, multi-theme engineering portfolio with automated resume generation and 400+ deterministic verification tests."
+    rows.append(f"| **[william_elias](https://github.com/howlcipher/william_elias)** | Portfolio & Build Tooling | Python, Playwright, HTML/CSS | {portfolio_highlights} |")
+    project_table = "\n".join(rows)
 
     return f"""# {personal['name']}
 
@@ -36,12 +74,7 @@ Currently, I serve as a **{official_title}** at {company}, where I build and mai
 
 | Repository | Focus | Tech Stack | Highlights |
 | :--- | :--- | :--- | :--- |
-| **[howlplane](https://github.com/howlcipher/howlplane)** | AI Engineering Control Plane | Python, Go, JSONL | Coordinates coding-agent tasks and reviews with policy limits, repeatable verification, and human-in-the-loop authority boundaries. |
-| **[howlproof](https://github.com/howlcipher/howlproof)** | Independent Software Verification | Python, Subprocess | Adversarial evaluation toolkit that tests local artifacts, captures reproducible evidence, and issues advisory verdicts. |
-| **[howlframe](https://github.com/howlcipher/howlframe)** | Language & Compiler Runtime | Go, Python, HFIR, VM | Experimental compiler and toolchain in Go with typed intermediate representations, bytecode, and capability-bounded execution. |
-| **[password_arena](https://github.com/howlcipher/password_arena)** | Defensive Security Arena | Python, zxcvbn, Cryptography | Local adversarial learning sandbox measuring password entropy progression, structural penalties, and attack budgets. |
-| **[howldream](https://github.com/howlcipher/howldream)** | Experimental Evaluation Lab | Python, AST Analysis | Bounded architectural proposal engine evaluating divergent AI proposals and failure modes under inspectable conditions. |
-| **[william_elias](https://github.com/howlcipher/william_elias)** | Portfolio & Build Tooling | Python, Playwright, HTML/CSS | Accessible, multi-theme engineering portfolio with automated resume generation and 400+ deterministic verification tests. |
+{project_table}
 
 ---
 
@@ -64,6 +97,10 @@ Currently, I serve as a **{official_title}** at {company}, where I build and mai
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Generate GitHub profile README from resume.json")
+    parser.add_argument("--sync-repo", action="store_true", help="Synchronize output to sibling howlcipher repo if present")
+    args = parser.parse_args()
+
     resume_path = ROOT / "resume.json"
     with open(resume_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -76,8 +113,9 @@ def main():
     target_doc.write_text(readme_content, encoding="utf-8")
     print(f"Wrote {target_doc}")
 
-    # 2. Write to howlcipher repo if it exists locally
-    if HOWLCIPHER_REPO.exists() and HOWLCIPHER_REPO.is_dir():
+    # 2. Write to sibling howlcipher repo if requested or flagged via environment
+    should_sync = args.sync_repo or (os.environ.get("SYNC_PROFILE_REPO") == "1")
+    if should_sync and HOWLCIPHER_REPO.exists() and HOWLCIPHER_REPO.is_dir():
         target_repo_readme = HOWLCIPHER_REPO / "README.md"
         target_repo_readme.write_text(readme_content, encoding="utf-8")
         print(f"Wrote {target_repo_readme}")

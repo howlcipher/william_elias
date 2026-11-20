@@ -172,3 +172,42 @@ def test_deployment_diagram_is_conceptual_and_non_sequential(index_html):
     assert ">Preflight Drift Checks<" in index_html
     assert ">Standardized Templates<" in index_html
     assert ">Artifacts &amp; Safeguards<" in index_html
+
+
+def test_github_profile_readme_matches_canonical_source(canonical):
+    readme_path = ROOT / "documentation" / "github_profile_readme.md"
+    assert readme_path.exists(), "documentation/github_profile_readme.md must exist"
+    readme_text = readme_path.read_text(encoding="utf-8")
+
+    current_role = next((role for role in canonical["experience"] if role.get("id") == "exp-stellantis"), canonical["experience"][0])
+    official_title = current_role["officialTitle"]
+    company = current_role["company"]
+    location = canonical["personal"]["location"]
+    canonical_base = canonical["seo"]["canonicalUrl"].rstrip("/")
+
+    # Check identity facts
+    assert f"**Senior Production Support Engineer** at {company}" in readme_text
+    assert f"**Location:** {location} (Open to U.S. Remote Opportunities)" in readme_text
+    assert f"[Portfolio]({canonical_base}/)" in readme_text
+    assert f"[Software & Platform Resume (PDF)]({canonical_base}/William_Elias_Software_Platform_Resume.pdf)" in readme_text
+
+    # Check project derivation from canonical resume.json
+    projects_by_id = {p["id"]: p for p in canonical.get("projects", [])}
+    for pid in ("project-howlplane", "project-howlproof", "project-howlframe", "project-password-arena", "project-howldream"):
+        proj = projects_by_id[pid]
+        repo_name = proj["link"].rstrip("/").split("/")[-1]
+        assert f"[{repo_name}]({proj['link']})" in readme_text
+        # Check that canonical highlights are present in the table
+        for highlight in proj["highlights"]:
+            assert highlight in readme_text
+
+    # Ensure prohibited uncalibrated claims are absent
+    prohibited = (
+        "architect of autonomous",
+        "deterministic evidence sandbox",
+        "secret rotation",
+        "automated rollback",
+    )
+    lower_readme = readme_text.lower()
+    for term in prohibited:
+        assert term not in lower_readme, f"Found prohibited term '{term}' in GitHub profile README"
