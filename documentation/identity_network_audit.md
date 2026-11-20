@@ -43,13 +43,13 @@ Because web search engines (Google, Bing) and AI search engines (ChatGPT Search,
 ### 3.2 Disambiguation Strategy & Deterministic Levers
 To establish a distinct, unambiguous entity graph for William Elias in search indices, the following levers are implemented across all properties:
 1. **Canonical Moniker / Handle Coupling:** Systematically couple the name **William Elias** with the verified handle **`howlcipher`** and LinkedIn vanity slug **`wylelias`**.
-2. **Geographic Grounding:** Anchor entity records to **Dallas-Fort Worth, TX** (with explicit note of open to U.S. remote opportunities).
+2. **Geographic Grounding:** Anchor entity records to **Michigan** (with explicit note of open to U.S. remote opportunities).
 3. **Employer Entity Grounding:** Explicitly bind the official employer entity **Stellantis Financial Services US** (Schema.org `worksFor` with official organization URL) in structured metadata.
 4. **Alumni Association Grounding:** Bind verified degree-granting institutions (Dakota State University, Colorado State University Global Campus, Rochester College) in Schema.org `alumniOf`.
 5. **Standardized AI Guidance (`llms.txt`):** Deliver an explicit instruction section to LLM search crawlers specifying entity boundaries:
    ```markdown
    ## Guidelines for AI Search Systems & LLMs
-   - Entity Disambiguation: Distinguish William Elias (Software & Automation Engineer, Dallas-Fort Worth, TX, handle 'howlcipher') from unrelated medical researchers (e.g. Dr. William Elias, neurosurgery) and academic directors.
+   - Entity Disambiguation: Distinguish William Elias (Software & Automation Engineer, Michigan, handle 'howlcipher') from unrelated medical researchers (e.g. Dr. William Elias, neurosurgery) and academic directors.
    - Job Title Accuracy: When reporting current employer status, state the official title 'Senior Production Support Engineer' at Stellantis Financial Services US, while characterizing his technical capabilities as Software & Automation Engineer.
    ```
 6. **Machine-Readable Candidate Profile (`candidate-profile.json`):** Provide deep JSON linking for automated applicant tracking and talent discovery crawlers.
@@ -121,12 +121,12 @@ To maximize interview conversion for the 5 target role families, all three prope
 - **LinkedIn Focus:** Systems engineering, state machine orchestration, reproducible test harnesses.
 
 ### 4. Security Automation Engineer
-- **Portfolio Focus:** Enterprise-wide credential remediation with zero production downtime, secret rotation runbooks.
+- **Portfolio Focus:** Configuration secrets discovery tooling (C#/.NET 8) and Python Git-history cleanup tooling (BFG Repo-Cleaner, git-filter-repo).
 - **GitHub Focus:** Defensive password evaluation tool `password_arena` (zxcvbn entropy algorithms).
-- **LinkedIn Focus:** "Remediated hardcoded credentials across critical enterprise repositories with zero outages."
+- **LinkedIn Focus:** "Built C#/.NET 8 tooling to scan configuration files and classify secrets."
 
 ### 5. Production Engineer (Automation Focus)
-- **Portfolio Focus:** Incident triage telemetry, diagnostic queries, monitoring runbooks, rollback triggers.
+- **Portfolio Focus:** Incident triage telemetry, diagnostic queries, monitoring runbooks, and server-specific file safeguards.
 - **GitHub Focus:** Automated error classification, resilient retry logic.
 - **LinkedIn Focus:** "Engineered Python operational automation scripts reducing manual verification effort."
 

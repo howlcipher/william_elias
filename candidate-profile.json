@@ -29,7 +29,7 @@
       "Developer Productivity & CI/CD",
       "Internal Tools & Fullstack Web Development",
       "Production Reliability & Incident Triage",
-      "Defensive Security & Credentials Remediation",
+      "Secrets Discovery & Git-History Tooling",
       "Multi-Agent Automation & Deterministic Verification"
     ],
     "technicalStack": {
@@ -58,10 +58,10 @@
         "Linux"
       ],
       "practices": [
-        "Preflight CI/CD Checks",
-        "Automated Rollback",
-        "Deterministic Testing",
-        "Zero Production Regression"
+        "Preflight Drift Checks",
+        "Standardized Pipeline Templates",
+        "Deterministic Verification",
+        "Server-Specific File Safeguards"
       ]
     },
     "verifiedExperience": [
@@ -150,6 +150,6 @@
         "year": "2014 - 2017"
       }
     ],
-    "verificationStandard": "Backed by inspectable primary evidence and verified production deliverables."
+    "verificationStandard": "Facts are classified under verified primary evidence, qualified limits (e.g. selected production workflows), owner-reported history (e.g. earlier employment figures), or experimental prototypes (e.g. Go container CLI, HowlDream proposal engine). Unverified claims (such as automated rollback or enterprise secret rotation) are excluded."
   }
 }

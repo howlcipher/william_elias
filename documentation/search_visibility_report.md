@@ -14,8 +14,9 @@ This report establishes the baseline visibility, technical search engine optimiz
 ### Key Discoverability Findings:
 1. **Entity Collision with Prominent Namesakes:** Generic branded searches such as `"William Elias software engineer"` or `"William Elias engineer"` are heavily diluted by medical researchers (notably Dr. W. Jeff Elias, neurosurgery pioneer at UVA Health) and national laboratory directors.
 2. **Handle-Bound Search Strength:** Searches coupling William's name with his technical handle (`"William Elias howlcipher"`) or independent project (`"William Elias HowlPlane"`) index with 100% precision directly to his GitHub repositories and Go package documentation (`pkg.go.dev`).
-3. **AI Search Engine Readiness:** By implementing a structured `llms.txt` file and deep `candidate-profile.json`, William's portfolio becomes a premier, direct reference source for generative AI search engines (ChatGPT Search, Perplexity, Microsoft Copilot), providing explicit instructions for entity disambiguation and preventing hallucinated tech stack claims.
+3. **AI Search Engine Readiness:** By implementing an advisory `llms.txt` file and structured `candidate-profile.json`, William's portfolio provides a standardized, machine-readable reference for generative AI search engines (ChatGPT Search, Perplexity, Microsoft Copilot), communicating explicit entity disambiguation directives and verified technical scope boundaries.
 4. **RFC 9309 Crawler Compliance:** GitHub Pages root crawler behavior was formally audited. The root `https://howlcipher.github.io/robots.txt` 404 response is confirmed non-blocking under RFC 9309, while the repository-level `https://howlcipher.github.io/william_elias/robots.txt` returns HTTP 200 with complete crawl permission and sitemap reference.
+5. **Implementation Scope Distinction:** Portfolio code, structured JSON-LD, `candidate-profile.json`, `llms.txt`, SVG diagrams, and automated test suites represent completed, committed repository deliverables. External profile updates (creating the `howlcipher/howlcipher` GitHub profile README, applying LinkedIn profile changes, and verifying Google/Bing Webmaster tools) remain unapplied recommendations awaiting manual owner action.
 
 ---
 
@@ -44,8 +45,8 @@ Recruiters and hiring managers rarely search by candidate name alone; they searc
 | **Developer Productivity Engineer** | `Developer Productivity`, `CI/CD Automation`, `Preflight Validation`, `Drift Detection`, `Azure DevOps` | Preflight checks diagram, CI/CD case study, verification disclosures | `knowsAbout: Developer Productivity, CI/CD, Azure DevOps` |
 | **Software Engineer — Internal Tools** | `Internal Tools`, `ASP.NET Core`, `Razor Pages`, `C#`, `SQL Server`, `Operational Tooling` | Operational portal case study, What I Build card, architecture breakdown | `knowsAbout: Internal Tools, ASP.NET Core, Razor Pages, C#` |
 | **Platform Software Engineer** | `Platform Engineering`, `Developer Tooling`, `Multi-Agent Architecture`, `Evidence Sandbox`, `HowlPlane` | Howl Ecosystem diagram, HowlPlane / HowlProof / HowlFrame cards | `knowsAbout: Systems Architecture, Multi-Agent Platforms` |
-| **Security Automation Engineer** | `Security Automation`, `Credential Remediation`, `Secret Rotation`, `zxcvbn`, `Password Arena` | Credential remediation case study, Password Arena card | `knowsAbout: Security Automation, Credential Remediation` |
-| **Production Engineer (Automation)** | `Production Reliability`, `Incident Triage`, `Telemetry`, `Rollback Safeguard`, `Python Scripting` | Production reliability case study, Python productivity card | `knowsAbout: Production Reliability, Incident Triage, Telemetry` |
+| **Security Automation Engineer** | `Security Automation`, `Secrets Discovery`, `Git-History Tooling`, `zxcvbn`, `Password Arena` | Secrets discovery case study, Password Arena card | `knowsAbout: Security Automation, Secrets Discovery` |
+| **Production Engineer (Automation)** | `Production Reliability`, `Incident Triage`, `Telemetry`, `Server File Safeguards`, `Python Scripting` | Production reliability case study, Python productivity card | `knowsAbout: Production Reliability, Incident Triage, Telemetry` |
 
 ---
 
@@ -58,14 +59,15 @@ Modern LLM web crawlers (such as `GPTBot`, `PerplexityBot`, `Claude-Web`) seek s
 - Direct entity disambiguation directives to distinguish him from medical namesakes.
 - Clarification that his official title is **Senior Production Support Engineer** at Stellantis Financial Services US, while his technical positioning is **Software & Automation Engineer**.
 - Explicit breakdown of verified skills, independent repositories, and target role alignments.
-- Strict factual boundaries preventing hallucinated claims (e.g., forbidding claims of AWS/Kubernetes adoption).
+- Strict factual boundaries preventing unsupported claims (e.g., forbidding claims of AWS/Kubernetes adoption, automated production rollback, or enterprise secret rotation).
+- *Advisory Scope:* While `llms.txt` provides structured grounding, it provides no guarantee that external AI search engines will crawl it, index it, or eliminate hallucinations.
 
 ### 4.2 Machine-Readable Candidate Profile (`candidate-profile.json`)
-Applicant Tracking Systems (ATS) and AI talent platforms increasingly ingest structured JSON profiles. William's portfolio provides a fully validated, machine-readable JSON profile linked via:
+Applicant Tracking Systems (ATS) and AI talent platforms increasingly ingest structured JSON profiles. William's portfolio provides a validated, machine-readable JSON profile linked via:
 ```html
 <link rel="alternate" type="application/json" title="Candidate Profile (JSON)" href="candidate-profile.json">
 ```
-This guarantees zero parsing ambiguity for programmatic ingestion.
+This provides standardized semantic structure for programmatic ingestion (subject to individual ATS parsing capabilities).
 
 ---
 

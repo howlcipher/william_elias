@@ -24,11 +24,11 @@ This guide provides the complete, copy-paste-ready `README.md` for `howlcipher/h
 Apply the following in **GitHub Settings -> Public profile**:
 
 - **Name:** `William Elias`
-- **Bio (135 / 160 characters):**  
-  `Software & Automation Engineer | Senior Production Support Engineer @ Stellantis Financial Services US | Dallas-Fort Worth, TX`
+- **Bio (127 / 160 characters):**  
+  `Software & Automation Engineer | Senior Production Support Engineer @ Stellantis Financial Services US | Michigan (U.S. Remote)`
 - **Pronouns:** `he/him` (Optional)
 - **Company:** `@Stellantis Financial Services US`
-- **Location:** `Dallas-Fort Worth, TX (Open to U.S. Remote)`
+- **Location:** `Michigan (Open to U.S. Remote)`
 - **Website:** `https://howlcipher.github.io/william_elias/`
 - **Social accounts:**
   - LinkedIn: `https://www.linkedin.com/in/wylelias`
@@ -48,17 +48,17 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 
 > **Official Role:** Senior Production Support Engineer at Stellantis Financial Services US  
 > **Positioning:** Software & Automation Engineer  
-> **Location:** Dallas-Fort Worth, TX (Open to U.S. Remote Opportunities)  
-> **Focus:** Developer productivity, internal web platforms, multi-agent architectures, CI/CD pipeline automation, and defensive security.
+> **Location:** Michigan (Open to U.S. Remote Opportunities)  
+> **Focus:** Developer productivity, internal web platforms, multi-agent architectures, CI/CD pipeline automation, and defensive security tooling.
 
 ---
 
 ## Target Role Alignment
 
-1. **Developer Productivity Engineer:** Automated multi-stage Azure DevOps CI/CD pipelines, preflight static analysis gates, deterministic test harnesses, and automated rollback triggers.
+1. **Developer Productivity Engineer:** Automated multi-stage Azure DevOps CI/CD pipelines, preflight drift checks, deterministic test harnesses, and server-specific file safeguards.
 2. **Software Engineer — Internal Tools:** Designed and maintain production internal operational web platform in ASP.NET Core Razor Pages, C#, and SQL Server.
 3. **Platform Software Engineer / Developer Tooling:** Architect of autonomous multi-agent coordination frameworks (HowlPlane), deterministic sandboxing (HowlProof), and custom language toolchains (HowlFrame).
-4. **Security Automation Engineer:** Remediated hardcoded credentials across critical enterprise repositories with zero outages; creator of Password Arena entropy benchmark.
+4. **Security Automation Engineer:** Built C#/.NET 8 tooling to scan configuration files and classify secrets; developed Python tooling supporting Git-history cleanup; creator of Password Arena entropy benchmark.
 5. **Production Engineer (Automation Focus):** Telemetry-driven incident triage automation, diagnostic scripting in Python/PowerShell, and production drift detection.
 
 ---
@@ -81,14 +81,14 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 - **Languages:** Python (Asyncio, pytest), C# (.NET / ASP.NET Core), SQL (T-SQL), Bash, PowerShell, Go, JavaScript, HTML5/CSS3
 - **Frameworks & Web:** ASP.NET Core Razor Pages, FastAPI, Flask, Playwright
 - **Platforms & Systems:** Azure DevOps (Multi-stage YAML pipelines), SQL Server, SQLite, IIS, Linux, Git
-- **Engineering Practices:** Preflight CI/CD Checks, Drift Detection, Automated Rollback, Zero Outage Migrations, Evidence-Based Verification
+- **Engineering Practices:** Preflight Drift Checks, Standardized Pipeline Templates, Deterministic Verification, Server-Specific File Safeguards
 
 ---
 
 ## Targeted Resumes (PDF Downloads)
 
 - **[Primary: Software & Platform Engineering](https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf)** — Developer productivity, internal tools, CI/CD, and platform engineering.
-- **[Secondary: Security Automation](https://howlcipher.github.io/william_elias/William_Elias_Security_Automation_Resume.pdf)** — Credential remediation, secret rotation, and defensive security tooling.
+- **[Secondary: Security Automation](https://howlcipher.github.io/william_elias/William_Elias_Security_Automation_Resume.pdf)** — Secrets discovery, Git-history cleanup, and defensive security tooling.
 - **[Secondary: Production & DevOps Automation](https://howlcipher.github.io/william_elias/William_Elias_Production_DevOps_Resume.pdf)** — Pipeline automation, diagnostic scripting, and production reliability.
 
 ---

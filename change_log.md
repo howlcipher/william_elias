@@ -2,10 +2,20 @@
 
 ## 2026-11-19
 
+### Factual Integrity Hotfix: Post-Merge Calibration
+
+* **Geographic Alignment:** Removed all conflicting references to Dallas–Fort Worth, TX across generator logic (`scripts/build_html.py`), machine-readable profiles (`candidate-profile.json`, `llms.txt`), and documentation (`github_profile_recommendations.md`, `identity_network_audit.md`, `search_visibility_report.md`). Canonical location strictly restored to `Michigan` as defined in `resume.json`.
+* **Education Calibration:** Derived degree records dynamically from canonical source data: corrected in-progress degree to `M.S. Cyber Defense (In Progress, Second Year)` from Dakota State University, and undergraduate degree to `B.B.A. Business Administration` from Rochester College, eliminating conflicting "Computer Science" and "in Management" titles.
+* **Security & Credentials Scope Correction:** Removed unsupported claims of enterprise secret rotation, zero-outage credential remediation, or leading enterprise-wide rotation. Aligned public descriptions strictly with verified work: C#/.NET 8 configuration scanning and Python Git-history cleanup tooling (BFG Repo-Cleaner, git-filter-repo). Updated badge to `Discovery Tooling`.
+* **Deployment & Rollback Claims Calibration:** Eliminated unsupported assertions of automated production rollback and zero-production-regression. Aligned deployment safeguards diagram and metadata strictly with primary evidence: preflight drift checks, standardized pipeline templates, and safeguards for server-specific files. Calibrated Container Deployment CLI prototype badge to `Proof of Concept` (`status-prototype`).
+* **Evidence Qualifications:** Replaced blanket primary verification claims with precise tier qualifications (verified primary evidence, qualified limits such as selected production workflows, owner-reported history, and experimental prototypes).
+* **AI Search Limitations:** Documented the advisory nature of `llms.txt`, noting it conveys no guarantee of indexing priority, ranking, search placement, or automated attribution, and distinguished committed repository work from unapplied external owner actions.
+* **Regression Protection:** Added `tests/test_factual_integrity_hotfix.py` validating location integrity, degree names, absence of unsupported rotation/rollback claims, and preservation of the Chicago Cubs visual identity.
+
 ### Discoverability, AI-Search Optimization & Three-Property Identity Network
 
 * **Architectural & Evidence Enhancements (D1):**
-  - Integrated a responsive, accessible Chicago Cubs themed SVG deployment safeguards diagram into Selected Work (`program-cicd-release`), visualizing preflight static checks, staged pipeline approval gates, and drift detection with automated rollback safeguards.
+  - Integrated a responsive, accessible Chicago Cubs themed SVG deployment safeguards diagram into Selected Work (`program-cicd-release`), visualizing preflight drift checks, standardized pipeline templates, and safeguards for server-specific files.
   - Added Howl Ecosystem architecture diagram illustrating relationships between HowlPlane (multi-agent coordination platform), HowlProof (deterministic evidence sandbox), and HowlFrame (compiler toolchain & VM runtime).
   - Built an Independent Engineering Evidence Index linking repositories, tech stacks, and automated test suite verification evidence.
   - Implemented high-contrast Cubs-themed status badges (`.status-badge`: `.status-prod`, `.status-completed`, `.status-core`, `.status-prototype`) distinguishing production-deployed deliverables from independent prototypes while preserving strict provenance labels.
