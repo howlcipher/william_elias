@@ -12,6 +12,7 @@ ARTIFACTS = (
     "config.js", "index.html", "robots.txt", "sitemap.xml", "preview.jpg",
     "assets/images/linkedin-banner.png",
     "documentation/linkedin_profile.md",
+    "documentation/github_profile_readme.md",
     "William_Elias_Software_Platform_Resume.pdf",
     "William_Elias_Security_Automation_Resume.pdf",
     "William_Elias_Production_DevOps_Resume.pdf",
@@ -22,6 +23,7 @@ ARTIFACTS = (
 GENERATORS = (
     "build_config.py", "build_html.py", "generate_resume_pdf.py",
     "generate_linkedin_banner.py", "generate_linkedin_profile.py",
+    "generate_github_profile_readme.py",
 )
 
 

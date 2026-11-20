@@ -44,7 +44,7 @@ Recruiters and hiring managers rarely search by candidate name alone; they searc
 | :--- | :--- | :--- | :--- |
 | **Developer Productivity Engineer** | `Developer Productivity`, `CI/CD Automation`, `Preflight Validation`, `Drift Detection`, `Azure DevOps` | Preflight checks diagram, CI/CD case study, verification disclosures | `knowsAbout: Developer Productivity, CI/CD, Azure DevOps` |
 | **Software Engineer — Internal Tools** | `Internal Tools`, `ASP.NET Core`, `Razor Pages`, `C#`, `SQL Server`, `Operational Tooling` | Operational portal case study, What I Build card, architecture breakdown | `knowsAbout: Internal Tools, ASP.NET Core, Razor Pages, C#` |
-| **Platform Software Engineer** | `Platform Engineering`, `Developer Tooling`, `Multi-Agent Architecture`, `Evidence Sandbox`, `HowlPlane` | Howl Ecosystem diagram, HowlPlane / HowlProof / HowlFrame cards | `knowsAbout: Systems Architecture, Multi-Agent Platforms` |
+| **Platform Software Engineer** | `Platform Engineering`, `Developer Tooling`, `AI Engineering Control Plane`, `Software Verification`, `HowlPlane` | Howl Ecosystem diagram, HowlPlane / HowlProof / HowlFrame cards | `knowsAbout: Systems Architecture, Multi-Agent Platforms` |
 | **Security Automation Engineer** | `Security Automation`, `Secrets Discovery`, `Git-History Tooling`, `zxcvbn`, `Password Arena` | Secrets discovery case study, Password Arena card | `knowsAbout: Security Automation, Secrets Discovery` |
 | **Production Engineer (Automation)** | `Production Reliability`, `Incident Triage`, `Telemetry`, `Server File Safeguards`, `Python Scripting` | Production reliability case study, Python productivity card | `knowsAbout: Production Reliability, Incident Triage, Telemetry` |
 

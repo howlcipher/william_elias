@@ -136,3 +136,39 @@ def test_cubs_color_tokens_and_appearance_modes_preserved():
     # Colorblind themes
     assert '[data-theme="colorblind"]' in css
     assert '[data-theme="colorblind"].dark-mode-colorblind' in css
+
+
+def test_unsupported_autonomy_and_sandbox_claims_absent(index_html, candidate_json, llms_txt):
+    prohibited = (
+        "architect of autonomous",
+        "autonomous multi-agent coordination frameworks",
+        "deterministic evidence sandbox",
+    )
+    for text_source, name in [
+        (index_html, "index.html"),
+        (json.dumps(candidate_json), "candidate-profile.json"),
+        (llms_txt, "llms.txt"),
+    ]:
+        lower_text = text_source.lower()
+        for term in prohibited:
+            assert term not in lower_text, f"Found uncalibrated claim '{term}' in {name}"
+
+    # HowlProof badge must be Software Verification, not Evidence Sandbox
+    assert "Evidence Sandbox" not in index_html
+    assert "Software Verification" in index_html
+
+
+def test_deployment_diagram_is_conceptual_and_non_sequential(index_html):
+    assert "Conceptual architecture diagram of deployment safeguard layers" in index_html
+    assert "Figure 1: Conceptual architecture of deployment safeguard layers" in index_html
+
+    # Ensure no sequential directional arrow markers asserting an automated execution pipeline
+    assert 'marker-end="url(#arrow)"' not in index_html
+
+    # Ensure stages are named as architectural layers rather than execution sequence numbers
+    assert "1. Preflight Drift Checks" not in index_html
+    assert "2. Standardized Templates" not in index_html
+    assert "3. Artifacts & Safeguards" not in index_html
+    assert ">Preflight Drift Checks<" in index_html
+    assert ">Standardized Templates<" in index_html
+    assert ">Artifacts &amp; Safeguards<" in index_html

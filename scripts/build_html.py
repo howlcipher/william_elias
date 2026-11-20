@@ -198,7 +198,7 @@ PROGRAM_BADGES = {
 
 PROJECT_BADGES = {
     'project-howlplane': ('status-core', 'Flagship Platform'),
-    'project-howlproof': ('status-core', 'Evidence Sandbox'),
+    'project-howlproof': ('status-core', 'Software Verification'),
     'project-howlframe': ('status-core', 'Language & Runtime'),
     'project-password-arena': ('status-completed', 'Security Tool'),
     'project-howldream': ('status-prototype', 'Exploratory Tool'),
@@ -213,34 +213,29 @@ def render_deployment_safeguards_diagram():
     return (
         '<div class="architecture-diagram-container">'
         '<svg class="architecture-svg" viewBox="0 0 720 120" role="img" '
-        'aria-label="Deployment safeguards flowchart: Preflight drift checks, standardized Azure DevOps pipeline templates, and safeguards for server-specific files" '
+        'aria-label="Conceptual architecture diagram of deployment safeguard layers: Preflight drift checks, standardized Azure DevOps pipeline templates, and safeguards for server-specific files" '
         'xmlns="http://www.w3.org/2000/svg">'
-        '<defs>'
-        '<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
-        '<path d="M 0 1 L 8 5 L 0 9 z" fill="var(--blue)"/>'
-        '</marker>'
-        '</defs>'
-        '<!-- Stage 1 -->'
+        '<!-- Layer 1: Preflight Drift Checks -->'
         '<rect x="8" y="15" width="210" height="90" rx="6" fill="var(--panel-solid)" stroke="var(--line)" stroke-width="1.5"/>'
-        '<text x="22" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">1. Preflight Drift Checks</text>'
+        '<text x="22" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">Preflight Drift Checks</text>'
         '<text x="22" y="66" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">Source &amp; Configuration Drift</text>'
         '<text x="22" y="86" fill="var(--blue)" font-family="IBM Plex Mono, monospace" font-size="10">Pre-Deployment Verification</text>'
-        '<!-- Arrow 1-2 -->'
-        '<line x1="222" y1="60" x2="250" y2="60" stroke="var(--blue)" stroke-width="2" marker-end="url(#arrow)"/>'
-        '<!-- Stage 2 -->'
+        '<!-- Layer Connector -->'
+        '<line x1="222" y1="60" x2="250" y2="60" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 3"/>'
+        '<!-- Layer 2: Standardized Templates -->'
         '<rect x="254" y="15" width="212" height="90" rx="6" fill="var(--panel-solid)" stroke="var(--blue)" stroke-width="1.5"/>'
-        '<text x="268" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">2. Standardized Templates</text>'
+        '<text x="268" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">Standardized Templates</text>'
         '<text x="268" y="66" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">Azure DevOps YAML Pipelines</text>'
         '<text x="268" y="86" fill="var(--blue)" font-family="IBM Plex Mono, monospace" font-size="10">Staged Release for Repo Subset</text>'
-        '<!-- Arrow 2-3 -->'
-        '<line x1="470" y1="60" x2="498" y2="60" stroke="var(--blue)" stroke-width="2" marker-end="url(#arrow)"/>'
-        '<!-- Stage 3 -->'
+        '<!-- Layer Connector -->'
+        '<line x1="470" y1="60" x2="498" y2="60" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 3"/>'
+        '<!-- Layer 3: Target Safeguards -->'
         '<rect x="502" y="15" width="210" height="90" rx="6" fill="var(--panel-solid)" stroke="var(--line-prominent)" stroke-width="1.5"/>'
-        '<text x="516" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">3. Artifacts &amp; Safeguards</text>'
+        '<text x="516" y="42" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600">Artifacts &amp; Safeguards</text>'
         '<text x="516" y="66" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">Release Artifacts Verification</text>'
         '<text x="516" y="86" fill="var(--blue)" font-family="IBM Plex Mono, monospace" font-size="10">Server-Specific File Protections</text>'
         '</svg>'
-        '<p class="diagram-caption">Figure 1: Preflight drift checks, standardized pipeline templates, and safeguards for server-specific files.</p>'
+        '<p class="diagram-caption">Figure 1: Conceptual architecture of deployment safeguard layers: preflight drift checks, standardized pipeline templates, and server-specific file protections.</p>'
         '</div>'
     )
 
@@ -417,18 +412,18 @@ def render_howl_ecosystem_diagram():
         '<!-- Top Box: HowlPlane -->'
         '<rect x="230" y="10" width="280" height="60" rx="6" fill="var(--panel-solid)" stroke="var(--blue)" stroke-width="2"/>'
         '<text x="370" y="34" text-anchor="middle" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="600">HowlPlane</text>'
-        '<text x="370" y="54" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">Multi-Agent Coordination Architecture</text>'
+        '<text x="370" y="54" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">AI Engineering Control Plane</text>'
         '<!-- Connecting paths -->'
         '<path d="M 310 70 L 310 90 L 170 90 L 170 108" fill="none" stroke="var(--blue)" stroke-width="1.75" marker-end="url(#arrow-blue)"/>'
         '<path d="M 430 70 L 430 90 L 570 90 L 570 108" fill="none" stroke="var(--blue)" stroke-width="1.75" marker-end="url(#arrow-blue)"/>'
         '<!-- Bottom Left: HowlProof -->'
         '<rect x="20" y="110" width="300" height="52" rx="6" fill="var(--panel-solid)" stroke="var(--line)" stroke-width="1.5"/>'
         '<text x="170" y="132" text-anchor="middle" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600">HowlProof</text>'
-        '<text x="170" y="149" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="10.5">Deterministic Evidence Sandbox</text>'
+        '<text x="170" y="149" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="10.5">Independent Software Verification</text>'
         '<!-- Bottom Right: HowlFrame -->'
         '<rect x="420" y="110" width="300" height="52" rx="6" fill="var(--panel-solid)" stroke="var(--line)" stroke-width="1.5"/>'
         '<text x="570" y="132" text-anchor="middle" fill="var(--ink)" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600">HowlFrame</text>'
-        '<text x="570" y="149" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="10.5">Transpiled Language, HFIR &amp; VM Runtime</text>'
+        '<text x="570" y="149" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="10.5">Experimental Language &amp; VM Runtime</text>'
         '</svg>'
         '<p class="diagram-caption">Figure 2: Component relationships across the Howl multi-agent architecture and verification toolchain.</p>'
         '</div>'
@@ -437,8 +432,8 @@ def render_howl_ecosystem_diagram():
 
 def render_evidence_index():
     rows = [
-        ('howlplane', '#project-howlplane', 'Multi-Agent Platform', 'Python, Asyncio, JSONL', 'Automated lifecycle &amp; task verification suites'),
-        ('howlproof', '#project-howlproof', 'Evidence Sandbox', 'Python, Sandbox Isolation', 'Deterministic test harness &amp; evidence auditor'),
+        ('howlplane', '#project-howlplane', 'AI Control Plane', 'Python, Go, JSONL', 'Automated lifecycle &amp; task verification suites'),
+        ('howlproof', '#project-howlproof', 'Software Verification', 'Python, Subprocess', 'Adversarial test fixtures &amp; evidence bundles'),
         ('howlframe', '#project-howlframe', 'Language &amp; Runtime', 'Go, Python, HFIR, VM', 'Compiler tests, bytecode verification, VM execution'),
         ('password_arena', '#project-password-arena', 'Defensive Security Tool', 'Python, zxcvbn, Cryptography', 'Entropy test fixtures &amp; cracking resistance models'),
         ('howldream', '#project-howldream', 'Exploratory Architecture', 'Python, AST Analysis', 'Static analysis verification &amp; bounded proposals'),
@@ -663,7 +658,7 @@ def build_llms_txt(data, variants_data, canonical_url):
         "## Target Role Alignments",
         "1. Developer Productivity Engineer: Built preflight drift checks, reusable Azure DevOps pipeline templates, and artifact verification tooling.",
         "2. Software Engineer — Internal Tools: Developed and maintain shared internal operations portal in ASP.NET Core Razor Pages (.NET 10).",
-        "3. Platform Software Engineer / Developer Tooling: Architect of autonomous multi-agent coordination frameworks (HowlPlane), deterministic sandboxing (HowlProof), and language runtimes (HowlFrame).",
+        "3. Platform Software Engineer / Developer Tooling: Developer of AI engineering control planes with policy-based governance (HowlPlane), adversarial verification tooling (HowlProof), and experimental compiler toolchains (HowlFrame).",
         "4. Security Automation Engineer: Built C#/.NET 8 tooling to scan configuration files and classify secrets; developed Python tooling supporting Git-history cleanup with BFG Repo-Cleaner and git-filter-repo.",
         "5. Production Engineer (Automation Focus): Telemetry-driven incident diagnosis, KQL queries, operational scripting in Python, and server file safeguards.",
         "",
@@ -673,11 +668,11 @@ def build_llms_txt(data, variants_data, canonical_url):
         "- Systems & Data: Azure DevOps, SQL Server, SQLite, IIS, Linux",
         "",
         "## Independent Open Source Engineering",
-        "- HowlPlane (https://github.com/howlcipher/howlplane): Autonomous multi-agent coordination architecture with shared message boards and verifiable task lifecycles.",
-        "- HowlProof (https://github.com/howlcipher/howlproof): Deterministic evidence-verification sandbox for test harness execution.",
-        "- HowlFrame (https://github.com/howlcipher/howlframe): Target-agnostic programming language compiler, HFIR intermediate representation, and runtime VM.",
+        "- HowlPlane (https://github.com/howlcipher/howlplane): AI engineering control plane for coordinating agent tasks, adversarial reviews, and repeatable verification with human-controlled authority boundaries.",
+        "- HowlProof (https://github.com/howlcipher/howlproof): Adversarial software verification toolkit for evaluating trusted local artifacts and bundling inspectable evidence.",
+        "- HowlFrame (https://github.com/howlcipher/howlframe): Experimental language and toolchain in Go with typed intermediate representations, bytecode, and capability-bounded execution.",
         "- Password Arena (https://github.com/howlcipher/password_arena): Defensive password security benchmark and entropy analysis tool.",
-        "- HowlDream (https://github.com/howlcipher/howldream): Exploratory codebase proposal and AST analysis engine.",
+        "- HowlDream (https://github.com/howlcipher/howldream): Experimental evaluation laboratory for divergent AI proposals, failure analysis, and inspectable trial records.",
         "",
         "## Education & Accreditations",
         *education_lines,
