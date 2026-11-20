@@ -10,6 +10,7 @@ import pytest
 from scripts.maintain import (
     validate_canonical_rules,
     validate_structured_data,
+    verify_pdf_alias_equivalence,
     ROOT,
 )
 
@@ -52,9 +53,29 @@ def test_validate_canonical_rules_catches_forbidden_phrases(canonical):
     assert any("secret rotation" in err for err in errors)
 
 
+def test_validate_canonical_rules_catches_missing_bs_information_technology(canonical):
+    bad = copy.deepcopy(canonical)
+    bad["education"] = [e for e in bad["education"] if e.get("degree") != "B.S. Information Technology"]
+    errors = validate_canonical_rules(bad)
+    assert any("B.S. Information Technology" in err for err in errors)
+
+
 def test_validate_structured_data_passes_on_current_workspace():
     errors = validate_structured_data(ROOT)
     assert errors == [], f"Structured data validation failed: {errors}"
+
+
+def test_validate_structured_data_catches_unsubstantiated_recognized_by(tmp_path):
+    (tmp_path / "index.html").write_text(
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage",'
+        '"mainEntity":{"@type":"Person","name":"William Elias","jobTitle":"Senior Production Support Engineer",'
+        '"alumniOf":[{"@type":"CollegeOrUniversity","name":"Rochester College"}],'
+        '"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"CCNA (Previously Held)",'
+        '"recognizedBy":{"@type":"Organization","name":"Cisco Networking Academy"}}]}}</script>',
+        encoding="utf-8",
+    )
+    errors = validate_structured_data(tmp_path)
+    assert any("must not include unsubstantiated recognizedBy" in err for err in errors)
 
 
 def test_validate_structured_data_catches_schema_in_candidate_profile(tmp_path):
@@ -73,6 +94,18 @@ def test_validate_structured_data_catches_schema_in_candidate_profile(tmp_path):
     assert any("must not declare a draft '$schema'" in err for err in errors)
 
 
+def test_verify_pdf_alias_equivalence_passes_on_current_workspace():
+    errors = verify_pdf_alias_equivalence(ROOT)
+    assert errors == [], f"PDF alias equivalence failed: {errors}"
+
+
+def test_verify_pdf_alias_equivalence_catches_mismatch(tmp_path):
+    (tmp_path / "William_Elias_Resume.pdf").write_bytes(b"content_a")
+    (tmp_path / "William_Elias_Production_DevOps_Resume.pdf").write_bytes(b"content_b")
+    errors = verify_pdf_alias_equivalence(tmp_path)
+    assert any("differs" in err for err in errors)
+
+
 def test_maintain_cli_check_flag():
     proc = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "maintain.py"), "--check", "--skip-banner"],
@@ -81,3 +114,6 @@ def test_maintain_cli_check_flag():
         check=True,
     )
     assert "All checks passed successfully." in proc.stdout
+    assert "Freshness Checked (Isolated Build):" in proc.stdout
+    assert "Local Repository Git State:" in proc.stdout
+    assert "Sibling Profile Repository (howlcipher/howlcipher):" in proc.stdout

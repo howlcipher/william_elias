@@ -1,8 +1,8 @@
 # William Elias — LinkedIn Owner Application Checklist
 
 **Profile:** [https://www.linkedin.com/in/wylelias](https://www.linkedin.com/in/wylelias)  
-**Canonical Content Reference:** [documentation/linkedin_profile.md](file:///run/media/system/tallgeese/dev/william_elias/documentation/linkedin_profile.md)  
-**Generated Banner Asset:** [assets/images/linkedin-banner.png](file:///run/media/system/tallgeese/dev/william_elias/assets/images/linkedin-banner.png)
+**Canonical Content Reference:** [linkedin_profile.md](linkedin_profile.md)  
+**Generated Banner Asset:** [assets/images/linkedin-banner.png](../assets/images/linkedin-banner.png)
 
 This checklist provides William Elias with exact, step-by-step instructions to harmonize his LinkedIn profile with his canonical career records and portfolio. To maintain security and comply with LinkedIn's terms of service, no automated profile modification or scraping is permitted; each change is applied directly by the owner.
 
@@ -18,9 +18,9 @@ This checklist provides William Elias with exact, step-by-step instructions to h
 ## Step-by-Step Owner Checklist
 
 ### 1. Profile Background Banner `[Needs Owner Action]`
-- **Asset path:** `assets/images/linkedin-banner.png` (Dimensions: 1584×396 px).
+- **Asset link:** [assets/images/linkedin-banner.png](../assets/images/linkedin-banner.png) (Local workspace path: `assets/images/linkedin-banner.png`, Dimensions: 1584×396 px).
 - **Design:** Chicago Cubs-inspired navy panel with crisp geometric accents, positioning statement, and verified focus areas.
-- **Action:** Go to LinkedIn profile > click camera icon on profile header > upload `assets/images/linkedin-banner.png` > Save.
+- **Action:** Go to LinkedIn profile > click camera icon on profile header > upload banner asset from local workspace path `assets/images/linkedin-banner.png` > Save.
 
 ### 2. Professional Headline `[Needs Owner Action]`
 - **Field:** Headline (under profile name)
@@ -105,7 +105,8 @@ This checklist provides William Elias with exact, step-by-step instructions to h
   18. `Software Engineering`
 
 ### 8. Recruiter "Open to Work" Configuration `[Cannot Verify]`
-- **Visibility:** Set to **Recruiters only** (ensures current employer/coworkers do not see a public green banner).
+- **Visibility:** Set to **Recruiters only** (optional setting to signal openness to technical recruiters while omitting the public `#OpenToWork` badge on your profile photo).  
+  *Privacy Note:* LinkedIn applies algorithmic filters to avoid alerting recruiters at your current employer and affiliated companies. However, LinkedIn explicitly states in its terms and help documentation that it cannot guarantee complete confidentiality (e.g., recruiters using multiple or unaffiliated accounts, third-party recruiter tools, or parent/subsidiary corporate networks). Treat this setting as an option to limit public exposure, not as an absolute guarantee of privacy.
 - **Target Job Titles:**
   - `Developer Productivity Engineer`
   - `Software Engineer`
@@ -119,7 +120,7 @@ This checklist provides William Elias with exact, step-by-step instructions to h
 
 ### 9. Education & Degree Verification `[Needs Owner Action]`
 Ensure degree and certification names match canonical records:
-- **Dakota State University:** M.S. Cyber Defense (In Progress)
-- **Colorado State University Global Campus:** B.S. Management Information Systems and Business Analytics (Prior Degree Record)
+- **Dakota State University:** M.S. Cyber Defense (In Progress, Second Year)
+- **Colorado State University Global Campus:** B.S. Information Technology
 - **Rochester College:** B.B.A. Business Administration
-- **Cisco Networking Academy:** CCNA (Previously Held) — Listed under **Licenses & Certifications**, NOT under formal college degrees.
+- **Cisco Networking Academy:** CCNA (Previously Held) — Listed under **Licenses & Certifications** (coursework provider), NOT under formal college degrees.

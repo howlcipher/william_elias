@@ -50,6 +50,7 @@ def test_geographic_location_is_strictly_canonical(canonical, candidate_json, ll
 def test_degree_names_match_canonical_records(canonical, candidate_json, llms_txt):
     degrees = [edu["degree"] for edu in canonical["education"]]
     assert "M.S. Cyber Defense (In Progress, Second Year)" in degrees
+    assert "B.S. Information Technology" in degrees
     assert "B.B.A. Business Administration" in degrees
 
     assert "M.S. Cyber Defense" in llms_txt
@@ -57,8 +58,13 @@ def test_degree_names_match_canonical_records(canonical, candidate_json, llms_tx
     assert "Computer Science" not in llms_txt
     assert "B.B.A. in Management" not in llms_txt
 
+    checklist_text = (ROOT / "documentation/linkedin_owner_checklist.md").read_text(encoding="utf-8")
+    assert "- **Colorado State University Global Campus:** B.S. Information Technology" in checklist_text
+    assert "Management Information Systems" not in checklist_text
+
     candidate_degrees = [e["degree"] for e in candidate_json["candidate"]["education"]]
     assert "M.S. Cyber Defense (In Progress, Second Year)" in candidate_degrees
+    assert "B.S. Information Technology" in candidate_degrees
     assert "B.B.A. Business Administration" in candidate_degrees
     assert not any("Computer Science" in d for d in candidate_degrees)
     assert not any("in Management" in d for d in candidate_degrees)
@@ -230,12 +236,12 @@ def test_json_ld_alumni_of_and_credentials_semantics(index_html):
     assert "Rochester College" in alumni_names
     assert "Cisco Networking Academy" not in alumni_names
 
-    # hasCredential should contain CCNA
+    # hasCredential should contain CCNA without unsubstantiated recognizedBy organization
     credentials = person.get("hasCredential", [])
     assert len(credentials) == 1
     assert credentials[0]["@type"] == "EducationalOccupationalCredential"
     assert credentials[0]["name"] == "CCNA (Previously Held)"
-    assert credentials[0]["recognizedBy"]["name"] == "Cisco Networking Academy"
+    assert "recognizedBy" not in credentials[0], "Course provider must not be classified as recognizing authority"
 
 
 def test_candidate_profile_schema_field_absent(candidate_json):
