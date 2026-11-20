@@ -14,7 +14,7 @@
 ## Target Role Alignments
 1. Developer Productivity Engineer: Built preflight drift checks, reusable Azure DevOps pipeline templates, and artifact verification tooling.
 2. Software Engineer — Internal Tools: Developed and maintain shared internal operations portal in ASP.NET Core Razor Pages (.NET 10).
-3. Platform Software Engineer / Developer Tooling: Architect of autonomous multi-agent coordination frameworks (HowlPlane), deterministic sandboxing (HowlProof), and language runtimes (HowlFrame).
+3. Platform Software Engineer / Developer Tooling: Developer of AI engineering control planes with policy-based governance (HowlPlane), adversarial verification tooling (HowlProof), and experimental compiler toolchains (HowlFrame).
 4. Security Automation Engineer: Built C#/.NET 8 tooling to scan configuration files and classify secrets; developed Python tooling supporting Git-history cleanup with BFG Repo-Cleaner and git-filter-repo.
 5. Production Engineer (Automation Focus): Telemetry-driven incident diagnosis, KQL queries, operational scripting in Python, and server file safeguards.
 
@@ -24,11 +24,11 @@
 - Systems & Data: Azure DevOps, SQL Server, SQLite, IIS, Linux
 
 ## Independent Open Source Engineering
-- HowlPlane (https://github.com/howlcipher/howlplane): Autonomous multi-agent coordination architecture with shared message boards and verifiable task lifecycles.
-- HowlProof (https://github.com/howlcipher/howlproof): Deterministic evidence-verification sandbox for test harness execution.
-- HowlFrame (https://github.com/howlcipher/howlframe): Target-agnostic programming language compiler, HFIR intermediate representation, and runtime VM.
+- HowlPlane (https://github.com/howlcipher/howlplane): AI engineering control plane for coordinating agent tasks, adversarial reviews, and repeatable verification with human-controlled authority boundaries.
+- HowlProof (https://github.com/howlcipher/howlproof): Adversarial software verification toolkit for evaluating trusted local artifacts and bundling inspectable evidence.
+- HowlFrame (https://github.com/howlcipher/howlframe): Experimental language and toolchain in Go with typed intermediate representations, bytecode, and capability-bounded execution.
 - Password Arena (https://github.com/howlcipher/password_arena): Defensive password security benchmark and entropy analysis tool.
-- HowlDream (https://github.com/howlcipher/howldream): Exploratory codebase proposal and AST analysis engine.
+- HowlDream (https://github.com/howlcipher/howldream): Experimental evaluation laboratory for divergent AI proposals, failure analysis, and inspectable trial records.
 
 ## Education & Accreditations
 - M.S. Cyber Defense (In Progress, Second Year) — Dakota State University (Expected Winter 2027)

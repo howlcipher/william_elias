@@ -57,7 +57,7 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 
 1. **Developer Productivity Engineer:** Automated multi-stage Azure DevOps CI/CD pipelines, preflight drift checks, deterministic test harnesses, and server-specific file safeguards.
 2. **Software Engineer — Internal Tools:** Designed and maintain production internal operational web platform in ASP.NET Core Razor Pages, C#, and SQL Server.
-3. **Platform Software Engineer / Developer Tooling:** Architect of autonomous multi-agent coordination frameworks (HowlPlane), deterministic sandboxing (HowlProof), and custom language toolchains (HowlFrame).
+3. **Platform Software Engineer / Developer Tooling:** Developer of AI engineering control planes with policy-based governance (HowlPlane), adversarial verification tooling (HowlProof), and experimental compiler toolchains (HowlFrame).
 4. **Security Automation Engineer:** Built C#/.NET 8 tooling to scan configuration files and classify secrets; developed Python tooling supporting Git-history cleanup; creator of Password Arena entropy benchmark.
 5. **Production Engineer (Automation Focus):** Telemetry-driven incident triage automation, diagnostic scripting in Python/PowerShell, and production drift detection.
 
@@ -67,12 +67,12 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 
 | Repository | Focus | Tech Stack | Highlights |
 | :--- | :--- | :--- | :--- |
-| **[howlplane](https://github.com/howlcipher/howlplane)** | Multi-Agent Coordination Platform | Python, Asyncio, JSONL | Autonomous coordination, shared message boards, deterministic task lifecycles |
-| **[howlproof](https://github.com/howlcipher/howlproof)** | Deterministic Evidence Sandbox | Python, Subprocess, Sandbox | Isolated test harness runner with verifiable evidence gate enforcement |
-| **[howlframe](https://github.com/howlcipher/howlframe)** | Language & Compiler Runtime | Go, Python, HFIR, VM | Custom language pipeline with AST parser, intermediate representation, and VM |
+| **[howlplane](https://github.com/howlcipher/howlplane)** | AI Engineering Control Plane | Python, Go, JSONL | Agent task routing, shared message boards, repeatable verification, human-controlled boundaries |
+| **[howlproof](https://github.com/howlcipher/howlproof)** | Independent Software Verification | Python, Subprocess | Adversarial evaluation of artifacts, test harness verification, inspectable evidence bundles |
+| **[howlframe](https://github.com/howlcipher/howlframe)** | Language & Compiler Runtime | Go, Python, HFIR, VM | Custom language pipeline with AST parser, intermediate representation, and capability boundaries |
 | **[william_elias](https://github.com/howlcipher/william_elias)** | Portfolio & Resume Pipeline | Python, Playwright, HTML/CSS | Fully automated portfolio build, 3 targeted PDF resumes, 400+ automated tests |
 | **[password_arena](https://github.com/howlcipher/password_arena)** | Defensive Security Arena | Python, zxcvbn, Cryptography | Password entropy evaluation, attack complexity modeling, and crack simulation |
-| **[howldream](https://github.com/howlcipher/howldream)** | Codebase Proposal Engine | Python, AST Analysis | Bounded architectural proposal engine with strict read-only AST safety guards |
+| **[howldream](https://github.com/howlcipher/howldream)** | Experimental Evaluation Lab | Python, AST Analysis | Divergent proposal evaluation, failure-mode discovery, and inspectable trial records |
 
 ---
 
@@ -105,12 +105,12 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 
 Pin the following 6 repositories on the GitHub profile:
 
-1. **`howlcipher/howlplane`** — Core flagship multi-agent architecture.
-2. **`howlcipher/howlproof`** — Deterministic evidence-verification sandbox.
-3. **`howlcipher/howlframe`** — Compiled language, HFIR intermediate representation, and VM runtime.
-4. **`howlcipher/william_elias`** — Career portfolio, build pipeline, and 415+ automated test suite.
-5. **`howlcipher/password_arena`** — Defensive security benchmark and entropy analysis tool.
-6. **`howlcipher/howldream`** — Exploratory codebase proposal and AST analysis engine.
+1. **`howlcipher/howlplane`** — AI engineering control plane for coordinating agent tasks with human-controlled authority boundaries.
+2. **`howlcipher/howlproof`** — Independent red-team QA, falsification, and evidence verification toolkit.
+3. **`howlcipher/howlframe`** — Experimental language and toolchain in Go, typed intermediate representation (HFIR), and bytecode VM.
+4. **`howlcipher/william_elias`** — Career engineering portfolio, automated build system, targeted resume PDFs, and 400+ automated tests.
+5. **`howlcipher/password_arena`** — Defensive security benchmark and entropy analysis tool exploring learning agents.
+6. **`howlcipher/howldream`** — Experimental evaluation laboratory for divergent AI proposals and failure analysis.
 
 ---
 
@@ -119,34 +119,34 @@ Pin the following 6 repositories on the GitHub profile:
 Configure each repository's metadata using the GitHub UI (Click the cog next to "About"):
 
 ### 1. `howlcipher/howlplane`
-- **Description:** `Autonomous multi-agent coordination platform with shared message boards and verifiable task lifecycles.`
-- **Website:** `https://howlcipher.github.io/william_elias/#project-howlplane`
-- **Topics:** `multi-agent`, `python`, `asyncio`, `developer-tooling`, `agentic-ai`, `workflow-orchestration`, `systems-architecture`
+- **Description:** `Autonomous AI engineering control plane: orchestration, persistent coding agents, adversarial falsification, and governance.`
+- **Website:** `https://howlcipher.github.io/howlplane/`
+- **Topics:** `ai-engineering`, `ai-agents`, `coding-agents`, `control-plane`, `devops`, `orchestration`, `platform-engineering`, `verification`, `python`, `go`
 
 ### 2. `howlcipher/howlproof`
-- **Description:** `Deterministic evidence-verification sandbox for automated test harness execution and publication safety.`
-- **Website:** `https://howlcipher.github.io/william_elias/#project-howlproof`
-- **Topics:** `testing`, `verification`, `developer-productivity`, `python`, `sandboxing`, `qa-automation`, `security-guardrails`
+- **Description:** `Independent red-team QA, falsification and evidence for the Howl ecosystem. Try to prove the build wrong before reality does.`
+- **Website:** `https://howlcipher.github.io/howlproof/`
+- **Topics:** `testing`, `verification`, `developer-productivity`, `python`, `qa`, `red-team`, `security`, `evidence`
 
 ### 3. `howlcipher/howlframe`
-- **Description:** `Target-agnostic programming language compiler, HFIR intermediate representation, and bytecode VM runtime.`
-- **Website:** `https://howlcipher.github.io/william_elias/#project-howlframe`
-- **Topics:** `compiler`, `virtual-machine`, `programming-language`, `go`, `python`, `intermediate-representation`, `bytecode`
+- **Description:** `HowlFrame is a verified execution platform for AI-native and adaptive software, combining deterministic authority boundaries with bounded probabilistic reasoning.`
+- **Website:** `https://howlcipher.github.io/howlframe/`
+- **Topics:** `compiler`, `virtual-machine`, `programming-language`, `go`, `bytecode`, `capability-security`, `webassembly`
 
 ### 4. `howlcipher/william_elias`
-- **Description:** `Career engineering portfolio, automated build system, targeted resume PDFs, and Playwright verification test suite.`
+- **Description:** `Software & Automation Engineer portfolio — developer tooling, platform engineering, CI/CD, production engineering, Python, Go, C#/.NET, and security automation.`
 - **Website:** `https://howlcipher.github.io/william_elias/`
-- **Topics:** `portfolio`, `ci-cd`, `playwright`, `pytest`, `python`, `developer-portfolio`, `json-ld`, `accessibility`
+- **Topics:** `portfolio`, `ci-cd`, `playwright`, `pytest`, `python`, `developer-portfolio`, `developer-productivity`, `platform-engineering`
 
 ### 5. `howlcipher/password_arena`
-- **Description:** `Defensive password security evaluation arena and entropy analysis benchmark using zxcvbn.`
-- **Website:** `https://howlcipher.github.io/william_elias/#project-password-arena`
-- **Topics:** `security`, `cryptography`, `python`, `password-security`, `zxcvbn`, `security-tooling`, `defensive-security`
+- **Description:** `Defensive password security evaluation and entropy benchmark exploring learning agents and structural penalties.`
+- **Website:** `https://howlcipher.github.io/password_arena/`
+- **Topics:** `security`, `cryptography`, `python`, `password-security`, `benchmarking`, `adversarial-testing`, `ai-safety`
 
 ### 6. `howlcipher/howldream`
-- **Description:** `Exploratory codebase proposal and AST static analysis engine with strict read-only execution safety.`
-- **Website:** `https://howlcipher.github.io/william_elias/#project-howldream`
-- **Topics:** `static-analysis`, `ast`, `code-analysis`, `python`, `developer-productivity`, `software-engineering`
+- **Description:** `Controlled divergent generation, hallucination experiments, failure analysis, verification, and novel-idea discovery.`
+- **Website:** `https://howlcipher.github.io/howldream/`
+- **Topics:** `ai`, `ai-reliability`, `experimentation`, `hallucination`, `verification`, `developer-productivity`
 
 ---
 

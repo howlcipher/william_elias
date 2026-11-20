@@ -102,8 +102,8 @@ Use public examples or synthetic data for these posts.
 5. **Featured Section:**
    - Link 1: Personal Portfolio (`https://howlcipher.github.io/william_elias/`) with title: "Software & Automation Engineer Portfolio"
    - Link 2: Primary Resume PDF (`https://howlcipher.github.io/william_elias/William_Elias_Software_Platform_Resume.pdf`) with title: "Software Engineering & Developer Tools Resume (PDF)"
-   - Link 3: GitHub HowlPlane (`https://github.com/howlcipher/howlplane`) with title: "HowlPlane — Multi-Agent Coordination Architecture"
-   - Link 4: GitHub HowlProof (`https://github.com/howlcipher/howlproof`) with title: "HowlProof — Deterministic Evidence Sandbox"
+   - Link 3: GitHub HowlPlane (`https://github.com/howlcipher/howlplane`) with title: "HowlPlane — AI Engineering Control Plane"
+   - Link 4: GitHub HowlProof (`https://github.com/howlcipher/howlproof`) with title: "HowlProof — Independent Software Verification"
 6. **Skills & Top 3 Pinning:**
    - Top 3 Pinned Skills:
      1. Developer Tooling

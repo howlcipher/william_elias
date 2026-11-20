@@ -2,6 +2,18 @@
 
 ## 2026-11-19
 
+### Final Identity Network Rollout & Release (F0-F7)
+
+* **GitHub Special Profile Repository:** Created, verified, and published `https://github.com/howlcipher/howlcipher` with a canonical, evidence-based profile README linking directly to William's portfolio, LinkedIn, and primary software engineering resume.
+* **Deterministic Profile README Generator:** Added `scripts/generate_github_profile_readme.py` and `documentation/github_profile_readme.md`, wired into `tests/test_generated_artifacts.py` to ensure zero drift between `resume.json` and the public GitHub profile.
+* **Technical Language Calibration:** Audited and calibrated descriptions across `llms.txt`, `candidate-profile.json`, `index.html`, and documentation:
+  - Replaced promotional autonomy phrasing with precise engineering descriptors: HowlPlane as AI Engineering Control Plane with human-in-the-loop authority boundaries; HowlProof as Independent Software Verification and adversarial evaluation toolkit; HowlFrame as experimental language and toolchain in Go with capability boundaries.
+  - Updated HowlProof badge from `Evidence Sandbox` to `Software Verification`.
+* **Deployment Safeguards Diagram Calibration:** Labeled SVG diagram as conceptual architecture rather than an automated execution sequence; removed directional execution arrowheads and sequence numbers `1.`, `2.`, `3.` in favor of modular safeguard layer titles and structural connectors.
+* **Repository Metadata & Discovery:** Updated `howlcipher/password_arena` description on GitHub; verified live GitHub Pages deployment and HTTP 200 accessibility for `sitemap.xml`, `candidate-profile.json`, and `llms.txt`.
+* **Search Engine Discovery Baseline:** Conducted live, measured web search audits across branded queries, documenting baseline crawlability and entity recognition without fabricated rankings.
+* **Comprehensive Test Suite Pass:** Verified 356 unit and artifact freshness tests plus 73 Playwright browser tests across all four themes and responsive viewports (429 tests passing).
+
 ### Factual Integrity Hotfix: Post-Merge Calibration
 
 * **Geographic Alignment:** Removed all conflicting references to Dallas–Fort Worth, TX across generator logic (`scripts/build_html.py`), machine-readable profiles (`candidate-profile.json`, `llms.txt`), and documentation (`github_profile_recommendations.md`, `identity_network_audit.md`, `search_visibility_report.md`). Canonical location strictly restored to `Michigan` as defined in `resume.json`.
