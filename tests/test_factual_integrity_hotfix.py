@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+import re
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -211,3 +212,32 @@ def test_github_profile_readme_matches_canonical_source(canonical):
     lower_readme = readme_text.lower()
     for term in prohibited:
         assert term not in lower_readme, f"Found prohibited term '{term}' in GitHub profile README"
+
+    # Header check
+    assert "| Repository | Focus | Technologies / Focus | Highlights |" in readme_text
+
+
+def test_json_ld_alumni_of_and_credentials_semantics(index_html):
+    match = re.search(r'<script type="application/ld\+json">(.*?)</script>', index_html, re.DOTALL)
+    assert match, "JSON-LD script block not found"
+    data = json.loads(match.group(1))
+    person = data["mainEntity"]
+
+    # alumniOf should only contain degree-granting universities
+    alumni_names = [inst["name"] for inst in person.get("alumniOf", [])]
+    assert "Dakota State University" in alumni_names
+    assert "Colorado State University Global Campus" in alumni_names
+    assert "Rochester College" in alumni_names
+    assert "Cisco Networking Academy" not in alumni_names
+
+    # hasCredential should contain CCNA
+    credentials = person.get("hasCredential", [])
+    assert len(credentials) == 1
+    assert credentials[0]["@type"] == "EducationalOccupationalCredential"
+    assert credentials[0]["name"] == "CCNA (Previously Held)"
+    assert credentials[0]["recognizedBy"]["name"] == "Cisco Networking Academy"
+
+
+def test_candidate_profile_schema_field_absent(candidate_json):
+    assert "$schema" not in candidate_json
+    assert candidate_json.get("entity") == "CandidateProfile"

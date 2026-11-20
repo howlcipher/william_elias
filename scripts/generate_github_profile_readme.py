@@ -72,7 +72,7 @@ Currently, I serve as a **{official_title}** at {company}, where I build and mai
 
 ## Core Engineering Repositories
 
-| Repository | Focus | Tech Stack | Highlights |
+| Repository | Focus | Technologies / Focus | Highlights |
 | :--- | :--- | :--- | :--- |
 {project_table}
 

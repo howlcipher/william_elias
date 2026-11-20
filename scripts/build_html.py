@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import re
 import html
 import datetime
@@ -565,7 +566,6 @@ def build_candidate_profile(data, variants_data, canonical_url):
         resumes_map[k] = f"{canonical_base}/{v.get('file', '')}" if canonical_base else v.get('file', '')
 
     profile = {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
         "entity": "CandidateProfile",
         "candidate": {
             "name": personal.get("name", "William Elias"),
@@ -715,11 +715,32 @@ def render_json_ld(data):
             'name': current.get('company'),
         }
     education_entries = data.get('education') or []
-    if education_entries:
-        person['alumniOf'] = [
-            {'@type': 'CollegeOrUniversity', 'name': edu.get('school')}
-            for edu in education_entries if edu.get('school')
-        ]
+    degree_institutions = []
+    credentials = []
+    for edu in education_entries:
+        school = edu.get('school')
+        degree = edu.get('degree', '')
+        if edu.get('id') == 'edu-ccna' or 'CCNA' in degree or 'Certification' in degree:
+            # Professional certifications or course providers are not university degrees
+            cred = {
+                '@type': 'EducationalOccupationalCredential',
+                'name': degree,
+            }
+            if school:
+                cred['recognizedBy'] = {
+                    '@type': 'Organization',
+                    'name': school,
+                }
+            credentials.append(cred)
+        elif school:
+            degree_institutions.append({
+                '@type': 'CollegeOrUniversity',
+                'name': school,
+            })
+    if degree_institutions:
+        person['alumniOf'] = degree_institutions
+    if credentials:
+        person['hasCredential'] = credentials
     if canonical_url:
         person['url'] = canonical_url
     if image_url:
@@ -969,6 +990,15 @@ def build_html():
         lambda m: f'<link rel="canonical" href="{esc(canonical_url)}">',
         html_content
     )
+
+    # Optional owner-supplied Google site verification token (no placeholder if absent)
+    google_verification = (data.get('seo') or {}).get('googleSiteVerification') or (data.get('site') or {}).get('googleSiteVerification') or os.environ.get('GOOGLE_SITE_VERIFICATION')
+    if google_verification:
+        html_content = re.sub(
+            r'(<link rel="canonical" href=".*?">)',
+            lambda m: f'{m.group(1)}\n    <meta name="google-site-verification" content="{esc(google_verification)}">',
+            html_content
+        )
 
     # Pre-render body content sections for SEO/no-JS visibility
     resumes = load_resume_variants()

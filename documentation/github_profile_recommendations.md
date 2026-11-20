@@ -65,7 +65,7 @@ Create a public repository named **`howlcipher`** under the account `howlcipher`
 
 ## Core Engineering Repositories
 
-| Repository | Focus | Tech Stack | Highlights |
+| Repository | Focus | Technologies / Focus | Highlights |
 | :--- | :--- | :--- | :--- |
 | **[howlplane](https://github.com/howlcipher/howlplane)** | AI Engineering Control Plane | Python, Go, JSONL | Agent task routing, shared message boards, repeatable verification, human-controlled boundaries |
 | **[howlproof](https://github.com/howlcipher/howlproof)** | Independent Software Verification | Python, Subprocess | Adversarial evaluation of artifacts, test harness verification, inspectable evidence bundles |
