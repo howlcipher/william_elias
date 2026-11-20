@@ -721,17 +721,13 @@ def render_json_ld(data):
         school = edu.get('school')
         degree = edu.get('degree', '')
         if edu.get('id') == 'edu-ccna' or 'CCNA' in degree or 'Certification' in degree:
-            # Professional certifications or course providers are not university degrees
-            cred = {
+            # Professional certifications or course providers are not university degrees.
+            # Training providers (e.g. Cisco Networking Academy) are coursework hosts,
+            # not substantiated as the formal recognizing authority or credential issuer.
+            credentials.append({
                 '@type': 'EducationalOccupationalCredential',
                 'name': degree,
-            }
-            if school:
-                cred['recognizedBy'] = {
-                    '@type': 'Organization',
-                    'name': school,
-                }
-            credentials.append(cred)
+            })
         elif school:
             degree_institutions.append({
                 '@type': 'CollegeOrUniversity',
