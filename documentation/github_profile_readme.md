@@ -17,7 +17,7 @@ Currently, I serve as a **Senior Production Support Engineer** at Stellantis Fin
 
 ## Core Engineering Repositories
 
-| Repository | Focus | Tech Stack | Highlights |
+| Repository | Focus | Technologies / Focus | Highlights |
 | :--- | :--- | :--- | :--- |
 | **[howlplane](https://github.com/howlcipher/howlplane)** | AI Engineering Control Plane | Python, Go, GitHub Actions | Coordinates coding-agent tasks and independent reviews, with repeatable checks and durable run records. Supports policy-based execution limits and human approval for consequential actions. |
 | **[howlproof](https://github.com/howlcipher/howlproof)** | Independent Software Verification | Python, Software Verification, Adversarial Testing | Beta toolkit for evaluating trusted local artifacts. Bundles evidence, supports replay for eligible findings, and records verification gaps in advisory verdicts. |

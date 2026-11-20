@@ -1,0 +1,83 @@
+"""Unit tests for scripts/maintain.py maintenance tooling."""
+
+import copy
+import json
+import subprocess
+import sys
+from pathlib import Path
+import pytest
+
+from scripts.maintain import (
+    validate_canonical_rules,
+    validate_structured_data,
+    ROOT,
+)
+
+
+@pytest.fixture(scope="module")
+def canonical():
+    return json.loads((ROOT / "resume.json").read_text(encoding="utf-8"))
+
+
+def test_validate_canonical_rules_passes_on_valid_resume(canonical):
+    errors = validate_canonical_rules(canonical)
+    assert errors == [], f"Unexpected validation errors: {errors}"
+
+
+def test_validate_canonical_rules_catches_invalid_location(canonical):
+    bad = copy.deepcopy(canonical)
+    bad["personal"]["location"] = "Dallas, TX"
+    errors = validate_canonical_rules(bad)
+    assert any("Invalid location" in err for err in errors)
+
+
+def test_validate_canonical_rules_catches_invalid_title(canonical):
+    bad = copy.deepcopy(canonical)
+    bad["experience"][0]["officialTitle"] = "Lead DevOps Architect"
+    errors = validate_canonical_rules(bad)
+    assert any("Senior Production Support Engineer" in err for err in errors)
+
+
+def test_validate_canonical_rules_catches_invalid_positioning(canonical):
+    bad = copy.deepcopy(canonical)
+    bad["personal"]["title"] = "Full Stack Ninja"
+    errors = validate_canonical_rules(bad)
+    assert any("Software & Automation Engineer" in err for err in errors)
+
+
+def test_validate_canonical_rules_catches_forbidden_phrases(canonical):
+    bad = copy.deepcopy(canonical)
+    bad["summary"] = "Implemented enterprise secret rotation across production."
+    errors = validate_canonical_rules(bad)
+    assert any("secret rotation" in err for err in errors)
+
+
+def test_validate_structured_data_passes_on_current_workspace():
+    errors = validate_structured_data(ROOT)
+    assert errors == [], f"Structured data validation failed: {errors}"
+
+
+def test_validate_structured_data_catches_schema_in_candidate_profile(tmp_path):
+    (tmp_path / "index.html").write_text(
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage",'
+        '"mainEntity":{"@type":"Person","name":"William Elias","jobTitle":"Senior Production Support Engineer",'
+        '"alumniOf":[{"@type":"CollegeOrUniversity","name":"Rochester College"}],'
+        '"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"CCNA (Previously Held)"}]}}</script>',
+        encoding="utf-8",
+    )
+    (tmp_path / "candidate-profile.json").write_text(
+        json.dumps({"$schema": "https://json-schema.org/draft/2020-12/schema", "entity": "CandidateProfile"}),
+        encoding="utf-8",
+    )
+    errors = validate_structured_data(tmp_path)
+    assert any("must not declare a draft '$schema'" in err for err in errors)
+
+
+def test_maintain_cli_check_flag():
+    proc = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "maintain.py"), "--check", "--skip-banner"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert "All checks passed successfully." in proc.stdout
