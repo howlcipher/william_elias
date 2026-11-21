@@ -24,6 +24,8 @@ Public repositories include [HowlPlane](https://github.com/howlcipher/howlplane)
 
 ## Build and review
 
+Résumé highlights add technical context alongside the achievement bullets. Tests check that a variant does not repeat the same bullet in both sections.
+
 `resume.json` holds canonical facts and `resume_variants.json` selects résumé content by ID. See the [architecture guide](documentation/ARCHITECTURE.md), [evidence review](documentation/career_evidence_reconciliation.md), and [LinkedIn copy](documentation/linkedin_profile.md).
 
 ```bash

@@ -425,16 +425,14 @@
   "pdfEngineeringHighlights": [
     {
       "id": "highlight-modular-architecture",
-      "name": "Portal Modular Architecture & Access Controls",
+      "name": "Portal Modular Architecture",
       "sourceProgram": "Production Support Portal",
       "bullets": [
-        "Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite.",
-        "Implemented authorization and audit logging for portal workflows that use Windows authentication and Active Directory identities."
+        "Razor Class Libraries organize modules contributed by multiple developers. Workflows use SQL Server and SQLite."
       ],
       "technology": [
         "ASP.NET Core",
-        "Razor Class Libraries",
-        "Active Directory"
+        "Razor Class Libraries"
       ]
     },
     {
