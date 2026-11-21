@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-21
+
+* Removed the repeated portal authorization bullet from the software résumé highlight and added a duplicate-bullet check across all variants.
+
 ## 2026-11-19
 
 ### Source-of-Truth Harmonization & Recruiter Discovery Completion

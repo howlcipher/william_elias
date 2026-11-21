@@ -480,3 +480,19 @@ def test_pdf_text_stays_inside_the_page(pdftotext, variant):
             left, top, right, bottom = (float(word.attrib[key]) for key in ("xMin", "yMin", "xMax", "yMax"))
             assert 12 <= left < right <= width - 12, word.text
             assert 12 <= top < bottom <= height - 12, word.text
+
+
+@pytest.mark.parametrize("variant", VARIANT_NAMES)
+def test_engineering_highlights_do_not_repeat_experience_bullets(config, variant_doc, variant):
+    view = resolve_variant(config, variant_doc, variant)
+    experience = {
+        " ".join(achievement["text"].lower().split())
+        for role in view["experience"]
+        for achievement in role["achievements"]
+    }
+    highlights = {
+        " ".join(bullet.lower().split())
+        for highlight in view["highlights"]
+        for bullet in highlight["bullets"]
+    }
+    assert not experience & highlights
