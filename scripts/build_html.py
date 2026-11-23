@@ -369,8 +369,9 @@ def render_projects(projects, provenance_label=''):
         badge_info = PROJECT_BADGES.get(proj.get('id'))
         badge_html = f'<span class="status-badge {badge_info[0]}">{esc(badge_info[1])}</span>' if badge_info else ''
         header_meta = f'<div class="card-meta"><p class="provenance-label provenance-independent">{esc(provenance_label)}</p>{badge_html}</div>' if provenance_label else badge_html
+        card_id = f' id="{esc(proj["id"])}"' if proj.get('id') else ''
         card = [
-            f'<div class="project-card card{featured_class}">',
+            f'<div{card_id} class="project-card card{featured_class}">',
             header_meta,
             f'<h3>{esc(proj.get("name", ""))}</h3>',
             f'<div class="project-subtitle">{esc(proj.get("subtitle", ""))}</div>',

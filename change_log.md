@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-11-23
+
+### Factual & Structural Quality Audit & Invariant Sealing
+
+* **Project Anchor Navigation Restoration:** Restored missing canonical `id` attributes on rendered project cards in `scripts/build_html.py:render_projects()`, ensuring that all internal anchor links (`#project-howlplane`, `#project-howlproof`, `#project-howlframe`, etc.) in the Independent Engineering Evidence Index table resolve directly to their destination cards in `index.html`.
+* **Backlog Reconciliation:** Cleaned up orphaned, headerless problem blocks in `BACKLOG.md` (sections 5, 6, 7) that were already marked Done under Completed items on 2026-08-07, confirming zero open defects across sections 1–8.
+* **Maintenance & Verification Tooling Sealing:** Extended `scripts/maintain.py` with automated validation functions (`validate_html_anchors` and `validate_documentation_links`), validating all internal `#` anchor targets in `index.html` and relative markdown file links across documentation and root files during isolated builds, `--check` CI runs, and local runs.
+* **Documentation & Developer Ergonomics:** Updated `README.md` to document `python scripts/maintain.py` and `python scripts/maintain.py --check` as the primary maintainer command alongside the individual generator scripts.
+* **Comprehensive Invariant Regression Protection:**
+  - Added unit tests in `tests/test_build_html.py` asserting project card canonical IDs and complete internal anchor resolution in `index.html`.
+  - Expanded `tests/test_factual_integrity_hotfix.py` to dynamically inspect all documentation markdown files (`documentation/*.md`) and `README.md` for strict geographic location (`Michigan`), canonical degree naming, and absence of unsupported security or rollback claims.
+  - Added unit tests in `tests/test_maintain.py` verifying HTML anchor and documentation link validation logic.
+
 ## 2026-11-21
 
 * Removed the repeated portal authorization bullet from the software résumé highlight and added a duplicate-bullet check across all variants.

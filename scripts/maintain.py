@@ -158,6 +158,44 @@ def validate_structured_data(site_dir: Path) -> list[str]:
     return errors
 
 
+def validate_html_anchors(site_dir: Path) -> list[str]:
+    """Verify that every internal anchor link in index.html resolves to an existing element ID."""
+    errors = []
+    index_path = site_dir / "index.html"
+    if not index_path.exists():
+        return ["index.html does not exist for anchor verification."]
+    content = index_path.read_text(encoding="utf-8")
+    ids = set(re.findall(r'id=["\']([^"\']+)["\']', content))
+    hrefs = re.findall(r'href=["\']#([^"\']+)["\']', content)
+    for target in set(hrefs):
+        if target not in ids:
+            errors.append(
+                f"Broken internal anchor href='#{target}' in index.html: target ID does not exist."
+            )
+    return errors
+
+
+def validate_documentation_links(root_dir: Path) -> list[str]:
+    """Verify that all relative file links in documentation and README resolve to existing files."""
+    errors = []
+    md_files = list(root_dir.glob("*.md")) + list(root_dir.glob("documentation/*.md"))
+    for md_file in md_files:
+        content = md_file.read_text(encoding="utf-8")
+        links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+        for _, link in links:
+            if link.startswith(("http://", "https://", "mailto:", "tel:", "#")):
+                continue
+            target_file_str = link.split("#")[0]
+            if not target_file_str:
+                continue
+            target_path = (md_file.parent / target_file_str).resolve()
+            if not target_path.exists():
+                errors.append(
+                    f"Broken relative link in {md_file.relative_to(root_dir)}: '{link}' -> '{target_file_str}' not found."
+                )
+    return errors
+
+
 def verify_pdf_alias_equivalence(site_dir: Path) -> list[str]:
     """Verify that the primary resume PDF alias is byte-identical to Production DevOps resume."""
     legacy_file = site_dir / "William_Elias_Resume.pdf"
@@ -235,6 +273,11 @@ def check_freshness_in_isolated_build(skip_banner: bool = False) -> list[str]:
         pdf_errors = verify_pdf_alias_equivalence(temp_path)
         if pdf_errors:
             return pdf_errors
+
+        # Verify internal HTML anchors in isolated build
+        anchor_errors = validate_html_anchors(temp_path)
+        if anchor_errors:
+            return anchor_errors
 
         # Compare artifacts
         for artifact in ARTIFACTS:
@@ -364,6 +407,7 @@ def print_status_report(errors: list[str], sync_github: bool, is_check_mode: boo
     else:
         print("  ✅ Canonical rules validated (location, titles, degrees, forbidden claims).")
         print("  ✅ HTML, JSON-LD, candidate-profile.json, and llms.txt validated.")
+        print("  ✅ Internal HTML anchors and documentation links verified.")
         print("  ✅ 4 PDF resume variants verified; alias byte-equivalence confirmed.")
         print("  ✅ LinkedIn banner generated (1584x396 px).")
         print("  ✅ GitHub profile README generated matching canonical schema.")
@@ -449,23 +493,27 @@ def main():
     with open(resume_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # 1. Validate canonical rules
+    # 1. Validate canonical rules and documentation links
     rule_errors = validate_canonical_rules(data)
-    if rule_errors:
-        print(f"Validation failed with {len(rule_errors)} error(s):", file=sys.stderr)
-        for err in rule_errors:
+    doc_errors = validate_documentation_links(ROOT)
+    initial_errors = rule_errors + doc_errors
+    if initial_errors:
+        print(f"Validation failed with {len(initial_errors)} error(s):", file=sys.stderr)
+        for err in initial_errors:
             print(f"  - {err}", file=sys.stderr)
         sys.exit(1)
 
     if args.check:
-        # Check structured data in current files
+        # Check structured data and HTML anchors in current files
         sd_errors = validate_structured_data(ROOT)
-        if sd_errors:
+        anchor_errors = validate_html_anchors(ROOT)
+        static_errors = sd_errors + anchor_errors
+        if static_errors:
             print(
-                f"Structured data validation failed with {len(sd_errors)} error(s):",
+                f"Validation failed with {len(static_errors)} error(s):",
                 file=sys.stderr,
             )
-            for err in sd_errors:
+            for err in static_errors:
                 print(f"  - {err}", file=sys.stderr)
             sys.exit(1)
 
@@ -494,10 +542,11 @@ def main():
             print(f"  - {err}", file=sys.stderr)
         sys.exit(1)
 
-    # 3. Validate structured data and PDF alias equivalence on generated output
+    # 3. Validate structured data, anchors, and PDF alias equivalence on generated output
     sd_errors = validate_structured_data(ROOT)
+    anchor_errors = validate_html_anchors(ROOT)
     pdf_errors = verify_pdf_alias_equivalence(ROOT)
-    all_errors = gen_errors + sd_errors + pdf_errors
+    all_errors = gen_errors + sd_errors + anchor_errors + pdf_errors
 
     print_status_report(all_errors, args.sync_github, is_check_mode=False)
     if all_errors:
