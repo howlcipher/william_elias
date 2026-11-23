@@ -95,3 +95,26 @@ def test_linkedin_banner_uses_the_current_title():
     assert "SOFTWARE // AUTOMATION" in markup
     assert "Software, DevOps" not in markup
     assert "DevOps &amp;" not in markup
+
+
+def test_project_cards_render_canonical_ids():
+    projects = [
+        {"id": "project-howlplane", "name": "HowlPlane", "subtitle": "AI Control Plane"},
+        {"id": "project-howlproof", "name": "HowlProof", "subtitle": "Software Verification"},
+    ]
+    from scripts.build_html import render_projects
+    html_out = render_projects(projects)
+    assert 'id="project-howlplane"' in html_out
+    assert 'id="project-howlproof"' in html_out
+
+
+def test_all_internal_anchors_in_index_html_resolve():
+    from pathlib import Path
+    import re
+    root = Path(__file__).resolve().parents[1]
+    index_html = (root / "index.html").read_text(encoding="utf-8")
+    ids = set(re.findall(r'id=["\']([^"\']+)["\']', index_html))
+    hrefs = re.findall(r'href=["\']#([^"\']+)["\']', index_html)
+    assert len(hrefs) > 0
+    missing = [target for target in set(hrefs) if target not in ids]
+    assert not missing, f"Missing target element IDs in index.html for hrefs: {missing}"

@@ -34,14 +34,14 @@ def test_geographic_location_is_strictly_canonical(canonical, candidate_json, ll
     assert "- Location: Michigan" in llms_txt
 
     prohibited_geo = ("dallas", "fort worth", "dfw")
-    for text_source, name in [
+    sources = [
         (index_html, "index.html"),
         (json.dumps(candidate_json), "candidate-profile.json"),
         (llms_txt, "llms.txt"),
-        ((ROOT / "documentation/github_profile_recommendations.md").read_text(), "github_profile_recommendations.md"),
-        ((ROOT / "documentation/identity_network_audit.md").read_text(), "identity_network_audit.md"),
-        ((ROOT / "documentation/search_visibility_report.md").read_text(), "search_visibility_report.md"),
-    ]:
+        ((ROOT / "README.md").read_text(encoding="utf-8"), "README.md"),
+    ] + [(f.read_text(encoding="utf-8"), f.name) for f in ROOT.glob("documentation/*.md")]
+
+    for text_source, name in sources:
         lower_text = text_source.lower()
         for geo in prohibited_geo:
             assert geo not in lower_text, f"Found conflicting location '{geo}' in {name}"
@@ -62,6 +62,11 @@ def test_degree_names_match_canonical_records(canonical, candidate_json, llms_tx
     assert "- **Colorado State University Global Campus:** B.S. Information Technology" in checklist_text
     assert "Management Information Systems" not in checklist_text
 
+    for f in ROOT.glob("documentation/*.md"):
+        doc_text = f.read_text(encoding="utf-8")
+        assert "Management Information Systems" not in doc_text, f"Found 'Management Information Systems' in {f.name}"
+        assert "B.B.A. in Management" not in doc_text, f"Found 'B.B.A. in Management' in {f.name}"
+
     candidate_degrees = [e["degree"] for e in candidate_json["candidate"]["education"]]
     assert "M.S. Cyber Defense (In Progress, Second Year)" in candidate_degrees
     assert "B.S. Information Technology" in candidate_degrees
@@ -75,11 +80,14 @@ def test_unsupported_security_and_rotation_claims_absent(index_html, candidate_j
         "secret rotation runbook", "secret rotation with zero", "zero-outage",
         "zero outage", "remediation completed", "enterprise-wide credential remediation",
     )
-    for text_source, name in [
+    sources = [
         (index_html, "index.html"),
         (json.dumps(candidate_json), "candidate-profile.json"),
         (llms_txt, "llms.txt"),
-    ]:
+        ((ROOT / "README.md").read_text(encoding="utf-8"), "README.md"),
+    ] + [(f.read_text(encoding="utf-8"), f.name) for f in ROOT.glob("documentation/*.md")]
+
+    for text_source, name in sources:
         lower_text = text_source.lower()
         for term in prohibited:
             assert term not in lower_text, f"Found unsupported security claim '{term}' in {name}"
@@ -90,11 +98,14 @@ def test_unsupported_automated_rollback_claims_absent(index_html, candidate_json
         "automated rollback trigger", "automated rollback safeguarding",
         "zero production regression", "zero-production-regression",
     )
-    for text_source, name in [
+    sources = [
         (index_html, "index.html"),
         (json.dumps(candidate_json), "candidate-profile.json"),
         (llms_txt, "llms.txt"),
-    ]:
+        ((ROOT / "README.md").read_text(encoding="utf-8"), "README.md"),
+    ] + [(f.read_text(encoding="utf-8"), f.name) for f in ROOT.glob("documentation/*.md")]
+
+    for text_source, name in sources:
         lower_text = text_source.lower()
         for term in prohibited:
             assert term not in lower_text, f"Found unsupported deployment claim '{term}' in {name}"

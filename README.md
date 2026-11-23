@@ -31,12 +31,11 @@ Résumé highlights add technical context alongside the achievement bullets. Tes
 ```bash
 pip install -r requirements-dev.txt
 playwright install chromium --with-deps
-python scripts/build_config.py
-python scripts/build_html.py
-python scripts/generate_resume_pdf.py
-python scripts/generate_linkedin_banner.py
-python scripts/generate_linkedin_profile.py
+python scripts/maintain.py          # Validate rules, regenerate all artifacts & verify
+python scripts/maintain.py --check  # CI verification mode (isolated build freshness check)
 PYTHONPATH=. pytest tests/ -W error
 ```
+
+Individual generator scripts (`build_config.py`, `build_html.py`, `generate_resume_pdf.py`, `generate_linkedin_banner.py`, `generate_linkedin_profile.py`, `generate_github_profile_readme.py`) can also be run independently as needed.
 
 Use Python 3.12 and install Poppler for the PDF checks. Pytest runs serially by default. CI uses Ubuntu 24.04 for the pinned Playwright version.

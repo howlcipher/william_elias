@@ -14,119 +14,31 @@ This file is maintained by the BACKLOG operation. IDs are stable and never renum
 
 ## 2. Reliability
 
+*(None currently open.)*
+
 ## 3. Accessibility
 
+*(None currently open.)*
+
 ## 4. Security
+
+*(None currently open.)*
+
 ## 5. Data and Build Architecture
 
-
-### Problem
-`validate_config()` (`scripts/generate_resume_pdf.py:27-56`) checks only 6 top-level keys, array types, `personal.title`, and 2 URL fields. `build()` (lines 91-173) directly subscripts `p["name"]`, `p["phone"]`, `p["email"]`, `p["tagline"]`, plus per-item `company`/`date`/`title`, `s["category"]`/`s["tags"]`, `proj["name"]`/`proj["subtitle"]`, `e["degree"]`/`e["school"]` — none of which `validate_config()` checks. A `resume.json` missing e.g. `personal.phone` passes validation cleanly, then crashes `build()` with a raw `KeyError`, contradicting ARCH-003's original acceptance criterion of a "clear, actionable error message."
-
-### Proposed work
-Extend `validate_config()` to check presence of every field `build()` dereferences (or refactor `build()` to use `.get()` with a single enumerated validation pass).
-
-### Acceptance criteria
-- Deleting any field `build()` uses from a test `resume.json` produces a `ValueError` from `validate_config()`, not a `KeyError` from `build()`.
-
-### Validation
-- Extend `TestValidateConfig` in `tests/test_generate_resume_pdf.py` with cases for each newly-covered field.
-
-### Notes
-Found during the 2026-08-06 post-merge audit, as a gap in ARCH-003's original scope rather than a regression of it.
-
----
-
-
-### Problem
-`inject()` (`scripts/build_html.py:174-179`) uses `re.sub(pattern, ..., html_content)` with no check that a match occurred. If a `<!-- BUILD:<NAME>:START/END -->` pair is ever accidentally edited/removed from `index.html`, `re.sub` returns the input unchanged with no error. Because CI's freshness gate is `git diff --exit-code` against the *regenerated* file, a silently-broken injection that happens to match the already-committed (now-stale) content produces no diff, so CI would not catch it.
-
-### Proposed work
-Use `re.subn()` and raise an exception in `inject()` if the match count is 0.
-
-### Acceptance criteria
-- Deliberately removing a marker pair from `index.html` and re-running `build_html.py` fails loudly instead of silently no-op'ing.
-
-### Validation
-- Manual: delete a marker pair, run `python scripts/build_html.py`, confirm it raises.
-
-### Notes
-Found during the 2026-08-06 post-merge audit while reviewing ENH-006's idempotency claim.
-
----
-
-
-### Problem
-`scripts/build_html.py:189,193` builds `og:description` via `tagline.replace(" // ", ", ").capitalize()`. Python's `.capitalize()` lowercases every character except the first, so "Platform Engineering // CI/CD // Python + Go // Agentic Systems" renders as `"Platform engineering, ci/cd, python + go, agentic systems."` (confirmed live at `index.html:10`) — "CI/CD" becomes "ci/cd".
-
-### Proposed work
-Only uppercase the first character of the whole string (e.g. `s[:1].upper() + s[1:]`) instead of `.capitalize()`, which lowercases the rest.
-
-### Acceptance criteria
-- Generated `og:description` preserves "CI/CD" casing (and any other embedded acronyms) verbatim from `resume.json`.
-
-### Validation
-- Regenerate and inspect `index.html`'s `og:description` meta tag.
-
-### Notes
-Found during the 2026-08-06 post-merge audit. This is an objective formatting defect (acronym mangled by a generic string method), not a subjective redesign preference.
+*(None currently open. ARCH-011, ARCH-012, ARCH-013 resolved and verified in Completed section.)*
 
 ## 6. Testing and CI
 
-
-### Problem
-`tests/` contains no test exercising `esc()`, `get_valid_url()`, `inject()`, or any `render_*` function in `scripts/build_html.py`, and none for `scripts/build_config.py` — despite `build_html.py` owning the escaping/URL-validation/marker-injection logic, the most injection-sensitive code in the pipeline. Separately, ENH-006's "no-JS" acceptance criterion was validated manually via raw-HTML grep (per its own Done note), not via an automated Playwright page context with `javascript_enabled=False`, even though `pytest-playwright` already supports this directly. **Partially narrowed since filing:** `tests/test_resume_content.py` (added 2026-08-06, PR #2) now covers resume.json↔config.js/index.html/PDF content-drift, including a dedicated `TestPdfIncludesEarlierExperience` check that closed ARCH-010 — so the "no drift protection" half of this item's motivation is now addressed for content. The remaining gap is narrower: no unit tests for `build_html.py`'s own escaping/URL-validation/marker-injection *functions* (`esc()`, `get_valid_url()`, `inject()`), nothing for `build_config.py`, and still no automated no-JS check.
-
-### Proposed work
-Add unit tests for `esc()`/`get_valid_url()`/`inject()` (including the "marker missing → no-op/raise" edge case from ARCH-012) and at least one `render_*` function; add one Playwright test that loads the page with JS disabled and asserts core resume content (name, a job title, a skill) is visible in the DOM.
-
-### Acceptance criteria
-- New tests fail on the current code's untested edge cases and pass once `build_html.py` behaves correctly.
-- No-JS test passes against current `index.html`.
-
-### Validation
-- `PYTHONPATH=. pytest tests/`
-
-### Notes
-Found during the 2026-08-06 post-merge audit. This does not reopen ENH-006 (its acceptance criteria were met as written) — it closes a coverage gap the item's own Done note already flagged as manually-verified-only. Re-scoped 2026-08-06 after `tests/test_resume_content.py` landed upstream and covered part of the original motivation (see Problem).
+*(None currently open. TEST-005 resolved and verified in Completed section.)*
 
 ## 7. Repository Maintenance
 
-
-### Problem
-`scripts/generate_resume_pdf.py:2` — `"""Render William_Elias_Resume.pdf from config.js so the site and PDF share one source of truth.` — but `load_config()` (line 20) reads `resume.json` directly. Harmless today only because the two are currently identical; misleading for future maintainers, and a leftover from the pre-ARCH-008 architecture.
-
-### Proposed work
-Update the docstring to say `resume.json`.
-
-### Acceptance criteria
-- Docstring matches the actual data source.
-
-### Validation
-- Read diff.
-
-### Notes
-Found during the 2026-08-06 post-merge audit.
-
----
-
-
-### Problem
-`requirements-dev.txt` pins `fpdf2==2.8.7` and `pypdf==6.14.2` exactly, but `pytest`, `playwright`, `pytest-playwright` have no version constraint at all — an inconsistent pinning strategy within the same file, meaning CI runs are not fully reproducible (an upstream release of any of the three could change test/CI behavior with no repo change).
-
-### Proposed work
-Pin exact versions for all three, matching the existing style.
-
-### Acceptance criteria
-- All entries in `requirements-dev.txt` are exact-pinned.
-
-### Validation
-- `pip install -r requirements-dev.txt` succeeds; CI passes unchanged.
-
-### Notes
-Found during the 2026-08-06 post-merge audit.
+*(None currently open. MAINT-003 and MAINT-004 resolved and verified in Completed section.)*
 
 ## 8. Portfolio Enhancements
+
+*(None currently open.)*
 
 ## 9. Completed
 

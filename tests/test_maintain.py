@@ -9,6 +9,8 @@ import pytest
 
 from scripts.maintain import (
     validate_canonical_rules,
+    validate_documentation_links,
+    validate_html_anchors,
     validate_structured_data,
     verify_pdf_alias_equivalence,
     ROOT,
@@ -117,3 +119,33 @@ def test_maintain_cli_check_flag():
     assert "Freshness Checked (Isolated Build):" in proc.stdout
     assert "Local Repository Git State:" in proc.stdout
     assert "Sibling Profile Repository (howlcipher/howlcipher):" in proc.stdout
+
+
+def test_validate_html_anchors_passes_on_current_workspace():
+    errors = validate_html_anchors(ROOT)
+    assert errors == [], f"Anchor validation errors: {errors}"
+
+
+def test_validate_html_anchors_catches_missing_target(tmp_path):
+    (tmp_path / "index.html").write_text(
+        '<a href="#missing-target">Click</a><div id="existing-target"></div>',
+        encoding="utf-8",
+    )
+    errors = validate_html_anchors(tmp_path)
+    assert any("missing-target" in err for err in errors)
+
+
+def test_validate_documentation_links_passes_on_current_workspace():
+    errors = validate_documentation_links(ROOT)
+    assert errors == [], f"Documentation link errors: {errors}"
+
+
+def test_validate_documentation_links_catches_missing_target(tmp_path):
+    doc_dir = tmp_path / "documentation"
+    doc_dir.mkdir()
+    (doc_dir / "test.md").write_text(
+        "[Missing Doc](../non_existent_file.md)",
+        encoding="utf-8",
+    )
+    errors = validate_documentation_links(tmp_path)
+    assert any("non_existent_file.md" in err for err in errors)
